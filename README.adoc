@@ -3,11 +3,10 @@ ifdef::env-github,env-browser[:relfileprefix: docs/]
 
 _**M**anage your eatery menus **e**fficiently, in **NUS**._
 
-https://travis-ci.org/AZhiKai/main[image:https://travis-ci.org/AZhiKai/main.svg?branch=master[Build Status]]
-https://ci.appveyor.com/project/AZhiKai/main[image:https://ci.appveyor.com/api/projects/status/haoihnnp741jvs7m/branch/master?svg=true[Build status]]
-https://coveralls.io/github/AZhiKai/main?branch=master[image:https://coveralls.io/repos/github/AZhiKai/main/badge.svg?branch=master[Coverage Status]]
-https://www.codacy.com/app/AZhiKai/main?utm_source=github.com&utm_medium=referral&utm_content=AZhiKai/main&utm_campaign=Badge_Grade[image:https://api.codacy.com/project/badge/Grade/299f6df960044215a511a90d281af954[Codacy code quality]]
-https://gitter.im/se-edu/Lobby[image:https://badges.gitter.im/se-edu/Lobby.svg[Gitter chat]]
+https://travis-ci.org/CS2103-AY1819S1-F10-4/main[image:https://travis-ci.org/CS2103-AY1819S1-F10-4/main.svg?branch=master[Build Status]]
+https://ci.appveyor.com/project/AZhiKai/main-j2jk6[image:https://ci.appveyor.com/api/projects/status/5kwkxt5khmfo0q31/branch/master?svg=true[Build status]]
+https://coveralls.io/github/CS2103-AY1819S1-F10-4/main?branch=master[image:https://coveralls.io/repos/github/CS2103-AY1819S1-F10-4/main/badge.svg?branch=master[Coverage Status]]
+https://www.codacy.com/app/AZhiKai/organisation_main?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=CS2103-AY1819S1-F10-4/main&amp;utm_campaign=Badge_Grade[image:https://api.codacy.com/project/badge/Grade/299f6df960044215a511a90d281af954[Codacy code quality]]
 
 ifdef::env-github[]
 image::docs/images/Ui.png[width="600"]
