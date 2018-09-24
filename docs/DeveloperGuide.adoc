@@ -842,6 +842,16 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 |`* *` |user |hide <<private-contact-detail,private contact details>> by default |minimize chance of someone else seeing them by accident
 
 |`*` |user with many persons in the address book |sort persons by name |locate a person easily
+
+|`* * *` |restaurant owner |check the current availability of ingredients|manage my ingredients easily
+
+|`* * *` |restaurant owner |see which ingredients are low in stock count |know which ingredients to restock promptly
+
+|`* *` |restaurant owner |check which dishes are not able to be cooked due to lack of ingredients |remove them from the daily menu
+
+|`* *` |lazy restaurant owner |save regular restocks and consumption data as the default |do not need to key in the same entries every time
+
+|`*` |forgetful restaurant owner |set reminders for the next restock |remember to restock
 |=======================================================================
 
 _{More to be added}_
@@ -852,14 +862,37 @@ _{More to be added}_
 (For all use cases below, the *System* is the `AddressBook` and the *Actor* is the `user`, unless specified otherwise)
 
 [discrete]
-=== Use case: Delete person
+=== Use case: Add ingredient
 
 *MSS*
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+1.  User requests to add a new ingredient.
+2.  App adds the ingredient specified to the ingredient list.
+3.  App returns a success message confirming the new ingredient has been added.
++
+Use case ends.
+
+*Extensions*
+
+[none]
+* 2a. The ingredient name entered is already in the ingredient list.
+[none]
+** 2a1. App returns a message telling user the ingredient name already exists.
+** 2a2. User requests to add ingredient again.
++
+Steps 2a1-2a2 are repeated until an ingredient name which does not exist is used.
++
+Use case resumes at step 3.
+
+[discrete]
+=== Use case: Delete ingredient
+
+*MSS*
+
+1.  User requests to list ingredients.
+2.  App shows a list of ingredients.
+3.  User requests to delete a specific ingredient in the list.
+4.  App deletes the ingredient.
 +
 Use case ends.
 
@@ -873,7 +906,104 @@ Use case ends.
 * 3a. The given index is invalid.
 +
 [none]
-** 3a1. AddressBook shows an error message.
+** 3a1. App returns a message telling user the index is invalid.
+** 3a2. User requests to delete ingredient again.
++
+Steps 3a1-3a2 are repeated until a valid index is entered.
++
+Use case resumes at step 3.
+
+[discrete]
+=== Use case: Edit ingredient
+
+*MSS*
+
+1.  User requests to edit a specific ingredient.
+2.  App edits the specified ingredient with the updated values.
+3.  App returns a success message confirming the specified ingredient has been edited.
++
+Use case ends.
+
+*Extensions*
+
+[none]
+* 1a. The given index is invalid.
++
+[none]
+** 1a1. App returns a message telling user that the index is invalid.
+** 1a2. User requests to edit ingredient again.
++
+Steps 1a1-1a2 are repeated until a valid index is entered.
++
+Use case resumes at step 2.
+
+[none]
+* 1b. None of the optional fields are specified.
++
+[none]
+** 1b1. App returns a message telling user at least one optional field has to be specified.
+** 1b2. User requests to edit ingredient again.
++
+Steps 1b1-1b2 are repeated until at least one optional field is entered.
++
+Use case resumes at step 2.
+
+[discrete]
+=== Use case: Stock up ingredient
+
+*MSS*
+
+1.  User requests to stock up a specific ingredient.
+2.  App updates the count of the specified ingredient.
+3.  App returns a success message confirming the specified ingredient has been stocked up.
++
+Use case ends.
+
+*Extensions*
+
+[none]
+* 1a. The ingredient name does not exist.
++
+[none]
+** 1a1. App returns a message telling user that the ingredient does not exist.
+** 1a2. User requests to stock up ingredient again.
++
+Steps 1a1-1a2 are repeated until a valid ingredient name is entered.
++
+Use case resumes at step 2.
+
+[discrete]
+=== Use case: Consume ingredient
+
+*MSS*
+
+1.  User requests to consume a specific ingredient.
+2.  App updates the count of the specified ingredient.
+3.  App returns a success message confirming the specified ingredient has been consumed.
++
+Use case ends.
+
+*Extensions*
+
+[none]
+* 1a. The ingredient name does not exist.
++
+[none]
+** 1a1. App returns a message telling user that the ingredient does not exist.
+** 1a2. User requests to consume ingredient again.
++
+Steps 1a1-1a2 are repeated until a valid ingredient name is entered.
++
+Use case resumes at step 2.
+
+[none]
+* 1b. The intended consumption is more than the number of units available.
++
+[none]
+** 1b1. App informs user that there is not enough of the ingredient.
+** 1b2. User requests to consume ingredient again.
++
+Steps 1b1-1b2 are repeated until the number of units entered is less than the number of units available.
 +
 Use case resumes at step 2.
 
