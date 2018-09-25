@@ -480,9 +480,9 @@ Format: `history [stockup] [consumption]`
 * At least one of the optional fields must be provided.
 ****
 
-=== Recording sales volume of a menu item within a day: `record-sales`
+=== Recording daily sales volume of a menu item: `record-sales`
 
-Records the quantity of a menu item sold within the selected day into the day's sales report. +
+Records the quantity of a menu item sold within the specified day into the day's sales report. +
 Format: `record-sales d/DATE n/ITEM_NAME q/QUANTITY SOLD p/ITEM_PRICE`
 
 ****
@@ -501,7 +501,7 @@ Examples:
 Displays the sales report for all days +
 Format: `display-sales` +
 OR +
-Displays the sales report for a specified day +
+Displays the sales report for the specified day +
 Format: `display-sales DATE`
 
 ****
@@ -516,19 +516,19 @@ Displays the sales report for all days +
 Displays the sales report dated 25-09-2018
 
 
-=== Deleting a sales record / report for a day: `delete-sales`
+=== Deleting a sales record / report: `delete-sales`
 
-Deletes a record in the sales report for a specified day +
+Deletes a menu item's sales record in the sales report for the specified day +
 Format: `delete-sales DATE ITEM_NAME` / `delete-sales DATE ITEM_INDEX` +
 OR +
-Deletes the entire sales report for a specified day. +
+Deletes the entire sales report for the specified day. +
 Format: `delete-sales DATE`
 
 ****
 * Deletes the record at the specified `ITEM_INDEX`.
 * The item index refers to the index number shown in the sales report for the specified day.
 * The index *must be a positive integer* 1, 2, 3, ...
-* Alternatively, deletes the record with the specified `ITEM_NAME`.
+* Alternatively, deletes the sales record with the specified `ITEM_NAME`.
 * Alternatively, deletes the entire sales report for the specified day by omitting the record identifier.
 ****
 
@@ -545,6 +545,50 @@ Deletes the sales record for `Fried Rice` from the sales report dated 10-02-2018
 
 * `delete-sales 23-06-2018` +
 Deletes the entire sales report dated 23-06-2018.
+
+=== Editing a sales record: `edit-sales`
+
+Edit a menu item's sales record in the sales report for the specified day +
+Format: `edit-sales DATE NAME [n/ITEM_NAME] [q/QUANTITY SOLD] [p/ITEM_PRICE]` / `edit-sales DATE INDEX [n/ITEM_NAME]
+[q/QUANTITY SOLD] [p/ITEM_PRICE]`
+
+****
+* Edits the record at the specified `INDEX`. The index refers to the index number shown in the sales report for the
+specified day. The index *must be a positive integer* 1, 2, 3, ...
+* At least one of the optional fields must be provided.
+* Existing values will be updated to the input values.
+* Alternatively, edits the sales record with the specified `NAME`.
+****
+
+Examples:
+
+* `edit-sales 23-06-2018 Fried Rice n/Fried Rice with Shrimps` +
+In the sales report dated 23-06-2018, edits the name of "Fried Rice" to be "Fried Rice with Shrimps".
+
+* `edit-sales 12-02-2018 Pasta q/37 p/6.50`  +
+In the sales report dated 12-02-2018, edits the quantity sold and price of "Pasta" to be 37 and 6.50 respectively.
+
+* `edit-sales 01-01-2018 3 n/Fried Omelet`  +
+In the sales report dated 01-01-2018, edits the menu item's name of the 3rd record to be "Fried Omelet".
+
+=== Checking sales history of a menu item: `check-sales`
+
+Displays the sales history of a menu item and the total revenue it has accumulated +
+Format: `check-sales ITEM_NAME` +
+
+Examples:
+
+* `check-sales Fried Rice`
+
+=== Ranking menu items according to profitability: `rank-dish`
+
+Ranks the menu items based on their total revenue accumulated in descending order +
+Format: `rank-dish`
+
+=== Ranking dates according to profitability: `rank-date`
+
+Ranks the dates based on their revenue accumulated in descending order +
+Format: `rank-date`
 
 == FAQ
 
