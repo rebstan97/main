@@ -45,6 +45,46 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 
 .  Refer to <<Commands>> for details of each command.
 
+[[Components]]
+== Components
+*MeNUS* consists of four main components: menus, inventory, sales and bookings management.
+
+=== Menus
+_To be completed by Yi Can_
+
+=== Inventory
+_To be completed by Rebecca_
+
+=== Sales
+_To be completed by Kai Jun_
+
+=== Bookings
+_To be completed by Ming Xian_
+
+
+[[Features]]
+== Key Features
+=== Convenience
+It is an ultimate All-In-One application that will provide you with the utmost convenience to manage your
+restaurants in NUS.
+
+* Export data to `.xml` (default) or Excel file.
+
+=== Security
+Security is key to a business's success. *MeNUS* ensures the security of your restaurant's data by:
+
+* Encrypting all restaurant data using AES-265.
+* Securing account passwords using bcrypt.
+* User needs to be authenticated before they can run any commands.
+* Authentication attempts (both succeed and failed) are logged.
+
+=== Efficiency
+Time is money. *MeNUS* ensures that the application will:
+
+* Load within 5 seconds.
+* Execute command within split of a second.
+** Update the GUI almost instantaneously.
+
 [[Commands]]
 == Commands
 
