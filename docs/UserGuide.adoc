@@ -639,3 +639,18 @@ e.g. `consume n/cod fish u/1`
 * *Remove dishes with low ingredients* : `remove-oos-dish`
 * *History of stockup/consumption* : `history [purchase] [consumption]` +
 e.g. `history stockup`
+* *Record sales volume of menu item* : `record-sales d/DATE n/ITEM_NAME q/QUANTITY SOLD p/ITEM_PRICE` +
+e.g. `record-sales d/25-09-2018 n/Fried Rice q/35 p/5.50`
+* *Display sales report for all / specific day* : `display-sales` or `display-sales DATE` +
+e.g. `display-sales` or `display-sales 25-09-2018`
+* *Delete sales record* : `delete-sales DATE ITEM_NAME` or `delete-sales DATE ITEM_INDEX` +
+e.g. `delete-sales 10-02-2018 Fried Rice` or `delete-sales 25-09-2018 2`
+* *Delete sales report* : `delete-sales DATE` +
+e.g. `delete-sales 23-06-2018`
+* *Edit sales record* : `edit-sales DATE NAME [n/ITEM_NAME] [q/QUANTITY SOLD] [p/ITEM_PRICE]` or `edit-sales DATE
+INDEX [n/ITEM_NAME] [q/QUANTITY SOLD] [p/ITEM_PRICE]` +
+e.g. `edit-sales 12-02-2018 Pasta q/37 p/6.50` or `edit-sales 01-01-2018 3 n/Fried Omelet`
+* *Check sales history of menu item* : `check-sales ITEM_NAME` +
+e.g. `check-sales Fried Rice`
+* *Rank menu items according to profitability* : `rank-dish` +
+* *Rank dates according to profitability* : `rank-date`
