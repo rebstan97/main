@@ -578,7 +578,7 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 |`* * *` |restaurant owner |assign role to a staff account |ensure only authorised staff can access certain parts of
 the system
 
-|`* * *` |new restaurant |see usage instructions |refer to instructions when I forget how to use the application
+|`* * *` |new restaurant owner|see usage instructions |refer to instructions when I forget how to use the application
 
 |`* * *` |forgetful restaurant owner |see usage instructions |refer to instructions when I forget how to use the
 application
@@ -593,6 +593,18 @@ application
 
 |`*` |forgetful restaurant owner |set reminders for the next restock |remember to restock
 
+|`* * *` |restaurant owner |keep track of daily sales |meet revenue goals, improve the menu and track inventory
+
+|`* * *` |restaurant owner |modify past sales records  |update any mistakes / refunds / cancelled booking
+
+|`* * *` |analytical restaurant owner |check the sales history of a menu item  |check the total revenue it has
+accumulated, and analyse its long-term sales performance
+
+|`* *` |profit-driven restaurant owner |know the most profitable dishes  | employ marketing strategies to bring in
+more revenue.
+
+|`* *` |profit-driven restaurant owner |know the most profitable days| employ marketing strategies to bring in more
+revenue.
 
 |=======================================================================
 
