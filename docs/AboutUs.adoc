@@ -13,45 +13,45 @@ We are a team based in the http://www.comp.nus.edu.sg[School of Computing, Natio
 
 === Ang Zhi Kai
 image::azhikai.png[width="150", align="left"]
-{empty}[http://www.comp.nus.edu.sg/~azhikai[homepage]] [https://github.com/azhikai[github]] [<<johndoe#, portfolio>>]
+{empty}[http://www.comp.nus.edu.sg/~azhikai[homepage]] [https://github.com/azhikai[github]] [<<azhikai#, portfolio>>]
 
 Role: Team Lead +
-Responsibilities: Model + Logic
+Responsibilities: Model + Storage
 
 '''
 
 === Tan Ying Zi Rebecca
 image::rebstan97.png[width="150", align="left"]
-{empty}[http://github.com/rebstan97[github]] [<<johndoe#, portfolio>>]
+{empty}[http://github.com/rebstan97[github]] [<<rebstan97#, portfolio>>]
 
-Role: Quality Assurance +
+Role: Testing + Quality Assurance +
 Responsibilities: Model
 
 '''
 
 === Ong Ming Xian
 image::m4dkip.png[width="150", align="left"]
-{empty}[http://github.com/m4dkip[github]] [<<johndoe#, portfolio>>]
+{empty}[http://github.com/m4dkip[github]] [<<m4dkip#, portfolio>>]
 
-Role: Back-end +
-Responsibilities: Storage
+Role: Documentation +
+Responsibilities: Logic
 
 '''
 
 === Lee Yi Can
 image::yican95.png[width="150", align="left"]
-{empty}[http://github.com/yican95[github]] [<<johndoe#, portfolio>>]
+{empty}[http://github.com/yican95[github]] [<<yican95#, portfolio>>]
 
-Role: Back-end + Front End +
-Responsibilities: Logic + UI
+Role: Integration +
+Responsibilities: Logic
 
 '''
 
 === Neo Kai Jun
 image::hyperionnkj.png[width="150", align="left"]
-{empty}[http://github.com/hyperionnkj[github]] [<<johndoe#, portfolio>>]
+{empty}[http://github.com/hyperionnkj[github]] [<<hyperionnkj#, portfolio>>]
 
-Role: Back-end +
-Responsibilities: Logic
+Role: Schedule + Tracking +
+Responsibilities: Storage
 
 '''
