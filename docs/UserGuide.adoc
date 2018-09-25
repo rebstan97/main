@@ -480,6 +480,72 @@ Format: `history [stockup] [consumption]`
 * At least one of the optional fields must be provided.
 ****
 
+=== Recording sales volume of a menu item within a day: `record-sales`
+
+Records the quantity of a menu item sold within the selected day into the day's sales report. +
+Format: `record-sales d/DATE n/ITEM_NAME q/QUANTITY SOLD p/ITEM_PRICE`
+
+****
+* Appends the above record onto the sales report for the day
+* A sales report will automatically be created if the day does not have one.
+* DATE must be written in the DD/MM/YYYY format
+* ITEM_NAME must be unique in the sales report for the selected day
+****
+
+Examples:
+
+* `record-sales d/25-09-2018 n/Fried Rice q/35 p/5.50`
+
+=== Display sales report: `display-sales`
+
+Displays the sales report for all days +
+Format: `display-sales` +
+OR +
+Displays the sales report for a specified day +
+Format: `display-sales DATE`
+
+****
+* DATE must be written in the DD/MM/YYYY format
+****
+
+Examples:
+
+* `display-sales` +
+Displays the sales report for all days +
+* `display-sales 25-09-2018` +
+Displays the sales report dated 25-09-2018
+
+
+=== Deleting a sales record / report for a day: `delete-sales`
+
+Deletes a record in the sales report for a specified day +
+Format: `delete-sales DATE ITEM_NAME` / `delete-sales DATE ITEM_INDEX` +
+OR +
+Deletes the entire sales report for a specified day. +
+Format: `delete-sales DATE`
+
+****
+* Deletes the record at the specified `ITEM_INDEX`.
+* The item index refers to the index number shown in the sales report for the specified day.
+* The index *must be a positive integer* 1, 2, 3, ...
+* Alternatively, deletes the record with the specified `ITEM_NAME`.
+* Alternatively, deletes the entire sales report for the specified day by omitting the record identifier.
+****
+
+Examples:
+
+* `display-sales` +
+`delete-sales 25-09-2018 2` +
+`display-sales` +
+Deletes the 2nd record from the sales report dated 25-09-2018.
+
+* `delete-sales 10-02-2018 Fried Rice` +
+`display-sales` +
+Deletes the sales record for `Fried Rice` from the sales report dated 10-02-2018.
+
+* `delete-sales 23-06-2018` +
+Deletes the entire sales report dated 23-06-2018.
+
 == FAQ
 
 *Q: How do I transfer my data to another Computer?* +
