@@ -486,10 +486,10 @@ Records the quantity of a menu item sold within the specified day into the day's
 Format: `record-sales d/DATE n/ITEM_NAME q/QUANTITY SOLD p/ITEM_PRICE`
 
 ****
-* Appends the above record onto the sales report for the day
+* Appends the above record onto the sales report for the day.
 * A sales report will automatically be created if the day does not have one.
-* DATE must be written in the DD/MM/YYYY format
-* ITEM_NAME must be unique in the sales report for the selected day
+* DATE must be written in the DD/MM/YYYY format.
+* ITEM_NAME must be unique in the sales report for the selected day.
 ****
 
 Examples:
@@ -498,27 +498,27 @@ Examples:
 
 === Display sales report: `display-sales`
 
-Displays the sales report for all days +
+Displays the sales report for all days. +
 Format: `display-sales` +
 OR +
-Displays the sales report for the specified day +
+Displays the sales report for the specified day. +
 Format: `display-sales DATE`
 
 ****
-* DATE must be written in the DD/MM/YYYY format
+* DATE must be written in the DD/MM/YYYY format.
 ****
 
 Examples:
 
 * `display-sales` +
-Displays the sales report for all days +
+Displays the sales report for all days. +
 * `display-sales 25-09-2018` +
-Displays the sales report dated 25-09-2018
+Displays the sales report dated 25-09-2018.
 
 
 === Deleting a sales record / report: `delete-sales`
 
-Deletes a menu item's sales record in the sales report for the specified day +
+Deletes a menu item's sales record in the sales report for the specified day. +
 Format: `delete-sales DATE ITEM_NAME` / `delete-sales DATE ITEM_INDEX` +
 OR +
 Deletes the entire sales report for the specified day. +
@@ -548,7 +548,7 @@ Deletes the entire sales report dated 23-06-2018.
 
 === Editing a sales record: `edit-sales`
 
-Edit a menu item's sales record in the sales report for the specified day +
+Edit a menu item's sales record in the sales report for the specified day. +
 Format: `edit-sales DATE NAME [n/ITEM_NAME] [q/QUANTITY SOLD] [p/ITEM_PRICE]` / `edit-sales DATE INDEX [n/ITEM_NAME]
 [q/QUANTITY SOLD] [p/ITEM_PRICE]`
 
@@ -573,7 +573,7 @@ In the sales report dated 01-01-2018, edits the menu item's name of the 3rd reco
 
 === Checking sales history of a menu item: `check-sales`
 
-Displays the sales history of a menu item and the total revenue it has accumulated +
+Displays the sales history of a menu item and the total revenue it has accumulated. +
 Format: `check-sales ITEM_NAME` +
 
 Examples:
@@ -582,12 +582,12 @@ Examples:
 
 === Ranking menu items according to profitability: `rank-dish`
 
-Ranks the menu items based on their total revenue accumulated in past sales records in descending order +
+Ranks the menu items based on their total revenue accumulated in past sales records in descending order. +
 Format: `rank-dish`
 
 === Ranking dates according to profitability: `rank-date`
 
-Ranks the dates based on their revenue accumulated in past sales records in descending order +
+Ranks the dates based on their revenue accumulated in past sales records in descending order. +
 Format: `rank-date`
 
 == FAQ
