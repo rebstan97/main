@@ -888,6 +888,93 @@ Steps 1b1-1b2 are repeated until the number of units entered is less than the nu
 Use case resumes at step 2.
 
 [discrete]
+=== Use case: UC401 - Add reservation
+
+*MSS*
+
+1.  User requests to add a new reservation.
+2.  App adds the reservation to the reservations list.
+3.  App returns a success message confirming the new reservation has been added.
++
+Use case ends.
+
+*Extensions*
+
+[none]
+* 2a. The reservation date or time entered has an incorrect format.
+[none]
+** 2a1. App returns a message telling user the date or time format is entered incorrectly.
+** 2a2. User requests to add reservation again.
++
+Steps 2a1-2a2 are repeated until a proper date and time are entered.
++
+Use case resumes at step 3.
+
+[discrete]
+=== Use case: UC402 - Edit reservation
+
+*MSS*
+
+1.  User requests to edit a specified reservation.
+2.  App edits the specified reservation with the updated values.
+3.  App returns a success message confirming the specified reservation has been edited.
++
+Use case ends.
+
+*Extensions*
+
+[none]
+* 1a. The given index is invalid.
++
+[none]
+** 1a1. App returns a message telling user that the index is invalid.
+** 1a2. User requests to edit reservation again.
++
+Steps 1a1-1a2 are repeated until a valid index is entered.
++
+Use case resumes at step 2.
+
+[none]
+* 1b. None of the optional fields are specified.
++
+[none]
+** 1b1. App returns a message telling user at least one optional field has to be specified.
+** 1b2. User requests to edit reservation again.
++
+Steps 1b1-1b2 are repeated until at least one optional field is entered.
++
+Use case resumes at step 2.
+
+[discrete]
+=== Use case: UC403 - Delete reservation
+
+*MSS*
+
+1.  User requests to list reservations.
+2.  App shows a list of reservations.
+3.  User requests to delete a specific reservation in the list.
+4.  App deletes the reservation.
++
+Use case ends.
+
+*Extensions*
+
+[none]
+* 2a. The list is empty.
++
+Use case ends.
+
+* 3a. The given index is invalid.
++
+[none]
+** 3a1. App returns a message telling user the index is invalid.
+** 3a2. User requests to delete reservation again.
++
+Steps 3a1-3a2 are repeated until a valid index is entered.
++
+Use case resumes at step 3.
+
+[discrete]
 === Use case: UC501 - Record sales volume of menu item within a day
 
 *Guarantees*:
