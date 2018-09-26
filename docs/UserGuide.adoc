@@ -521,6 +521,26 @@ Edits the name and price of the 1st item to be `burger` and `3` respectively.
 * `edit-item 2 p/4 t/` +
 Edits the price of the 2nd item to be `4` and clears all existing tags.
 
+=== Deleting an item : `delete-item`
+
+Deletes the specified item from the menu. +
+Format: `delete-item INDEX`
+
+****
+* Deletes the item at the specified `INDEX`.
+* The index refers to the index number shown in the displayed item list.
+* The index *must be a positive integer* 1, 2, 3, ...
+****
+
+Examples:
+
+* `list-item` +
+`delete-item 2` +
+Deletes the 2nd item in the menu.
+* `find-item Cheese` +
+`delete-item 1` +
+Deletes the 1st item in the results of the `find` command.
+
 === Locating items by name: `find-item`
 
 Finds items whose names contain any of the given keywords. +
@@ -542,10 +562,10 @@ Returns `burger` and `Cheese Burger`
 * `find-item Cheese Chocolate Fruit` +
 Returns any item having names `Cheese`, `Chocolate`, or `Fruit`
 
-=== Filter items by tag: `filter-item`
+=== Filter menu by tag: `filter-menu`
 
-Finds items that contain the given tag. +
-Format: `filter-item t/TAG`
+Finds items that contain the given tag in the menu. +
+Format: `filter-menu t/TAG`
 
 ****
 * The search is case insensitive. e.g `burger` will match `Burger`
@@ -557,30 +577,27 @@ Format: `filter-item t/TAG`
 
 Examples:
 
-* `filter-item t/monday` +
+* `filter-menu t/monday` +
 Returns any item that contains tag `monday`
-* `filter-item t/set` +
+* `filter-menu t/set` +
 Returns any item that contains tag `set`
 
-=== Deleting an item : `delete-item`
+=== Sort menu : `sort-menu`
 
-Deletes the specified item from the menu. +
-Format: `delete-item INDEX`
+Sort the menu by name or tags. +
+Format: `sort-menu [sm/NAME] [sm/TAG]`
 
 ****
-* Deletes the item at the specified `INDEX`.
-* The index refers to the index number shown in the displayed item list.
-* The index *must be a positive integer* 1, 2, 3, ...
+* Sort the menu by name or tag.
+* Only one of the sorting method should be provided.
 ****
 
 Examples:
 
-* `list-item` +
-`delete-item 2` +
-Deletes the 2nd item in the menu.
-* `find-item Cheese` +
-`delete-item 1` +
-Deletes the 1st item in the results of the `find` command.
+* `sort-menu sm/NAME` +
+Sorts the menu by item name.
+* `sort-menu sm/TAG` +
+Sorts the menu by item tags.
 
 === Clearing all entries : `clear-menu`
 
@@ -810,6 +827,10 @@ e.g. `edit-item 2 n/Fries p/3`
 * *Find item* : `find-item KEYWORD [MORE_KEYWORDS]` +
 e.g. `find-item Cheese Burger`
 * *List item* : `list-item`
+* *Filter menu* : `fiiter-menu t/TAG` +
+e.g. `filter-menu t/cheese`
+* *Sort menu* : `sort-menu`
+e.g. `sort-menu sm/NAME`
 * *Give an item a discount* : `discount-item`
 e.g. `discount-item 2 d/20`
 * *Today's special* : `today-special`
