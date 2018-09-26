@@ -578,7 +578,7 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 |`* * *` |restaurant owner |assign role to a staff account |ensure only authorised staff can access certain parts of
 the system
 
-|`* * *` |new restaurant |see usage instructions |refer to instructions when I forget how to use the application
+|`* * *` |new restaurant owner|see usage instructions |refer to instructions when I forget how to use the application
 
 |`* * *` |forgetful restaurant owner |see usage instructions |refer to instructions when I forget how to use the
 application
@@ -593,6 +593,18 @@ application
 
 |`*` |forgetful restaurant owner |set reminders for the next restock |remember to restock
 
+|`* * *` |restaurant owner |keep track of daily sales |meet revenue goals, improve the menu and track inventory
+
+|`* * *` |restaurant owner |modify past sales records  |update any mistakes / refunds / cancelled booking
+
+|`* * *` |analytical restaurant owner |check the sales history of a menu item  |check the total revenue it has
+accumulated, and analyse its long-term sales performance
+
+|`* *` |profit-driven restaurant owner |know the most profitable dishes  | employ marketing strategies to bring in
+more revenue
+
+|`* *` |profit-driven restaurant owner |know the most profitable days| employ marketing strategies to bring in more
+revenue
 
 |=======================================================================
 
@@ -875,6 +887,182 @@ Steps 1b1-1b2 are repeated until the number of units entered is less than the nu
 +
 Use case resumes at step 2.
 
+[discrete]
+=== Use case: UC501 - Record sales volume of menu item within a day
+
+*Guarantees*:
+
+* A new sales record of a menu item will be appended.
+
+*MSS*
+
+1. User requests to record sales volume of a menu item within a specified day.
+2. App appends the record at the end of the day's sales report.
+3. App returns a success message confirming that the record is successful.
++
+Use case ends.
+
+*Extensions*
+[none]
+* 1a. Invalid command format entered by the user.
+[none]
+** 1a1. App returns a message telling user that the command format is invalid.
+** 1a2. User requests to record sales volume again.
++
+Steps 1a1-1a2 are repeated until a valid command format is entered.
++
+Use case resumes at step 2.
++
+
+[none]
+* 2a. Sales report does not exist for the specified day.
+[none]
+** 2a1. App automatically creates a sales report for the day.
++
+Use case resumes at step 2.
+
+* 2b. Sales record of the menu item already exist in the day's sales report.
+[none]
+** 2b1. App returns a message telling user that the menu item's record already exists.
+** 2b2. User requests to record sales volume again.
++
+Steps 2b1-2b2 are repeated until a record with unique item name is entered.
++
+Use case resumes at step 3.
++
+
+
+[discrete]
+=== Use case: UC502 - Editing sales record in a sales report for a day
+
+*Guarantees*:
+
+* Sales record will be updated to the user's input.
+
+*MSS*
+
+1. User requests to edit a sales record in the sales report for a specified day.
+2. App updates the sales record to that given by the user.
+3. App returns a success message confirming that the modification is successful.
++
+Use case ends.
+
+*Extensions*
+
+[none]
+* 1a. Invalid command format entered by the user.
+[none]
+** 1a1. App returns a message telling user that the command format is invalid.
+** 1a2. User requests to edit sales record again.
++
+Steps 1a1-1a2 are repeated until a valid command format is entered.
++
+Use case resumes at step 2.
++
+
+[none]
+* 1b. The given index/name is invalid.
++
+[none]
+** 1b1. App returns a message telling user that the index/name is invalid.
+** 1b2. User requests to edit sales record again.
++
+Steps 1b1-1b2 are repeated until a valid index/name is entered.
++
+Use case resumes at step 2.
+
+[none]
+* 1c. None of the optional fields are specified.
++
+[none]
+** 1c1. App returns a message telling user at least one optional field has to be specified.
+** 1c2. User requests to edit sales record again.
++
+Steps 1c1-1c2 are repeated until at least one optional field is entered.
++
+Use case resumes at step 2.
+
+[discrete]
+=== Use case: UC503 - Deleting sales record in a sales report for a day
+
+*MSS*
+
+1.  User requests to display the sales report of a specified day.
+2.  App shows the sales report.
+3.  User requests to delete a sales record in that sales report.
+4.  App deletes the sales record.
+5. App returns a success message confirming that the deletion is successful.
++
+Use case ends.
+
+*Extensions*
+
+[none]
+* 1a. The sales report does not exist in the specified day since no record has been entered.
+* 1b. App tells user that sales report does not exist.
++
+Use case ends.
+
+* 3a. Invalid command format entered by the user.
+[none]
+** 3a1. App returns a message telling user that the command format is invalid.
+** 3a2. User requests to delete sales record again.
++
+Steps 3a1-3a2 are repeated until a valid command format is entered.
++
+Use case resumes at step 4.
++
+
+* 3b. The given index/name is invalid.
++
+[none]
+** 3b1. App returns a message telling user the index/name is invalid.
+** 3b2. User requests to delete sales record again.
++
+Steps 3b1-3b2 are repeated until a valid index/name is entered.
++
+Use case resumes at step 4.
+
+[discrete]
+=== Use case: UC504 - Checking sales history of a menu item
+
+*MSS*
+
+1. User requests to check sales history of a menu item.
+2. App shows the sales history of the menu item.
++
+Use case ends.
+
+*Extensions*
+[none]
+* 1a. The given menu item does not have any past sales record.
+[none]
+** 1a1. App returns a message telling user that the item does not have any past sales record.
++
+Use case ends.
+
+[discrete]
+=== Use case: UC505 - Ranking menu items according to profitability
+
+[NOTE]
+The use case for ranking dates according to profitability is the same.
+
+*MSS*
+
+1. User requests to rank menu items according to the total revenue accumulated in past sales
+records.
+2. App shows the profitability ranking of the menu items.
++
+Use case ends.
+
+*Extensions*
+[none]
+* 1a. User has never entered a sales record. No sales record exists.
+[none]
+** 1a1. App returns a message telling user that there is no sales record.
++
+Use case ends.
+
 _{More to be added}_
 
 [appendix]
@@ -891,6 +1079,7 @@ _{More to be added}_
 .  Should always favour security over efficiency in development.
 .  Any user who has the basic proficiency of the English language should be able to use the application with the help
  of the link:{repoURL}/docs/UserGuide.adoc[`UserGuide.adoc`].
+.  System should not require any internet access except for updating.
 
 [appendix]
 == Glossary
