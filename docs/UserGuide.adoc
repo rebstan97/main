@@ -582,12 +582,12 @@ Examples:
 
 === Ranking menu items according to profitability: `rank-dish`
 
-Ranks the menu items based on their total revenue accumulated in descending order +
+Ranks the menu items based on their total revenue accumulated in past sales records in descending order +
 Format: `rank-dish`
 
 === Ranking dates according to profitability: `rank-date`
 
-Ranks the dates based on their revenue accumulated in descending order +
+Ranks the dates based on their revenue accumulated in past sales records in descending order +
 Format: `rank-date`
 
 == FAQ
