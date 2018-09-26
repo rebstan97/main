@@ -601,10 +601,10 @@ application
 accumulated, and analyse its long-term sales performance
 
 |`* *` |profit-driven restaurant owner |know the most profitable dishes  | employ marketing strategies to bring in
-more revenue.
+more revenue
 
 |`* *` |profit-driven restaurant owner |know the most profitable days| employ marketing strategies to bring in more
-revenue.
+revenue
 
 |=======================================================================
 
@@ -904,9 +904,9 @@ Use case ends.
 
 *Extensions*
 [none]
-* 1a. Invalid command format entered by the user
+* 1a. Invalid command format entered by the user.
 [none]
-** 1a1. App returns a message telling user that the command format is invalid
+** 1a1. App returns a message telling user that the command format is invalid.
 ** 1a2. User requests to record sales volume again.
 +
 Steps 1a1-1a2 are repeated until a valid command format is entered.
@@ -915,7 +915,7 @@ Use case resumes at step 2.
 +
 
 [none]
-* 2a. Sales report does not exist for the specified day
+* 2a. Sales report does not exist for the specified day.
 [none]
 ** 2a1. App automatically creates a sales report for the day.
 +
@@ -937,7 +937,7 @@ Use case resumes at step 3.
 
 *Guarantees*:
 
-* Sales record will be updated to the user's input
+* Sales record will be updated to the user's input.
 
 *MSS*
 
@@ -950,9 +950,9 @@ Use case ends.
 *Extensions*
 
 [none]
-* 1a. Invalid command format entered by the user
+* 1a. Invalid command format entered by the user.
 [none]
-** 1a1. App returns a message telling user that the command format is invalid
+** 1a1. App returns a message telling user that the command format is invalid.
 ** 1a2. User requests to edit sales record again.
 +
 Steps 1a1-1a2 are repeated until a valid command format is entered.
@@ -1003,9 +1003,9 @@ Use case ends.
 +
 Use case ends.
 
-* 3a. Invalid command format entered by the user
+* 3a. Invalid command format entered by the user.
 [none]
-** 3a1. App returns a message telling user that the command format is invalid
+** 3a1. App returns a message telling user that the command format is invalid.
 ** 3a2. User requests to delete sales record again.
 +
 Steps 3a1-3a2 are repeated until a valid command format is entered.
@@ -1079,7 +1079,7 @@ _{More to be added}_
 .  Should always favour security over efficiency in development.
 .  Any user who has the basic proficiency of the English language should be able to use the application with the help
  of the link:{repoURL}/docs/UserGuide.adoc[`UserGuide.adoc`].
-.  System should not require any internet access except for updating
+.  System should not require any internet access except for updating.
 
 [appendix]
 == Glossary
