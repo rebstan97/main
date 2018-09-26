@@ -606,7 +606,7 @@ more revenue
 |`* *` |profit-driven restaurant owner |know the most profitable days| employ marketing strategies to bring in more
 revenue
 
-|`* * *` |restaurant owner |add a new item to the menu |
+|`* * *` |restaurant owner |add a new item to the menu |introduce new dishes
 
 |`* * *` |restaurant owner |delete a item from the menu |remove entries that I no longer need
 
@@ -911,7 +911,7 @@ Use case resumes at step 2.
 
 *MSS*
 
-1.  User requests to add item to menu
+1.  User requests to add item to menu.
 2.  App adds the item to menu.
 +
 Use case ends.
@@ -938,10 +938,10 @@ Use case restart from step 1.
 
 *MSS*
 
-1.  User requests to list items
-2.  App shows a list of items in menu
-3.  User requests to delete a specific item in the list
-4.  App deletes the item
+1.  User requests to list items.
+2.  App shows a list of items in menu.
+3.  User requests to delete a specific item in the list.
+4.  App deletes the item.
 +
 Use case ends.
 
@@ -964,10 +964,10 @@ Use case resumes at step 2.
 
 *MSS*
 
-1.  User requests to list items
-2.  App shows a list of items in menu
-3.  User requests to edit a specific item in the list
-4.  App edits the item with updated values
+1.  User requests to list items.
+2.  App shows a list of items in menu.
+3.  User requests to edit a specific item in the list.
+4.  App edits the item with updated values.
 +
 Use case ends.
 
@@ -997,10 +997,10 @@ Use case resumes at step 2.
 
 *MSS*
 
-1.  User requests to list items
-2.  App shows a list of items in menu
-3.  User requests to give a specific item in the list a discount
-4.  App give the item a discount
+1.  User requests to list items.
+2.  App shows a list of items in menu.
+3.  User requests to give a specific item in the list a discount.
+4.  App give the item a discount.
 +
 Use case ends.
 
@@ -1030,8 +1030,8 @@ Use case resumes at step 2.
 
 *MSS*
 
-1.  User requests to export menu
-2.  App export the menu
+1.  User requests to export menu.
+2.  App export the menu.
 +
 Use case ends.
 
