@@ -482,7 +482,7 @@ Format: `history [stockup] [consumption]`
 
 === Adding a reservation: `add-reservation`
 
-Adds a new reservation to the reservation list. +
+Adds a new reservation to the reservations list. +
 Format: `add-reservation n/NAME p/PAX d/DATE t/TIME`
 
 ****
@@ -496,8 +496,51 @@ Examples:
 
 === Listing all reservations : `list-reservations`
 
-Shows a list of all reservations in the reservation list. +
+Shows a list of all reservations in the reservations list. +
 Format: `list-reservations`
+
+=== Editing a reservation: `edit-reservation`
+
+Edits an reservation in the reservation list. +
+Format: `edit-reservation INDEX [n/NAME] [p/PAX] [d/DATE] [t/TIME]`
+
+****
+* Edits the reservation at the specified `INDEX`. The index refers to the index number shown in the
+displayed reservations list. The index *must be a positive integer* 1, 2, 3, ...
+* At least one of the optional fields must be provided.
+* Existing values will be updated to the input values.
+****
+
+Examples:
+
+* `edit-reservation 2 t/1700` +
+Edits the time of the 2nd reservation in the list to `1700` hrs.
+
+* `edit-reservation 6 n/ONG p/4`  +
+Edits the name and pax of the 6th reservation to `ONG` and `4` respectively.
+
+=== Sorting reservations list: `sort-reservations`
+
+Sorts the reservations list by Date/Time. +
+Format: `sort-reservations`
+
+=== Deleting a reservation: `delete-reservation`
+
+Deletes the specified reservation from the reservations list. +
+Format: `delete-reservation INDEX`
+
+****
+* Deletes the reservation at the specified `INDEX`.
+* The index refers to the index number shown in the displayed reservations list.
+* The index *must be a positive integer* 1, 2, 3, ...
+****
+
+Examples:
+
+* `list-reservations` +
+`delete-reservations 2` +
+`list-ingredients` +
+Deletes the 2nd reservation in the reservations list.
 
 === Recording daily sales volume of a menu item: `record-sales`
 
@@ -658,6 +701,14 @@ e.g. `consume n/cod fish u/1`
 * *Remove dishes with low ingredients* : `remove-oos-dish`
 * *History of stockup/consumption* : `history [purchase] [consumption]` +
 e.g. `history stockup`
+* *Add a reservation* : `add-reservation n/NAME p/PAX d/DATE t/TIME` +
+e.g. `add-reservation n/TAN p/4 d/21072018 t/1300`
+* *List reservations* : `list-reservations`
+* *Edit reservation* : `edit-reservation INDEX [n/NAME] [p/PAX] [d/DATE] [t/TIME]` +
+e.g. `edit-reservation 2 t/1700`
+* *Sort reservations* : `sort-reservations`
+* *Delete a reservation* : `delete-reservation INDEX` +
+e.g. `delete-reservations 2`
 * *Record sales volume of menu item* : `record-sales d/DATE n/ITEM_NAME q/QUANTITY SOLD p/ITEM_PRICE` +
 e.g. `record-sales d/25-09-2018 n/Fried Rice q/35 p/5.50`
 * *Display sales report for all / specific day* : `display-sales` or `display-sales DATE` +
