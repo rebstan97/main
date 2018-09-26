@@ -480,6 +480,167 @@ Format: `history [stockup] [consumption]`
 * At least one of the optional fields must be provided.
 ****
 
+=== Adding an item to the menu: `add-item`
+
+Adds an item to the menu +
+Format: `add-item n/ITEM_NAME p/ITEM_PRICE [t/TAG]...`
+
+****
+* ITEM_NAME and ITEM_PRICE must be provided.
+* An item can have any number of tags (including 0)
+****
+
+Examples:
+
+* `add-item n/Burger p/2`
+* `add-item n/Burger Set p/4.5 t/Set`
+
+=== Listing all items in the menu : `list-item`
+
+Shows a list of all items in the menu. +
+Format: `list-item`
+
+=== Editing an item in the menu : `edit-item`
+
+Edits an existing item in the menu. +
+Format: `edit-item INDEX [n/ITEM_NAME] [p/ITEM_PRICE] [t/TAG]...`
+
+****
+* Edits the item at the specified `INDEX`. The index refers to the index number shown in the displayed item list. The
+index *must be a positive integer* 1, 2, 3, ...
+* At least one of the optional fields must be provided.
+* Existing values will be updated to the input values.
+* When editing tags, the existing tags of the item will be removed i.e adding of tags is not cumulative.
+* You can remove all the item's tags by typing `t/` without specifying any tags after it.
+****
+
+Examples:
+
+* `edit-item 1 n/burger p/3` +
+Edits the name and price of the 1st item to be `burger` and `3` respectively.
+* `edit-item 2 p/4 t/` +
+Edits the price of the 2nd item to be `4` and clears all existing tags.
+
+=== Locating items by name: `find-item`
+
+Finds items whose names contain any of the given keywords. +
+Format: `find-item KEYWORD [MORE_KEYWORDS]`
+
+****
+* The search is case insensitive. e.g `burger` will match `Burger`
+* The order of the keywords does not matter. e.g. `Cheese Burger` will match `Burger Cheese`
+* Only the name is searched.
+* Only full words will be matched e.g. `Bur` will not match `Burger`
+* Items matching at least one keyword will be returned (i.e. `OR` search). e.g. `Cheese Burger` will return
+`Cheese Fries`,`Cheese Cake`
+****
+
+Examples:
+
+* `find-item Burger` +
+Returns `burger` and `Cheese Burger`
+* `find-item Cheese Chocolate Fruit` +
+Returns any item having names `Cheese`, `Chocolate`, or `Fruit`
+
+=== Filter items by tag: `filter-item`
+
+Finds items that contain the given tag. +
+Format: `filter-item t/TAG`
+
+****
+* The search is case insensitive. e.g `burger` will match `Burger`
+* Only filter by tag.
+* Only full words will be matched e.g. `Bur` will not match `Burger`
+* Items matching at least one keyword will be returned (i.e. `OR` search). e.g. `Cheese Burger` will return
+`Cheese Fries`,`Cheese Cake`
+****
+
+Examples:
+
+* `filter-item t/monday` +
+Returns any item that contains tag `monday`
+* `filter-item t/set` +
+Returns any item that contains tag `set`
+
+=== Deleting an item : `delete-item`
+
+Deletes the specified item from the menu. +
+Format: `delete-item INDEX`
+
+****
+* Deletes the item at the specified `INDEX`.
+* The index refers to the index number shown in the displayed item list.
+* The index *must be a positive integer* 1, 2, 3, ...
+****
+
+Examples:
+
+* `list-item` +
+`delete-item 2` +
+Deletes the 2nd item in the menu.
+* `find-item Cheese` +
+`delete-item 1` +
+Deletes the 1st item in the results of the `find` command.
+
+=== Clearing all entries : `clear-menu`
+
+Clears all entries from the menu. +
+Format: `clear-menu`
+
+=== Giving a discount to an item : `discount-item`
+
+Gives the item identified by the index number used in the displayed item list a discount. +
+Format: `discount-item INDEX|ALL d/PERCENTAGE`
+
+****
+* Gives the item at the specified `INDEX` a discount based on the percentage.
+* If the item is already on discount, it will update the new discounted price.
+* The index refers to the index number shown in the displayed person list.
+* The index *must be a positive integer* `1, 2, 3, ...`
+* You can remove discount by typing `0` for the percentage.
+* You can give a discount to the whole menu by typing `ALL` instead of a specified `INDEX`.
+****
+
+Examples:
+
+* `list-item` +
+`discount-item 2` +
+Discount the 2nd item in the menu.
+* `find-item Cheese` +
+`discount-item 1` +
+Discounts the 1st item in the results of the `find` command.
+
+=== Today's specials : `today-special`
+
+Lists the items that have been tagged with the particular day in the menu. +
+Format: `today-special`
+
+Examples:
+
+* `today-special` +
+If today is Monday +
+List the items that have been tagged with `Monday` in the menu.
+
+=== Export menu : `export-menu`
+
+Exports the menu to a particular file path. +
+Format: `export-menu fp/FILEPATH fn/FILENAME`
+
+Examples:
+
+* `export-menu f/test/ n/menu.txt` +
+Export the menu to test folder with the file name `menu.txt`
+
+=== Import menu : `import-menu`
+
+Imports an existing menu from specified file path to replace current menu. +
+Format: `import-menu fp/FILEPATH fn/FILENAME`
+
+Examples:
+
+* `import-menu f/test/ n/menu.txt` +
+Import the menu.txt from test folder to replace current menu.
+
 === Recording daily sales volume of a menu item: `record-sales`
 
 Records the quantity of a menu item sold within the specified day into the day's sales report. +
@@ -639,6 +800,23 @@ e.g. `consume n/cod fish u/1`
 * *Remove dishes with low ingredients* : `remove-oos-dish`
 * *History of stockup/consumption* : `history [purchase] [consumption]` +
 e.g. `history stockup`
+* *Add item* `add-item n/ITEM_NAME p/ITEM_PRICE [t/TAG]...` +
+e.g. `add-item n/Burger Set p/3 t/set`
+* *Clear menu* : `clear-menu`
+* *Delete item* : `delete-item INDEX` +
+e.g. `delete-item 3`
+* *Edit item* : `edit-item INDEX [n/ITEM_NAME] [p/ITEM_PRICE] [t/TAG]...` +
+e.g. `edit-item 2 n/Fries p/3`
+* *Find item* : `find-item KEYWORD [MORE_KEYWORDS]` +
+e.g. `find-item Cheese Burger`
+* *List item* : `list-item`
+* *Give an item a discount* : `discount-item`
+e.g. `discount-item 2 d/20`
+* *Today's special* : `today-special`
+* *Export menu* : `export-menu`
+e.g. `export-menu fp/backup/ fn/menu.txt`
+* *Import menu* : `import-menu`
+e.g. `import-menu fp/backup/ fn/menu.txt`
 * *Record sales volume of menu item* : `record-sales d/DATE n/ITEM_NAME q/QUANTITY SOLD p/ITEM_PRICE` +
 e.g. `record-sales d/25-09-2018 n/Fried Rice q/35 p/5.50`
 * *Display sales report for all / specific day* : `display-sales` or `display-sales DATE` +
