@@ -346,6 +346,25 @@ Format: `history [stockup] [consumption]`
 * At least one of the optional fields must be provided.
 ****
 
+=== Adding a reservation: `add-reservation`
+
+Adds a new reservation to the reservation list. +
+Format: `add-reservation n/NAME p/PAX d/DATE t/TIME`
+
+****
+* Date is entered in DDMMYYYY format.
+* Time is entered in Military Time.
+****
+
+Examples:
+
+* `add-reservation n/TAN p/4 d/21072018 t/1300`
+
+=== Listing all reservations : `list-reservations`
+
+Shows a list of all reservations in the reservation list. +
+Format: `list-reservations`
+
 == FAQ
 
 *Q*: How do I transfer my data to another Computer? +
