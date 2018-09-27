@@ -606,6 +606,25 @@ more revenue
 |`* *` |profit-driven restaurant owner |know the most profitable days| employ marketing strategies to bring in more
 revenue
 
+|`* * *` |restaurant owner |add a new item to the menu |introduce new dishes
+
+|`* * *` |restaurant owner |delete an item from the menu |remove entries that I no longer need
+
+|`* * *` |restaurant owner |edit an item from the menu |update the entries of the menu
+
+|`* * *` |restaurant owner |find an item by name |locate details of items without having to go through the entire
+ list
+
+|`* * *` |restaurant owner |filter items by tag |filter and find items without having to go through the entire list
+
+|`* * *` |restaurant owner |give an item discount |have discount for items in menu
+
+|`* * *` |restaurant owner |view menu |see the changes made to the menu
+
+|`* * *` |restaurant owner |clear menu |revamp my menu when there is a need
+
+|`* * *` |restaurant owner |export menu |print hard copies of the menu
+
 |=======================================================================
 
 [appendix]
@@ -886,6 +905,145 @@ Use case resumes at step 2.
 Steps 1b1-1b2 are repeated until the number of units entered is less than the number of units available.
 +
 Use case resumes at step 2.
+
+[discrete]
+=== Use case: UC301 -  Add item to menu
+
+*MSS*
+
+1.  User requests to add item to menu.
+2.  App adds the item to menu.
++
+Use case ends.
+
+*Extensions*
+
+[none]
+* 1a. Invalid argument given for the command.
++
+[none]
+** 1a1. App shows an error message that ITEM_NAME or/and ITEM_PRICE are invalid.
++
+Use case restart from step 1.
+
+* 1b. The item name entered is already in the menu.
++
+[none]
+** 1b1. App shows an error message that the item name already exists.
++
+Use case restart from step 1.
+
+[discrete]
+=== Use case: UC302 - Delete item from menu
+
+*MSS*
+
+1.  User requests to list items.
+2.  App shows a list of items in menu.
+3.  User requests to delete a specific item in the list.
+4.  App deletes the item.
++
+Use case ends.
+
+*Extensions*
+
+[none]
+* 2a. The list is empty.
++
+Use case ends.
+
+* 3a. The given index is invalid.
++
+[none]
+** 3a1. App shows an error message that the given index is invalid.
++
+Use case resumes at step 2.
+
+[discrete]
+=== Use case: UC303 - Edit item from menu
+
+*MSS*
+
+1.  User requests to list items.
+2.  App shows a list of items in menu.
+3.  User requests to edit a specific item in the list.
+4.  App edits the item with updated values.
++
+Use case ends.
+
+*Extensions*
+
+[none]
+* 2a. The list is empty.
++
+Use case ends.
+
+* 3a. The given index is invalid.
++
+[none]
+** 3a1. App shows an error message that the given index is invalid.
++
+Use case resumes at step 2.
+
+* 3b. None of the optional fields are specified.
++
+[none]
+** 3b1. App shows an error message that none of the optional fields are specified.
++
+Use case resumes at step 2.
+
+[discrete]
+=== Use case: UC304 - Give an item a discount
+
+*MSS*
+
+1.  User requests to list items.
+2.  App shows a list of items in menu.
+3.  User requests to give a specific item in the list a discount.
+4.  App give the item a discount.
++
+Use case ends.
+
+*Extensions*
+
+[none]
+* 2a. The list is empty.
++
+Use case ends.
+
+* 3a. The given index is invalid.
++
+[none]
+** 3a1. App shows an error message that the given index is invalid.
++
+Use case resumes at step 2.
+
+* 3b. The given percentage is invalid.
++
+[none]
+** 3b1. App shows an error message that the given percentage is invalid.
++
+Use case resumes at step 2.
+
+[discrete]
+=== Use case: UC305 - Export menu
+
+*MSS*
+
+1.  User requests to export menu.
+2.  App export the menu.
++
+Use case ends.
+
+*Extensions*
+
+[none]
+* 1a. Invalid file path given for the command.
++
+[none]
+** 1a1. App shows an error message that file path is invalid.
++
+Use case restart from step 1.
 
 [discrete]
 === Use case: UC401 - Add reservation
