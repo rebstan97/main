@@ -608,16 +608,16 @@ revenue
 
 |`* * *` |restaurant owner |add a new item to the menu |introduce new dishes
 
-|`* * *` |restaurant owner |delete a item from the menu |remove entries that I no longer need
+|`* * *` |restaurant owner |delete an item from the menu |remove entries that I no longer need
 
-|`* * *` |restaurant owner |edit a item from the menu |update the entries of the menu
+|`* * *` |restaurant owner |edit an item from the menu |update the entries of the menu
 
-|`* * *` |restaurant owner |find a item by name |locate details of items without having to go through the entire
+|`* * *` |restaurant owner |find an item by name |locate details of items without having to go through the entire
  list
 
 |`* * *` |restaurant owner |filter items by tag |filter and find items without having to go through the entire list
 
-|`* * *` |restaurant owner |give a item discount |have discount for items in menu
+|`* * *` |restaurant owner |give an item discount |have discount for items in menu
 
 |`* * *` |restaurant owner |view menu |see the changes made to the menu
 

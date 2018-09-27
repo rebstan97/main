@@ -495,15 +495,16 @@ Examples:
 * `add-item n/Burger p/2`
 * `add-item n/Burger Set p/4.5 t/Set`
 
-=== Listing all items in the menu : `list-item`
+=== Listing all items in the menu : `list-items`
 
 Shows a list of all items in the menu. +
-Format: `list-item`
+Format: `list-items`
 
 === Editing an item in the menu : `edit-item`
 
 Edits an existing item in the menu. +
-Format: `edit-item INDEX [n/ITEM_NAME] [p/ITEM_PRICE] [t/TAG]...`
+Format: `edit-item INDEX [n/ITEM_NAME] [p/ITEM_PRICE] [t/TAG]...` or `edit-item NAME [n/ITEM_NAME] [p/ITEM_PRICE]
+[t/TAG]...`
 
 ****
 * Edits the item at the specified `INDEX`. The index refers to the index number shown in the displayed item list. The
@@ -512,6 +513,7 @@ index *must be a positive integer* 1, 2, 3, ...
 * Existing values will be updated to the input values.
 * When editing tags, the existing tags of the item will be removed i.e adding of tags is not cumulative.
 * You can remove all the item's tags by typing `t/` without specifying any tags after it.
+* Alternatively, edits the item with the specified `NAME`.
 ****
 
 Examples:
@@ -524,12 +526,13 @@ Edits the price of the 2nd item to be `4` and clears all existing tags.
 === Deleting an item : `delete-item`
 
 Deletes the specified item from the menu. +
-Format: `delete-item INDEX`
+Format: `delete-item INDEX` or `delete-item NAME`
 
 ****
 * Deletes the item at the specified `INDEX`.
 * The index refers to the index number shown in the displayed item list.
 * The index *must be a positive integer* 1, 2, 3, ...
+* Alternatively, deletes the item with the specified `NAME`.
 ****
 
 Examples:
@@ -826,7 +829,7 @@ e.g. `delete-item 3`
 e.g. `edit-item 2 n/Fries p/3`
 * *Find item* : `find-item KEYWORD [MORE_KEYWORDS]` +
 e.g. `find-item Cheese Burger`
-* *List item* : `list-item`
+* *List items* : `list-items`
 * *Filter menu* : `fiiter-menu t/TAG` +
 e.g. `filter-menu t/cheese`
 * *Sort menu* : `sort-menu`
