@@ -537,7 +537,7 @@ Format: `delete-item INDEX` or `delete-item NAME`
 
 Examples:
 
-* `list-item` +
+* `list-items` +
 `delete-item 2` +
 Deletes the 2nd item in the menu.
 * `find-item Cheese` +
@@ -623,7 +623,7 @@ Format: `discount-item INDEX|ALL d/PERCENTAGE`
 
 Examples:
 
-* `list-item` +
+* `list-items` +
 `discount-item 2` +
 Discount the 2nd item in the menu.
 * `find-item Cheese` +
