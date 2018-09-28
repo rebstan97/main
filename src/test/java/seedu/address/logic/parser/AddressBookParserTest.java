@@ -1,6 +1,7 @@
 package seedu.address.logic.parser;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertTrue;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
@@ -29,11 +30,14 @@ import seedu.address.logic.commands.SelectCommand;
 import seedu.address.logic.commands.UndoCommand;
 import seedu.address.logic.commands.accounts.CreateCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.accounts.Account;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 import seedu.address.testutil.PersonBuilder;
 import seedu.address.testutil.PersonUtil;
+import seedu.address.testutil.accounts.AccountBuilder;
+import seedu.address.testutil.accounts.AccountUtil;
 
 public class AddressBookParserTest {
 
@@ -145,6 +149,17 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_createAccount() throws ParseException {
-        assertTrue(parser.parseCommand(CreateCommand.COMMAND_WORD) instanceof CreateCommand);
+        Account account = new AccountBuilder().build();
+        CreateCommand command = (CreateCommand) parser.parseCommand(AccountUtil.getCreateCommand(account));
+        assertEquals(new CreateCommand(account), command);
+    }
+
+    @Test
+    public void parseCommand_createAccount_notEquals() throws ParseException {
+        Account accountOneCommand = new AccountBuilder().build();
+        Account accountTwoCommand = new AccountBuilder().withUsername("demo1").withPassword("1122qq").build();
+        CreateCommand commandOne = (CreateCommand) parser.parseCommand(AccountUtil.getCreateCommand(accountOneCommand));
+        CreateCommand commandTwo = (CreateCommand) parser.parseCommand(AccountUtil.getCreateCommand(accountTwoCommand));
+        assertNotEquals(commandOne, commandTwo);
     }
 }
