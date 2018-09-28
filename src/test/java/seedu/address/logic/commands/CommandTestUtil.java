@@ -60,8 +60,13 @@ public class CommandTestUtil {
     public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "hubby*"; // '*' not allowed in tags
 
     /** For accounts */
-    public static final String VALID_USERNAME = " " + PREFIX_ID + DEFAULT_USERNAME;
-    public static final String VALID_PASSWORD = " " + PREFIX_PASSWORD + DEFAULT_PASSWORD;
+    public static final String VALID_USERNAME_DEMO_ONE = "demo1";
+    public static final String VALID_USERNAME_DEMO_TWO = "demo2";
+    public static final String VALID_PASSWORD_DEMO_ONE = "1122";
+    public static final String VALID_PASSWORD_DEMO_TWO = "22qq";
+
+    public static final String VALID_USERNAME = " " + PREFIX_ID + VALID_USERNAME_DEMO_ONE;
+    public static final String VALID_PASSWORD = " " + PREFIX_PASSWORD + VALID_PASSWORD_DEMO_ONE;
 
     public static final String INVALID_USERNAME = " " + PREFIX_ID + "azhi kai"; // space not allowed
     public static final String INVALID_PASSWORD = " " + PREFIX_PASSWORD + "11 22qq"; // space not allowed

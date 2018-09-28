@@ -12,6 +12,7 @@ import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSucces
 import static seedu.address.testutil.accounts.AccountBuilder.DEFAULT_PASSWORD;
 import static seedu.address.testutil.accounts.AccountBuilder.DEFAULT_USERNAME;
 import static seedu.address.testutil.accounts.TypicalAccounts.DEFAULT_ADMIN_ACCOUNT;
+import static seedu.address.testutil.accounts.TypicalAccounts.DEMO_ONE;
 
 import org.junit.Test;
 
@@ -27,7 +28,7 @@ public class CreateCommandParserTest {
 
     @Test
     public void parse_allFieldsPresent_success() {
-        Account expectedAccount = new AccountBuilder(DEFAULT_ADMIN_ACCOUNT).build();
+        Account expectedAccount = new AccountBuilder(DEMO_ONE).build();
 
         // whitespace only preamble
         assertParseSuccess(parser, PREAMBLE_WHITESPACE + VALID_USERNAME + VALID_PASSWORD,

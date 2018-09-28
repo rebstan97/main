@@ -1,5 +1,10 @@
 package seedu.address.testutil.accounts;
 
+import static seedu.address.logic.commands.CommandTestUtil.VALID_PASSWORD_DEMO_ONE;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_PASSWORD_DEMO_TWO;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_USERNAME_DEMO_ONE;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_USERNAME_DEMO_TWO;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -12,7 +17,10 @@ import seedu.address.model.accounts.Account;
 public class TypicalAccounts {
 
     public static final Account DEFAULT_ADMIN_ACCOUNT = new AccountBuilder().build();
-    public static final Account DEMO_ONE = new AccountBuilder().withUsername("demo1").withPassword("pw1").build();
+    public static final Account DEMO_ONE =
+            new AccountBuilder().withUsername(VALID_USERNAME_DEMO_ONE).withPassword(VALID_PASSWORD_DEMO_ONE).build();
+    public static final Account DEMO_TWO =
+            new AccountBuilder().withUsername(VALID_USERNAME_DEMO_TWO).withPassword(VALID_PASSWORD_DEMO_TWO).build();
 
     private TypicalAccounts() {} // prevents instantiation
 
