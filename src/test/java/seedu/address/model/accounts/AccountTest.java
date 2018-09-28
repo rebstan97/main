@@ -1,6 +1,8 @@
 package seedu.address.model.accounts;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_USERNAME_DEMO_ONE;
 import static seedu.address.testutil.accounts.TypicalAccounts.DEFAULT_ADMIN_ACCOUNT;
@@ -16,6 +18,14 @@ public class AccountTest {
 
     @Rule
     public ExpectedException thrown = ExpectedException.none();
+
+    @Test
+    public void check_toString() {
+        Account adminAccount = new AccountBuilder(DEFAULT_ADMIN_ACCOUNT).build();
+
+        assertEquals(adminAccount.toString(), DEFAULT_ADMIN_ACCOUNT.getUsername().toString());
+        assertNotEquals(adminAccount.toString(), DEMO_ONE.getUsername().toString());
+    }
 
     @Test
     public void equals() {
@@ -40,5 +50,16 @@ public class AccountTest {
         Account editedAdminAccount =
                 new AccountBuilder(DEFAULT_ADMIN_ACCOUNT).withUsername(VALID_USERNAME_DEMO_ONE).build();
         assertFalse(DEFAULT_ADMIN_ACCOUNT.equals(editedAdminAccount));
+    }
+
+    @Test
+    public void hash_code() {
+        Account adminAccount = new AccountBuilder(DEFAULT_ADMIN_ACCOUNT).build();
+
+        assertEquals(adminAccount.hashCode(), adminAccount.hashCode());
+
+        Account demoAccount = new AccountBuilder(DEMO_ONE).build();
+
+        assertNotEquals(adminAccount.hashCode(), demoAccount.hashCode());
     }
 }

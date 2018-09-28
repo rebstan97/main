@@ -57,6 +57,6 @@ public class Account {
 
     @Override
     public String toString() {
-        return "Username: " + getUsername();
+        return getUsername().toString();
     }
 }
