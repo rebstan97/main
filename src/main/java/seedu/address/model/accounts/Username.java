@@ -12,7 +12,7 @@ public class Username {
             "Username should only contain alphanumeric characters and without spaces, and it should not be blank";
 
     /*
-     * The first character of the address must not be a whitespace,
+     * The first character of the username must not be a whitespace,
      * otherwise " " (a blank string) becomes a valid input.
      */
     public static final String USERNAME_VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum}]*";
