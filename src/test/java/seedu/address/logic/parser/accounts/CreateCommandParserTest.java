@@ -11,7 +11,6 @@ import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailur
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.address.testutil.accounts.AccountBuilder.DEFAULT_PASSWORD;
 import static seedu.address.testutil.accounts.AccountBuilder.DEFAULT_USERNAME;
-import static seedu.address.testutil.accounts.TypicalAccounts.DEFAULT_ADMIN_ACCOUNT;
 import static seedu.address.testutil.accounts.TypicalAccounts.DEMO_ONE;
 
 import org.junit.Test;
