@@ -136,7 +136,7 @@ public class AddressBookTest {
         Person amyWithoutTags = new PersonBuilder(AMY).withTags().build();
 
         AddressBook expectedAddressBook = new AddressBookBuilder().withPerson(amyWithoutTags)
-                .withPerson(TypicalPersons.DYLAN)
+                .withPerson(DYLAN)
                 .build();
 
         assertEquals(addressBookWithPersons, expectedAddressBook);
