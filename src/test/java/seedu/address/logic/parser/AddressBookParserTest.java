@@ -27,6 +27,7 @@ import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.RedoCommand;
 import seedu.address.logic.commands.SelectCommand;
 import seedu.address.logic.commands.UndoCommand;
+import seedu.address.logic.commands.accounts.CreateCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
@@ -35,6 +36,7 @@ import seedu.address.testutil.PersonBuilder;
 import seedu.address.testutil.PersonUtil;
 
 public class AddressBookParserTest {
+
     @Rule
     public ExpectedException thrown = ExpectedException.none();
 
@@ -139,5 +141,10 @@ public class AddressBookParserTest {
         thrown.expect(ParseException.class);
         thrown.expectMessage(MESSAGE_UNKNOWN_COMMAND);
         parser.parseCommand("unknownCommand");
+    }
+
+    @Test
+    public void parseCommand_createAccount() throws ParseException {
+        assertTrue(parser.parseCommand(CreateCommand.COMMAND_WORD) instanceof CreateCommand);
     }
 }
