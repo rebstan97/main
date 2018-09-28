@@ -1,7 +1,11 @@
 package seedu.address.model.accounts;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertTrue;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_USERNAME_DEMO_ONE;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_USERNAME_DEMO_TWO;
 
 import org.junit.Test;
 
@@ -38,5 +42,16 @@ public class UsernameTest {
         assertTrue(Username.isValidUsername("peter2")); // alphanumeric characters
         assertTrue(Username.isValidUsername("CapitalAng")); // with capital letters
         assertTrue(Username.isValidUsername("ThisIsALongUsernameAlthoughWhoWouldDoThisRight")); // long names
+    }
+
+    @Test
+    public void hash_code() {
+        Username userOne = new Username(VALID_USERNAME_DEMO_ONE);
+
+        assertEquals(userOne.hashCode(), userOne.hashCode());
+
+        Username userTwo = new Username(VALID_USERNAME_DEMO_TWO);
+
+        assertNotEquals(userOne.hashCode(), userTwo.hashCode());
     }
 }
