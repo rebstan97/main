@@ -16,11 +16,11 @@ import seedu.address.model.accounts.Account;
 import seedu.address.testutil.accounts.AccountBuilder;
 
 public class CreateCommandTest {
-    private CommandHistory commandHistory = new CommandHistory();
-    private Model model = new ModelManager();
-
     @Rule
     public ExpectedException thrown = ExpectedException.none();
+
+    private CommandHistory commandHistory = new CommandHistory();
+    private Model model = new ModelManager();
 
     @Test
     public void execute_throwsException() throws CommandException {
