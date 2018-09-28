@@ -1,7 +1,11 @@
 package seedu.address.model.accounts;
 
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_PASSWORD_DEMO_ONE;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_PASSWORD_DEMO_TWO;
 
 import org.junit.Test;
 
@@ -37,5 +41,16 @@ public class PasswordTest {
         assertTrue(Password.isValidPassword("CapitalAng")); // with capital letters
         assertTrue(Password.isValidPassword("th15isAPassword")); // long alphanumeric password
         assertTrue(Password.isValidPassword("!!@@SGMY3-1")); // alphanumeric and special characters
+    }
+
+    @Test
+    public void hash_code() {
+        Password passwordOne = new Password(VALID_PASSWORD_DEMO_ONE);
+
+        assertEquals(passwordOne.hashCode(), passwordOne.hashCode());
+
+        Password passwordTwo = new Password(VALID_PASSWORD_DEMO_TWO);
+
+        assertNotEquals(passwordOne.hashCode(), passwordTwo.hashCode());
     }
 }
