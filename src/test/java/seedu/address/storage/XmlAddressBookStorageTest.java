@@ -152,19 +152,18 @@ public class XmlAddressBookStorageTest {
         Path filePath = testFolder.getRoot().toPath().resolve("TempAddressBook.xml");
         AddressBook original = getTypicalAddressBook();
         XmlAddressBookStorage xmlAddressBookStorage = new XmlAddressBookStorage(filePath);
+        Path path = Paths.get(filePath.toString() + ".backup");
 
         //Backup in a temporary storage and read back
         xmlAddressBookStorage.backupAddressBook(original);
-        ReadOnlyAddressBook readBack = xmlAddressBookStorage.readAddressBook(Paths.get(filePath.toString()
-                + ".backup")).get();
+        ReadOnlyAddressBook readBack = xmlAddressBookStorage.readAddressBook(path).get();
         assertEquals(original, new AddressBook(readBack));
 
         //Modify data, overwrite exiting backup file, and read back
         original.addPerson(DYLAN);
         original.removePerson(ALICE);
         xmlAddressBookStorage.backupAddressBook(original);
-        readBack = xmlAddressBookStorage.readAddressBook(Paths.get(filePath.toString()
-                + ".backup")).get();
+        readBack = xmlAddressBookStorage.readAddressBook(path).get();
         assertEquals(original, new AddressBook(readBack));
     }
 }
