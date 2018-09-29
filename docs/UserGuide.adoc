@@ -660,7 +660,6 @@ Examples:
 
 * `import-menu f/test/ n/menu.txt` +
 Import the menu.txt from test folder to replace current menu.
->>>>>>> d8104eeac35a224217ba9b7331cb65179fd57082
 
 === Adding a reservation: `add-reservation`
 
