@@ -4,7 +4,6 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.DYLAN;
-import static seedu.address.testutil.TypicalPersons.FIONA;
 import static seedu.address.testutil.TypicalPersons.HOON;
 import static seedu.address.testutil.TypicalPersons.IDA;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
