@@ -55,6 +55,12 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
+    public void resetData(ReadOnlyAccountRecord newData) {
+        accountRecord.resetData(newData);
+        indicateAddressBookChanged();
+    }
+
+    @Override
     public ReadOnlyAddressBook getAddressBook() {
         return versionedAddressBook;
     }
@@ -144,19 +150,11 @@ public class ModelManager extends ComponentManager implements Model {
         versionedAddressBook.commit();
     }
 
-    //=========== Account =================================================================================
-
     /**
      * Raises an event to indicate the model has changed
      */
     private void indicateAccountRecordChanged() {
         raise(new AccountRecordChangedEvent(accountRecord));
-    }
-
-    @Override
-    public void resetData(ReadOnlyAccountRecord newData) {
-        accountRecord.resetData(newData);
-        indicateAddressBookChanged();
     }
 
     @Override

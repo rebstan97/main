@@ -19,9 +19,14 @@ public interface Model {
     Predicate<Person> PREDICATE_SHOW_ALL_PERSONS = unused -> true;
 
     /**
-     * Clears existing backing model and replaces with the provided new data.
+     * Clears existing backing model and replaces with the provided new data for AddressBook.
      */
     void resetData(ReadOnlyAddressBook newData);
+
+    /**
+     * Clears existing backing model and replaces with the provided new data for AccountRecord.
+     */
+    void resetData(ReadOnlyAccountRecord newData);
 
     /**
      * Returns the AddressBook
@@ -93,11 +98,6 @@ public interface Model {
      * Saves the current address book state for undo/redo.
      */
     void commitAddressBook();
-
-    /**
-     * Clears existing backing model and replaces with the provided new data.
-     */
-    void resetData(ReadOnlyAccountRecord newData);
 
     /**
      * Returns the AddressBook

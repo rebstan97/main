@@ -41,6 +41,7 @@ public class AccountRecord implements ReadOnlyAccountRecord {
     public void setAccounts(List<Account> accounts) {
         this.accounts.setAccounts(accounts);
     }
+
     /**
      * Resets the existing data of this {@code AccountRecord} with {@code newData}.
      */
