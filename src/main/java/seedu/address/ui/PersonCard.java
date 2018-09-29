@@ -14,9 +14,11 @@ public class PersonCard extends UiPart<Region> {
 
     private static final String FXML = "PersonListCard.fxml";
 
-    private static final String[] TAG_COLOR_STYLES = { "teal", "red" , "yellow", "blue", "orange", "brown", "green",
-        "pink", "black", "grey" };
+    private enum tagColourStyle {
+        TEAL, RED, YELLOW, BLUE, ORANGE, BROWN, GREEN, PINK, BLACK, GREY
+    }
 
+    private static final tagColourStyle[] TAG_COLOR_STYLES = tagColourStyle.values();
 
     /**
      * Note: Certain keywords such as "location" and "resources" are reserved keywords in JavaFX.
@@ -58,7 +60,7 @@ public class PersonCard extends UiPart<Region> {
      * Returns color style for {@code tagName}'s label
      */
     private String getTagColorStyleFor(String tagName) {
-        return TAG_COLOR_STYLES[Math.abs(tagName.hashCode()) % TAG_COLOR_STYLES.length];
+        return TAG_COLOR_STYLES[Math.abs(tagName.hashCode()) % TAG_COLOR_STYLES.length].toString();
     }
 
     /**
