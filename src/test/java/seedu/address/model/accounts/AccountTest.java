@@ -1,9 +1,7 @@
 package seedu.address.model.accounts;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotEquals;
-import static org.junit.Assert.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_USERNAME_DEMO_ONE;
 import static seedu.address.testutil.accounts.TypicalAccounts.DEFAULT_ADMIN_ACCOUNT;
 import static seedu.address.testutil.accounts.TypicalAccounts.DEMO_ONE;

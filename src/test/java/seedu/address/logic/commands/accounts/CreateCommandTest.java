@@ -1,8 +1,6 @@
 package seedu.address.logic.commands.accounts;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static seedu.address.testutil.accounts.AccountBuilder.DEFAULT_PASSWORD;
-import static seedu.address.testutil.accounts.AccountBuilder.DEFAULT_USERNAME;
 import static seedu.address.testutil.accounts.TypicalAccounts.DEFAULT_ADMIN_ACCOUNT;
 
 import org.junit.Assert;

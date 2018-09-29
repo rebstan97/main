@@ -13,8 +13,6 @@ import static seedu.address.testutil.TypicalPersons.BENSON;
 import static seedu.address.testutil.TypicalPersons.BOB;
 import static seedu.address.testutil.TypicalPersons.DYLAN;
 import static seedu.address.testutil.accounts.TypicalAccounts.DEFAULT_ADMIN_ACCOUNT;
-import static seedu.address.testutil.accounts.TypicalAccounts.DEMO_ONE;
-import static seedu.address.testutil.accounts.TypicalAccounts.DEMO_TWO;
 
 import java.nio.file.Paths;
 import java.util.Arrays;
@@ -29,8 +27,6 @@ import seedu.address.model.person.Person;
 import seedu.address.model.tag.Tag;
 import seedu.address.testutil.AddressBookBuilder;
 import seedu.address.testutil.PersonBuilder;
-import seedu.address.testutil.accounts.AccountBuilder;
-import seedu.address.testutil.accounts.AccountRecordBuilder;
 
 public class ModelManagerTest {
 
@@ -39,7 +35,6 @@ public class ModelManagerTest {
 
     private ModelManager modelManager = new ModelManager();
     private AddressBook addressBookWithPersons = null;
-    private AccountRecord accountRecordWithAccounts = null;
 
     @Test
     public void hasPerson_nullPerson_throwsNullPointerException() {
