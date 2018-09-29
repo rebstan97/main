@@ -5,8 +5,15 @@ import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
+import seedu.address.testutil.Assert;
+
 
 public class RemarkTest {
+
+    @Test
+    public void constructor_null_throwsNullPointerException() {
+        Assert.assertThrows(NullPointerException.class, () -> new Remark(null));
+    }
 
     @Test
     public void equals() {
@@ -21,9 +28,6 @@ public class RemarkTest {
 
         // different types -> returns false
         assertFalse(remark.equals(1));
-
-        // null -> returns false
-        assertFalse(remark.equals(null));
 
         // different remark -> returns false
         Remark differentRemark = new Remark("Other remark");
