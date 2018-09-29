@@ -82,6 +82,9 @@ public class XmlAccountRecordStorage implements AccountRecordStorage {
         XmlFileStorage.saveDataToFile(filePath, new XmlSerializableAccountRecord(accountRecord));
     }
 
+    /**
+     * Stores accountrecord data in an XML file
+     */
     static class XmlFileStorage {
 
         /**
