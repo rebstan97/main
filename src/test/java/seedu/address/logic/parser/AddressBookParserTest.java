@@ -45,8 +45,8 @@ public class AddressBookParserTest {
         Person person = new PersonBuilder().build();
         AddCommand command = (AddCommand) parser.parseCommand(PersonUtil.getAddCommand(person));
         assertEquals(new AddCommand(person), command);
-        command = (AddCommand) parser.parseCommand(AddCommand.COMMAND_ALIAS +
-                " " + PersonUtil.getPersonDetails(person));
+        command = (AddCommand) parser.parseCommand(AddCommand.COMMAND_ALIAS
+                + " " + PersonUtil.getPersonDetails(person));
         assertEquals(new AddCommand(person), command);
     }
 
@@ -92,8 +92,8 @@ public class AddressBookParserTest {
         FindCommand command = (FindCommand) parser.parseCommand(
                 FindCommand.COMMAND_WORD + " " + keywords.stream().collect(Collectors.joining(" ")));
         assertEquals(new FindCommand(new NameContainsKeywordsPredicate(keywords)), command);
-        command = (FindCommand) parser.parseCommand(FindCommand.COMMAND_ALIAS + " " +
-                keywords.stream().collect(Collectors.joining(" ")));
+        command = (FindCommand) parser.parseCommand(FindCommand.COMMAND_ALIAS + " "
+                + keywords.stream().collect(Collectors.joining(" ")));
         assertEquals(new FindCommand(new NameContainsKeywordsPredicate(keywords)), command);
     }
 
