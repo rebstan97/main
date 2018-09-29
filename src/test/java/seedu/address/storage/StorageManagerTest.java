@@ -77,7 +77,7 @@ public class StorageManagerTest {
                 .toString() + ".backup")).get();
         assertEquals(original, new AddressBook(retrieved));
     }
-    
+
     @Test
     public void getAddressBookFilePath() {
         assertNotNull(storageManager.getAddressBookFilePath());
