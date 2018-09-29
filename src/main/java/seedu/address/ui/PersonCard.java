@@ -14,11 +14,14 @@ public class PersonCard extends UiPart<Region> {
 
     private static final String FXML = "PersonListCard.fxml";
 
-    private enum tagColourStyle {
+    /**
+     * The colours of the tags take on Enum values
+     */
+    private enum TagColourStyle {
         TEAL, RED, YELLOW, BLUE, ORANGE, BROWN, GREEN, PINK, BLACK, GREY
     }
 
-    private static final tagColourStyle[] TAG_COLOR_STYLES = tagColourStyle.values();
+    private static final TagColourStyle[] TAG_COLOR_STYLES = TagColourStyle.values();
 
     /**
      * Note: Certain keywords such as "location" and "resources" are reserved keywords in JavaFX.
