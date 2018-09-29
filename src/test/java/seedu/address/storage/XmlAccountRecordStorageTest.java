@@ -13,13 +13,10 @@ import java.util.Optional;
 
 import org.junit.Rule;
 import org.junit.Test;
-import org.junit.Test.None;
 import org.junit.rules.ExpectedException;
 import org.junit.rules.TemporaryFolder;
 
 import seedu.address.commons.exceptions.DataConversionException;
-import seedu.address.model.AddressBook;
-import seedu.address.model.accounts.Account;
 import seedu.address.model.accounts.AccountRecord;
 import seedu.address.model.accounts.ReadOnlyAccountRecord;
 import seedu.address.model.accounts.Username;
@@ -41,7 +38,7 @@ public class XmlAccountRecordStorageTest {
         readAccountRecord(null);
     }
 
-    private java.util.Optional<ReadOnlyAccountRecord> readAccountRecord(String filePath) throws Exception {
+    private Optional<ReadOnlyAccountRecord> readAccountRecord(String filePath) throws Exception {
         return new XmlAccountRecordStorage(Paths.get(filePath)).readAccountRecord(addToTestDataPathIfNotNull(filePath));
     }
 

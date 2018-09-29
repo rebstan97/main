@@ -103,6 +103,11 @@ public class AddCommandTest {
         }
 
         @Override
+        public void resetData(ReadOnlyAccountRecord newData) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public ReadOnlyAddressBook getAddressBook() {
             throw new AssertionError("This method should not be called.");
         }
@@ -159,11 +164,6 @@ public class AddCommandTest {
 
         @Override
         public void commitAddressBook() {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public void resetData(ReadOnlyAccountRecord newData) {
             throw new AssertionError("This method should not be called.");
         }
 
