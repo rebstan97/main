@@ -3,6 +3,8 @@ package seedu.address.model;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
+import seedu.address.model.accounts.Account;
+import seedu.address.model.accounts.ReadOnlyAccountRecord;
 import seedu.address.model.person.Person;
 import seedu.address.model.tag.Tag;
 
@@ -91,4 +93,43 @@ public interface Model {
      * Saves the current address book state for undo/redo.
      */
     void commitAddressBook();
+
+    /**
+     * Clears existing backing model and replaces with the provided new data.
+     */
+    void resetData(ReadOnlyAccountRecord newData);
+
+    /**
+     * Returns the AddressBook
+     */
+    ReadOnlyAccountRecord getAccountRecord();
+
+    /**
+     * Adds the given account. {@code account} must not already exist in the account storage.
+     *
+     * @param account to be added.
+     */
+    void addAccount(Account account);
+
+    /**
+     * Returns true if a person with the same identity as {@code person} exists in the address book.
+     */
+    boolean hasAccount(Account account);
+
+    /**
+     * Deletes the given account. The person must exist in the address book.
+     *
+     * @param account to be removed.
+     */
+    void removeAccount(Account account);
+
+    /**
+     * Replaces the given person {@code target} with {@code editedPerson}. {@code target} must exist in the address
+     * book. The person identity of {@code editedPerson} must not be the same as another existing person in the address
+     * book.
+     *
+     * @param target account to be updated.
+     * @param editedAcount updated account.
+     */
+    void updateAccount(Account target, Account editedAcount);
 }

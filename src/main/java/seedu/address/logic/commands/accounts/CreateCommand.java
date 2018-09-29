@@ -38,7 +38,14 @@ public class CreateCommand extends Command {
 
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
-        throw new CommandException(toCreate.getUsername() + ", " + toCreate.getPassword());
+        requireNonNull(model);
+
+        if (model.hasAccount(toCreate)) {
+            throw new CommandException(MESSAGE_DUPLICATE_USERNAME);
+        }
+
+        model.addAccount(toCreate);
+        return new CommandResult(String.format(MESSAGE_SUCCESS, toCreate));
     }
 
     @Override

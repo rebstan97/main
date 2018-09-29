@@ -31,8 +31,19 @@ public class Account {
     }
 
     /**
-     * Returns true if both persons have the same identity and data fields. This defines a stronger notion of equality
-     * between two persons.
+     * Returns true if both accounts have the same username.
+     */
+    public boolean isSameUsername(Account otherAccount) {
+        if (otherAccount == this) {
+            return true;
+        }
+
+        return otherAccount != null && otherAccount.getUsername().equals(getUsername());
+    }
+
+    /**
+     * Returns true if both accounts have the same identity and data fields. This defines a stronger notion of equality
+     * between two account.
      */
     @Override
     public boolean equals(Object other) {

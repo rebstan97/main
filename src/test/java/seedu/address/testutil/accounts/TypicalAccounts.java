@@ -10,6 +10,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import seedu.address.model.accounts.Account;
+import seedu.address.model.accounts.AccountRecord;
 
 /**
  * A utility class containing a list of {@code Person} objects to be used in tests.
@@ -24,7 +25,18 @@ public class TypicalAccounts {
 
     private TypicalAccounts() {} // prevents instantiation
 
+    /**
+     * Returns an {@code AddressBook} with all the typical persons.
+     */
+    public static AccountRecord getTypicalAccountRecord() {
+        AccountRecord accountRecord = new AccountRecord();
+        for (Account account : getTypicalAccounts()) {
+            accountRecord.addAccount(account);
+        }
+        return accountRecord;
+    }
+
     public static List<Account> getTypicalAccounts() {
-        return new ArrayList<>(Arrays.asList(DEFAULT_ADMIN_ACCOUNT, DEMO_ONE));
+        return new ArrayList<>(Arrays.asList(DEFAULT_ADMIN_ACCOUNT, DEMO_ONE, DEMO_TWO));
     }
 }

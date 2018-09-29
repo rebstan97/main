@@ -12,7 +12,8 @@ import seedu.address.commons.core.GuiSettings;
 public class UserPrefs {
 
     private GuiSettings guiSettings;
-    private Path addressBookFilePath = Paths.get("data" , "addressbook.xml");
+    private Path addressBookFilePath = Paths.get("data", "addressbook.xml");
+    private Path accountRecordFilePath = Paths.get("data", "accountrecord.xml");
 
     public UserPrefs() {
         setGuiSettings(500, 500, 0, 0);
@@ -34,8 +35,16 @@ public class UserPrefs {
         return addressBookFilePath;
     }
 
+    public Path getAccountRecordFilePath() {
+        return accountRecordFilePath;
+    }
+
     public void setAddressBookFilePath(Path addressBookFilePath) {
         this.addressBookFilePath = addressBookFilePath;
+    }
+
+    public void setAccountRecordFilePath(Path addressBookFilePath) {
+        // Deliberately don't allow this option, at least for now
     }
 
     @Override
@@ -50,12 +59,13 @@ public class UserPrefs {
         UserPrefs o = (UserPrefs) other;
 
         return Objects.equals(guiSettings, o.guiSettings)
-                && Objects.equals(addressBookFilePath, o.addressBookFilePath);
+                && Objects.equals(addressBookFilePath, o.addressBookFilePath)
+                && Objects.equals(accountRecordFilePath, o.accountRecordFilePath);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(guiSettings, addressBookFilePath);
+        return Objects.hash(guiSettings, addressBookFilePath, accountRecordFilePath);
     }
 
     @Override
@@ -63,7 +73,7 @@ public class UserPrefs {
         StringBuilder sb = new StringBuilder();
         sb.append("Gui Settings : " + guiSettings.toString());
         sb.append("\nLocal data file location : " + addressBookFilePath);
+        sb.append("\nLocal account file location : " + accountRecordFilePath);
         return sb.toString();
     }
-
 }

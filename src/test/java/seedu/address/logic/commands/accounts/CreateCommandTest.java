@@ -1,14 +1,17 @@
 package seedu.address.logic.commands.accounts;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.address.testutil.accounts.AccountBuilder.DEFAULT_PASSWORD;
 import static seedu.address.testutil.accounts.AccountBuilder.DEFAULT_USERNAME;
 import static seedu.address.testutil.accounts.TypicalAccounts.DEFAULT_ADMIN_ACCOUNT;
 
+import org.junit.Assert;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
 import seedu.address.logic.CommandHistory;
+import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
@@ -16,6 +19,9 @@ import seedu.address.model.accounts.Account;
 import seedu.address.testutil.accounts.AccountBuilder;
 
 public class CreateCommandTest {
+
+    private static final CommandHistory EMPTY_COMMAND_HISTORY = new CommandHistory();
+
     @Rule
     public ExpectedException thrown = ExpectedException.none();
 
@@ -23,10 +29,11 @@ public class CreateCommandTest {
     private Model model = new ModelManager();
 
     @Test
-    public void execute_throwsException() throws CommandException {
-        thrown.expect(CommandException.class);
-        thrown.expectMessage(DEFAULT_USERNAME + ", " + DEFAULT_PASSWORD);
-        Account account = new AccountBuilder(DEFAULT_ADMIN_ACCOUNT).build();
-        new CreateCommand(account).execute(model, commandHistory);
+    public void executeSuccess() throws CommandException {
+        Account validAccount = new AccountBuilder(DEFAULT_ADMIN_ACCOUNT).build();
+        CommandResult commandResult = new CreateCommand(validAccount).execute(model, commandHistory);
+
+        assertEquals(String.format(CreateCommand.MESSAGE_SUCCESS, validAccount), commandResult.feedbackToUser);
+        Assert.assertEquals(EMPTY_COMMAND_HISTORY, commandHistory); //TODO: remove?
     }
 }
