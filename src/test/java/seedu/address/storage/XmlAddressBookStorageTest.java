@@ -3,6 +3,8 @@ package seedu.address.storage;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static seedu.address.testutil.TypicalPersons.ALICE;
+import static seedu.address.testutil.TypicalPersons.DYLAN;
+import static seedu.address.testutil.TypicalPersons.FIONA;
 import static seedu.address.testutil.TypicalPersons.HOON;
 import static seedu.address.testutil.TypicalPersons.IDA;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
@@ -96,7 +98,6 @@ public class XmlAddressBookStorageTest {
         xmlAddressBookStorage.saveAddressBook(original); //file path not specified
         readBack = xmlAddressBookStorage.readAddressBook().get(); //file path not specified
         assertEquals(original, new AddressBook(readBack));
-
     }
 
     @Test
@@ -123,5 +124,48 @@ public class XmlAddressBookStorageTest {
         saveAddressBook(new AddressBook(), null);
     }
 
+    @Test
+    public void backupAddressBook_nullAddressBook_throwsNullPointerException() {
+        thrown.expect(NullPointerException.class);
+        backupAddressBook(null, "SomeFile.xml");
+    }
 
+    @Test
+    public void backupAddressBook_nullFilePath_throwsNullPointerException() {
+        thrown.expect(NullPointerException.class);
+        backupAddressBook(new AddressBook(), null);
+    }
+
+    /**
+     * Backup {@code addressBook} at the specified {@code filePath}.
+     */
+    private void backupAddressBook(ReadOnlyAddressBook addressBook, String filePath) {
+        try {
+            new XmlAddressBookStorage(Paths.get(filePath))
+                    .backupAddressBook(addressBook);
+        } catch (IOException ioe) {
+            throw new AssertionError("There should not be an error writing to the file.", ioe);
+        }
+    }
+
+    @Test
+    public void readAndBackupAddressBook_allInOrder_success() throws Exception {
+        Path filePath = testFolder.getRoot().toPath().resolve("TempAddressBook.xml");
+        AddressBook original = getTypicalAddressBook();
+        XmlAddressBookStorage xmlAddressBookStorage = new XmlAddressBookStorage(filePath);
+
+        //Backup in a temporary storage and read back
+        xmlAddressBookStorage.backupAddressBook(original);
+        ReadOnlyAddressBook readBack = xmlAddressBookStorage.readAddressBook(Paths.get(filePath.toString()
+                + ".backup")).get();
+        assertEquals(original, new AddressBook(readBack));
+
+        //Modify data, overwrite exiting backup file, and read back
+        original.addPerson(DYLAN);
+        original.removePerson(ALICE);
+        xmlAddressBookStorage.backupAddressBook(original);
+        readBack = xmlAddressBookStorage.readAddressBook(Paths.get(filePath.toString()
+                + ".backup")).get();
+        assertEquals(original, new AddressBook(readBack));
+    }
 }
