@@ -14,6 +14,9 @@ import seedu.address.model.Model;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Remark;
 
+/**
+ * Adds a remark to a person in the address book.
+ */
 public class RemarkCommand extends Command {
     public static final String COMMAND_WORD = "remark";
 
