@@ -15,7 +15,7 @@ import seedu.address.model.accounts.ReadOnlyAccountRecord;
 /**
  * An Immutable AddressBook that is serializable to XML format
  */
-@XmlRootElement(name = "addressbook")
+@XmlRootElement(name = "accountrecord")
 public class XmlSerializableAccountRecord {
 
     public static final String MESSAGE_DUPLICATE_PERSON = "Persons list contains duplicate person(s).";
