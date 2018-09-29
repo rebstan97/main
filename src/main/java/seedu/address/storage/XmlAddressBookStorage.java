@@ -5,6 +5,7 @@ import static java.util.Objects.requireNonNull;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.nio.file.Path;
 import java.util.Optional;
 import java.util.logging.Logger;
@@ -23,9 +24,11 @@ public class XmlAddressBookStorage implements AddressBookStorage {
     private static final Logger logger = LogsCenter.getLogger(XmlAddressBookStorage.class);
 
     private Path filePath;
+    private Path backupFilePath;
 
     public XmlAddressBookStorage(Path filePath) {
         this.filePath = filePath;
+        this.backupFilePath = Paths.get(filePath.toString() + ".backup");
     }
 
     public Path getAddressBookFilePath() {
@@ -77,4 +80,12 @@ public class XmlAddressBookStorage implements AddressBookStorage {
         XmlFileStorage.saveDataToFile(filePath, new XmlSerializableAddressBook(addressBook));
     }
 
+    /**
+     * Similar to {@link #saveAddressBook(ReadOnlyAddressBook, Path)}
+     * @param filePath location of the backup. Cannot be null
+     */
+    @Override
+    public void backupAddressBook(ReadOnlyAddressBook addressBook) throws IOException {
+        saveAddressBook(addressBook, backupFilePath);
+    }
 }
