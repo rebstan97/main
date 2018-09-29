@@ -60,16 +60,16 @@ public class CommandTestUtil {
     /** For accounts */
     public static final String VALID_USERNAME_DEMO_ONE = "demo1";
     public static final String VALID_USERNAME_DEMO_TWO = "demo2";
+    public static final String VALID_USERNAME_DEMO_THREE = "demo3";
     public static final String VALID_PASSWORD_DEMO_ONE = "1122";
     public static final String VALID_PASSWORD_DEMO_TWO = "22qq";
+    public static final String VALID_PASSWORD_DEMO_THREE = "abc@!";
 
     public static final String VALID_USERNAME = " " + PREFIX_ID + VALID_USERNAME_DEMO_ONE;
     public static final String VALID_PASSWORD = " " + PREFIX_PASSWORD + VALID_PASSWORD_DEMO_ONE;
 
     public static final String INVALID_USERNAME = " " + PREFIX_ID + "azhi kai"; // space not allowed
     public static final String INVALID_PASSWORD = " " + PREFIX_PASSWORD + "11 22qq"; // space not allowed
-
-
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
