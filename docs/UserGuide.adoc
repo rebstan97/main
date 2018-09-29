@@ -12,19 +12,24 @@ ifdef::env-github[]
 :tip-caption: :bulb:
 :note-caption: :information_source:
 endif::[]
-:repoURL: https://github.com/se-edu/addressbook-level4
+:repoURL: https://github.com/CS2103-AY1819S1-F10-4/main
 
-By: `Team SE-EDU`      Since: `Jun 2016`      Licence: `MIT`
+By: `Team CS2103-AY1819S1-F10-4`      Since: `Sep 2018`      Licence: `MIT`
 
 == Introduction
+As the name implies, link:{repoURL}[MeNUS] helps you improve the Management(M) and its efficiency(e) of your
+restaurants in NUS.
 
-AddressBook Level 4 (AB4) is for those who *prefer to use a desktop app for managing contacts*. More importantly, AB4 is *optimized for those who prefer to work with a Command Line Interface* (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, AB4 can get your contact management tasks done faster than traditional GUI apps. Interested? Jump to the <<Quick Start>> to get started. Enjoy!
+MeNUS is for restaurant owners who prefer to use a desktop application to manage their restaurants. More importantly,
+MeNUS is *optimized for users who prefer to work with a Command Line Interface (CLI) while still having the benefits
+of a Graphical User Interface (GUI)*. If you can type fast, MeNUS allows you to manage all aspects of your eatery
+from a single location -- menu, inventory, sales and bookings management!
 
 == Quick Start
 
 .  Ensure you have Java version `9` or later installed in your Computer.
-.  Download the latest `addressbook.jar` link:{repoURL}/releases[here].
-.  Copy the file to the folder you want to use as the home folder for your Address Book.
+.  Download the latest `menus.jar` link:{repoURL}/releases[here].
+.  Copy the file to the folder you want to use as the home folder.
 .  Double-click the file to start the app. The GUI should appear in a few seconds.
 +
 image::Ui.png[width="790"]
@@ -38,10 +43,50 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 * **`delete`**`3` : deletes the 3rd contact shown in the current list
 * *`exit`* : exits the app
 
-.  Refer to <<Features>> for details of each command.
+.  Refer to <<Commands>> for details of each command.
+
+[[Components]]
+== Components
+*MeNUS* consists of four main components: menus, inventory, sales and bookings management.
+
+=== Menus
+_To be completed by Yi Can_
+
+=== Inventory
+_To be completed by Rebecca_
+
+=== Sales
+_To be completed by Kai Jun_
+
+=== Bookings
+_To be completed by Ming Xian_
+
 
 [[Features]]
-== Features
+== Key Features
+=== Convenience
+It is an ultimate All-In-One application that will provide you with the utmost convenience to manage your
+restaurants in NUS.
+
+* Export data to `.xml` (default) or Excel file.
+
+=== Security
+Security is key to a business's success. *MeNUS* ensures the security of your restaurant's data by:
+
+* Encrypting all restaurant data using AES-265.
+* Securing account passwords using bcrypt.
+* User needs to be authenticated before they can run any commands.
+* Authentication attempts (both succeed and failed) are logged.
+
+=== Efficiency
+Time is money. *MeNUS* ensures that the application will:
+
+* Load within 5 seconds.
+* Execute command within split of a second.
+** Update the GUI almost instantaneously.
+
+[[Commands]]
+== Commands
 
 ====
 *Command Format*
@@ -229,16 +274,571 @@ Format: `exit`
 Address book data are saved in the hard disk automatically after any command that changes the data. +
 There is no need to save manually.
 
-// tag::dataencryption[]
-=== Encrypting data files `[coming in v2.0]`
+=== Logging in: `login`
 
-_{explain how the user can enable/disable data encryption}_
-// end::dataencryption[]
+Logs into an existing account. +
+Format: `login id/USERNAME pw/PASSWORD` +
+
+Examples:
+
+* `login id/azhikai pw/p@55w0rd`
+
+=== Logging out: `logout`
+
+Logs out of the account. +
+Format: `logout`
+
+=== Creating user account: `create-account`
+
+Creates a new user account with a given role. +
+Format: `create-account id/USERNAME pw/PASSWORD r/ROLE_ID`
+
+Examples:
+
+* `create-account id/azhikai pw/p@55w0rd r/0`
+
+=== Editing user account: `edit-account`
+
+Edits an existing user account. +
+Format: `edit-account id/USERNAME [nid/NEW_USERNAME] [pw/NEW_PASSWORD] [r/NEW_ROLE_ID]`
+
+****
+* The account's data will remain intact if none of the optional fields are provided.
+****
+
+Examples:
+
+* `edit-account id/azhikai`
+** Nothing happens in this case.
+* `edit-account id/azhikai nid/angzhikai`
+* `edit-account id/azhikai nid/angzhikai pw/n3wp@55w0rd`
+* `edit-account id/azhikai r/1`
+
+=== Deleting user account: `delete-account`
+
+Deletes an existing user account. +
+Format: `delete-account id/USERNAME `
+
+Examples:
+
+* `delete-account id/azhikai`
+
+=== List all user accounts: `list-account`
+
+List all existing user accounts. +
+Format: `list-account`
+
+=== Creating user role: `create-role`
+
+Creates a new user role. +
+Format: `create-role id/ROLE_ID n/ROLE_NAME`
+
+Examples:
+
+* `create-role id/0 n/Administrator`
+* `create-role id/1 n/Manager`
+
+=== Editing user role: `edit-role`
+
+Edits an existing role. +
+Format: `edit-role id/ROLE_ID [nid/NEW_ROLE_ID] [n/ROLE_NAME]`
+
+****
+* The role's data will remain intact if none of the optional fields are provided.
+****
+
+Examples:
+
+* `edit-role id/0`
+** Nothing happens in this case.
+* `edit-role id/0 nid/2 n/Supervisor`
+* `edit-account id/0 nid/1`
+* `edit-account id/0 n/Owner`
+
+=== Deleting user role: `delete-role`
+
+Deletes an existing user role. +
+Format: `delete-role id/ROLE_ID `
+
+Examples:
+
+* `delete-role id/0`
+
+=== List all user roles: `list-role`
+
+List all existing user roles. +
+Format: `list-role`
+
+=== Adding an ingredient: `add-ingredient`
+
+Adds a new ingredient to the ingredient list. +
+Format: `add-ingredient n/INGREDIENT_NAME t/UNIT_TYPE p/PRICE_PER_UNIT m/MINIMUM`
+
+****
+* MINIMUM refers to the minimum number of units below which an ingredient will be considered low in stock count
+****
+
+Examples:
+
+* `add-ingredient n/cod fish t/kilogram p/20 m/1`
+
+=== Listing all ingredients : `list-ingredients`
+
+Shows a list of all ingredients in the ingredient list. +
+Format: `list-ingredients`
+
+=== Listing ingredients with low stock count: `list-ingredients-low`
+
+Shows a list of ingredients that are low in stock count. +
+Format: `list-ingredients-low`
+
+=== Removing an ingredient: `delete-ingredient`
+
+Deletes the specified ingredient from the ingredient list. +
+Format: `delete-ingredient INDEX` or `delete-ingredient NAME`
+
+****
+* Deletes the ingredient at the specified `INDEX`.
+* The index refers to the index number shown in the displayed ingredient list.
+* The index *must be a positive integer* 1, 2, 3, ...
+* Alternatively, deletes the ingredient with the specified `NAME`.
+****
+
+Examples:
+
+* `list-ingredients` +
+`delete-ingredient 1` +
+`list-ingredients` +
+Deletes the 1st ingredient in the ingredient list.
+
+* `delete-ingredient cod fish` +
+`list-ingredients` +
+Deletes the ingredient `cod fish` from the ingredient list.
+
+=== Editing an ingredient: `edit-ingredient`
+
+Edits an ingredient in the ingredient list. +
+Format: `edit-ingredient INDEX [n/INGREDIENT_NAME] [t/UNIT_TYPE] [p/PRICE_PER_UNIT] [m/MINIMUM]` or `edit-ingredient NAME [n/INGREDIENT_NAME] [t/UNIT_TYPE] [p/PRICE_PER_UNIT] [m/MINIMUM]`
+
+****
+* Edits the ingredient at the specified `INDEX`. The index refers to the index number shown in the displayed ingredient list. The index *must be a positive integer* 1, 2, 3, ...
+* At least one of the optional fields must be provided.
+* Existing values will be updated to the input values.
+* Alternatively, edits the ingredient with the specified `NAME`.
+****
+
+Examples:
+
+* `edit-ingredient 3 n/thin fries` +
+Edits the name of the 3rd ingredient to be `thin fries`.
+
+* `edit-ingredient 4 u/1.5ml bottle p/1.20`  +
+Edits the unit type and price per unit of the 4th ingredient to be `1.5ml bottle` and `1.20` respectively.
+
+* `edit-ingredient ketchup n/tomato ketchup`  +
+Edits the name of `ketchup` to be `tomato ketchup`.
+
+=== Stocking up an ingredient: `stockup`
+
+Increase the number of units of an ingredient or multiple ingredients. +
+Format: `stockup n/INGREDIENT_NAME... u/NUMBER_OF_UNITS...`
+
+****
+* NUMBER_OF_UNITS for an ingredient must follow the INGREDIENT_NAME for that particular ingredient.
+****
+
+Examples:
+
+* `stockup n/cod fish u/5`
+* `stockup n/chicken thigh u/10 n/fries u/20 n/tomato ketchup u/50`
+
+=== Consuming an ingredient: `consume`
+
+Decrease the number of units of an ingredient or multiple ingredients. +
+Format: `consume n/INGREDIENT_NAME... u/NUMBER_OF_UNITS...`
+
+****
+* NUMBER_OF_UNITS for an ingredient must follow the INGREDIENT_NAME for that particular ingredient.
+****
+
+Examples:
+
+* `consume n/cod fish u/1`
+* `consume n/chicken thigh u/2 n/fries u/1`
+
+=== Removing out-of-stock dishes from daily menu: `remove-oos-dish`
+
+Removes out-of-stock dishes that require ingredients with low stock count from the daily menu. +
+Format: `remove-oos-dish`
+
+=== Show history of stockup or consumption: `history`
+
+Shows the history of past ingredient stockups or past ingredient consumption. +
+Format: `history [stockup] [consumption]`
+
+****
+* At least one of the optional fields must be provided.
+****
+
+=== Adding an item to the menu: `add-item`
+
+Adds an item to the menu +
+Format: `add-item n/ITEM_NAME p/ITEM_PRICE [t/TAG]...`
+
+****
+* ITEM_NAME and ITEM_PRICE must be provided.
+* An item can have any number of tags (including 0)
+****
+
+Examples:
+
+* `add-item n/Burger p/2`
+* `add-item n/Burger Set p/4.5 t/Set`
+
+=== Listing all items in the menu : `list-items`
+
+Shows a list of all items in the menu. +
+Format: `list-items`
+
+=== Editing an item in the menu : `edit-item`
+
+Edits an existing item in the menu. +
+Format: `edit-item INDEX [n/ITEM_NAME] [p/ITEM_PRICE] [t/TAG]...` or `edit-item NAME [n/ITEM_NAME] [p/ITEM_PRICE]
+[t/TAG]...`
+
+****
+* Edits the item at the specified `INDEX`. The index refers to the index number shown in the displayed item list. The
+index *must be a positive integer* 1, 2, 3, ...
+* At least one of the optional fields must be provided.
+* Existing values will be updated to the input values.
+* When editing tags, the existing tags of the item will be removed i.e adding of tags is not cumulative.
+* You can remove all the item's tags by typing `t/` without specifying any tags after it.
+* Alternatively, edits the item with the specified `NAME`.
+****
+
+Examples:
+
+* `edit-item 1 n/burger p/3` +
+Edits the name and price of the 1st item to be `burger` and `3` respectively.
+* `edit-item 2 p/4 t/` +
+Edits the price of the 2nd item to be `4` and clears all existing tags.
+
+=== Deleting an item : `delete-item`
+
+Deletes the specified item from the menu. +
+Format: `delete-item INDEX` or `delete-item NAME`
+
+****
+* Deletes the item at the specified `INDEX`.
+* The index refers to the index number shown in the displayed item list.
+* The index *must be a positive integer* 1, 2, 3, ...
+* Alternatively, deletes the item with the specified `NAME`.
+****
+
+Examples:
+
+* `list-items` +
+`delete-item 2` +
+Deletes the 2nd item in the menu.
+* `find-item Cheese` +
+`delete-item 1` +
+Deletes the 1st item in the results of the `find` command.
+
+=== Locating items by name: `find-item`
+
+Finds items whose names contain any of the given keywords. +
+Format: `find-item KEYWORD [MORE_KEYWORDS]`
+
+****
+* The search is case insensitive. e.g `burger` will match `Burger`
+* The order of the keywords does not matter. e.g. `Cheese Burger` will match `Burger Cheese`
+* Only the name is searched.
+* Only full words will be matched e.g. `Bur` will not match `Burger`
+* Items matching at least one keyword will be returned (i.e. `OR` search). e.g. `Cheese Burger` will return
+`Cheese Fries`,`Cheese Cake`
+****
+
+Examples:
+
+* `find-item Burger` +
+Returns `burger` and `Cheese Burger`
+* `find-item Cheese Chocolate Fruit` +
+Returns any item having names `Cheese`, `Chocolate`, or `Fruit`
+
+=== Filter menu by tag: `filter-menu`
+
+Finds items that contain the given tag in the menu. +
+Format: `filter-menu t/TAG`
+
+****
+* The search is case insensitive. e.g `burger` will match `Burger`
+* Only filter by tag.
+* Only full words will be matched e.g. `Bur` will not match `Burger`
+* Items matching at least one keyword will be returned (i.e. `OR` search). e.g. `Cheese Burger` will return
+`Cheese Fries`,`Cheese Cake`
+****
+
+Examples:
+
+* `filter-menu t/monday` +
+Returns any item that contains tag `monday`
+* `filter-menu t/set` +
+Returns any item that contains tag `set`
+
+=== Sort menu : `sort-menu`
+
+Sort the menu by name or tags. +
+Format: `sort-menu [sm/NAME] [sm/TAG]`
+
+****
+* Sort the menu by name or tag.
+* Only one of the sorting method should be provided.
+****
+
+Examples:
+
+* `sort-menu sm/NAME` +
+Sorts the menu by item name.
+* `sort-menu sm/TAG` +
+Sorts the menu by item tags.
+
+=== Clearing all entries : `clear-menu`
+
+Clears all entries from the menu. +
+Format: `clear-menu`
+
+=== Giving a discount to an item : `discount-item`
+
+Gives the item identified by the index number used in the displayed item list a discount. +
+Format: `discount-item INDEX|ALL d/PERCENTAGE`
+
+****
+* Gives the item at the specified `INDEX` a discount based on the percentage.
+* If the item is already on discount, it will update the new discounted price.
+* The index refers to the index number shown in the displayed person list.
+* The index *must be a positive integer* `1, 2, 3, ...`
+* You can remove discount by typing `0` for the percentage.
+* You can give a discount to the whole menu by typing `ALL` instead of a specified `INDEX`.
+****
+
+Examples:
+
+* `list-items` +
+`discount-item 2` +
+Discount the 2nd item in the menu.
+* `find-item Cheese` +
+`discount-item 1` +
+Discounts the 1st item in the results of the `find` command.
+
+=== Today's specials : `today-special`
+
+Lists the items that have been tagged with the particular day in the menu. +
+Format: `today-special`
+
+Examples:
+
+* `today-special` +
+If today is Monday +
+List the items that have been tagged with `Monday` in the menu.
+
+=== Export menu : `export-menu`
+
+Exports the menu to a particular file path. +
+Format: `export-menu fp/FILEPATH fn/FILENAME`
+
+Examples:
+
+* `export-menu f/test/ n/menu.txt` +
+Export the menu to test folder with the file name `menu.txt`
+
+=== Import menu : `import-menu`
+
+Imports an existing menu from specified file path to replace current menu. +
+Format: `import-menu fp/FILEPATH fn/FILENAME`
+
+Examples:
+
+* `import-menu f/test/ n/menu.txt` +
+Import the menu.txt from test folder to replace current menu.
+>>>>>>> d8104eeac35a224217ba9b7331cb65179fd57082
+
+=== Adding a reservation: `add-reservation`
+
+Adds a new reservation to the reservations list. +
+Format: `add-reservation n/NAME p/PAX d/DATE t/TIME`
+
+****
+* Date is entered in DDMMYYYY format.
+* Time is entered in Military Time.
+****
+
+Examples:
+
+* `add-reservation n/TAN p/4 d/21072018 t/1300`
+
+=== Listing all reservations : `list-reservations`
+
+Shows a list of all reservations in the reservations list. +
+Format: `list-reservations`
+
+=== Editing a reservation: `edit-reservation`
+
+Edits an reservation in the reservation list. +
+Format: `edit-reservation INDEX [n/NAME] [p/PAX] [d/DATE] [t/TIME]`
+
+****
+* Edits the reservation at the specified `INDEX`. The index refers to the index number shown in the
+displayed reservations list. The index *must be a positive integer* 1, 2, 3, ...
+* At least one of the optional fields must be provided.
+* Existing values will be updated to the input values.
+****
+
+Examples:
+
+* `edit-reservation 2 t/1700` +
+Edits the time of the 2nd reservation in the list to `1700` hrs.
+
+* `edit-reservation 6 n/ONG p/4`  +
+Edits the name and pax of the 6th reservation to `ONG` and `4` respectively.
+
+=== Sorting reservations list: `sort-reservations`
+
+Sorts the reservations list by Date/Time. +
+Format: `sort-reservations`
+
+=== Deleting a reservation: `delete-reservation`
+
+Deletes the specified reservation from the reservations list. +
+Format: `delete-reservation INDEX`
+
+****
+* Deletes the reservation at the specified `INDEX`.
+* The index refers to the index number shown in the displayed reservations list.
+* The index *must be a positive integer* 1, 2, 3, ...
+****
+
+Examples:
+
+* `list-reservations` +
+`delete-reservations 2` +
+`list-ingredients` +
+Deletes the 2nd reservation in the reservations list.
+
+=== Recording daily sales volume of a menu item: `record-sales`
+
+Records the quantity of a menu item sold within the specified day into the day's sales report. +
+Format: `record-sales d/DATE n/ITEM_NAME q/QUANTITY SOLD p/ITEM_PRICE`
+
+****
+* Appends the above record onto the sales report for the day.
+* A sales report will automatically be created if the day does not have one.
+* DATE must be written in the DD/MM/YYYY format.
+* ITEM_NAME must be unique in the sales report for the selected day.
+****
+
+Examples:
+
+* `record-sales d/25-09-2018 n/Fried Rice q/35 p/5.50`
+
+=== Display sales report: `display-sales`
+
+Displays the sales report for all days. +
+Format: `display-sales` +
+OR +
+Displays the sales report for the specified day. +
+Format: `display-sales DATE`
+
+****
+* DATE must be written in the DD/MM/YYYY format.
+****
+
+Examples:
+
+* `display-sales` +
+Displays the sales report for all days. +
+* `display-sales 25-09-2018` +
+Displays the sales report dated 25-09-2018.
+
+
+=== Deleting a sales record / report: `delete-sales`
+
+Deletes a menu item's sales record in the sales report for the specified day. +
+Format: `delete-sales DATE ITEM_NAME` / `delete-sales DATE ITEM_INDEX` +
+OR +
+Deletes the entire sales report for the specified day. +
+Format: `delete-sales DATE`
+
+****
+* Deletes the record at the specified `ITEM_INDEX`.
+* The item index refers to the index number shown in the sales report for the specified day.
+* The index *must be a positive integer* 1, 2, 3, ...
+* Alternatively, deletes the sales record with the specified `ITEM_NAME`.
+* Alternatively, deletes the entire sales report for the specified day by omitting the record identifier.
+****
+
+Examples:
+
+* `display-sales` +
+`delete-sales 25-09-2018 2` +
+`display-sales` +
+Deletes the 2nd record from the sales report dated 25-09-2018.
+
+* `delete-sales 10-02-2018 Fried Rice` +
+`display-sales` +
+Deletes the sales record for `Fried Rice` from the sales report dated 10-02-2018.
+
+* `delete-sales 23-06-2018` +
+Deletes the entire sales report dated 23-06-2018.
+
+=== Editing a sales record: `edit-sales`
+
+Edit a menu item's sales record in the sales report for the specified day. +
+Format: `edit-sales DATE NAME [n/ITEM_NAME] [q/QUANTITY SOLD] [p/ITEM_PRICE]` / `edit-sales DATE INDEX [n/ITEM_NAME]
+[q/QUANTITY SOLD] [p/ITEM_PRICE]`
+
+****
+* Edits the record at the specified `INDEX`. The index refers to the index number shown in the sales report for the
+specified day. The index *must be a positive integer* 1, 2, 3, ...
+* At least one of the optional fields must be provided.
+* Existing values will be updated to the input values.
+* Alternatively, edits the sales record with the specified `NAME`.
+****
+
+Examples:
+
+* `edit-sales 23-06-2018 Fried Rice n/Fried Rice with Shrimps` +
+In the sales report dated 23-06-2018, edits the name of "Fried Rice" to be "Fried Rice with Shrimps".
+
+* `edit-sales 12-02-2018 Pasta q/37 p/6.50`  +
+In the sales report dated 12-02-2018, edits the quantity sold and price of "Pasta" to be 37 and 6.50 respectively.
+
+* `edit-sales 01-01-2018 3 n/Fried Omelet`  +
+In the sales report dated 01-01-2018, edits the menu item's name of the 3rd record to be "Fried Omelet".
+
+=== Checking sales history of a menu item: `check-sales`
+
+Displays the sales history of a menu item and the total revenue it has accumulated. +
+Format: `check-sales ITEM_NAME` +
+
+Examples:
+
+* `check-sales Fried Rice`
+
+=== Ranking menu items according to profitability: `rank-dish`
+
+Ranks the menu items based on their total revenue accumulated in past sales records in descending order. +
+Format: `rank-dish`
+
+=== Ranking dates according to profitability: `rank-date`
+
+Ranks the dates based on their revenue accumulated in past sales records in descending order. +
+Format: `rank-date`
 
 == FAQ
 
-*Q*: How do I transfer my data to another Computer? +
-*A*: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous Address Book folder.
+*Q: How do I transfer my data to another Computer?* +
+*A*: Install the application in the other computer and overwrite the empty data file it creates with the file that
+contains the data of your previous *MeNUS* folder.
 
 == Command Summary
 
@@ -258,3 +858,72 @@ e.g.`select 2`
 * *History* : `history`
 * *Undo* : `undo`
 * *Redo* : `redo`
+* *Logging in*: `login id/USERNAME pw/PASSWORD`
+* *Logging out*: `logout`
+* *Creating user account*: `create-account id/USERNAME pw/PASSWORD r/ROLE_ID`
+* *Editing user account*: `edit-account id/USERNAME [nid/NEW_USERNAME] [pw/NEW_PASSWORD] [r/NEW_ROLE_ID]`
+* *Deleting user account*: `delete-account id/USERNAME`
+* *Listing user accounts*: `list-account`
+* *Creating user role*: `create-role id/ROLE_ID n/ROLE_NAME`
+* *Editing user role*: `edit-role id/ROLE_ID [nid/NEW_ROLE_ID] [n/NEW_ROLE_NAME]`
+* *Deleting user role*: `delete-role id/ROLE_ID`
+* *Listing user roles*: `list-role`
+* *Add ingredient* : `add-ingredient n/INGREDIENT_NAME t/UNIT_TYPE p/PRICE_PER_UNIT m/MINIMUM` +
+e.g. `add-ingredient n/cod fish t/kilogram p/20 m/1`
+* *List ingredients* : `list-ingredients`
+* *List ingredients with low stock count* : `list-ingredients-low`
+* *Delete ingredient* : `delete-ingredient INDEX` or `delete-ingredient NAME` +
+e.g. `delete-ingredient 1` or `delete-ingredient cod fish`
+* *Edit ingredient* : `edit-ingredient INDEX [n/INGREDIENT_NAME] [t/UNIT_TYPE] [p/PRICE_PER_UNIT] [m/MINIMUM]` or `edit-ingredient NAME [n/INGREDIENT_NAME] [t/UNIT_TYPE] [p/PRICE_PER_UNIT] [m/MINIMUM]` +
+e.g. `edit-ingredient 3 n/thin fries` or `edit-ingredient ketchup n/tomato ketchup`
+* *Stock up* : `stockup n/INGREDIENT_NAME... u/NUMBER_OF_UNITS...` +
+e.g. `stockup n/cod fish u/5`
+* *Consume* : `consume n/INGREDIENT_NAME... u/NUMBER_OF_UNITS...` +
+e.g. `consume n/cod fish u/1`
+* *Remove dishes with low ingredients* : `remove-oos-dish`
+* *History of stockup/consumption* : `history [purchase] [consumption]` +
+e.g. `history stockup`
+* *Add item* `add-item n/ITEM_NAME p/ITEM_PRICE [t/TAG]...` +
+e.g. `add-item n/Burger Set p/3 t/set`
+* *Clear menu* : `clear-menu`
+* *Delete item* : `delete-item INDEX` +
+e.g. `delete-item 3`
+* *Edit item* : `edit-item INDEX [n/ITEM_NAME] [p/ITEM_PRICE] [t/TAG]...` +
+e.g. `edit-item 2 n/Fries p/3`
+* *Find item* : `find-item KEYWORD [MORE_KEYWORDS]` +
+e.g. `find-item Cheese Burger`
+* *List items* : `list-items`
+* *Filter menu* : `fiiter-menu t/TAG` +
+e.g. `filter-menu t/cheese`
+* *Sort menu* : `sort-menu`
+e.g. `sort-menu sm/NAME`
+* *Give an item a discount* : `discount-item`
+e.g. `discount-item 2 d/20`
+* *Today's special* : `today-special`
+* *Export menu* : `export-menu`
+e.g. `export-menu fp/backup/ fn/menu.txt`
+* *Import menu* : `import-menu`
+e.g. `import-menu fp/backup/ fn/menu.txt`
+* *Add a reservation* : `add-reservation n/NAME p/PAX d/DATE t/TIME` +
+e.g. `add-reservation n/TAN p/4 d/21072018 t/1300`
+* *List reservations* : `list-reservations`
+* *Edit reservation* : `edit-reservation INDEX [n/NAME] [p/PAX] [d/DATE] [t/TIME]` +
+e.g. `edit-reservation 2 t/1700`
+* *Sort reservations* : `sort-reservations`
+* *Delete a reservation* : `delete-reservation INDEX` +
+e.g. `delete-reservations 2`
+* *Record sales volume of menu item* : `record-sales d/DATE n/ITEM_NAME q/QUANTITY SOLD p/ITEM_PRICE` +
+e.g. `record-sales d/25-09-2018 n/Fried Rice q/35 p/5.50`
+* *Display sales report for all / specific day* : `display-sales` or `display-sales DATE` +
+e.g. `display-sales` or `display-sales 25-09-2018`
+* *Delete sales record* : `delete-sales DATE ITEM_NAME` or `delete-sales DATE ITEM_INDEX` +
+e.g. `delete-sales 10-02-2018 Fried Rice` or `delete-sales 25-09-2018 2`
+* *Delete sales report* : `delete-sales DATE` +
+e.g. `delete-sales 23-06-2018`
+* *Edit sales record* : `edit-sales DATE NAME [n/ITEM_NAME] [q/QUANTITY SOLD] [p/ITEM_PRICE]` or `edit-sales DATE
+INDEX [n/ITEM_NAME] [q/QUANTITY SOLD] [p/ITEM_PRICE]` +
+e.g. `edit-sales 12-02-2018 Pasta q/37 p/6.50` or `edit-sales 01-01-2018 3 n/Fried Omelet`
+* *Check sales history of menu item* : `check-sales ITEM_NAME` +
+e.g. `check-sales Fried Rice`
+* *Rank menu items according to profitability* : `rank-dish` +
+* *Rank dates according to profitability* : `rank-date`
