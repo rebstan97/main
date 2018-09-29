@@ -23,7 +23,10 @@ public class AccountTest {
     public void check_toString() {
         Account adminAccount = new AccountBuilder(DEFAULT_ADMIN_ACCOUNT).build();
 
+        // same username
         assertEquals(adminAccount.toString(), DEFAULT_ADMIN_ACCOUNT.getUsername().toString());
+
+        // different username
         assertNotEquals(adminAccount.toString(), DEMO_ONE.getUsername().toString());
     }
 
@@ -31,25 +34,25 @@ public class AccountTest {
     public void equals() {
         // same values -> returns true
         Account adminAccount = new AccountBuilder(DEFAULT_ADMIN_ACCOUNT).build();
-        assertTrue(DEFAULT_ADMIN_ACCOUNT.equals(adminAccount));
+        assertEquals(DEFAULT_ADMIN_ACCOUNT, adminAccount);
 
         // same object -> returns true
-        assertTrue(DEFAULT_ADMIN_ACCOUNT.equals(DEFAULT_ADMIN_ACCOUNT));
+        assertEquals(DEFAULT_ADMIN_ACCOUNT, DEFAULT_ADMIN_ACCOUNT);
 
         // null -> returns false
-        assertFalse(DEFAULT_ADMIN_ACCOUNT.equals(null));
+        assertNotEquals(null, DEFAULT_ADMIN_ACCOUNT);
 
         // different type -> returns false
-        assertFalse(DEFAULT_ADMIN_ACCOUNT.equals(5));
+        assertNotEquals(5, DEFAULT_ADMIN_ACCOUNT);
 
         // different account -> returns false
         Account demoAccount = new AccountBuilder(DEMO_ONE).build();
-        assertFalse(DEFAULT_ADMIN_ACCOUNT.equals(demoAccount));
+        assertNotEquals(DEFAULT_ADMIN_ACCOUNT, demoAccount);
 
         // different username -> returns false
         Account editedAdminAccount =
                 new AccountBuilder(DEFAULT_ADMIN_ACCOUNT).withUsername(VALID_USERNAME_DEMO_ONE).build();
-        assertFalse(DEFAULT_ADMIN_ACCOUNT.equals(editedAdminAccount));
+        assertNotEquals(DEFAULT_ADMIN_ACCOUNT, editedAdminAccount);
     }
 
     @Test
