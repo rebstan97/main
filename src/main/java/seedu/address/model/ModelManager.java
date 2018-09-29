@@ -177,7 +177,7 @@ public class ModelManager extends ComponentManager implements Model {
 
     @Override
     public void removeAccount(Account account) {
-        accountRecord.removePerson(account);
+        accountRecord.removeAccount(account);
         indicateAccountRecordChanged();
     }
 

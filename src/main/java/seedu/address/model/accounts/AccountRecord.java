@@ -76,7 +76,7 @@ public class AccountRecord implements ReadOnlyAccountRecord {
     /**
      * Removes {@code key} from this {@code AddressBook}. {@code key} must exist in the address book.
      */
-    public void removePerson(Account key) {
+    public void removeAccount(Account key) {
         accounts.remove(key);
     }
 
