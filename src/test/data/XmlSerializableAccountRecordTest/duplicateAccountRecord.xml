@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<accountrecord>
+    <accounts>
+        <username>azhikai</username>
+        <password>1122qq</password>
+    </accounts>
+
+    <!-- Account with same username -->
+    <accounts>
+        <username>azhikai</username>
+        <password>1122qq</password>
+    </accounts>
+</accountrecord>

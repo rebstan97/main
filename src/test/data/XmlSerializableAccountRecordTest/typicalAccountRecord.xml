@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<accountrecord>
+  <accounts>
+    <username>azhikai</username>
+    <password>1122qq!@#</password>
+  </accounts>
+  <accounts>
+    <username>demo1</username>
+    <password>1122</password>
+  </accounts>
+  <accounts>
+    <username>demo2</username>
+    <password>22qq</password>
+  </accounts>
+</accountrecord>

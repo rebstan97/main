@@ -18,7 +18,7 @@ import seedu.address.model.accounts.ReadOnlyAccountRecord;
 @XmlRootElement(name = "accountrecord")
 public class XmlSerializableAccountRecord {
 
-    public static final String MESSAGE_DUPLICATE_PERSON = "Persons list contains duplicate person(s).";
+    public static final String MESSAGE_DUPLICATE_ACCOUNT = "Persons list contains duplicate account(s).";
 
     @XmlElement
     private List<XmlAdaptedAccount> accounts;
@@ -49,7 +49,7 @@ public class XmlSerializableAccountRecord {
         for (XmlAdaptedAccount p : accounts) {
             Account account = p.toModelType();
             if (addressBook.hasAccount(account)) {
-                throw new IllegalValueException(MESSAGE_DUPLICATE_PERSON);
+                throw new IllegalValueException(MESSAGE_DUPLICATE_ACCOUNT);
             }
             addressBook.addAccount(account);
         }

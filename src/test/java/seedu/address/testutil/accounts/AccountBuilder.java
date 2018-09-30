@@ -10,7 +10,7 @@ import seedu.address.model.accounts.Username;
 public class AccountBuilder {
 
     public static final String DEFAULT_USERNAME = "azhikai";
-    public static final String DEFAULT_PASSWORD = "1122qq";
+    public static final String DEFAULT_PASSWORD = "1122qq!@#";
 
     private Username username;
     private Password password;
