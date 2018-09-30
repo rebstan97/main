@@ -18,7 +18,7 @@ import seedu.address.model.accounts.ReadOnlyAccountRecord;
 @XmlRootElement(name = "accountrecord")
 public class XmlSerializableAccountRecord {
 
-    public static final String MESSAGE_DUPLICATE_ACCOUNT = "Persons list contains duplicate account(s).";
+    public static final String MESSAGE_DUPLICATE_ACCOUNT = "Accounts list contains duplicate account(s).";
 
     @XmlElement
     private List<XmlAdaptedAccount> accounts;

@@ -1,6 +1,8 @@
 package seedu.address.storage.accounts;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
+import static seedu.address.testutil.accounts.TypicalAccounts.DEMO_ADMIN;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -24,10 +26,11 @@ public class XmlSerializableAccountRecordTest {
     @Rule
     public ExpectedException thrown = ExpectedException.none();
 
+    private XmlSerializableAccountRecord dataFromFile = null;
+
     @Test
     public void toModelType_typicalAccountRecordFile_success() throws Exception {
-        XmlSerializableAccountRecord dataFromFile = XmlUtil.getDataFromFile(TYPICAL_ACCOUNTS_FILE,
-                XmlSerializableAccountRecord.class);
+        dataFromFile = XmlUtil.getDataFromFile(TYPICAL_ACCOUNTS_FILE, XmlSerializableAccountRecord.class);
         AccountRecord accountRecordFromFile = dataFromFile.toModelType();
         AccountRecord typicalAccountRecord = TypicalAccounts.getTypicalAccountRecord();
         System.out.println(accountRecordFromFile.getAccountList() + " " + typicalAccountRecord.getAccountList());
@@ -36,19 +39,38 @@ public class XmlSerializableAccountRecordTest {
 
     @Test
     public void toModelType_invalidAccountRecordFile_throwsIllegalValueException() throws Exception {
-        XmlSerializableAccountRecord dataFromFile = XmlUtil.getDataFromFile(INVALID_ACCOUNTS_FILE,
-                XmlSerializableAccountRecord.class);
+        dataFromFile = XmlUtil.getDataFromFile(INVALID_ACCOUNTS_FILE, XmlSerializableAccountRecord.class);
         thrown.expect(IllegalValueException.class);
         dataFromFile.toModelType();
     }
 
     @Test
     public void toModelType_duplicatePersons_throwsIllegalValueException() throws Exception {
-        XmlSerializableAccountRecord dataFromFile = XmlUtil.getDataFromFile(DUPLICATE_ACCOUNTS_FILE,
-                XmlSerializableAccountRecord.class);
+        dataFromFile = XmlUtil.getDataFromFile(DUPLICATE_ACCOUNTS_FILE, XmlSerializableAccountRecord.class);
         thrown.expect(IllegalValueException.class);
         thrown.expectMessage(XmlSerializableAccountRecord.MESSAGE_DUPLICATE_ACCOUNT);
         dataFromFile.toModelType();
     }
 
+    @Test
+    public void equals() throws Exception {
+        dataFromFile = XmlUtil.getDataFromFile(TYPICAL_ACCOUNTS_FILE, XmlSerializableAccountRecord.class);
+        AccountRecord accountRecordFromFile = dataFromFile.toModelType();
+        AccountRecord typicalAccountRecord = TypicalAccounts.getTypicalAccountRecord();
+
+        // same object
+        assertEquals(accountRecordFromFile, accountRecordFromFile);
+
+        // different object, same state
+        assertEquals(accountRecordFromFile, typicalAccountRecord);
+
+        typicalAccountRecord.removeAccount(DEMO_ADMIN);
+        assertNotEquals(accountRecordFromFile, typicalAccountRecord);
+
+        // not same instance
+        assertNotEquals(1, accountRecordFromFile);
+
+        // not same instance
+        assertNotEquals(null, accountRecordFromFile);
+    }
 }
