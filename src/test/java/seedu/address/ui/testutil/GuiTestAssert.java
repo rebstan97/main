@@ -40,6 +40,9 @@ public class GuiTestAssert {
         assertEquals(expectedPerson.getEmail().value, actualCard.getEmail());
         assertEquals(expectedPerson.getAddress().value, actualCard.getAddress());
         assertTagsEqual(expectedPerson, actualCard);
+        assertEquals(expectedPerson.getRemark().value, actualCard.getRemark());
+        assertEquals(expectedPerson.getTags().stream().map(tag -> tag.tagName).collect(Collectors.toList()),
+                actualCard.getTags());
     }
 
     /**
