@@ -1,6 +1,7 @@
 package seedu.address.model;
 
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
@@ -13,6 +14,7 @@ import static seedu.address.testutil.TypicalPersons.BENSON;
 import static seedu.address.testutil.TypicalPersons.BOB;
 import static seedu.address.testutil.TypicalPersons.DYLAN;
 import static seedu.address.testutil.accounts.TypicalAccounts.DEFAULT_ADMIN_ACCOUNT;
+import static seedu.address.testutil.accounts.TypicalAccounts.DEMO_ONE;
 
 import java.nio.file.Paths;
 import java.util.Arrays;
@@ -21,12 +23,15 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
+import seedu.address.model.accounts.Account;
 import seedu.address.model.accounts.AccountRecord;
+import seedu.address.model.accounts.exceptions.AccountNotFoundException;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
 import seedu.address.model.tag.Tag;
 import seedu.address.testutil.AddressBookBuilder;
 import seedu.address.testutil.PersonBuilder;
+import seedu.address.testutil.accounts.AccountBuilder;
 
 public class ModelManagerTest {
 
@@ -43,19 +48,8 @@ public class ModelManagerTest {
     }
 
     @Test
-    public void hasAccount_nullAccount_throwsNullPointerException() {
-        thrown.expect(NullPointerException.class);
-        modelManager.hasAccount(null);
-    }
-
-    @Test
     public void hasPerson_personNotInAddressBook_returnsFalse() {
         assertFalse(modelManager.hasPerson(ALICE));
-    }
-
-    @Test
-    public void hasAccount_accountNotInAccountRecord_returnsFalse() {
-        assertFalse(modelManager.hasAccount(DEFAULT_ADMIN_ACCOUNT));
     }
 
     @Test
@@ -131,24 +125,24 @@ public class ModelManagerTest {
         // same values -> returns true
         modelManager = new ModelManager(addressBook, accountRecord, userPrefs);
         ModelManager modelManagerCopy = new ModelManager(addressBook, accountRecord, userPrefs);
-        assertTrue(modelManager.equals(modelManagerCopy));
+        assertEquals(modelManager, modelManagerCopy);
 
         // same object -> returns true
-        assertTrue(modelManager.equals(modelManager));
+        assertEquals(modelManager, modelManager);
 
         // null -> returns false
-        assertFalse(modelManager.equals(null));
+        assertNotEquals(null, modelManager);
 
         // different types -> returns false
-        assertFalse(modelManager.equals(5));
+        assertNotEquals(5, modelManager);
 
         // different addressBook -> returns false
-        assertFalse(modelManager.equals(new ModelManager(differentAddressBook, accountRecord, userPrefs)));
+        assertNotEquals(modelManager, new ModelManager(differentAddressBook, accountRecord, userPrefs));
 
         // different filteredList -> returns false
         String[] keywords = ALICE.getName().fullName.split("\\s+");
         modelManager.updateFilteredPersonList(new NameContainsKeywordsPredicate(Arrays.asList(keywords)));
-        assertFalse(modelManager.equals(new ModelManager(addressBook, accountRecord, userPrefs)));
+        assertNotEquals(modelManager, new ModelManager(addressBook, accountRecord, userPrefs));
 
         // resets modelManager to initial state for upcoming tests
         modelManager.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
@@ -156,8 +150,60 @@ public class ModelManagerTest {
         // different userPrefs -> returns true
         UserPrefs differentUserPrefs = new UserPrefs();
         differentUserPrefs.setAddressBookFilePath(Paths.get("differentFilePath"));
-        assertTrue(modelManager.equals(new ModelManager(addressBook, accountRecord, differentUserPrefs)));
+        assertEquals(modelManager, new ModelManager(addressBook, accountRecord, differentUserPrefs));
+    }
 
-        //TODO: Add tests for account record here
+    @Test
+    public void hasAccount_nullAccount_throwsNullPointerException() {
+        thrown.expect(NullPointerException.class);
+        modelManager.hasAccount(null);
+    }
+
+    @Test
+    public void hasAccount_accountNotInAccountRecord_returnsFalse() {
+        assertFalse(modelManager.hasAccount(DEFAULT_ADMIN_ACCOUNT));
+    }
+
+    @Test
+    public void hasAccount_accountInAccountRecord_returnsTrue() {
+        modelManager.addAccount(DEFAULT_ADMIN_ACCOUNT);
+        assertTrue(modelManager.hasAccount(DEFAULT_ADMIN_ACCOUNT));
+    }
+
+    @Test
+    public void getAccountList_modifyList_throwsUnsupportedOperationException() {
+        thrown.expect(UnsupportedOperationException.class);
+        modelManager.getAccountRecord().getAccountList().remove(0);
+    }
+
+    @Test
+    public void removeAccount_accountNotInAccountRecord_throwsAccountNotFoundException() {
+        thrown.expect(AccountNotFoundException.class);
+        modelManager.removeAccount(DEFAULT_ADMIN_ACCOUNT);
+    }
+
+    @Test
+    public void removeAccount_accountInAccountRecord_returnTrue() {
+        modelManager.addAccount(DEFAULT_ADMIN_ACCOUNT);
+        assertTrue(modelManager.hasAccount(DEFAULT_ADMIN_ACCOUNT));
+
+        modelManager.removeAccount(DEFAULT_ADMIN_ACCOUNT);
+        assertFalse(modelManager.hasAccount(DEFAULT_ADMIN_ACCOUNT));
+    }
+
+    @Test
+    public void updateAccount_accountNotInAccountRecord_throwsAccountNotFoundException() {
+        thrown.expect(AccountNotFoundException.class);
+        modelManager.updateAccount(DEFAULT_ADMIN_ACCOUNT, DEMO_ONE);
+    }
+
+    @Test
+    public void updateAccount_accountInAccountRecord_returnTrue() {
+        modelManager.addAccount(DEFAULT_ADMIN_ACCOUNT);
+        Account account = new AccountBuilder(DEMO_ONE).build();
+
+        modelManager.updateAccount(DEFAULT_ADMIN_ACCOUNT, account);
+        assertFalse(modelManager.hasAccount(DEFAULT_ADMIN_ACCOUNT));
+        assertTrue(modelManager.hasAccount(account));
     }
 }
