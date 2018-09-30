@@ -87,7 +87,7 @@ public class UniqueAccountList implements Iterable<Account> {
     public void setAccounts(List<Account> accounts) {
         requireAllNonNull(accounts);
         if (!accountsAreUnique(accounts)) {
-            throw new DuplicatePersonException();
+            throw new DuplicateAccountException();
         }
 
         internalList.setAll(accounts);

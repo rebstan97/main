@@ -20,7 +20,7 @@ import org.junit.rules.ExpectedException;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.model.accounts.exceptions.AccountNotFoundException;
-import seedu.address.model.person.exceptions.DuplicatePersonException;
+import seedu.address.model.accounts.exceptions.DuplicateAccountException;
 import seedu.address.testutil.accounts.AccountBuilder;
 
 public class AccountRecordTest {
@@ -57,7 +57,7 @@ public class AccountRecordTest {
         List<Account> accounts = Arrays.asList(DEFAULT_ADMIN_ACCOUNT, account);
         AccountRecordStub newData = new AccountRecordStub(accounts);
 
-        thrown.expect(DuplicatePersonException.class);
+        thrown.expect(DuplicateAccountException.class);
         accountRecord.resetData(newData);
     }
 

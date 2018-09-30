@@ -7,6 +7,6 @@ package seedu.address.model.accounts.exceptions;
 public class DuplicateAccountException extends RuntimeException {
 
     public DuplicateAccountException() {
-        super("Operation would result in duplicate persons");
+        super("Operation would result in duplicate accounts");
     }
 }
