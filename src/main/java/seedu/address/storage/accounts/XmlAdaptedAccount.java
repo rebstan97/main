@@ -44,6 +44,15 @@ public class XmlAdaptedAccount {
         password = source.getPassword().toString();
     }
 
+
+    public String getUsername() {
+        return username;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
     /**
      * Converts this jaxb-friendly adapted account object into the model's Account object.
      *
@@ -82,6 +91,7 @@ public class XmlAdaptedAccount {
         }
 
         XmlAdaptedAccount otherAccount = (XmlAdaptedAccount) other;
-        return Objects.equals(username, otherAccount.username) && Objects.equals(password, otherAccount.password);
+        return Objects.equals(getUsername(), otherAccount.getUsername())
+                && Objects.equals(getPassword(), otherAccount.getPassword());
     }
 }
