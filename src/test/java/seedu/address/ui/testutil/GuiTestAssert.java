@@ -64,21 +64,21 @@ public class GuiTestAssert {
 
         case "classmates":
         case "owesMoney":
-            return "TEAL";
+            return "teal";
 
         case "colleagues":
         case "neighbours":
-            return "YELLOW";
+            return "yellow";
 
         case "family":
         case "friend":
-            return "ORANGE";
+            return "orange";
 
         case "friends":
-            return "BROWN";
+            return "brown";
 
         case "husband":
-            return "GREY";
+            return "grey";
 
         default:
             throw new AssertionError(tagName + " does not have a color assigned.");
