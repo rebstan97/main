@@ -1,7 +1,8 @@
 package seedu.address.storage.accounts;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 import static seedu.address.testutil.accounts.TypicalAccounts.DEMO_ADMIN;
 
 import java.nio.file.Path;
@@ -59,18 +60,18 @@ public class XmlSerializableAccountRecordTest {
         AccountRecord typicalAccountRecord = TypicalAccounts.getTypicalAccountRecord();
 
         // same object
-        assertEquals(accountRecordFromFile, accountRecordFromFile);
+        assertTrue(accountRecordFromFile.equals(accountRecordFromFile));
 
         // different object, same state
-        assertEquals(accountRecordFromFile, typicalAccountRecord);
+        assertTrue(accountRecordFromFile.equals(typicalAccountRecord));
 
         typicalAccountRecord.removeAccount(DEMO_ADMIN);
-        assertNotEquals(accountRecordFromFile, typicalAccountRecord);
+        assertFalse(accountRecordFromFile.equals(typicalAccountRecord));
 
         // not same instance
-        assertNotEquals(1, accountRecordFromFile);
+        assertFalse(accountRecordFromFile.equals(null));
 
         // not same instance
-        assertNotEquals(null, accountRecordFromFile);
+        assertFalse(accountRecordFromFile.equals(1));
     }
 }

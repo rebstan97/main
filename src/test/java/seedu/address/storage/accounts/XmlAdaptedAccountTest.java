@@ -60,7 +60,7 @@ public class XmlAdaptedAccountTest {
     }
 
     @Test
-    public void equals() throws Exception {
+    public void equals() {
         XmlAdaptedAccount accountDemoOne = new XmlAdaptedAccount(new AccountBuilder(DEMO_ONE).build());
 
         // same object
