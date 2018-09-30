@@ -1,10 +1,10 @@
 package seedu.address.logic.parser.accounts;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.commands.CommandTestUtil.PREFIX_WITH_INVALID_PASSWORD;
-import static seedu.address.logic.commands.CommandTestUtil.PREFIX_WITH_INVALID_USERNAME;
 import static seedu.address.logic.commands.CommandTestUtil.PREAMBLE_NON_EMPTY;
 import static seedu.address.logic.commands.CommandTestUtil.PREAMBLE_WHITESPACE;
+import static seedu.address.logic.commands.CommandTestUtil.PREFIX_WITH_INVALID_PASSWORD;
+import static seedu.address.logic.commands.CommandTestUtil.PREFIX_WITH_INVALID_USERNAME;
 import static seedu.address.logic.commands.CommandTestUtil.PREFIX_WITH_VALID_PASSWORD;
 import static seedu.address.logic.commands.CommandTestUtil.PREFIX_WITH_VALID_USERNAME;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
@@ -30,11 +30,12 @@ public class CreateCommandParserTest {
         Account expectedAccount = new AccountBuilder(DEMO_ONE).build();
 
         // whitespace only preamble
-        assertParseSuccess(parser, PREAMBLE_WHITESPACE + PREFIX_WITH_VALID_USERNAME + PREFIX_WITH_VALID_PASSWORD,
-                new CreateCommand(expectedAccount));
+        assertParseSuccess(parser, PREAMBLE_WHITESPACE + PREFIX_WITH_VALID_USERNAME
+                + PREFIX_WITH_VALID_PASSWORD, new CreateCommand(expectedAccount));
 
         // whitespace only
-        assertParseSuccess(parser, PREFIX_WITH_VALID_USERNAME + PREFIX_WITH_VALID_PASSWORD, new CreateCommand(expectedAccount));
+        assertParseSuccess(parser, PREFIX_WITH_VALID_USERNAME + PREFIX_WITH_VALID_PASSWORD,
+                new CreateCommand(expectedAccount));
     }
 
     @Test
@@ -60,16 +61,20 @@ public class CreateCommandParserTest {
     @Test
     public void parse_invalidValue_failure() {
         // invalid username
-        assertParseFailure(parser, PREFIX_WITH_INVALID_USERNAME + PREFIX_WITH_VALID_PASSWORD, Username.MESSAGE_USERNAME_CONSTRAINT);
+        assertParseFailure(parser, PREFIX_WITH_INVALID_USERNAME + PREFIX_WITH_VALID_PASSWORD,
+                Username.MESSAGE_USERNAME_CONSTRAINT);
 
         // invalid password
-        assertParseFailure(parser, PREFIX_WITH_VALID_USERNAME + PREFIX_WITH_INVALID_PASSWORD, Password.MESSAGE_PASSWORD_CONSTRAINT);
+        assertParseFailure(parser, PREFIX_WITH_VALID_USERNAME + PREFIX_WITH_INVALID_PASSWORD,
+                Password.MESSAGE_PASSWORD_CONSTRAINT);
 
         // two invalid values, only first invalid value reported
-        assertParseFailure(parser, PREFIX_WITH_INVALID_USERNAME + PREFIX_WITH_INVALID_PASSWORD, Username.MESSAGE_USERNAME_CONSTRAINT);
+        assertParseFailure(parser, PREFIX_WITH_INVALID_USERNAME + PREFIX_WITH_INVALID_PASSWORD,
+                Username.MESSAGE_USERNAME_CONSTRAINT);
 
         // non-empty preamble
-        assertParseFailure(parser, PREAMBLE_NON_EMPTY + PREFIX_WITH_VALID_USERNAME + PREFIX_WITH_VALID_PASSWORD,
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, CreateCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, PREAMBLE_NON_EMPTY + PREFIX_WITH_VALID_USERNAME
+                + PREFIX_WITH_VALID_PASSWORD, String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                CreateCommand.MESSAGE_USAGE));
     }
 }

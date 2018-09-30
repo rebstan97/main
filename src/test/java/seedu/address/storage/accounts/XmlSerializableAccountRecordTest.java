@@ -12,7 +12,6 @@ import org.junit.rules.ExpectedException;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.commons.util.XmlUtil;
 import seedu.address.model.accounts.AccountRecord;
-import seedu.address.storage.accounts.XmlSerializableAccountRecord;
 import seedu.address.testutil.accounts.TypicalAccounts;
 
 public class XmlSerializableAccountRecordTest {
