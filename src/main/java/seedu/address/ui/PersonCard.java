@@ -18,7 +18,11 @@ public class PersonCard extends UiPart<Region> {
      * The colours of the tags take on Enum values
      */
     private enum TagColourStyle {
-        TEAL, RED, YELLOW, BLUE, ORANGE, BROWN, GREEN, PINK, BLACK, GREY
+        TEAL, RED, YELLOW, BLUE, ORANGE, BROWN, GREEN, PINK, BLACK, GREY;
+
+        private String getColourStyle() {
+            return this.toString();
+        }
     }
 
     private static final TagColourStyle[] TAG_COLOR_STYLES = TagColourStyle.values();
@@ -63,7 +67,7 @@ public class PersonCard extends UiPart<Region> {
      * Returns color style for {@code tagName}'s label
      */
     private String getTagColorStyleFor(String tagName) {
-        return TAG_COLOR_STYLES[Math.abs(tagName.hashCode()) % TAG_COLOR_STYLES.length].toString();
+        return TAG_COLOR_STYLES[Math.abs(tagName.hashCode()) % TAG_COLOR_STYLES.length].getColourStyle();
     }
 
     /**
