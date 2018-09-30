@@ -8,8 +8,6 @@ import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.accounts.Account;
 import seedu.address.model.accounts.Password;
 import seedu.address.model.accounts.Username;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Phone;
 
 /**
  * JAXB-friendly version of the Account.
@@ -53,7 +51,8 @@ public class XmlAdaptedAccount {
      */
     public Account toModelType() throws IllegalValueException {
         if (username == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Name.class.getSimpleName()));
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    Username.class.getSimpleName()));
         }
         if (!Username.isValidUsername(username)) {
             throw new IllegalValueException(Username.MESSAGE_USERNAME_CONSTRAINT);
@@ -61,7 +60,8 @@ public class XmlAdaptedAccount {
         final Username modelUsername = new Username(username);
 
         if (password == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Phone.class.getSimpleName()));
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    Password.class.getSimpleName()));
         }
         if (!Password.isValidPassword(password)) {
             throw new IllegalValueException(Password.MESSAGE_PASSWORD_CONSTRAINT);
@@ -81,7 +81,7 @@ public class XmlAdaptedAccount {
             return false;
         }
 
-        XmlAdaptedAccount otherPerson = (XmlAdaptedAccount) other;
-        return Objects.equals(username, otherPerson.username) && Objects.equals(password, otherPerson.password);
+        XmlAdaptedAccount otherAccount = (XmlAdaptedAccount) other;
+        return Objects.equals(username, otherAccount.username) && Objects.equals(password, otherAccount.password);
     }
 }
