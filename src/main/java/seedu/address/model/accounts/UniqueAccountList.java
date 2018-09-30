@@ -10,7 +10,6 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.model.accounts.exceptions.AccountNotFoundException;
 import seedu.address.model.accounts.exceptions.DuplicateAccountException;
-import seedu.address.model.person.exceptions.DuplicatePersonException;
 
 /**
  * A list of accounts that enforces uniqueness between its elements and does not allow nulls. An account is considered
@@ -28,7 +27,7 @@ public class UniqueAccountList implements Iterable<Account> {
     private final ObservableList<Account> internalList = FXCollections.observableArrayList();
 
     /**
-     * Returns true if the list contains an equivalent person as the given argument.
+     * Returns true if the list contains an equivalent account as the given argument.
      */
     public boolean contains(Account toCheck) {
         requireNonNull(toCheck);
@@ -36,12 +35,12 @@ public class UniqueAccountList implements Iterable<Account> {
     }
 
     /**
-     * Adds a person to the list. The person must not already exist in the list.
+     * Adds a account to the list. The account must not already exist in the list.
      */
     public void add(Account toAdd) {
         requireNonNull(toAdd);
         if (contains(toAdd)) {
-            throw new DuplicatePersonException();
+            throw new DuplicateAccountException();
         }
         internalList.add(toAdd);
     }
