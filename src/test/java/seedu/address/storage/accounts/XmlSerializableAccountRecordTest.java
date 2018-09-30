@@ -1,4 +1,4 @@
-package seedu.address.storage;
+package seedu.address.storage.accounts;
 
 import static org.junit.Assert.assertEquals;
 

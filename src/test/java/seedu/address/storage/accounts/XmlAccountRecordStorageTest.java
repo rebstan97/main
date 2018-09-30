@@ -1,4 +1,4 @@
-package seedu.address.storage;
+package seedu.address.storage.accounts;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
@@ -20,7 +20,6 @@ import seedu.address.commons.exceptions.DataConversionException;
 import seedu.address.model.accounts.AccountRecord;
 import seedu.address.model.accounts.ReadOnlyAccountRecord;
 import seedu.address.model.accounts.Username;
-import seedu.address.storage.accounts.XmlAccountRecordStorage;
 
 public class XmlAccountRecordStorageTest {
 
