@@ -10,6 +10,7 @@ import seedu.address.commons.events.storage.DataSavingExceptionEvent;
 import seedu.address.commons.exceptions.DataConversionException;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.accounts.ReadOnlyAccountRecord;
 import seedu.address.storage.accounts.AccountRecordStorage;
 
 /**
@@ -44,7 +45,14 @@ public interface Storage extends AddressBookStorage, AccountRecordStorage, UserP
 
     // ================ AccountRecord methods ==============================
 
-    //TODO: Need to include the other methods??? Think...
+    @Override
+    Path getAccountRecordFilePath();
+
+    @Override
+    Optional<ReadOnlyAccountRecord> readAccountRecord() throws DataConversionException, IOException;
+
+    @Override
+    void saveAccountRecord(ReadOnlyAccountRecord accountRecord) throws IOException;
 
     /**
      * Saves the current version of the Account Record to the hard disk. Creates the data file if it is missing. Raises

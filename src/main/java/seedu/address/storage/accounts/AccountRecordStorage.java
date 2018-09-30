@@ -43,5 +43,5 @@ public interface AccountRecordStorage {
     /**
      * @see #saveAccountRecord(ReadOnlyAccountRecord)
      */
-    void saveAccountRecord(ReadOnlyAccountRecord addressBook, Path filePath) throws IOException;
+    void saveAccountRecord(ReadOnlyAccountRecord accountRecord, Path filePath) throws IOException;
 }
