@@ -43,15 +43,6 @@ public class UniqueAccountListTest {
     }
 
     @Test
-    public void contains_accountWithSamePasswordInList_returnsTrue() {
-        uniqueAccountList.add(DEMO_ADMIN);
-        Account editedAdmin = new AccountBuilder(DEMO_ONE)
-                .withPassword(DEMO_ADMIN.getPassword().toString())
-                .build();
-        assertTrue(uniqueAccountList.contains(editedAdmin));
-    }
-
-    @Test
     public void add_nullAccount_throwsNullPointerException() {
         thrown.expect(NullPointerException.class);
         uniqueAccountList.add(null);
@@ -108,7 +99,7 @@ public class UniqueAccountListTest {
         uniqueAccountList.add(DEMO_ADMIN);
         uniqueAccountList.add(DEMO_ONE);
         thrown.expect(DuplicateAccountException.class);
-        uniqueAccountList.update(DEMO_ADMIN, DEMO_ADMIN);
+        uniqueAccountList.update(DEMO_ADMIN, DEMO_ONE);
     }
 
     @Test
