@@ -19,7 +19,7 @@ import seedu.address.model.accounts.AccountRecord;
  */
 public class TypicalAccounts {
 
-    public static final Account DEFAULT_ADMIN_ACCOUNT = new AccountBuilder().build();
+    public static final Account DEMO_ADMIN = new AccountBuilder().build();
     public static final Account DEMO_ONE = new AccountBuilder().withUsername(VALID_USERNAME_DEMO_ONE)
             .withPassword(VALID_PASSWORD_DEMO_ONE)
             .build();
@@ -44,6 +44,6 @@ public class TypicalAccounts {
     }
 
     public static List<Account> getTypicalAccounts() {
-        return new ArrayList<>(Arrays.asList(DEFAULT_ADMIN_ACCOUNT, DEMO_ONE, DEMO_TWO));
+        return new ArrayList<>(Arrays.asList(DEMO_ADMIN, DEMO_ONE, DEMO_TWO));
     }
 }

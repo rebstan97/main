@@ -13,7 +13,7 @@ import static seedu.address.testutil.TypicalPersons.AMY;
 import static seedu.address.testutil.TypicalPersons.BENSON;
 import static seedu.address.testutil.TypicalPersons.BOB;
 import static seedu.address.testutil.TypicalPersons.DYLAN;
-import static seedu.address.testutil.accounts.TypicalAccounts.DEFAULT_ADMIN_ACCOUNT;
+import static seedu.address.testutil.accounts.TypicalAccounts.DEMO_ADMIN;
 import static seedu.address.testutil.accounts.TypicalAccounts.DEMO_ONE;
 
 import java.nio.file.Paths;
@@ -161,13 +161,13 @@ public class ModelManagerTest {
 
     @Test
     public void hasAccount_accountNotInAccountRecord_returnsFalse() {
-        assertFalse(modelManager.hasAccount(DEFAULT_ADMIN_ACCOUNT));
+        assertFalse(modelManager.hasAccount(DEMO_ADMIN));
     }
 
     @Test
     public void hasAccount_accountInAccountRecord_returnsTrue() {
-        modelManager.addAccount(DEFAULT_ADMIN_ACCOUNT);
-        assertTrue(modelManager.hasAccount(DEFAULT_ADMIN_ACCOUNT));
+        modelManager.addAccount(DEMO_ADMIN);
+        assertTrue(modelManager.hasAccount(DEMO_ADMIN));
     }
 
     @Test
@@ -179,31 +179,31 @@ public class ModelManagerTest {
     @Test
     public void removeAccount_accountNotInAccountRecord_throwsAccountNotFoundException() {
         thrown.expect(AccountNotFoundException.class);
-        modelManager.removeAccount(DEFAULT_ADMIN_ACCOUNT);
+        modelManager.removeAccount(DEMO_ADMIN);
     }
 
     @Test
     public void removeAccount_accountInAccountRecord_returnTrue() {
-        modelManager.addAccount(DEFAULT_ADMIN_ACCOUNT);
-        assertTrue(modelManager.hasAccount(DEFAULT_ADMIN_ACCOUNT));
+        modelManager.addAccount(DEMO_ADMIN);
+        assertTrue(modelManager.hasAccount(DEMO_ADMIN));
 
-        modelManager.removeAccount(DEFAULT_ADMIN_ACCOUNT);
-        assertFalse(modelManager.hasAccount(DEFAULT_ADMIN_ACCOUNT));
+        modelManager.removeAccount(DEMO_ADMIN);
+        assertFalse(modelManager.hasAccount(DEMO_ADMIN));
     }
 
     @Test
     public void updateAccount_accountNotInAccountRecord_throwsAccountNotFoundException() {
         thrown.expect(AccountNotFoundException.class);
-        modelManager.updateAccount(DEFAULT_ADMIN_ACCOUNT, DEMO_ONE);
+        modelManager.updateAccount(DEMO_ADMIN, DEMO_ONE);
     }
 
     @Test
     public void updateAccount_accountInAccountRecord_returnTrue() {
-        modelManager.addAccount(DEFAULT_ADMIN_ACCOUNT);
+        modelManager.addAccount(DEMO_ADMIN);
         Account account = new AccountBuilder(DEMO_ONE).build();
 
-        modelManager.updateAccount(DEFAULT_ADMIN_ACCOUNT, account);
-        assertFalse(modelManager.hasAccount(DEFAULT_ADMIN_ACCOUNT));
+        modelManager.updateAccount(DEMO_ADMIN, account);
+        assertFalse(modelManager.hasAccount(DEMO_ADMIN));
         assertTrue(modelManager.hasAccount(account));
     }
 }

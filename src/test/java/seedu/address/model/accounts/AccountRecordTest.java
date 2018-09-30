@@ -4,7 +4,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PASSWORD_DEMO_ONE;
-import static seedu.address.testutil.accounts.TypicalAccounts.DEFAULT_ADMIN_ACCOUNT;
+import static seedu.address.testutil.accounts.TypicalAccounts.DEMO_ADMIN;
 import static seedu.address.testutil.accounts.TypicalAccounts.DEMO_ONE;
 import static seedu.address.testutil.accounts.TypicalAccounts.getTypicalAccountRecord;
 
@@ -51,10 +51,10 @@ public class AccountRecordTest {
     @Test
     public void resetData_withDuplicateAccounts_throwsDuplicateAccountException() {
         // same username but different password
-        Account account = new AccountBuilder(DEFAULT_ADMIN_ACCOUNT)
+        Account account = new AccountBuilder(DEMO_ADMIN)
                 .withPassword(VALID_PASSWORD_DEMO_ONE)
                 .build();
-        List<Account> accounts = Arrays.asList(DEFAULT_ADMIN_ACCOUNT, account);
+        List<Account> accounts = Arrays.asList(DEMO_ADMIN, account);
         AccountRecordStub newData = new AccountRecordStub(accounts);
 
         thrown.expect(DuplicateAccountException.class);
@@ -69,7 +69,7 @@ public class AccountRecordTest {
 
     @Test
     public void updateAccount_notFound_throwsAccountNotFoundException() {
-        Account account = new AccountBuilder(DEFAULT_ADMIN_ACCOUNT).build();
+        Account account = new AccountBuilder(DEMO_ADMIN).build();
         accountRecord.addAccount(account);
         thrown.expect(AccountNotFoundException.class);
         accountRecord.updateAccount(DEMO_ONE, DEMO_ONE);
@@ -77,20 +77,20 @@ public class AccountRecordTest {
 
     @Test
     public void hasAccount_accountNotInAccountRecord_returnsFalse() {
-        assertFalse(accountRecord.hasAccount(DEFAULT_ADMIN_ACCOUNT));
+        assertFalse(accountRecord.hasAccount(DEMO_ADMIN));
     }
 
     @Test
     public void hasAccount_accountInAddressBook_returnsTrue() {
-        accountRecord.addAccount(DEFAULT_ADMIN_ACCOUNT);
-        assertTrue(accountRecord.hasAccount(DEFAULT_ADMIN_ACCOUNT));
+        accountRecord.addAccount(DEMO_ADMIN);
+        assertTrue(accountRecord.hasAccount(DEMO_ADMIN));
     }
 
     @Test
     public void hasAccount_accountWithSamePasswordInAccountRecord_returnsTrue() {
-        accountRecord.addAccount(DEFAULT_ADMIN_ACCOUNT);
+        accountRecord.addAccount(DEMO_ADMIN);
         Account accountWithSamePassword = new AccountBuilder(DEMO_ONE)
-                .withPassword(DEFAULT_ADMIN_ACCOUNT.getPassword().toString())
+                .withPassword(DEMO_ADMIN.getPassword().toString())
                 .build();
         accountRecord.addAccount(accountWithSamePassword);
         assertTrue(accountRecord.hasAccount(accountWithSamePassword));

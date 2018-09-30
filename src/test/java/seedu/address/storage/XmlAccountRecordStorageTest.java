@@ -2,7 +2,7 @@ package seedu.address.storage;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
-import static seedu.address.testutil.accounts.TypicalAccounts.DEFAULT_ADMIN_ACCOUNT;
+import static seedu.address.testutil.accounts.TypicalAccounts.DEMO_ADMIN;
 import static seedu.address.testutil.accounts.TypicalAccounts.DEMO_THREE;
 import static seedu.address.testutil.accounts.TypicalAccounts.getTypicalAccountRecord;
 
@@ -102,13 +102,13 @@ public class XmlAccountRecordStorageTest {
 
         //Modify data, overwrite exiting file, and read back
         original.addAccount(DEMO_THREE);
-        original.removeAccount(DEFAULT_ADMIN_ACCOUNT);
+        original.removeAccount(DEMO_ADMIN);
         xmlAccountRecordStorage.saveAccountRecord(original, filePath);
         readBack = xmlAccountRecordStorage.readAccountRecord(filePath).get();
         assertEquals(original, new AccountRecord(readBack));
 
         //Save and read without specifying file path
-        original.addAccount(DEFAULT_ADMIN_ACCOUNT);
+        original.addAccount(DEMO_ADMIN);
         xmlAccountRecordStorage.saveAccountRecord(original); //file path not specified
         readBack = xmlAccountRecordStorage.readAccountRecord().get(); //file path not specified
         assertEquals(original, new AccountRecord(readBack));

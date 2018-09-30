@@ -1,7 +1,7 @@
 package seedu.address.logic.commands.accounts;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static seedu.address.testutil.accounts.TypicalAccounts.DEFAULT_ADMIN_ACCOUNT;
+import static seedu.address.testutil.accounts.TypicalAccounts.DEMO_ADMIN;
 
 import org.junit.Assert;
 import org.junit.Rule;
@@ -28,7 +28,7 @@ public class CreateCommandTest {
 
     @Test
     public void executeSuccess() throws CommandException {
-        Account validAccount = new AccountBuilder(DEFAULT_ADMIN_ACCOUNT).build();
+        Account validAccount = new AccountBuilder(DEMO_ADMIN).build();
         CommandResult commandResult = new CreateCommand(validAccount).execute(model, commandHistory);
 
         assertEquals(String.format(CreateCommand.MESSAGE_SUCCESS, validAccount), commandResult.feedbackToUser);
