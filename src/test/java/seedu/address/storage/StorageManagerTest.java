@@ -70,6 +70,15 @@ public class StorageManagerTest {
     }
 
     @Test
+    public void addressBookReadBackup() throws Exception {
+        AddressBook original = getTypicalAddressBook();
+        storageManager.backupAddressBook(original);
+        ReadOnlyAddressBook retrieved = storageManager.readAddressBook(Paths.get(getTempFilePath("ab")
+                .toString() + ".backup")).get();
+        assertEquals(original, new AddressBook(retrieved));
+    }
+
+    @Test
     public void getAddressBookFilePath() {
         assertNotNull(storageManager.getAddressBookFilePath());
     }
