@@ -21,7 +21,7 @@ public class PersonCard extends UiPart<Region> {
         TEAL, RED, YELLOW, BLUE, ORANGE, BROWN, GREEN, PINK, BLACK, GREY;
 
         private String getColourStyle() {
-            return this.toString();
+            return this.toString().toLowerCase();
         }
     }
 
