@@ -1,7 +1,8 @@
 package seedu.address.storage.accounts;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 import static seedu.address.storage.accounts.XmlAdaptedAccount.MISSING_FIELD_MESSAGE_FORMAT;
 import static seedu.address.testutil.accounts.TypicalAccounts.DEMO_ADMIN;
 import static seedu.address.testutil.accounts.TypicalAccounts.DEMO_ONE;
@@ -64,21 +65,21 @@ public class XmlAdaptedAccountTest {
         XmlAdaptedAccount accountDemoOne = new XmlAdaptedAccount(new AccountBuilder(DEMO_ONE).build());
 
         // same object
-        assertEquals(accountDemoOne, accountDemoOne);
+        assertTrue(accountDemoOne.equals(accountDemoOne));
 
         XmlAdaptedAccount accountDemoOneDuplicate = new XmlAdaptedAccount(new AccountBuilder(DEMO_ONE).build());
 
         // different object, same state
-        assertEquals(accountDemoOne, accountDemoOneDuplicate);
+        assertTrue(accountDemoOne.equals(accountDemoOneDuplicate));
 
         XmlAdaptedAccount accountDemoTwo = new XmlAdaptedAccount(new AccountBuilder(DEMO_TWO).build());
 
-        assertNotEquals(accountDemoOne, accountDemoTwo);
+        assertFalse(accountDemoOne.equals(accountDemoTwo));
 
         // not same instance
-        assertNotEquals(1, accountDemoOne);
+        assertFalse(accountDemoOne.equals(null));
 
         // not same instance
-        assertNotEquals(null, accountDemoOne);
+        assertFalse(accountDemoOne.equals(1));
     }
 }
