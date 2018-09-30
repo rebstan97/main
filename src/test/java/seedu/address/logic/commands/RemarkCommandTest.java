@@ -10,6 +10,7 @@ import static seedu.address.logic.commands.CommandTestUtil.showPersonAtIndex;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
+import static seedu.address.testutil.accounts.TypicalAccounts.getTypicalAccountRecord;
 
 import org.junit.Test;
 
@@ -31,7 +32,7 @@ public class RemarkCommandTest {
 
     private static final String REMARK_STUB = "Some remark";
 
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private Model model = new ModelManager(getTypicalAddressBook(), getTypicalAccountRecord(), new UserPrefs());
     private CommandHistory commandHistory = new CommandHistory();
 
     @Test
@@ -44,7 +45,8 @@ public class RemarkCommandTest {
 
         String expectedMessage = String.format(RemarkCommand.MESSAGE_DELETE_REMARK_SUCCESS, editedPerson);
 
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), model.getAccountRecord(),
+                new UserPrefs());
         expectedModel.updatePerson(firstPerson, editedPerson);
         expectedModel.commitAddressBook();
 
@@ -63,7 +65,8 @@ public class RemarkCommandTest {
 
         String expectedMessage = String.format(RemarkCommand.MESSAGE_ADD_REMARK_SUCCESS, editedPerson);
 
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), model.getAccountRecord(),
+                new UserPrefs());
         expectedModel.updatePerson(firstPerson, editedPerson);
         expectedModel.commitAddressBook();
 
@@ -79,8 +82,7 @@ public class RemarkCommandTest {
     }
 
     /**
-     * Edit filtered list where index is larger than size of filtered list,
-     * but smaller than size of address book
+     * Edit filtered list where index is larger than size of filtered list, but smaller than size of address book
      */
     @Test
     public void execute_invalidPersonIndexFilteredList_failure() {
@@ -101,7 +103,7 @@ public class RemarkCommandTest {
 
         RemarkCommand remarkCommand = new RemarkCommand(INDEX_FIRST_PERSON, new Remark(REMARK_STUB));
 
-        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        Model expectedModel = new ModelManager(model.getAddressBook(), model.getAccountRecord(), new UserPrefs());
         expectedModel.updatePerson(personToModify, modifiedPerson);
         expectedModel.commitAddressBook();
 
@@ -116,6 +118,7 @@ public class RemarkCommandTest {
         expectedModel.redoAddressBook();
         assertCommandSuccess(new RedoCommand(), model, commandHistory, RedoCommand.MESSAGE_SUCCESS, expectedModel);
     }
+
     @Test
     public void executeUndoRedo_invalidIndexUnfilteredList_failure() {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredPersonList().size() + 1);
