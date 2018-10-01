@@ -45,6 +45,7 @@ public class CreateCommand extends Command {
         }
 
         model.addAccount(toCreate);
+        model.commitAddressBook();
         return new CommandResult(String.format(MESSAGE_SUCCESS, toCreate));
     }
 
