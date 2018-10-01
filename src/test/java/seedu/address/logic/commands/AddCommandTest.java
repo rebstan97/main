@@ -177,7 +177,17 @@ public class AddCommandTest {
         }
 
         @Override
-        public void updateAccount(Account target, Account editedAcount) {
+        public void updateAccount(Account target, Account editedAccount) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ObservableList<Account> getFilteredAccountList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void updateFilteredAccountList(Predicate<Account> predicate) {
             throw new AssertionError("This method should not be called.");
         }
     }
