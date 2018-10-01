@@ -22,7 +22,7 @@ public class MinimumUnit {
     public final String minimumUnit;
 
     /**
-     * Constructs an {@code MinimumUnit}.
+     * Constructs a {@code MinimumUnit}.
      *
      * @param minimum A valid minimum number of units.
      */

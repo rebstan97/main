@@ -14,7 +14,10 @@ public class Ingredient {
     private final IngredientName name;
     private final IngredientUnit unit;
     private final IngredientPrice price;
+
+    //Data fields
     private final MinimumUnit minimum;
+    private final NumUnits numUnits;
 
     /**
      * Every field must be present and not null.
@@ -25,6 +28,7 @@ public class Ingredient {
         this.unit = unit;
         this.price = price;
         this.minimum = minimum;
+        this.numUnits = new NumUnits("0");
     }
 
     public IngredientName getName() {
@@ -41,6 +45,10 @@ public class Ingredient {
 
     public MinimumUnit getMinimum() {
         return minimum;
+    }
+
+    public NumUnits getNumUnits() {
+        return numUnits;
     }
 
     @Override
