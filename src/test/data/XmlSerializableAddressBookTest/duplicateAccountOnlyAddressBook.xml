@@ -5,7 +5,7 @@
     <password>1122qq</password>
   </accounts>
 
-  <!-- Person with same username -->
+  <!-- Account with same username -->
   <accounts>
     <username>azhikai</username>
     <password>2233ww</password>
