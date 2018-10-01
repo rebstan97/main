@@ -3,7 +3,7 @@ package seedu.address.storage.accounts;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
-import static seedu.address.storage.accounts.XmlAdaptedAccount.MISSING_FIELD_MESSAGE_FORMAT;
+import static seedu.address.storage.elements.XmlAdaptedAccount.MISSING_FIELD_MESSAGE_FORMAT;
 import static seedu.address.testutil.accounts.TypicalAccounts.DEMO_ADMIN;
 import static seedu.address.testutil.accounts.TypicalAccounts.DEMO_ONE;
 import static seedu.address.testutil.accounts.TypicalAccounts.DEMO_TWO;
@@ -13,6 +13,7 @@ import org.junit.Test;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.accounts.Password;
 import seedu.address.model.accounts.Username;
+import seedu.address.storage.elements.XmlAdaptedAccount;
 import seedu.address.testutil.Assert;
 import seedu.address.testutil.accounts.AccountBuilder;
 
