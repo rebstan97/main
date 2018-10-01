@@ -13,14 +13,16 @@ public class Ingredient {
     // Identity fields
     private final IngredientName name;
     private final IngredientUnit unit;
+    private final IngredientPrice price;
 
     /**
      * Every field must be present and not null.
      */
-    public Ingredient(IngredientName name, IngredientUnit unit) {
+    public Ingredient(IngredientName name, IngredientUnit unit, IngredientPrice price) {
         requireAllNonNull(name);
         this.name = name;
         this.unit = unit;
+        this.price = price;
     }
 
     public IngredientName getName() {
@@ -29,6 +31,10 @@ public class Ingredient {
 
     public IngredientUnit getUnit() {
         return unit;
+    }
+
+    public IngredientPrice getPrice() {
+        return price;
     }
 
     @Override
