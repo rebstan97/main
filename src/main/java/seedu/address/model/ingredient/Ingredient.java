@@ -14,15 +14,17 @@ public class Ingredient {
     private final IngredientName name;
     private final IngredientUnit unit;
     private final IngredientPrice price;
+    private final MinimumUnit minimum;
 
     /**
      * Every field must be present and not null.
      */
-    public Ingredient(IngredientName name, IngredientUnit unit, IngredientPrice price) {
+    public Ingredient(IngredientName name, IngredientUnit unit, IngredientPrice price, MinimumUnit minimum) {
         requireAllNonNull(name);
         this.name = name;
         this.unit = unit;
         this.price = price;
+        this.minimum = minimum;
     }
 
     public IngredientName getName() {
@@ -35,6 +37,10 @@ public class Ingredient {
 
     public IngredientPrice getPrice() {
         return price;
+    }
+
+    public MinimumUnit getMinimum() {
+        return minimum;
     }
 
     @Override
