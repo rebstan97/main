@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<addressbook>
+  <accounts>
+    <username>azhikai</username>
+    <password>1122qq</password>
+  </accounts>
+
+  <!-- Person with same username -->
+  <accounts>
+    <username>azhikai</username>
+    <password>2233ww</password>
+  </accounts>
+
+</addressbook>
