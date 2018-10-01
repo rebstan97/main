@@ -12,17 +12,23 @@ public class Ingredient {
 
     // Identity fields
     private final IngredientName name;
+    private final IngredientUnit unit;
 
     /**
      * Every field must be present and not null.
      */
-    public Ingredient(IngredientName name) {
+    public Ingredient(IngredientName name, IngredientUnit unit) {
         requireAllNonNull(name);
         this.name = name;
+        this.unit = unit;
     }
 
     public IngredientName getName() {
         return name;
+    }
+
+    public IngredientUnit getUnit() {
+        return unit;
     }
 
     @Override
