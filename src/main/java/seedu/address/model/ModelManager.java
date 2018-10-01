@@ -11,11 +11,8 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.ComponentManager;
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.commons.events.model.AccountRecordChangedEvent;
 import seedu.address.commons.events.model.AddressBookChangedEvent;
 import seedu.address.model.accounts.Account;
-import seedu.address.model.accounts.AccountRecord;
-import seedu.address.model.accounts.ReadOnlyAccountRecord;
 import seedu.address.model.person.Person;
 import seedu.address.model.tag.Tag;
 
@@ -28,35 +25,27 @@ public class ModelManager extends ComponentManager implements Model {
 
     private final VersionedAddressBook versionedAddressBook;
     private final FilteredList<Person> filteredPersons;
-    private final AccountRecord accountRecord;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
      */
-    public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyAccountRecord accountRecord, UserPrefs userPrefs) {
+    public ModelManager(ReadOnlyAddressBook addressBook, UserPrefs userPrefs) {
         super();
-        requireAllNonNull(addressBook, accountRecord, userPrefs);
+        requireAllNonNull(addressBook, userPrefs);
 
         logger.fine("Initializing with address book: " + addressBook + " and user prefs " + userPrefs);
 
         versionedAddressBook = new VersionedAddressBook(addressBook);
         filteredPersons = new FilteredList<>(versionedAddressBook.getPersonList());
-        this.accountRecord = new AccountRecord(accountRecord);
     }
 
     public ModelManager() {
-        this(new AddressBook(), new AccountRecord(), new UserPrefs());
+        this(new AddressBook(), new UserPrefs());
     }
 
     @Override
     public void resetData(ReadOnlyAddressBook newData) {
         versionedAddressBook.resetData(newData);
-        indicateAddressBookChanged();
-    }
-
-    @Override
-    public void resetData(ReadOnlyAccountRecord newData) {
-        accountRecord.resetData(newData);
         indicateAddressBookChanged();
     }
 
@@ -150,39 +139,27 @@ public class ModelManager extends ComponentManager implements Model {
         versionedAddressBook.commit();
     }
 
-    /**
-     * Raises an event to indicate the model has changed
-     */
-    private void indicateAccountRecordChanged() {
-        raise(new AccountRecordChangedEvent(accountRecord));
-    }
-
-    @Override
-    public ReadOnlyAccountRecord getAccountRecord() {
-        return accountRecord;
-    }
-
     @Override
     public void addAccount(Account account) {
-        accountRecord.addAccount(account);
-        indicateAccountRecordChanged();
+        versionedAddressBook.addAccount(account);
+        indicateAddressBookChanged();
     }
 
     @Override
     public boolean hasAccount(Account account) {
-        return accountRecord.hasAccount(account);
+        return versionedAddressBook.hasAccount(account);
     }
 
     @Override
     public void removeAccount(Account account) {
-        accountRecord.removeAccount(account);
-        indicateAccountRecordChanged();
+        versionedAddressBook.removeAccount(account);
+        indicateAddressBookChanged();
     }
 
     @Override
-    public void updateAccount(Account target, Account editedAcount) {
-        accountRecord.updateAccount(target, editedAcount);
-        indicateAccountRecordChanged();
+    public void updateAccount(Account target, Account editedAccount) {
+        versionedAddressBook.updateAccount(target, editedAccount);
+        indicateAddressBookChanged();
     }
 
     @Override
@@ -200,7 +177,6 @@ public class ModelManager extends ComponentManager implements Model {
         // state check
         ModelManager other = (ModelManager) obj;
         return versionedAddressBook.equals(other.versionedAddressBook)
-                && filteredPersons.equals(other.filteredPersons)
-                && accountRecord.equals(other.accountRecord);
+                && filteredPersons.equals(other.filteredPersons);
     }
 }

@@ -4,7 +4,6 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.model.accounts.Account;
-import seedu.address.model.accounts.ReadOnlyAccountRecord;
 import seedu.address.model.person.Person;
 import seedu.address.model.tag.Tag;
 
@@ -22,11 +21,6 @@ public interface Model {
      * Clears existing backing model and replaces with the provided new data for AddressBook.
      */
     void resetData(ReadOnlyAddressBook newData);
-
-    /**
-     * Clears existing backing model and replaces with the provided new data for AccountRecord.
-     */
-    void resetData(ReadOnlyAccountRecord newData);
 
     /**
      * Returns the AddressBook
@@ -99,10 +93,7 @@ public interface Model {
      */
     void commitAddressBook();
 
-    /**
-     * Returns the AddressBook
-     */
-    ReadOnlyAccountRecord getAccountRecord();
+    //=========== API for Accounts =============================================================
 
     /**
      * Adds the given account. {@code account} must not already exist in the account storage.

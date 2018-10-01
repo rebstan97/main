@@ -76,4 +76,5 @@ public class TypicalPersons {
     public static List<Person> getTypicalPersons() {
         return new ArrayList<>(Arrays.asList(ALICE, BENSON, CARL, DANIEL, ELLE, FIONA, GEORGE));
     }
+    //TODO: Change to TypicalAddressBook in the future, combine with adding accounts here from TypicalAccounts
 }

@@ -20,7 +20,6 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.accounts.Account;
-import seedu.address.model.accounts.ReadOnlyAccountRecord;
 import seedu.address.model.person.Person;
 import seedu.address.model.tag.Tag;
 import seedu.address.testutil.PersonBuilder;
@@ -103,11 +102,6 @@ public class AddCommandTest {
         }
 
         @Override
-        public void resetData(ReadOnlyAccountRecord newData) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
         public ReadOnlyAddressBook getAddressBook() {
             throw new AssertionError("This method should not be called.");
         }
@@ -164,11 +158,6 @@ public class AddCommandTest {
 
         @Override
         public void commitAddressBook() {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public ReadOnlyAccountRecord getAccountRecord() {
             throw new AssertionError("This method should not be called.");
         }
 

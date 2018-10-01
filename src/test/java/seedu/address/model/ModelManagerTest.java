@@ -23,7 +23,6 @@ import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
 import seedu.address.model.accounts.Account;
-import seedu.address.model.accounts.AccountRecord;
 import seedu.address.model.accounts.exceptions.AccountNotFoundException;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
@@ -66,13 +65,12 @@ public class ModelManagerTest {
     @Test
     public void removeTag_noSuchTag_addressBookUnmodified() {
         addressBookWithPersons = new AddressBookBuilder().withPerson(AMY).withPerson(BOB).build();
-        AccountRecord accountRecord = new AccountRecord();
         UserPrefs userPrefs = new UserPrefs();
 
-        ModelManager unmodifiedModelManager = new ModelManager(addressBookWithPersons, accountRecord, userPrefs);
+        ModelManager unmodifiedModelManager = new ModelManager(addressBookWithPersons, userPrefs);
         unmodifiedModelManager.removeTag(new Tag(VALID_TAG_TEST));
 
-        ModelManager expectedModelManager = new ModelManager(addressBookWithPersons, accountRecord, userPrefs);
+        ModelManager expectedModelManager = new ModelManager(addressBookWithPersons, userPrefs);
 
         assertEquals(unmodifiedModelManager, expectedModelManager);
     }
@@ -80,16 +78,15 @@ public class ModelManagerTest {
     @Test
     public void removeTag_fromAllPersons_addressBookModified() {
         addressBookWithPersons = new AddressBookBuilder().withPerson(AMY).withPerson(BOB).build();
-        AccountRecord accountRecord = new AccountRecord();
         UserPrefs userPrefs = new UserPrefs();
 
-        ModelManager modifiedModelManager = new ModelManager(addressBookWithPersons, accountRecord, userPrefs);
+        ModelManager modifiedModelManager = new ModelManager(addressBookWithPersons, userPrefs);
         modifiedModelManager.removeTag(new Tag(VALID_TAG_FRIEND));
 
         Person amyWithoutTags = new PersonBuilder(AMY).withTags().build();
         Person bobWithoutFriendTag = new PersonBuilder(BOB).withTags(VALID_TAG_HUSBAND).build();
 
-        ModelManager expectedModelManager = new ModelManager(addressBookWithPersons, accountRecord, userPrefs);
+        ModelManager expectedModelManager = new ModelManager(addressBookWithPersons, userPrefs);
         // Cannot init a new AddressBook due to difference in addressBookStateList
         expectedModelManager.updatePerson(AMY, amyWithoutTags);
         expectedModelManager.updatePerson(BOB, bobWithoutFriendTag);
@@ -100,15 +97,14 @@ public class ModelManagerTest {
     @Test
     public void removeTag_fromOnePerson_addressBookModified() {
         addressBookWithPersons = new AddressBookBuilder().withPerson(AMY).withPerson(DYLAN).build();
-        AccountRecord accountRecord = new AccountRecord();
         UserPrefs userPrefs = new UserPrefs();
 
-        ModelManager modifiedModelManager = new ModelManager(addressBookWithPersons, accountRecord, userPrefs);
+        ModelManager modifiedModelManager = new ModelManager(addressBookWithPersons, userPrefs);
         modifiedModelManager.removeTag(new Tag(VALID_TAG_FRIEND));
 
         Person amyWithoutTags = new PersonBuilder(AMY).withTags().build();
 
-        ModelManager expectedModelManager = new ModelManager(addressBookWithPersons, accountRecord, userPrefs);
+        ModelManager expectedModelManager = new ModelManager(addressBookWithPersons, userPrefs);
         expectedModelManager.updatePerson(AMY, amyWithoutTags);
 
         assertEquals(modifiedModelManager, expectedModelManager);
@@ -118,12 +114,11 @@ public class ModelManagerTest {
     public void equals() {
         AddressBook addressBook = new AddressBookBuilder().withPerson(ALICE).withPerson(BENSON).build();
         AddressBook differentAddressBook = new AddressBook();
-        AccountRecord accountRecord = new AccountRecord();
         UserPrefs userPrefs = new UserPrefs();
 
         // same values -> returns true
-        modelManager = new ModelManager(addressBook, accountRecord, userPrefs);
-        ModelManager modelManagerCopy = new ModelManager(addressBook, accountRecord, userPrefs);
+        modelManager = new ModelManager(addressBook, userPrefs);
+        ModelManager modelManagerCopy = new ModelManager(addressBook, userPrefs);
         assertTrue(modelManager.equals(modelManagerCopy));
 
         // same object -> returns true
@@ -136,12 +131,12 @@ public class ModelManagerTest {
         assertFalse(modelManager.equals(5));
 
         // different addressBook -> returns false
-        assertFalse(modelManager.equals(new ModelManager(differentAddressBook, accountRecord, userPrefs)));
+        assertFalse(modelManager.equals(new ModelManager(differentAddressBook, userPrefs)));
 
         // different filteredList -> returns false
         String[] keywords = ALICE.getName().fullName.split("\\s+");
         modelManager.updateFilteredPersonList(new NameContainsKeywordsPredicate(Arrays.asList(keywords)));
-        assertFalse(modelManager.equals(new ModelManager(addressBook, accountRecord, userPrefs)));
+        assertFalse(modelManager.equals(new ModelManager(addressBook, userPrefs)));
 
         // resets modelManager to initial state for upcoming tests
         modelManager.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
@@ -149,7 +144,7 @@ public class ModelManagerTest {
         // different userPrefs -> returns true
         UserPrefs differentUserPrefs = new UserPrefs();
         differentUserPrefs.setAddressBookFilePath(Paths.get("differentFilePath"));
-        assertTrue(modelManager.equals(new ModelManager(addressBook, accountRecord, differentUserPrefs)));
+        assertTrue(modelManager.equals(new ModelManager(addressBook, differentUserPrefs)));
     }
 
     @Test
@@ -172,7 +167,7 @@ public class ModelManagerTest {
     @Test
     public void getAccountList_modifyList_throwsUnsupportedOperationException() {
         thrown.expect(UnsupportedOperationException.class);
-        modelManager.getAccountRecord().getAccountList().remove(0);
+        modelManager.getAddressBook().getAccountList().remove(0);
     }
 
     @Test
