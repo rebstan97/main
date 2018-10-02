@@ -67,7 +67,7 @@ public class Reservation {
     /**
      * Returns true if both reservations of the same name have at least one other
      * identity field that is the same.
-     * This defines a weaker notion of equality between two persons.
+     * This defines a weaker notion of equality between two reservations.
      */
     public boolean isSameReservation(Reservation otherReservation) {
         if (otherReservation == this) {
@@ -94,12 +94,12 @@ public class Reservation {
             return false;
         }
 
-        Reservation otherPerson = (Reservation) other;
-        return otherPerson.getName().equals(getName())
-                && otherPerson.getPax().equals(getPax())
-                && otherPerson.getDateTime().equals(getDateTime())
-                && otherPerson.getRemark().equals(getRemark())
-                && otherPerson.getTags().equals(getTags());
+        Reservation otherReservation = (Reservation) other;
+        return otherReservation.getName().equals(getName())
+                && otherReservation.getPax().equals(getPax())
+                && otherReservation.getDateTime().equals(getDateTime())
+                && otherReservation.getRemark().equals(getRemark())
+                && otherReservation.getTags().equals(getTags());
     }
 
     @Override
