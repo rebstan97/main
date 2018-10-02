@@ -76,5 +76,4 @@ public class UserPrefs {
         sb.append("\nLocal sales records file location : " + salesRecordFilePath);
         return sb.toString();
     }
-
 }
