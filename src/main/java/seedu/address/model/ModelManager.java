@@ -13,6 +13,7 @@ import seedu.address.commons.core.ComponentManager;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.events.model.AddressBookChangedEvent;
 import seedu.address.model.person.Person;
+import seedu.address.model.salesrecord.SalesRecord;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -23,6 +24,8 @@ public class ModelManager extends ComponentManager implements Model {
 
     private final VersionedAddressBook versionedAddressBook;
     private final FilteredList<Person> filteredPersons;
+    private final FilteredList<SalesRecord> filteredRecords;
+
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -35,6 +38,8 @@ public class ModelManager extends ComponentManager implements Model {
 
         versionedAddressBook = new VersionedAddressBook(addressBook);
         filteredPersons = new FilteredList<>(versionedAddressBook.getPersonList());
+        filteredRecords = new FilteredList<>(versionedAddressBook.getRecordList());
+
     }
 
     public ModelManager() {
@@ -106,6 +111,52 @@ public class ModelManager extends ComponentManager implements Model {
         filteredPersons.setPredicate(predicate);
     }
 
+    //=========== Sales =================================================================================
+
+    @Override
+    public boolean hasRecord(SalesRecord record) {
+        requireNonNull(record);
+        return versionedAddressBook.hasRecord(record);
+    }
+
+    @Override
+    public void deleteRecord(SalesRecord target) {
+        versionedAddressBook.removeRecord(target);
+        indicateAddressBookChanged();
+    }
+
+    @Override
+    public void addRecord(SalesRecord record) {
+        versionedAddressBook.addRecord(record);
+        updateFilteredRecordList(PREDICATE_SHOW_ALL_RECORDS);
+        indicateAddressBookChanged();
+    }
+
+    @Override
+    public void updateRecord(SalesRecord target, SalesRecord editedRecord) {
+        requireAllNonNull(target, editedRecord);
+        versionedAddressBook.updateRecord(target, editedRecord);
+        indicateAddressBookChanged();
+    }
+
+    //=========== Filtered Record List Accessors =============================================================
+
+
+    /**
+     * Returns an unmodifiable view of the list of {@code SalesRecord} backed by the internal list of
+     * {@code versionedAddressBook}
+     */
+    @Override
+    public ObservableList<SalesRecord> getFilteredRecordList() {
+        return FXCollections.unmodifiableObservableList(filteredRecords);
+    }
+
+    @Override
+    public void updateFilteredRecordList(Predicate<SalesRecord> predicate) {
+        requireNonNull(predicate);
+        filteredRecords.setPredicate(predicate);
+    }
+
     //=========== Undo/Redo =================================================================================
 
     @Override
@@ -150,7 +201,7 @@ public class ModelManager extends ComponentManager implements Model {
         // state check
         ModelManager other = (ModelManager) obj;
         return versionedAddressBook.equals(other.versionedAddressBook)
-                && filteredPersons.equals(other.filteredPersons);
+                && filteredPersons.equals(other.filteredPersons)
+                && filteredRecords.equals(other.filteredRecords);
     }
-
 }

@@ -4,6 +4,7 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.model.person.Person;
+import seedu.address.model.salesrecord.SalesRecord;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -15,6 +16,11 @@ public interface Model {
      * {@code Predicate} that always evaluate to true
      */
     Predicate<Person> PREDICATE_SHOW_ALL_PERSONS = unused -> true;
+
+    /**
+     * {@code Predicate} that always evaluate to true
+     */
+    Predicate<SalesRecord> PREDICATE_SHOW_ALL_RECORDS = unused -> true;
 
     /**
      * Clears existing backing model and replaces with the provided new data.
@@ -91,4 +97,40 @@ public interface Model {
      * Saves the current address book state for undo/redo.
      */
     void commitAddressBook();
+
+    //=========== API for Sales =============================================================
+
+    /**
+     * Adds the given record. {@code record} must not already exist in the sales book.
+     */
+    void addRecord(SalesRecord record);
+
+    /**
+     * Returns true if a record with the same identity as {@code record} exists in the sales book.
+     */
+    boolean hasRecord (SalesRecord record);
+
+    /**
+     * Deletes the given record. The record must exist in the sales book.
+     */
+    void deleteRecord(SalesRecord target);
+
+    /**
+     * Replaces the given record {@code target} with {@code editedRecord}. {@code target} must exist in the sales
+     * book. The record identity of {@code editedRecord} must not be the same as another existing record in the sales
+     * book.
+     */
+    void updateRecord(SalesRecord target, SalesRecord editedRecord);
+
+    /**
+     * Returns an unmodifiable view of the filtered record list
+     */
+    ObservableList<SalesRecord> getFilteredRecordList();
+
+    /**
+     * Updates the filter of the filtered record list to filter by the given {@code predicate}.
+     *
+     * @throws NullPointerException if {@code predicate} is null.
+     */
+    void updateFilteredRecordList(Predicate<SalesRecord> predicate);
 }
