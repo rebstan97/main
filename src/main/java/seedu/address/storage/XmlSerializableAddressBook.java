@@ -11,6 +11,7 @@ import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.person.Person;
+import seedu.address.model.salesrecord.SalesRecord;
 
 /**
  * An Immutable AddressBook that is serializable to XML format
@@ -19,16 +20,24 @@ import seedu.address.model.person.Person;
 public class XmlSerializableAddressBook {
 
     public static final String MESSAGE_DUPLICATE_PERSON = "Persons list contains duplicate person(s).";
+    public static final String MESSAGE_DUPLICATE_RECORD = "Records list contains duplicate record(s).";
+
 
     @XmlElement
     private List<XmlAdaptedPerson> persons;
 
+    @XmlElement
+    private List<XmlAdaptedRecord> records;
+
+    private AddressBook addressBook;
+
     /**
-     * Creates an empty XmlSerializableAddressBook.
-     * This empty constructor is required for marshalling.
+     * Creates an empty XmlSerializableAddressBook. This empty constructor is required for marshalling.
      */
     public XmlSerializableAddressBook() {
+        addressBook = new AddressBook();
         persons = new ArrayList<>();
+        records = new ArrayList<>();
     }
 
     /**
@@ -37,16 +46,22 @@ public class XmlSerializableAddressBook {
     public XmlSerializableAddressBook(ReadOnlyAddressBook src) {
         this();
         persons.addAll(src.getPersonList().stream().map(XmlAdaptedPerson::new).collect(Collectors.toList()));
+        records.addAll(src.getRecordList().stream().map(XmlAdaptedRecord::new).collect(Collectors.toList()));
     }
 
     /**
      * Converts this addressbook into the model's {@code AddressBook} object.
      *
-     * @throws IllegalValueException if there were any data constraints violated or duplicates in the
-     * {@code XmlAdaptedPerson}.
+     * @throws IllegalValueException if there were any data constraints violated or duplicates in the {@code
+     *         XmlAdaptedPerson}.
      */
     public AddressBook toModelType() throws IllegalValueException {
-        AddressBook addressBook = new AddressBook();
+        personToModelType();
+        recordToModelType();
+        return addressBook;
+    }
+
+    private void personToModelType() throws IllegalValueException {
         for (XmlAdaptedPerson p : persons) {
             Person person = p.toModelType();
             if (addressBook.hasPerson(person)) {
@@ -54,7 +69,16 @@ public class XmlSerializableAddressBook {
             }
             addressBook.addPerson(person);
         }
-        return addressBook;
+    }
+
+    private void recordToModelType() throws IllegalValueException {
+        for (XmlAdaptedRecord r : records) {
+            SalesRecord record = r.toModelType();
+            if (addressBook.hasRecord(record)) {
+                throw new IllegalValueException(MESSAGE_DUPLICATE_RECORD);
+            }
+            addressBook.addRecord(record);
+        }
     }
 
     @Override
@@ -66,6 +90,7 @@ public class XmlSerializableAddressBook {
         if (!(other instanceof XmlSerializableAddressBook)) {
             return false;
         }
-        return persons.equals(((XmlSerializableAddressBook) other).persons);
+        return persons.equals(((XmlSerializableAddressBook) other).persons)
+                && records.equals(((XmlSerializableAddressBook) other).records);
     }
 }
