@@ -1,58 +1,53 @@
 package seedu.address.testutil;
 
+import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Set;
 
-import seedu.address.model.person.Address;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.Phone;
-import seedu.address.model.person.Remark;
+import seedu.address.model.reservation.Name;
+import seedu.address.model.reservation.Pax;
+import seedu.address.model.reservation.Reservation;
+import seedu.address.model.reservation.Remark;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.util.SampleDataUtil;
 
 /**
- * A utility class to help with building Person objects.
+ * A utility class to help with building Reservation objects.
  */
 public class ReservationBuilder {
 
     public static final String DEFAULT_NAME = "Alice Pauline";
-    public static final String DEFAULT_PHONE = "85355255";
-    public static final String DEFAULT_EMAIL = "alice@gmail.com";
-    public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
+    public static final String DEFAULT_PAX = "4";
+    public static final String DEFAULT_DATE = "2007-12-03T10:15:30";
     public static final String DEFAULT_REMARK = "";
 
     private Name name;
-    private Phone phone;
-    private Email email;
-    private Address address;
+    private Pax pax;
+    private LocalDateTime dateTime;
     private Remark remark;
     private Set<Tag> tags;
 
     public ReservationBuilder() {
         name = new Name(DEFAULT_NAME);
-        phone = new Phone(DEFAULT_PHONE);
-        email = new Email(DEFAULT_EMAIL);
-        address = new Address(DEFAULT_ADDRESS);
+        pax = new Pax(DEFAULT_PAX);
+        dateTime = LocalDateTime.parse(DEFAULT_DATE);
         remark = new Remark(DEFAULT_REMARK);
         tags = new HashSet<>();
     }
 
     /**
-     * Initializes the PersonBuilder with the data of {@code personToCopy}.
+     * Initializes the ReservationBuilder with the data of {@code reservationToCopy}.
      */
-    public ReservationBuilder(Person personToCopy) {
-        name = personToCopy.getName();
-        phone = personToCopy.getPhone();
-        email = personToCopy.getEmail();
-        address = personToCopy.getAddress();
-        remark = personToCopy.getRemark();
-        tags = new HashSet<>(personToCopy.getTags());
+    public ReservationBuilder(Reservation reservationToCopy) {
+        name = reservationToCopy.getName();
+        pax = reservationToCopy.getPax();
+        dateTime = reservationToCopy.getDateTime();
+        remark = reservationToCopy.getRemark();
+        tags = new HashSet<>(reservationToCopy.getTags());
     }
 
     /**
-     * Sets the {@code Name} of the {@code Person} that we are building.
+     * Sets the {@code Name} of the {@code Reservation} that we are building.
      */
     public ReservationBuilder withName(String name) {
         this.name = new Name(name);
@@ -60,7 +55,7 @@ public class ReservationBuilder {
     }
 
     /**
-     * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code Person} that we are building.
+     * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code Reservation} that we are building.
      */
     public ReservationBuilder withTags(String ... tags) {
         this.tags = SampleDataUtil.getTagSet(tags);
@@ -68,26 +63,18 @@ public class ReservationBuilder {
     }
 
     /**
-     * Sets the {@code Address} of the {@code Person} that we are building.
+     * Sets the {@code dateTime} of the {@code Reservation} that we are building.
      */
-    public ReservationBuilder withAddress(String address) {
-        this.address = new Address(address);
+    public ReservationBuilder withDateTime(String dateTime) {
+        this.dateTime = LocalDateTime.parse(dateTime);
         return this;
     }
 
     /**
-     * Sets the {@code Phone} of the {@code Person} that we are building.
+     * Sets the {@code Pax} of the {@code Reservation} that we are building.
      */
-    public ReservationBuilder withPhone(String phone) {
-        this.phone = new Phone(phone);
-        return this;
-    }
-
-    /**
-     * Sets the {@code Email} of the {@code Person} that we are building.
-     */
-    public ReservationBuilder withEmail(String email) {
-        this.email = new Email(email);
+    public ReservationBuilder withPhone(String pax) {
+        this.pax = new Pax(pax);
         return this;
     }
 
@@ -99,8 +86,8 @@ public class ReservationBuilder {
         return this;
     }
 
-    public Person build() {
-        return new Person(name, phone, email, address, remark, tags);
+    public Reservation build() {
+        return new Reservation(name, pax, dateTime, remark, tags);
     }
 
 }
