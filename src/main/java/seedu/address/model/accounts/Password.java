@@ -3,8 +3,6 @@ package seedu.address.model.accounts;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
-import java.util.Arrays;
-
 import at.favre.lib.crypto.bcrypt.BCrypt;
 
 /**
@@ -12,8 +10,8 @@ import at.favre.lib.crypto.bcrypt.BCrypt;
  */
 public class Password {
 
-    public static final String MESSAGE_PASSWORD_CONSTRAINT =
-            "Password should only contain alphanumeric characters and without spaces, and it should not be blank";
+    public static final String MESSAGE_PASSWORD_CONSTRAINT = "Password should not contain spaces, "
+            + "and it should not be blank";
 
     /*
      * The first character of the password must not be a whitespace,
@@ -31,9 +29,8 @@ public class Password {
     public Password(String password) {
         requireNonNull(password);
         checkArgument(isValidPassword(password), MESSAGE_PASSWORD_CONSTRAINT);
-        //
         char[] bcryptHashBytes = BCrypt.withDefaults().hashToChar(6, password.toCharArray());
-        this.password = Arrays.toString(bcryptHashBytes);
+        this.password = String.valueOf(bcryptHashBytes);
     }
 
     /**
