@@ -61,6 +61,12 @@ public class XmlSerializableAddressBook {
         return addressBook;
     }
 
+    /**
+     * Converts this addressbook's person list into the model's {@code AddressBook} object.
+     *
+     * @throws IllegalValueException if there were any data constraints violated or duplicates in the {@code
+     *         XmlAdaptedPerson}.
+     */
     private void personToModelType() throws IllegalValueException {
         for (XmlAdaptedPerson p : persons) {
             Person person = p.toModelType();
@@ -71,6 +77,12 @@ public class XmlSerializableAddressBook {
         }
     }
 
+    /**
+     * Converts this addressbook's record list into the model's {@code AddressBook} object.
+     *
+     * @throws IllegalValueException if there were any data constraints violated or duplicates in the {@code
+     *         XmlAdaptedRecord}.
+     */
     private void recordToModelType() throws IllegalValueException {
         for (XmlAdaptedRecord r : records) {
             SalesRecord record = r.toModelType();

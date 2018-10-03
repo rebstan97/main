@@ -16,6 +16,6 @@ public class CliSyntax {
     // Sales prefixes
     public static final Prefix PREFIX_DATE = new Prefix("d/");
     public static final Prefix PREFIX_ITEM_NAME = new Prefix("n/");
-    public static final Prefix PREFIX_QUANTITY_SOLD= new Prefix("q/");
+    public static final Prefix PREFIX_QUANTITY_SOLD = new Prefix("q/");
     public static final Prefix PREFIX_ITEM_PRICE = new Prefix("p/");
 }

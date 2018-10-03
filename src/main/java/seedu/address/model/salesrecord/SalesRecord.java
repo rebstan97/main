@@ -14,7 +14,7 @@ public class SalesRecord {
 
     // Identity field
     private final Date date;
-    private final Name name;   // uses name from person
+    private final Name name;    // uses name from person
 
     // Data fields
     private final QuantitySold quantitySold;

@@ -2,10 +2,8 @@ package seedu.address.ui.sales;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
-import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
-import seedu.address.model.person.Person;
 import seedu.address.model.salesrecord.SalesRecord;
 import seedu.address.ui.PersonCard;
 import seedu.address.ui.UiPart;

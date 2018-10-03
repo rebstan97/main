@@ -15,10 +15,10 @@ import seedu.address.logic.parser.Parser;
 import seedu.address.logic.parser.ParserUtil;
 import seedu.address.logic.parser.Prefix;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.salesrecord.Date;
 import seedu.address.model.person.Name;
-import seedu.address.model.salesrecord.QuantitySold;
+import seedu.address.model.salesrecord.Date;
 import seedu.address.model.salesrecord.Price;
+import seedu.address.model.salesrecord.QuantitySold;
 import seedu.address.model.salesrecord.SalesRecord;
 
 /**

@@ -125,7 +125,7 @@ public class ParserUtil {
         return tagSet;
     }
 
-//================ Sales Commands Parser Util ================================================================
+    //================ Sales Commands Parser Util ================================================================
 
     /**
      * Parses a {@code String date} into a {@code Date}. Leading and trailing whitespaces will be trimmed.
@@ -142,7 +142,8 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String quantitySold} into a {@code QuantitySold}. Leading and trailing whitespaces will be trimmed.
+     * Parses a {@code String quantitySold} into a {@code QuantitySold}. Leading and trailing whitespaces will be
+     * trimmed.
      *
      * @throws ParseException if the given {@code quantitySold} is invalid.
      */
