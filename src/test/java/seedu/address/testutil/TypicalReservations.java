@@ -12,21 +12,21 @@ import seedu.address.model.reservation.Reservation;
  */
 public class TypicalReservations {
 
-    public static final Reservation ALICE = new ReservationBuilder().withName("Alice Pauline")
+    public static final Reservation ANDREW = new ReservationBuilder().withName("Andrew Pauline")
             .withPax("4")
             .withDateTime("2018-10-03T12:00:00")
-            .withTags("allergic to peanuts").build();
+            .withTags("allergies").build();
     public static final Reservation BENSON = new ReservationBuilder().withName("Benson Meier")
             .withPax("2")
             .withDateTime("2018-10-03T14:00:00")
-            .withTags("need parking space", "allergic to peanuts").build();
+            .withTags("driving", "allergies").build();
     public static final Reservation CARL = new ReservationBuilder().withName("Carl Kurz")
             .withPax("1")
             .withDateTime("2018-10-03T15:00:00").build();
     public static final Reservation DANIEL = new ReservationBuilder().withName("Daniel Meier")
             .withPax("3")
             .withDateTime("2018-10-04T12:00:00")
-            .withTags( "need parking space").build();
+            .withTags( "driving").build();
     public static final Reservation ELLE = new ReservationBuilder().withName("Elle Meyer")
             .withPax("2")
             .withDateTime("2018-10-04T13:00:00").build();
@@ -53,6 +53,6 @@ public class TypicalReservations {
     }
 
     public static List<Reservation> getTypicalReservations() {
-        return new ArrayList<>(Arrays.asList(ALICE, BENSON, CARL, DANIEL, ELLE, FIONA, GEORGE));
+        return new ArrayList<>(Arrays.asList(ANDREW, BENSON, CARL, DANIEL, ELLE, FIONA, GEORGE));
     }
 }
