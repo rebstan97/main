@@ -13,13 +13,19 @@ import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.commons.util.XmlUtil;
 import seedu.address.model.AddressBook;
 import seedu.address.testutil.TypicalPersons;
+import seedu.address.testutil.menu.TypicalItems;
 
 public class XmlSerializableAddressBookTest {
 
-    private static final Path TEST_DATA_FOLDER = Paths.get("src", "test", "data", "XmlSerializableAddressBookTest");
+    private static final Path TEST_DATA_FOLDER = Paths.get("src", "test", "data",
+            "XmlSerializableAddressBookTest");
     private static final Path TYPICAL_PERSONS_FILE = TEST_DATA_FOLDER.resolve("typicalPersonsAddressBook.xml");
     private static final Path INVALID_PERSON_FILE = TEST_DATA_FOLDER.resolve("invalidPersonAddressBook.xml");
     private static final Path DUPLICATE_PERSON_FILE = TEST_DATA_FOLDER.resolve("duplicatePersonAddressBook.xml");
+    // Menu Management
+    private static final Path TYPICAL_ITEMS_FILE = TEST_DATA_FOLDER.resolve("typicalItemsOnlyAddressBook.xml");
+    private static final Path INVALID_ITEM_FILE = TEST_DATA_FOLDER.resolve("invalidItemOnlyAddressBook.xml");
+    private static final Path DUPLICATE_ITEM_FILE = TEST_DATA_FOLDER.resolve("duplicateItemOnlyAddressBook.xml");
 
     @Rule
     public ExpectedException thrown = ExpectedException.none();
@@ -47,6 +53,33 @@ public class XmlSerializableAddressBookTest {
                 XmlSerializableAddressBook.class);
         thrown.expect(IllegalValueException.class);
         thrown.expectMessage(XmlSerializableAddressBook.MESSAGE_DUPLICATE_PERSON);
+        dataFromFile.toModelType();
+    }
+
+    // Menu Management
+    @Test
+    public void toModelType_typicalItemsOnlyFile_success() throws Exception {
+        XmlSerializableAddressBook dataFromFile = XmlUtil.getDataFromFile(TYPICAL_ITEMS_FILE,
+                XmlSerializableAddressBook.class);
+        AddressBook addressBookFromFile = dataFromFile.toModelType();
+        AddressBook typicalItemsAddressBook = TypicalItems.getTypicalAddressBook();
+        assertEquals(addressBookFromFile, typicalItemsAddressBook);
+    }
+
+    @Test
+    public void toModelType_invalidItemOnlyFile_throwsIllegalValueException() throws Exception {
+        XmlSerializableAddressBook dataFromFile = XmlUtil.getDataFromFile(INVALID_ITEM_FILE,
+                XmlSerializableAddressBook.class);
+        thrown.expect(IllegalValueException.class);
+        dataFromFile.toModelType();
+    }
+
+    @Test
+    public void toModelType_duplicateItemsOnly_throwsIllegalValueException() throws Exception {
+        XmlSerializableAddressBook dataFromFile = XmlUtil.getDataFromFile(DUPLICATE_ITEM_FILE,
+                XmlSerializableAddressBook.class);
+        thrown.expect(IllegalValueException.class);
+        thrown.expectMessage(XmlSerializableAddressBook.MESSAGE_DUPLICATE_ITEM);
         dataFromFile.toModelType();
     }
 
