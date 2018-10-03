@@ -1,8 +1,8 @@
 package seedu.address.model.ingredient;
 
-import java.util.Objects;
-
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+
+import java.util.Objects;
 
 /**
  * Represents an ingredient in the restaurant management app.

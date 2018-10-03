@@ -10,8 +10,8 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 public class IngredientPrice {
 
     public static final String MESSAGE_PRICE_CONSTRAINTS =
-            "Ingredient price (per unit) should only contain numeric characters or decimal separator '.' " +
-                    "up to 2 decimal places, and it should not be blank";
+            "Ingredient price (per unit) should only contain numeric characters or decimal separator '.' "
+                    + "up to 2 decimal places, and it should not be blank";
 
     /*
      * The first character of the price must not be a whitespace,
