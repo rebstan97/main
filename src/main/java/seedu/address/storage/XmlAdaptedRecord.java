@@ -89,8 +89,8 @@ public class XmlAdaptedRecord {
      */
     private ItemName nameToModelType() throws IllegalValueException {
         if (itemName == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT
-                    , ItemName.class.getSimpleName()));
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    ItemName.class.getSimpleName()));
         }
         if (!ItemName.isValidName(itemName)) {
             throw new IllegalValueException(ItemName.MESSAGE_NAME_CONSTRAINTS);
