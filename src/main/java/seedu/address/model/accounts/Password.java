@@ -3,6 +3,10 @@ package seedu.address.model.accounts;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
+import java.util.Arrays;
+
+import at.favre.lib.crypto.bcrypt.BCrypt;
+
 /**
  * Represents an account password. Guarantees: immutable; is valid as declared in {@link #isValidPassword(String)}
  */
@@ -15,7 +19,7 @@ public class Password {
      * The first character of the password must not be a whitespace,
      * otherwise " " (a blank string) becomes a valid input.
      */
-    public static final String PASSWORD_VALIDATION_REGEX = "[\\p{ASCII}&&[\\S]][\\p{ASCII}&&[\\S]]*";
+    public static final String PASSWORD_VALIDATION_REGEX = "[\\p{ASCII}&&[\\S]][\\p{ASCII}&&[\\S]]{1,20}";
 
     private final String password;
 
@@ -27,14 +31,16 @@ public class Password {
     public Password(String password) {
         requireNonNull(password);
         checkArgument(isValidPassword(password), MESSAGE_PASSWORD_CONSTRAINT);
-        this.password = password;
+        //
+        char[] bcryptHashBytes = BCrypt.withDefaults().hashToChar(6, password.toCharArray());
+        this.password = Arrays.toString(bcryptHashBytes);
     }
 
     /**
      * Returns true if a given string is a valid name.
      */
-    public static boolean isValidPassword(String test) {
-        return test.matches(PASSWORD_VALIDATION_REGEX);
+    public static boolean isValidPassword(String password) {
+        return password.matches(PASSWORD_VALIDATION_REGEX);
     }
 
 
