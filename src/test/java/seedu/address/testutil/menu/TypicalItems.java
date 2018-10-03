@@ -4,6 +4,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_ITEM_NAME_BURGE
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ITEM_NAME_FRIES;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ITEM_PRICE_BURGER;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ITEM_PRICE_FRIES;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_ITEM_TAG_BURGER;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ITEM_TAG_CHEESE;
 
 import java.util.ArrayList;
@@ -22,7 +23,7 @@ public class TypicalItems {
             .withTags("drink").build();
     public static final Item BEEF_BURGER = new ItemBuilder().withName("Beef Burger")
             .withPrice("3")
-            .withTags("beef", "burger").build();
+            .withTags("beef", VALID_ITEM_TAG_BURGER).build();
     public static final Item CHOCO_CAKE = new ItemBuilder().withName("Chocolate Cake").withPrice("2").build();
     public static final Item DUCK_RICE = new ItemBuilder().withName("Duck Rice").withPrice("3").build();
     public static final Item EGG = new ItemBuilder().withName("Egg").withPrice("0.5").build();
@@ -40,7 +41,7 @@ public class TypicalItems {
     public static final Item FRIES = new ItemBuilder().withName(VALID_ITEM_NAME_FRIES)
             .withPrice(VALID_ITEM_PRICE_FRIES).withTags(VALID_ITEM_TAG_CHEESE).build();
     public static final Item CHEESE_BURGER = new ItemBuilder().withName("Cheese Burger").withPrice("3")
-            .withTags("burger", VALID_ITEM_TAG_CHEESE).build();
+            .withTags(VALID_ITEM_TAG_BURGER, VALID_ITEM_TAG_CHEESE).build();
 
     public static final String KEYWORD_MATCHING_HAINANESE = "Hainanese"; // A keyword that matches HAINANESE
 

@@ -63,6 +63,7 @@ public class CommandTestUtil {
     public static final String VALID_ITEM_NAME_FRIES = "Cheese Fries";
     public static final String VALID_ITEM_PRICE_BURGER = "2.50";
     public static final String VALID_ITEM_PRICE_FRIES = "2";
+    public static final String VALID_ITEM_TAG_BURGER = "burger";
     public static final String VALID_ITEM_TAG_CHEESE = "cheese";
     public static final String VALID_ITEM_REMARK_BURGER = "Burger with beef patty.";
     public static final String VALID_ITEM_REMARK_FRIES = "Fries with cheese.";
