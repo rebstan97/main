@@ -4,6 +4,8 @@ import java.util.Objects;
 
 import javax.xml.bind.annotation.XmlElement;
 
+import org.controlsfx.control.PropertySheet.Item;
+
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.salesrecord.ItemName;
 import seedu.address.model.salesrecord.Date;
@@ -60,22 +62,49 @@ public class XmlAdaptedRecord {
      * @throws IllegalValueException if there were any data constraints violated in the adapted record
      */
     public SalesRecord toModelType() throws IllegalValueException {
+        final Date modelDate = dateToModelType();
+        final ItemName modelName = nameToModelType();
+        final QuantitySold modelQuantitySold = quantitySoldToModelType();
+        final Price modelPrice = priceToModelType();
+        return new SalesRecord(modelDate, modelName, modelQuantitySold, modelPrice);
+    }
+
+    /**
+     * Converts this date string into the model's Date object.
+     *
+     * @throws IllegalValueException if there were any data constraints violated in the date
+     */
+    private Date dateToModelType() throws IllegalValueException{
         if (date == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Date.class.getSimpleName()));
         }
         if (!Date.isValidDate(date)) {
             throw new IllegalValueException(Date.MESSAGE_DATE_CONSTRAINTS);
         }
-        final Date modelDate = new Date(date);
+        return new Date(date);
+    }
 
+    /**
+     * Converts this itemName string into the model's ItemName object.
+     *
+     * @throws IllegalValueException if there were any data constraints violated in the itemName
+     */
+    private ItemName nameToModelType() throws IllegalValueException{
         if (itemName == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, ItemName.class.getSimpleName()));
         }
         if (!ItemName.isValidName(itemName)) {
             throw new IllegalValueException(ItemName.MESSAGE_NAME_CONSTRAINTS);
         }
-        final ItemName modelName = new ItemName(itemName);
+        return new ItemName(itemName);
+    }
 
+    /**
+     * Converts this quantitySold string into the model's QuantitySold object.
+     *
+     * @throws IllegalValueException if there were any data constraints violated in the quantitySold
+     */
+    private QuantitySold quantitySoldToModelType() throws IllegalValueException{
         if (quantitySold == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
                     QuantitySold.class.getSimpleName()));
@@ -83,17 +112,22 @@ public class XmlAdaptedRecord {
         if (!QuantitySold.isValidQuantity(quantitySold)) {
             throw new IllegalValueException(QuantitySold.MESSAGE_QUANTITY_CONSTRAINTS);
         }
-        final QuantitySold modelQuantitySold = new QuantitySold(quantitySold);
+        return new QuantitySold(quantitySold);
+    }
 
+    /**
+     * Converts this price string into the model's Price object.
+     *
+     * @throws IllegalValueException if there were any data constraints violated in the price
+     */
+    private Price priceToModelType() throws IllegalValueException{
         if (price == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Price.class.getSimpleName()));
         }
         if (!Price.isValidPrice(price)) {
             throw new IllegalValueException(Price.MESSAGE_PRICE_CONSTRAINTS);
         }
-        final Price modelPrice = new Price(price);
-
-        return new SalesRecord(modelDate, modelName, modelQuantitySold, modelPrice);
+        return new Price(price);
     }
 
     @Override
