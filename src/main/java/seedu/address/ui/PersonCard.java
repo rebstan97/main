@@ -15,6 +15,19 @@ public class PersonCard extends UiPart<Region> {
     private static final String FXML = "PersonListCard.fxml";
 
     /**
+     * The colours of the tags take on Enum values
+     */
+    private enum TagColourStyle {
+        TEAL, RED, YELLOW, BLUE, ORANGE, BROWN, GREEN, PINK, BLACK, GREY;
+
+        private String getColourStyle() {
+            return this.toString().toLowerCase();
+        }
+    }
+
+    private static final TagColourStyle[] TAG_COLOR_STYLES = TagColourStyle.values();
+
+    /**
      * Note: Certain keywords such as "location" and "resources" are reserved keywords in JavaFX.
      * As a consequence, UI elements' variable names cannot be set to such keywords
      * or an exception will be thrown by JavaFX during runtime.
@@ -37,6 +50,8 @@ public class PersonCard extends UiPart<Region> {
     @FXML
     private Label email;
     @FXML
+    private Label remark;
+    @FXML
     private FlowPane tags;
 
     public PersonCard(Person person, int displayedIndex) {
@@ -46,9 +61,29 @@ public class PersonCard extends UiPart<Region> {
         name.setText(person.getName().fullName);
         phone.setText(person.getPhone().value);
         address.setText(person.getAddress().value);
+        remark.setText(person.getRemark().value);
         email.setText(person.getEmail().value);
-        person.getTags().forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+        initTags(person);
     }
+
+    /**
+     * Returns color style for {@code tagName}'s label
+     */
+    private String getTagColorStyleFor(String tagName) {
+        return TAG_COLOR_STYLES[Math.abs(tagName.hashCode()) % TAG_COLOR_STYLES.length].getColourStyle();
+    }
+
+    /**
+     * Creates tag labels for {@code person}
+     */
+    private void initTags(Person person) {
+        person.getTags().forEach(tag -> {
+            Label tagLabel = new Label(tag.tagName);
+            tagLabel.getStyleClass().add(getTagColorStyleFor(tag.tagName));
+            tags.getChildren().add(tagLabel);
+        });
+    }
+
 
     @Override
     public boolean equals(Object other) {
