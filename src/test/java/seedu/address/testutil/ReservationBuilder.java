@@ -6,8 +6,8 @@ import java.util.Set;
 
 import seedu.address.model.reservation.Name;
 import seedu.address.model.reservation.Pax;
-import seedu.address.model.reservation.Reservation;
 import seedu.address.model.reservation.Remark;
+import seedu.address.model.reservation.Reservation;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.util.SampleDataUtil;
 

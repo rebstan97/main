@@ -9,7 +9,6 @@ import java.util.List;
 
 import org.junit.Test;
 
-import seedu.address.testutil.PersonBuilder;
 import seedu.address.testutil.ReservationBuilder;
 
 public class NameContainsKeywordsPredicateTest {
