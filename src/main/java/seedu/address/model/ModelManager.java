@@ -13,6 +13,7 @@ import seedu.address.commons.core.ComponentManager;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.events.model.AddressBookChangedEvent;
 import seedu.address.model.person.Person;
+import seedu.address.model.reservation.Reservation;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -23,6 +24,7 @@ public class ModelManager extends ComponentManager implements Model {
 
     private final VersionedAddressBook versionedAddressBook;
     private final FilteredList<Person> filteredPersons;
+    private final FilteredList<Reservation> filteredReservations;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -35,6 +37,7 @@ public class ModelManager extends ComponentManager implements Model {
 
         versionedAddressBook = new VersionedAddressBook(addressBook);
         filteredPersons = new FilteredList<>(versionedAddressBook.getPersonList());
+        filteredReservations = new FilteredList<>(versionedAddressBook.getReservationList());
     }
 
     public ModelManager() {
@@ -150,7 +153,59 @@ public class ModelManager extends ComponentManager implements Model {
         // state check
         ModelManager other = (ModelManager) obj;
         return versionedAddressBook.equals(other.versionedAddressBook)
-                && filteredPersons.equals(other.filteredPersons);
+                && filteredPersons.equals(other.filteredPersons)
+                && filteredReservations.equals(other.filteredReservations);
+    }
+
+    //Reservation Management
+
+    @Override
+    public boolean hasReservation(Reservation reservation) {
+        requireNonNull(reservation);
+        return versionedAddressBook.hasReservation(reservation);
+    }
+
+    @Override
+    public void deleteReservation(Reservation target) {
+        versionedAddressBook.removeReservation(target);
+        indicateAddressBookChanged();
+    }
+
+    @Override
+    public void addReservation(Reservation reservation) {
+        versionedAddressBook.addReservation(reservation);
+        updateFilteredPersonList(PREDICATE_SHOW_ALL_RESERVATIONS);
+        indicateAddressBookChanged();
+    }
+
+    @Override
+    public void updateReservation(Reservation target, Reservation editedReservation) {
+        requireAllNonNull(target, editedReservation);
+
+        versionedAddressBook.updateReservation(target, editedReservation);
+        indicateAddressBookChanged();
+    }
+
+    @Override
+    public void removeTagForReservation(Tag tag) {
+        versionedAddressBook.removeTag(tag);
+    }
+
+    //=========== Filtered Reservation List Accessors =============================================================
+
+    /**
+     * Returns an unmodifiable view of the list of {@code Reservation} backed by the internal list of
+     * {@code versionedAddressBook}
+     */
+    @Override
+    public ObservableList<Reservation> getFilteredReservationList() {
+        return FXCollections.unmodifiableObservableList(filteredReservations);
+    }
+
+    @Override
+    public void updateFilteredReservationList(Predicate<Reservation> predicate) {
+        requireNonNull(predicate);
+        filteredReservations.setPredicate(predicate);
     }
 
 }
