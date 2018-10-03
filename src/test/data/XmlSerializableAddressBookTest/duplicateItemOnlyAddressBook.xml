@@ -5,7 +5,6 @@
         <name>Cheese Burger</name>
         <price>3</price>
         <remark></remark>
-        <tagged></tagged>
     </items>
 
     <!-- Item with same identity as Cheese Burger -->
@@ -13,7 +12,6 @@
         <name>Cheese Burger</name>
         <price>3</price>
         <remark></remark>
-        <tagged></tagged>
     </items>
 
 </addressbook>
