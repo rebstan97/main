@@ -8,10 +8,8 @@ import java.util.List;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import seedu.address.model.reservation.Reservation;
 import seedu.address.model.reservation.exceptions.DuplicateReservationException;
 import seedu.address.model.reservation.exceptions.ReservationNotFoundException;
-import seedu.address.model.reservation.exceptions.DuplicateReservationException;
 
 /**
  * A list of reservations that enforces uniqueness between its elements and does not allow nulls.

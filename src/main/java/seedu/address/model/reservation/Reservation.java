@@ -8,9 +8,6 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
-import seedu.address.model.reservation.Name;
-import seedu.address.model.reservation.Pax;
-import seedu.address.model.reservation.Remark;
 import seedu.address.model.tag.Tag;
 
 /**
