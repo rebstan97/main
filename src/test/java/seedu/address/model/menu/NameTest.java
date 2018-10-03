@@ -36,7 +36,7 @@ public class NameTest {
         assertTrue(Name.isValidName("12345")); // numbers only
         assertTrue(Name.isValidName("set meal 2")); // alphanumeric characters
         assertTrue(Name.isValidName("Burger")); // with capital letters
-        assertTrue(Name.isValidName("Ultimate Supreme Value Burger Set Meal")); // long names
+        assertTrue(Name.isValidName("Ultimate Supreme Burger Value Set Meal")); // long names
     }
 }
 
