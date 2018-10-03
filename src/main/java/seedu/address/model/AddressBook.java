@@ -60,6 +60,7 @@ public class AddressBook implements ReadOnlyAddressBook {
         requireNonNull(newData);
 
         setPersons(newData.getPersonList());
+        setReservations(newData.getReservationList());
     }
 
     //// person-level operations
@@ -183,6 +184,11 @@ public class AddressBook implements ReadOnlyAddressBook {
         Reservation newReservation = new Reservation(reservation.getName(), reservation.getPax(),
                 reservation.getDateTime(), reservation.getRemark(), tags);
         updateReservation(reservation, newReservation);
+    }
+
+    @Override
+    public ObservableList<Reservation> getReservationList() {
+        return reservations.asUnmodifiableObservableList();
     }
 
     //// util methods
