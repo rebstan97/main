@@ -6,6 +6,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PRICE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.ArrayList;
@@ -56,6 +57,24 @@ public class CommandTestUtil {
     public static final String INVALID_EMAIL_DESC = " " + PREFIX_EMAIL + "bob!yahoo"; // missing '@' symbol
     public static final String INVALID_ADDRESS_DESC = " " + PREFIX_ADDRESS; // empty string not allowed for addresses
     public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "hubby*"; // '*' not allowed in tags
+
+    // Menu Management
+    public static final String VALID_ITEM_NAME_BURGER = "Burger";
+    public static final String VALID_ITEM_NAME_FRIES = "Cheese Fries";
+    public static final String VALID_ITEM_PRICE_BURGER = "2.50";
+    public static final String VALID_ITEM_PRICE_FRIES = "2";
+    public static final String VALID_ITEM_TAG_CHEESE = "cheese";
+    public static final String VALID_ITEM_REMARK_BURGER = "Burger with beef patty.";
+    public static final String VALID_ITEM_REMARK_FRIES = "Fries with cheese.";
+
+    public static final String ITEM_NAME_DESC_BURGER = " " + PREFIX_NAME + VALID_ITEM_NAME_BURGER;
+    public static final String ITEM_NAME_DESC_FRIES = " " + PREFIX_NAME + VALID_ITEM_NAME_FRIES;
+    public static final String ITEM_PRICE_DESC_BURGER = " " + PREFIX_PRICE + VALID_ITEM_PRICE_BURGER;
+    public static final String ITEM_PRICE_DESC_FRIES = " " + PREFIX_PRICE + VALID_ITEM_PRICE_FRIES;
+    public static final String ITEM_TAG_DESC_CHEESE = " " + PREFIX_TAG + VALID_ITEM_TAG_CHEESE;
+
+    public static final String INVALID_ITEM_NAME_DESC = " " + PREFIX_NAME + "Fries&"; // '&' not allowed in names
+    public static final String INVALID_PRICE_DESC = " " + PREFIX_PRICE + "911a"; // 'a' not allowed in prices
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
