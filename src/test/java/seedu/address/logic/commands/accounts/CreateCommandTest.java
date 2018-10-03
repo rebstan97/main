@@ -34,4 +34,6 @@ public class CreateCommandTest {
         assertEquals(String.format(CreateCommand.MESSAGE_SUCCESS, validAccount), commandResult.feedbackToUser);
         Assert.assertEquals(EMPTY_COMMAND_HISTORY, commandHistory); //TODO: remove?
     }
+
+    //TODO: Improve
 }
