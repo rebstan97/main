@@ -10,7 +10,7 @@ import java.util.stream.Collectors;
 
 import org.junit.Test;
 
-import seedu.address.commons.exceptions.IllegalValueException;;
+import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.menu.Name;
 import seedu.address.model.menu.Price;
 import seedu.address.storage.XmlAdaptedTag;
