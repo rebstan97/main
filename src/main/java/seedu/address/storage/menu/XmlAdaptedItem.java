@@ -35,13 +35,13 @@ public class XmlAdaptedItem {
     private List<XmlAdaptedTag> tagged = new ArrayList<>();
 
     /**
-     * Constructs an XmlAdaptedPerson.
+     * Constructs an XmlAdaptedItem.
      * This is the no-arg constructor that is required by JAXB.
      */
     public XmlAdaptedItem() {}
 
     /**
-     * Constructs an {@code XmlAdaptedPerson} with the given person details.
+     * Constructs an {@code XmlAdaptedItem} with the given item details.
      */
     public XmlAdaptedItem(String name, String price, String remark, List<XmlAdaptedTag> tagged) {
         this.name = name;
@@ -67,9 +67,9 @@ public class XmlAdaptedItem {
     }
 
     /**
-     * Converts this jaxb-friendly adapted person object into the model's Person object.
+     * Converts this jaxb-friendly adapted item object into the model's Item object.
      *
-     * @throws IllegalValueException if there were any data constraints violated in the adapted person
+     * @throws IllegalValueException if there were any data constraints violated in the adapted item
      */
     public Item toModelType() throws IllegalValueException {
         final List<Tag> itemTags = new ArrayList<>();
