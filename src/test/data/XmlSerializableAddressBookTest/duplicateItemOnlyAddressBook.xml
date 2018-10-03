@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<addressbook>
+
+    <items>
+        <name>Cheese Burger</name>
+        <price>3</price>
+        <remark></remark>
+        <tagged></tagged>
+    </items>
+
+    <!-- Item with same identity as Cheese Burger -->
+    <items>
+        <name>Cheese Burger</name>
+        <price>3</price>
+        <remark></remark>
+        <tagged></tagged>
+    </items>
+
+</addressbook>
