@@ -12,6 +12,7 @@ import static seedu.address.testutil.TypicalPersons.AMY;
 import static seedu.address.testutil.TypicalPersons.BOB;
 import static seedu.address.testutil.TypicalPersons.DYLAN;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalReservations.ANDREW;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -26,6 +27,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
+import seedu.address.model.reservation.Reservation;
 import seedu.address.model.tag.Tag;
 import seedu.address.testutil.AddressBookBuilder;
 import seedu.address.testutil.PersonBuilder;
@@ -62,7 +64,8 @@ public class AddressBookTest {
         Person editedAlice = new PersonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
                 .build();
         List<Person> newPersons = Arrays.asList(ALICE, editedAlice);
-        AddressBookStub newData = new AddressBookStub(newPersons);
+        List<Reservation> newReservations = Arrays.asList(ANDREW);
+        AddressBookStub newData = new AddressBookStub(newPersons, newReservations);
 
         thrown.expect(DuplicatePersonException.class);
         addressBook.resetData(newData);
@@ -147,14 +150,21 @@ public class AddressBookTest {
     private static class AddressBookStub implements ReadOnlyAddressBook {
 
         private final ObservableList<Person> persons = FXCollections.observableArrayList();
+        private final ObservableList<Reservation> reservations = FXCollections.observableArrayList();
 
-        AddressBookStub(Collection<Person> persons) {
+        AddressBookStub(Collection<Person> persons, Collection<Reservation> reservations) {
             this.persons.setAll(persons);
+            this.reservations.setAll(reservations);
         }
 
         @Override
         public ObservableList<Person> getPersonList() {
             return persons;
+        }
+
+        @Override
+        public ObservableList<Reservation> getReservationList() {
+            return reservations;
         }
     }
 
