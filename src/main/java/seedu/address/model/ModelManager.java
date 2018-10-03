@@ -165,20 +165,20 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
-    public void deleteItem(Item target){
+    public void deleteItem(Item target) {
         versionedAddressBook.removeItem(target);
         indicateAddressBookChanged();
     }
 
     @Override
-    public void addItem(Item item){
+    public void addItem(Item item) {
         versionedAddressBook.addItem(item);
         updateFilteredItemList(PREDICATE_SHOW_ALL_ITEMS);
         indicateAddressBookChanged();
     }
 
     @Override
-    public void updateItem(Item target, Item editedItem){
+    public void updateItem(Item target, Item editedItem) {
         requireAllNonNull(target, editedItem);
 
         versionedAddressBook.updateItem(target, editedItem);
@@ -186,17 +186,17 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
-    public void removeTagForMenu(Tag tag){
+    public void removeTagForMenu(Tag tag) {
         versionedAddressBook.removeTagForMenu(tag);
     }
 
     @Override
-    public ObservableList<Item> getFilteredItemList(){
+    public ObservableList<Item> getFilteredItemList() {
         return FXCollections.unmodifiableObservableList(filteredItems);
     }
 
     @Override
-    public void updateFilteredItemList(Predicate<Item> predicate){
+    public void updateFilteredItemList(Predicate<Item> predicate) {
         requireNonNull(predicate);
         filteredItems.setPredicate(predicate);
     }

@@ -18,6 +18,11 @@ public interface Model {
     Predicate<Person> PREDICATE_SHOW_ALL_PERSONS = unused -> true;
 
     /**
+     * {@code Predicate} that always evaluate to true
+     */
+    Predicate<Item> PREDICATE_SHOW_ALL_ITEMS = unused -> true;
+
+    /**
      * Clears existing backing model and replaces with the provided new data.
      */
     void resetData(ReadOnlyAddressBook newData);
@@ -94,11 +99,6 @@ public interface Model {
     void commitAddressBook();
 
     // Mennu Management
-    /**
-     * {@code Predicate} that always evaluate to true
-     */
-    Predicate<Item> PREDICATE_SHOW_ALL_ITEMS = unused -> true;
-
     /**
      * Returns true if an item with the same identity as {@code item} exists in the address book.
      */
