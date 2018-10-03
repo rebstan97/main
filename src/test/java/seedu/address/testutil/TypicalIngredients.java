@@ -1,13 +1,13 @@
 package seedu.address.testutil;
 
-import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_APPLE;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BROCCOLI;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_UNIT_APPLE;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_UNIT_BROCCOLI;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_PRICE_APPLE;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_PRICE_BROCCOLI;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_MINIMUM_APPLE;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_MINIMUM_BROCCOLI;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_APPLE;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BROCCOLI;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_PRICE_APPLE;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_PRICE_BROCCOLI;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_UNIT_APPLE;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_UNIT_BROCCOLI;
 
 import java.util.ArrayList;
 import java.util.Arrays;

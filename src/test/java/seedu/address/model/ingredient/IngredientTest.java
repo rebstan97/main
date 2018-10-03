@@ -2,10 +2,10 @@ package seedu.address.model.ingredient;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_UNIT_BROCCOLI;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_PRICE_BROCCOLI;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BROCCOLI;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_MINIMUM_BROCCOLI;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BROCCOLI;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_PRICE_BROCCOLI;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_UNIT_BROCCOLI;
 import static seedu.address.testutil.TypicalIngredients.APPLE;
 import static seedu.address.testutil.TypicalIngredients.BROCCOLI;
 
