@@ -4,6 +4,8 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_ITEM_TAG_BURGER;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_ITEM_TAG_CHEESE;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_TEST;
@@ -12,6 +14,11 @@ import static seedu.address.testutil.TypicalPersons.AMY;
 import static seedu.address.testutil.TypicalPersons.BOB;
 import static seedu.address.testutil.TypicalPersons.DYLAN;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
+import static seedu.address.testutil.menu.TypicalItems.APPLE_JUICE;
+import static seedu.address.testutil.menu.TypicalItems.BEEF_BURGER;
+import static seedu.address.testutil.menu.TypicalItems.BURGER;
+import static seedu.address.testutil.menu.TypicalItems.CHEESE_BURGER;
+import static seedu.address.testutil.menu.TypicalItems.FRIES;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -24,11 +31,14 @@ import org.junit.rules.ExpectedException;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import seedu.address.model.menu.Item;
+import seedu.address.model.menu.exceptions.DuplicateItemException;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
 import seedu.address.model.tag.Tag;
 import seedu.address.testutil.AddressBookBuilder;
 import seedu.address.testutil.PersonBuilder;
+import seedu.address.testutil.menu.ItemBuilder;
 
 public class AddressBookTest {
 
@@ -62,7 +72,8 @@ public class AddressBookTest {
         Person editedAlice = new PersonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
                 .build();
         List<Person> newPersons = Arrays.asList(ALICE, editedAlice);
-        AddressBookStub newData = new AddressBookStub(newPersons);
+        List<Item> newItems = Arrays.asList(APPLE_JUICE);
+        AddressBookStub newData = new AddressBookStub(newPersons, newItems);
 
         thrown.expect(DuplicatePersonException.class);
         addressBook.resetData(newData);
@@ -141,20 +152,112 @@ public class AddressBookTest {
         assertEquals(addressBookWithPersons, expectedAddressBook);
     }
 
+    // Menu Management
+    @Test
+    public void resetData_withDuplicateItems_throwsDuplicateItemException() {
+        // Two items with the same identity fields
+        Item editedApple = new ItemBuilder(APPLE_JUICE).withTags(VALID_ITEM_TAG_CHEESE).build();
+        List<Person> newPersons = Arrays.asList(ALICE);
+        List<Item> newItems = Arrays.asList(APPLE_JUICE, editedApple);
+        AddressBookStub newData = new AddressBookStub(newPersons, newItems);
+
+        thrown.expect(DuplicateItemException.class);
+        addressBook.resetData(newData);
+    }
+
+    @Test
+    public void hasItem_nullItem_throwsNullPointerException() {
+        thrown.expect(NullPointerException.class);
+        addressBook.hasItem(null);
+    }
+
+    @Test
+    public void hasItem_itemNotInAddressBook_returnsFalse() {
+        assertFalse(addressBook.hasItem(APPLE_JUICE));
+    }
+
+    @Test
+    public void hasItem_itemInAddressBook_returnsTrue() {
+        addressBook.addItem(APPLE_JUICE);
+        assertTrue(addressBook.hasItem(APPLE_JUICE));
+    }
+
+    @Test
+    public void hasItem_itemWithSameIdentityFieldsInAddressBook_returnsTrue() {
+        addressBook.addItem(APPLE_JUICE);
+        Item editedApple = new ItemBuilder(APPLE_JUICE).withTags(VALID_ITEM_TAG_CHEESE).build();
+        assertTrue(addressBook.hasItem(editedApple));
+    }
+
+    @Test
+    public void getItemList_modifyList_throwsUnsupportedOperationException() {
+        thrown.expect(UnsupportedOperationException.class);
+        addressBook.getItemList().remove(0);
+    }
+
+    @Test
+    public void removeTagForMenu_noSuchTag_addressBookUnmodified() {
+        addressBookWithPersons = new AddressBookBuilder().withItem(BEEF_BURGER).withItem(BURGER).build();
+
+        addressBookWithPersons.removeTagForMenu(new Tag(VALID_ITEM_TAG_CHEESE));
+
+        AddressBook expectedAddressBook = new AddressBookBuilder().withItem(BEEF_BURGER).withItem(BURGER).build();
+
+        assertEquals(addressBookWithPersons, expectedAddressBook);
+    }
+
+    @Test
+    public void removeTagForMenu_fromAllItems_addressBookModified() {
+        addressBookWithPersons = new AddressBookBuilder().withItem(CHEESE_BURGER).withItem(FRIES).build();
+
+        addressBookWithPersons.removeTagForMenu(new Tag(VALID_ITEM_TAG_CHEESE));
+
+        Item cheeseWithoutCheeseTags = new ItemBuilder(CHEESE_BURGER).withTags(VALID_ITEM_TAG_BURGER).build();
+        Item friesWithoutTags = new ItemBuilder(FRIES).withTags().build();
+
+        AddressBook expectedAddressBook = new AddressBookBuilder().withItem(cheeseWithoutCheeseTags)
+                .withItem(friesWithoutTags)
+                .build();
+
+        assertEquals(addressBookWithPersons, expectedAddressBook);
+    }
+
+    @Test
+    public void removeTagForMenu_fromOneItem_addressBookModified() {
+        addressBookWithPersons = new AddressBookBuilder().withItem(FRIES).withItem(BURGER).build();
+
+        addressBookWithPersons.removeTagForMenu(new Tag(VALID_ITEM_TAG_CHEESE));
+
+        Item friesWithoutTags = new ItemBuilder(FRIES).withTags().build();
+
+        AddressBook expectedAddressBook = new AddressBookBuilder().withItem(friesWithoutTags)
+                .withItem(BURGER)
+                .build();
+
+        assertEquals(addressBookWithPersons, expectedAddressBook);
+    }
+
     /**
      * A stub ReadOnlyAddressBook whose persons list can violate interface constraints.
      */
     private static class AddressBookStub implements ReadOnlyAddressBook {
 
         private final ObservableList<Person> persons = FXCollections.observableArrayList();
+        private final ObservableList<Item> items = FXCollections.observableArrayList();
 
-        AddressBookStub(Collection<Person> persons) {
+        AddressBookStub(Collection<Person> persons, Collection<Item> items) {
             this.persons.setAll(persons);
+            this.items.setAll(items);
         }
 
         @Override
         public ObservableList<Person> getPersonList() {
             return persons;
+        }
+
+        @Override
+        public ObservableList<Item> getItemList() {
+            return items;
         }
     }
 
