@@ -15,8 +15,8 @@ import seedu.address.logic.parser.Parser;
 import seedu.address.logic.parser.ParserUtil;
 import seedu.address.logic.parser.Prefix;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.Name;
 import seedu.address.model.salesrecord.Date;
+import seedu.address.model.salesrecord.ItemName;
 import seedu.address.model.salesrecord.Price;
 import seedu.address.model.salesrecord.QuantitySold;
 import seedu.address.model.salesrecord.SalesRecord;
@@ -28,7 +28,7 @@ public class RecordSalesCommandParser implements Parser<RecordSalesCommand> {
 
     /**
      * Parses the given {@code String} of arguments in the context of the RecordSalesCommand
-     * and returns an RecordSalesCommand object for execution.
+     * and returns a RecordSalesCommand object for execution.
      * @throws ParseException if the user input does not conform the expected format
      */
     public RecordSalesCommand parse(String args) throws ParseException {
@@ -42,7 +42,7 @@ public class RecordSalesCommandParser implements Parser<RecordSalesCommand> {
         }
 
         Date date = ParserUtil.parseDate(argMultimap.getValue(PREFIX_DATE).get());
-        Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_ITEM_NAME).get());
+        ItemName name = ParserUtil.parseItemName(argMultimap.getValue(PREFIX_ITEM_NAME).get());
         QuantitySold quantitySold = ParserUtil.parseQuantitySold(argMultimap.getValue(PREFIX_QUANTITY_SOLD).get());
         Price price = ParserUtil.parsePrice(argMultimap.getValue(PREFIX_ITEM_PRICE).get());
 

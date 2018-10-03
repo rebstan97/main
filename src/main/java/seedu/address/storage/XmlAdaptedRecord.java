@@ -5,7 +5,7 @@ import java.util.Objects;
 import javax.xml.bind.annotation.XmlElement;
 
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.person.Name;
+import seedu.address.model.salesrecord.ItemName;
 import seedu.address.model.salesrecord.Date;
 import seedu.address.model.salesrecord.Price;
 import seedu.address.model.salesrecord.QuantitySold;
@@ -69,12 +69,12 @@ public class XmlAdaptedRecord {
         final Date modelDate = new Date(date);
 
         if (itemName == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Name.class.getSimpleName()));
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, ItemName.class.getSimpleName()));
         }
-        if (!Name.isValidName(itemName)) {
-            throw new IllegalValueException(Name.MESSAGE_NAME_CONSTRAINTS);
+        if (!ItemName.isValidName(itemName)) {
+            throw new IllegalValueException(ItemName.MESSAGE_NAME_CONSTRAINTS);
         }
-        final Name modelName = new Name(itemName);
+        final ItemName modelName = new ItemName(itemName);
 
         if (quantitySold == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,

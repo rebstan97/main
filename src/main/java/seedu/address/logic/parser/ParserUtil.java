@@ -14,6 +14,7 @@ import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
 import seedu.address.model.salesrecord.Date;
+import seedu.address.model.salesrecord.ItemName;
 import seedu.address.model.salesrecord.Price;
 import seedu.address.model.salesrecord.QuantitySold;
 import seedu.address.model.tag.Tag;
@@ -139,6 +140,20 @@ public class ParserUtil {
             throw new ParseException(Date.MESSAGE_DATE_CONSTRAINTS);
         }
         return new Date(trimmedDate);
+    }
+
+    /**
+     * Parses a {@code String name} into a {@code ItemName}. Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code name} is invalid.
+     */
+    public static ItemName parseItemName(String name) throws ParseException {
+        requireNonNull(name);
+        String trimmedName = name.trim();
+        if (!ItemName.isValidName(trimmedName)) {
+            throw new ParseException(ItemName.MESSAGE_NAME_CONSTRAINTS);
+        }
+        return new ItemName(trimmedName);
     }
 
     /**

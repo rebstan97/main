@@ -4,8 +4,6 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Objects;
 
-import seedu.address.model.person.Name;
-
 /**
  * Represents a sales record in the sales book.
  * Guarantees: details are present and not null, field values are validated, immutable.
@@ -14,7 +12,7 @@ public class SalesRecord {
 
     // Identity field
     private final Date date;
-    private final Name name;    // uses name from person
+    private final ItemName name;
 
     // Data fields
     private final QuantitySold quantitySold;
@@ -23,7 +21,7 @@ public class SalesRecord {
     /**
      * Every field must be present and not null.
      */
-    public SalesRecord(Date date, Name name, QuantitySold quantitySold, Price price) {
+    public SalesRecord(Date date, ItemName name, QuantitySold quantitySold, Price price) {
         requireAllNonNull(date, name, quantitySold, price);
         this.date = date;
         this.name = name;
@@ -35,7 +33,7 @@ public class SalesRecord {
         return date;
     }
 
-    public Name getName() {
+    public ItemName getName() {
         return name;
     }
 
