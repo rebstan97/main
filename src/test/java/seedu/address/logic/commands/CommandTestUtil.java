@@ -7,6 +7,10 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_INGREDIENT_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_INGREDIENT_UNIT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_INGREDIENT_PRICE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_INGREDIENT_MINIMUM;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -62,6 +66,25 @@ public class CommandTestUtil {
 
     public static final EditCommand.EditPersonDescriptor DESC_AMY;
     public static final EditCommand.EditPersonDescriptor DESC_BOB;
+
+    /** For ingredients */
+    public static final String VALID_NAME_APPLE = "Granny Smith Apple";
+    public static final String VALID_NAME_BROCCOLI = "Australian Broccoli";
+    public static final String VALID_UNIT_APPLE = "packet of 5";
+    public static final String VALID_UNIT_BROCCOLI = "kilograms";
+    public static final String VALID_PRICE_APPLE = "1.90";
+    public static final String VALID_PRICE_BROCCOLI = "6.50";
+    public static final String VALID_MINIMUM_APPLE = "3";
+    public static final String VALID_MINIMUM_BROCCOLI = "5";
+
+    public static final String INGREDIENT_NAME_DESC_APPLE = " " + PREFIX_INGREDIENT_NAME + VALID_NAME_APPLE;
+    public static final String INGREDIENT_NAME_DESC_BROCCOLI = " " + PREFIX_INGREDIENT_NAME + VALID_NAME_BROCCOLI;
+    public static final String INGREDIENT_UNIT_DESC_APPLE = " " + PREFIX_INGREDIENT_UNIT + VALID_UNIT_APPLE;
+    public static final String INGREDIENT_UNIT_DESC_BROCCOLI = " " + PREFIX_INGREDIENT_UNIT + VALID_UNIT_BROCCOLI;
+    public static final String INGREDIENT_PRICE_DESC_APPLE = " " + PREFIX_INGREDIENT_PRICE + VALID_PRICE_APPLE;
+    public static final String INGREDIENT_PRICE_DESC_BROCCOLI = " " + PREFIX_INGREDIENT_PRICE + VALID_PRICE_BROCCOLI;
+    public static final String INGREDIENT_MINIMUM_DESC_APPLE = " " + PREFIX_INGREDIENT_MINIMUM + VALID_MINIMUM_APPLE;
+    public static final String INGREDIENT_MINIMUM_DESC_BROCCOLI = " " + PREFIX_INGREDIENT_MINIMUM + VALID_MINIMUM_BROCCOLI;
 
     static {
         DESC_AMY = new EditPersonDescriptorBuilder().withName(VALID_NAME_AMY)

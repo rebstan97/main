@@ -13,4 +13,10 @@ public class CliSyntax {
     public static final Prefix PREFIX_TAG = new Prefix("t/");
     public static final Prefix PREFIX_REMARK = new Prefix("r/");
 
+    /* Prefix definitions for ingredient */
+    public static final Prefix PREFIX_INGREDIENT_NAME = new Prefix("n/");
+    public static final Prefix PREFIX_INGREDIENT_UNIT = new Prefix("u/");
+    public static final Prefix PREFIX_INGREDIENT_PRICE = new Prefix("p/");
+    public static final Prefix PREFIX_INGREDIENT_MINIMUM = new Prefix("m/");
+
 }
