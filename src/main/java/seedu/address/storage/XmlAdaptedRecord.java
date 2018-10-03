@@ -4,11 +4,9 @@ import java.util.Objects;
 
 import javax.xml.bind.annotation.XmlElement;
 
-import org.controlsfx.control.PropertySheet.Item;
-
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.salesrecord.ItemName;
 import seedu.address.model.salesrecord.Date;
+import seedu.address.model.salesrecord.ItemName;
 import seedu.address.model.salesrecord.Price;
 import seedu.address.model.salesrecord.QuantitySold;
 import seedu.address.model.salesrecord.SalesRecord;
@@ -74,7 +72,7 @@ public class XmlAdaptedRecord {
      *
      * @throws IllegalValueException if there were any data constraints violated in the date
      */
-    private Date dateToModelType() throws IllegalValueException{
+    private Date dateToModelType() throws IllegalValueException {
         if (date == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Date.class.getSimpleName()));
         }
@@ -89,9 +87,10 @@ public class XmlAdaptedRecord {
      *
      * @throws IllegalValueException if there were any data constraints violated in the itemName
      */
-    private ItemName nameToModelType() throws IllegalValueException{
+    private ItemName nameToModelType() throws IllegalValueException {
         if (itemName == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, ItemName.class.getSimpleName()));
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT
+                    , ItemName.class.getSimpleName()));
         }
         if (!ItemName.isValidName(itemName)) {
             throw new IllegalValueException(ItemName.MESSAGE_NAME_CONSTRAINTS);
@@ -104,7 +103,7 @@ public class XmlAdaptedRecord {
      *
      * @throws IllegalValueException if there were any data constraints violated in the quantitySold
      */
-    private QuantitySold quantitySoldToModelType() throws IllegalValueException{
+    private QuantitySold quantitySoldToModelType() throws IllegalValueException {
         if (quantitySold == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
                     QuantitySold.class.getSimpleName()));
@@ -120,7 +119,7 @@ public class XmlAdaptedRecord {
      *
      * @throws IllegalValueException if there were any data constraints violated in the price
      */
-    private Price priceToModelType() throws IllegalValueException{
+    private Price priceToModelType() throws IllegalValueException {
         if (price == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Price.class.getSimpleName()));
         }
