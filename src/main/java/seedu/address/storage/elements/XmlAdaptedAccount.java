@@ -46,11 +46,11 @@ public class XmlAdaptedAccount {
     }
 
     /**
-     * Converts this jaxb-friendly adapted account object into the model's Account object.
+     * Verifies if the {@code username} is valid.
      *
-     * @throws IllegalValueException if there were any data constraints violated in the adapted account
+     * @throws IllegalValueException if there were any data constraints violated in the adapted account.
      */
-    public Account toModelType() throws IllegalValueException {
+    private void verifyUsername() throws IllegalValueException {
         if (username == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
                     Username.class.getSimpleName()));
@@ -58,8 +58,14 @@ public class XmlAdaptedAccount {
         if (!Username.isValidUsername(username)) {
             throw new IllegalValueException(Username.MESSAGE_USERNAME_CONSTRAINT);
         }
-        final Username modelUsername = new Username(username);
+    }
 
+    /**
+     * Verifies if the {@code password} is valid.
+     *
+     * @throws IllegalValueException if there were any data constraints violated in the adapted account.
+     */
+    private void verifyPassword() throws IllegalValueException {
         if (password == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
                     Password.class.getSimpleName()));
@@ -67,6 +73,19 @@ public class XmlAdaptedAccount {
         if (!Password.isValidPassword(password)) {
             throw new IllegalValueException(Password.MESSAGE_PASSWORD_CONSTRAINT);
         }
+    }
+
+    /**
+     * Converts this jaxb-friendly adapted account object into the model's Account object.
+     *
+     * @throws IllegalValueException if there were any data constraints violated in the adapted account.
+     */
+    public Account toModelType() throws IllegalValueException {
+
+        verifyUsername();
+        final Username modelUsername = new Username(username);
+
+        verifyPassword();
         final Password modelPassword = new Password(password);
 
         return new Account(modelUsername, modelPassword);
