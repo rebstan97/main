@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import seedu.address.model.AddressBook;
 import seedu.address.model.menu.Item;
 
 /**
@@ -18,7 +19,7 @@ import seedu.address.model.menu.Item;
  */
 public class TypicalItems {
 
-    public static final Item APPLE_JUICE = new ItemBuilder().withName("Apple JUICE")
+    public static final Item APPLE_JUICE = new ItemBuilder().withName("Apple Juice")
             .withPrice("2")
             .withTags("drink").build();
     public static final Item BEEF_BURGER = new ItemBuilder().withName("Beef Burger")
@@ -46,6 +47,17 @@ public class TypicalItems {
     public static final String KEYWORD_MATCHING_HAINANESE = "Hainanese"; // A keyword that matches HAINANESE
 
     private TypicalItems() {} // prevents instantiation
+
+    /**
+     * Returns an {@code AddressBook} with all the typical persons.
+     */
+    public static AddressBook getTypicalAddressBook() {
+        AddressBook ab = new AddressBook();
+        for (Item item : getTypicalItems()) {
+            ab.addItem(item);
+        }
+        return ab;
+    }
 
     public static List<Item> getTypicalItems() {
         return new ArrayList<>(
