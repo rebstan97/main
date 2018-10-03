@@ -58,12 +58,6 @@ public class RecordListPanel extends UiPart<Region> {
         });
     }
 
-    @Subscribe
-    private void handleJumpToListRequestEvent(JumpToListRequestEvent event) {
-        logger.info(LogsCenter.getEventHandlingLogMessage(event));
-        scrollTo(event.targetIndex);
-    }
-
     /**
      * Custom {@code ListCell} that displays the graphics of a {@code SalesRecord} using a {@code RecordCard}.
      */
