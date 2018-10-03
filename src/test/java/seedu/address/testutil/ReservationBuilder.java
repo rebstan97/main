@@ -73,7 +73,7 @@ public class ReservationBuilder {
     /**
      * Sets the {@code Pax} of the {@code Reservation} that we are building.
      */
-    public ReservationBuilder withPhone(String pax) {
+    public ReservationBuilder withPax(String pax) {
         this.pax = new Pax(pax);
         return this;
     }
