@@ -4,9 +4,12 @@ import static java.util.Objects.requireNonNull;
 
 import java.util.HashSet;
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 
 import javafx.collections.ObservableList;
+import seedu.address.model.menu.Item;
+import seedu.address.model.menu.UniqueItemList;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.UniquePersonList;
 import seedu.address.model.tag.Tag;
@@ -17,6 +20,7 @@ import seedu.address.model.tag.Tag;
 public class AddressBook implements ReadOnlyAddressBook {
 
     private final UniquePersonList persons;
+    private final UniqueItemList items;
 
     /*
      * The 'unusual' code block below is an non-static initialization block, sometimes used to avoid duplication
@@ -27,6 +31,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     {
         persons = new UniquePersonList();
+        items = new UniqueItemList();
     }
 
     public AddressBook() {}
@@ -56,6 +61,7 @@ public class AddressBook implements ReadOnlyAddressBook {
         requireNonNull(newData);
 
         setPersons(newData.getPersonList());
+        setItems(newData.getItemList());
     }
 
     //// person-level operations
@@ -120,12 +126,86 @@ public class AddressBook implements ReadOnlyAddressBook {
         persons.forEach(person -> removeTagForPerson(person, tag));
     }
 
+    // Menu Management
+    /**
+     * Replaces the contents of the person list with {@code persons}. {@code persons} must not contain duplicate
+     * persons.
+     */
+    public void setItems(List<Item> items) {
+        this.items.setItems(items);
+    }
+
+    /**
+     * Returns true if a item with the same identity as {@code item} exists in the menu.
+     */
+    public boolean hasItem(Item item) {
+        requireNonNull(item);
+        return items.contains(item);
+    }
+
+    /**
+     * Adds an item to the menu. The item must not already exist in the menu.
+     */
+    public void addItem(Item i) {
+        items.add(i);
+    }
+
+    /**
+     * Replaces the given item {@code target} in the list with {@code editedItem}. {@code target} must exist in the
+     * menu. The item identity of {@code editedItem} must not be the same as another existing item in the
+     * menu.
+     */
+    public void updateItem(Item target, Item editedItem) {
+        requireNonNull(editedItem);
+
+        items.setItem(target, editedItem);
+    }
+
+    /**
+     * Removes {@code key} from this {@code Menu}. {@code key} must exist in the menu.
+     */
+    public void removeItem(Item key) {
+        items.remove(key);
+    }
+
+    /**
+     * Removes {@code tag} from {@code item} in this {@code Menu}.
+     *
+     * @param item whose tag is being removed.
+     * @param tag to be removed.
+     */
+    private void removeTagForItem(Item item, Tag tag) {
+        Set<Tag> tags = new HashSet<>(item.getTags());
+
+        if (!tags.remove(tag)) {
+            return;
+        }
+
+        Item newItem = new Item(item.getName(), item.getPrice(), item.getRemark(), tags);
+        updateItem(item, newItem);
+    }
+
+
+    /**
+     * Removes {@code tag} from all {@code item} in this {@code AddressBook}.
+     *
+     * @param tag to be removed.
+     */
+    public void removeTagForMenu(Tag tag) {
+        items.forEach(item -> removeTagForItem(item, tag));
+    }
+
+    @Override
+    public ObservableList<Item> getItemList() {
+        return items.asUnmodifiableObservableList();
+    }
+
     //// util methods
 
     @Override
     public String toString() {
-        return persons.asUnmodifiableObservableList().size() + " persons";
-        // TODO: refine later
+        return String.valueOf(persons.asUnmodifiableObservableList().size()) + " persons\n"
+                + items.asUnmodifiableObservableList().size() + " items";
     }
 
     @Override
@@ -135,13 +215,19 @@ public class AddressBook implements ReadOnlyAddressBook {
 
     @Override
     public boolean equals(Object other) {
-        return other == this // short circuit if same object
-                || (other instanceof AddressBook // instanceof handles nulls
-                && persons.equals(((AddressBook) other).persons));
+        if (other == this) {
+            return true;
+        }
+        // instanceof handles nulls
+        if (!(other instanceof AddressBook)) {
+            return false;
+        }
+        return persons.equals(((AddressBook) other).persons)
+                && items.equals(((AddressBook) other).items);
     }
 
     @Override
     public int hashCode() {
-        return persons.hashCode();
+        return Objects.hash(persons, items);
     }
 }
