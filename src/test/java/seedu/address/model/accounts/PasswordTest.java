@@ -7,21 +7,11 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PASSWORD_DEMO_ONE;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PASSWORD_DEMO_TWO;
 
-import org.junit.Before;
 import org.junit.Test;
 
-import at.favre.lib.crypto.bcrypt.BCrypt;
-import at.favre.lib.crypto.bcrypt.BCrypt.Hasher;
 import seedu.address.testutil.Assert;
 
 public class PasswordTest {
-
-    private Hasher hasher;
-
-    @Before
-    public void setUp() {
-        hasher = BCrypt.withDefaults();
-    }
 
     @Test
     public void constructor_null_throwsNullPointerException() {
@@ -42,9 +32,10 @@ public class PasswordTest {
         // invalid password
         assertFalse(Password.isValidPassword("")); // empty string
         assertFalse(Password.isValidPassword(" ")); // spaces only
+        assertFalse(Password.isValidPassword("1122")); // length 4, whereas minimum is length 6
         assertFalse(Password.isValidPassword("11 22qq")); // contains space
 
-        // valid password
+        // valid password, all with length 6 or more
         assertTrue(Password.isValidPassword("azhikai")); // alphabets only
         assertTrue(Password.isValidPassword("1122qq")); // numbers only
         assertTrue(Password.isValidPassword("peter2")); // alphanumeric characters
@@ -54,29 +45,11 @@ public class PasswordTest {
     }
 
     @Test
-    public void hash_password() {
-        // compare the hash of the same password
-        Password password = new Password("1122qq");
-        char[] hashPassword = hasher.hashToChar(6, password.toString().toCharArray());
-        BCrypt.Result resultPassword = BCrypt.verifyer().verify(password.toString().toCharArray(), hashPassword);
-        assertTrue(resultPassword.verified);
-
-        // compare the hash of two different passwords
-        Password anotherPassword = new Password("1122qq@");
-        char[] hashAnotherPassword = hasher.hashToChar(6, anotherPassword.toString().toCharArray());
-        BCrypt.Result resultAnotherPassword = BCrypt.verifyer().verify(password.toString().toCharArray(),
-                hashAnotherPassword);
-        assertFalse(resultAnotherPassword.verified);
-    }
-
-    @Test
     public void hash_code() {
         Password passwordOne = new Password(VALID_PASSWORD_DEMO_ONE);
-
         assertEquals(passwordOne.hashCode(), passwordOne.hashCode());
 
         Password passwordTwo = new Password(VALID_PASSWORD_DEMO_TWO);
-
         assertNotEquals(passwordOne.hashCode(), passwordTwo.hashCode());
     }
 }

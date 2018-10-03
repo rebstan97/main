@@ -18,7 +18,7 @@ import seedu.address.model.accounts.Password;
 import seedu.address.model.accounts.Username;
 
 /**
- * Parses input arguments and creates a new AddCommand object
+ * Parses input arguments and creates a new CreateCommand object
  */
 public class CreateCommandParser implements Parser<CreateCommand> {
 

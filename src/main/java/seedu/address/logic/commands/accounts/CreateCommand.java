@@ -29,30 +29,30 @@ public class CreateCommand extends Command {
     public static final String MESSAGE_SUCCESS = "New account created: %1$s";
     public static final String MESSAGE_DUPLICATE_USERNAME = "This username already exists";
 
-    private final Account toCreate;
+    private final Account account;
 
     public CreateCommand(Account account) {
         requireNonNull(account);
-        toCreate = account;
+        this.account = account;
     }
 
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
 
-        if (model.hasAccount(toCreate)) {
+        if (model.hasAccount(account)) {
             throw new CommandException(MESSAGE_DUPLICATE_USERNAME);
         }
 
-        model.addAccount(toCreate);
+        model.addAccount(account);
         model.commitAddressBook();
-        return new CommandResult(String.format(MESSAGE_SUCCESS, toCreate));
+        return new CommandResult(String.format(MESSAGE_SUCCESS, account));
     }
 
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof CreateCommand // instanceof handles nulls
-                && toCreate.equals(((CreateCommand) other).toCreate));
+                && account.equals(((CreateCommand) other).account));
     }
 }

@@ -17,7 +17,7 @@ public class Account {
      * Every field must be present and not null.
      */
     public Account(Username username, Password password) {
-        requireAllNonNull(username);
+        requireAllNonNull(username, password);
         this.username = username;
         this.password = password;
     }

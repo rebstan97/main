@@ -15,7 +15,7 @@ public class Username {
      * The first character of the username must not be a whitespace,
      * otherwise " " (a blank string) becomes a valid input.
      */
-    public static final String USERNAME_VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum}]*";
+    private static final String USERNAME_VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum}]*";
 
     private final String username;
 

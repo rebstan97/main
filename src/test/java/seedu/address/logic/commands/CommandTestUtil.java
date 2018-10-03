@@ -75,9 +75,9 @@ public class CommandTestUtil {
     public static final String VALID_USERNAME_DEMO_ONE = "demo1";
     public static final String VALID_USERNAME_DEMO_TWO = "demo2";
     public static final String VALID_USERNAME_DEMO_THREE = "demo3";
-    public static final String VALID_PASSWORD_DEMO_ONE = "1122";
-    public static final String VALID_PASSWORD_DEMO_TWO = "22qq";
-    public static final String VALID_PASSWORD_DEMO_THREE = "abc@!";
+    public static final String VALID_PASSWORD_DEMO_ONE = "1122qq";
+    public static final String VALID_PASSWORD_DEMO_TWO = "22qqww";
+    public static final String VALID_PASSWORD_DEMO_THREE = "abc!@#";
 
     public static final String PREFIX_WITH_VALID_USERNAME = " " + PREFIX_ID + VALID_USERNAME_DEMO_ONE;
     public static final String PREFIX_WITH_VALID_PASSWORD = " " + PREFIX_PASSWORD + VALID_PASSWORD_DEMO_ONE;

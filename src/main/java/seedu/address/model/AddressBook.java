@@ -28,8 +28,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      *
      * Note that non-static init blocks are not recommended to use. There are other ways to avoid duplication
      *   among constructors.
-     */
-    {
+     */ {
         persons = new UniquePersonList();
         accounts = new UniqueAccountList();
     }
@@ -152,6 +151,8 @@ public class AddressBook implements ReadOnlyAddressBook {
      * Adds a account to the account record. The account must not already exist in the account record.
      */
     public void addAccount(Account account) {
+        // hash password before
+        //account.getPassword().hash(account.getUsername().toString());
         accounts.add(account);
     }
 
