@@ -7,11 +7,21 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PASSWORD_DEMO_ONE;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PASSWORD_DEMO_TWO;
 
+import org.junit.Before;
 import org.junit.Test;
 
+import at.favre.lib.crypto.bcrypt.BCrypt;
+import at.favre.lib.crypto.bcrypt.BCrypt.Hasher;
 import seedu.address.testutil.Assert;
 
 public class PasswordTest {
+
+    private Hasher hasher;
+
+    @Before
+    public void setUp() {
+        hasher = BCrypt.withDefaults();
+    }
 
     @Test
     public void constructor_null_throwsNullPointerException() {
@@ -41,6 +51,22 @@ public class PasswordTest {
         assertTrue(Password.isValidPassword("CapitalAng")); // with capital letters
         assertTrue(Password.isValidPassword("th15isAPassword")); // long alphanumeric password
         assertTrue(Password.isValidPassword("!!@@SGMY3-1")); // alphanumeric and special characters
+    }
+
+    @Test
+    public void hash_password() {
+        // compare the hash of the same password
+        Password password = new Password("1122qq");
+        char[] hashPassword = hasher.hashToChar(6, password.toString().toCharArray());
+        BCrypt.Result resultPassword = BCrypt.verifyer().verify(password.toString().toCharArray(), hashPassword);
+        assertTrue(resultPassword.verified);
+
+        // compare the hash of two different passwords
+        Password anotherPassword = new Password("1122qq@");
+        char[] hashAnotherPassword = hasher.hashToChar(6, anotherPassword.toString().toCharArray());
+        BCrypt.Result resultAnotherPassword = BCrypt.verifyer().verify(password.toString().toCharArray(),
+                hashAnotherPassword);
+        assertFalse(resultAnotherPassword.verified);
     }
 
     @Test
