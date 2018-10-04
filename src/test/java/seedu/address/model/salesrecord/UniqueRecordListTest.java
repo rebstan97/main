@@ -29,7 +29,7 @@ public class UniqueRecordListTest {
         uniqueRecordList.contains(null);
     }
     @Test
-    public void contains_record_notInList_returnsFalse() {
+    public void contains_recordNotInList_returnsFalse() {
         assertFalse(uniqueRecordList.contains(RECORD_DEFAULT));
     }
     @Test
