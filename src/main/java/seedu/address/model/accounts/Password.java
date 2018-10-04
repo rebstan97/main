@@ -78,14 +78,16 @@ public class Password {
      * @return a sequence of bytes whose length is exactly 16.
      */
     private byte[] generateSalt(String username) {
-        if (username.length() > MAX_SALT_LENGTH) {
-            username = username.substring(0, MAX_SALT_LENGTH + 1);
-            assert username.getBytes().length == MAX_SALT_LENGTH;
-            return username.getBytes();
+        String usernameToProcess = username;
+
+        if (usernameToProcess.length() > MAX_SALT_LENGTH) {
+            usernameToProcess = usernameToProcess.substring(0, MAX_SALT_LENGTH + 1);
+            assert usernameToProcess.getBytes().length == MAX_SALT_LENGTH;
+            return usernameToProcess.getBytes();
         }
 
         // username is shorter than 16 characters, fill up the remaining gaps
-        char[] usernameArray = Arrays.copyOf(username.toCharArray(), MAX_SALT_LENGTH);
+        char[] usernameArray = Arrays.copyOf(usernameToProcess.toCharArray(), MAX_SALT_LENGTH);
         for (int i = username.length(); i < MAX_SALT_LENGTH; i++) {
             usernameArray[i] = '@';
         }
