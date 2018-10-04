@@ -20,7 +20,7 @@ import seedu.address.ui.UiPart;
  * Panel containing the list of persons.
  */
 public class ItemListPanel extends UiPart<Region> {
-    private static final String FXML = "PersonListPanel.fxml";
+    private static final String FXML = "ItemListPanel.fxml";
     private final Logger logger = LogsCenter.getLogger(ItemListPanel.class);
 
     @FXML
