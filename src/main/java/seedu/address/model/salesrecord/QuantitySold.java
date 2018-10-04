@@ -26,7 +26,7 @@ public class QuantitySold {
     }
 
     /**
-     * Returns true if a given string is a valid integer.
+     * Returns true if a given string is a valid positive integer.
      */
     public static boolean isValidQuantity(String test) {
         return test.matches(QUANTITY_VALIDATION_REGEX);
