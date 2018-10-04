@@ -25,6 +25,7 @@ import seedu.address.model.person.Person;
 import seedu.address.storage.XmlSerializableAddressBook;
 
 public class PersonListPanelTest extends GuiUnitTest {
+
     private static final ObservableList<Person> TYPICAL_PERSONS =
             FXCollections.observableList(getTypicalPersons());
 
@@ -76,8 +77,8 @@ public class PersonListPanelTest extends GuiUnitTest {
     }
 
     /**
-     * Returns a list of persons containing {@code personCount} persons that is used to populate the
-     * {@code PersonListPanel}.
+     * Returns a list of persons containing {@code personCount} persons that is used to populate the {@code
+     * PersonListPanel}.
      */
     private ObservableList<Person> createBackingList(int personCount) throws Exception {
         Path xmlFile = createXmlFileWithPersons(personCount);
@@ -104,7 +105,7 @@ public class PersonListPanelTest extends GuiUnitTest {
         }
         builder.append("</addressbook>\n");
 
-        Path manyPersonsFile = Paths.get(TEST_DATA_FOLDER + "manyPersons.xml");
+        Path manyPersonsFile = TEST_DATA_FOLDER.resolve("manyPersons.xml");
         FileUtil.createFile(manyPersonsFile);
         FileUtil.writeToFile(manyPersonsFile, builder.toString());
         manyPersonsFile.toFile().deleteOnExit();
@@ -112,8 +113,8 @@ public class PersonListPanelTest extends GuiUnitTest {
     }
 
     /**
-     * Initializes {@code personListPanelHandle} with a {@code PersonListPanel} backed by {@code backingList}.
-     * Also shows the {@code Stage} that displays only {@code PersonListPanel}.
+     * Initializes {@code personListPanelHandle} with a {@code PersonListPanel} backed by {@code backingList}. Also
+     * shows the {@code Stage} that displays only {@code PersonListPanel}.
      */
     private void initUi(ObservableList<Person> backingList) {
         PersonListPanel personListPanel = new PersonListPanel(backingList);

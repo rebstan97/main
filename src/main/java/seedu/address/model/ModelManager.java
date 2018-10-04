@@ -12,6 +12,7 @@ import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.ComponentManager;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.events.model.AddressBookChangedEvent;
+import seedu.address.model.accounts.Account;
 import seedu.address.model.person.Person;
 import seedu.address.model.tag.Tag;
 
@@ -19,10 +20,12 @@ import seedu.address.model.tag.Tag;
  * Represents the in-memory model of the address book data.
  */
 public class ModelManager extends ComponentManager implements Model {
+
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
     private final VersionedAddressBook versionedAddressBook;
     private final FilteredList<Person> filteredPersons;
+    private final FilteredList<Account> filteredAccounts;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -35,6 +38,7 @@ public class ModelManager extends ComponentManager implements Model {
 
         versionedAddressBook = new VersionedAddressBook(addressBook);
         filteredPersons = new FilteredList<>(versionedAddressBook.getPersonList());
+        filteredAccounts = new FilteredList<>(versionedAddressBook.getAccountList());
     }
 
     public ModelManager() {
@@ -52,7 +56,9 @@ public class ModelManager extends ComponentManager implements Model {
         return versionedAddressBook;
     }
 
-    /** Raises an event to indicate the model has changed */
+    /**
+     * Raises an event to indicate the model has changed
+     */
     private void indicateAddressBookChanged() {
         raise(new AddressBookChangedEvent(versionedAddressBook));
     }
@@ -91,10 +97,6 @@ public class ModelManager extends ComponentManager implements Model {
 
     //=========== Filtered Person List Accessors =============================================================
 
-    /**
-     * Returns an unmodifiable view of the list of {@code Person} backed by the internal list of
-     * {@code versionedAddressBook}
-     */
     @Override
     public ObservableList<Person> getFilteredPersonList() {
         return FXCollections.unmodifiableObservableList(filteredPersons);
@@ -135,9 +137,46 @@ public class ModelManager extends ComponentManager implements Model {
         versionedAddressBook.commit();
     }
 
+    //=========== Accounts =================================================================================
+
+    @Override
+    public void addAccount(Account account) {
+        versionedAddressBook.addAccount(account);
+        indicateAddressBookChanged();
+    }
+
+    @Override
+    public boolean hasAccount(Account account) {
+        return versionedAddressBook.hasAccount(account);
+    }
+
+    @Override
+    public void removeAccount(Account account) {
+        versionedAddressBook.removeAccount(account);
+        indicateAddressBookChanged();
+    }
+
+    @Override
+    public void updateAccount(Account target, Account editedAccount) {
+        versionedAddressBook.updateAccount(target, editedAccount);
+        indicateAddressBookChanged();
+    }
+
+    //=========== Filtered Account List Accessors =============================================================
+
+    @Override
+    public ObservableList<Account> getFilteredAccountList() {
+        return FXCollections.unmodifiableObservableList(filteredAccounts);
+    }
+
+    @Override
+    public void updateFilteredAccountList(Predicate<Account> predicate) {
+        requireNonNull(predicate);
+        filteredAccounts.setPredicate(predicate);
+    }
+
     @Override
     public boolean equals(Object obj) {
-        // short circuit if same object
         if (obj == this) {
             return true;
         }
@@ -150,7 +189,7 @@ public class ModelManager extends ComponentManager implements Model {
         // state check
         ModelManager other = (ModelManager) obj;
         return versionedAddressBook.equals(other.versionedAddressBook)
-                && filteredPersons.equals(other.filteredPersons);
+                && filteredPersons.equals(other.filteredPersons)
+                && filteredAccounts.equals(other.filteredAccounts);
     }
-
 }

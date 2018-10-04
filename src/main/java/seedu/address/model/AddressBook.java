@@ -4,9 +4,12 @@ import static java.util.Objects.requireNonNull;
 
 import java.util.HashSet;
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 
 import javafx.collections.ObservableList;
+import seedu.address.model.accounts.Account;
+import seedu.address.model.accounts.UniqueAccountList;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.UniquePersonList;
 import seedu.address.model.tag.Tag;
@@ -17,6 +20,7 @@ import seedu.address.model.tag.Tag;
 public class AddressBook implements ReadOnlyAddressBook {
 
     private final UniquePersonList persons;
+    private final UniqueAccountList accounts;
 
     /*
      * The 'unusual' code block below is an non-static initialization block, sometimes used to avoid duplication
@@ -27,6 +31,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     {
         persons = new UniquePersonList();
+        accounts = new UniqueAccountList();
     }
 
     public AddressBook() {}
@@ -56,6 +61,7 @@ public class AddressBook implements ReadOnlyAddressBook {
         requireNonNull(newData);
 
         setPersons(newData.getPersonList());
+        setAccounts(newData.getAccountList());
     }
 
     //// person-level operations
@@ -120,28 +126,83 @@ public class AddressBook implements ReadOnlyAddressBook {
         persons.forEach(person -> removeTagForPerson(person, tag));
     }
 
-    //// util methods
-
-    @Override
-    public String toString() {
-        return persons.asUnmodifiableObservableList().size() + " persons";
-        // TODO: refine later
-    }
-
     @Override
     public ObservableList<Person> getPersonList() {
         return persons.asUnmodifiableObservableList();
     }
 
+    //// account-level operations
+
+    /**
+     * Replaces the contents of the person list with {@code persons}. {@code persons} must not contain duplicate
+     * persons.
+     */
+    public void setAccounts(List<Account> accounts) {
+        this.accounts.setAccounts(accounts);
+    }
+
+    /**
+     * Returns true if a person with the same identity as {@code person} exists in the address book.
+     */
+    public boolean hasAccount(Account account) {
+        return accounts.contains(account);
+    }
+
+    /**
+     * Adds a account to the account record. The account must not already exist in the account record.
+     */
+    public void addAccount(Account account) {
+        // hash password before
+        //account.getPassword().hash(account.getUsername().toString());
+        accounts.add(account);
+    }
+
+    /**
+     * Replaces the given person {@code target} in the list with {@code editedPerson}. {@code target} must exist in the
+     * address book. The person identity of {@code editedPerson} must not be the same as another existing person in the
+     * address book.
+     */
+    public void updateAccount(Account target, Account editedAccount) {
+        accounts.update(target, editedAccount);
+    }
+
+    /**
+     * Removes {@code key} from this {@code AddressBook}. {@code key} must exist in the address book.
+     */
+    public void removeAccount(Account key) {
+        accounts.remove(key);
+    }
+
+    @Override
+    public ObservableList<Account> getAccountList() {
+        return accounts.asUnmodifiableObservableList();
+    }
+
+    //// util methods
+
+    @Override
+    public String toString() {
+        return String.valueOf(persons.asUnmodifiableObservableList().size()) + " persons\n"
+                + accounts.asUnmodifiableObservableList().size() + " accounts";
+    }
+
     @Override
     public boolean equals(Object other) {
-        return other == this // short circuit if same object
-                || (other instanceof AddressBook // instanceof handles nulls
-                && persons.equals(((AddressBook) other).persons));
+        if (other == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(other instanceof AddressBook)) {
+            return false;
+        }
+
+        return persons.equals(((AddressBook) other).persons)
+                && accounts.equals(((AddressBook) other).accounts);
     }
 
     @Override
     public int hashCode() {
-        return persons.hashCode();
+        return Objects.hash(persons, accounts);
     }
 }

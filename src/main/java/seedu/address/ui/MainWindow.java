@@ -6,6 +6,7 @@ import com.google.common.eventbus.Subscribe;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextInputControl;
 import javafx.scene.input.KeyCombination;
@@ -21,12 +22,15 @@ import seedu.address.logic.Logic;
 import seedu.address.model.UserPrefs;
 
 /**
- * The Main Window. Provides the basic application layout containing
- * a menu bar and space where other JavaFX elements can be placed.
+ * The Main Window. Provides the basic application layout containing a menu bar and space where other JavaFX elements
+ * can be placed.
  */
 public class MainWindow extends UiPart<Stage> {
 
     private static final String FXML = "MainWindow.fxml";
+
+    private static final String ACCOUNT_STATUS_INITIAL = "Guest";
+    private static final String ACCOUNT_STATUS = "Welcome, %s";
 
     private final Logger logger = LogsCenter.getLogger(getClass());
 
@@ -50,6 +54,9 @@ public class MainWindow extends UiPart<Stage> {
     private MenuItem helpMenuItem;
 
     @FXML
+    private Label accountStatus;
+
+    @FXML
     private StackPane personListPanelPlaceholder;
 
     @FXML
@@ -69,6 +76,7 @@ public class MainWindow extends UiPart<Stage> {
 
         // Configure the UI
         setTitle(config.getAppTitle());
+        setUsername(ACCOUNT_STATUS_INITIAL);
         setWindowDefaultSize(prefs);
 
         setAccelerators();
@@ -87,6 +95,7 @@ public class MainWindow extends UiPart<Stage> {
 
     /**
      * Sets the accelerator of a MenuItem.
+     *
      * @param keyCombination the KeyCombination value of the accelerator
      */
     private void setAccelerator(MenuItem menuItem, KeyCombination keyCombination) {
@@ -141,6 +150,10 @@ public class MainWindow extends UiPart<Stage> {
 
     private void setTitle(String appTitle) {
         primaryStage.setTitle(appTitle);
+    }
+
+    private void setUsername(String message) {
+        accountStatus.setText(message);
     }
 
     /**
