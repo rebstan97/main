@@ -84,7 +84,8 @@ public class CommandTestUtil {
     public static final String INGREDIENT_PRICE_DESC_APPLE = " " + PREFIX_INGREDIENT_PRICE + VALID_PRICE_APPLE;
     public static final String INGREDIENT_PRICE_DESC_BROCCOLI = " " + PREFIX_INGREDIENT_PRICE + VALID_PRICE_BROCCOLI;
     public static final String INGREDIENT_MINIMUM_DESC_APPLE = " " + PREFIX_INGREDIENT_MINIMUM + VALID_MINIMUM_APPLE;
-    public static final String INGREDIENT_MINIMUM_DESC_BROCCOLI = " " + PREFIX_INGREDIENT_MINIMUM + VALID_MINIMUM_BROCCOLI;
+    public static final String INGREDIENT_MINIMUM_DESC_BROCCOLI = " " + PREFIX_INGREDIENT_MINIMUM
+            + VALID_MINIMUM_BROCCOLI;
 
     static {
         DESC_AMY = new EditPersonDescriptorBuilder().withName(VALID_NAME_AMY)
