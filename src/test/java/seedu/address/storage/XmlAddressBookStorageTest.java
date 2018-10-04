@@ -8,7 +8,6 @@ import static seedu.address.testutil.TypicalPersons.DYLAN;
 import static seedu.address.testutil.TypicalPersons.HOON;
 import static seedu.address.testutil.TypicalPersons.IDA;
 
-
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;

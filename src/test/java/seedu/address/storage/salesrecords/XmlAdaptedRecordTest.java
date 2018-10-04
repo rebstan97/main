@@ -4,9 +4,9 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static seedu.address.storage.XmlAdaptedRecord.MISSING_FIELD_MESSAGE_FORMAT;
-import static seedu.address.testutil.salesrecords.TypicalRecords.DEMO_DEFAULT;
-import static seedu.address.testutil.salesrecords.TypicalRecords.DEMO_ONE;
-import static seedu.address.testutil.salesrecords.TypicalRecords.DEMO_TWO;
+import static seedu.address.testutil.salesrecords.TypicalRecords.RECORD_DEFAULT;
+import static seedu.address.testutil.salesrecords.TypicalRecords.RECORD_ONE;
+import static seedu.address.testutil.salesrecords.TypicalRecords.RECORD_TWO;
 
 import org.junit.Test;
 
@@ -24,16 +24,16 @@ public class XmlAdaptedRecordTest {
     private static final String INVALID_ITEM_NAME = "Apple Juice :D";
     private static final String INVALID_QUANTITY_SOLD = "100.5";
     private static final String INVALID_PRICE = "$21";
-    private static final String VALID_DATE = DEMO_DEFAULT.getDate().toString();
-    private static final String VALID_ITEM_NAME = DEMO_DEFAULT.getName().toString();
-    private static final String VALID_QUANTITY_SOLD = DEMO_DEFAULT.getQuantitySold().toString();
-    private static final String VALID_PRICE = DEMO_DEFAULT.getPrice().toString();
+    private static final String VALID_DATE = RECORD_DEFAULT.getDate().toString();
+    private static final String VALID_ITEM_NAME = RECORD_DEFAULT.getName().toString();
+    private static final String VALID_QUANTITY_SOLD = RECORD_DEFAULT.getQuantitySold().toString();
+    private static final String VALID_PRICE = RECORD_DEFAULT.getPrice().toString();
 
     private XmlAdaptedRecord record = null;
     @Test
     public void toModelType_validRecordDetails_returnsRecord() throws Exception {
-        record = new XmlAdaptedRecord(DEMO_DEFAULT);
-        assertEquals(DEMO_DEFAULT, record.toModelType());
+        record = new XmlAdaptedRecord(RECORD_DEFAULT);
+        assertEquals(RECORD_DEFAULT, record.toModelType());
     }
     @Test
     public void toModelType_nullDate_throwsIllegalValueException() {
@@ -86,16 +86,16 @@ public class XmlAdaptedRecordTest {
 
     @Test
     public void equals() {
-        XmlAdaptedRecord recordDemoOne = new XmlAdaptedRecord(new RecordBuilder(DEMO_ONE).build());
+        XmlAdaptedRecord recordOneXml = new XmlAdaptedRecord(new RecordBuilder(RECORD_ONE).build());
         // same object
-        assertTrue(recordDemoOne.equals(recordDemoOne));
-        XmlAdaptedRecord recordDemoOneDuplicate = new XmlAdaptedRecord(new RecordBuilder(DEMO_ONE).build());
+        assertTrue(recordOneXml.equals(recordOneXml));
+        XmlAdaptedRecord recordOneXmlCopy = new XmlAdaptedRecord(new RecordBuilder(RECORD_ONE).build());
         // different object, same identity and attributes
-        assertTrue(recordDemoOne.equals(recordDemoOneDuplicate));
-        XmlAdaptedRecord recordDemoTwo = new XmlAdaptedRecord(new RecordBuilder(DEMO_TWO).build());
-        assertFalse(recordDemoOne.equals(recordDemoTwo));
-        assertFalse(recordDemoOne.equals(null));
+        assertTrue(recordOneXml.equals(recordOneXmlCopy));
+        XmlAdaptedRecord recordTwoXml = new XmlAdaptedRecord(new RecordBuilder(RECORD_TWO).build());
+        assertFalse(recordOneXml.equals(recordTwoXml));
+        assertFalse(recordOneXml.equals(null));
         // not same instance
-        assertFalse(recordDemoOne.equals(1));
+        assertFalse(recordOneXml.equals(1));
     }
 }

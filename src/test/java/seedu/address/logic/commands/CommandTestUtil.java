@@ -7,7 +7,9 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ITEM_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ITEM_PRICE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ID;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PASSWORD;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_QUANTITY_SOLD;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
@@ -61,34 +63,6 @@ public class CommandTestUtil {
     public static final String INVALID_ADDRESS_DESC = " " + PREFIX_ADDRESS; // empty string not allowed for addresses
     public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "hubby*"; // '*' not allowed in tags
 
-    /** For sales records */
-    public static final String VALID_DATE_DEMO_ONE = "28-02-2018";
-    public static final String VALID_DATE_DEMO_TWO = "11-11-2011";
-    public static final String VALID_DATE_DEMO_THREE = "25-12-2017";
-    public static final String VALID_ITEM_NAME_DEMO_ONE = "Cheese Pizza";
-    public static final String VALID_ITEM_NAME_DEMO_TWO = "Pasta";
-    public static final String VALID_ITEM_NAME_DEMO_THREE = "Orange Juice";
-    public static final String VALID_QUANTITY_SOLD_DEMO_ONE = "100";
-    public static final String VALID_QUANTITY_SOLD_DEMO_TWO = "87";
-    public static final String VALID_QUANTITY_SOLD_DEMO_THREE = "202";
-    public static final String VALID_PRICE_DEMO_ONE = "18.50";
-    public static final String VALID_PRICE_DEMO_TWO = "7.99";
-    public static final String VALID_PRICE_DEMO_THREE = "2";
-
-    public static final String PREFIX_WITH_VALID_DATE = " " + PREFIX_DATE + VALID_DATE_DEMO_ONE;
-    public static final String PREFIX_WITH_VALID_ITEM_NAME = " " + PREFIX_ITEM_NAME + VALID_ITEM_NAME_DEMO_ONE;
-    public static final String PREFIX_WITH_VALID_QUANTITY_SOLD = " " + PREFIX_QUANTITY_SOLD + VALID_QUANTITY_SOLD_DEMO_ONE;
-    public static final String PREFIX_WITH_VALID_PRICE = " " + PREFIX_ITEM_PRICE + VALID_PRICE_DEMO_ONE;
-    public static final String PREFIX_WITH_INVALID_DATE = " " + PREFIX_DATE + "31-02-2018"; // no such date
-    public static final String PREFIX_WITH_INVALID_ITEM_NAME = " " + PREFIX_ITEM_NAME + "Fried Rice!"; // symbols not
-    // allowed
-    public static final String PREFIX_WITH_INVALID_QUANTITY_SOLD = " " + PREFIX_QUANTITY_SOLD + "3.5"; // positive
-    // integer only
-    public static final String PREFIX_WITH_INVALID_PRICE = " " + PREFIX_ITEM_PRICE + "-2"; // negative price not allowed
-
-    public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
-    public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
-
     public static final EditCommand.EditPersonDescriptor DESC_AMY;
     public static final EditCommand.EditPersonDescriptor DESC_BOB;
 
@@ -100,6 +74,48 @@ public class CommandTestUtil {
                 .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB)
                 .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
     }
+
+    /** For sales records */
+    public static final String VALID_DATE_RECORD_ONE = "28-02-2018";
+    public static final String VALID_DATE_RECORD_TWO = "11-11-2011";
+    public static final String VALID_DATE_RECORD_THREE = "25-12-2017";
+    public static final String VALID_ITEM_NAME_RECORD_ONE = "Cheese Pizza";
+    public static final String VALID_ITEM_NAME_RECORD_TWO = "Pasta";
+    public static final String VALID_ITEM_NAME_RECORD_THREE = "Orange Juice";
+    public static final String VALID_QUANTITY_SOLD_RECORD_ONE = "100";
+    public static final String VALID_QUANTITY_SOLD_RECORD_TWO = "87";
+    public static final String VALID_QUANTITY_SOLD_RECORD_THREE = "202";
+    public static final String VALID_PRICE_RECORD_ONE = "18.50";
+    public static final String VALID_PRICE_RECORD_TWO = "7.99";
+    public static final String VALID_PRICE_RECORD_THREE = "2";
+
+    public static final String PREFIX_WITH_VALID_DATE = " " + PREFIX_DATE + VALID_DATE_RECORD_ONE;
+    public static final String PREFIX_WITH_VALID_ITEM_NAME = " " + PREFIX_ITEM_NAME + VALID_ITEM_NAME_RECORD_ONE;
+    public static final String PREFIX_WITH_VALID_QUANTITY_SOLD = " " + PREFIX_QUANTITY_SOLD + VALID_QUANTITY_SOLD_RECORD_ONE;
+    public static final String PREFIX_WITH_VALID_PRICE = " " + PREFIX_ITEM_PRICE + VALID_PRICE_RECORD_ONE;
+    public static final String PREFIX_WITH_INVALID_DATE = " " + PREFIX_DATE + "31-02-2018"; // no such date
+    public static final String PREFIX_WITH_INVALID_ITEM_NAME = " " + PREFIX_ITEM_NAME + "Fried Rice!"; // symbols not
+    // allowed
+    public static final String PREFIX_WITH_INVALID_QUANTITY_SOLD = " " + PREFIX_QUANTITY_SOLD + "3.5"; // positive
+    // integer only
+    public static final String PREFIX_WITH_INVALID_PRICE = " " + PREFIX_ITEM_PRICE + "-2"; // negative price not allowed
+
+    /** For accounts */
+    public static final String VALID_USERNAME_DEMO_ONE = "demo1";
+    public static final String VALID_USERNAME_DEMO_TWO = "demo2";
+    public static final String VALID_USERNAME_DEMO_THREE = "demo3";
+    public static final String VALID_PASSWORD_DEMO_ONE = "1122qq";
+    public static final String VALID_PASSWORD_DEMO_TWO = "22qqww";
+    public static final String VALID_PASSWORD_DEMO_THREE = "abc!@#";
+
+    public static final String PREFIX_WITH_VALID_USERNAME = " " + PREFIX_ID + VALID_USERNAME_DEMO_ONE;
+    public static final String PREFIX_WITH_VALID_PASSWORD = " " + PREFIX_PASSWORD + VALID_PASSWORD_DEMO_ONE;
+
+    public static final String PREFIX_WITH_INVALID_USERNAME = " " + PREFIX_ID + "azhi kai"; // space not allowed
+    public static final String PREFIX_WITH_INVALID_PASSWORD = " " + PREFIX_PASSWORD + "11 22qq"; // space not allowed
+
+    public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
+    public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
 
     /**
      * Executes the given {@code command}, confirms that <br>
@@ -169,5 +185,4 @@ public class CommandTestUtil {
         model.deletePerson(firstPerson);
         model.commitAddressBook();
     }
-
 }

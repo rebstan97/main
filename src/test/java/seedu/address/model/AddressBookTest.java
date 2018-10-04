@@ -7,15 +7,17 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_TEST;
+import static seedu.address.testutil.TypicalAddressBook.getTypicalAddressBook;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.AMY;
 import static seedu.address.testutil.TypicalPersons.BOB;
 import static seedu.address.testutil.TypicalPersons.DYLAN;
-import static seedu.address.testutil.TypicalAddressBook.getTypicalAddressBook;
-import static seedu.address.testutil.salesrecords.TypicalRecords.DEMO_DEFAULT;
-import static seedu.address.testutil.salesrecords.TypicalRecords.DEMO_ONE;
-import static seedu.address.testutil.salesrecords.TypicalRecords.DEMO_THREE;
-import static seedu.address.testutil.salesrecords.TypicalRecords.DEMO_TWO;
+import static seedu.address.testutil.accounts.TypicalAccounts.DEMO_ADMIN;
+import static seedu.address.testutil.accounts.TypicalAccounts.DEMO_ONE;
+import static seedu.address.testutil.salesrecords.TypicalRecords.RECORD_DEFAULT;
+import static seedu.address.testutil.salesrecords.TypicalRecords.RECORD_ONE;
+import static seedu.address.testutil.salesrecords.TypicalRecords.RECORD_THREE;
+import static seedu.address.testutil.salesrecords.TypicalRecords.RECORD_TWO;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -28,6 +30,8 @@ import org.junit.rules.ExpectedException;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import seedu.address.model.accounts.Account;
+import seedu.address.model.accounts.exceptions.DuplicateAccountException;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
 import seedu.address.model.salesrecord.SalesRecord;
@@ -35,6 +39,7 @@ import seedu.address.model.salesrecord.exceptions.DuplicateRecordException;
 import seedu.address.model.tag.Tag;
 import seedu.address.testutil.AddressBookBuilder;
 import seedu.address.testutil.PersonBuilder;
+import seedu.address.testutil.accounts.AccountBuilder;
 import seedu.address.testutil.salesrecords.RecordBuilder;
 
 public class AddressBookTest {
@@ -64,13 +69,16 @@ public class AddressBookTest {
     }
 
     @Test
-    public void resetData_withDuplicatePersonsWithRecords_throwsDuplicatePersonException() {
+    public void resetData_withDuplicatePersonsWithRecordsAndAccounts_throwsDuplicatePersonException() {
         // Two persons with the same identity fields
-        Person editedAlice = new PersonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
+        Person editedAlice = new PersonBuilder(ALICE)
+                .withAddress(VALID_ADDRESS_BOB)
+                .withTags(VALID_TAG_HUSBAND)
                 .build();
         List<Person> newPersons = Arrays.asList(ALICE, editedAlice);
-        List<SalesRecord> newRecords = Arrays.asList(DEMO_DEFAULT, DEMO_ONE);
-        AddressBookStub newData = new AddressBookStub(newPersons, newRecords);
+        List<SalesRecord> newRecords = Arrays.asList(RECORD_DEFAULT, RECORD_ONE);
+        List<Account> newAccounts = Arrays.asList(DEMO_ADMIN, DEMO_ONE);
+        AddressBookStub newData = new AddressBookStub(newPersons, newRecords, newAccounts);
 
         thrown.expect(DuplicatePersonException.class);
         addressBook.resetData(newData);
@@ -96,7 +104,9 @@ public class AddressBookTest {
     @Test
     public void hasPerson_personWithSameIdentityFieldsInAddressBook_returnsTrue() {
         addressBook.addPerson(ALICE);
-        Person editedAlice = new PersonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
+        Person editedAlice = new PersonBuilder(ALICE)
+                .withAddress(VALID_ADDRESS_BOB)
+                .withTags(VALID_TAG_HUSBAND)
                 .build();
         assertTrue(addressBook.hasPerson(editedAlice));
     }
@@ -136,7 +146,10 @@ public class AddressBookTest {
 
     @Test
     public void removeTag_fromOnePerson_addressBookModified() {
-        addressBookWithPersons = new AddressBookBuilder().withPerson(AMY).withPerson(DYLAN).build();
+        addressBookWithPersons = new AddressBookBuilder()
+                .withPerson(AMY)
+                .withPerson(DYLAN)
+                .build();
 
         addressBookWithPersons.removeTag(new Tag(VALID_TAG_FRIEND));
 
@@ -150,15 +163,16 @@ public class AddressBookTest {
     }
 
     @Test
-    public void resetData_withDuplicateRecordsWithPersons_throwsDuplicateRecordException() {
+    public void resetData_withDuplicateRecordsWithPersonsAndAccounts_throwsDuplicateRecordException() {
         // Two records with the same date and name
-        SalesRecord record = new RecordBuilder(DEMO_ONE)
-                .withDate(DEMO_DEFAULT.getDate().toString())
-                .withName(DEMO_DEFAULT.getName().toString())
+        SalesRecord record = new RecordBuilder(RECORD_ONE)
+                .withDate(RECORD_DEFAULT.getDate().toString())
+                .withName(RECORD_DEFAULT.getName().toString())
                 .build();
-        List<SalesRecord> newRecords = Arrays.asList(DEMO_DEFAULT, record);
+        List<SalesRecord> newRecords = Arrays.asList(RECORD_DEFAULT, record);
         List<Person> newPersons = Arrays.asList(ALICE, BOB);
-        AddressBookStub newData = new AddressBookStub(newPersons, newRecords);
+        List<Account> newAccounts = Arrays.asList(DEMO_ADMIN, DEMO_ONE);
+        AddressBookStub newData = new AddressBookStub(newPersons, newRecords, newAccounts);
         thrown.expect(DuplicateRecordException.class);
         addressBook.resetData(newData);
     }
@@ -169,37 +183,37 @@ public class AddressBookTest {
     }
     @Test
     public void hasRecord_recordNotInAddressBook_returnsFalse() {
-        assertFalse(addressBook.hasRecord(DEMO_DEFAULT));
+        assertFalse(addressBook.hasRecord(RECORD_DEFAULT));
     }
     @Test
     public void hasRecord_recordInAddressBook_returnsTrue() {
-        addressBook.addRecord(DEMO_DEFAULT);
-        assertTrue(addressBook.hasRecord(DEMO_DEFAULT));
+        addressBook.addRecord(RECORD_DEFAULT);
+        assertTrue(addressBook.hasRecord(RECORD_DEFAULT));
     }
     @Test
     public void hasRecord_recordWithSameDateDifferentNameInAddressBook_returnsTrue() {
-        addressBook.addRecord(DEMO_DEFAULT);
-        SalesRecord record = new RecordBuilder(DEMO_TWO)
-                .withDate(DEMO_DEFAULT.getDate().toString())
+        addressBook.addRecord(RECORD_DEFAULT);
+        SalesRecord record = new RecordBuilder(RECORD_TWO)
+                .withDate(RECORD_DEFAULT.getDate().toString())
                 .build();
         addressBook.addRecord(record);
         assertTrue(addressBook.hasRecord(record));
     }
     @Test
     public void hasRecord_recordWithDifferentDateSameNameInAddressBook_returnsTrue() {
-        addressBook.addRecord(DEMO_DEFAULT);
-        SalesRecord record = new RecordBuilder(DEMO_ONE)
-                .withName(DEMO_DEFAULT.getName().toString())
+        addressBook.addRecord(RECORD_DEFAULT);
+        SalesRecord record = new RecordBuilder(RECORD_ONE)
+                .withName(RECORD_DEFAULT.getName().toString())
                 .build();
         addressBook.addRecord(record);
         assertTrue(addressBook.hasRecord(record));
     }
     @Test
     public void hasRecord_recordWithSameQuantitySoldSamePriceInAddressBook_returnsTrue() {
-        addressBook.addRecord(DEMO_DEFAULT);
-        SalesRecord record = new RecordBuilder(DEMO_THREE)
-                .withQuantitySold(DEMO_DEFAULT.getQuantitySold().toString())
-                .withPrice(DEMO_DEFAULT.getPrice().toString())
+        addressBook.addRecord(RECORD_DEFAULT);
+        SalesRecord record = new RecordBuilder(RECORD_THREE)
+                .withQuantitySold(RECORD_DEFAULT.getQuantitySold().toString())
+                .withPrice(RECORD_DEFAULT.getPrice().toString())
                 .build();
         addressBook.addRecord(record);
         assertTrue(addressBook.hasRecord(record));
@@ -209,6 +223,56 @@ public class AddressBookTest {
         thrown.expect(UnsupportedOperationException.class);
         addressBook.getRecordList().remove(0);
     }
+
+    @Test
+    public void resetData_withDuplicateAccountsWithPersonsAndRecords_throwsDuplicateAccountException() {
+        // Two accounts with the same username
+        Account account = new AccountBuilder(DEMO_ONE)
+                .withUsername(DEMO_ADMIN.getUsername().toString())
+                .build();
+        List<Account> newAccounts = Arrays.asList(DEMO_ADMIN, account);
+        List<Person> newPersons = Arrays.asList(ALICE, BOB);
+        List<SalesRecord> newRecords = Arrays.asList(RECORD_DEFAULT, RECORD_ONE);
+
+        AddressBookStub newData = new AddressBookStub(newPersons, newRecords, newAccounts);
+
+        thrown.expect(DuplicateAccountException.class);
+        addressBook.resetData(newData);
+    }
+
+    @Test
+    public void hasAccount_nullAccount_throwsNullPointerException() {
+        thrown.expect(NullPointerException.class);
+        addressBook.hasAccount(null);
+    }
+
+    @Test
+    public void hasAccount_accountNotInAddressBook_returnsFalse() {
+        assertFalse(addressBook.hasAccount(DEMO_ADMIN));
+    }
+
+    @Test
+    public void hasAccount_accountInAddressBook_returnsTrue() {
+        addressBook.addAccount(DEMO_ADMIN);
+        assertTrue(addressBook.hasAccount(DEMO_ADMIN));
+    }
+
+    @Test
+    public void hasAccount_accountWithSamePasswordInAddressBook_returnsTrue() {
+        addressBook.addAccount(DEMO_ADMIN);
+        Account account = new AccountBuilder(DEMO_ONE)
+                .withPassword(DEMO_ADMIN.getPassword().toString())
+                .build();
+        addressBook.addAccount(account);
+        assertTrue(addressBook.hasAccount(account));
+    }
+
+    @Test
+    public void getAccountList_modifyList_throwsUnsupportedOperationException() {
+        thrown.expect(UnsupportedOperationException.class);
+        addressBook.getAccountList().remove(0);
+    }
+
     @Test
     public void equals() {
         addressBookWithPersons = new AddressBookBuilder().withPerson(AMY).withPerson(DYLAN).build();
@@ -232,10 +296,12 @@ public class AddressBookTest {
 
         private final ObservableList<Person> persons = FXCollections.observableArrayList();
         private final ObservableList<SalesRecord> records = FXCollections.observableArrayList();
+        private final ObservableList<Account> accounts = FXCollections.observableArrayList();
 
-        AddressBookStub(Collection<Person> persons, Collection<SalesRecord> records) {
+        AddressBookStub(Collection<Person> persons, Collection<SalesRecord> records, Collection<Account> accounts) {
             this.persons.setAll(persons);
             this.records.setAll(records);
+            this.accounts.setAll(accounts);
         }
 
         @Override
@@ -247,6 +313,10 @@ public class AddressBookTest {
         public ObservableList<SalesRecord> getRecordList() {
             return records;
         }
-    }
 
+        @Override
+        public ObservableList<Account> getAccountList() {
+            return accounts;
+        }
+    }
 }

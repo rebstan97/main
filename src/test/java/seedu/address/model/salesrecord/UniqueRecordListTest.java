@@ -3,9 +3,9 @@ package seedu.address.model.salesrecord;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertFalse;
-import static seedu.address.testutil.salesrecords.TypicalRecords.DEMO_DEFAULT;
-import static seedu.address.testutil.salesrecords.TypicalRecords.DEMO_ONE;
-import static seedu.address.testutil.salesrecords.TypicalRecords.DEMO_THREE;
+import static seedu.address.testutil.salesrecords.TypicalRecords.RECORD_DEFAULT;
+import static seedu.address.testutil.salesrecords.TypicalRecords.RECORD_ONE;
+import static seedu.address.testutil.salesrecords.TypicalRecords.RECORD_THREE;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -30,12 +30,12 @@ public class UniqueRecordListTest {
     }
     @Test
     public void contains_Record_NotInList_returnsFalse() {
-        assertFalse(uniqueRecordList.contains(DEMO_DEFAULT));
+        assertFalse(uniqueRecordList.contains(RECORD_DEFAULT));
     }
     @Test
     public void contains_recordInList_returnsTrue() {
-        uniqueRecordList.add(DEMO_ONE);
-        assertTrue(uniqueRecordList.contains(DEMO_ONE));
+        uniqueRecordList.add(RECORD_ONE);
+        assertTrue(uniqueRecordList.contains(RECORD_ONE));
     }
     @Test
     public void add_nullRecord_throwsNullPointerException() {
@@ -44,39 +44,39 @@ public class UniqueRecordListTest {
     }
     @Test
     public void add_duplicateRecord_throwsDuplicateRecordException() {
-        uniqueRecordList.add(DEMO_ONE);
+        uniqueRecordList.add(RECORD_ONE);
         thrown.expect(DuplicateRecordException.class);
-        uniqueRecordList.add(DEMO_ONE);
+        uniqueRecordList.add(RECORD_ONE);
     }
     @Test
     public void setRecord_nullTargetAudience_throwsNullPointerException() {
         thrown.expect(NullPointerException.class);
-        uniqueRecordList.setRecord(null, DEMO_DEFAULT);
+        uniqueRecordList.setRecord(null, RECORD_DEFAULT);
     }
     @Test
     public void setRecord_nullEditedRecord_throwsNullPointerException() {
         thrown.expect(NullPointerException.class);
-        uniqueRecordList.setRecord(DEMO_ONE, null);
+        uniqueRecordList.setRecord(RECORD_ONE, null);
     }
     @Test
     public void setRecord_targetRecordNotInList_throwsRecordNotFoundException() {
         thrown.expect(RecordNotFoundException.class);
-        uniqueRecordList.setRecord(DEMO_THREE, DEMO_DEFAULT);
+        uniqueRecordList.setRecord(RECORD_THREE, RECORD_DEFAULT);
     }
     @Test
     public void setRecord_editedSameRecord_success() {
-        uniqueRecordList.add(DEMO_DEFAULT);
-        uniqueRecordList.setRecord(DEMO_DEFAULT, DEMO_DEFAULT);
+        uniqueRecordList.add(RECORD_DEFAULT);
+        uniqueRecordList.setRecord(RECORD_DEFAULT, RECORD_DEFAULT);
         UniqueRecordList expectedRecordList = new UniqueRecordList();
-        expectedRecordList.add(DEMO_DEFAULT);
+        expectedRecordList.add(RECORD_DEFAULT);
         assertEquals(expectedRecordList, uniqueRecordList);
     }
     @Test
     public void setRecord_editedRecordAlreadyExists_throwsDuplicateRecordException() {
-        uniqueRecordList.add(DEMO_DEFAULT);
-        uniqueRecordList.add(DEMO_ONE);
+        uniqueRecordList.add(RECORD_DEFAULT);
+        uniqueRecordList.add(RECORD_ONE);
         thrown.expect(DuplicateRecordException.class);
-        uniqueRecordList.setRecord(DEMO_DEFAULT, DEMO_ONE);
+        uniqueRecordList.setRecord(RECORD_DEFAULT, RECORD_ONE);
     }
     @Test
     public void remove_nullRecord_throwsNullPointerException() {
@@ -86,12 +86,12 @@ public class UniqueRecordListTest {
     @Test
     public void remove_recordDoesNotExist_throwsRecordNotFoundException() {
         thrown.expect(RecordNotFoundException.class);
-        uniqueRecordList.remove(DEMO_DEFAULT);
+        uniqueRecordList.remove(RECORD_DEFAULT);
     }
     @Test
     public void remove_existingRecord_removesRecord() {
-        uniqueRecordList.add(DEMO_DEFAULT);
-        uniqueRecordList.remove(DEMO_DEFAULT);
+        uniqueRecordList.add(RECORD_DEFAULT);
+        uniqueRecordList.remove(RECORD_DEFAULT);
         UniqueRecordList expectedRecordList = new UniqueRecordList();
         assertEquals(expectedRecordList, uniqueRecordList);
     }
@@ -102,9 +102,9 @@ public class UniqueRecordListTest {
     }
     @Test
     public void setRecords_uniqueRecordList_replacesOwnListWithProvidedUniqueRecordList() {
-        uniqueRecordList.add(DEMO_DEFAULT);
+        uniqueRecordList.add(RECORD_DEFAULT);
         UniqueRecordList expectedRecordList = new UniqueRecordList();
-        expectedRecordList.add(DEMO_ONE);
+        expectedRecordList.add(RECORD_ONE);
         uniqueRecordList.setRecords(expectedRecordList);
         assertEquals(expectedRecordList, uniqueRecordList);
     }
@@ -115,16 +115,16 @@ public class UniqueRecordListTest {
     }
     @Test
     public void setRecords_list_replacesOwnListWithProvidedList() {
-        uniqueRecordList.add(DEMO_DEFAULT);
-        List<SalesRecord> records = Collections.singletonList(DEMO_ONE);
+        uniqueRecordList.add(RECORD_DEFAULT);
+        List<SalesRecord> records = Collections.singletonList(RECORD_ONE);
         uniqueRecordList.setRecords(records);
         UniqueRecordList expectedRecordList = new UniqueRecordList();
-        expectedRecordList.add(DEMO_ONE);
+        expectedRecordList.add(RECORD_ONE);
         assertEquals(expectedRecordList, uniqueRecordList);
     }
     @Test
     public void setRecords_listWithDuplicateRecords_throwsDuplicateRecordException() {
-        List<SalesRecord> listWithDuplicateRecords = Arrays.asList(DEMO_DEFAULT, DEMO_DEFAULT);
+        List<SalesRecord> listWithDuplicateRecords = Arrays.asList(RECORD_DEFAULT, RECORD_DEFAULT);
         thrown.expect(DuplicateRecordException.class);
         uniqueRecordList.setRecords(listWithDuplicateRecords);
     }
@@ -135,28 +135,28 @@ public class UniqueRecordListTest {
     }
     @Test
     public void equals_sameObject_returnsTrue() {
-        uniqueRecordList.add(DEMO_DEFAULT);
+        uniqueRecordList.add(RECORD_DEFAULT);
         assertTrue(uniqueRecordList.equals(uniqueRecordList));
     }
     @Test
     public void equals_sameList_returnsTrue() {
-        uniqueRecordList.add(DEMO_DEFAULT);
-        uniqueRecordList.add(DEMO_THREE);
+        uniqueRecordList.add(RECORD_DEFAULT);
+        uniqueRecordList.add(RECORD_THREE);
         UniqueRecordList uniqueRecordListCopy = new UniqueRecordList();
-        uniqueRecordListCopy.add(DEMO_DEFAULT);
-        uniqueRecordListCopy.add(DEMO_THREE);
+        uniqueRecordListCopy.add(RECORD_DEFAULT);
+        uniqueRecordListCopy.add(RECORD_THREE);
         assertTrue(uniqueRecordList.equals(uniqueRecordListCopy));
     }
     @Test
     public void equals_differentType_returnsFalse() {
-        uniqueRecordList.add(DEMO_DEFAULT);
+        uniqueRecordList.add(RECORD_DEFAULT);
         assertFalse(uniqueRecordList.equals(2));
     }
     @Test
     public void equals_differentList_returnsFalse() {
-        uniqueRecordList.add(DEMO_DEFAULT);
+        uniqueRecordList.add(RECORD_DEFAULT);
         UniqueRecordList uniqueRecordListCopy = new UniqueRecordList();
-        uniqueRecordListCopy.add(DEMO_THREE);
+        uniqueRecordListCopy.add(RECORD_THREE);
         assertFalse(uniqueRecordList.equals(uniqueRecordListCopy));
     }
 }

@@ -4,18 +4,11 @@ import static java.util.Objects.requireNonNull;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
-import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.logic.commands.CommandTestUtil.deleteFirstPerson;
-import static seedu.address.testutil.TypicalAddressBook.getTypicalAddressBook;
-import static seedu.address.testutil.salesrecords.TypicalRecords.DEMO_DEFAULT;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.function.Predicate;
 
-import org.junit.Assert;
-import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
@@ -27,6 +20,7 @@ import seedu.address.logic.commands.salescommands.RecordSalesCommand;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.accounts.Account;
 import seedu.address.model.person.Person;
 import seedu.address.model.salesrecord.SalesRecord;
 import seedu.address.model.tag.Tag;
@@ -146,31 +140,6 @@ public class RecordSalesCommandTest {
         }
 
         @Override
-        public boolean canUndoAddressBook() {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public boolean canRedoAddressBook() {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public void undoAddressBook() {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public void redoAddressBook() {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public void commitAddressBook() {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
         public void addRecord(SalesRecord record) {
             throw new AssertionError("This method should not be called.");
         }
@@ -197,6 +166,61 @@ public class RecordSalesCommandTest {
 
         @Override
         public void updateFilteredRecordList(Predicate<SalesRecord> predicate) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void addAccount(Account account) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean hasAccount(Account account) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void removeAccount(Account account) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void updateAccount(Account target, Account editedAccount) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ObservableList<Account> getFilteredAccountList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void updateFilteredAccountList(Predicate<Account> predicate) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean canUndoAddressBook() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean canRedoAddressBook() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void undoAddressBook() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void redoAddressBook() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void commitAddressBook() {
             throw new AssertionError("This method should not be called.");
         }
     }

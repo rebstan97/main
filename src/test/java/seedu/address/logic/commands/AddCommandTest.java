@@ -19,6 +19,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.accounts.Account;
 import seedu.address.model.person.Person;
 import seedu.address.model.salesrecord.SalesRecord;
 import seedu.address.model.tag.Tag;
@@ -162,6 +163,36 @@ public class AddCommandTest {
         }
 
         @Override
+        public void addAccount(Account account) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean hasAccount(Account account) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void removeAccount(Account account) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void updateAccount(Account target, Account editedAccount) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ObservableList<Account> getFilteredAccountList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void updateFilteredAccountList(Predicate<Account> predicate) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void addRecord(SalesRecord record) {
             throw new AssertionError("This method should not be called.");
         }
@@ -191,6 +222,7 @@ public class AddCommandTest {
             throw new AssertionError("This method should not be called.");
         }
     }
+
     /**
      * A Model stub that contains a single person.
      */

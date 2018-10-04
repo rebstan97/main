@@ -18,7 +18,7 @@ import static seedu.address.testutil.salesrecords.RecordBuilder.DEFAULT_ITEM_NAM
 import static seedu.address.testutil.salesrecords.RecordBuilder.DEFAULT_QUANTITY_SOLD;
 import static seedu.address.testutil.salesrecords.RecordBuilder.DEFAULT_PRICE;
 
-import static seedu.address.testutil.salesrecords.TypicalRecords.DEMO_ONE;
+import static seedu.address.testutil.salesrecords.TypicalRecords.RECORD_ONE;
 import org.junit.Test;
 import seedu.address.logic.commands.salescommands.RecordSalesCommand;
 import seedu.address.logic.parser.salescommandsparser.RecordSalesCommandParser;
@@ -34,7 +34,7 @@ public class RecordSalesCommandParserTest {
 
     @Test
     public void parse_allFieldsPresent_success() {
-        SalesRecord expectedRecord = new RecordBuilder(DEMO_ONE).build();
+        SalesRecord expectedRecord = new RecordBuilder(RECORD_ONE).build();
         // whitespace only preamble
         assertParseSuccess(parser, PREAMBLE_WHITESPACE + PREFIX_WITH_VALID_DATE
                 + PREFIX_WITH_VALID_ITEM_NAME + PREFIX_WITH_VALID_QUANTITY_SOLD + PREFIX_WITH_VALID_PRICE,
