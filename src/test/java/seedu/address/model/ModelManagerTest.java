@@ -14,12 +14,12 @@ import static seedu.address.testutil.TypicalPersons.AMY;
 import static seedu.address.testutil.TypicalPersons.BENSON;
 import static seedu.address.testutil.TypicalPersons.BOB;
 import static seedu.address.testutil.TypicalPersons.DYLAN;
+import static seedu.address.testutil.accounts.TypicalAccounts.DEMO_ADMIN;
 import static seedu.address.testutil.accounts.TypicalAccounts.DEMO_ONE;
 import static seedu.address.testutil.accounts.TypicalAccounts.DEMO_TWO;
 import static seedu.address.testutil.salesrecords.TypicalRecords.RECORD_DEFAULT;
 import static seedu.address.testutil.salesrecords.TypicalRecords.RECORD_ONE;
 import static seedu.address.testutil.salesrecords.TypicalRecords.RECORD_TWO;
-import static seedu.address.testutil.accounts.TypicalAccounts.DEMO_ADMIN;
 
 import java.nio.file.Paths;
 import java.util.Arrays;
@@ -37,8 +37,8 @@ import seedu.address.model.salesrecord.exceptions.RecordNotFoundException;
 import seedu.address.model.tag.Tag;
 import seedu.address.testutil.AddressBookBuilder;
 import seedu.address.testutil.PersonBuilder;
-import seedu.address.testutil.salesrecords.RecordBuilder;
 import seedu.address.testutil.accounts.AccountBuilder;
+import seedu.address.testutil.salesrecords.RecordBuilder;
 
 public class ModelManagerTest {
 

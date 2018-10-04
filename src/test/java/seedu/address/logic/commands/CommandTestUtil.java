@@ -5,9 +5,9 @@ import static org.junit.Assert.assertTrue;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ID;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ITEM_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ITEM_PRICE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ID;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PASSWORD;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
@@ -91,7 +91,8 @@ public class CommandTestUtil {
 
     public static final String PREFIX_WITH_VALID_DATE = " " + PREFIX_DATE + VALID_DATE_RECORD_ONE;
     public static final String PREFIX_WITH_VALID_ITEM_NAME = " " + PREFIX_ITEM_NAME + VALID_ITEM_NAME_RECORD_ONE;
-    public static final String PREFIX_WITH_VALID_QUANTITY_SOLD = " " + PREFIX_QUANTITY_SOLD + VALID_QUANTITY_SOLD_RECORD_ONE;
+    public static final String PREFIX_WITH_VALID_QUANTITY_SOLD = " " + PREFIX_QUANTITY_SOLD +
+            VALID_QUANTITY_SOLD_RECORD_ONE;
     public static final String PREFIX_WITH_VALID_PRICE = " " + PREFIX_ITEM_PRICE + VALID_PRICE_RECORD_ONE;
     public static final String PREFIX_WITH_INVALID_DATE = " " + PREFIX_DATE + "31-02-2018"; // no such date
     public static final String PREFIX_WITH_INVALID_ITEM_NAME = " " + PREFIX_ITEM_NAME + "Fried Rice!"; // symbols not

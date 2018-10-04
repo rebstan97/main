@@ -48,7 +48,8 @@ public class RecordSalesCommandTest {
 
         CommandResult commandResult = new RecordSalesCommand(validRecord).execute(modelStub, commandHistory);
 
-        assertEquals(String.format(RecordSalesCommand.MESSAGE_RECORD_SALES_SUCCESS, validRecord), commandResult.feedbackToUser);
+        assertEquals(String.format(RecordSalesCommand.MESSAGE_RECORD_SALES_SUCCESS, validRecord),
+                commandResult.feedbackToUser);
         assertEquals(Arrays.asList(validRecord), modelStub.recordsAdded);
         assertEquals(EMPTY_COMMAND_HISTORY, commandHistory);
     }

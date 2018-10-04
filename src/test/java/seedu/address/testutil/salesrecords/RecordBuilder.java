@@ -1,10 +1,10 @@
 package seedu.address.testutil.salesrecords;
 
-import seedu.address.model.salesrecord.SalesRecord;
 import seedu.address.model.salesrecord.Date;
 import seedu.address.model.salesrecord.ItemName;
-import seedu.address.model.salesrecord.QuantitySold;
 import seedu.address.model.salesrecord.Price;
+import seedu.address.model.salesrecord.QuantitySold;
+import seedu.address.model.salesrecord.SalesRecord;
 
 /**
  * A utility class to help with building SalesRecord objects.

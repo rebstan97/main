@@ -31,7 +31,10 @@ public class SalesRecordTest {
 
         // different date and item name -> returns false
         SalesRecord editedRecordOne =
-                new RecordBuilder(RECORD_ONE).withDate(VALID_DATE_RECORD_TWO).withName(VALID_ITEM_NAME_RECORD_TWO).build();
+                new RecordBuilder(RECORD_ONE)
+                        .withDate(VALID_DATE_RECORD_TWO)
+                        .withName(VALID_ITEM_NAME_RECORD_TWO)
+                        .build();
         assertFalse(RECORD_ONE.isSameRecord(editedRecordOne));
 
         // different date, same item name -> returns false
@@ -68,7 +71,7 @@ public class SalesRecordTest {
     @Test
     public void equals() {
         // same values -> returns true
-        SalesRecord recordThreeCopy= new RecordBuilder(RECORD_THREE).build();
+        SalesRecord recordThreeCopy = new RecordBuilder(RECORD_THREE).build();
         assertTrue(RECORD_THREE.equals(recordThreeCopy));
 
         // same object -> returns true

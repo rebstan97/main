@@ -10,7 +10,6 @@ import static seedu.address.ui.StatusBarFooter.SYNC_STATUS_INITIAL;
 import static seedu.address.ui.StatusBarFooter.SYNC_STATUS_UPDATED;
 import static seedu.address.ui.UiPart.FXML_FILE_FOLDER;
 import static seedu.address.ui.testutil.GuiTestAssert.assertListMatching;
-import static seedu.address.testutil.TypicalAddressBook.getTypicalAddressBook;
 
 import java.net.MalformedURLException;
 import java.net.URL;
