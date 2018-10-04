@@ -38,7 +38,8 @@ public class Price {
 
     @Override
     public String toString() {
-        return value;
+        //return value;
+        return String.format("%.2f", valueDble);
     }
 
     @Override
