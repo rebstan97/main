@@ -69,11 +69,6 @@ public class UniqueRecordList implements Iterable<SalesRecord> {
         internalList.set(index, editedRecord);
     }
 
-    public void setRecord(UniqueRecordList replacement) {
-        requireNonNull(replacement);
-        internalList.setAll(replacement.internalList);
-    }
-
     /**
      * Removes the equivalent record from the list.
      * The record must exist in the list.
@@ -83,6 +78,11 @@ public class UniqueRecordList implements Iterable<SalesRecord> {
         if (!internalList.remove(toRemove)) {
             throw new RecordNotFoundException();
         }
+    }
+
+    public void setRecords(UniqueRecordList replacement) {
+        requireNonNull(replacement);
+        internalList.setAll(replacement.internalList);
     }
 
     /**
