@@ -50,7 +50,12 @@ public class SalesRecord {
      * This defines a weaker notion of equality between two records.
      */
     public boolean isSameRecord(SalesRecord otherRecord) {
-        return getName().equals(otherRecord.getName()) && getDate().equals(otherRecord.getDate());
+        if (otherRecord == this) {
+            return true;
+        }
+        return otherRecord != null
+                && getName().equals(otherRecord.getName())
+                && getDate().equals(otherRecord.getDate());
     }
 
     /**
