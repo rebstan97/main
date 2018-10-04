@@ -13,7 +13,7 @@ import seedu.address.ui.UiPart;
  */
 public class ItemCard extends UiPart<Region> {
 
-    private static final String FXML = "PersonListCard.fxml";
+    private static final String FXML = "ItemListCard.fxml";
 
     /**
      * The colours of the tags take on Enum values
