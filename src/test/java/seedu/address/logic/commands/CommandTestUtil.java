@@ -65,13 +65,13 @@ public class CommandTestUtil {
     public static final String VALID_DATE_DEMO_ONE = "28-02-2018";
     public static final String VALID_DATE_DEMO_TWO = "11-11-2011";
     public static final String VALID_DATE_DEMO_THREE = "25-12-2017";
-    public static final String VALID_ITEM_NAME_DEMO_ONE = "Fried Rice";
+    public static final String VALID_ITEM_NAME_DEMO_ONE = "Cheese Pizza";
     public static final String VALID_ITEM_NAME_DEMO_TWO = "Pasta";
     public static final String VALID_ITEM_NAME_DEMO_THREE = "Orange Juice";
     public static final String VALID_QUANTITY_SOLD_DEMO_ONE = "100";
     public static final String VALID_QUANTITY_SOLD_DEMO_TWO = "87";
     public static final String VALID_QUANTITY_SOLD_DEMO_THREE = "202";
-    public static final String VALID_PRICE_DEMO_ONE = "8.50";
+    public static final String VALID_PRICE_DEMO_ONE = "18.50";
     public static final String VALID_PRICE_DEMO_TWO = "7.99";
     public static final String VALID_PRICE_DEMO_THREE = "2";
 
