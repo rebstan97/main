@@ -7,7 +7,6 @@ import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 
 import at.favre.lib.crypto.bcrypt.BCrypt;
-import seedu.address.model.accounts.exceptions.PasswordHashException;
 
 /**
  * Represents an account password. Guarantees: immutable; is valid as declared in {@link #isValidPassword(String)}
@@ -44,9 +43,23 @@ public class Password {
 
     /**
      * Returns true if a given string is a valid password, including both raw and hashed password.
+     *
+     * @param password Password to validate.
      */
     public static boolean isValidPassword(String password) {
         return password.matches(PASSWORD_VALIDATION_REGEX);
+    }
+
+    /**
+     * Verifies if the password matches the hash.
+     *
+     * @param password The raw password provided by the user.
+     * @param hash The hash of the raw password that is already in the storage.
+     * @return true if the password matches the hash. Otherwise, returns false.
+     */
+    public static boolean verifyPassword(String password, byte[] hash) {
+        BCrypt.Result result = BCrypt.verifyer().verify(password.getBytes(StandardCharsets.UTF_8), hash);
+        return result.verified;
     }
 
     /**
@@ -57,15 +70,7 @@ public class Password {
     public void hash(String username) {
         byte[] salt = generateSalt(username);
 
-        if (salt.length != 16) {
-            throw new PasswordHashException();
-        }
-
         byte[] hash = BCrypt.withDefaults().hash(6, salt, password.getBytes());
-        BCrypt.Result result = BCrypt.verifyer().verify(password.getBytes(StandardCharsets.UTF_8), hash);
-        if (!result.verified || !result.validFormat) {
-            throw new PasswordHashException();
-        }
         password = new String(hash);
     }
 
@@ -81,7 +86,7 @@ public class Password {
         String usernameToProcess = username;
 
         if (usernameToProcess.length() > MAX_SALT_LENGTH) {
-            usernameToProcess = usernameToProcess.substring(0, MAX_SALT_LENGTH + 1);
+            usernameToProcess = usernameToProcess.substring(0, MAX_SALT_LENGTH);
             assert usernameToProcess.getBytes().length == MAX_SALT_LENGTH;
             return usernameToProcess.getBytes();
         }
@@ -104,9 +109,16 @@ public class Password {
 
     @Override
     public boolean equals(Object other) {
-        return other == this // short circuit if same object
-                || (other instanceof Password // instanceof handles nulls
-                && password.equals(((Password) other).password)); // state check
+        if (other == this) {
+            return true;
+        }
+
+        // handles null as well
+        if (!(other instanceof Password)) {
+            return false;
+        }
+
+        return password.equals(((Password) other).password); // always return false
     }
 
     @Override

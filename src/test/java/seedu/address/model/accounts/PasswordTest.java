@@ -44,6 +44,54 @@ public class PasswordTest {
         assertTrue(Password.isValidPassword("!!@@SGMY3-1")); // alphanumeric and special characters
     }
 
+    //TODO: Needs to be updated again in the future
+    @Test
+    public void hashPassword() {
+        Password passwordOne = new Password("1122qq");
+        passwordOne.hash(""); // hash with an empty username, which is impossible
+        assertTrue(passwordOne.toString().contains("$2a$06$")); // hash version 2a, cost factor 6
+
+        Password passwordTwo = new Password("1122qq");
+        passwordTwo.hash("azhikai12345678910"); // more than length 16 for username
+        assertTrue(passwordTwo.toString().contains("$2a$06$")); // hash version 2a, cost factor 6
+    }
+
+
+    //TODO: Needs to be updated again in the future
+    @Test
+    public void verifyHashPassword() {
+        Password passwordOne = new Password(VALID_PASSWORD_DEMO_ONE);
+        passwordOne.hash(""); // hash with an empty username, which is impossible
+
+        assertTrue(Password.verifyPassword(VALID_PASSWORD_DEMO_ONE, passwordOne.toString().getBytes()));
+
+        Password passwordTwo = new Password(VALID_PASSWORD_DEMO_ONE);
+        passwordTwo.hash("azhikai12345678910"); // more than length 16 for username
+
+        assertTrue(Password.verifyPassword(VALID_PASSWORD_DEMO_ONE, passwordTwo.toString().getBytes()));
+
+        // different username but same password should not result in the same password hash
+        assertNotEquals(passwordOne.toString(), passwordTwo.toString());
+    }
+
+    @Test
+    public void equals() {
+        Password passwordOne = new Password(VALID_PASSWORD_DEMO_ONE);
+        passwordOne.hash(""); // hash with an empty username, which is impossible
+        Password passwordTwo = new Password(VALID_PASSWORD_DEMO_ONE);
+        passwordTwo.hash("azhikai12345678910"); // more than length 16 for username
+
+        // same object
+        assertTrue(passwordOne.equals(passwordOne));
+
+        // different type
+        assertFalse(passwordOne.equals(null));
+        assertFalse(passwordOne.equals(0));
+
+        // different username but same password should not result in the same password hash
+        assertFalse(passwordOne.equals(passwordTwo));
+    }
+
     @Test
     public void hash_code() {
         Password passwordOne = new Password(VALID_PASSWORD_DEMO_ONE);
