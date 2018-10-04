@@ -7,11 +7,15 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_TEST;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_RECORDS;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.AMY;
 import static seedu.address.testutil.TypicalPersons.BENSON;
 import static seedu.address.testutil.TypicalPersons.BOB;
 import static seedu.address.testutil.TypicalPersons.DYLAN;
+import static seedu.address.testutil.salesrecords.TypicalRecords.DEMO_DEFAULT;
+import static seedu.address.testutil.salesrecords.TypicalRecords.DEMO_ONE;
+import static seedu.address.testutil.salesrecords.TypicalRecords.DEMO_TWO;
 
 import java.nio.file.Paths;
 import java.util.Arrays;
@@ -22,9 +26,12 @@ import org.junit.rules.ExpectedException;
 
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
+import seedu.address.model.salesrecord.SalesRecord;
+import seedu.address.model.salesrecord.exceptions.RecordNotFoundException;
 import seedu.address.model.tag.Tag;
 import seedu.address.testutil.AddressBookBuilder;
 import seedu.address.testutil.PersonBuilder;
+import seedu.address.testutil.salesrecords.RecordBuilder;
 
 public class ModelManagerTest {
 
@@ -55,6 +62,12 @@ public class ModelManagerTest {
     public void getFilteredPersonList_modifyList_throwsUnsupportedOperationException() {
         thrown.expect(UnsupportedOperationException.class);
         modelManager.getFilteredPersonList().remove(0);
+    }
+
+    @Test
+    public void getFilteredRecordList_modifyList_throwsUnsupportedOperationException() {
+        thrown.expect(UnsupportedOperationException.class);
+        modelManager.getFilteredRecordList().remove(0);
     }
 
     @Test
@@ -104,8 +117,58 @@ public class ModelManagerTest {
     }
 
     @Test
+    public void hasRecord_nullRecord_throwsNullPointerException() {
+        thrown.expect(NullPointerException.class);
+        modelManager.hasRecord(null);
+    }
+    @Test
+    public void hasRecord_recordNotInSalesBook_returnsFalse() {
+        assertFalse(modelManager.hasRecord(DEMO_DEFAULT));
+    }
+    @Test
+    public void hasRecord_recordInSalesBook_returnsTrue() {
+        modelManager.addRecord(DEMO_DEFAULT);
+        assertTrue(modelManager.hasRecord(DEMO_DEFAULT));
+    }
+    @Test
+    public void getRecordList_modifyList_throwsUnsupportedOperationException() {
+        thrown.expect(UnsupportedOperationException.class);
+        modelManager.getAddressBook().getRecordList().remove(0);
+    }
+    @Test
+    public void removeRecord_recordNotInSalesBook_throwsRecordsNotFoundException() {
+        thrown.expect(RecordNotFoundException.class);
+        modelManager.deleteRecord(DEMO_DEFAULT);
+    }
+    @Test
+    public void removeRecord_recordInSalesBook_returnTrue() {
+        modelManager.addRecord(DEMO_DEFAULT);
+        assertTrue(modelManager.hasRecord(DEMO_DEFAULT));
+        modelManager.deleteRecord(DEMO_DEFAULT);
+        assertFalse(modelManager.hasRecord(DEMO_DEFAULT));
+    }
+    @Test
+    public void updateRecord_recordNotInSalesBook_throwsRecordNotFoundException() {
+        thrown.expect(RecordNotFoundException.class);
+        modelManager.updateRecord(DEMO_DEFAULT, DEMO_ONE);
+    }
+    @Test
+    public void updateRecord_recordInSalesBook_returnTrue() {
+        modelManager.addRecord(DEMO_DEFAULT);
+        SalesRecord record = new RecordBuilder(DEMO_ONE).build();
+        modelManager.updateRecord(DEMO_DEFAULT, record);
+        assertFalse(modelManager.hasRecord(DEMO_DEFAULT));
+        assertTrue(modelManager.hasRecord(record));
+    }
+
+    @Test
     public void equals() {
-        AddressBook addressBook = new AddressBookBuilder().withPerson(ALICE).withPerson(BENSON).build();
+        AddressBook addressBook = new AddressBookBuilder()
+                .withPerson(ALICE)
+                .withPerson(BENSON)
+                .withRecord(DEMO_ONE)
+                .withRecord(DEMO_TWO)
+                .build();
         AddressBook differentAddressBook = new AddressBook();
         UserPrefs userPrefs = new UserPrefs();
 
@@ -133,6 +196,7 @@ public class ModelManagerTest {
 
         // resets modelManager to initial state for upcoming tests
         modelManager.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        modelManager.updateFilteredRecordList(PREDICATE_SHOW_ALL_RECORDS);
 
         // different userPrefs -> returns true
         UserPrefs differentUserPrefs = new UserPrefs();
