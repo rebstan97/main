@@ -48,7 +48,7 @@ public class RecordListPanel extends UiPart<Region> {
     /**
      * Scrolls to the {@code RecordCard} at the {@code index} and selects it.
      */
-    private void scrollTo(int index) {
+    public void scrollTo(int index) {
         Platform.runLater(() -> {
             recordListView.scrollTo(index);
             recordListView.getSelectionModel().clearAndSelect(index);

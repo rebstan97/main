@@ -250,7 +250,7 @@ public class RecordSalesCommandTest {
      */
     private class ModelStubAcceptingRecordAdded extends ModelStub {
 
-        final ArrayList<SalesRecord> recordsAdded = new ArrayList<>();
+        private final ArrayList<SalesRecord> recordsAdded = new ArrayList<>();
 
         @Override
         public boolean hasRecord(SalesRecord record) {
