@@ -1,6 +1,8 @@
 package seedu.address.storage;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -16,13 +18,17 @@ import seedu.address.testutil.TypicalAddressBook;
 
 public class XmlSerializableAddressBookTest {
 
-    private static final Path TEST_DATA_FOLDER = Paths.get("src", "test", "data", "XmlSerializableAddressBookTest");
+    private static final Path TEST_DATA_FOLDER = Paths.get("src", "test", "data",
+            "XmlSerializableAddressBookTest");
     private static final Path TYPICAL_PERSONS_FILE = TEST_DATA_FOLDER.resolve("typicalPersonsAddressBook.xml");
     private static final Path INVALID_PERSON_FILE = TEST_DATA_FOLDER.resolve("invalidPersonAddressBook.xml");
     private static final Path DUPLICATE_PERSON_FILE = TEST_DATA_FOLDER.resolve("duplicatePersonAddressBook.xml");
-
+    private static final Path INVALID_RECORD_FILE = TEST_DATA_FOLDER.resolve("invalidRecordAddressBook.xml");
+    private static final Path DUPLICATE_RECORD_FILE = TEST_DATA_FOLDER.resolve("duplicateRecordAddressBook.xml");
     @Rule
     public ExpectedException thrown = ExpectedException.none();
+
+    private XmlSerializableAddressBook dataFromFile = null;
 
     @Test
     public void toModelType_typicalPersonsFile_success() throws Exception {
@@ -50,4 +56,17 @@ public class XmlSerializableAddressBookTest {
         dataFromFile.toModelType();
     }
 
+    @Test
+    public void toModelType_invalidRecordFile_throwsIllegalValueException() throws Exception {
+        dataFromFile = XmlUtil.getDataFromFile(INVALID_RECORD_FILE, XmlSerializableAddressBook.class);
+        thrown.expect(IllegalValueException.class);
+        dataFromFile.toModelType();
+    }
+    @Test
+    public void toModelType_duplicateRecords_throwsIllegalValueException() throws Exception {
+        dataFromFile = XmlUtil.getDataFromFile(DUPLICATE_RECORD_FILE, XmlSerializableAddressBook.class);
+        thrown.expect(IllegalValueException.class);
+        thrown.expectMessage(XmlSerializableAddressBook.MESSAGE_DUPLICATE_RECORD);
+        dataFromFile.toModelType();
+    }
 }
