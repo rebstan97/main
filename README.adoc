@@ -37,8 +37,9 @@ effectiveness and efficiency of managing their eatery' menus.
 initiative of the https://se-edu.github.io/Team.html[se-edu] team.
 * Some parts of this sample application were inspired by the excellent http://code.makery.ch/library/javafx-8-tutorial/[Java FX tutorial] by
 _Marco Jakob_.
-* Libraries used: https://github.com/TestFX/TestFX[TextFX], https://bitbucket.org/controlsfx/controlsfx/[ControlsFX], https://github.com/FasterXML/jackson[Jackson], https://github.com/google/guava[Guava], https://github.com/junit-team/junit5[JUnit5]
-* Free icons:
-** https://www.flaticon.com/authors/smashicons[Smashicons]
+* Libraries used: https://github.com/TestFX/TestFX[TextFX], https://bitbucket.org/controlsfx/controlsfx/[ControlsFX],
+ https://github.com/FasterXML/jackson[Jackson], https://github.com/google/guava[Guava],
+ https://github.com/junit-team/junit5[JUnit5], https://github.com/patrickfav/bcrypt[bcrypt]
+* Free icons: https://www.flaticon.com/authors/smashicons[Smashicons]
 
 == Licence : link:LICENSE[MIT]
