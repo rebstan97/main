@@ -32,6 +32,7 @@ public class XmlSerializableAddressBook {
     @XmlElement
     private List<XmlAdaptedRecord> records;
 
+    @XmlElement
     private List<XmlAdaptedAccount> accounts;
 
     private AddressBook addressBook;
