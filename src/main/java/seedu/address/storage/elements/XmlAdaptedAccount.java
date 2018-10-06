@@ -105,4 +105,7 @@ public class XmlAdaptedAccount {
         return Objects.equals(username, otherAccount.username)
                 && Objects.equals(password, otherAccount.password);
     }
+
+    public static class XmlAdaptedIngredient {
+    }
 }

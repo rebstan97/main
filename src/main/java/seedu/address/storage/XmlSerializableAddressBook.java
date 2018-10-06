@@ -11,8 +11,10 @@ import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.accounts.Account;
+import seedu.address.model.ingredient.Ingredient;
 import seedu.address.model.person.Person;
 import seedu.address.storage.elements.XmlAdaptedAccount;
+import seedu.address.storage.elements.XmlAdaptedIngredient;
 
 /**
  * An Immutable AddressBook that is serializable to XML format
@@ -22,12 +24,17 @@ public class XmlSerializableAddressBook {
 
     public static final String MESSAGE_DUPLICATE_PERSON = "Person list contains duplicate person(s).";
     public static final String MESSAGE_DUPLICATE_ACCOUNT = "Account list contains duplicate account(s).";
+    public static final String MESSAGE_DUPLICATE_INGREDIENT = "Ingredient list contains duplicate ingredient(s).";
+
 
     @XmlElement
     private List<XmlAdaptedPerson> persons;
 
     @XmlElement
     private List<XmlAdaptedAccount> accounts;
+
+    @XmlElement
+    private List<XmlAdaptedIngredient> ingredients;
 
     private AddressBook addressBook;
 
@@ -38,6 +45,7 @@ public class XmlSerializableAddressBook {
         addressBook = new AddressBook();
         persons = new ArrayList<>();
         accounts = new ArrayList<>();
+        ingredients = new ArrayList<>();
     }
 
     /**
@@ -47,6 +55,8 @@ public class XmlSerializableAddressBook {
         this();
         persons.addAll(src.getPersonList().stream().map(XmlAdaptedPerson::new).collect(Collectors.toList()));
         accounts.addAll(src.getAccountList().stream().map(XmlAdaptedAccount::new).collect(Collectors.toList()));
+        ingredients.addAll(src.getIngredientList().stream().map(XmlAdaptedIngredient::new).collect(Collectors.toList()));
+
     }
 
     /**
@@ -82,6 +92,22 @@ public class XmlSerializableAddressBook {
     }
 
     /**
+     * Converts this ingredient record into the model's {@code Ingredient} object.
+     *
+     * @throws IllegalValueException if there were any data constraints violated or duplicates in the {@code
+     *         XmlAdaptedIngredient}.
+     */
+    public void processIngredients() throws IllegalValueException {
+        for (XmlAdaptedIngredient i : ingredients) {
+            Ingredient ingredient = i.toModelType();
+            if (addressBook.hasIngredient(ingredient)) {
+                throw new IllegalValueException(MESSAGE_DUPLICATE_INGREDIENT);
+            }
+            addressBook.addIngredient(ingredient);
+        }
+    }
+
+    /**
      * Returns the converted model {@code AddressBook} object.
      *
      * @throws IllegalValueException if there were any data constraints violated or duplicates record when not
@@ -90,6 +116,7 @@ public class XmlSerializableAddressBook {
     public AddressBook toModelType() throws IllegalValueException {
         processPersons();
         processAccounts();
+        processIngredients();
         return addressBook;
     }
 
@@ -104,6 +131,7 @@ public class XmlSerializableAddressBook {
         }
 
         return persons.equals(((XmlSerializableAddressBook) other).persons)
-                && accounts.equals(((XmlSerializableAddressBook) other).accounts);
+                && accounts.equals(((XmlSerializableAddressBook) other).accounts)
+                && ingredients.equals(((XmlSerializableAddressBook) other).ingredients);
     }
 }
