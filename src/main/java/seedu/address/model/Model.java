@@ -150,7 +150,7 @@ public interface Model {
     /**
      * Deletes the given ingredient. The ingredient must exist in the address book.
      */
-    void deleteIngredient(Person target);
+    void deleteIngredient(Ingredient target);
 
     /**
      * Adds the given ingredient. {@code ingredient} must not already exist in the address book.
@@ -167,7 +167,7 @@ public interface Model {
     /**
      * Returns an unmodifiable view of the filtered ingredient list
      */
-    ObservableList<Person> getFilteredIngredientList();
+    ObservableList<Ingredient> getFilteredIngredientList();
 
     /**
      * Updates the filter of the filtered ingredient list to filter by the given {@code predicate}.

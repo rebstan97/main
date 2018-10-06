@@ -10,6 +10,8 @@ import java.util.Set;
 import javafx.collections.ObservableList;
 import seedu.address.model.accounts.Account;
 import seedu.address.model.accounts.UniqueAccountList;
+import seedu.address.model.ingredient.Ingredient;
+import seedu.address.model.ingredient.UniqueIngredientList;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.UniquePersonList;
 import seedu.address.model.tag.Tag;
@@ -21,6 +23,7 @@ public class AddressBook implements ReadOnlyAddressBook {
 
     private final UniquePersonList persons;
     private final UniqueAccountList accounts;
+    private final UniqueIngredientList ingredients;
 
     /*
      * The 'unusual' code block below is an non-static initialization block, sometimes used to avoid duplication
@@ -32,6 +35,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     {
         persons = new UniquePersonList();
         accounts = new UniqueAccountList();
+        ingredients = new UniqueIngredientList();
     }
 
     public AddressBook() {}
@@ -173,9 +177,56 @@ public class AddressBook implements ReadOnlyAddressBook {
         accounts.remove(key);
     }
 
+    //// ingredient-level operations
+
+    /**
+     * Replaces the contents of the ingredient list with {@code ingredients}. {@code ingredients} must not
+     * contain duplicate ingredients.
+     */
+    public void setIngredients(List<Ingredient> ingredients) {
+        this.ingredients.setIngredients(ingredients);
+    }
+
+    /**
+     * Returns true if an ingredient with the same identity as {@code ingredient} exists in the address book.
+     */
+    public boolean hasIngredient(Ingredient ingredient) {
+        return ingredients.contains(ingredient);
+    }
+
+    /**
+     * Adds an ingredient to the address book. The ingredient must not already exist in the address book.
+     */
+    public void addIngredient(Ingredient i) {
+        ingredients.add(i);
+    }
+
+    /**
+     * Replaces the given ingredient {@code target} in the list with {@code editedIngredients}. {@code target} must
+     * exist in the address book. The ingredient identity of {@code editedIngredient} must not be the same as
+     * another existing ingredient in the address book.
+     */
+    public void updateIngredient(Ingredient target, Ingredient editedIngredient) {
+        requireNonNull(editedIngredient);
+
+        ingredients.setIngredient(target, editedIngredient);
+    }
+
+    /**
+     * Removes ingredient with {@code key} from this {@code AddressBook}. {@code key} must exist in the address book.
+     */
+    public void removeIngredient(Ingredient key) {
+        ingredients.remove(key);
+    }
+
     @Override
     public ObservableList<Account> getAccountList() {
         return accounts.asUnmodifiableObservableList();
+    }
+
+    @Override
+    public ObservableList<Ingredient> getIngredientList() {
+        return ingredients.asUnmodifiableObservableList();
     }
 
     //// util methods

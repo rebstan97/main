@@ -13,6 +13,7 @@ import seedu.address.commons.core.ComponentManager;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.events.model.AddressBookChangedEvent;
 import seedu.address.model.accounts.Account;
+import seedu.address.model.ingredient.Ingredient;
 import seedu.address.model.person.Person;
 import seedu.address.model.tag.Tag;
 
@@ -26,6 +27,7 @@ public class ModelManager extends ComponentManager implements Model {
     private final VersionedAddressBook versionedAddressBook;
     private final FilteredList<Person> filteredPersons;
     private final FilteredList<Account> filteredAccounts;
+    private final FilteredList<Ingredient> filteredIngredients;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -39,6 +41,7 @@ public class ModelManager extends ComponentManager implements Model {
         versionedAddressBook = new VersionedAddressBook(addressBook);
         filteredPersons = new FilteredList<>(versionedAddressBook.getPersonList());
         filteredAccounts = new FilteredList<>(versionedAddressBook.getAccountList());
+        filteredIngredients = new FilteredList<>(versionedAddressBook.getIngredientList());
     }
 
     public ModelManager() {
@@ -173,6 +176,48 @@ public class ModelManager extends ComponentManager implements Model {
     public void updateFilteredAccountList(Predicate<Account> predicate) {
         requireNonNull(predicate);
         filteredAccounts.setPredicate(predicate);
+    }
+
+    //=========== Ingredients ===========
+
+    @Override
+    public boolean hasIngredient(Ingredient ingredient) {
+        requireNonNull(ingredient);
+        return versionedAddressBook.hasIngredient(ingredient);
+    }
+
+    @Override
+    public void deleteIngredient(Ingredient target) {
+        versionedAddressBook.removeIngredient(target);
+        indicateAddressBookChanged();
+    }
+
+    @Override
+    public void addIngredient(Ingredient ingredient) {
+        versionedAddressBook.addIngredient(ingredient);
+        updateFilteredIngredientList(PREDICATE_SHOW_ALL_INGREDIENTS);
+        indicateAddressBookChanged();
+    }
+
+    @Override
+    public void updateIngredient(Ingredient target, Ingredient editedIngredient) {
+        requireAllNonNull(target, editedIngredient);
+
+        versionedAddressBook.updateIngredient(target, editedIngredient);
+        indicateAddressBookChanged();
+    }
+
+    //=========== Filtered Ingredient List Accessors =============================================================
+
+    @Override
+    public ObservableList<Ingredient> getFilteredIngredientList() {
+        return FXCollections.unmodifiableObservableList(filteredIngredients);
+    }
+
+    @Override
+    public void updateFilteredIngredientList(Predicate<Ingredient> predicate) {
+        requireNonNull(predicate);
+        filteredIngredients.setPredicate(predicate);
     }
 
     @Override
