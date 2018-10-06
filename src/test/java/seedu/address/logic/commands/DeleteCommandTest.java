@@ -6,9 +6,9 @@ import static org.junit.Assert.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showPersonAtIndex;
+import static seedu.address.testutil.TypicalAddressBook.getTypicalAddressBook;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
-import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import org.junit.Test;
 
@@ -21,8 +21,8 @@ import seedu.address.model.UserPrefs;
 import seedu.address.model.person.Person;
 
 /**
- * Contains integration tests (interaction with the Model, UndoCommand and RedoCommand) and unit tests for
- * {@code DeleteCommand}.
+ * Contains integration tests (interaction with the Model, UndoCommand and RedoCommand) and unit tests for {@code
+ * DeleteCommand}.
  */
 public class DeleteCommandTest {
 
@@ -115,11 +115,10 @@ public class DeleteCommandTest {
     }
 
     /**
-     * 1. Deletes a {@code Person} from a filtered list.
-     * 2. Undo the deletion.
-     * 3. The unfiltered list should be shown now. Verify that the index of the previously deleted person in the
-     * unfiltered list is different from the index at the filtered list.
-     * 4. Redo the deletion. This ensures {@code RedoCommand} deletes the person object regardless of indexing.
+     * 1. Deletes a {@code Person} from a filtered list. 2. Undo the deletion. 3. The unfiltered list should be shown
+     * now. Verify that the index of the previously deleted person in the unfiltered list is different from the index at
+     * the filtered list. 4. Redo the deletion. This ensures {@code RedoCommand} deletes the person object regardless of
+     * indexing.
      */
     @Test
     public void executeUndoRedo_validIndexFilteredList_samePersonDeleted() throws Exception {

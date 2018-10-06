@@ -7,11 +7,13 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_TEST;
+import static seedu.address.testutil.TypicalAddressBook.getTypicalAddressBook;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.AMY;
 import static seedu.address.testutil.TypicalPersons.BOB;
 import static seedu.address.testutil.TypicalPersons.DYLAN;
-import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
+import static seedu.address.testutil.accounts.TypicalAccounts.DEMO_ADMIN;
+import static seedu.address.testutil.accounts.TypicalAccounts.DEMO_ONE;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -24,11 +26,14 @@ import org.junit.rules.ExpectedException;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import seedu.address.model.accounts.Account;
+import seedu.address.model.accounts.exceptions.DuplicateAccountException;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
 import seedu.address.model.tag.Tag;
 import seedu.address.testutil.AddressBookBuilder;
 import seedu.address.testutil.PersonBuilder;
+import seedu.address.testutil.accounts.AccountBuilder;
 
 public class AddressBookTest {
 
@@ -57,12 +62,16 @@ public class AddressBookTest {
     }
 
     @Test
-    public void resetData_withDuplicatePersons_throwsDuplicatePersonException() {
+    public void resetData_withDuplicatePersonsWithAccounts_throwsDuplicatePersonException() {
         // Two persons with the same identity fields
-        Person editedAlice = new PersonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
+        Person editedAlice = new PersonBuilder(ALICE)
+                .withAddress(VALID_ADDRESS_BOB)
+                .withTags(VALID_TAG_HUSBAND)
                 .build();
         List<Person> newPersons = Arrays.asList(ALICE, editedAlice);
-        AddressBookStub newData = new AddressBookStub(newPersons);
+        List<Account> newAccounts = Arrays.asList(DEMO_ADMIN, DEMO_ONE);
+
+        AddressBookStub newData = new AddressBookStub(newPersons, newAccounts);
 
         thrown.expect(DuplicatePersonException.class);
         addressBook.resetData(newData);
@@ -88,7 +97,9 @@ public class AddressBookTest {
     @Test
     public void hasPerson_personWithSameIdentityFieldsInAddressBook_returnsTrue() {
         addressBook.addPerson(ALICE);
-        Person editedAlice = new PersonBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
+        Person editedAlice = new PersonBuilder(ALICE)
+                .withAddress(VALID_ADDRESS_BOB)
+                .withTags(VALID_TAG_HUSBAND)
                 .build();
         assertTrue(addressBook.hasPerson(editedAlice));
     }
@@ -128,7 +139,10 @@ public class AddressBookTest {
 
     @Test
     public void removeTag_fromOnePerson_addressBookModified() {
-        addressBookWithPersons = new AddressBookBuilder().withPerson(AMY).withPerson(DYLAN).build();
+        addressBookWithPersons = new AddressBookBuilder()
+                .withPerson(AMY)
+                .withPerson(DYLAN)
+                .build();
 
         addressBookWithPersons.removeTag(new Tag(VALID_TAG_FRIEND));
 
@@ -141,21 +155,97 @@ public class AddressBookTest {
         assertEquals(addressBookWithPersons, expectedAddressBook);
     }
 
+    @Test
+    public void resetData_withDuplicateAccountsWithPersons_throwsDuplicateAccountException() {
+        // Two accounts with the same username
+        Account account = new AccountBuilder(DEMO_ONE)
+                .withUsername(DEMO_ADMIN.getUsername().toString())
+                .build();
+        List<Account> newAccounts = Arrays.asList(DEMO_ADMIN, account);
+        List<Person> newPersons = Arrays.asList(ALICE, BOB);
+        AddressBookStub newData = new AddressBookStub(newPersons, newAccounts);
+
+        thrown.expect(DuplicateAccountException.class);
+        addressBook.resetData(newData);
+    }
+
+    @Test
+    public void hasAccount_nullAccount_throwsNullPointerException() {
+        thrown.expect(NullPointerException.class);
+        addressBook.hasAccount(null);
+    }
+
+    @Test
+    public void hasAccount_accountNotInAddressBook_returnsFalse() {
+        assertFalse(addressBook.hasAccount(DEMO_ADMIN));
+    }
+
+    @Test
+    public void hasAccount_accountInAddressBook_returnsTrue() {
+        addressBook.addAccount(DEMO_ADMIN);
+        assertTrue(addressBook.hasAccount(DEMO_ADMIN));
+    }
+
+    @Test
+    public void hasAccount_accountWithSamePasswordInAddressBook_returnsTrue() {
+        addressBook.addAccount(DEMO_ADMIN);
+        Account account = new AccountBuilder(DEMO_ONE)
+                .withPassword(DEMO_ADMIN.getPassword().toString())
+                .build();
+        addressBook.addAccount(account);
+        assertTrue(addressBook.hasAccount(account));
+    }
+
+    @Test
+    public void getAccountList_modifyList_throwsUnsupportedOperationException() {
+        thrown.expect(UnsupportedOperationException.class);
+        addressBook.getAccountList().remove(0);
+    }
+
+    @Test
+    public void equals() {
+        addressBookWithPersons = new AddressBookBuilder().withPerson(AMY).withPerson(DYLAN).build();
+
+        // same object
+        assertTrue(addressBookWithPersons.equals(addressBookWithPersons));
+
+        addressBookWithPersons.removeTag(new Tag(VALID_TAG_FRIEND));
+
+        Person amyWithoutTags = new PersonBuilder(AMY).withTags().build();
+
+        AddressBook expectedAddressBook = new AddressBookBuilder().withPerson(amyWithoutTags)
+                .withPerson(DYLAN)
+                .build();
+
+        assertTrue(addressBookWithPersons.equals(expectedAddressBook));
+
+        // different type
+        assertFalse(addressBookWithPersons.equals(null));
+        assertFalse(addressBookWithPersons.equals(0));
+
+    }
+
     /**
      * A stub ReadOnlyAddressBook whose persons list can violate interface constraints.
      */
     private static class AddressBookStub implements ReadOnlyAddressBook {
 
         private final ObservableList<Person> persons = FXCollections.observableArrayList();
+        private final ObservableList<Account> accounts = FXCollections.observableArrayList();
 
-        AddressBookStub(Collection<Person> persons) {
+        AddressBookStub(Collection<Person> persons, Collection<Account> accounts) {
             this.persons.setAll(persons);
+            this.accounts.setAll(accounts);
         }
 
         @Override
         public ObservableList<Person> getPersonList() {
             return persons;
         }
-    }
 
+        @Override
+        public ObservableList<Account> getAccountList() {
+            return accounts;
+        }
+    }
 }
