@@ -3,6 +3,7 @@ package seedu.address.model;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
+import seedu.address.model.ingredient.Ingredient;
 import seedu.address.model.person.Person;
 import seedu.address.model.tag.Tag;
 
@@ -15,6 +16,7 @@ public interface Model {
      * {@code Predicate} that always evaluate to true
      */
     Predicate<Person> PREDICATE_SHOW_ALL_PERSONS = unused -> true;
+    Predicate<Ingredient> PREDICATE_SHOW_ALL_INGREDIENTS = unused -> true;
 
     /**
      * Clears existing backing model and replaces with the provided new data.
@@ -91,4 +93,41 @@ public interface Model {
      * Saves the current address book state for undo/redo.
      */
     void commitAddressBook();
+
+    //=============== API for Ingredient ===============
+
+    /**
+     * Returns true if an ingredient with the same identity as {@code ingredient} exists in the address book.
+     */
+    boolean hasIngredient(Ingredient ingredient);
+
+    /**
+     * Deletes the given ingredient. The ingredient must exist in the address book.
+     */
+    void deleteIngredient(Person target);
+
+    /**
+     * Adds the given ingredient. {@code ingredient} must not already exist in the address book.
+     */
+    void addIngredient(Ingredient ingredient);
+
+    /**
+     * Replaces the given ingredient {@code target} with {@code editedIngredient}. {@code target} must exist in
+     * the address book. The ingredient identity of {@code editedIngredient} must not be the same as another
+     * existing ingredient in the address book.
+     */
+    void updateIngredient(Ingredient target, Ingredient editedIngredient);
+
+    /**
+     * Returns an unmodifiable view of the filtered ingredient list
+     */
+    ObservableList<Person> getFilteredIngredientList();
+
+    /**
+     * Updates the filter of the filtered ingredient list to filter by the given {@code predicate}.
+     *
+     * @throws NullPointerException if {@code predicate} is null.
+     */
+    void updateFilteredIngredientList(Predicate<Ingredient> predicate);
+
 }
