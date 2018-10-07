@@ -48,7 +48,8 @@ public class AddIngredientCommandTest {
 
         CommandResult commandResult = new AddIngredientCommand(validIngredient).execute(modelStub, commandHistory);
 
-        assertEquals(String.format(AddIngredientCommand.MESSAGE_SUCCESS, validIngredient), commandResult.feedbackToUser);
+        assertEquals(String.format(AddIngredientCommand.MESSAGE_SUCCESS, validIngredient),
+                commandResult.feedbackToUser);
         assertEquals(Arrays.asList(validIngredient), modelStub.ingredientsAdded);
         assertEquals(EMPTY_COMMAND_HISTORY, commandHistory);
     }
