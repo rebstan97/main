@@ -57,8 +57,8 @@ public class MainWindow extends UiPart<Stage> {
     @FXML
     private Label accountStatus;
 
-//    @FXML
-//    private StackPane personListPanelPlaceholder;
+    //@FXML
+    //private StackPane personListPanelPlaceholder;
 
     @FXML
     private StackPane ingredientListPanelPlaceholder;
@@ -135,8 +135,8 @@ public class MainWindow extends UiPart<Stage> {
         browserPanel = new BrowserPanel();
         browserPlaceholder.getChildren().add(browserPanel.getRoot());
 
-//        personListPanel = new PersonListPanel(logic.getFilteredPersonList());
-//        personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
+        //personListPanel = new PersonListPanel(logic.getFilteredPersonList());
+        //personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
 
         ingredientListPanel = new IngredientListPanel(logic.getFilteredIngredientList());
         ingredientListPanelPlaceholder.getChildren().add(ingredientListPanel.getRoot());

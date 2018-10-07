@@ -1,10 +1,10 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_INGREDIENT_NAME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_INGREDIENT_UNIT;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_INGREDIENT_PRICE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_INGREDIENT_MINIMUM;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_INGREDIENT_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_INGREDIENT_PRICE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_INGREDIENT_UNIT;
 
 import java.util.stream.Stream;
 

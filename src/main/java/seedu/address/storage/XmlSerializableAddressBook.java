@@ -55,7 +55,8 @@ public class XmlSerializableAddressBook {
         this();
         persons.addAll(src.getPersonList().stream().map(XmlAdaptedPerson::new).collect(Collectors.toList()));
         accounts.addAll(src.getAccountList().stream().map(XmlAdaptedAccount::new).collect(Collectors.toList()));
-        ingredients.addAll(src.getIngredientList().stream().map(XmlAdaptedIngredient::new).collect(Collectors.toList()));
+        ingredients.addAll(src.getIngredientList().stream().map(XmlAdaptedIngredient::new)
+                .collect(Collectors.toList()));
 
     }
 

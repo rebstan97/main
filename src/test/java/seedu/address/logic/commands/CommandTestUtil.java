@@ -88,7 +88,7 @@ public class CommandTestUtil {
 
     public static final String PREFIX_WITH_INVALID_USERNAME = " " + PREFIX_ID + "azhi kai"; // space not allowed
     public static final String PREFIX_WITH_INVALID_PASSWORD = " " + PREFIX_PASSWORD + "11 22qq"; // space not allowed
-    
+
     /** For ingredients */
     public static final String VALID_NAME_APPLE = "Granny Smith Apple";
     public static final String VALID_NAME_BROCCOLI = "Australian Broccoli";
