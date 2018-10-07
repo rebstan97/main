@@ -5,11 +5,7 @@ import java.util.Objects;
 import javax.xml.bind.annotation.XmlElement;
 
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.ingredient.Ingredient;
-import seedu.address.model.ingredient.IngredientName;
-import seedu.address.model.ingredient.IngredientPrice;
-import seedu.address.model.ingredient.IngredientUnit;
-import seedu.address.model.ingredient.MinimumUnit;
+import seedu.address.model.ingredient.*;
 
 /**
  * JAXB-friendly version of the Ingredient.
@@ -102,7 +98,16 @@ public class XmlAdaptedIngredient {
         }
         final MinimumUnit modelMinimum = new MinimumUnit(minimum);
 
-        return new Ingredient(modelName, modelUnit, modelPrice, modelMinimum);
+        if (numUnits == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    NumUnits.class.getSimpleName()));
+        }
+        if (!NumUnits.isValidNumUnits(numUnits)) {
+            throw new IllegalValueException(NumUnits.MESSAGE_NUMUNITS_CONSTRAINTS);
+        }
+        final NumUnits modelNumUnits = new NumUnits(numUnits);
+
+        return new Ingredient(modelName, modelUnit, modelPrice, modelMinimum, modelNumUnits);
     }
 
     @Override
