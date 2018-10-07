@@ -28,6 +28,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.model.accounts.Account;
 import seedu.address.model.accounts.exceptions.DuplicateAccountException;
+import seedu.address.model.ingredient.Ingredient;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
 import seedu.address.model.tag.Tag;
@@ -232,10 +233,13 @@ public class AddressBookTest {
 
         private final ObservableList<Person> persons = FXCollections.observableArrayList();
         private final ObservableList<Account> accounts = FXCollections.observableArrayList();
+        private final ObservableList<Ingredient> ingredients = FXCollections.observableArrayList();
 
         AddressBookStub(Collection<Person> persons, Collection<Account> accounts) {
             this.persons.setAll(persons);
             this.accounts.setAll(accounts);
+            this.ingredients.setAll(ingredients);
+
         }
 
         @Override
@@ -246,6 +250,11 @@ public class AddressBookTest {
         @Override
         public ObservableList<Account> getAccountList() {
             return accounts;
+        }
+
+        @Override
+        public ObservableList<Ingredient> getIngredientList() {
+            return ingredients;
         }
     }
 }

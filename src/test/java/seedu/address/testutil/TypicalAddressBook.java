@@ -1,10 +1,12 @@
 package seedu.address.testutil;
 
+import static seedu.address.testutil.TypicalIngredients.getTypicalIngredients;
 import static seedu.address.testutil.TypicalPersons.getTypicalPersons;
 import static seedu.address.testutil.accounts.TypicalAccounts.getTypicalAccounts;
 
 import seedu.address.model.AddressBook;
 import seedu.address.model.accounts.Account;
+import seedu.address.model.ingredient.Ingredient;
 import seedu.address.model.person.Person;
 
 /**
@@ -23,6 +25,9 @@ public class TypicalAddressBook {
         for (Account account : getTypicalAccounts()) {
             ab.addAccount(account);
         }
+        for (Ingredient ingredient : getTypicalIngredients()) {
+            ab.addIngredient(ingredient);
+        }
         return ab;
     }
 
@@ -40,10 +45,21 @@ public class TypicalAddressBook {
     /**
      * Returns an {@code AddressBook} with {@code Account} objects only.
      */
-    public static AddressBook getTypicalAddressBookWithAccountOnly() {
+    public static AddressBook getTypicalAddressBookWithAccountsOnly() {
         AddressBook ab = new AddressBook();
         for (Account account : getTypicalAccounts()) {
             ab.addAccount(account);
+        }
+        return ab;
+    }
+
+    /**
+     * Returns an {@code AddressBook} with {@code Ingredient} objects only.
+     */
+    public static AddressBook getTypicalAddressBookWithIngredientsOnly() {
+        AddressBook ab = new AddressBook();
+        for (Ingredient ingredient : getTypicalIngredients()) {
+            ab.addIngredient(ingredient);
         }
         return ab;
     }

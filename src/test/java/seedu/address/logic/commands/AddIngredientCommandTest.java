@@ -16,6 +16,7 @@ import org.junit.rules.ExpectedException;
 import javafx.collections.ObservableList;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.commands.ingredients.AddIngredientCommand;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
@@ -23,9 +24,9 @@ import seedu.address.model.accounts.Account;
 import seedu.address.model.ingredient.Ingredient;
 import seedu.address.model.person.Person;
 import seedu.address.model.tag.Tag;
-import seedu.address.testutil.PersonBuilder;
+import seedu.address.testutil.IngredientBuilder;
 
-public class AddCommandTest {
+public class AddIngredientCommandTest {
 
     private static final CommandHistory EMPTY_COMMAND_HISTORY = new CommandHistory();
 
@@ -35,56 +36,56 @@ public class AddCommandTest {
     private CommandHistory commandHistory = new CommandHistory();
 
     @Test
-    public void constructor_nullPerson_throwsNullPointerException() {
+    public void constructor_nullIngredient_throwsNullPointerException() {
         thrown.expect(NullPointerException.class);
-        new AddCommand(null);
+        new AddIngredientCommand(null);
     }
 
     @Test
-    public void execute_personAcceptedByModel_addSuccessful() throws Exception {
-        ModelStubAcceptingPersonAdded modelStub = new ModelStubAcceptingPersonAdded();
-        Person validPerson = new PersonBuilder().build();
+    public void execute_ingredientAcceptedByModel_addSuccessful() throws Exception {
+        ModelStubAcceptingIngredientAdded modelStub = new ModelStubAcceptingIngredientAdded();
+        Ingredient validIngredient = new IngredientBuilder().build();
 
-        CommandResult commandResult = new AddCommand(validPerson).execute(modelStub, commandHistory);
+        CommandResult commandResult = new AddIngredientCommand(validIngredient).execute(modelStub, commandHistory);
 
-        assertEquals(String.format(AddCommand.MESSAGE_SUCCESS, validPerson), commandResult.feedbackToUser);
-        assertEquals(Arrays.asList(validPerson), modelStub.personsAdded);
+        assertEquals(String.format(AddIngredientCommand.MESSAGE_SUCCESS, validIngredient), commandResult.feedbackToUser);
+        assertEquals(Arrays.asList(validIngredient), modelStub.ingredientsAdded);
         assertEquals(EMPTY_COMMAND_HISTORY, commandHistory);
     }
 
     @Test
-    public void execute_duplicatePerson_throwsCommandException() throws Exception {
-        Person validPerson = new PersonBuilder().build();
-        AddCommand addCommand = new AddCommand(validPerson);
-        ModelStub modelStub = new ModelStubWithPerson(validPerson);
+    public void execute_duplicateIngredient_throwsCommandException() throws Exception {
+        Ingredient validIngredient = new IngredientBuilder().build();
+        AddIngredientCommand addIngredientCommand = new AddIngredientCommand(validIngredient);
+        ModelStub modelStub = new ModelStubWithIngredient(validIngredient);
 
         thrown.expect(CommandException.class);
-        thrown.expectMessage(AddCommand.MESSAGE_DUPLICATE_PERSON);
-        addCommand.execute(modelStub, commandHistory);
+        thrown.expectMessage(AddIngredientCommand.MESSAGE_DUPLICATE_INGREDIENT);
+        addIngredientCommand.execute(modelStub, commandHistory);
     }
 
     @Test
     public void equals() {
-        Person alice = new PersonBuilder().withName("Alice").build();
-        Person bob = new PersonBuilder().withName("Bob").build();
-        AddCommand addAliceCommand = new AddCommand(alice);
-        AddCommand addBobCommand = new AddCommand(bob);
+        Ingredient apple = new IngredientBuilder().withName("Apple").build();
+        Ingredient broccoli = new IngredientBuilder().withName("Broccoli").build();
+        AddIngredientCommand addAppleCommand = new AddIngredientCommand(apple);
+        AddIngredientCommand addBroccoliCommand = new AddIngredientCommand(broccoli);
 
         // same object -> returns true
-        assertTrue(addAliceCommand.equals(addAliceCommand));
+        assertTrue(addAppleCommand.equals(addAppleCommand));
 
         // same values -> returns true
-        AddCommand addAliceCommandCopy = new AddCommand(alice);
-        assertTrue(addAliceCommand.equals(addAliceCommandCopy));
+        AddIngredientCommand addAppleCommandCopy = new AddIngredientCommand(apple);
+        assertTrue(addAppleCommand.equals(addAppleCommandCopy));
 
         // different types -> returns false
-        assertFalse(addAliceCommand.equals(1));
+        assertFalse(addAppleCommand.equals(1));
 
         // null -> returns false
-        assertFalse(addAliceCommand.equals(null));
+        assertFalse(addAppleCommand.equals(null));
 
         // different person -> returns false
-        assertFalse(addAliceCommand.equals(addBobCommand));
+        assertFalse(addAppleCommand.equals(addBroccoliCommand));
     }
 
     /**
@@ -226,51 +227,51 @@ public class AddCommandTest {
     }
 
     /**
-     * A Model stub that contains a person.
+     * A Model stub that always accept the ingredient being added.
      */
-    private class ModelStubWithPerson extends ModelStub {
+    private class ModelStubAcceptingIngredientAdded extends ModelStub {
 
-        private final Person person;
+        final ArrayList<Ingredient> ingredientsAdded = new ArrayList<>();
 
-        ModelStubWithPerson(Person person) {
-            requireNonNull(person);
-            this.person = person;
+        @Override
+        public boolean hasIngredient(Ingredient ingredient) {
+            requireNonNull(ingredient);
+            return ingredientsAdded.stream().anyMatch(ingredient::isSameIngredient);
         }
 
         @Override
-        public boolean hasPerson(Person person) {
-            requireNonNull(person);
-            return this.person.isSamePerson(person);
-        }
-    }
-
-    /**
-     * A Model stub that always accept the person being added.
-     */
-    private class ModelStubAcceptingPersonAdded extends ModelStub {
-
-        final ArrayList<Person> personsAdded = new ArrayList<>();
-
-        @Override
-        public boolean hasPerson(Person person) {
-            requireNonNull(person);
-            return personsAdded.stream().anyMatch(person::isSamePerson);
-        }
-
-        @Override
-        public void addPerson(Person person) {
-            requireNonNull(person);
-            personsAdded.add(person);
+        public void addIngredient(Ingredient ingredient) {
+            requireNonNull(ingredient);
+            ingredientsAdded.add(ingredient);
         }
 
         @Override
         public void commitAddressBook() {
-            // called by {@code AddCommand#execute()}
+            // called by {@code AddIngredientCommand#execute()}
         }
 
         @Override
         public ReadOnlyAddressBook getAddressBook() {
             return new AddressBook();
+        }
+    }
+
+    /**
+     * A Model stub that contains an ingredient.
+     */
+    private class ModelStubWithIngredient extends ModelStub {
+
+        private final Ingredient ingredient;
+
+        ModelStubWithIngredient(Ingredient ingredient) {
+            requireNonNull(ingredient);
+            this.ingredient = ingredient;
+        }
+
+        @Override
+        public boolean hasIngredient(Ingredient ingredient) {
+            requireNonNull(ingredient);
+            return this.ingredient.isSameIngredient(ingredient);
         }
     }
 
