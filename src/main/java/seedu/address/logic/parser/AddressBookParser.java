@@ -7,7 +7,6 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import seedu.address.logic.commands.AddCommand;
-import seedu.address.logic.commands.ingredients.AddIngredientCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.DeleteCommand;
@@ -22,6 +21,7 @@ import seedu.address.logic.commands.RemarkCommand;
 import seedu.address.logic.commands.SelectCommand;
 import seedu.address.logic.commands.UndoCommand;
 import seedu.address.logic.commands.accounts.CreateCommand;
+import seedu.address.logic.commands.ingredients.AddIngredientCommand;
 import seedu.address.logic.commands.ingredients.ListIngredientsCommand;
 import seedu.address.logic.parser.accounts.CreateCommandParser;
 import seedu.address.logic.parser.exceptions.ParseException;

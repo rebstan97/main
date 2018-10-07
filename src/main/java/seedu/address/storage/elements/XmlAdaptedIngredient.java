@@ -5,7 +5,12 @@ import java.util.Objects;
 import javax.xml.bind.annotation.XmlElement;
 
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.ingredient.*;
+import seedu.address.model.ingredient.Ingredient;
+import seedu.address.model.ingredient.IngredientName;
+import seedu.address.model.ingredient.IngredientPrice;
+import seedu.address.model.ingredient.IngredientUnit;
+import seedu.address.model.ingredient.MinimumUnit;
+import seedu.address.model.ingredient.NumUnits;
 
 /**
  * JAXB-friendly version of the Ingredient.

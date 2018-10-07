@@ -106,6 +106,4 @@ public class XmlAdaptedAccount {
                 && Objects.equals(password, otherAccount.password);
     }
 
-    public static class XmlAdaptedIngredient {
-    }
 }
