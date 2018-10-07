@@ -235,7 +235,8 @@ public class AddressBook implements ReadOnlyAddressBook {
     @Override
     public String toString() {
         return String.valueOf(persons.asUnmodifiableObservableList().size()) + " persons\n"
-                + accounts.asUnmodifiableObservableList().size() + " accounts";
+                + accounts.asUnmodifiableObservableList().size() + " accounts"
+                + ingredients.asUnmodifiableObservableList().size() + " ingredients";
     }
 
     @Override
@@ -250,11 +251,12 @@ public class AddressBook implements ReadOnlyAddressBook {
         }
 
         return persons.equals(((AddressBook) other).persons)
-                && accounts.equals(((AddressBook) other).accounts);
+                && accounts.equals(((AddressBook) other).accounts)
+                && ingredients.equals(((AddressBook) other).ingredients);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(persons, accounts);
+        return Objects.hash(persons, accounts, ingredients);
     }
 }
