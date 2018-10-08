@@ -42,10 +42,10 @@ public class RecordCard extends UiPart<Region> {
         super(FXML);
         this.record = record;
         id.setText(displayedIndex + ". ");
-        date.setText(record.getDate().date);
-        itemName.setText(record.getName().fullName);
-        quantitySold.setText("Quantity Sold: " + String.valueOf(record.getQuantitySold().value));
-        price.setText("Item Price: $" + String.valueOf(record.getPrice().value));
+        date.setText(record.getDate().toString());
+        itemName.setText(record.getName().toString());
+        quantitySold.setText("Quantity Sold: " + String.valueOf(record.getQuantitySold().toString()));
+        price.setText("Item Price: $" + String.valueOf(record.getPrice().toString()));
     }
 
     @Override

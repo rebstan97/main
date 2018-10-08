@@ -12,7 +12,8 @@ public class QuantitySold {
     public static final String MESSAGE_QUANTITY_CONSTRAINTS =
             "Quantity sold should be a positive integer.";
     public static final String QUANTITY_VALIDATION_REGEX = "\\d{1,}";
-    public final int value;
+
+    private final int value;
 
     /**
      * Constructs a {@code QuantitySold}.

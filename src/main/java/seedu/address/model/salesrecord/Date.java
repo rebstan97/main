@@ -18,7 +18,7 @@ public class Date {
             "Dates should only contain numbers, and it should be in the format DD-MM-YYYY.\nThe date must exist in "
                     + "the calendar";
 
-    public final String date;
+    private final String date;
 
     /**
      * Constructs a {@code date}.

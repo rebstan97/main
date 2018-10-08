@@ -11,7 +11,7 @@ public class Price {
 
     public static final String MESSAGE_PRICE_CONSTRAINTS =
             "Price should be a positive number in SGD.";
-    public final float value;
+    private final float value;
 
     /**
      * Constructs a {@code Price}.

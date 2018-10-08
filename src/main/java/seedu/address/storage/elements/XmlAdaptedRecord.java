@@ -48,10 +48,10 @@ public class XmlAdaptedRecord {
      * @param source future changes to this will not affect the created XmlAdaptedRecord
      */
     public XmlAdaptedRecord(SalesRecord source) {
-        date = source.getDate().date;
-        itemName = source.getName().fullName;
-        quantitySold = String.valueOf(source.getQuantitySold().value);
-        price = String.valueOf(source.getPrice().value);
+        date = source.getDate().toString();
+        itemName = source.getName().toString();
+        quantitySold = String.valueOf(source.getQuantitySold().toString());
+        price = String.valueOf(source.getPrice().toString());
     }
 
     /**
