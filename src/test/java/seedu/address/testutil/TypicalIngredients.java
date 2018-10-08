@@ -44,7 +44,7 @@ public class TypicalIngredients {
             .withUnit("kilogram")
             .withPrice("14.00")
             .withMinimum("8").build();
-    public static final Ingredient GARLIC = new IngredientBuilder().withName("Mexican Avocado")
+    public static final Ingredient GARLIC = new IngredientBuilder().withName("Garlic Cloves")
             .withUnit("500 gram bag")
             .withPrice("2.40")
             .withMinimum("3").build();

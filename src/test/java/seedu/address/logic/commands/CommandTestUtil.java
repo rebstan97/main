@@ -23,6 +23,8 @@ import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
+import seedu.address.model.ingredient.Ingredient;
+import seedu.address.model.ingredient.IngredientNameContainsKeywordsPredicate;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
@@ -179,6 +181,21 @@ public class CommandTestUtil {
         Person firstPerson = model.getFilteredPersonList().get(0);
         model.deletePerson(firstPerson);
         model.commitAddressBook();
+    }
+
+    /**
+     * Updates {@code model}'s filtered list to show only the ingredient at the given {@code targetIndex} in the
+     * {@code model}'s address book.
+     */
+    public static void showIngredientAtIndex(Model model, Index targetIndex) {
+        assertTrue(targetIndex.getZeroBased() < model.getFilteredIngredientList().size());
+
+        Ingredient ingredient = model.getFilteredIngredientList().get(targetIndex.getZeroBased());
+        final String[] splitIngredient = ingredient.getName().fullName.split("\\s+");
+        model.updateFilteredIngredientList(
+                new IngredientNameContainsKeywordsPredicate(Arrays.asList(splitIngredient[0])));
+
+        assertEquals(1, model.getFilteredIngredientList().size());
     }
 
 }
