@@ -27,7 +27,6 @@ import seedu.address.logic.parser.accounts.CreateCommandParser;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.logic.parser.salescommandsparser.RecordSalesCommandParser;
 
-
 /**
  * Parses user input.
  */
