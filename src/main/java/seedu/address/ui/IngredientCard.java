@@ -39,7 +39,7 @@ public class IngredientCard extends UiPart<Region> {
         this.ingredient = ingredient;
         id.setText(displayedIndex + ". ");
         name.setText(ingredient.getName().fullName);
-        price.setText("$" + ingredient.getPrice().pricePerUnit + " /" + ingredient.getUnit().unitName);
+        price.setText("$" + ingredient.getPrice().pricePerUnit + " / " + ingredient.getUnit().unitName);
         numUnits.setText(ingredient.getNumUnits().numberOfUnits + " " + ingredient.getUnit().unitName
                 + "(s) available");
     }

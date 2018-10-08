@@ -28,14 +28,16 @@ public class IngredientUnitTest {
         // invalid unit
         assertFalse(IngredientUnit.isValidUnit("")); // empty string
         assertFalse(IngredientUnit.isValidUnit(" ")); // spaces only
-        assertFalse(IngredientUnit.isValidUnit("^")); // only non-alphanumeric characters
-        assertFalse(IngredientUnit.isValidUnit("kilogram*")); // contains non-alphanumeric characters
+        assertFalse(IngredientUnit.isValidUnit("^")); // only non-alphanumeric characters excluding hyphen
+        assertFalse(IngredientUnit.isValidUnit("kilogram*")); // contains non-alphanumeric character
 
         // valid unit
         assertTrue(IngredientUnit.isValidUnit("kilogram")); // alphabets only
         assertTrue(IngredientUnit.isValidUnit("12345")); // numbers only
         assertTrue(IngredientUnit.isValidUnit("500 ml")); // alphanumeric characters
         assertTrue(IngredientUnit.isValidUnit("Bottles")); // with capital letters
-        assertTrue(IngredientUnit.isValidUnit("5 kilogram packet")); // long names
+        assertTrue(IngredientUnit.isValidUnit("5-kilogram packet")); // contains hyphen
+        assertTrue(IngredientUnit.isValidUnit("10 crates of 20 50-gram cans")); // long names
+
     }
 }

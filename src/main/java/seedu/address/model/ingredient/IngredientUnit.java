@@ -10,13 +10,14 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 public class IngredientUnit {
 
     public static final String MESSAGE_UNIT_CONSTRAINTS =
-            "Ingredient units should only contain alphanumeric characters and spaces, and it should not be blank";
+            "Ingredient units should only contain alphanumeric characters, hyphens or spaces, and it "
+                    + "should not be blank";
 
     /*
      * The first character of the unit must not be a whitespace,
      * otherwise " " (a blank string) becomes a valid input.
      */
-    public static final String UNIT_VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum} ]*";
+    public static final String UNIT_VALIDATION_REGEX = "[\\p{Alnum}[-]][\\p{Alnum}[-] ]*";
 
     public final String unitName;
 
