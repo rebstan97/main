@@ -16,7 +16,7 @@ import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
 import seedu.address.model.salesrecord.exceptions.DuplicateRecordException;
-import seedu.address.model.salesrecord.exceptions.RecordNotFoundException;
+import seedu.address.model.salesrecord.exceptions.SalesRecordNotFoundException;
 
 public class UniqueRecordListTest {
     @Rule
@@ -60,7 +60,7 @@ public class UniqueRecordListTest {
     }
     @Test
     public void setRecord_targetRecordNotInList_throwsRecordNotFoundException() {
-        thrown.expect(RecordNotFoundException.class);
+        thrown.expect(SalesRecordNotFoundException.class);
         uniqueRecordList.setRecord(RECORD_THREE, RECORD_DEFAULT);
     }
     @Test
@@ -85,7 +85,7 @@ public class UniqueRecordListTest {
     }
     @Test
     public void remove_recordDoesNotExist_throwsRecordNotFoundException() {
-        thrown.expect(RecordNotFoundException.class);
+        thrown.expect(SalesRecordNotFoundException.class);
         uniqueRecordList.remove(RECORD_DEFAULT);
     }
     @Test

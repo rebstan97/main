@@ -33,7 +33,7 @@ import seedu.address.model.accounts.exceptions.AccountNotFoundException;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
 import seedu.address.model.salesrecord.SalesRecord;
-import seedu.address.model.salesrecord.exceptions.RecordNotFoundException;
+import seedu.address.model.salesrecord.exceptions.SalesRecordNotFoundException;
 import seedu.address.model.tag.Tag;
 import seedu.address.testutil.AddressBookBuilder;
 import seedu.address.testutil.PersonBuilder;
@@ -152,7 +152,7 @@ public class ModelManagerTest {
     }
     @Test
     public void deleteRecord_recordNotInSalesBook_throwsRecordsNotFoundException() {
-        thrown.expect(RecordNotFoundException.class);
+        thrown.expect(SalesRecordNotFoundException.class);
         modelManager.deleteRecord(RECORD_DEFAULT);
     }
     @Test
@@ -164,7 +164,7 @@ public class ModelManagerTest {
     }
     @Test
     public void updateRecord_recordNotInSalesBook_throwsRecordNotFoundException() {
-        thrown.expect(RecordNotFoundException.class);
+        thrown.expect(SalesRecordNotFoundException.class);
         modelManager.updateRecord(RECORD_DEFAULT, RECORD_ONE);
     }
     @Test

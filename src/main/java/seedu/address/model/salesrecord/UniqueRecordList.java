@@ -9,7 +9,7 @@ import java.util.List;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.model.salesrecord.exceptions.DuplicateRecordException;
-import seedu.address.model.salesrecord.exceptions.RecordNotFoundException;
+import seedu.address.model.salesrecord.exceptions.SalesRecordNotFoundException;
 
 /**
  * A list of records that enforces uniqueness between its elements and does not allow nulls.
@@ -59,7 +59,7 @@ public class UniqueRecordList implements Iterable<SalesRecord> {
 
         int index = internalList.indexOf(target);
         if (index == -1) {
-            throw new RecordNotFoundException();
+            throw new SalesRecordNotFoundException();
         }
 
         if (!target.isSameRecord(editedRecord) && contains(editedRecord)) {
@@ -76,7 +76,7 @@ public class UniqueRecordList implements Iterable<SalesRecord> {
     public void remove(SalesRecord toRemove) {
         requireNonNull(toRemove);
         if (!internalList.remove(toRemove)) {
-            throw new RecordNotFoundException();
+            throw new SalesRecordNotFoundException();
         }
     }
 
