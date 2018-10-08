@@ -61,7 +61,7 @@ public class RecordSalesCommand extends Command {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof RecordSalesCommand // instanceof handles nulls
-                && toAdd.equals(((RecordSalesCommand) other).toAdd));
+                        || (other instanceof RecordSalesCommand // instanceof handles nulls
+                            && toAdd.equals(((RecordSalesCommand) other).toAdd));
     }
 }
