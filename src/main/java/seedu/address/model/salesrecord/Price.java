@@ -10,7 +10,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 public class Price {
 
     public static final String MESSAGE_PRICE_CONSTRAINTS =
-            "Price should be a positive number in SGD.";
+            "Price should be a positive number.";
     private final float value;
 
     /**

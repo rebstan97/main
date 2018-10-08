@@ -20,9 +20,11 @@ public class RecordUtil {
      * Returns the part of command string for the given {@code record}'s details.
      */
     public static String getRecordDetails(SalesRecord record) {
-        return PREFIX_DATE + record.getDate().date + " "
-                + PREFIX_ITEM_NAME + record.getName().fullName + " "
-                + PREFIX_QUANTITY_SOLD + record.getQuantitySold().value + " "
-                + PREFIX_ITEM_PRICE + record.getPrice().value;
+        return PREFIX_DATE + record.getDate().toString() + " "
+                + PREFIX_ITEM_NAME + record.getName().toString() + " "
+                + PREFIX_QUANTITY_SOLD + record.getQuantitySold().toString() + " "
+                + PREFIX_ITEM_PRICE + record.getPrice().toString();
     }
 }
+
+
