@@ -48,7 +48,7 @@ public class ItemName {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                         || (other instanceof seedu.address.model.salesrecord.ItemName // instanceof handles nulls
-                            && fullName.equals(((seedu.address.model.salesrecord.ItemName) other).fullName)); // state check
+                            && fullName.equals(((seedu.address.model.salesrecord.ItemName) other).fullName));
     }
 
     @Override
