@@ -17,6 +17,7 @@ public class Date {
     public static final String MESSAGE_DATE_CONSTRAINTS =
             "Dates should only contain numbers, and it should be in the format DD-MM-YYYY.\nThe date must exist in "
                     + "the calendar";
+    
     public final String date;
 
     /**
