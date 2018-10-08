@@ -1,4 +1,4 @@
-package seedu.address.logic.parser;
+package seedu.address.logic.parser.ingredients;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_INGREDIENT_MINIMUM;
@@ -9,6 +9,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_INGREDIENT_UNIT;
 import java.util.stream.Stream;
 
 import seedu.address.logic.commands.ingredients.AddIngredientCommand;
+import seedu.address.logic.parser.*;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.ingredient.Ingredient;
 import seedu.address.model.ingredient.IngredientName;
