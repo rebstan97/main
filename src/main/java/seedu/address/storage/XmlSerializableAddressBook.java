@@ -109,7 +109,7 @@ public class XmlSerializableAddressBook {
      * @throws IllegalValueException if there were any data constraints violated or duplicates in the {@code
      *         XmlAdaptedAccount}.
      */
-    public void accountToModelType() throws IllegalValueException {
+    private void accountToModelType() throws IllegalValueException {
         for (XmlAdaptedAccount acc : accounts) {
             Account account = acc.toModelType();
             if (addressBook.hasAccount(account)) {
