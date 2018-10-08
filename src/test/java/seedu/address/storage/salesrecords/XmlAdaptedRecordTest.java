@@ -3,7 +3,7 @@ package seedu.address.storage.salesrecords;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
-import static seedu.address.storage.XmlAdaptedRecord.MISSING_FIELD_MESSAGE_FORMAT;
+import static seedu.address.storage.elements.XmlAdaptedRecord.MISSING_FIELD_MESSAGE_FORMAT;
 import static seedu.address.testutil.salesrecords.TypicalRecords.RECORD_DEFAULT;
 import static seedu.address.testutil.salesrecords.TypicalRecords.RECORD_ONE;
 import static seedu.address.testutil.salesrecords.TypicalRecords.RECORD_TWO;
@@ -15,7 +15,7 @@ import seedu.address.model.salesrecord.Date;
 import seedu.address.model.salesrecord.ItemName;
 import seedu.address.model.salesrecord.Price;
 import seedu.address.model.salesrecord.QuantitySold;
-import seedu.address.storage.XmlAdaptedRecord;
+import seedu.address.storage.elements.XmlAdaptedRecord;
 import seedu.address.testutil.Assert;
 import seedu.address.testutil.salesrecords.RecordBuilder;
 

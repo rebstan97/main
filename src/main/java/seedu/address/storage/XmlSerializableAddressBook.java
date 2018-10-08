@@ -14,6 +14,7 @@ import seedu.address.model.accounts.Account;
 import seedu.address.model.person.Person;
 import seedu.address.model.salesrecord.SalesRecord;
 import seedu.address.storage.elements.XmlAdaptedAccount;
+import seedu.address.storage.elements.XmlAdaptedRecord;
 
 
 /**
