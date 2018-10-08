@@ -44,8 +44,8 @@ public class Price {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof Price // instanceof handles nulls
-                && value == ((Price) other).value); // state check
+                        || (other instanceof Price // instanceof handles nulls
+                            && value == ((Price) other).value); // state check
     }
 
     @Override

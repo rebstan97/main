@@ -17,7 +17,7 @@ public class Date {
     public static final String MESSAGE_DATE_CONSTRAINTS =
             "Dates should only contain numbers, and it should be in the format DD-MM-YYYY.\nThe date must exist in "
                     + "the calendar";
-    
+
     public final String date;
 
     /**
@@ -53,8 +53,8 @@ public class Date {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof Date // instanceof handles nulls
-                && date.equals(((Date) other).date)); // state check
+                        || (other instanceof Date // instanceof handles nulls
+                            && date.equals(((Date) other).date)); // state check
     }
 
     @Override
