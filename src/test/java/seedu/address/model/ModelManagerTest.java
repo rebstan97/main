@@ -14,6 +14,8 @@ import static seedu.address.testutil.TypicalPersons.AMY;
 import static seedu.address.testutil.TypicalPersons.BENSON;
 import static seedu.address.testutil.TypicalPersons.BOB;
 import static seedu.address.testutil.TypicalPersons.DYLAN;
+import static seedu.address.testutil.accounts.TypicalAccounts.DEMO_ADMIN;
+import static seedu.address.testutil.accounts.TypicalAccounts.DEMO_ONE;
 import static seedu.address.testutil.menu.TypicalItems.APPLE_JUICE;
 import static seedu.address.testutil.menu.TypicalItems.BURGER;
 import static seedu.address.testutil.menu.TypicalItems.CHEESE_BURGER;
@@ -26,12 +28,15 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
+import seedu.address.model.accounts.Account;
+import seedu.address.model.accounts.exceptions.AccountNotFoundException;
 import seedu.address.model.menu.Item;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
 import seedu.address.model.tag.Tag;
 import seedu.address.testutil.AddressBookBuilder;
 import seedu.address.testutil.PersonBuilder;
+import seedu.address.testutil.accounts.AccountBuilder;
 import seedu.address.testutil.menu.ItemBuilder;
 
 public class ModelManagerTest {
@@ -66,13 +71,20 @@ public class ModelManagerTest {
     }
 
     @Test
+    public void getFilteredAccountList_modifyList_throwsUnsupportedOperationException() {
+        thrown.expect(UnsupportedOperationException.class);
+        modelManager.getFilteredAccountList().remove(0);
+    }
+
+    @Test
     public void removeTag_noSuchTag_addressBookUnmodified() {
         addressBookWithPersons = new AddressBookBuilder().withPerson(AMY).withPerson(BOB).build();
+        UserPrefs userPrefs = new UserPrefs();
 
-        ModelManager unmodifiedModelManager = new ModelManager(addressBookWithPersons, new UserPrefs());
+        ModelManager unmodifiedModelManager = new ModelManager(addressBookWithPersons, userPrefs);
         unmodifiedModelManager.removeTag(new Tag(VALID_TAG_TEST));
 
-        ModelManager expectedModelManager = new ModelManager(addressBookWithPersons, new UserPrefs());
+        ModelManager expectedModelManager = new ModelManager(addressBookWithPersons, userPrefs);
 
         assertEquals(unmodifiedModelManager, expectedModelManager);
     }
@@ -99,16 +111,71 @@ public class ModelManagerTest {
     @Test
     public void removeTag_fromOnePerson_addressBookModified() {
         addressBookWithPersons = new AddressBookBuilder().withPerson(AMY).withPerson(DYLAN).build();
+        UserPrefs userPrefs = new UserPrefs();
 
-        ModelManager modifiedModelManager = new ModelManager(addressBookWithPersons, new UserPrefs());
+        ModelManager modifiedModelManager = new ModelManager(addressBookWithPersons, userPrefs);
         modifiedModelManager.removeTag(new Tag(VALID_TAG_FRIEND));
 
         Person amyWithoutTags = new PersonBuilder(AMY).withTags().build();
 
-        ModelManager expectedModelManager = new ModelManager(addressBookWithPersons, new UserPrefs());
+        ModelManager expectedModelManager = new ModelManager(addressBookWithPersons, userPrefs);
         expectedModelManager.updatePerson(AMY, amyWithoutTags);
 
         assertEquals(modifiedModelManager, expectedModelManager);
+    }
+
+    @Test
+    public void hasAccount_nullAccount_throwsNullPointerException() {
+        thrown.expect(NullPointerException.class);
+        modelManager.hasAccount(null);
+    }
+
+    @Test
+    public void hasAccount_accountNotInAccountRecord_returnsFalse() {
+        assertFalse(modelManager.hasAccount(DEMO_ADMIN));
+    }
+
+    @Test
+    public void hasAccount_accountInAccountRecord_returnsTrue() {
+        modelManager.addAccount(DEMO_ADMIN);
+        assertTrue(modelManager.hasAccount(DEMO_ADMIN));
+    }
+
+    @Test
+    public void getAccountList_modifyList_throwsUnsupportedOperationException() {
+        thrown.expect(UnsupportedOperationException.class);
+        modelManager.getAddressBook().getAccountList().remove(0);
+    }
+
+    @Test
+    public void removeAccount_accountNotInAccountRecord_throwsAccountNotFoundException() {
+        thrown.expect(AccountNotFoundException.class);
+        modelManager.removeAccount(DEMO_ADMIN);
+    }
+
+    @Test
+    public void removeAccount_accountInAccountRecord_returnTrue() {
+        modelManager.addAccount(DEMO_ADMIN);
+        assertTrue(modelManager.hasAccount(DEMO_ADMIN));
+
+        modelManager.removeAccount(DEMO_ADMIN);
+        assertFalse(modelManager.hasAccount(DEMO_ADMIN));
+    }
+
+    @Test
+    public void updateAccount_accountNotInAccountRecord_throwsAccountNotFoundException() {
+        thrown.expect(AccountNotFoundException.class);
+        modelManager.updateAccount(DEMO_ADMIN, DEMO_ONE);
+    }
+
+    @Test
+    public void updateAccount_accountInAccountRecord_returnTrue() {
+        modelManager.addAccount(DEMO_ADMIN);
+        Account account = new AccountBuilder(DEMO_ONE).build();
+
+        modelManager.updateAccount(DEMO_ADMIN, account);
+        assertFalse(modelManager.hasAccount(DEMO_ADMIN));
+        assertTrue(modelManager.hasAccount(account));
     }
 
     // Menu Management
@@ -211,6 +278,8 @@ public class ModelManagerTest {
 
         // resets modelManager to initial state for upcoming tests
         modelManager.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+
+        //TODO: Test updateFilteredAccountList
 
         // different userPrefs -> returns true
         UserPrefs differentUserPrefs = new UserPrefs();

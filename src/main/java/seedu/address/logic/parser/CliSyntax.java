@@ -13,7 +13,10 @@ public class CliSyntax {
     public static final Prefix PREFIX_TAG = new Prefix("t/");
     public static final Prefix PREFIX_REMARK = new Prefix("r/");
 
-    // Menu Management
-    public static final Prefix PREFIX_PRICE = new Prefix("p/");
+    /*Prefix definitions for user accounts */
+    public static final Prefix PREFIX_ID = new Prefix("id/");
+    public static final Prefix PREFIX_PASSWORD = new Prefix("pw/");
 
+    /*Prefix definitions for menu management */
+    public static final Prefix PREFIX_PRICE = new Prefix("p/");
 }

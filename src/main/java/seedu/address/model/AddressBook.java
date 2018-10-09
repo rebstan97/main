@@ -8,6 +8,8 @@ import java.util.Objects;
 import java.util.Set;
 
 import javafx.collections.ObservableList;
+import seedu.address.model.accounts.Account;
+import seedu.address.model.accounts.UniqueAccountList;
 import seedu.address.model.menu.Item;
 import seedu.address.model.menu.UniqueItemList;
 import seedu.address.model.person.Person;
@@ -20,6 +22,7 @@ import seedu.address.model.tag.Tag;
 public class AddressBook implements ReadOnlyAddressBook {
 
     private final UniquePersonList persons;
+    private final UniqueAccountList accounts;
     private final UniqueItemList items;
 
     /*
@@ -31,6 +34,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     {
         persons = new UniquePersonList();
+        accounts = new UniqueAccountList();
         items = new UniqueItemList();
     }
 
@@ -61,6 +65,7 @@ public class AddressBook implements ReadOnlyAddressBook {
         requireNonNull(newData);
 
         setPersons(newData.getPersonList());
+        setAccounts(newData.getAccountList());
         setItems(newData.getItemList());
     }
 
@@ -126,6 +131,58 @@ public class AddressBook implements ReadOnlyAddressBook {
         persons.forEach(person -> removeTagForPerson(person, tag));
     }
 
+    @Override
+    public ObservableList<Person> getPersonList() {
+        return persons.asUnmodifiableObservableList();
+    }
+
+    //// account-level operations
+
+    /**
+     * Replaces the contents of the person list with {@code persons}. {@code persons} must not contain duplicate
+     * persons.
+     */
+    public void setAccounts(List<Account> accounts) {
+        this.accounts.setAccounts(accounts);
+    }
+
+    /**
+     * Returns true if a person with the same identity as {@code person} exists in the address book.
+     */
+    public boolean hasAccount(Account account) {
+        return accounts.contains(account);
+    }
+
+    /**
+     * Adds a account to the account record. The account must not already exist in the account record.
+     */
+    public void addAccount(Account account) {
+        // hash password before
+        //account.getPassword().hash(account.getUsername().toString());
+        accounts.add(account);
+    }
+
+    /**
+     * Replaces the given person {@code target} in the list with {@code editedPerson}. {@code target} must exist in the
+     * address book. The person identity of {@code editedPerson} must not be the same as another existing person in the
+     * address book.
+     */
+    public void updateAccount(Account target, Account editedAccount) {
+        accounts.update(target, editedAccount);
+    }
+
+    /**
+     * Removes {@code key} from this {@code AddressBook}. {@code key} must exist in the address book.
+     */
+    public void removeAccount(Account key) {
+        accounts.remove(key);
+    }
+
+    @Override
+    public ObservableList<Account> getAccountList() {
+        return accounts.asUnmodifiableObservableList();
+    }
+
     // Menu Management
     /**
      * Replaces the contents of the person list with {@code persons}. {@code persons} must not contain duplicate
@@ -152,8 +209,7 @@ public class AddressBook implements ReadOnlyAddressBook {
 
     /**
      * Replaces the given item {@code target} in the list with {@code editedItem}. {@code target} must exist in the
-     * menu. The item identity of {@code editedItem} must not be the same as another existing item in the
-     * menu.
+     * menu. The item identity of {@code editedItem} must not be the same as another existing item in the menu.
      */
     public void updateItem(Item target, Item editedItem) {
         requireNonNull(editedItem);
@@ -185,7 +241,6 @@ public class AddressBook implements ReadOnlyAddressBook {
         updateItem(item, newItem);
     }
 
-
     /**
      * Removes {@code tag} from all {@code item} in this {@code AddressBook}.
      *
@@ -205,12 +260,8 @@ public class AddressBook implements ReadOnlyAddressBook {
     @Override
     public String toString() {
         return String.valueOf(persons.asUnmodifiableObservableList().size()) + " persons\n"
+                + accounts.asUnmodifiableObservableList().size() + " accounts"
                 + items.asUnmodifiableObservableList().size() + " items";
-    }
-
-    @Override
-    public ObservableList<Person> getPersonList() {
-        return persons.asUnmodifiableObservableList();
     }
 
     @Override
@@ -218,16 +269,19 @@ public class AddressBook implements ReadOnlyAddressBook {
         if (other == this) {
             return true;
         }
+
         // instanceof handles nulls
         if (!(other instanceof AddressBook)) {
             return false;
         }
+
         return persons.equals(((AddressBook) other).persons)
+                && accounts.equals(((AddressBook) other).accounts)
                 && items.equals(((AddressBook) other).items);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(persons, items);
+        return Objects.hash(persons, accounts, items);
     }
 }
