@@ -21,8 +21,10 @@ import seedu.address.logic.commands.RemarkCommand;
 import seedu.address.logic.commands.SelectCommand;
 import seedu.address.logic.commands.UndoCommand;
 import seedu.address.logic.commands.accounts.CreateCommand;
+import seedu.address.logic.commands.menu.AddItemCommand;
 import seedu.address.logic.parser.accounts.CreateCommandParser;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.logic.parser.menu.AddItemCommandParser;
 
 /**
  * Parses user input.
@@ -101,6 +103,10 @@ public class AddressBookParser {
 
         case CreateCommand.COMMAND_WORD:
             return new CreateCommandParser().parse(arguments);
+
+        case AddItemCommand.COMMAND_WORD:
+        case AddItemCommand.COMMAND_ALIAS:
+            return new AddItemCommandParser().parse(arguments);
 
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
