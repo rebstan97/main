@@ -18,4 +18,11 @@ public class RecordPanelSelectionChangedEvent extends BaseEvent {
     public String toString() {
         return getClass().getSimpleName();
     }
+
+    /**
+     * Returns newSelection in this changed event
+     */
+    public SalesRecord getNewSelection() {
+        return newSelection;
+    }
 }
