@@ -31,8 +31,10 @@ import seedu.address.logic.commands.RemarkCommand;
 import seedu.address.logic.commands.SelectCommand;
 import seedu.address.logic.commands.UndoCommand;
 import seedu.address.logic.commands.accounts.CreateCommand;
+import seedu.address.logic.commands.menu.AddItemCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.accounts.Account;
+import seedu.address.model.menu.Item;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Remark;
@@ -41,6 +43,8 @@ import seedu.address.testutil.PersonBuilder;
 import seedu.address.testutil.PersonUtil;
 import seedu.address.testutil.accounts.AccountBuilder;
 import seedu.address.testutil.accounts.AccountUtil;
+import seedu.address.testutil.menu.ItemBuilder;
+import seedu.address.testutil.menu.ItemUtil;
 
 public class AddressBookParserTest {
 
@@ -195,5 +199,15 @@ public class AddressBookParserTest {
         CreateCommand commandOne = (CreateCommand) parser.parseCommand(AccountUtil.getCreateCommand(accountOneCommand));
         CreateCommand commandTwo = (CreateCommand) parser.parseCommand(AccountUtil.getCreateCommand(accountTwoCommand));
         assertNotEquals(commandOne, commandTwo);
+    }
+
+    @Test
+    public void parseCommand_addItem() throws Exception {
+        Item item = new ItemBuilder().build();
+        AddItemCommand command = (AddItemCommand) parser.parseCommand(ItemUtil.getAddItemCommand(item));
+        assertEquals(new AddItemCommand(item), command);
+        command = (AddItemCommand) parser.parseCommand(AddItemCommand.COMMAND_ALIAS
+                + " " + ItemUtil.getItemDetails(item));
+        assertEquals(new AddItemCommand(item), command);
     }
 }
