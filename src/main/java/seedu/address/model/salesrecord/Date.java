@@ -53,8 +53,8 @@ public class Date {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                        || (other instanceof Date // instanceof handles nulls
-                            && date.equals(((Date) other).date)); // state check
+                || (other instanceof Date // instanceof handles nulls
+                    && date.equals(((Date) other).date)); // state check
     }
 
     @Override
