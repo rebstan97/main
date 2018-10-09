@@ -173,7 +173,8 @@ public class AddressBookTest {
                 .build();
         List<Account> newAccounts = Arrays.asList(DEMO_ADMIN, account);
         List<Person> newPersons = Arrays.asList(ALICE, BOB);
-        AddressBookStub newData = new AddressBookStub(newPersons, newAccounts);
+        List<Item> newItems = Arrays.asList(APPLE_JUICE);
+        AddressBookStub newData = new AddressBookStub(newPersons, newAccounts, newItems);
 
         thrown.expect(DuplicateAccountException.class);
         addressBook.resetData(newData);
@@ -218,8 +219,9 @@ public class AddressBookTest {
         // Two items with the same identity fields
         Item editedApple = new ItemBuilder(APPLE_JUICE).withTags(VALID_ITEM_TAG_CHEESE).build();
         List<Person> newPersons = Arrays.asList(ALICE);
+        List<Account> newAccounts = Arrays.asList(DEMO_ADMIN);
         List<Item> newItems = Arrays.asList(APPLE_JUICE, editedApple);
-        AddressBookStub newData = new AddressBookStub(newPersons, newItems);
+        AddressBookStub newData = new AddressBookStub(newPersons, newAccounts, newItems);
 
         thrown.expect(DuplicateItemException.class);
         addressBook.resetData(newData);
