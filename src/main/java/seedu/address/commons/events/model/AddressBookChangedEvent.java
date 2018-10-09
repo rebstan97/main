@@ -18,6 +18,6 @@ public class AddressBookChangedEvent extends BaseEvent {
     public String toString() {
         return "number of persons " + data.getPersonList().size()
                 + ", number of accounts " + data.getAccountList().size()
-				+ ", number of items " + data.getItemList().size();
+                + ", number of items " + data.getItemList().size();
     }
 }
