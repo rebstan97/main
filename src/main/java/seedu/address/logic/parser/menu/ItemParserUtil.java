@@ -9,7 +9,7 @@ import seedu.address.model.menu.Price;
 /**
  * Contains utility methods used for parsing strings in the various *Parser classes.
  */
-public class MenuParserUtil {
+public class ItemParserUtil {
 
     /**
      * Parses a {@code String name} into a {@code Name}. Leading and trailing whitespaces will be trimmed.

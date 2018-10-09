@@ -40,8 +40,8 @@ public class AddItemCommandParser implements Parser<AddItemCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddItemCommand.MESSAGE_USAGE));
         }
 
-        Name name = MenuParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
-        Price price = MenuParserUtil.parsePrice(argMultimap.getValue(PREFIX_PRICE).get());
+        Name name = ItemParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
+        Price price = ItemParserUtil.parsePrice(argMultimap.getValue(PREFIX_PRICE).get());
         Remark remark = new Remark("");
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
 
