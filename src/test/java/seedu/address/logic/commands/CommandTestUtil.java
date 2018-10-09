@@ -91,7 +91,8 @@ public class CommandTestUtil {
     public static final String ITEM_TAG_DESC_CHEESE = " " + PREFIX_TAG + VALID_ITEM_TAG_CHEESE;
 
     public static final String INVALID_ITEM_NAME_DESC = " " + PREFIX_NAME + "Fries&"; // '&' not allowed in names
-    public static final String INVALID_PRICE_DESC = " " + PREFIX_PRICE + "911a"; // 'a' not allowed in prices
+    public static final String INVALID_PRICE_DESC = " " + PREFIX_PRICE + "9.000"; // 3 decimal place not allowed in
+    // prices
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
