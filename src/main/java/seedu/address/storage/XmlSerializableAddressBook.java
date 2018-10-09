@@ -59,14 +59,8 @@ public class XmlSerializableAddressBook {
 
     /**
      * Converts this person record into the model's {@code Person} object.
-<<<<<<< HEAD
-     * @throws IllegalValueException if there were any data constraints violated or duplicates in the {@code
-     * XmlAdaptedPerson}.
-=======
-     *
      * @throws IllegalValueException if there were any data constraints violated or duplicates in the {@code
      *         XmlAdaptedPerson}.
->>>>>>> 6620f079b6fcb34d3d35324e88e3e808d422af63
      */
     public void processPersons() throws IllegalValueException {
         for (XmlAdaptedPerson p : persons) {
