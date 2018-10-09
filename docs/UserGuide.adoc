@@ -28,7 +28,7 @@ from a single location -- menu, inventory, sales and bookings management!
 == Quick Start
 
 .  Ensure you have Java version `9` or later installed in your Computer.
-.  Download the latest `menus.jar` link:{repoURL}/releases[here].
+.  Download the latest `menus.jar` link:https://github.com/CS2103-AY1819S1-F10-4/main/releases[here].
 .  Copy the file to the folder you want to use as the home folder.
 .  Double-click the file to start the app. The GUI should appear in a few seconds.
 +
@@ -288,19 +288,19 @@ Examples:
 Logs out of the account. +
 Format: `logout`
 
-=== Creating user account: `create-account`
+=== Creating user account: `create-acc`
 
 Creates a new user account with a given role. +
-Format: `create-account id/USERNAME pw/PASSWORD r/ROLE_ID`
+Format: `create-acc id/USERNAME pw/PASSWORD r/ROLE_ID`
 
 Examples:
 
-* `create-account id/azhikai pw/p@55w0rd r/0`
+* `create-acc id/azhikai pw/p@55w0rd r/0`
 
-=== Editing user account: `edit-account`
+=== Editing user account: `edit-acc`
 
 Edits an existing user account. +
-Format: `edit-account id/USERNAME [nid/NEW_USERNAME] [pw/NEW_PASSWORD] [r/NEW_ROLE_ID]`
+Format: `edit-acc id/USERNAME [nid/NEW_USERNAME] [pw/NEW_PASSWORD] [r/NEW_ROLE_ID]`
 
 ****
 * The account's data will remain intact if none of the optional fields are provided.
@@ -308,25 +308,25 @@ Format: `edit-account id/USERNAME [nid/NEW_USERNAME] [pw/NEW_PASSWORD] [r/NEW_RO
 
 Examples:
 
-* `edit-account id/azhikai`
+* `edit-acc id/azhikai`
 ** Nothing happens in this case.
-* `edit-account id/azhikai nid/angzhikai`
-* `edit-account id/azhikai nid/angzhikai pw/n3wp@55w0rd`
-* `edit-account id/azhikai r/1`
+* `edit-acc id/azhikai nid/angzhikai`
+* `edit-acc id/azhikai nid/angzhikai pw/n3wp@55w0rd`
+* `edit-acc id/azhikai r/1`
 
-=== Deleting user account: `delete-account`
+=== Deleting user account: `delete-acc`
 
 Deletes an existing user account. +
-Format: `delete-account id/USERNAME `
+Format: `delete-acc id/USERNAME `
 
 Examples:
 
-* `delete-account id/azhikai`
+* `delete-acc id/azhikai`
 
-=== List all user accounts: `list-account`
+=== List all user accounts: `list-acc`
 
 List all existing user accounts. +
-Format: `list-account`
+Format: `list-acc`
 
 === Creating user role: `create-role`
 
@@ -352,8 +352,6 @@ Examples:
 * `edit-role id/0`
 ** Nothing happens in this case.
 * `edit-role id/0 nid/2 n/Supervisor`
-* `edit-account id/0 nid/1`
-* `edit-account id/0 n/Owner`
 
 === Deleting user role: `delete-role`
 
@@ -852,10 +850,10 @@ e.g.`select 2`
 * *Redo* : `redo`
 * *Logging in*: `login id/USERNAME pw/PASSWORD`
 * *Logging out*: `logout`
-* *Creating user account*: `create-account id/USERNAME pw/PASSWORD r/ROLE_ID`
-* *Editing user account*: `edit-account id/USERNAME [nid/NEW_USERNAME] [pw/NEW_PASSWORD] [r/NEW_ROLE_ID]`
-* *Deleting user account*: `delete-account id/USERNAME`
-* *Listing user accounts*: `list-account`
+* *Creating user account*: `create-acc id/USERNAME pw/PASSWORD r/ROLE_ID`
+* *Editing user account*: `edit-acc id/USERNAME [nid/NEW_USERNAME] [pw/NEW_PASSWORD] [r/NEW_ROLE_ID]`
+* *Deleting user account*: `delete-acc id/USERNAME`
+* *Listing user accounts*: `list-acc`
 * *Creating user role*: `create-role id/ROLE_ID n/ROLE_NAME`
 * *Editing user role*: `edit-role id/ROLE_ID [nid/NEW_ROLE_ID] [n/NEW_ROLE_NAME]`
 * *Deleting user role*: `delete-role id/ROLE_ID`
