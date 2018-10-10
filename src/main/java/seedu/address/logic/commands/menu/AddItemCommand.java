@@ -28,7 +28,7 @@ public class AddItemCommand extends Command {
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + "Apple Juice "
-            + PREFIX_PRICE + "98765432 "
+            + PREFIX_PRICE + "2 "
             + PREFIX_TAG + "drink";
 
     public static final String MESSAGE_SUCCESS = "New item added: %1$s";
