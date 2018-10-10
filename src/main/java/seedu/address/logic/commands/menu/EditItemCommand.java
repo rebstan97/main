@@ -31,9 +31,9 @@ import seedu.address.model.tag.Tag;
  */
 public class EditItemCommand extends Command {
 
-    public static final String COMMAND_WORD = "edit";
+    public static final String COMMAND_WORD = "edit-item";
 
-    public static final String COMMAND_ALIAS = "e";
+    public static final String COMMAND_ALIAS = "ei";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the item identified "
             + "by the index number used in the displayed item list. "
