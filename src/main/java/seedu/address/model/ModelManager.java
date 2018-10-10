@@ -231,6 +231,12 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
+    public void resetMenuData(ReadOnlyAddressBook newData) {
+        versionedAddressBook.resetMenuData(newData);
+        indicateAddressBookChanged();
+    }
+
+    @Override
     public ObservableList<Item> getFilteredItemList() {
         return FXCollections.unmodifiableObservableList(filteredItems);
     }

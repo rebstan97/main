@@ -250,6 +250,14 @@ public class AddressBook implements ReadOnlyAddressBook {
         items.forEach(item -> removeTagForItem(item, tag));
     }
 
+    /**
+     * Resets the menu data of this {@code AddressBook} with {@code newData}.
+     */
+    public void resetMenuData(ReadOnlyAddressBook newData) {
+        requireNonNull(newData);
+        setItems(newData.getItemList());
+    }
+
     @Override
     public ObservableList<Item> getItemList() {
         return items.asUnmodifiableObservableList();

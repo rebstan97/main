@@ -220,6 +220,11 @@ public class AddCommandTest {
         }
 
         @Override
+        public void resetMenuData(ReadOnlyAddressBook newData) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public ObservableList<Item> getFilteredItemList() {
             throw new AssertionError("This method should not be called.");
         }

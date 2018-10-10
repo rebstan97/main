@@ -49,7 +49,7 @@ public class AddItemCommandTest {
         CommandResult commandResult = new AddItemCommand(validItem).execute(modelStub, commandHistory);
 
         assertEquals(String.format(AddItemCommand.MESSAGE_SUCCESS, validItem), commandResult.feedbackToUser);
-        assertEquals(Arrays.asList(validItem), modelStub.itemsAdded);
+        assertEquals(Arrays.asList(validItem), modelStub.getItemsAdded());
         assertEquals(EMPTY_COMMAND_HISTORY, commandHistory);
     }
 
@@ -221,6 +221,11 @@ public class AddItemCommandTest {
         }
 
         @Override
+        public void resetMenuData(ReadOnlyAddressBook newData) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public ObservableList<Item> getFilteredItemList() {
             throw new AssertionError("This method should not be called.");
         }
@@ -255,7 +260,7 @@ public class AddItemCommandTest {
      */
     private class ModelStubAcceptingItemAdded extends ModelStub {
 
-        final ArrayList<Item> itemsAdded = new ArrayList<>();
+        private final ArrayList<Item> itemsAdded = new ArrayList<>();
 
         @Override
         public boolean hasItem(Item item) {
@@ -277,6 +282,10 @@ public class AddItemCommandTest {
         @Override
         public ReadOnlyAddressBook getAddressBook() {
             return new AddressBook();
+        }
+
+        public ArrayList<Item> getItemsAdded() {
+            return itemsAdded;
         }
     }
 

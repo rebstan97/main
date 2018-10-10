@@ -170,6 +170,11 @@ public interface Model {
     void removeTagForMenu(Tag tag);
 
     /**
+     * Clears the item list and replaces with the provided new data for AddressBook.
+     */
+    void resetMenuData(ReadOnlyAddressBook newData);
+
+    /**
      * Returns an unmodifiable view of the filtered item list
      */
     ObservableList<Item> getFilteredItemList();
