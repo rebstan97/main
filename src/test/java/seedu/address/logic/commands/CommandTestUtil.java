@@ -18,11 +18,13 @@ import java.util.List;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.commands.menu.EditItemCommand;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
+import seedu.address.testutil.menu.EditItemDescriptorBuilder;
 
 /**
  * Contains helper methods for testing commands.
@@ -88,10 +90,11 @@ public class CommandTestUtil {
     public static final String ITEM_NAME_DESC_FRIES = " " + PREFIX_NAME + VALID_ITEM_NAME_FRIES;
     public static final String ITEM_PRICE_DESC_BURGER = " " + PREFIX_PRICE + VALID_ITEM_PRICE_BURGER;
     public static final String ITEM_PRICE_DESC_FRIES = " " + PREFIX_PRICE + VALID_ITEM_PRICE_FRIES;
+    public static final String ITEM_TAG_DESC_BURGER = " " + PREFIX_TAG + VALID_ITEM_TAG_BURGER;
     public static final String ITEM_TAG_DESC_CHEESE = " " + PREFIX_TAG + VALID_ITEM_TAG_CHEESE;
 
     public static final String INVALID_ITEM_NAME_DESC = " " + PREFIX_NAME + "Fries&"; // '&' not allowed in names
-    public static final String INVALID_PRICE_DESC = " " + PREFIX_PRICE + "9.000"; // 3 decimal place not allowed in
+    public static final String INVALID_PRICE_DESC = " " + PREFIX_PRICE + "9.000"; // 3 decimal places not allowed in
     // prices
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
@@ -100,6 +103,9 @@ public class CommandTestUtil {
     public static final EditCommand.EditPersonDescriptor DESC_AMY;
     public static final EditCommand.EditPersonDescriptor DESC_BOB;
 
+    public static final EditItemCommand.EditItemDescriptor DESC_BURGER;
+    public static final EditItemCommand.EditItemDescriptor DESC_FRIES;
+
     static {
         DESC_AMY = new EditPersonDescriptorBuilder().withName(VALID_NAME_AMY)
                 .withPhone(VALID_PHONE_AMY).withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_AMY)
@@ -107,6 +113,11 @@ public class CommandTestUtil {
         DESC_BOB = new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB)
                 .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB)
                 .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
+        // Menu Management
+        DESC_BURGER = new EditItemDescriptorBuilder().withName(VALID_ITEM_NAME_BURGER)
+                .withPrice(VALID_ITEM_PRICE_BURGER).build();
+        DESC_FRIES = new EditItemDescriptorBuilder().withName(VALID_ITEM_NAME_FRIES).withPrice(VALID_ITEM_PRICE_FRIES)
+                        .withTags(VALID_ITEM_TAG_CHEESE).build();
     }
 
     /**
