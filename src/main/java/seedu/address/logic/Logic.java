@@ -28,13 +28,11 @@ public interface Logic {
     /** Returns an unmodifiable view of the filtered list of accounts */
     ObservableList<Account> getFilteredAccountList();
 
-<<<<<<< HEAD
     /** Returns an unmodifiable view of the filtered list of ingredients */
     ObservableList<Ingredient> getFilteredIngredientList();
-=======
+
     /** Returns an unmodifiable view of the filtered list of sales records */
     ObservableList<SalesRecord> getFilteredRecordList();
->>>>>>> master
 
     /** Returns the list of input entered by the user, encapsulated in a {@code ListElementPointer} object */
     ListElementPointer getHistorySnapshot();
