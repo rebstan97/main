@@ -21,6 +21,10 @@ import static seedu.address.testutil.menu.TypicalItems.BEEF_BURGER;
 import static seedu.address.testutil.menu.TypicalItems.BURGER;
 import static seedu.address.testutil.menu.TypicalItems.CHEESE_BURGER;
 import static seedu.address.testutil.menu.TypicalItems.FRIES;
+import static seedu.address.testutil.salesrecords.TypicalRecords.RECORD_DEFAULT;
+import static seedu.address.testutil.salesrecords.TypicalRecords.RECORD_ONE;
+import static seedu.address.testutil.salesrecords.TypicalRecords.RECORD_THREE;
+import static seedu.address.testutil.salesrecords.TypicalRecords.RECORD_TWO;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -39,11 +43,14 @@ import seedu.address.model.menu.Item;
 import seedu.address.model.menu.exceptions.DuplicateItemException;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
+import seedu.address.model.salesrecord.SalesRecord;
+import seedu.address.model.salesrecord.exceptions.DuplicateRecordException;
 import seedu.address.model.tag.Tag;
 import seedu.address.testutil.AddressBookBuilder;
 import seedu.address.testutil.PersonBuilder;
 import seedu.address.testutil.accounts.AccountBuilder;
 import seedu.address.testutil.menu.ItemBuilder;
+import seedu.address.testutil.salesrecords.RecordBuilder;
 
 public class AddressBookTest {
 
@@ -72,16 +79,17 @@ public class AddressBookTest {
     }
 
     @Test
-    public void resetData_withDuplicatePersonsWithAccounts_throwsDuplicatePersonException() {
+    public void resetData_withDuplicatePersonsWithRecordsAndAccounts_throwsDuplicatePersonException() {
         // Two persons with the same identity fields
         Person editedAlice = new PersonBuilder(ALICE)
                 .withAddress(VALID_ADDRESS_BOB)
                 .withTags(VALID_TAG_HUSBAND)
                 .build();
         List<Person> newPersons = Arrays.asList(ALICE, editedAlice);
+        List<SalesRecord> newRecords = Arrays.asList(RECORD_DEFAULT, RECORD_ONE);
         List<Account> newAccounts = Arrays.asList(DEMO_ADMIN, DEMO_ONE);
         List<Item> newItems = Arrays.asList(APPLE_JUICE);
-        AddressBookStub newData = new AddressBookStub(newPersons, newAccounts, newItems);
+        AddressBookStub newData = new AddressBookStub(newPersons, newAccounts, newItems, newRecords);
 
         thrown.expect(DuplicatePersonException.class);
         addressBook.resetData(newData);
@@ -166,7 +174,70 @@ public class AddressBookTest {
     }
 
     @Test
-    public void resetData_withDuplicateAccountsWithPersons_throwsDuplicateAccountException() {
+    public void resetData_withDuplicateRecordsWithPersonsAndAccounts_throwsDuplicateRecordException() {
+        // Two records with the same date and name
+        SalesRecord record = new RecordBuilder(RECORD_ONE)
+                .withDate(RECORD_DEFAULT.getDate().toString())
+                .withName(RECORD_DEFAULT.getName().toString())
+                .build();
+        List<SalesRecord> newRecords = Arrays.asList(RECORD_DEFAULT, record);
+        List<Person> newPersons = Arrays.asList(ALICE, BOB);
+        List<Account> newAccounts = Arrays.asList(DEMO_ADMIN, DEMO_ONE);
+        List<Item> newItems = Arrays.asList(APPLE_JUICE);
+        AddressBookStub newData = new AddressBookStub(newPersons, newAccounts, newItems, newRecords);
+        thrown.expect(DuplicateRecordException.class);
+        addressBook.resetData(newData);
+    }
+    @Test
+    public void hasRecord_nullRecord_throwsNullPointerException() {
+        thrown.expect(NullPointerException.class);
+        addressBook.hasRecord(null);
+    }
+    @Test
+    public void hasRecord_recordNotInAddressBook_returnsFalse() {
+        assertFalse(addressBook.hasRecord(RECORD_DEFAULT));
+    }
+    @Test
+    public void hasRecord_recordInAddressBook_returnsTrue() {
+        addressBook.addRecord(RECORD_DEFAULT);
+        assertTrue(addressBook.hasRecord(RECORD_DEFAULT));
+    }
+    @Test
+    public void hasRecord_recordWithSameDateDifferentNameInAddressBook_returnsTrue() {
+        addressBook.addRecord(RECORD_DEFAULT);
+        SalesRecord record = new RecordBuilder(RECORD_TWO)
+                .withDate(RECORD_DEFAULT.getDate().toString())
+                .build();
+        addressBook.addRecord(record);
+        assertTrue(addressBook.hasRecord(record));
+    }
+    @Test
+    public void hasRecord_recordWithDifferentDateSameNameInAddressBook_returnsTrue() {
+        addressBook.addRecord(RECORD_DEFAULT);
+        SalesRecord record = new RecordBuilder(RECORD_ONE)
+                .withName(RECORD_DEFAULT.getName().toString())
+                .build();
+        addressBook.addRecord(record);
+        assertTrue(addressBook.hasRecord(record));
+    }
+    @Test
+    public void hasRecord_recordWithSameQuantitySoldSamePriceInAddressBook_returnsTrue() {
+        addressBook.addRecord(RECORD_DEFAULT);
+        SalesRecord record = new RecordBuilder(RECORD_THREE)
+                .withQuantitySold(RECORD_DEFAULT.getQuantitySold().toString())
+                .withPrice(RECORD_DEFAULT.getPrice().toString())
+                .build();
+        addressBook.addRecord(record);
+        assertTrue(addressBook.hasRecord(record));
+    }
+    @Test
+    public void getRecordList_modifyList_throwsUnsupportedOperationException() {
+        thrown.expect(UnsupportedOperationException.class);
+        addressBook.getRecordList().remove(0);
+    }
+
+    @Test
+    public void resetData_withDuplicateAccountsWithPersonsAndRecords_throwsDuplicateAccountException() {
         // Two accounts with the same username
         Account account = new AccountBuilder(DEMO_ONE)
                 .withUsername(DEMO_ADMIN.getUsername().toString())
@@ -174,7 +245,8 @@ public class AddressBookTest {
         List<Account> newAccounts = Arrays.asList(DEMO_ADMIN, account);
         List<Person> newPersons = Arrays.asList(ALICE, BOB);
         List<Item> newItems = Arrays.asList(APPLE_JUICE);
-        AddressBookStub newData = new AddressBookStub(newPersons, newAccounts, newItems);
+        List<SalesRecord> newRecords = Arrays.asList(RECORD_DEFAULT, RECORD_ONE);
+        AddressBookStub newData = new AddressBookStub(newPersons, newAccounts, newItems, newRecords);
 
         thrown.expect(DuplicateAccountException.class);
         addressBook.resetData(newData);
@@ -221,7 +293,8 @@ public class AddressBookTest {
         List<Person> newPersons = Arrays.asList(ALICE);
         List<Account> newAccounts = Arrays.asList(DEMO_ADMIN);
         List<Item> newItems = Arrays.asList(APPLE_JUICE, editedApple);
-        AddressBookStub newData = new AddressBookStub(newPersons, newAccounts, newItems);
+        List<SalesRecord> newRecords = Arrays.asList(RECORD_DEFAULT, RECORD_ONE);
+        AddressBookStub newData = new AddressBookStub(newPersons, newAccounts, newItems, newRecords);
 
         thrown.expect(DuplicateItemException.class);
         addressBook.resetData(newData);
@@ -302,20 +375,14 @@ public class AddressBookTest {
     @Test
     public void equals() {
         addressBookWithPersons = new AddressBookBuilder().withPerson(AMY).withPerson(DYLAN).build();
-
         // same object
         assertTrue(addressBookWithPersons.equals(addressBookWithPersons));
-
         addressBookWithPersons.removeTag(new Tag(VALID_TAG_FRIEND));
-
         Person amyWithoutTags = new PersonBuilder(AMY).withTags().build();
-
         AddressBook expectedAddressBook = new AddressBookBuilder().withPerson(amyWithoutTags)
                 .withPerson(DYLAN)
                 .build();
-
         assertTrue(addressBookWithPersons.equals(expectedAddressBook));
-
         // different type
         assertFalse(addressBookWithPersons.equals(null));
         assertFalse(addressBookWithPersons.equals(0));
@@ -327,11 +394,14 @@ public class AddressBookTest {
     private static class AddressBookStub implements ReadOnlyAddressBook {
 
         private final ObservableList<Person> persons = FXCollections.observableArrayList();
+        private final ObservableList<SalesRecord> records = FXCollections.observableArrayList();
         private final ObservableList<Account> accounts = FXCollections.observableArrayList();
         private final ObservableList<Item> items = FXCollections.observableArrayList();
 
-        AddressBookStub(Collection<Person> persons, Collection<Account> accounts, Collection<Item> items) {
+        AddressBookStub(Collection<Person> persons, Collection<Account> accounts, Collection<Item> items,
+                        Collection<SalesRecord> records) {
             this.persons.setAll(persons);
+            this.records.setAll(records);
             this.accounts.setAll(accounts);
             this.items.setAll(items);
         }
@@ -339,6 +409,11 @@ public class AddressBookTest {
         @Override
         public ObservableList<Person> getPersonList() {
             return persons;
+        }
+
+        @Override
+        public ObservableList<SalesRecord> getRecordList() {
+            return records;
         }
 
         @Override

@@ -36,12 +36,14 @@ import seedu.address.logic.commands.menu.ClearMenuCommand;
 import seedu.address.logic.commands.menu.DeleteItemCommand;
 import seedu.address.logic.commands.menu.ListItemsCommand;
 import seedu.address.logic.commands.menu.SelectItemCommand;
+import seedu.address.logic.commands.salescommands.RecordSalesCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.accounts.Account;
 import seedu.address.model.menu.Item;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Remark;
+import seedu.address.model.salesrecord.SalesRecord;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 import seedu.address.testutil.PersonBuilder;
 import seedu.address.testutil.PersonUtil;
@@ -49,6 +51,8 @@ import seedu.address.testutil.accounts.AccountBuilder;
 import seedu.address.testutil.accounts.AccountUtil;
 import seedu.address.testutil.menu.ItemBuilder;
 import seedu.address.testutil.menu.ItemUtil;
+import seedu.address.testutil.salesrecords.RecordBuilder;
+import seedu.address.testutil.salesrecords.RecordUtil;
 
 public class AddressBookParserTest {
 
@@ -173,6 +177,13 @@ public class AddressBookParserTest {
         RemarkCommand command = (RemarkCommand) parser.parseCommand(RemarkCommand.COMMAND_WORD + " "
                 + INDEX_FIRST_PERSON.getOneBased() + " " + PREFIX_REMARK + remark.value);
         assertEquals(new RemarkCommand(INDEX_FIRST_PERSON, remark), command);
+    }
+
+    @Test
+    public void parseCommand_record_sales() throws Exception {
+        SalesRecord record = new RecordBuilder().build();
+        RecordSalesCommand command = (RecordSalesCommand) parser.parseCommand(RecordUtil.getRecordSalesCommand(record));
+        assertEquals(new RecordSalesCommand(record), command);
     }
 
     @Test

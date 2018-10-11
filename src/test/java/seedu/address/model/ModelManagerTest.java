@@ -8,7 +8,9 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_ITEM_TAG_CHEESE
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_TEST;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_ACCOUNTS;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_RECORDS;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.AMY;
 import static seedu.address.testutil.TypicalPersons.BENSON;
@@ -20,6 +22,10 @@ import static seedu.address.testutil.menu.TypicalItems.APPLE_JUICE;
 import static seedu.address.testutil.menu.TypicalItems.BURGER;
 import static seedu.address.testutil.menu.TypicalItems.CHEESE_BURGER;
 import static seedu.address.testutil.menu.TypicalItems.FRIES;
+import static seedu.address.testutil.accounts.TypicalAccounts.DEMO_TWO;
+import static seedu.address.testutil.salesrecords.TypicalRecords.RECORD_DEFAULT;
+import static seedu.address.testutil.salesrecords.TypicalRecords.RECORD_ONE;
+import static seedu.address.testutil.salesrecords.TypicalRecords.RECORD_TWO;
 
 import java.nio.file.Paths;
 import java.util.Arrays;
@@ -33,11 +39,14 @@ import seedu.address.model.accounts.exceptions.AccountNotFoundException;
 import seedu.address.model.menu.Item;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
+import seedu.address.model.salesrecord.SalesRecord;
+import seedu.address.model.salesrecord.exceptions.SalesRecordNotFoundException;
 import seedu.address.model.tag.Tag;
 import seedu.address.testutil.AddressBookBuilder;
 import seedu.address.testutil.PersonBuilder;
 import seedu.address.testutil.accounts.AccountBuilder;
 import seedu.address.testutil.menu.ItemBuilder;
+import seedu.address.testutil.salesrecords.RecordBuilder;
 
 public class ModelManagerTest {
 
@@ -68,6 +77,12 @@ public class ModelManagerTest {
     public void getFilteredPersonList_modifyList_throwsUnsupportedOperationException() {
         thrown.expect(UnsupportedOperationException.class);
         modelManager.getFilteredPersonList().remove(0);
+    }
+
+    @Test
+    public void getFilteredRecordList_modifyList_throwsUnsupportedOperationException() {
+        thrown.expect(UnsupportedOperationException.class);
+        modelManager.getFilteredRecordList().remove(0);
     }
 
     @Test
@@ -122,6 +137,51 @@ public class ModelManagerTest {
         expectedModelManager.updatePerson(AMY, amyWithoutTags);
 
         assertEquals(modifiedModelManager, expectedModelManager);
+    }
+
+    @Test
+    public void hasRecord_nullRecord_throwsNullPointerException() {
+        thrown.expect(NullPointerException.class);
+        modelManager.hasRecord(null);
+    }
+    @Test
+    public void hasRecord_recordNotInSalesBook_returnsFalse() {
+        assertFalse(modelManager.hasRecord(RECORD_DEFAULT));
+    }
+    @Test
+    public void hasRecord_recordInSalesBook_returnsTrue() {
+        modelManager.addRecord(RECORD_DEFAULT);
+        assertTrue(modelManager.hasRecord(RECORD_DEFAULT));
+    }
+    @Test
+    public void getRecordList_modifyList_throwsUnsupportedOperationException() {
+        thrown.expect(UnsupportedOperationException.class);
+        modelManager.getAddressBook().getRecordList().remove(0);
+    }
+    @Test
+    public void deleteRecord_recordNotInSalesBook_throwsRecordsNotFoundException() {
+        thrown.expect(SalesRecordNotFoundException.class);
+        modelManager.deleteRecord(RECORD_DEFAULT);
+    }
+    @Test
+    public void deleteRecord_recordInSalesBook_returnTrue() {
+        modelManager.addRecord(RECORD_DEFAULT);
+        assertTrue(modelManager.hasRecord(RECORD_DEFAULT));
+        modelManager.deleteRecord(RECORD_DEFAULT);
+        assertFalse(modelManager.hasRecord(RECORD_DEFAULT));
+    }
+    @Test
+    public void updateRecord_recordNotInSalesBook_throwsRecordNotFoundException() {
+        thrown.expect(SalesRecordNotFoundException.class);
+        modelManager.updateRecord(RECORD_DEFAULT, RECORD_ONE);
+    }
+    @Test
+    public void updateRecord_recordInSalesBook_returnTrue() {
+        modelManager.addRecord(RECORD_DEFAULT);
+        SalesRecord record = new RecordBuilder(RECORD_ONE).build();
+        modelManager.updateRecord(RECORD_DEFAULT, record);
+        assertFalse(modelManager.hasRecord(RECORD_DEFAULT));
+        assertTrue(modelManager.hasRecord(record));
     }
 
     @Test
@@ -250,7 +310,14 @@ public class ModelManagerTest {
 
     @Test
     public void equals() {
-        AddressBook addressBook = new AddressBookBuilder().withPerson(ALICE).withPerson(BENSON).build();
+        AddressBook addressBook = new AddressBookBuilder()
+                .withPerson(ALICE)
+                .withPerson(BENSON)
+                .withRecord(RECORD_ONE)
+                .withRecord(RECORD_TWO)
+                .withAccount(DEMO_ONE)
+                .withAccount(DEMO_TWO)
+                .build();
         AddressBook differentAddressBook = new AddressBook();
         UserPrefs userPrefs = new UserPrefs();
 
@@ -278,6 +345,8 @@ public class ModelManagerTest {
 
         // resets modelManager to initial state for upcoming tests
         modelManager.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        modelManager.updateFilteredRecordList(PREDICATE_SHOW_ALL_RECORDS);
+        modelManager.updateFilteredAccountList(PREDICATE_SHOW_ALL_ACCOUNTS);
 
         //TODO: Test updateFilteredAccountList
 

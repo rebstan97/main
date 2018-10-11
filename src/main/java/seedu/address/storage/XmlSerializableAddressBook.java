@@ -13,7 +13,9 @@ import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.accounts.Account;
 import seedu.address.model.menu.Item;
 import seedu.address.model.person.Person;
+import seedu.address.model.salesrecord.SalesRecord;
 import seedu.address.storage.elements.XmlAdaptedAccount;
+import seedu.address.storage.elements.XmlAdaptedRecord;
 import seedu.address.storage.menu.XmlAdaptedItem;
 
 /**
@@ -23,6 +25,7 @@ import seedu.address.storage.menu.XmlAdaptedItem;
 public class XmlSerializableAddressBook {
 
     public static final String MESSAGE_DUPLICATE_PERSON = "Persons list contains duplicate person(s).";
+    public static final String MESSAGE_DUPLICATE_RECORD = "Records list contains duplicate record(s).";
     public static final String MESSAGE_DUPLICATE_ACCOUNT = "Account list contains duplicate account(s).";
     public static final String MESSAGE_DUPLICATE_ITEM = "Items list contains duplicate item(s).";
 
@@ -30,6 +33,9 @@ public class XmlSerializableAddressBook {
 
     @XmlElement
     private List<XmlAdaptedPerson> persons;
+
+    @XmlElement
+    private List<XmlAdaptedRecord> records;
 
     @XmlElement
     private List<XmlAdaptedAccount> accounts;
@@ -43,6 +49,7 @@ public class XmlSerializableAddressBook {
     public XmlSerializableAddressBook() {
         addressBook = new AddressBook();
         persons = new ArrayList<>();
+        records = new ArrayList<>();
         accounts = new ArrayList<>();
         items = new ArrayList<>();
     }
@@ -53,16 +60,32 @@ public class XmlSerializableAddressBook {
     public XmlSerializableAddressBook(ReadOnlyAddressBook src) {
         this();
         persons.addAll(src.getPersonList().stream().map(XmlAdaptedPerson::new).collect(Collectors.toList()));
+        records.addAll(src.getRecordList().stream().map(XmlAdaptedRecord::new).collect(Collectors.toList()));
         accounts.addAll(src.getAccountList().stream().map(XmlAdaptedAccount::new).collect(Collectors.toList()));
         items.addAll(src.getItemList().stream().map(XmlAdaptedItem::new).collect(Collectors.toList()));
     }
 
     /**
-     * Converts this person record into the model's {@code Person} object.
+     * Returns the converted model {@code AddressBook} object.
+     *
+     * @throws IllegalValueException if there were any data constraints violated or duplicates record when not
+     *         allowed.
+     */
+    public AddressBook toModelType() throws IllegalValueException {
+        processPersons();
+        processRecords();
+        processAccounts();
+        processItems();
+        return addressBook;
+    }
+
+    /**
+     * Converts this addressbook's person list into the model's {@code AddressBook} object.
+     *
      * @throws IllegalValueException if there were any data constraints violated or duplicates in the {@code
      *         XmlAdaptedPerson}.
      */
-    public void processPersons() throws IllegalValueException {
+    private void processPersons() throws IllegalValueException {
         for (XmlAdaptedPerson p : persons) {
             Person person = p.toModelType();
             if (addressBook.hasPerson(person)) {
@@ -73,12 +96,28 @@ public class XmlSerializableAddressBook {
     }
 
     /**
+     * Converts this addressbook's record list into the model's {@code AddressBook} object.
+     *
+     * @throws IllegalValueException if there were any data constraints violated or duplicates in the {@code
+     *         XmlAdaptedRecord}.
+     */
+    private void processRecords() throws IllegalValueException {
+        for (XmlAdaptedRecord r : records) {
+            SalesRecord record = r.toModelType();
+            if (addressBook.hasRecord(record)) {
+                throw new IllegalValueException(MESSAGE_DUPLICATE_RECORD);
+            }
+            addressBook.addRecord(record);
+        }
+    }
+
+    /**
      * Converts this account record into the model's {@code Account} object.
      *
      * @throws IllegalValueException if there were any data constraints violated or duplicates in the {@code
      *         XmlAdaptedAccount}.
      */
-    public void processAccounts() throws IllegalValueException {
+    private void processAccounts() throws IllegalValueException {
         for (XmlAdaptedAccount acc : accounts) {
             Account account = acc.toModelType();
             if (addressBook.hasAccount(account)) {
@@ -103,19 +142,6 @@ public class XmlSerializableAddressBook {
         }
     }
 
-    /**
-     * Returns the converted model {@code AddressBook} object.
-     *
-     * @throws IllegalValueException if there were any data constraints violated or duplicates record when not
-     *         allowed.
-     */
-    public AddressBook toModelType() throws IllegalValueException {
-        processPersons();
-        processAccounts();
-        processItems();
-        return addressBook;
-    }
-
     @Override
     public boolean equals(Object other) {
         if (other == this) {
@@ -127,6 +153,7 @@ public class XmlSerializableAddressBook {
         }
         return persons.equals(((XmlSerializableAddressBook) other).persons)
                 && accounts.equals(((XmlSerializableAddressBook) other).accounts)
-                && items.equals(((XmlSerializableAddressBook) other).items);
+                && items.equals(((XmlSerializableAddressBook) other).items)
+                && records.equals(((XmlSerializableAddressBook) other).records);
     }
 }
