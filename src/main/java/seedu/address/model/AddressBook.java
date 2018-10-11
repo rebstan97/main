@@ -183,24 +183,6 @@ public class AddressBook implements ReadOnlyAddressBook {
         reservations.remove(key);
     }
 
-    /**
-     * Removes {@code tag} from {@code reservation} in this {@code AddressBook}.
-     *
-     * @param reservation whose tag is being removed.
-     * @param tag to be removed.
-     */
-    private void removeTagForReservation(Reservation reservation, Tag tag) {
-        Set<Tag> tags = new HashSet<>(reservation.getTags());
-
-        if (!tags.remove(tag)) {
-            return;
-        }
-
-        Reservation newReservation = new Reservation(reservation.getName(), reservation.getPax(),
-                reservation.getDateTime(), reservation.getRemark(), tags);
-        updateReservation(reservation, newReservation);
-    }
-
     @Override
     public ObservableList<Reservation> getReservationList() {
         return reservations.asUnmodifiableObservableList();
