@@ -1,9 +1,9 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -16,6 +16,7 @@ import org.junit.rules.ExpectedException;
 import javafx.collections.ObservableList;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.commands.salescommands.RecordSalesCommand;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
@@ -23,9 +24,9 @@ import seedu.address.model.accounts.Account;
 import seedu.address.model.person.Person;
 import seedu.address.model.salesrecord.SalesRecord;
 import seedu.address.model.tag.Tag;
-import seedu.address.testutil.PersonBuilder;
+import seedu.address.testutil.salesrecords.RecordBuilder;
 
-public class AddCommandTest {
+public class RecordSalesCommandTest {
 
     private static final CommandHistory EMPTY_COMMAND_HISTORY = new CommandHistory();
 
@@ -35,56 +36,58 @@ public class AddCommandTest {
     private CommandHistory commandHistory = new CommandHistory();
 
     @Test
-    public void constructor_nullPerson_throwsNullPointerException() {
+    public void constructor_nullRecord_throwsNullPointerException() {
         thrown.expect(NullPointerException.class);
-        new AddCommand(null);
+        new RecordSalesCommand(null);
     }
 
     @Test
-    public void execute_personAcceptedByModel_addSuccessful() throws Exception {
-        ModelStubAcceptingPersonAdded modelStub = new ModelStubAcceptingPersonAdded();
-        Person validPerson = new PersonBuilder().build();
+    public void execute_recordAcceptedByModel_addSuccessful() throws Exception {
+        ModelStubAcceptingRecordAdded modelStub = new ModelStubAcceptingRecordAdded();
+        SalesRecord validRecord = new RecordBuilder().build();
 
-        CommandResult commandResult = new AddCommand(validPerson).execute(modelStub, commandHistory);
+        CommandResult commandResult = new RecordSalesCommand(validRecord).execute(modelStub, commandHistory);
 
-        assertEquals(String.format(AddCommand.MESSAGE_SUCCESS, validPerson), commandResult.feedbackToUser);
-        assertEquals(Arrays.asList(validPerson), modelStub.personsAdded);
+        assertEquals(String.format(RecordSalesCommand.MESSAGE_RECORD_SALES_SUCCESS, validRecord),
+                commandResult.feedbackToUser);
+        assertEquals(Arrays.asList(validRecord), modelStub.recordsAdded);
         assertEquals(EMPTY_COMMAND_HISTORY, commandHistory);
     }
 
     @Test
-    public void execute_duplicatePerson_throwsCommandException() throws Exception {
-        Person validPerson = new PersonBuilder().build();
-        AddCommand addCommand = new AddCommand(validPerson);
-        ModelStub modelStub = new ModelStubWithPerson(validPerson);
+    public void execute_duplicateRecord_throwsCommandException() throws Exception {
+        SalesRecord validRecord = new RecordBuilder().build();
+        RecordSalesCommand recordSalesCommand = new RecordSalesCommand(validRecord);
+        ModelStub modelStub = new ModelStubWithRecord(validRecord);
 
         thrown.expect(CommandException.class);
-        thrown.expectMessage(AddCommand.MESSAGE_DUPLICATE_PERSON);
-        addCommand.execute(modelStub, commandHistory);
+        thrown.expectMessage(String.format(RecordSalesCommand.MESSAGE_DUPLICATE_SALES_RECORD, validRecord.getName()));
+        recordSalesCommand.execute(modelStub, commandHistory);
     }
 
     @Test
     public void equals() {
-        Person alice = new PersonBuilder().withName("Alice").build();
-        Person bob = new PersonBuilder().withName("Bob").build();
-        AddCommand addAliceCommand = new AddCommand(alice);
-        AddCommand addBobCommand = new AddCommand(bob);
+        SalesRecord record1 = new RecordBuilder().withDate("28-02-2018").withName("Sweet Potato").build();
+        SalesRecord record2 = new RecordBuilder().withDate("11-08-2017").withName("Apple Juice").build();
+
+        RecordSalesCommand recordRecord1Command = new RecordSalesCommand(record1);
+        RecordSalesCommand recordRecord2Command = new RecordSalesCommand(record2);
 
         // same object -> returns true
-        assertTrue(addAliceCommand.equals(addAliceCommand));
+        assertTrue(recordRecord1Command.equals(recordRecord1Command));
 
         // same values -> returns true
-        AddCommand addAliceCommandCopy = new AddCommand(alice);
-        assertTrue(addAliceCommand.equals(addAliceCommandCopy));
+        RecordSalesCommand recordRecord1CommandCopy = new RecordSalesCommand(record1);
+        assertTrue(recordRecord1Command.equals(recordRecord1CommandCopy));
 
         // different types -> returns false
-        assertFalse(addAliceCommand.equals(1));
+        assertFalse(recordRecord1Command.equals(1));
 
         // null -> returns false
-        assertFalse(addAliceCommand.equals(null));
+        assertFalse(recordRecord1Command.equals(null));
 
         // different person -> returns false
-        assertFalse(addAliceCommand.equals(addBobCommand));
+        assertFalse(recordRecord1Command.equals(recordRecord2Command));
     }
 
     /**
@@ -138,27 +141,32 @@ public class AddCommandTest {
         }
 
         @Override
-        public boolean canUndoAddressBook() {
+        public void addRecord(SalesRecord record) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public boolean canRedoAddressBook() {
+        public boolean hasRecord(SalesRecord record) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void undoAddressBook() {
+        public void deleteRecord(SalesRecord target) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void redoAddressBook() {
+        public void updateRecord(SalesRecord target, SalesRecord editedRecord) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void commitAddressBook() {
+        public ObservableList<SalesRecord> getFilteredRecordList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void updateFilteredRecordList(Predicate<SalesRecord> predicate) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -193,77 +201,72 @@ public class AddCommandTest {
         }
 
         @Override
-        public void addRecord(SalesRecord record) {
+        public boolean canUndoAddressBook() {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public boolean hasRecord(SalesRecord record) {
+        public boolean canRedoAddressBook() {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void deleteRecord(SalesRecord target) {
+        public void undoAddressBook() {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void updateRecord(SalesRecord target, SalesRecord editedRecord) {
+        public void redoAddressBook() {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public ObservableList<SalesRecord> getFilteredRecordList() {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public void updateFilteredRecordList(Predicate<SalesRecord> predicate) {
+        public void commitAddressBook() {
             throw new AssertionError("This method should not be called.");
         }
     }
 
     /**
-     * A Model stub that contains a single person.
+     * A Model stub that contains a single record.
      */
-    private class ModelStubWithPerson extends ModelStub {
+    private class ModelStubWithRecord extends ModelStub {
 
-        private final Person person;
+        private final SalesRecord record;
 
-        ModelStubWithPerson(Person person) {
-            requireNonNull(person);
-            this.person = person;
+        ModelStubWithRecord(SalesRecord record) {
+            requireNonNull(record);
+            this.record = record;
         }
 
         @Override
-        public boolean hasPerson(Person person) {
-            requireNonNull(person);
-            return this.person.isSamePerson(person);
+        public boolean hasRecord(SalesRecord record) {
+            requireNonNull(record);
+            return this.record.isSameRecord(record);
         }
     }
 
     /**
      * A Model stub that always accept the person being added.
      */
-    private class ModelStubAcceptingPersonAdded extends ModelStub {
+    private class ModelStubAcceptingRecordAdded extends ModelStub {
 
-        final ArrayList<Person> personsAdded = new ArrayList<>();
+        private final ArrayList<SalesRecord> recordsAdded = new ArrayList<>();
 
         @Override
-        public boolean hasPerson(Person person) {
-            requireNonNull(person);
-            return personsAdded.stream().anyMatch(person::isSamePerson);
+        public boolean hasRecord(SalesRecord record) {
+            requireNonNull(record);
+            return recordsAdded.stream().anyMatch(record::isSameRecord);
         }
 
         @Override
-        public void addPerson(Person person) {
-            requireNonNull(person);
-            personsAdded.add(person);
+        public void addRecord(SalesRecord record) {
+            requireNonNull(record);
+            recordsAdded.add(record);
         }
 
         @Override
         public void commitAddressBook() {
-            // called by {@code AddCommand#execute()}
+            // called by {@code RecordSalesCommand#execute()}
         }
 
         @Override
@@ -271,5 +274,4 @@ public class AddCommandTest {
             return new AddressBook();
         }
     }
-
 }
