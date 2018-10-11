@@ -7,8 +7,7 @@ import seedu.address.model.menu.Item;
  * Represents a selection change in the Person List Panel
  */
 public class ItemPanelSelectionChangedEvent extends BaseEvent {
-
-
+    
     private final Item newSelection;
 
     public ItemPanelSelectionChangedEvent(Item newSelection) {
