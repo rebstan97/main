@@ -22,18 +22,6 @@ public class Ingredient {
     /**
      * Every field must be present and not null.
      */
-    public Ingredient(IngredientName name, IngredientUnit unit, IngredientPrice price, MinimumUnit minimum) {
-        requireAllNonNull(name);
-        this.name = name;
-        this.unit = unit;
-        this.price = price;
-        this.minimum = minimum;
-        this.numUnits = new NumUnits("0");
-    }
-
-    /**
-     * Every field must be present and not null.
-     */
     public Ingredient(IngredientName name, IngredientUnit unit, IngredientPrice price, MinimumUnit minimum,
                       NumUnits numUnits) {
         requireAllNonNull(name);
