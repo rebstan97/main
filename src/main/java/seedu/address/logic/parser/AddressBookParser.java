@@ -26,11 +26,13 @@ import seedu.address.logic.commands.menu.ClearMenuCommand;
 import seedu.address.logic.commands.menu.DeleteItemCommand;
 import seedu.address.logic.commands.menu.EditItemCommand;
 import seedu.address.logic.commands.menu.ListItemsCommand;
+import seedu.address.logic.commands.menu.SelectItemCommand;
 import seedu.address.logic.parser.accounts.CreateCommandParser;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.logic.parser.menu.AddItemCommandParser;
 import seedu.address.logic.parser.menu.DeleteItemCommandParser;
 import seedu.address.logic.parser.menu.EditItemCommandParser;
+import seedu.address.logic.parser.menu.SelectItemCommandParser;
 
 /**
  * Parses user input.
@@ -126,10 +128,13 @@ public class AddressBookParser {
         case ListItemsCommand.COMMAND_ALIAS:
             return new ListItemsCommand();
 
+        case SelectItemCommand.COMMAND_WORD:
+        case SelectItemCommand.COMMAND_ALIAS:
+            return new SelectItemCommandParser().parse(arguments);
+
         case ClearMenuCommand.COMMAND_WORD:
         case ClearMenuCommand.COMMAND_ALIAS:
             return new ClearMenuCommand();
-
 
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
