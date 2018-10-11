@@ -15,11 +15,7 @@ import seedu.address.logic.parser.Parser;
 import seedu.address.logic.parser.ParserUtil;
 import seedu.address.logic.parser.Prefix;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.ingredient.Ingredient;
-import seedu.address.model.ingredient.IngredientName;
-import seedu.address.model.ingredient.IngredientPrice;
-import seedu.address.model.ingredient.IngredientUnit;
-import seedu.address.model.ingredient.MinimumUnit;
+import seedu.address.model.ingredient.*;
 
 /**
  * Parses input arguments and creates a new AddIngredientCommand object
@@ -47,7 +43,7 @@ public class AddIngredientCommandParser implements Parser<AddIngredientCommand> 
         IngredientPrice price = ParserUtil.parseIngredientPrice(argMultimap.getValue(PREFIX_INGREDIENT_PRICE).get());
         MinimumUnit minimum = ParserUtil.parseMinimumUnit(argMultimap.getValue(PREFIX_INGREDIENT_MINIMUM).get());
 
-        Ingredient ingredient = new Ingredient(name, unit, price, minimum);
+        Ingredient ingredient = new Ingredient(name, unit, price, minimum, new NumUnits("0"));
 
         return new AddIngredientCommand(ingredient);
     }

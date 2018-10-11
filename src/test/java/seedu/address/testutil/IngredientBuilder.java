@@ -16,6 +16,7 @@ public class IngredientBuilder {
     public static final String DEFAULT_UNIT = "packet of 5";
     public static final String DEFAULT_PRICE = "1.90";
     public static final String DEFAULT_MINIMUM = "3";
+    public static final String DEFAULT_NUMUNITS = "0";
 
     private IngredientName name;
     private IngredientUnit unit;
@@ -28,7 +29,7 @@ public class IngredientBuilder {
         unit = new IngredientUnit(DEFAULT_UNIT);
         price = new IngredientPrice(DEFAULT_PRICE);
         minimum = new MinimumUnit(DEFAULT_MINIMUM);
-        numUnits = new NumUnits("0");
+        numUnits = new NumUnits(DEFAULT_NUMUNITS);
     }
 
     /**
@@ -83,7 +84,7 @@ public class IngredientBuilder {
     }
 
     public Ingredient build() {
-        return new Ingredient(name, unit, price, minimum);
+        return new Ingredient(name, unit, price, minimum, numUnits);
     }
 
 }
