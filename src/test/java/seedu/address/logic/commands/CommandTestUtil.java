@@ -3,15 +3,19 @@ package seedu.address.logic.commands;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ID;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_INGREDIENT_MINIMUM;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_INGREDIENT_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_INGREDIENT_PRICE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_INGREDIENT_UNIT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ITEM_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ITEM_PRICE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PASSWORD;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_QUANTITY_SOLD;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.ArrayList;
@@ -76,6 +80,32 @@ public class CommandTestUtil {
                 .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB)
                 .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
     }
+
+    /** For sales records */
+    public static final String VALID_DATE_RECORD_ONE = "28-02-2018";
+    public static final String VALID_DATE_RECORD_TWO = "11-11-2011";
+    public static final String VALID_DATE_RECORD_THREE = "25-12-2017";
+    public static final String VALID_ITEM_NAME_RECORD_ONE = "Cheese Pizza";
+    public static final String VALID_ITEM_NAME_RECORD_TWO = "Pasta";
+    public static final String VALID_ITEM_NAME_RECORD_THREE = "Orange Juice";
+    public static final String VALID_QUANTITY_SOLD_RECORD_ONE = "100";
+    public static final String VALID_QUANTITY_SOLD_RECORD_TWO = "87";
+    public static final String VALID_QUANTITY_SOLD_RECORD_THREE = "202";
+    public static final String VALID_PRICE_RECORD_ONE = "18.50";
+    public static final String VALID_PRICE_RECORD_TWO = "7.99";
+    public static final String VALID_PRICE_RECORD_THREE = "2";
+
+    public static final String PREFIX_WITH_VALID_DATE = " " + PREFIX_DATE + VALID_DATE_RECORD_ONE;
+    public static final String PREFIX_WITH_VALID_ITEM_NAME = " " + PREFIX_ITEM_NAME + VALID_ITEM_NAME_RECORD_ONE;
+    public static final String PREFIX_WITH_VALID_QUANTITY_SOLD =
+            " " + PREFIX_QUANTITY_SOLD + VALID_QUANTITY_SOLD_RECORD_ONE;
+    public static final String PREFIX_WITH_VALID_PRICE = " " + PREFIX_ITEM_PRICE + VALID_PRICE_RECORD_ONE;
+    public static final String PREFIX_WITH_INVALID_DATE = " " + PREFIX_DATE + "31-02-2018"; // no such date
+    public static final String PREFIX_WITH_INVALID_ITEM_NAME = " " + PREFIX_ITEM_NAME + "Fried Rice!"; // symbols not
+    // allowed
+    public static final String PREFIX_WITH_INVALID_QUANTITY_SOLD = " " + PREFIX_QUANTITY_SOLD + "3.5"; // positive
+    // integer only
+    public static final String PREFIX_WITH_INVALID_PRICE = " " + PREFIX_ITEM_PRICE + "-2"; // negative price not allowed
 
     /** For accounts */
     public static final String VALID_USERNAME_DEMO_ONE = "demo1";

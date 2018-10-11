@@ -3,11 +3,12 @@ package seedu.address.testutil;
 import static seedu.address.testutil.TypicalIngredients.getTypicalIngredients;
 import static seedu.address.testutil.TypicalPersons.getTypicalPersons;
 import static seedu.address.testutil.accounts.TypicalAccounts.getTypicalAccounts;
-
+import static seedu.address.testutil.salesrecords.TypicalRecords.getTypicalRecords;
 import seedu.address.model.AddressBook;
 import seedu.address.model.accounts.Account;
 import seedu.address.model.ingredient.Ingredient;
 import seedu.address.model.person.Person;
+import seedu.address.model.salesrecord.SalesRecord;
 
 /**
  * A utility class containing a list of all possible types of an {@code AddressBook} objects to be used in tests.
@@ -21,6 +22,9 @@ public class TypicalAddressBook {
         AddressBook ab = new AddressBook();
         for (Person person : getTypicalPersons()) {
             ab.addPerson(person);
+        }
+        for (SalesRecord record : getTypicalRecords()) {
+            ab.addRecord(record);
         }
         for (Account account : getTypicalAccounts()) {
             ab.addAccount(account);
@@ -38,6 +42,17 @@ public class TypicalAddressBook {
         AddressBook ab = new AddressBook();
         for (Person person : getTypicalPersons()) {
             ab.addPerson(person);
+        }
+        return ab;
+    }
+
+    /**
+     * Returns an {@code AddressBook} with {@code SalesRecord} objects only.
+     */
+    public static AddressBook getTypicalAddressBookWithRecordOnly() {
+        AddressBook ab = new AddressBook();
+        for (SalesRecord record : getTypicalRecords()) {
+            ab.addRecord(record);
         }
         return ab;
     }

@@ -14,6 +14,8 @@ import seedu.address.model.ingredient.Ingredient;
 import seedu.address.model.ingredient.UniqueIngredientList;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.UniquePersonList;
+import seedu.address.model.salesrecord.SalesRecord;
+import seedu.address.model.salesrecord.UniqueRecordList;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -22,8 +24,12 @@ import seedu.address.model.tag.Tag;
 public class AddressBook implements ReadOnlyAddressBook {
 
     private final UniquePersonList persons;
+
+    private final UniqueRecordList records;
+
     private final UniqueAccountList accounts;
     private final UniqueIngredientList ingredients;
+
 
     /*
      * The 'unusual' code block below is an non-static initialization block, sometimes used to avoid duplication
@@ -34,6 +40,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     {
         persons = new UniquePersonList();
+        records = new UniqueRecordList();
         accounts = new UniqueAccountList();
         ingredients = new UniqueIngredientList();
     }
@@ -65,6 +72,7 @@ public class AddressBook implements ReadOnlyAddressBook {
         requireNonNull(newData);
 
         setPersons(newData.getPersonList());
+        setRecords(newData.getRecordList());
         setAccounts(newData.getAccountList());
         setIngredients(newData.getIngredientList());
     }
@@ -131,9 +139,60 @@ public class AddressBook implements ReadOnlyAddressBook {
         persons.forEach(person -> removeTagForPerson(person, tag));
     }
 
+
     @Override
     public ObservableList<Person> getPersonList() {
         return persons.asUnmodifiableObservableList();
+    }
+
+
+    //// sales record-level operation
+
+    /**
+     * Replaces the contents of the record list with {@code records}. {@code records} must not contain duplicate
+     * records.
+     */
+    public void setRecords(List<SalesRecord> records) {
+        this.records.setRecords(records);
+    }
+
+
+    /**
+     * Returns true if a record with the same identity as {@code record} exists in the sales book.
+     */
+    public boolean hasRecord(SalesRecord record) {
+        requireNonNull(record);
+        return records.contains(record);
+    }
+
+    /**
+     * Adds a record to the address book. The record must not already exist in the sales book.
+     */
+    public void addRecord(SalesRecord r) {
+        records.add(r);
+    }
+
+    /**
+     * Replaces the given record {@code target} in the list with {@code editedRecord}. {@code target} must exist in the
+     * sales book. The record identity of {@code editedRecord} must not be the same as another existing record in the
+     * sales book.
+     */
+    public void updateRecord(SalesRecord target, SalesRecord editedRecord) {
+        requireNonNull(editedRecord);
+
+        records.setRecord(target, editedRecord);
+    }
+
+    /**
+     * Removes {@code key} from this {@code SalesBook}. {@code key} must exist in the sales book.
+     */
+    public void removeRecord(SalesRecord key) {
+        records.remove(key);
+    }
+
+    @Override
+    public ObservableList<SalesRecord> getRecordList() {
+        return records.asUnmodifiableObservableList();
     }
 
     //// account-level operations
@@ -236,7 +295,8 @@ public class AddressBook implements ReadOnlyAddressBook {
     public String toString() {
         return String.valueOf(persons.asUnmodifiableObservableList().size()) + " persons\n"
                 + accounts.asUnmodifiableObservableList().size() + " accounts\n"
-                + ingredients.asUnmodifiableObservableList().size() + " ingredients\n";
+                + ingredients.asUnmodifiableObservableList().size() + " ingredients\n"
+                + records.asUnmodifiableObservableList().size() + " records";
     }
 
     @Override
@@ -252,11 +312,12 @@ public class AddressBook implements ReadOnlyAddressBook {
 
         return persons.equals(((AddressBook) other).persons)
                 && accounts.equals(((AddressBook) other).accounts)
-                && ingredients.equals(((AddressBook) other).ingredients);
+                && ingredients.equals(((AddressBook) other).ingredients)
+                && records.equals(((AddressBook) other).records);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(persons, accounts, ingredients);
+        return Objects.hash(persons, accounts, ingredients, records);
     }
 }

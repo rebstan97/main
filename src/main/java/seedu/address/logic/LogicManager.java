@@ -14,6 +14,7 @@ import seedu.address.model.Model;
 import seedu.address.model.accounts.Account;
 import seedu.address.model.ingredient.Ingredient;
 import seedu.address.model.person.Person;
+import seedu.address.model.salesrecord.SalesRecord;
 
 /**
  * The main LogicManager of the app.
@@ -55,6 +56,11 @@ public class LogicManager extends ComponentManager implements Logic {
     @Override
     public ObservableList<Ingredient> getFilteredIngredientList() {
         return model.getFilteredIngredientList();
+    }
+
+    @Override
+    public ObservableList<SalesRecord> getFilteredRecordList() {
+        return model.getFilteredRecordList();
     }
 
     @Override

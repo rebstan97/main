@@ -593,24 +593,12 @@ application
 
 |`* * *` |restaurant owner |see which ingredients are low in stock count |know which ingredients to restock promptly
 
-|`* *` |restaurant owner |check which dishes are not able to be cooked due to lack of ingredients |remove them from the daily menu
-
-|`* *` |lazy restaurant owner |save regular restocks and consumption data as the default |do not need to key in the same entries every time
-
-|`*` |forgetful restaurant owner |set reminders for the next restock |remember to restock
-
 |`* * *` |restaurant owner |keep track of daily sales |meet revenue goals, improve the menu and track inventory
 
 |`* * *` |restaurant owner |modify past sales records  |update any mistakes / refunds / cancelled booking
 
 |`* * *` |analytical restaurant owner |check the sales history of a menu item  |check the total revenue it has
 accumulated, and analyse its long-term sales performance
-
-|`* *` |profit-driven restaurant owner |know the most profitable dishes  | employ marketing strategies to bring in
-more revenue
-
-|`* *` |profit-driven restaurant owner |know the most profitable days| employ marketing strategies to bring in more
-revenue
 
 |`* * *` |restaurant owner |add a new item to the menu |introduce new dishes
 
@@ -638,6 +626,18 @@ revenue
 |`* * *` |restaurant owner |sort reservations |easily see the reservations in chronological order
 
 |`* * *` |restaurant owner |delete a reservation |get rid of reservations that I don't need anymore
+
+|`* *` |restaurant owner |check which dishes are not able to be cooked due to lack of ingredients |remove them from the daily menu
+
+|`* *` |lazy restaurant owner |save regular restocks and consumption data as the default |do not need to key in the same entries every time
+
+|`* *` |profit-driven restaurant owner |know the most profitable dishes  | employ marketing strategies to bring in
+more revenue
+
+|`* *` |profit-driven restaurant owner |know the most profitable days| employ marketing strategies to bring in more
+revenue
+
+|`*` |forgetful restaurant owner |set reminders for the next restock |remember to restock
 
 |=======================================================================
 
@@ -1147,16 +1147,16 @@ Steps 3a1-3a2 are repeated until a valid index is entered.
 Use case resumes at step 3.
 
 [discrete]
-=== Use case: UC501 - Record sales volume of menu item within a day
+=== Use case: UC501 - Record sales volume of menu item
 
 *Guarantees*:
 
-* A new sales record of a menu item will be appended.
+* A new sales record of a menu item will be appended to the sales book.
 
 *MSS*
 
-1. User requests to record sales volume of a menu item within a specified day.
-2. App appends the record at the end of the day's sales report.
+1. User requests to record sales volume of a menu item for a specified day.
+2. App appends the record at the end of sales book.
 3. App returns a success message confirming that the record is successful.
 +
 Use case ends.
@@ -1174,25 +1174,19 @@ Use case resumes at step 2.
 +
 
 [none]
-* 2a. Sales report does not exist for the specified day.
+* 2a. Sales record of the menu item with the same date already exists in the sales book.
 [none]
-** 2a1. App automatically creates a sales report for the day.
+** 2a1. App returns a message telling user that the menu item's record already exists.
+** 2a2. User requests to record sales volume again.
 +
-Use case resumes at step 2.
-
-* 2b. Sales record of the menu item already exist in the day's sales report.
-[none]
-** 2b1. App returns a message telling user that the menu item's record already exists.
-** 2b2. User requests to record sales volume again.
-+
-Steps 2b1-2b2 are repeated until a record with unique item name is entered.
+Steps 2a1-2a2 are repeated until a record with unique item name is entered.
 +
 Use case resumes at step 3.
 +
 
 
 [discrete]
-=== Use case: UC502 - Editing sales record in a sales report for a day
+=== Use case: UC502 - Editing sales record
 
 *Guarantees*:
 
@@ -1200,7 +1194,7 @@ Use case resumes at step 3.
 
 *MSS*
 
-1. User requests to edit a sales record in the sales report for a specified day.
+1. User requests to edit a sales record in the sales book.
 2. App updates the sales record to that given by the user.
 3. App returns a success message confirming that the modification is successful.
 +
@@ -1220,13 +1214,13 @@ Use case resumes at step 2.
 +
 
 [none]
-* 1b. The given index/name is invalid.
+* 1b. The given index or name or date is invalid.
 +
 [none]
-** 1b1. App returns a message telling user that the index/name is invalid.
+** 1b1. App returns a message telling user that the index or name or date is invalid.
 ** 1b2. User requests to edit sales record again.
 +
-Steps 1b1-1b2 are repeated until a valid index/name is entered.
+Steps 1b1-1b2 are repeated until a valid index/ name and date is entered.
 +
 Use case resumes at step 2.
 
@@ -1242,45 +1236,38 @@ Steps 1c1-1c2 are repeated until at least one optional field is entered.
 Use case resumes at step 2.
 
 [discrete]
-=== Use case: UC503 - Deleting sales record in a sales report for a day
+=== Use case: UC503 - Deleting sales record
 
 *MSS*
 
-1.  User requests to display the sales report of a specified day.
-2.  App shows the sales report.
-3.  User requests to delete a sales record in that sales report.
-4.  App deletes the sales record.
-5. App returns a success message confirming that the deletion is successful.
+1.  User requests to delete a sales record in the sales book.
+2.  App deletes the sales record.
+3. App returns a success message confirming that the deletion is successful.
 +
 Use case ends.
 
 *Extensions*
 
 [none]
-* 1a. The sales report does not exist in the specified day since no record has been entered.
-* 1b. App tells user that sales report does not exist.
-+
-Use case ends.
-
-* 3a. Invalid command format entered by the user.
+* 1a. Invalid command format entered by the user.
 [none]
-** 3a1. App returns a message telling user that the command format is invalid.
-** 3a2. User requests to delete sales record again.
+** 1a1. App returns a message telling user that the command format is invalid.
+** 1a2. User requests to delete sales record again.
 +
-Steps 3a1-3a2 are repeated until a valid command format is entered.
+Steps 1a1-1a2 are repeated until a valid command format is entered.
 +
-Use case resumes at step 4.
+Use case resumes at step 2.
 +
 
-* 3b. The given index/name is invalid.
+* 1b. The given index or name or date is invalid.
 +
 [none]
-** 3b1. App returns a message telling user the index/name is invalid.
-** 3b2. User requests to delete sales record again.
+** 1b1. App returns a message telling user the index or name or date is invalid.
+** 1b2. User requests to delete sales record again.
 +
-Steps 3b1-3b2 are repeated until a valid index/name is entered.
+Steps 1b1-1b2 are repeated until a valid index/name and date is entered.
 +
-Use case resumes at step 4.
+Use case resumes at step 2.
 
 [discrete]
 === Use case: UC504 - Checking sales history of a menu item
@@ -1316,9 +1303,9 @@ Use case ends.
 
 *Extensions*
 [none]
-* 1a. User has never entered a sales record. No sales record exists.
+* 1a. User has never entered a sales record. Sales book is empty.
 [none]
-** 1a1. App returns a message telling user that there is no sales record.
+** 1a1. App returns a message telling user that sales book is empty.
 +
 Use case ends.
 
