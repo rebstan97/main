@@ -13,6 +13,7 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
 import seedu.address.model.accounts.Account;
 import seedu.address.model.person.Person;
+import seedu.address.model.reservation.Reservation;
 import seedu.address.model.salesrecord.SalesRecord;
 
 /**
@@ -50,6 +51,11 @@ public class LogicManager extends ComponentManager implements Logic {
     @Override
     public ObservableList<Account> getFilteredAccountList() {
         return model.getFilteredAccountList();
+    }
+
+    @Override
+    public ObservableList<Reservation> getFilteredReservationList() {
+        return model.getFilteredReservationList();
     }
 
     @Override
