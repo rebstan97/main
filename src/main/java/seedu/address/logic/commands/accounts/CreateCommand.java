@@ -53,6 +53,6 @@ public class CreateCommand extends Command {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof CreateCommand // instanceof handles nulls
-                        && account.equals(((CreateCommand) other).account));
+                    && account.equals(((CreateCommand) other).account));
     }
 }
