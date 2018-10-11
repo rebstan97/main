@@ -75,23 +75,23 @@
     <numUnits>0</numUnits>
   </ingredients>
   <ingredients>
-    <name>Baked Beans</name>
-    <unit>200-gram can</unit>
-    <price>0.80</price>
-    <minimum>10</minimum>
-    <numUnits>0</numUnits>
+      <name>Baked Beans</name>
+      <unit>200-gram can</unit>
+      <price>0.80</price>
+      <minimum>10</minimum>
+      <numUnits>0</numUnits>
   </ingredients>
   <ingredients>
     <name>Chinese Cabbage</name>
-    <unit>500-grams</unit>
-    <price>3.20</price>
+    <unit>500 grams</unit>
+    <price>5.50</price>
     <minimum>10</minimum>
     <numUnits>0</numUnits>
   </ingredients>
   <ingredients>
     <name>Duck Drumstick</name>
-    <unit>50-grams</unit>
-    <price>4.30</price>
+    <unit>50 grams</unit>
+    <price>3.20</price>
     <minimum>20</minimum>
     <numUnits>0</numUnits>
   </ingredients>
@@ -103,10 +103,10 @@
     <numUnits>0</numUnits>
   </ingredients>
   <ingredients>
-    <name>Cod Fish</name>
+    <name>White Promfret</name>
     <unit>kilogram</unit>
-    <price>20.99</price>
-    <minimum>3</minimum>
+    <price>14.00</price>
+    <minimum>8</minimum>
     <numUnits>0</numUnits>
   </ingredients>
   <ingredients>

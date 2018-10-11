@@ -25,7 +25,7 @@ public class TypicalIngredients {
             .withPrice("6.00")
             .withMinimum("1").build();
     public static final Ingredient BEANS = new IngredientBuilder().withName("Baked Beans")
-            .withUnit("200 gram can")
+            .withUnit("200-gram can")
             .withPrice("0.80")
             .withMinimum("10").build();
     public static final Ingredient CABBAGE = new IngredientBuilder().withName("Chinese Cabbage")
