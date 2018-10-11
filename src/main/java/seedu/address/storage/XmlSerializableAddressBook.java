@@ -13,10 +13,10 @@ import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.accounts.Account;
 import seedu.address.model.person.Person;
 import seedu.address.model.reservation.Reservation;
-import seedu.address.storage.elements.XmlAdaptedAccount;
-import seedu.address.storage.reservation.XmlAdaptedReservation;
 import seedu.address.model.salesrecord.SalesRecord;
+import seedu.address.storage.elements.XmlAdaptedAccount;
 import seedu.address.storage.elements.XmlAdaptedRecord;
+import seedu.address.storage.reservation.XmlAdaptedReservation;
 
 /**
  * An Immutable AddressBook that is serializable to XML format
