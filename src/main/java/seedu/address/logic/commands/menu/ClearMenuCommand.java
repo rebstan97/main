@@ -21,7 +21,7 @@ public class ClearMenuCommand extends Command {
     @Override
     public CommandResult execute(Model model, CommandHistory history) {
         requireNonNull(model);
-        model.resetData(new AddressBook());
+        model.resetMenuData(new AddressBook());
         model.commitAddressBook();
         return new CommandResult(MESSAGE_SUCCESS);
     }
