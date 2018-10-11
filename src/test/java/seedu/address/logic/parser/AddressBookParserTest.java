@@ -35,6 +35,7 @@ import seedu.address.logic.commands.menu.AddItemCommand;
 import seedu.address.logic.commands.menu.ClearMenuCommand;
 import seedu.address.logic.commands.menu.DeleteItemCommand;
 import seedu.address.logic.commands.menu.ListItemsCommand;
+import seedu.address.logic.commands.menu.SelectItemCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.accounts.Account;
 import seedu.address.model.menu.Item;
@@ -230,6 +231,16 @@ public class AddressBookParserTest {
         assertTrue(parser.parseCommand(ListItemsCommand.COMMAND_ALIAS) instanceof ListItemsCommand);
         assertTrue(parser.parseCommand(ListItemsCommand.COMMAND_WORD + " 3") instanceof ListItemsCommand);
         assertTrue(parser.parseCommand(ListItemsCommand.COMMAND_ALIAS + " 3") instanceof ListItemsCommand);
+    }
+
+    @Test
+    public void parseCommand_selectItem() throws Exception {
+        SelectItemCommand command = (SelectItemCommand) parser.parseCommand(
+                SelectItemCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased());
+        assertEquals(new SelectItemCommand(INDEX_FIRST_PERSON), command);
+        command = (SelectItemCommand) parser.parseCommand(
+                SelectItemCommand.COMMAND_ALIAS + " " + INDEX_FIRST_PERSON.getOneBased());
+        assertEquals(new SelectItemCommand(INDEX_FIRST_PERSON), command);
     }
 
     @Test
