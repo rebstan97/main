@@ -6,6 +6,7 @@ import javafx.collections.ObservableList;
 import seedu.address.model.accounts.Account;
 import seedu.address.model.person.Person;
 import seedu.address.model.reservation.Reservation;
+import seedu.address.model.salesrecord.SalesRecord;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -19,6 +20,7 @@ public interface Model {
     Predicate<Person> PREDICATE_SHOW_ALL_PERSONS = unused -> true;
     Predicate<Account> PREDICATE_SHOW_ALL_ACCOUNTS = unused -> true;
     Predicate<Person> PREDICATE_SHOW_ALL_RESERVATIONS = unused -> true;
+    Predicate<SalesRecord> PREDICATE_SHOW_ALL_RECORDS = unused -> true;
 
     /**
      * Clears existing backing model and replaces with the provided new data for AddressBook.
@@ -77,32 +79,41 @@ public interface Model {
      */
     void updateFilteredPersonList(Predicate<Person> predicate);
 
-    //=========== API for Redo/Undo =============================================================
+    //=========== API for Sales =============================================================
 
     /**
-     * Returns true if the model has previous address book states to restore.
+     * Adds the given record. {@code record} must not already exist in the sales book.
      */
-    boolean canUndoAddressBook();
+    void addRecord(SalesRecord record);
 
     /**
-     * Returns true if the model has undone address book states to restore.
+     * Returns true if a record with the same identity as {@code record} exists in the sales book.
      */
-    boolean canRedoAddressBook();
+    boolean hasRecord (SalesRecord record);
 
     /**
-     * Restores the model's address book to its previous state.
+     * Deletes the given record. The record must exist in the sales book.
      */
-    void undoAddressBook();
+    void deleteRecord(SalesRecord target);
 
     /**
-     * Restores the model's address book to its previously undone state.
+     * Replaces the given record {@code target} with {@code editedRecord}. {@code target} must exist in the sales
+     * book. The record identity of {@code editedRecord} must not be the same as another existing record in the sales
+     * book.
      */
-    void redoAddressBook();
+    void updateRecord(SalesRecord target, SalesRecord editedRecord);
 
     /**
-     * Saves the current address book state for undo/redo.
+     * Returns an unmodifiable view of the filtered record list
      */
-    void commitAddressBook();
+    ObservableList<SalesRecord> getFilteredRecordList();
+
+    /**
+     * Updates the filter of the filtered record list to filter by the given {@code predicate}.
+     *
+     * @throws NullPointerException if {@code predicate} is null.
+     */
+    void updateFilteredRecordList(Predicate<SalesRecord> predicate);
 
     // =========== API for Reservations =============================================================
 
@@ -181,5 +192,32 @@ public interface Model {
     ObservableList<Account> getFilteredAccountList();
 
     void updateFilteredAccountList(Predicate<Account> predicate);
+
+    //=========== API for Redo/Undo =============================================================
+
+    /**
+     * Returns true if the model has previous address book states to restore.
+     */
+    boolean canUndoAddressBook();
+
+    /**
+     * Returns true if the model has undone address book states to restore.
+     */
+    boolean canRedoAddressBook();
+
+    /**
+     * Restores the model's address book to its previous state.
+     */
+    void undoAddressBook();
+
+    /**
+     * Restores the model's address book to its previously undone state.
+     */
+    void redoAddressBook();
+
+    /**
+     * Saves the current address book state for undo/redo.
+     */
+    void commitAddressBook();
 
 }

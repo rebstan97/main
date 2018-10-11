@@ -53,6 +53,12 @@ public class LogicManagerTest {
     }
 
     @Test
+    public void getFilteredRecordList_modifyList_throwsUnsupportedOperationException() {
+        thrown.expect(UnsupportedOperationException.class);
+        logic.getFilteredRecordList().remove(0);
+    }
+
+    @Test
     public void getFilteredAccountList_modifyList_throwsUnsupportedOperationException() {
         thrown.expect(UnsupportedOperationException.class);
         logic.getFilteredAccountList().remove(0);
@@ -100,7 +106,6 @@ public class LogicManagerTest {
      */
     private void assertCommandBehavior(Class<?> expectedException, String inputCommand,
                                            String expectedMessage, Model expectedModel) {
-
         try {
             CommandResult result = logic.execute(inputCommand);
             assertEquals(expectedException, null);
@@ -109,7 +114,6 @@ public class LogicManagerTest {
             assertEquals(expectedException, e.getClass());
             assertEquals(expectedMessage, e.getMessage());
         }
-
         assertEquals(expectedModel, model);
     }
 

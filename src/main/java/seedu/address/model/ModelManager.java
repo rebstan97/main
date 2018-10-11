@@ -15,6 +15,7 @@ import seedu.address.commons.events.model.AddressBookChangedEvent;
 import seedu.address.model.accounts.Account;
 import seedu.address.model.person.Person;
 import seedu.address.model.reservation.Reservation;
+import seedu.address.model.salesrecord.SalesRecord;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -27,6 +28,7 @@ public class ModelManager extends ComponentManager implements Model {
     private final VersionedAddressBook versionedAddressBook;
     private final FilteredList<Person> filteredPersons;
     private final FilteredList<Reservation> filteredReservations;
+    private final FilteredList<SalesRecord> filteredRecords;
     private final FilteredList<Account> filteredAccounts;
 
     /**
@@ -41,6 +43,7 @@ public class ModelManager extends ComponentManager implements Model {
         versionedAddressBook = new VersionedAddressBook(addressBook);
         filteredPersons = new FilteredList<>(versionedAddressBook.getPersonList());
         filteredReservations = new FilteredList<>(versionedAddressBook.getReservationList());
+        filteredRecords = new FilteredList<>(versionedAddressBook.getRecordList());
         filteredAccounts = new FilteredList<>(versionedAddressBook.getAccountList());
     }
 
@@ -111,33 +114,50 @@ public class ModelManager extends ComponentManager implements Model {
         filteredPersons.setPredicate(predicate);
     }
 
-    //=========== Undo/Redo =================================================================================
+    //=========== Sales =================================================================================
 
     @Override
-    public boolean canUndoAddressBook() {
-        return versionedAddressBook.canUndo();
+    public boolean hasRecord(SalesRecord record) {
+        requireNonNull(record);
+        return versionedAddressBook.hasRecord(record);
     }
 
     @Override
-    public boolean canRedoAddressBook() {
-        return versionedAddressBook.canRedo();
-    }
-
-    @Override
-    public void undoAddressBook() {
-        versionedAddressBook.undo();
+    public void deleteRecord(SalesRecord target) {
+        versionedAddressBook.removeRecord(target);
         indicateAddressBookChanged();
     }
 
     @Override
-    public void redoAddressBook() {
-        versionedAddressBook.redo();
+    public void addRecord(SalesRecord record) {
+        versionedAddressBook.addRecord(record);
+        updateFilteredRecordList(PREDICATE_SHOW_ALL_RECORDS);
         indicateAddressBookChanged();
     }
 
     @Override
-    public void commitAddressBook() {
-        versionedAddressBook.commit();
+    public void updateRecord(SalesRecord target, SalesRecord editedRecord) {
+        requireAllNonNull(target, editedRecord);
+        versionedAddressBook.updateRecord(target, editedRecord);
+        indicateAddressBookChanged();
+    }
+
+    //=========== Filtered Sales Record List Accessors =============================================================
+
+
+    /**
+     * Returns an unmodifiable view of the list of {@code SalesRecord} backed by the internal list of
+     * {@code versionedAddressBook}
+     */
+    @Override
+    public ObservableList<SalesRecord> getFilteredRecordList() {
+        return FXCollections.unmodifiableObservableList(filteredRecords);
+    }
+
+    @Override
+    public void updateFilteredRecordList(Predicate<SalesRecord> predicate) {
+        requireNonNull(predicate);
+        filteredRecords.setPredicate(predicate);
     }
 
     //=========== Accounts =================================================================================
@@ -178,6 +198,35 @@ public class ModelManager extends ComponentManager implements Model {
         filteredAccounts.setPredicate(predicate);
     }
 
+    //=========== Undo/Redo =================================================================================
+
+    @Override
+    public boolean canUndoAddressBook() {
+        return versionedAddressBook.canUndo();
+    }
+
+    @Override
+    public boolean canRedoAddressBook() {
+        return versionedAddressBook.canRedo();
+    }
+
+    @Override
+    public void undoAddressBook() {
+        versionedAddressBook.undo();
+        indicateAddressBookChanged();
+    }
+
+    @Override
+    public void redoAddressBook() {
+        versionedAddressBook.redo();
+        indicateAddressBookChanged();
+    }
+
+    @Override
+    public void commitAddressBook() {
+        versionedAddressBook.commit();
+    }
+
     @Override
     public boolean equals(Object obj) {
         if (obj == this) {
@@ -194,7 +243,8 @@ public class ModelManager extends ComponentManager implements Model {
         return versionedAddressBook.equals(other.versionedAddressBook)
                 && filteredPersons.equals(other.filteredPersons)
                 && filteredAccounts.equals(other.filteredAccounts)
-                && filteredReservations.equals(other.filteredReservations);
+                && filteredReservations.equals(other.filteredReservations)
+                && filteredRecords.equals(other.filteredRecords);
     }
 
     //=========== Reservations =====================================================================================
