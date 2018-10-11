@@ -10,9 +10,9 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 public class Pax {
 
 
-    public static final String MESSAGE_PHONE_CONSTRAINTS =
+    public static final String MESSAGE_PAX_CONSTRAINTS =
             "Pax value should only contain numbers, and it should be at least 1 digit long";
-    public static final String PHONE_VALIDATION_REGEX = "\\d{1,}";
+    public static final String PAX_VALIDATION_REGEX = "\\d{1,}";
     public final String value;
 
     /**
@@ -22,15 +22,15 @@ public class Pax {
      */
     public Pax(String pax) {
         requireNonNull(pax);
-        checkArgument(isValidPax(pax), MESSAGE_PHONE_CONSTRAINTS);
+        checkArgument(isValidPax(pax), MESSAGE_PAX_CONSTRAINTS);
         value = pax;
     }
 
     /**
-     * Returns true if a given string is a valid phone number.
+     * Returns true if a given string is a valid pax number.
      */
     public static boolean isValidPax(String test) {
-        return test.matches(PHONE_VALIDATION_REGEX);
+        return test.matches(PAX_VALIDATION_REGEX);
     }
 
     @Override
