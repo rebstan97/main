@@ -26,7 +26,6 @@ public class Price {
         checkArgument(isValidPrice(price), MESSAGE_PRICE_CONSTRAINTS);
         value = price;
         valueDble = Double.parseDouble(price);
-
     }
 
     /**
