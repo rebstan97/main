@@ -65,9 +65,9 @@ public class XmlSerializableAddressBook {
      *         allowed.
      */
     public AddressBook toModelType() throws IllegalValueException {
-        personToModelType();
-        recordToModelType();
-        accountToModelType();
+        processPersons();
+        processAccounts();
+        processRecords();
         return addressBook;
     }
 
@@ -77,7 +77,7 @@ public class XmlSerializableAddressBook {
      * @throws IllegalValueException if there were any data constraints violated or duplicates in the {@code
      *         XmlAdaptedPerson}.
      */
-    private void personToModelType() throws IllegalValueException {
+    private void processPersons() throws IllegalValueException {
         for (XmlAdaptedPerson p : persons) {
             Person person = p.toModelType();
             if (addressBook.hasPerson(person)) {
@@ -93,7 +93,7 @@ public class XmlSerializableAddressBook {
      * @throws IllegalValueException if there were any data constraints violated or duplicates in the {@code
      *         XmlAdaptedRecord}.
      */
-    private void recordToModelType() throws IllegalValueException {
+    private void processAccounts() throws IllegalValueException {
         for (XmlAdaptedRecord r : records) {
             SalesRecord record = r.toModelType();
             if (addressBook.hasRecord(record)) {
@@ -109,7 +109,7 @@ public class XmlSerializableAddressBook {
      * @throws IllegalValueException if there were any data constraints violated or duplicates in the {@code
      *         XmlAdaptedAccount}.
      */
-    private void accountToModelType() throws IllegalValueException {
+    private void processRecords() throws IllegalValueException {
         for (XmlAdaptedAccount acc : accounts) {
             Account account = acc.toModelType();
             if (addressBook.hasAccount(account)) {
