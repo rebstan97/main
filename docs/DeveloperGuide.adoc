@@ -593,24 +593,12 @@ application
 
 |`* * *` |restaurant owner |see which ingredients are low in stock count |know which ingredients to restock promptly
 
-|`* *` |restaurant owner |check which dishes are not able to be cooked due to lack of ingredients |remove them from the daily menu
-
-|`* *` |lazy restaurant owner |save regular restocks and consumption data as the default |do not need to key in the same entries every time
-
-|`*` |forgetful restaurant owner |set reminders for the next restock |remember to restock
-
 |`* * *` |restaurant owner |keep track of daily sales |meet revenue goals, improve the menu and track inventory
 
 |`* * *` |restaurant owner |modify past sales records  |update any mistakes / refunds / cancelled booking
 
 |`* * *` |analytical restaurant owner |check the sales history of a menu item  |check the total revenue it has
 accumulated, and analyse its long-term sales performance
-
-|`* *` |profit-driven restaurant owner |know the most profitable dishes  | employ marketing strategies to bring in
-more revenue
-
-|`* *` |profit-driven restaurant owner |know the most profitable days| employ marketing strategies to bring in more
-revenue
 
 |`* * *` |restaurant owner |add a new item to the menu |introduce new dishes
 
@@ -638,6 +626,18 @@ revenue
 |`* * *` |restaurant owner |sort reservations |easily see the reservations in chronological order
 
 |`* * *` |restaurant owner |delete a reservation |get rid of reservations that I don't need anymore
+
+|`* *` |restaurant owner |check which dishes are not able to be cooked due to lack of ingredients |remove them from the daily menu
+
+|`* *` |lazy restaurant owner |save regular restocks and consumption data as the default |do not need to key in the same entries every time
+
+|`* *` |profit-driven restaurant owner |know the most profitable dishes  | employ marketing strategies to bring in
+more revenue
+
+|`* *` |profit-driven restaurant owner |know the most profitable days| employ marketing strategies to bring in more
+revenue
+
+|`*` |forgetful restaurant owner |set reminders for the next restock |remember to restock
 
 |=======================================================================
 
