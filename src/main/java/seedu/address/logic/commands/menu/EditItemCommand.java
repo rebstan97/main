@@ -47,14 +47,14 @@ public class EditItemCommand extends Command {
 
     public static final String MESSAGE_EDIT_ITEM_SUCCESS = "Edited Item: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
-    public static final String MESSAGE_DUPLICATE_ITEM = "This item already exists in the address book.";
+    public static final String MESSAGE_DUPLICATE_ITEM = "This item already exists in the menu.";
 
     private final Index index;
     private final EditItemDescriptor editItemDescriptor;
 
     /**
      * @param index of the item in the filtered item list to edit
-     * @param editItemDescriptor details to edit the person with
+     * @param editItemDescriptor details to edit the item with
      */
     public EditItemCommand(Index index, EditItemDescriptor editItemDescriptor) {
         requireNonNull(index);
@@ -87,7 +87,7 @@ public class EditItemCommand extends Command {
     }
 
     /**
-     * Creates and returns a {@code Person} with the details of {@code personToEdit}
+     * Creates and returns a {@code Item} with the details of {@code itemToEdit}
      * edited with {@code editItemDescriptor}.
      */
     private static Item createEditedItem(Item itemToEdit, EditItemDescriptor editItemDescriptor) {
@@ -120,8 +120,8 @@ public class EditItemCommand extends Command {
     }
 
     /**
-     * Stores the details to edit the person with. Each non-empty field value will replace the
-     * corresponding field value of the person.
+     * Stores the details to edit the item with. Each non-empty field value will replace the
+     * corresponding field value of the item.
      */
     public static class EditItemDescriptor {
         private Name name;

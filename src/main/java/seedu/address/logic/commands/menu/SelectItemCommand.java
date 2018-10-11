@@ -16,7 +16,7 @@ import seedu.address.model.Model;
 import seedu.address.model.menu.Item;
 
 /**
- * Selects a person identified using it's displayed index from the address book.
+ * Selects an item identified using it's displayed index from the menu.
  */
 public class SelectItemCommand extends Command {
 

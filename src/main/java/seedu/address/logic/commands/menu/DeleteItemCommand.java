@@ -14,7 +14,7 @@ import seedu.address.model.Model;
 import seedu.address.model.menu.Item;
 
 /**
- * Deletes a person identified using it's displayed index from the address book.
+ * Deletes an item identified using it's displayed index from the menu.
  */
 public class DeleteItemCommand extends Command {
 
