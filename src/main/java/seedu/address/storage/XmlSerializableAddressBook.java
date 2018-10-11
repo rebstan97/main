@@ -12,7 +12,9 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.accounts.Account;
 import seedu.address.model.person.Person;
+import seedu.address.model.reservation.Reservation;
 import seedu.address.storage.elements.XmlAdaptedAccount;
+import seedu.address.storage.reservation.XmlAdaptedReservation;
 
 /**
  * An Immutable AddressBook that is serializable to XML format
@@ -22,12 +24,16 @@ public class XmlSerializableAddressBook {
 
     public static final String MESSAGE_DUPLICATE_PERSON = "Person list contains duplicate person(s).";
     public static final String MESSAGE_DUPLICATE_ACCOUNT = "Account list contains duplicate account(s).";
+    public static final String MESSAGE_DUPLICATE_RESERVATION = "Account list contains duplicate reservation(s).";
 
     @XmlElement
     private List<XmlAdaptedPerson> persons;
 
     @XmlElement
     private List<XmlAdaptedAccount> accounts;
+
+    @XmlElement
+    private List<XmlAdaptedReservation> reservations;
 
     private AddressBook addressBook;
 
@@ -38,6 +44,7 @@ public class XmlSerializableAddressBook {
         addressBook = new AddressBook();
         persons = new ArrayList<>();
         accounts = new ArrayList<>();
+        reservations = new ArrayList<>();
     }
 
     /**
@@ -47,6 +54,8 @@ public class XmlSerializableAddressBook {
         this();
         persons.addAll(src.getPersonList().stream().map(XmlAdaptedPerson::new).collect(Collectors.toList()));
         accounts.addAll(src.getAccountList().stream().map(XmlAdaptedAccount::new).collect(Collectors.toList()));
+        reservations.addAll(src.getReservationList().stream()
+                .map(XmlAdaptedReservation::new).collect(Collectors.toList()));
     }
 
     /**
@@ -82,6 +91,22 @@ public class XmlSerializableAddressBook {
     }
 
     /**
+     * Converts this reservation record into the model's {@code Reservation} object.
+     *
+     * @throws IllegalValueException if there were any data constraints violated or duplicates in the {@code
+     *         XmlAdaptedReservation}.
+     */
+    public void processReservations() throws IllegalValueException {
+        for (XmlAdaptedReservation res : reservations) {
+            Reservation reservation = res.toModelType();
+            if (addressBook.hasReservation(reservation)) {
+                throw new IllegalValueException(MESSAGE_DUPLICATE_RESERVATION);
+            }
+            addressBook.addReservation(reservation);
+        }
+    }
+
+    /**
      * Returns the converted model {@code AddressBook} object.
      *
      * @throws IllegalValueException if there were any data constraints violated or duplicates record when not
@@ -90,6 +115,7 @@ public class XmlSerializableAddressBook {
     public AddressBook toModelType() throws IllegalValueException {
         processPersons();
         processAccounts();
+        processReservations();
         return addressBook;
     }
 
@@ -104,6 +130,7 @@ public class XmlSerializableAddressBook {
         }
 
         return persons.equals(((XmlSerializableAddressBook) other).persons)
-                && accounts.equals(((XmlSerializableAddressBook) other).accounts);
+                && accounts.equals(((XmlSerializableAddressBook) other).accounts)
+                && reservations.equals(((XmlSerializableAddressBook) other).reservations);
     }
 }

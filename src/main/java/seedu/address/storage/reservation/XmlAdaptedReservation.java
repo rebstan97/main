@@ -50,7 +50,7 @@ public class XmlAdaptedReservation {
         }
     }
     /**
-     * Converts a given Item into this class for JAXB use.
+     * Converts a given Reservation into this class for JAXB use.
      *
      * @param source future changes to this will not affect the created XmlAdaptedReservation
      */
