@@ -64,7 +64,6 @@ public class TypicalIngredients {
     private TypicalIngredients() {} // prevents instantiation
 
     public static List<Ingredient> getTypicalIngredients() {
-//        return new ArrayList<>();
         return new ArrayList<>(Arrays.asList(AVOCADO, BEANS, CABBAGE, DUCK, EGG, FISH, GARLIC));
     }
 }
