@@ -60,8 +60,8 @@ public class MainWindow extends UiPart<Stage> {
     @FXML
     private StackPane personListPanelPlaceholder;
 
-//    @FXML
-//    private StackPane ingredientListPanelPlaceholder;
+    //@FXML
+    //private StackPane ingredientListPanelPlaceholder;
 
     @FXML
     private StackPane resultDisplayPlaceholder;
@@ -138,8 +138,8 @@ public class MainWindow extends UiPart<Stage> {
         personListPanel = new PersonListPanel(logic.getFilteredPersonList());
         personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
 
-//        ingredientListPanel = new IngredientListPanel(logic.getFilteredIngredientList());
-//        ingredientListPanelPlaceholder.getChildren().add(ingredientListPanel.getRoot());
+        //ingredientListPanel = new IngredientListPanel(logic.getFilteredIngredientList());
+        //ingredientListPanelPlaceholder.getChildren().add(ingredientListPanel.getRoot());
 
         ResultDisplay resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
