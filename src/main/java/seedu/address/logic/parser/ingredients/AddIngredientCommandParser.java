@@ -15,7 +15,12 @@ import seedu.address.logic.parser.Parser;
 import seedu.address.logic.parser.ParserUtil;
 import seedu.address.logic.parser.Prefix;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.ingredient.*;
+import seedu.address.model.ingredient.Ingredient;
+import seedu.address.model.ingredient.IngredientName;
+import seedu.address.model.ingredient.IngredientPrice;
+import seedu.address.model.ingredient.IngredientUnit;
+import seedu.address.model.ingredient.MinimumUnit;
+import seedu.address.model.ingredient.NumUnits;
 
 /**
  * Parses input arguments and creates a new AddIngredientCommand object
