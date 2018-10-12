@@ -23,7 +23,7 @@ import seedu.address.testutil.accounts.AccountBuilder;
 
 public class RegisterCommandParserTest {
 
-    private CreateCommandParser parser = new CreateCommandParser();
+    private RegisterCommandParser parser = new RegisterCommandParser();
 
     @Test
     public void parse_allFieldsPresent_success() {

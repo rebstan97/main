@@ -20,7 +20,7 @@ import seedu.address.model.accounts.Username;
 /**
  * Parses input arguments and creates a new RegisterCommand object
  */
-public class CreateCommandParser implements Parser<RegisterCommand> {
+public class RegisterCommandParser implements Parser<RegisterCommand> {
 
     /**
      * Parses the given {@code String} of arguments in the context of the RegisterCommand and returns a RegisterCommand
