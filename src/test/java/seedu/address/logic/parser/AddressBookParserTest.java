@@ -31,9 +31,15 @@ import seedu.address.logic.commands.RemarkCommand;
 import seedu.address.logic.commands.SelectCommand;
 import seedu.address.logic.commands.UndoCommand;
 import seedu.address.logic.commands.accounts.CreateCommand;
+import seedu.address.logic.commands.menu.AddItemCommand;
+import seedu.address.logic.commands.menu.ClearMenuCommand;
+import seedu.address.logic.commands.menu.DeleteItemCommand;
+import seedu.address.logic.commands.menu.ListItemsCommand;
+import seedu.address.logic.commands.menu.SelectItemCommand;
 import seedu.address.logic.commands.salescommands.RecordSalesCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.accounts.Account;
+import seedu.address.model.menu.Item;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Remark;
@@ -43,6 +49,8 @@ import seedu.address.testutil.PersonBuilder;
 import seedu.address.testutil.PersonUtil;
 import seedu.address.testutil.accounts.AccountBuilder;
 import seedu.address.testutil.accounts.AccountUtil;
+import seedu.address.testutil.menu.ItemBuilder;
+import seedu.address.testutil.menu.ItemUtil;
 import seedu.address.testutil.salesrecords.RecordBuilder;
 import seedu.address.testutil.salesrecords.RecordUtil;
 
@@ -206,5 +214,51 @@ public class AddressBookParserTest {
         CreateCommand commandOne = (CreateCommand) parser.parseCommand(AccountUtil.getCreateCommand(accountOneCommand));
         CreateCommand commandTwo = (CreateCommand) parser.parseCommand(AccountUtil.getCreateCommand(accountTwoCommand));
         assertNotEquals(commandOne, commandTwo);
+    }
+
+    @Test
+    public void parseCommand_addItem() throws Exception {
+        Item item = new ItemBuilder().build();
+        AddItemCommand command = (AddItemCommand) parser.parseCommand(ItemUtil.getAddItemCommand(item));
+        assertEquals(new AddItemCommand(item), command);
+        command = (AddItemCommand) parser.parseCommand(AddItemCommand.COMMAND_ALIAS
+                + " " + ItemUtil.getItemDetails(item));
+        assertEquals(new AddItemCommand(item), command);
+    }
+
+    @Test
+    public void parseCommand_deleteItem() throws Exception {
+        DeleteItemCommand command = (DeleteItemCommand) parser.parseCommand(
+                DeleteItemCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased());
+        assertEquals(new DeleteItemCommand(INDEX_FIRST_PERSON), command);
+        command = (DeleteItemCommand) parser.parseCommand(DeleteItemCommand.COMMAND_ALIAS
+                + " " + INDEX_FIRST_PERSON.getOneBased());
+        assertEquals(new DeleteItemCommand(INDEX_FIRST_PERSON), command);
+    }
+
+    @Test
+    public void parseCommand_listItems() throws Exception {
+        assertTrue(parser.parseCommand(ListItemsCommand.COMMAND_WORD) instanceof ListItemsCommand);
+        assertTrue(parser.parseCommand(ListItemsCommand.COMMAND_ALIAS) instanceof ListItemsCommand);
+        assertTrue(parser.parseCommand(ListItemsCommand.COMMAND_WORD + " 3") instanceof ListItemsCommand);
+        assertTrue(parser.parseCommand(ListItemsCommand.COMMAND_ALIAS + " 3") instanceof ListItemsCommand);
+    }
+
+    @Test
+    public void parseCommand_selectItem() throws Exception {
+        SelectItemCommand command = (SelectItemCommand) parser.parseCommand(
+                SelectItemCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased());
+        assertEquals(new SelectItemCommand(INDEX_FIRST_PERSON), command);
+        command = (SelectItemCommand) parser.parseCommand(
+                SelectItemCommand.COMMAND_ALIAS + " " + INDEX_FIRST_PERSON.getOneBased());
+        assertEquals(new SelectItemCommand(INDEX_FIRST_PERSON), command);
+    }
+
+    @Test
+    public void parseCommand_clearMenu() throws Exception {
+        assertTrue(parser.parseCommand(ClearMenuCommand.COMMAND_WORD) instanceof ClearMenuCommand);
+        assertTrue(parser.parseCommand(ClearMenuCommand.COMMAND_ALIAS) instanceof ClearMenuCommand);
+        assertTrue(parser.parseCommand(ClearMenuCommand.COMMAND_WORD + " 3") instanceof ClearMenuCommand);
+        assertTrue(parser.parseCommand(ClearMenuCommand.COMMAND_ALIAS + " 3") instanceof ClearMenuCommand);
     }
 }

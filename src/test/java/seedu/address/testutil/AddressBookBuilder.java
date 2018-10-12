@@ -2,6 +2,7 @@ package seedu.address.testutil;
 
 import seedu.address.model.AddressBook;
 import seedu.address.model.accounts.Account;
+import seedu.address.model.menu.Item;
 import seedu.address.model.person.Person;
 import seedu.address.model.salesrecord.SalesRecord;
 
@@ -42,6 +43,15 @@ public class AddressBookBuilder {
      */
     public AddressBookBuilder withAccount(Account account) {
         addressBook.addAccount(account);
+        return this;
+    }
+
+    // Menu Management
+    /**
+     * Adds a new {@code Item} to the {@code AddressBook} that we are building.
+     */
+    public AddressBookBuilder withItem(Item item) {
+        addressBook.addItem(item);
         return this;
     }
 

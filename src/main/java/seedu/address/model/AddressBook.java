@@ -10,6 +10,8 @@ import java.util.Set;
 import javafx.collections.ObservableList;
 import seedu.address.model.accounts.Account;
 import seedu.address.model.accounts.UniqueAccountList;
+import seedu.address.model.menu.Item;
+import seedu.address.model.menu.UniqueItemList;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.UniquePersonList;
 import seedu.address.model.salesrecord.SalesRecord;
@@ -27,6 +29,8 @@ public class AddressBook implements ReadOnlyAddressBook {
 
     private final UniqueAccountList accounts;
 
+    private final UniqueItemList items;
+
 
     /*
      * The 'unusual' code block below is an non-static initialization block, sometimes used to avoid duplication
@@ -39,6 +43,7 @@ public class AddressBook implements ReadOnlyAddressBook {
         persons = new UniquePersonList();
         records = new UniqueRecordList();
         accounts = new UniqueAccountList();
+        items = new UniqueItemList();
     }
 
     public AddressBook() {}
@@ -70,6 +75,7 @@ public class AddressBook implements ReadOnlyAddressBook {
         setPersons(newData.getPersonList());
         setRecords(newData.getRecordList());
         setAccounts(newData.getAccountList());
+        setItems(newData.getItemList());
     }
 
     //// person-level operations
@@ -237,12 +243,93 @@ public class AddressBook implements ReadOnlyAddressBook {
         return accounts.asUnmodifiableObservableList();
     }
 
+    // Menu Management
+    /**
+     * Replaces the contents of the person list with {@code persons}. {@code persons} must not contain duplicate
+     * persons.
+     */
+    public void setItems(List<Item> items) {
+        this.items.setItems(items);
+    }
+
+    /**
+     * Returns true if a item with the same identity as {@code item} exists in the menu.
+     */
+    public boolean hasItem(Item item) {
+        requireNonNull(item);
+        return items.contains(item);
+    }
+
+    /**
+     * Adds an item to the menu. The item must not already exist in the menu.
+     */
+    public void addItem(Item i) {
+        items.add(i);
+    }
+
+    /**
+     * Replaces the given item {@code target} in the list with {@code editedItem}. {@code target} must exist in the
+     * menu. The item identity of {@code editedItem} must not be the same as another existing item in the menu.
+     */
+    public void updateItem(Item target, Item editedItem) {
+        requireNonNull(editedItem);
+
+        items.setItem(target, editedItem);
+    }
+
+    /**
+     * Removes {@code key} from this {@code Menu}. {@code key} must exist in the menu.
+     */
+    public void removeItem(Item key) {
+        items.remove(key);
+    }
+
+    /**
+     * Removes {@code tag} from {@code item} in this {@code Menu}.
+     *
+     * @param item whose tag is being removed.
+     * @param tag to be removed.
+     */
+    private void removeTagForItem(Item item, Tag tag) {
+        Set<Tag> tags = new HashSet<>(item.getTags());
+
+        if (!tags.remove(tag)) {
+            return;
+        }
+
+        Item newItem = new Item(item.getName(), item.getPrice(), item.getRemark(), tags);
+        updateItem(item, newItem);
+    }
+
+    /**
+     * Removes {@code tag} from all {@code item} in this {@code AddressBook}.
+     *
+     * @param tag to be removed.
+     */
+    public void removeTagForMenu(Tag tag) {
+        items.forEach(item -> removeTagForItem(item, tag));
+    }
+
+    /**
+     * Resets the menu data of this {@code AddressBook} with {@code newData}.
+     */
+    public void resetMenuData(ReadOnlyAddressBook newData) {
+        requireNonNull(newData);
+        setItems(newData.getItemList());
+    }
+
+    @Override
+    public ObservableList<Item> getItemList() {
+        return items.asUnmodifiableObservableList();
+    }
+
     //// util methods
 
     @Override
     public String toString() {
         return String.valueOf(persons.asUnmodifiableObservableList().size()) + " persons\n"
                 + accounts.asUnmodifiableObservableList().size() + " accounts\n"
+                + items.asUnmodifiableObservableList().size() + " items\n"
                 + records.asUnmodifiableObservableList().size() + " records";
     }
 
@@ -259,11 +346,12 @@ public class AddressBook implements ReadOnlyAddressBook {
 
         return persons.equals(((AddressBook) other).persons)
                 && accounts.equals(((AddressBook) other).accounts)
+                && items.equals(((AddressBook) other).items)
                 && records.equals(((AddressBook) other).records);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(persons, accounts, records);
+        return Objects.hash(persons, accounts, items, records);
     }
 }

@@ -13,6 +13,7 @@ import seedu.address.commons.core.ComponentManager;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.events.model.AddressBookChangedEvent;
 import seedu.address.model.accounts.Account;
+import seedu.address.model.menu.Item;
 import seedu.address.model.person.Person;
 import seedu.address.model.salesrecord.SalesRecord;
 import seedu.address.model.tag.Tag;
@@ -28,6 +29,7 @@ public class ModelManager extends ComponentManager implements Model {
     private final FilteredList<Person> filteredPersons;
     private final FilteredList<SalesRecord> filteredRecords;
     private final FilteredList<Account> filteredAccounts;
+    private final FilteredList<Item> filteredItems;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -42,6 +44,7 @@ public class ModelManager extends ComponentManager implements Model {
         filteredPersons = new FilteredList<>(versionedAddressBook.getPersonList());
         filteredRecords = new FilteredList<>(versionedAddressBook.getRecordList());
         filteredAccounts = new FilteredList<>(versionedAddressBook.getAccountList());
+        filteredItems = new FilteredList<>(versionedAddressBook.getItemList());
     }
 
     public ModelManager() {
@@ -195,6 +198,59 @@ public class ModelManager extends ComponentManager implements Model {
         filteredAccounts.setPredicate(predicate);
     }
 
+    //=========== Menu Management ===========================================================================
+
+    @Override
+    public boolean hasItem(Item item) {
+        requireNonNull(item);
+        return versionedAddressBook.hasItem(item);
+    }
+
+    @Override
+    public void deleteItem(Item target) {
+        versionedAddressBook.removeItem(target);
+        indicateAddressBookChanged();
+    }
+
+    @Override
+    public void addItem(Item item) {
+        versionedAddressBook.addItem(item);
+        updateFilteredItemList(PREDICATE_SHOW_ALL_ITEMS);
+        indicateAddressBookChanged();
+    }
+
+    @Override
+    public void updateItem(Item target, Item editedItem) {
+        requireAllNonNull(target, editedItem);
+
+        versionedAddressBook.updateItem(target, editedItem);
+        indicateAddressBookChanged();
+    }
+
+    @Override
+    public void removeTagForMenu(Tag tag) {
+        versionedAddressBook.removeTagForMenu(tag);
+    }
+
+    @Override
+    public void resetMenuData(ReadOnlyAddressBook newData) {
+        versionedAddressBook.resetMenuData(newData);
+        indicateAddressBookChanged();
+    }
+
+    //=========== Filtered Item List Accessors ==============================================================
+
+    @Override
+    public ObservableList<Item> getFilteredItemList() {
+        return FXCollections.unmodifiableObservableList(filteredItems);
+    }
+
+    @Override
+    public void updateFilteredItemList(Predicate<Item> predicate) {
+        requireNonNull(predicate);
+        filteredItems.setPredicate(predicate);
+    }
+
     //=========== Undo/Redo =================================================================================
 
     @Override
@@ -239,7 +295,8 @@ public class ModelManager extends ComponentManager implements Model {
         ModelManager other = (ModelManager) obj;
         return versionedAddressBook.equals(other.versionedAddressBook)
                 && filteredPersons.equals(other.filteredPersons)
-                && filteredRecords.equals(other.filteredRecords)
+                && filteredAccounts.equals(other.filteredAccounts)
+                && filteredItems.equals(other.filteredItems)
                 && filteredAccounts.equals(other.filteredAccounts);
     }
 }
