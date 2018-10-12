@@ -6,6 +6,7 @@ import static org.junit.Assert.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ITEM_TAG_BURGER;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ITEM_TAG_CHEESE;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_RESERVATION_PAX_BILLY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_TEST;
@@ -45,11 +46,13 @@ import seedu.address.model.menu.exceptions.DuplicateItemException;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
 import seedu.address.model.reservation.Reservation;
+import seedu.address.model.reservation.exceptions.DuplicateReservationException;
 import seedu.address.model.salesrecord.SalesRecord;
 import seedu.address.model.salesrecord.exceptions.DuplicateRecordException;
 import seedu.address.model.tag.Tag;
 import seedu.address.testutil.AddressBookBuilder;
 import seedu.address.testutil.PersonBuilder;
+import seedu.address.testutil.ReservationBuilder;
 import seedu.address.testutil.accounts.AccountBuilder;
 import seedu.address.testutil.menu.ItemBuilder;
 import seedu.address.testutil.salesrecords.RecordBuilder;
@@ -377,6 +380,24 @@ public class AddressBookTest {
                 .build();
 
         assertEquals(addressBookWithPersons, expectedAddressBook);
+    }
+
+    // Reservation Management
+    @Test
+    public void resetData_withDuplicatePersonsWithRecordsAndAccounts_throwsDuplicateReservationException() {
+        // Two persons with the same identity fields
+        Reservation editedAndrew = new ReservationBuilder(ANDREW)
+                .withPax(VALID_RESERVATION_PAX_BILLY)
+                .build();
+        List<Person> newPersons = Arrays.asList(ALICE);
+        List<Account> newAccounts = Arrays.asList(DEMO_ADMIN, DEMO_ONE);
+        List<Item> newItems = Arrays.asList(APPLE_JUICE);
+        List<Reservation> newReservations = Arrays.asList(ANDREW, editedAndrew);
+        List<SalesRecord> newRecords = Arrays.asList(RECORD_DEFAULT, RECORD_ONE);
+        AddressBookStub newData = new AddressBookStub(newPersons, newAccounts, newItems, newReservations, newRecords);
+
+        thrown.expect(DuplicateReservationException.class);
+        addressBook.resetData(newData);
     }
 
     @Test
