@@ -58,12 +58,6 @@ public class ReservationListPanel extends UiPart<Region> {
         });
     }
 
-    @Subscribe
-    private void handleJumpToListRequestEvent(JumpToListRequestEvent event) {
-        logger.info(LogsCenter.getEventHandlingLogMessage(event));
-        scrollTo(event.targetIndex);
-    }
-
     /**
      * Custom {@code ListCell} that displays the graphics of a {@code Reservation} using a {@code ReservationCard}.
      */
