@@ -37,8 +37,6 @@ public class CreateCommandParserTest {
 
     @Test
     public void parse_allFieldsPresent_success() {
-        System.out.println(expectedAccount.toString());
-
         // whitespace only preamble
         assertParseSuccess(parser, PREAMBLE_WHITESPACE + PREFIX_WITH_VALID_USERNAME
                 + PREFIX_WITH_VALID_PASSWORD, new CreateCommand(expectedAccount));
