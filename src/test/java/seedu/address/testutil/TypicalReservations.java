@@ -16,7 +16,7 @@ public class TypicalReservations {
             .withPax("4")
             .withDateTime("2018-10-03T12:00:00")
             .withTags("allergies").build();
-    public static final Reservation BENSON = new ReservationBuilder().withName("Benson Meier")
+    public static final Reservation BILLY = new ReservationBuilder().withName("Benson Meier")
             .withPax("2")
             .withDateTime("2018-10-03T14:00:00")
             .withTags("driving", "allergies").build();
@@ -53,6 +53,6 @@ public class TypicalReservations {
     }
 
     public static List<Reservation> getTypicalReservations() {
-        return new ArrayList<>(Arrays.asList(ANDREW, BENSON, CARL, DANIEL, ELLE, FIONA, GEORGE));
+        return new ArrayList<>(Arrays.asList(ANDREW, BILLY, CARL, DANIEL, ELLE, FIONA, GEORGE));
     }
 }
