@@ -127,6 +127,16 @@ public class CommandTestUtil {
     public static final String INVALID_PRICE_DESC = " " + PREFIX_PRICE + "9.000"; // 3 decimal places not allowed in
     // prices
 
+    // Reservation Management
+    public static final String VALID_RESERVATION_NAME_ANDREW = "Andrew";
+    public static final String VALID_RESERVATION_NAME_BILLY = "Billy";
+    public static final String VALID_RESERVATION_PAX_ANDREW = "2";
+    public static final String VALID_RESERVATION_PAX_BILLY = "4";
+    public static final String VALID_RESERVATION_DATETIME_ANDREW = "2018-12-03T12:00:00";
+    public static final String VALID_RESERVATION_DATETIME_BILLY = "2018-12-05T18:00:00";
+    public static final String VALID_RESERVATION_REMARK_ANDREW = "Driving";
+    public static final String VALID_RESERVATION_REMARK_BILLY = "Allergies";
+
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
 
