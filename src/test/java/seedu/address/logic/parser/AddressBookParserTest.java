@@ -211,8 +211,10 @@ public class AddressBookParserTest {
     public void parseCommand_createAccount_notEquals() throws ParseException {
         Account accountOneCommand = new AccountBuilder().build();
         Account accountTwoCommand = new AccountBuilder().withUsername("demo1").withPassword("1122qq").build();
-        RegisterCommand commandOne = (RegisterCommand) parser.parseCommand(AccountUtil.getCreateCommand(accountOneCommand));
-        RegisterCommand commandTwo = (RegisterCommand) parser.parseCommand(AccountUtil.getCreateCommand(accountTwoCommand));
+        RegisterCommand commandOne = (RegisterCommand) parser
+                .parseCommand(AccountUtil.getCreateCommand(accountOneCommand));
+        RegisterCommand commandTwo = (RegisterCommand) parser
+                .parseCommand(AccountUtil.getCreateCommand(accountTwoCommand));
         assertNotEquals(commandOne, commandTwo);
     }
 
