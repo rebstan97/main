@@ -14,7 +14,7 @@ import seedu.address.model.accounts.Account;
 /**
  * Adds a new user account to the account file.
  */
-public class CreateCommand extends Command {
+public class RegisterCommand extends Command {
 
     public static final String COMMAND_WORD = "register";
     public static final String COMMAND_ALIAS = "reg";
@@ -32,7 +32,7 @@ public class CreateCommand extends Command {
 
     private final Account account;
 
-    public CreateCommand(Account account) {
+    public RegisterCommand(Account account) {
         requireNonNull(account);
         this.account = account;
     }
@@ -53,7 +53,7 @@ public class CreateCommand extends Command {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof CreateCommand // instanceof handles nulls
-                && account.equals(((CreateCommand) other).account));
+                || (other instanceof RegisterCommand // instanceof handles nulls
+                && account.equals(((RegisterCommand) other).account));
     }
 }
