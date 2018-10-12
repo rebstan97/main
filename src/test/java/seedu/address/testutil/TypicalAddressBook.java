@@ -1,4 +1,5 @@
 package seedu.address.testutil;
+
 import static seedu.address.testutil.TypicalPersons.getTypicalPersons;
 import static seedu.address.testutil.accounts.TypicalAccounts.getTypicalAccounts;
 import static seedu.address.testutil.salesrecords.TypicalRecords.getTypicalRecords;
@@ -27,6 +28,9 @@ public class TypicalAddressBook {
         for (Account account : getTypicalAccounts()) {
             ab.addAccount(account);
         }
+        /*for (Item item : getTypicalItems()) {
+            ab.addItem(item); // @Yi Can: Need to add this, and update the xml test file(s)
+        }*/
         return ab;
     }
 
