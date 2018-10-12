@@ -115,6 +115,7 @@ public class AddressBookParser {
             return new RecordSalesCommandParser().parse(arguments);
 
         case CreateCommand.COMMAND_WORD:
+        case CreateCommand.COMMAND_ALIAS:
             return new CreateCommandParser().parse(arguments);
 
         case AddItemCommand.COMMAND_WORD:

@@ -17,6 +17,7 @@ import seedu.address.model.accounts.Account;
 public class CreateCommand extends Command {
 
     public static final String COMMAND_WORD = "register";
+    public static final String COMMAND_ALIAS = "reg";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Registers a new user account. "
             + "Parameters: "
