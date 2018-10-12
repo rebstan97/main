@@ -84,6 +84,7 @@ public class Password {
         if (!isHashed(password)) {
             byte[] salt = generateSalt(username);
 
+            //TODO: Removing the salt certain test cases to fail due to mismatch of hashes.
             byte[] hash = BCrypt.withDefaults().hash(6, salt, password.getBytes());
             password = new String(hash);
         }
