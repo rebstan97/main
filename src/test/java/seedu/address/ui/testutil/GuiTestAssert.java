@@ -9,7 +9,9 @@ import java.util.stream.Collectors;
 import guitests.guihandles.PersonCardHandle;
 import guitests.guihandles.PersonListPanelHandle;
 import guitests.guihandles.ResultDisplayHandle;
+import guitests.guihandles.menu.ItemCardHandle;
 import guitests.guihandles.reservation.ReservationCardHandle;
+import seedu.address.model.menu.Item;
 import seedu.address.model.person.Person;
 import seedu.address.model.reservation.Reservation;
 
@@ -124,6 +126,45 @@ public class GuiTestAssert {
         assertEquals(expected, resultDisplayHandle.getText());
     }
 
+    // Menu Management
+    /**
+     * Asserts that {@code actualCard} displays the same values as {@code expectedCard}.
+     */
+    public static void assertItemCardEquals(ItemCardHandle expectedCard, ItemCardHandle actualCard) {
+        assertEquals(expectedCard.getId(), actualCard.getId());
+        assertEquals(expectedCard.getName(), actualCard.getName());
+        assertEquals(expectedCard.getPrice(), actualCard.getPrice());
+        assertEquals(expectedCard.getTags(), actualCard.getTags());
+
+        expectedCard.getTags().forEach(tag ->
+                assertEquals(expectedCard.getTagStyleClasses(tag), actualCard.getTagStyleClasses(tag)));
+    }
+
+    /**
+     * Asserts that {@code actualCard} displays the details of {@code expectedItem}.
+     */
+    public static void assertCardDisplaysItem(Item expectedItem, ItemCardHandle actualCard) {
+        assertEquals(expectedItem.getName().fullName, actualCard.getName());
+        assertEquals("$" + expectedItem.getPrice().toString(), actualCard.getPrice());
+        assertTagsEqualForItem(expectedItem, actualCard);
+        assertEquals(expectedItem.getRemark().value, actualCard.getRemark());
+        assertEquals(expectedItem.getTags().stream().map(tag -> tag.tagName).collect(Collectors.toList()),
+                actualCard.getTags());
+    }
+
+    /**
+     * Asserts that the tags in {@code actualCard} matches all the tags in {@code expectedItem} with the correct
+     * color.
+     */
+    private static void assertTagsEqualForItem(Item expectedItem, ItemCardHandle actualCard) {
+        List<String> expectedTags = expectedItem.getTags().stream()
+                .map(tag -> tag.tagName).collect(Collectors.toList());
+        assertEquals(expectedTags, actualCard.getTags());
+        expectedTags.forEach(tag ->
+                assertEquals(Arrays.asList(LABEL_DEFAULT_STYLE, getTagColorStyleFor(tag)),
+                        actualCard.getTagStyleClasses(tag)));
+    }
+
     // Reservation Management
     /**
      * Asserts that {@code actualCard} displays the same values as {@code expectedCard}.
@@ -164,4 +205,5 @@ public class GuiTestAssert {
                 assertEquals(Arrays.asList(LABEL_DEFAULT_STYLE, getTagColorStyleFor(tag)),
                         actualCard.getTagStyleClasses(tag)));
     }
+
 }

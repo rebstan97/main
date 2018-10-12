@@ -20,6 +20,7 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.accounts.Account;
+import seedu.address.model.menu.Item;
 import seedu.address.model.person.Person;
 import seedu.address.model.reservation.Reservation;
 import seedu.address.model.salesrecord.SalesRecord;
@@ -190,6 +191,47 @@ public class AddCommandTest {
 
         @Override
         public void updateFilteredAccountList(Predicate<Account> predicate) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        // Menu Management
+        @Override
+        public void addItem(Item item) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean hasItem(Item item) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void deleteItem(Item target) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void updateItem(Item target, Item editedItem) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void removeTagForMenu(Tag tag) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void resetMenuData(ReadOnlyAddressBook newData) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ObservableList<Item> getFilteredItemList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void updateFilteredItemList(Predicate<Item> predicate) {
             throw new AssertionError("This method should not be called.");
         }
 

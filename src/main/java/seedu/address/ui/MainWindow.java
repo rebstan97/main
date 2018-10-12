@@ -20,6 +20,7 @@ import seedu.address.commons.events.ui.ExitAppRequestEvent;
 import seedu.address.commons.events.ui.ShowHelpRequestEvent;
 import seedu.address.logic.Logic;
 import seedu.address.model.UserPrefs;
+import seedu.address.ui.menu.ItemListPanel;
 import seedu.address.ui.sales.RecordListPanel;
 
 /**
@@ -45,6 +46,7 @@ public class MainWindow extends UiPart<Stage> {
     private Config config;
     private UserPrefs prefs;
     private HelpWindow helpWindow;
+    private ItemListPanel itemListPanel;
 
     @FXML
     private StackPane browserPlaceholder;
@@ -139,6 +141,9 @@ public class MainWindow extends UiPart<Stage> {
         //recordListPanel = new RecordListPanel(logic.getFilteredRecordList());
         //personListPanelPlaceholder.getChildren().add(recordListPanel.getRoot()); // Show sales book
 
+        //itemListPanel = new ItemListPanel(logic.getFilteredItemList());
+        //personListPanelPlaceholder.getChildren().add(itemListPanel.getRoot());
+
         ResultDisplay resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
 
@@ -207,6 +212,10 @@ public class MainWindow extends UiPart<Stage> {
 
     public PersonListPanel getPersonListPanel() {
         return personListPanel;
+    }
+
+    public ItemListPanel getItemListPanel() {
+        return itemListPanel;
     }
 
     void releaseResources() {
