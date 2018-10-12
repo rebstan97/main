@@ -2,7 +2,7 @@ package seedu.address.storage.reservation;
 
 import static org.junit.Assert.assertEquals;
 import static seedu.address.storage.reservation.XmlAdaptedReservation.MISSING_FIELD_MESSAGE_FORMAT;
-import static seedu.address.testutil.TypicalReservations.BENSON;
+import static seedu.address.testutil.TypicalReservations.BILLY;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,18 +22,18 @@ public class XmlAdaptedReservationTest {
     // private static final String INVALID_DATETIME = "2018-12-03TJ^&:";
     private static final String INVALID_TAG = "#friend";
 
-    private static final String VALID_NAME = BENSON.getName().toString();
-    private static final String VALID_PAX = BENSON.getPax().toString();
-    private static final String VALID_DATETIME = BENSON.getDateTime().toString();
-    private static final String VALID_REMARK = BENSON.getRemark().toString();
-    private static final List<XmlAdaptedTag> VALID_TAGS = BENSON.getTags().stream()
+    private static final String VALID_NAME = BILLY.getName().toString();
+    private static final String VALID_PAX = BILLY.getPax().toString();
+    private static final String VALID_DATETIME = BILLY.getDateTime().toString();
+    private static final String VALID_REMARK = BILLY.getRemark().toString();
+    private static final List<XmlAdaptedTag> VALID_TAGS = BILLY.getTags().stream()
             .map(XmlAdaptedTag::new)
             .collect(Collectors.toList());
 
     @Test
     public void toModelType_validReservationDetails_returnsReservation() throws Exception {
-        XmlAdaptedReservation reservation = new XmlAdaptedReservation(BENSON);
-        assertEquals(BENSON, reservation.toModelType());
+        XmlAdaptedReservation reservation = new XmlAdaptedReservation(BILLY);
+        assertEquals(BILLY, reservation.toModelType());
     }
 
     @Test
