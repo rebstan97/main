@@ -187,6 +187,39 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     /**
+     * Handles switching of the side navigation bar.
+     */
+    @FXML
+    public void handleSwitchToAccount() {
+        // TODO: Some might require raising/posting event, for example, if you call the list method, so it
+        // should raise an event and automatically update the UI
+    }
+
+    @FXML
+    public void handleSwitchToMenu() {
+        // TODO: Some might require raising/posting event, for example, if you call the list method, so it
+        // should raise an event and automatically update the UI
+    }
+
+    @FXML
+    public void handleSwitchToSales() {
+        // To implement. Some might require raising/posting event, for example, if you call the list method, so it
+        // should raise an event and automatically update the UI
+    }
+
+    @FXML
+    public void handleSwitchToIngredient() {
+        // TODO: Some might require raising/posting event, for example, if you call the list method, so it
+        // should raise an event and automatically update the UI
+    }
+
+    @FXML
+    public void handleSwitchToReservation() {
+        // TODO: Some might require raising/posting event, for example, if you call the list method, so it
+        // should raise an event and automatically update the UI
+    }
+
+    /**
      * Opens the help window or focuses on it if it's already opened.
      */
     @FXML
