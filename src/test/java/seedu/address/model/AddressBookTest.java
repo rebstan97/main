@@ -401,6 +401,38 @@ public class AddressBookTest {
     }
 
     @Test
+    public void hasReservation_nullReservation_throwsNullPointerException() {
+        thrown.expect(NullPointerException.class);
+        addressBook.hasReservation(null);
+    }
+
+    @Test
+    public void hasReservation_reservationNotInAddressBook_returnsFalse() {
+        assertFalse(addressBook.hasReservation(ANDREW));
+    }
+
+    @Test
+    public void hasReservation_reservationInAddressBook_returnsTrue() {
+        addressBook.addReservation(ANDREW);
+        assertTrue(addressBook.hasReservation(ANDREW));
+    }
+
+    @Test
+    public void hasReservation_reservationWithSameIdentityFieldsInAddressBook_returnsTrue() {
+        addressBook.addReservation(ANDREW);
+        Reservation editedAndrew = new ReservationBuilder(ANDREW)
+                .withPax(VALID_RESERVATION_PAX_BILLY)
+                .build();
+        assertTrue(addressBook.hasReservation(editedAndrew));
+    }
+
+    @Test
+    public void getReservationList_modifyList_throwsUnsupportedOperationException() {
+        thrown.expect(UnsupportedOperationException.class);
+        addressBook.getReservationList().remove(0);
+    }
+
+    @Test
     public void equals() {
         addressBookWithPersons = new AddressBookBuilder().withPerson(AMY).withPerson(DYLAN).build();
         // same object
