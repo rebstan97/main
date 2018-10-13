@@ -24,7 +24,7 @@ public class TypicalReservations {
     public static final Reservation DANIEL = new ReservationBuilder().withName("Daniel Meier")
             .withPax("3")
             .withDateTime("2018-10-04T12:00:00")
-            .withTags( "driving").build();
+            .withTags("driving").build();
     public static final Reservation ELLE = new ReservationBuilder().withName("Elle Meyer")
             .withPax("2")
             .withDateTime("2018-10-04T13:00:00").build();

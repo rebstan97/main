@@ -15,7 +15,6 @@ import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.AMY;
 import static seedu.address.testutil.TypicalPersons.BOB;
 import static seedu.address.testutil.TypicalPersons.DYLAN;
-import static seedu.address.testutil.reservation.TypicalReservations.ANDREW;
 import static seedu.address.testutil.accounts.TypicalAccounts.DEMO_ADMIN;
 import static seedu.address.testutil.accounts.TypicalAccounts.DEMO_ONE;
 import static seedu.address.testutil.menu.TypicalItems.APPLE_JUICE;
@@ -23,6 +22,7 @@ import static seedu.address.testutil.menu.TypicalItems.BEEF_BURGER;
 import static seedu.address.testutil.menu.TypicalItems.BURGER;
 import static seedu.address.testutil.menu.TypicalItems.CHEESE_BURGER;
 import static seedu.address.testutil.menu.TypicalItems.FRIES;
+import static seedu.address.testutil.reservation.TypicalReservations.ANDREW;
 import static seedu.address.testutil.salesrecords.TypicalRecords.RECORD_DEFAULT;
 import static seedu.address.testutil.salesrecords.TypicalRecords.RECORD_ONE;
 import static seedu.address.testutil.salesrecords.TypicalRecords.RECORD_THREE;
@@ -52,9 +52,9 @@ import seedu.address.model.salesrecord.exceptions.DuplicateRecordException;
 import seedu.address.model.tag.Tag;
 import seedu.address.testutil.AddressBookBuilder;
 import seedu.address.testutil.PersonBuilder;
-import seedu.address.testutil.reservation.ReservationBuilder;
 import seedu.address.testutil.accounts.AccountBuilder;
 import seedu.address.testutil.menu.ItemBuilder;
+import seedu.address.testutil.reservation.ReservationBuilder;
 import seedu.address.testutil.salesrecords.RecordBuilder;
 
 public class AddressBookTest {
