@@ -318,6 +318,20 @@ public class AddressBook implements ReadOnlyAddressBook {
         setItems(newData.getItemList());
     }
 
+    /**
+     * Sorts the menu by name in alphabetical order.
+     */
+    public void sortMenuByName() {
+        items.sortItemsByName();
+    }
+
+    /**
+     * Sorts the menu by price in ascending order.
+     */
+    public void sortMenuByPrice() {
+        items.sortItemsByPrice();
+    }
+
     @Override
     public ObservableList<Item> getItemList() {
         return items.asUnmodifiableObservableList();
