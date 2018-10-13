@@ -52,17 +52,6 @@ public class TypicalItems {
 
     private TypicalItems() {} // prevents instantiation
 
-    /**
-     * Returns an {@code AddressBook} with all the typical persons.
-     */
-    public static AddressBook getTypicalAddressBook() {
-        AddressBook ab = new AddressBook();
-        for (Item item : getTypicalItems()) {
-            ab.addItem(item);
-        }
-        return ab;
-    }
-
     public static List<Item> getTypicalItems() {
         return new ArrayList<>(
                 Arrays.asList(APPLE_JUICE, BEEF_BURGER, CHOCO_CAKE, DUCK_RICE, EGG, FRUIT_CAKE, GARLIC_BREAD));
