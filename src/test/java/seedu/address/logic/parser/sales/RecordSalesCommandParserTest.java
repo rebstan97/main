@@ -23,7 +23,6 @@ import static seedu.address.testutil.salesrecords.TypicalRecords.RECORD_ONE;
 import org.junit.Test;
 
 import seedu.address.logic.commands.sales.RecordSalesCommand;
-import seedu.address.logic.parser.salescommandsparser.RecordSalesCommandParser;
 import seedu.address.model.salesrecord.Date;
 import seedu.address.model.salesrecord.ItemName;
 import seedu.address.model.salesrecord.Price;
