@@ -19,7 +19,7 @@ public class SortMenuCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Sorts all items by name in alphabetical order or "
             + "by price in ascending order "
             + "and displays them as a list with index numbers.\n"
-            + "Parameters: SORTING METHOD\n"
+            + "Parameters: SORTING METHOD(name or price)\n"
             + "Example: " + COMMAND_WORD + " name";
 
     public static final String MESSAGE_SORTED = "Menu has been sorted by %1$s";
