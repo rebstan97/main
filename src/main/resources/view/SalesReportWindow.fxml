@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.VBox?>
+
+<?import javafx.scene.Scene?>
+<?import javafx.scene.image.Image?>
+
+<fx:root type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/9.0.4" xmlns:fx="http://javafx.com/fxml/1"
+  title="Sales Report for ">
+  <icons>
+    <Image url="@/images/sales.png" />
+  </icons>
+  <scene>
+    <Scene>
+      <VBox alignment="TOP_CENTER" prefHeight="290.0" prefWidth="600.0" spacing="10.0">
+        <TableView prefHeight="250.0" prefWidth="200.0">
+          <columns>
+            <TableColumn fx:id="id" prefWidth="36" text="ID" />
+            <TableColumn fx:id="itemName" prefWidth="300" text="Item Name" />
+            <TableColumn fx:id="quantitySold" prefWidth="90" text="Quantity Sold" />
+            <TableColumn fx:id="price" prefWidth="90" text="Price" />
+            <TableColumn fx:id="revenue" prefWidth="90" text="Revenue" />
+          </columns>
+        </TableView>
+        <Label fx:id="totalRevenue" alignment="BOTTOM_LEFT" prefHeight="18.0" prefWidth="708" text="Total Revenue: ">
+        </Label>
+      </VBox>
+    </Scene>
+  </scene>
+</fx:root>
