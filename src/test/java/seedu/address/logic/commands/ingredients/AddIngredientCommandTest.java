@@ -1,4 +1,4 @@
-package seedu.address.logic.commands;
+package seedu.address.logic.commands.ingredients;
 
 import static java.util.Objects.requireNonNull;
 import static org.junit.Assert.assertEquals;
@@ -7,6 +7,7 @@ import static org.junit.Assert.assertTrue;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.function.Predicate;
 
 import org.junit.Rule;
@@ -15,8 +16,8 @@ import org.junit.rules.ExpectedException;
 
 import javafx.collections.ObservableList;
 import seedu.address.logic.CommandHistory;
+import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.logic.commands.ingredients.AddIngredientCommand;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
@@ -304,7 +305,7 @@ public class AddIngredientCommandTest {
      */
     private class ModelStubAcceptingIngredientAdded extends ModelStub {
 
-        final ArrayList<Ingredient> ingredientsAdded = new ArrayList<>();
+        final List<Ingredient> ingredientsAdded = new ArrayList<>();
 
         @Override
         public boolean hasIngredient(Ingredient ingredient) {

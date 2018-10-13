@@ -53,24 +53,6 @@
           </padding>
         </StackPane>
 
-<<<<<<< HEAD
-        <!--<SplitPane id="splitPane" fx:id="splitPane" dividerPositions="0.4" VBox.vgrow="ALWAYS">-->
-          <!--<VBox fx:id="personList" minWidth="340" prefWidth="340" SplitPane.resizableWithParent="false">-->
-            <!--<padding>-->
-              <!--<Insets bottom="10" left="10" right="10" top="10" />-->
-            <!--</padding>-->
-            <!--<StackPane fx:id="personListPanelPlaceholder" VBox.vgrow="ALWAYS" />-->
-          <!--</VBox>-->
-
-          <SplitPane id="splitPane" fx:id="splitPane" dividerPositions="0.4" VBox.vgrow="ALWAYS">
-              <VBox fx:id="personList" minWidth="340" prefWidth="340" SplitPane.resizableWithParent="false">
-                  <padding>
-                      <Insets bottom="10" left="10" right="10" top="10" />
-                  </padding>
-                  <StackPane fx:id="personListPanelPlaceholder" VBox.vgrow="ALWAYS" />
-              </VBox>
-
-=======
         <SplitPane id="splitPane" fx:id="splitPane" dividerPositions="0.4" VBox.vgrow="ALWAYS">
           <VBox fx:id="sideButtonBar" alignment="CENTER" maxWidth="80.0" minWidth="80.0" prefWidth="80.0">
             <ImageView fx:id="switchToAccountButton" fitHeight="50.0" fitWidth="50.0"
@@ -112,7 +94,7 @@
             </padding>
             <StackPane fx:id="personListPanelPlaceholder" VBox.vgrow="ALWAYS" />
           </VBox>
->>>>>>> master
+
           <StackPane fx:id="browserPlaceholder" prefWidth="340">
             <padding>
               <Insets bottom="10" left="10" right="10" top="10" />
