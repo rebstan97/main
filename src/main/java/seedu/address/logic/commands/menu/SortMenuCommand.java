@@ -24,6 +24,9 @@ public class SortMenuCommand extends Command {
 
     public static final String MESSAGE_SORTED = "Menu has been sorted by %1$s";
 
+    /**
+     * Sorting Method that can be used
+     */
     public enum SortMethod {
         NAME, PRICE
     }
