@@ -40,7 +40,7 @@ public class AddReservationCommand extends Command {
     private final Reservation toAdd;
 
     /**
-     * Creates an AddCommand to add the specified {@code Reservation}
+     * Creates an AddReservationCommand to add the specified {@code Reservation}
      */
     public AddReservationCommand(Reservation reservation) {
         requireNonNull(reservation);
