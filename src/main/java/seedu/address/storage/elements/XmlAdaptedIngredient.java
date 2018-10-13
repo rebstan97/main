@@ -88,7 +88,7 @@ public class XmlAdaptedIngredient {
     /**
      * Checks if name is valid.
      *
-     * @throws IllegalValueException if name is null or invalid
+     * @throws IllegalValueException if {@code name} is null or invalid
      */
     private void checkIfValidName() throws IllegalValueException {
         if (name == null) {
@@ -103,7 +103,7 @@ public class XmlAdaptedIngredient {
     /**
      * Checks if unit is valid.
      *
-     * @throws IllegalValueException if unit is null or invalid
+     * @throws IllegalValueException if {@code unit} is null or invalid
      */
     private void checkIfValidUnit() throws IllegalValueException {
         if (unit == null) {
@@ -118,7 +118,7 @@ public class XmlAdaptedIngredient {
     /**
      * Checks if price is valid.
      *
-     * @throws IllegalValueException if price is null or invalid
+     * @throws IllegalValueException if {@code price} is null or invalid
      */
     private void checkIfValidPrice() throws IllegalValueException {
         if (price == null) {
@@ -133,7 +133,7 @@ public class XmlAdaptedIngredient {
     /**
      * Checks if minimum is valid.
      *
-     * @throws IllegalValueException if minimum is null or invalid
+     * @throws IllegalValueException if {@code minimum} is null or invalid
      */
     private void checkIfValidMinimum() throws IllegalValueException {
         if (minimum == null) {
@@ -148,7 +148,7 @@ public class XmlAdaptedIngredient {
     /**
      * Checks if numUnits is valid.
      *
-     * @throws IllegalValueException if there name is null or invalid
+     * @throws IllegalValueException if {@code numUnits} is null or invalid
      */
     private void checkIfValidNumUnits() throws IllegalValueException {
         if (numUnits == null) {

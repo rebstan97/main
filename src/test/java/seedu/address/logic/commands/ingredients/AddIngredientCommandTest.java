@@ -7,7 +7,6 @@ import static org.junit.Assert.assertTrue;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 import java.util.function.Predicate;
 
 import org.junit.Rule;
@@ -305,7 +304,7 @@ public class AddIngredientCommandTest {
      */
     private class ModelStubAcceptingIngredientAdded extends ModelStub {
 
-        final private ArrayList<Ingredient> ingredientsAdded = new ArrayList<>();
+        private final ArrayList<Ingredient> ingredientsAdded = new ArrayList<>();
 
         @Override
         public boolean hasIngredient(Ingredient ingredient) {
