@@ -30,7 +30,7 @@ import seedu.address.logic.commands.RedoCommand;
 import seedu.address.logic.commands.RemarkCommand;
 import seedu.address.logic.commands.SelectCommand;
 import seedu.address.logic.commands.UndoCommand;
-import seedu.address.logic.commands.accounts.CreateCommand;
+import seedu.address.logic.commands.accounts.RegisterCommand;
 import seedu.address.logic.commands.menu.AddItemCommand;
 import seedu.address.logic.commands.menu.ClearMenuCommand;
 import seedu.address.logic.commands.menu.DeleteItemCommand;
@@ -203,16 +203,18 @@ public class AddressBookParserTest {
     @Test
     public void parseCommand_createAccount() throws ParseException {
         Account account = new AccountBuilder().build();
-        CreateCommand command = (CreateCommand) parser.parseCommand(AccountUtil.getCreateCommand(account));
-        assertEquals(new CreateCommand(account), command);
+        RegisterCommand command = (RegisterCommand) parser.parseCommand(AccountUtil.getCreateCommand(account));
+        assertEquals(new RegisterCommand(account), command);
     }
 
     @Test
     public void parseCommand_createAccount_notEquals() throws ParseException {
         Account accountOneCommand = new AccountBuilder().build();
         Account accountTwoCommand = new AccountBuilder().withUsername("demo1").withPassword("1122qq").build();
-        CreateCommand commandOne = (CreateCommand) parser.parseCommand(AccountUtil.getCreateCommand(accountOneCommand));
-        CreateCommand commandTwo = (CreateCommand) parser.parseCommand(AccountUtil.getCreateCommand(accountTwoCommand));
+        RegisterCommand commandOne = (RegisterCommand) parser
+                .parseCommand(AccountUtil.getCreateCommand(accountOneCommand));
+        RegisterCommand commandTwo = (RegisterCommand) parser
+                .parseCommand(AccountUtil.getCreateCommand(accountTwoCommand));
         assertNotEquals(commandOne, commandTwo);
     }
 
