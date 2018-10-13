@@ -10,6 +10,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_TEST;
 import static seedu.address.testutil.TypicalAddressBook.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalAddressBook.getTypicalAddressBookWithItemOnly;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.AMY;
 import static seedu.address.testutil.TypicalPersons.BOB;
@@ -370,6 +371,19 @@ public class AddressBookTest {
                 .build();
 
         assertEquals(addressBookWithPersons, expectedAddressBook);
+    }
+
+    @Test
+    public void resetMenuData_null_throwsNullPointerException() {
+        thrown.expect(NullPointerException.class);
+        addressBook.resetMenuData(null);
+    }
+
+    @Test
+    public void resetMenuData_withValidReadOnlyAddressBook_replacesMenuDataOnly() {
+        AddressBook newData = getTypicalAddressBookWithItemOnly();
+        addressBook.resetMenuData(newData);
+        assertEquals(newData, addressBook);
     }
 
     @Test
