@@ -20,7 +20,7 @@ import seedu.address.logic.commands.RedoCommand;
 import seedu.address.logic.commands.RemarkCommand;
 import seedu.address.logic.commands.SelectCommand;
 import seedu.address.logic.commands.UndoCommand;
-import seedu.address.logic.commands.accounts.CreateCommand;
+import seedu.address.logic.commands.accounts.RegisterCommand;
 import seedu.address.logic.commands.ingredients.AddIngredientCommand;
 import seedu.address.logic.commands.ingredients.DeleteIngredientCommand;
 import seedu.address.logic.commands.ingredients.EditIngredientCommand;
@@ -32,7 +32,7 @@ import seedu.address.logic.commands.menu.EditItemCommand;
 import seedu.address.logic.commands.menu.ListItemsCommand;
 import seedu.address.logic.commands.menu.SelectItemCommand;
 import seedu.address.logic.commands.salescommands.RecordSalesCommand;
-import seedu.address.logic.parser.accounts.CreateCommandParser;
+import seedu.address.logic.parser.accounts.RegisterCommandParser;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.logic.parser.ingredients.AddIngredientCommandParser;
 import seedu.address.logic.parser.ingredients.DeleteIngredientCommandParser;
@@ -122,8 +122,9 @@ public class AddressBookParser {
         case RecordSalesCommand.COMMAND_WORD:
             return new RecordSalesCommandParser().parse(arguments);
 
-        case CreateCommand.COMMAND_WORD:
-            return new CreateCommandParser().parse(arguments);
+        case RegisterCommand.COMMAND_WORD:
+        case RegisterCommand.COMMAND_ALIAS:
+            return new RegisterCommandParser().parse(arguments);
 
         case AddIngredientCommand.COMMAND_WORD:
             return new AddIngredientCommandParser().parse(arguments);
