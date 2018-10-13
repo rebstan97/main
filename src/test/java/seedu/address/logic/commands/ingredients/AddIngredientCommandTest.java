@@ -305,7 +305,7 @@ public class AddIngredientCommandTest {
      */
     private class ModelStubAcceptingIngredientAdded extends ModelStub {
 
-        final List<Ingredient> ingredientsAdded = new ArrayList<>();
+        final private ArrayList<Ingredient> ingredientsAdded = new ArrayList<>();
 
         @Override
         public boolean hasIngredient(Ingredient ingredient) {
