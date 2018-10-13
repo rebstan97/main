@@ -3,7 +3,7 @@ package seedu.address.testutil.accounts;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ID;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PASSWORD;
 
-import seedu.address.logic.commands.accounts.CreateCommand;
+import seedu.address.logic.commands.accounts.RegisterCommand;
 import seedu.address.model.accounts.Account;
 
 /**
@@ -15,7 +15,7 @@ public class AccountUtil {
      * Returns a create command string for adding the {@code account}.
      */
     public static String getCreateCommand(Account account) {
-        return CreateCommand.COMMAND_WORD + " " + getAccountDetails(account);
+        return RegisterCommand.COMMAND_WORD + " " + getAccountDetails(account);
     }
 
     /**
