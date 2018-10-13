@@ -217,6 +217,8 @@ public class ParserUtil {
         return new Password(trimmedPassword);
     }
 
+    //================ Ingredients Parser Util ===================================================
+
     /**
      * Parses a {@code String name} into an {@code IngredientName}. Leading and trailing whitespaces
      * will be trimmed.
