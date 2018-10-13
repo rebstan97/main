@@ -8,7 +8,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_QUANTITY_SOLD;
 
 import java.util.stream.Stream;
 
-import seedu.address.logic.commands.salescommands.RecordSalesCommand;
+import seedu.address.logic.commands.sales.RecordSalesCommand;
 import seedu.address.logic.parser.ArgumentMultimap;
 import seedu.address.logic.parser.ArgumentTokenizer;
 import seedu.address.logic.parser.Parser;

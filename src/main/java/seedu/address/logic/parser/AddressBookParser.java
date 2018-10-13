@@ -27,7 +27,7 @@ import seedu.address.logic.commands.menu.DeleteItemCommand;
 import seedu.address.logic.commands.menu.EditItemCommand;
 import seedu.address.logic.commands.menu.ListItemsCommand;
 import seedu.address.logic.commands.menu.SelectItemCommand;
-import seedu.address.logic.commands.salescommands.RecordSalesCommand;
+import seedu.address.logic.commands.sales.RecordSalesCommand;
 import seedu.address.logic.parser.accounts.RegisterCommandParser;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.logic.parser.menu.AddItemCommandParser;

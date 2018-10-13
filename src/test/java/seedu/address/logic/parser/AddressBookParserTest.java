@@ -36,7 +36,7 @@ import seedu.address.logic.commands.menu.ClearMenuCommand;
 import seedu.address.logic.commands.menu.DeleteItemCommand;
 import seedu.address.logic.commands.menu.ListItemsCommand;
 import seedu.address.logic.commands.menu.SelectItemCommand;
-import seedu.address.logic.commands.salescommands.RecordSalesCommand;
+import seedu.address.logic.commands.sales.RecordSalesCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.accounts.Account;
 import seedu.address.model.menu.Item;
