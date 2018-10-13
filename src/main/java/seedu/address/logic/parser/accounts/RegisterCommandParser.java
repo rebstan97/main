@@ -6,7 +6,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_PASSWORD;
 
 import java.util.stream.Stream;
 
-import seedu.address.logic.commands.accounts.CreateCommand;
+import seedu.address.logic.commands.accounts.RegisterCommand;
 import seedu.address.logic.parser.ArgumentMultimap;
 import seedu.address.logic.parser.ArgumentTokenizer;
 import seedu.address.logic.parser.Parser;
@@ -18,21 +18,21 @@ import seedu.address.model.accounts.Password;
 import seedu.address.model.accounts.Username;
 
 /**
- * Parses input arguments and creates a new CreateCommand object
+ * Parses input arguments and creates a new RegisterCommand object
  */
-public class CreateCommandParser implements Parser<CreateCommand> {
+public class RegisterCommandParser implements Parser<RegisterCommand> {
 
     /**
-     * Parses the given {@code String} of arguments in the context of the CreateCommand and returns a CreateCommand
+     * Parses the given {@code String} of arguments in the context of the RegisterCommand and returns a RegisterCommand
      * object for execution.
      *
      * @throws ParseException if the user input does not conform the expected format
      */
-    public CreateCommand parse(String args) throws ParseException {
+    public RegisterCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_ID, PREFIX_PASSWORD);
 
         if (!arePrefixesPresent(argMultimap, PREFIX_ID, PREFIX_PASSWORD) || !argMultimap.getPreamble().isEmpty()) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, CreateCommand.MESSAGE_USAGE));
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, RegisterCommand.MESSAGE_USAGE));
         }
 
         Username username = ParserUtil.parseUsername(argMultimap.getValue(PREFIX_ID).get());
@@ -40,7 +40,7 @@ public class CreateCommandParser implements Parser<CreateCommand> {
 
         Account account = new Account(username, password);
 
-        return new CreateCommand(account);
+        return new RegisterCommand(account);
     }
 
     /**

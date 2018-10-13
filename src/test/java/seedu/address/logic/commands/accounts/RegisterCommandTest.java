@@ -16,7 +16,7 @@ import seedu.address.model.ModelManager;
 import seedu.address.model.accounts.Account;
 import seedu.address.testutil.accounts.AccountBuilder;
 
-public class CreateCommandTest {
+public class RegisterCommandTest {
 
     private static final CommandHistory EMPTY_COMMAND_HISTORY = new CommandHistory();
 
@@ -29,9 +29,9 @@ public class CreateCommandTest {
     @Test
     public void executeSuccess() throws CommandException {
         Account validAccount = new AccountBuilder(DEMO_ADMIN).build();
-        CommandResult commandResult = new CreateCommand(validAccount).execute(model, commandHistory);
+        CommandResult commandResult = new RegisterCommand(validAccount).execute(model, commandHistory);
 
-        assertEquals(String.format(CreateCommand.MESSAGE_SUCCESS, validAccount), commandResult.feedbackToUser);
+        assertEquals(String.format(RegisterCommand.MESSAGE_SUCCESS, validAccount), commandResult.feedbackToUser);
         Assert.assertEquals(EMPTY_COMMAND_HISTORY, commandHistory); //TODO: remove?
     }
 

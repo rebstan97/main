@@ -14,11 +14,12 @@ import seedu.address.model.accounts.Account;
 /**
  * Adds a new user account to the account file.
  */
-public class CreateCommand extends Command {
+public class RegisterCommand extends Command {
 
-    public static final String COMMAND_WORD = "create-acc";
+    public static final String COMMAND_WORD = "register";
+    public static final String COMMAND_ALIAS = "reg";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Creates a new user account. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Registers a new user account. "
             + "Parameters: "
             + PREFIX_ID + "USERNAME "
             + PREFIX_PASSWORD + "PASSWORD\n"
@@ -26,12 +27,12 @@ public class CreateCommand extends Command {
             + PREFIX_ID + "azhikai "
             + PREFIX_PASSWORD + "1122qq";
 
-    public static final String MESSAGE_SUCCESS = "New account created: %1$s";
-    public static final String MESSAGE_DUPLICATE_USERNAME = "This username already exists";
+    public static final String MESSAGE_SUCCESS = "New account registered: %1$s!";
+    public static final String MESSAGE_DUPLICATE_USERNAME = "This username already exists.";
 
     private final Account account;
 
-    public CreateCommand(Account account) {
+    public RegisterCommand(Account account) {
         requireNonNull(account);
         this.account = account;
     }
@@ -52,7 +53,7 @@ public class CreateCommand extends Command {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof CreateCommand // instanceof handles nulls
-                    && account.equals(((CreateCommand) other).account));
+                || (other instanceof RegisterCommand // instanceof handles nulls
+                && account.equals(((RegisterCommand) other).account));
     }
 }
