@@ -18,6 +18,8 @@ import seedu.address.model.menu.Item;
  */
 public class TypicalItems {
 
+    public static final Item ITEM_DEFAULT = new ItemBuilder().build();
+
     public static final Item APPLE_JUICE = new ItemBuilder().withName("Apple Juice")
             .withPrice("2")
             .withTags("drink", "monday").build();
