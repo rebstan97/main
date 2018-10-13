@@ -2,6 +2,7 @@ package seedu.address.logic.commands.sales;
 
 import static java.util.Objects.requireNonNull;
 
+import javafx.collections.ObservableList;
 import seedu.address.commons.core.EventsCenter;
 import seedu.address.commons.events.ui.DisplaySalesReportEvent;
 import seedu.address.logic.CommandHistory;
@@ -9,6 +10,7 @@ import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.model.Model;
 import seedu.address.model.salesrecord.Date;
+import seedu.address.model.salesrecord.SalesRecord;
 
 /**
  * Display sales report of a specific date
@@ -34,7 +36,8 @@ public class DisplaySalesCommand extends Command {
 
     @Override
     public CommandResult execute(Model model, CommandHistory history) {
-        EventsCenter.getInstance().post(new DisplaySalesReportEvent(date));
+        ObservableList<SalesRecord> salesReport = model.getRecordListWithDate(date);
+        EventsCenter.getInstance().post(new DisplaySalesReportEvent(salesReport));
         return new CommandResult(String.format(DISPLAYING_REPORT_MESSAGE, date.toString()));
     }
 

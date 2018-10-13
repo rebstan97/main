@@ -6,6 +6,7 @@ import javafx.collections.ObservableList;
 import seedu.address.model.accounts.Account;
 import seedu.address.model.menu.Item;
 import seedu.address.model.person.Person;
+import seedu.address.model.salesrecord.Date;
 import seedu.address.model.salesrecord.SalesRecord;
 import seedu.address.model.tag.Tag;
 
@@ -102,6 +103,9 @@ public interface Model {
      * book.
      */
     void updateRecord(SalesRecord target, SalesRecord editedRecord);
+
+    /** Returns an unmodifiable list of sales records with the specified date. */
+    ObservableList<SalesRecord> getRecordListWithDate(Date date);
 
     /**
      * Returns an unmodifiable view of the filtered record list

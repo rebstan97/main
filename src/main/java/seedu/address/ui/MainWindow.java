@@ -90,7 +90,6 @@ public class MainWindow extends UiPart<Stage> {
         registerAsAnEventHandler(this);
 
         helpWindow = new HelpWindow();
-        salesReportWindow = new SalesReportWindow(logic.getFilteredRecordList());
     }
 
     public Stage getPrimaryStage() {
@@ -278,12 +277,11 @@ public class MainWindow extends UiPart<Stage> {
         handleHelp();
     }
 
-    
+
     @Subscribe
     private void handleDisplaySalesReportEvent(DisplaySalesReportEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
-//        salesReportWindow.initializeSalesReport(event.getDateOfSalesReportToDisplay());
+        salesReportWindow = new SalesReportWindow(event.getSalesReportToDisplay());
         salesReportWindow.show();
-
     }
 }

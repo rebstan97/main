@@ -1,21 +1,22 @@
 package seedu.address.commons.events.ui;
 
+import javafx.collections.ObservableList;
 import seedu.address.commons.events.BaseEvent;
-import seedu.address.model.salesrecord.Date;
+import seedu.address.model.salesrecord.SalesRecord;
 
 /**
  * An event requesting to display the sales report of a specified date
  */
 public class DisplaySalesReportEvent extends BaseEvent {
 
-    private Date dateOfSalesReportToDisplay;
+    private ObservableList<SalesRecord> salesReportToDisplay;
 
-    public DisplaySalesReportEvent(Date dateOfSalesReportToDisplay) {
-        this.dateOfSalesReportToDisplay = dateOfSalesReportToDisplay;
+    public DisplaySalesReportEvent(ObservableList<SalesRecord> salesReportToDisplay) {
+        this.salesReportToDisplay = salesReportToDisplay;
     }
 
-    public Date getDateOfSalesReportToDisplay() {
-        return dateOfSalesReportToDisplay;
+    public ObservableList<SalesRecord> getSalesReportToDisplay() {
+        return salesReportToDisplay;
     }
 
     @Override

@@ -15,6 +15,7 @@ import seedu.address.commons.events.model.AddressBookChangedEvent;
 import seedu.address.model.accounts.Account;
 import seedu.address.model.menu.Item;
 import seedu.address.model.person.Person;
+import seedu.address.model.salesrecord.Date;
 import seedu.address.model.salesrecord.SalesRecord;
 import seedu.address.model.tag.Tag;
 
@@ -140,6 +141,13 @@ public class ModelManager extends ComponentManager implements Model {
         requireAllNonNull(target, editedRecord);
         versionedAddressBook.updateRecord(target, editedRecord);
         indicateAddressBookChanged();
+    }
+
+    /** Returns an unmodifiable list of sales records with the specified date. */
+    @Override
+    public ObservableList<SalesRecord> getRecordListWithDate(Date date) {
+        requireNonNull(date);
+        return versionedAddressBook.getRecordListWithDate(date);
     }
 
     //=========== Filtered Sales Record List Accessors =============================================================

@@ -20,7 +20,7 @@ public class SalesReportWindow extends UiPart<Stage> {
     private static final Logger logger = LogsCenter.getLogger(SalesReportWindow.class);
     private static final String FXML = "SalesReportWindow.fxml";
 
-    private ObservableList<SalesRecord> recordList;
+    private ObservableList<SalesRecord> salesReport;
 
     @FXML
     private TableView table ;
@@ -31,17 +31,18 @@ public class SalesReportWindow extends UiPart<Stage> {
      * Creates a new SalesReportWindow
      *
      * @param root Stage to use as the root of the SalesReportWindow.
+     * @param salesReport ObservableList of sales records that make up the salesReport
      */
-    public SalesReportWindow(Stage root, ObservableList<SalesRecord> recordList) {
+    public SalesReportWindow(Stage root, ObservableList<SalesRecord> salesReport) {
         super(FXML, root);
-        this.recordList = recordList;
+        this.salesReport = salesReport;
     }
 
     /**
      * Creates a new SalesReportWindow.
      */
-    public SalesReportWindow(ObservableList<SalesRecord> recordList) {
-        this(new Stage(), recordList);
+    public SalesReportWindow(ObservableList<SalesRecord> salesReport) {
+        this(new Stage(), salesReport);
     }
 
     /**
