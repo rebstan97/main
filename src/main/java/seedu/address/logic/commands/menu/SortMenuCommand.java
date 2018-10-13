@@ -1,9 +1,7 @@
 package seedu.address.logic.commands.menu;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_SORT_MENU;
 
-import seedu.address.commons.core.Messages;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
@@ -21,8 +19,8 @@ public class SortMenuCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Sorts all items by name in alphabetical order or "
             + "by price in ascending order "
             + "and displays them as a list with index numbers.\n"
-            + "Parameters: " + PREFIX_SORT_MENU + "SORTING METHOD\n"
-            + "Example: " + COMMAND_WORD + " " + PREFIX_SORT_MENU + "name";
+            + "Parameters: SORTING METHOD\n"
+            + "Example: " + COMMAND_WORD + " name";
 
     public static final String MESSAGE_SORTED = "Menu has been sorted by %1$s";
 
