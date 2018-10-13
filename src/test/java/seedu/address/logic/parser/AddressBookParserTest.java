@@ -36,6 +36,7 @@ import seedu.address.logic.commands.menu.ClearMenuCommand;
 import seedu.address.logic.commands.menu.DeleteItemCommand;
 import seedu.address.logic.commands.menu.EditItemCommand;
 import seedu.address.logic.commands.menu.EditItemCommand.EditItemDescriptor;
+import seedu.address.logic.commands.menu.FilterMenuCommand;
 import seedu.address.logic.commands.menu.ListItemsCommand;
 import seedu.address.logic.commands.menu.SelectItemCommand;
 import seedu.address.logic.commands.menu.SortMenuCommand;
@@ -44,6 +45,7 @@ import seedu.address.logic.commands.salescommands.RecordSalesCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.accounts.Account;
 import seedu.address.model.menu.Item;
+import seedu.address.model.menu.TagContainsKeywordsPredicate;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Remark;
@@ -281,6 +283,18 @@ public class AddressBookParserTest {
         command = (SortMenuCommand) parser.parseCommand(
                 SortMenuCommand.COMMAND_ALIAS + " price");
         assertEquals(new SortMenuCommand(SortMethod.PRICE), command);
+    }
+
+    @Test
+    public void parseCommand_filterMenu() throws Exception {
+        List<String> keywords = Arrays.asList("foo", "bar", "baz");
+        FilterMenuCommand command = (FilterMenuCommand) parser.parseCommand(
+                FilterMenuCommand.COMMAND_WORD + " "
+                        + keywords.stream().collect(Collectors.joining(" ")));
+        assertEquals(new FilterMenuCommand(new TagContainsKeywordsPredicate(keywords)), command);
+        command = (FilterMenuCommand) parser.parseCommand(FilterMenuCommand.COMMAND_ALIAS + " "
+                + keywords.stream().collect(Collectors.joining(" ")));
+        assertEquals(new FilterMenuCommand(new TagContainsKeywordsPredicate(keywords)), command);
     }
 
     @Test
