@@ -67,6 +67,30 @@ public class XmlAdaptedIngredient {
      */
     public Ingredient toModelType() throws IllegalValueException {
 
+        checkIfValidName();
+        final IngredientName modelName = new IngredientName(name);
+
+        checkIfValidUnit();
+        final IngredientUnit modelUnit = new IngredientUnit(unit);
+
+        checkIfValidPrice();
+        final IngredientPrice modelPrice = new IngredientPrice(price);
+
+        checkIfValidMinimum();
+        final MinimumUnit modelMinimum = new MinimumUnit(minimum);
+
+        checkIfValidNumUnits();
+        final NumUnits modelNumUnits = new NumUnits(numUnits);
+
+        return new Ingredient(modelName, modelUnit, modelPrice, modelMinimum, modelNumUnits);
+    }
+
+    /**
+     * Checks if name is valid.
+     *
+     * @throws IllegalValueException if name is null or invalid
+     */
+    private void checkIfValidName() throws IllegalValueException {
         if (name == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
                     IngredientName.class.getSimpleName()));
@@ -74,8 +98,14 @@ public class XmlAdaptedIngredient {
         if (!IngredientName.isValidName(name)) {
             throw new IllegalValueException(IngredientName.MESSAGE_NAME_CONSTRAINTS);
         }
-        final IngredientName modelName = new IngredientName(name);
+    }
 
+    /**
+     * Checks if unit is valid.
+     *
+     * @throws IllegalValueException if unit is null or invalid
+     */
+    private void checkIfValidUnit() throws IllegalValueException {
         if (unit == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
                     IngredientUnit.class.getSimpleName()));
@@ -83,8 +113,14 @@ public class XmlAdaptedIngredient {
         if (!IngredientUnit.isValidUnit(unit)) {
             throw new IllegalValueException(IngredientUnit.MESSAGE_UNIT_CONSTRAINTS);
         }
-        final IngredientUnit modelUnit = new IngredientUnit(unit);
+    }
 
+    /**
+     * Checks if price is valid.
+     *
+     * @throws IllegalValueException if price is null or invalid
+     */
+    private void checkIfValidPrice() throws IllegalValueException {
         if (price == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
                     IngredientPrice.class.getSimpleName()));
@@ -92,8 +128,14 @@ public class XmlAdaptedIngredient {
         if (!IngredientPrice.isValidPrice(price)) {
             throw new IllegalValueException(IngredientPrice.MESSAGE_PRICE_CONSTRAINTS);
         }
-        final IngredientPrice modelPrice = new IngredientPrice(price);
+    }
 
+    /**
+     * Checks if minimum is valid.
+     *
+     * @throws IllegalValueException if minimum is null or invalid
+     */
+    private void checkIfValidMinimum() throws IllegalValueException {
         if (minimum == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
                     MinimumUnit.class.getSimpleName()));
@@ -101,8 +143,14 @@ public class XmlAdaptedIngredient {
         if (!MinimumUnit.isValidMinimum(minimum)) {
             throw new IllegalValueException(MinimumUnit.MESSAGE_MINIMUM_CONSTRAINTS);
         }
-        final MinimumUnit modelMinimum = new MinimumUnit(minimum);
+    }
 
+    /**
+     * Checks if numUnits is valid.
+     *
+     * @throws IllegalValueException if there name is null or invalid
+     */
+    private void checkIfValidNumUnits() throws IllegalValueException {
         if (numUnits == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
                     NumUnits.class.getSimpleName()));
@@ -110,9 +158,6 @@ public class XmlAdaptedIngredient {
         if (!NumUnits.isValidNumUnits(numUnits)) {
             throw new IllegalValueException(NumUnits.MESSAGE_NUMUNITS_CONSTRAINTS);
         }
-        final NumUnits modelNumUnits = new NumUnits(numUnits);
-
-        return new Ingredient(modelName, modelUnit, modelPrice, modelMinimum, modelNumUnits);
     }
 
     @Override
