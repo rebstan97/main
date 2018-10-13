@@ -39,12 +39,9 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.model.accounts.Account;
 import seedu.address.model.accounts.exceptions.DuplicateAccountException;
-<<<<<<< HEAD
 import seedu.address.model.ingredient.Ingredient;
-=======
 import seedu.address.model.menu.Item;
 import seedu.address.model.menu.exceptions.DuplicateItemException;
->>>>>>> master
 import seedu.address.model.person.Person;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
 import seedu.address.model.salesrecord.SalesRecord;
@@ -400,23 +397,16 @@ public class AddressBookTest {
         private final ObservableList<Person> persons = FXCollections.observableArrayList();
         private final ObservableList<SalesRecord> records = FXCollections.observableArrayList();
         private final ObservableList<Account> accounts = FXCollections.observableArrayList();
-<<<<<<< HEAD
         private final ObservableList<Ingredient> ingredients = FXCollections.observableArrayList();
-=======
         private final ObservableList<Item> items = FXCollections.observableArrayList();
->>>>>>> master
 
         AddressBookStub(Collection<Person> persons, Collection<Account> accounts, Collection<Item> items,
                         Collection<SalesRecord> records) {
             this.persons.setAll(persons);
             this.records.setAll(records);
             this.accounts.setAll(accounts);
-<<<<<<< HEAD
             this.ingredients.setAll(ingredients);
-
-=======
             this.items.setAll(items);
->>>>>>> master
         }
 
         @Override
@@ -435,13 +425,13 @@ public class AddressBookTest {
         }
 
         @Override
-<<<<<<< HEAD
         public ObservableList<Ingredient> getIngredientList() {
             return ingredients;
-=======
+        }
+
+        @Override
         public ObservableList<Item> getItemList() {
             return items;
->>>>>>> master
         }
     }
 

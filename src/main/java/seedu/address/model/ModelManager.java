@@ -256,6 +256,7 @@ public class ModelManager extends ComponentManager implements Model {
         indicateAddressBookChanged();
     }
 
+    @Override
     public void addItem(Item item) {
         versionedAddressBook.addItem(item);
         updateFilteredItemList(PREDICATE_SHOW_ALL_ITEMS);
