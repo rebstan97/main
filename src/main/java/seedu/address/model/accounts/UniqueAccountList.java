@@ -122,7 +122,7 @@ public class UniqueAccountList implements Iterable<Account> {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof UniqueAccountList // instanceof handles nulls
-                && internalList.equals(((UniqueAccountList) other).internalList));
+                    && internalList.equals(((UniqueAccountList) other).internalList));
     }
 
     @Override

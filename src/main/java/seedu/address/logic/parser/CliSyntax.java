@@ -29,4 +29,7 @@ public class CliSyntax {
     public static final Prefix PREFIX_INGREDIENT_PRICE = new Prefix("p/");
     public static final Prefix PREFIX_INGREDIENT_MINIMUM = new Prefix("m/");
 
+    /*Prefix definitions for menu management */
+    public static final Prefix PREFIX_PRICE = new Prefix("p/");
+
 }
