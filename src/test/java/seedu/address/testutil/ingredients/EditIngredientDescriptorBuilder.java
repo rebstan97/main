@@ -44,7 +44,7 @@ public class EditIngredientDescriptorBuilder {
     /**
      * Sets the {@code IngredientUnit} of the {@code EditIngredientDescriptor} that we are building.
      */
-    public EditIngredientDescriptorBuilder withPhone(String unit) {
+    public EditIngredientDescriptorBuilder withUnit(String unit) {
         descriptor.setUnit(new IngredientUnit(unit));
         return this;
     }
