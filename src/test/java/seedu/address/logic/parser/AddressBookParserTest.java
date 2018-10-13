@@ -38,8 +38,11 @@ import seedu.address.logic.commands.menu.EditItemCommand;
 import seedu.address.logic.commands.menu.EditItemCommand.EditItemDescriptor;
 import seedu.address.logic.commands.menu.ListItemsCommand;
 import seedu.address.logic.commands.menu.SelectItemCommand;
+import seedu.address.logic.commands.menu.SortMenuCommand;
+import seedu.address.logic.commands.menu.SortMenuCommand.SortMethod;
 import seedu.address.logic.commands.salescommands.RecordSalesCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.logic.parser.menu.SortMenuCommandParserTest;
 import seedu.address.model.accounts.Account;
 import seedu.address.model.menu.Item;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
@@ -269,6 +272,16 @@ public class AddressBookParserTest {
         command = (SelectItemCommand) parser.parseCommand(
                 SelectItemCommand.COMMAND_ALIAS + " " + INDEX_FIRST_PERSON.getOneBased());
         assertEquals(new SelectItemCommand(INDEX_FIRST_PERSON), command);
+    }
+
+    @Test
+    public void parseCommand_sortMenu() throws Exception {
+        SortMenuCommand command = (SortMenuCommand) parser.parseCommand(
+                SortMenuCommand.COMMAND_WORD + " name");
+        assertEquals(new SortMenuCommand(SortMethod.NAME), command);
+        command = (SortMenuCommand) parser.parseCommand(
+                SortMenuCommand.COMMAND_ALIAS + " price");
+        assertEquals(new SortMenuCommand(SortMethod.PRICE), command);
     }
 
     @Test
