@@ -1,6 +1,7 @@
 package seedu.address.logic.commands.menu;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_ITEMS;
 
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.Command;
@@ -49,6 +50,7 @@ public class SortMenuCommand extends Command {
             break;
         default:
         }
+        model.updateFilteredItemList(PREDICATE_SHOW_ALL_ITEMS);
         model.commitAddressBook();
         return new CommandResult(String.format(MESSAGE_SORTED, sortMethod.name()));
     }
