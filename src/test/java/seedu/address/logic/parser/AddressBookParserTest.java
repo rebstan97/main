@@ -34,6 +34,9 @@ import seedu.address.logic.commands.accounts.CreateCommand;
 import seedu.address.logic.commands.menu.AddItemCommand;
 import seedu.address.logic.commands.menu.ClearMenuCommand;
 import seedu.address.logic.commands.menu.DeleteItemCommand;
+import seedu.address.logic.commands.menu.EditItemCommand;
+import seedu.address.logic.commands.menu.EditItemCommand.EditItemDescriptor;
+import seedu.address.logic.commands.menu.FindItemCommand;
 import seedu.address.logic.commands.menu.ListItemsCommand;
 import seedu.address.logic.commands.menu.SelectItemCommand;
 import seedu.address.logic.commands.salescommands.RecordSalesCommand;
@@ -49,6 +52,7 @@ import seedu.address.testutil.PersonBuilder;
 import seedu.address.testutil.PersonUtil;
 import seedu.address.testutil.accounts.AccountBuilder;
 import seedu.address.testutil.accounts.AccountUtil;
+import seedu.address.testutil.menu.EditItemDescriptorBuilder;
 import seedu.address.testutil.menu.ItemBuilder;
 import seedu.address.testutil.menu.ItemUtil;
 import seedu.address.testutil.salesrecords.RecordBuilder;
@@ -234,6 +238,18 @@ public class AddressBookParserTest {
         command = (DeleteItemCommand) parser.parseCommand(DeleteItemCommand.COMMAND_ALIAS
                 + " " + INDEX_FIRST_PERSON.getOneBased());
         assertEquals(new DeleteItemCommand(INDEX_FIRST_PERSON), command);
+    }
+
+    @Test
+    public void parseCommand_editItem() throws Exception {
+        Item item = new ItemBuilder().build();
+        EditItemDescriptor descriptor = new EditItemDescriptorBuilder(item).build();
+        EditItemCommand command = (EditItemCommand) parser.parseCommand(EditItemCommand.COMMAND_WORD + " "
+                + INDEX_FIRST_PERSON.getOneBased() + " " + ItemUtil.getEditItemDescriptorDetails(descriptor));
+        assertEquals(new EditItemCommand(INDEX_FIRST_PERSON, descriptor), command);
+        command = (EditItemCommand) parser.parseCommand(EditItemCommand.COMMAND_ALIAS + " "
+                + INDEX_FIRST_PERSON.getOneBased() + " " + ItemUtil.getEditItemDescriptorDetails(descriptor));
+        assertEquals(new EditItemCommand(INDEX_FIRST_PERSON, descriptor), command);
     }
 
     @Test
