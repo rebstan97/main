@@ -4,7 +4,6 @@ import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATETIME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PAX;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.time.LocalDateTime;
@@ -45,7 +44,7 @@ public class AddReservationCommandParser implements Parser<AddReservationCommand
         }
 
         Name name = ReservationParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
-        Pax pax = ReservationParserUtil.parsePax(argMultimap.getValue(PREFIX_PHONE).get());
+        Pax pax = ReservationParserUtil.parsePax(argMultimap.getValue(PREFIX_PAX).get());
         LocalDateTime dateTime = ReservationParserUtil.parseDateTime(argMultimap.getValue(PREFIX_DATETIME).get());
 
         Remark remark = new Remark("");
