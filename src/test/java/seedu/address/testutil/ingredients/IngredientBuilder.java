@@ -1,4 +1,4 @@
-package seedu.address.testutil;
+package seedu.address.testutil.ingredients;
 
 import seedu.address.model.ingredient.Ingredient;
 import seedu.address.model.ingredient.IngredientName;

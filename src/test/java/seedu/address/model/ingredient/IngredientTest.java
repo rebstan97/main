@@ -6,14 +6,14 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_MINIMUM_BROCCOL
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BROCCOLI;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PRICE_BROCCOLI;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_UNIT_BROCCOLI;
-import static seedu.address.testutil.TypicalIngredients.APPLE;
-import static seedu.address.testutil.TypicalIngredients.BROCCOLI;
+import static seedu.address.testutil.ingredients.TypicalIngredients.APPLE;
+import static seedu.address.testutil.ingredients.TypicalIngredients.BROCCOLI;
 
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
-import seedu.address.testutil.IngredientBuilder;
+import seedu.address.testutil.ingredients.IngredientBuilder;
 
 public class IngredientTest {
     @Rule

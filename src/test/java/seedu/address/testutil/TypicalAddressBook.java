@@ -1,6 +1,6 @@
 package seedu.address.testutil;
 
-import static seedu.address.testutil.TypicalIngredients.getTypicalIngredients;
+import static seedu.address.testutil.ingredients.TypicalIngredients.getTypicalIngredients;
 import static seedu.address.testutil.TypicalPersons.getTypicalPersons;
 import static seedu.address.testutil.accounts.TypicalAccounts.getTypicalAccounts;
 import static seedu.address.testutil.salesrecords.TypicalRecords.getTypicalRecords;

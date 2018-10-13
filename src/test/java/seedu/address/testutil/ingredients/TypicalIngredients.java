@@ -1,4 +1,4 @@
-package seedu.address.testutil;
+package seedu.address.testutil.ingredients;
 
 import static seedu.address.logic.commands.CommandTestUtil.VALID_MINIMUM_APPLE;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_MINIMUM_BROCCOLI;
@@ -14,6 +14,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import seedu.address.model.ingredient.Ingredient;
+import seedu.address.testutil.ingredients.IngredientBuilder;
 
 /**
  * A utility class containing a list of {@code Ingredient} objects to be used in tests.

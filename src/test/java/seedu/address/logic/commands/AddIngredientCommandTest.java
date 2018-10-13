@@ -26,7 +26,7 @@ import seedu.address.model.menu.Item;
 import seedu.address.model.person.Person;
 import seedu.address.model.salesrecord.SalesRecord;
 import seedu.address.model.tag.Tag;
-import seedu.address.testutil.IngredientBuilder;
+import seedu.address.testutil.ingredients.IngredientBuilder;
 
 public class AddIngredientCommandTest {
 
