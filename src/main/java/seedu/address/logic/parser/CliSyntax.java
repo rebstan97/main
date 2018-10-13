@@ -25,4 +25,8 @@ public class CliSyntax {
 
     /*Prefix definitions for menu management */
     public static final Prefix PREFIX_PRICE = new Prefix("p/");
+
+    /*Prefix definitions for reservation management */
+    public static final Prefix PREFIX_PAX = new Prefix("px/");
+    public static final Prefix PREFIX_DATETIME = new Prefix("dt/");
 }
