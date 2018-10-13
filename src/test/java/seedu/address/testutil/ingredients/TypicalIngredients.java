@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import seedu.address.model.AddressBook;
 import seedu.address.model.ingredient.Ingredient;
 
 /**
@@ -65,5 +66,16 @@ public class TypicalIngredients {
 
     public static List<Ingredient> getTypicalIngredients() {
         return new ArrayList<>(Arrays.asList(AVOCADO, BEANS, CABBAGE, DUCK, EGG, FISH, GARLIC));
+    }
+
+    /**
+     * Returns an {@code AddressBook} with all the typical ingredients.
+     */
+    public static AddressBook getTypicalAddressBookWithIngredientsOnly() {
+        AddressBook ab = new AddressBook();
+        for (Ingredient ingredient : getTypicalIngredients()) {
+            ab.addIngredient(ingredient);
+        }
+        return ab;
     }
 }

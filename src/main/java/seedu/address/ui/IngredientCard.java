@@ -33,6 +33,8 @@ public class IngredientCard extends UiPart<Region> {
     private Label price;
     @FXML
     private Label numUnits;
+    @FXML
+    private Label minimum;
 
     public IngredientCard(Ingredient ingredient, int displayedIndex) {
         super(FXML);

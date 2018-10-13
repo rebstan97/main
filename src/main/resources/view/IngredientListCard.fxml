@@ -28,6 +28,7 @@
             </HBox>
             <Label fx:id="price" styleClass="cell_small_label" text="\$price" />
             <Label fx:id="numUnits" styleClass="cell_small_label" text="\$numUnits" />
+            <!--<Label fx:id="minUnits" styleClass="cell_small_label" text="\$minUnits" />-->
         </VBox>
     </GridPane>
 </HBox>
