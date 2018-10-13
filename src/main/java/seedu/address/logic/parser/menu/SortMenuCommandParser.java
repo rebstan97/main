@@ -27,6 +27,11 @@ public class SortMenuCommandParser implements Parser<SortMenuCommand> {
         return new SortMenuCommand(sortMethod);
     }
 
+    /**
+     * Parse the user input and return a SortMethod Enum.
+     * @param userInput
+     * @throws ParseException if the user input is not valid
+     */
     private SortMethod parseSortMethod(String userInput) throws ParseException {
         String input = userInput.toUpperCase().trim();
         switch (input) {
