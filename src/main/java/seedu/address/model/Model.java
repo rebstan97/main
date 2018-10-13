@@ -186,6 +186,16 @@ public interface Model {
     void resetMenuData(ReadOnlyAddressBook newData);
 
     /**
+     * Sort the item list by name in alphabetical order.
+     */
+    void sortMenuByName();
+
+    /**
+     * Sort the item list by price in ascending order.
+     */
+    void sortMenuByPrice();
+
+    /**
      * Returns an unmodifiable view of the filtered item list
      */
     ObservableList<Item> getFilteredItemList();

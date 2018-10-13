@@ -238,6 +238,18 @@ public class ModelManager extends ComponentManager implements Model {
         indicateAddressBookChanged();
     }
 
+    @Override
+    public void sortMenuByName() {
+        versionedAddressBook.sortMenuByName();
+        indicateAddressBookChanged();
+    }
+
+    @Override
+    public void sortMenuByPrice() {
+        versionedAddressBook.sortMenuByPrice();
+        indicateAddressBookChanged();
+    }
+
     //=========== Filtered Item List Accessors ==============================================================
 
     @Override
@@ -297,6 +309,6 @@ public class ModelManager extends ComponentManager implements Model {
                 && filteredPersons.equals(other.filteredPersons)
                 && filteredAccounts.equals(other.filteredAccounts)
                 && filteredItems.equals(other.filteredItems)
-                && filteredAccounts.equals(other.filteredAccounts);
+                && filteredRecords.equals(other.filteredRecords);
     }
 }
