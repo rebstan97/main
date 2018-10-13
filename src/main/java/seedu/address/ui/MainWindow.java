@@ -16,12 +16,14 @@ import javafx.stage.Stage;
 import seedu.address.commons.core.Config;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.commons.events.ui.DisplaySalesReportEvent;
 import seedu.address.commons.events.ui.ExitAppRequestEvent;
 import seedu.address.commons.events.ui.ShowHelpRequestEvent;
 import seedu.address.logic.Logic;
 import seedu.address.model.UserPrefs;
 import seedu.address.ui.menu.ItemListPanel;
 import seedu.address.ui.sales.RecordListPanel;
+import seedu.address.ui.sales.SalesReportWindow;
 
 /**
  * The Main Window. Provides the basic application layout containing a menu bar and space where other JavaFX elements
@@ -43,6 +45,7 @@ public class MainWindow extends UiPart<Stage> {
     private BrowserPanel browserPanel;
     private PersonListPanel personListPanel;
     private RecordListPanel recordListPanel; // Panels stack on top of each other, only one visible at a time
+    private SalesReportWindow salesReportWindow;
     private Config config;
     private UserPrefs prefs;
     private HelpWindow helpWindow;
@@ -87,6 +90,7 @@ public class MainWindow extends UiPart<Stage> {
         registerAsAnEventHandler(this);
 
         helpWindow = new HelpWindow();
+        salesReportWindow = new SalesReportWindow(logic.getFilteredRecordList());
     }
 
     public Stage getPrimaryStage() {
@@ -272,5 +276,14 @@ public class MainWindow extends UiPart<Stage> {
     private void handleShowHelpEvent(ShowHelpRequestEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
         handleHelp();
+    }
+
+    
+    @Subscribe
+    private void handleDisplaySalesReportEvent(DisplaySalesReportEvent event) {
+        logger.info(LogsCenter.getEventHandlingLogMessage(event));
+//        salesReportWindow.initializeSalesReport(event.getDateOfSalesReportToDisplay());
+        salesReportWindow.show();
+
     }
 }
