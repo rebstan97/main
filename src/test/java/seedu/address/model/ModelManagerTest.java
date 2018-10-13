@@ -20,9 +20,11 @@ import static seedu.address.testutil.accounts.TypicalAccounts.DEMO_ADMIN;
 import static seedu.address.testutil.accounts.TypicalAccounts.DEMO_ONE;
 import static seedu.address.testutil.accounts.TypicalAccounts.DEMO_TWO;
 import static seedu.address.testutil.menu.TypicalItems.APPLE_JUICE;
+import static seedu.address.testutil.menu.TypicalItems.BEEF_BURGER;
 import static seedu.address.testutil.menu.TypicalItems.BURGER;
 import static seedu.address.testutil.menu.TypicalItems.CHEESE_BURGER;
 import static seedu.address.testutil.menu.TypicalItems.FRIES;
+import static seedu.address.testutil.menu.TypicalItems.ITEM_DEFAULT;
 import static seedu.address.testutil.salesrecords.TypicalRecords.RECORD_DEFAULT;
 import static seedu.address.testutil.salesrecords.TypicalRecords.RECORD_ONE;
 import static seedu.address.testutil.salesrecords.TypicalRecords.RECORD_TWO;
@@ -37,6 +39,7 @@ import org.junit.rules.ExpectedException;
 import seedu.address.model.accounts.Account;
 import seedu.address.model.accounts.exceptions.AccountNotFoundException;
 import seedu.address.model.menu.Item;
+import seedu.address.model.menu.exceptions.ItemNotFoundException;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
 import seedu.address.model.salesrecord.SalesRecord;
@@ -89,6 +92,12 @@ public class ModelManagerTest {
     public void getFilteredAccountList_modifyList_throwsUnsupportedOperationException() {
         thrown.expect(UnsupportedOperationException.class);
         modelManager.getFilteredAccountList().remove(0);
+    }
+
+    @Test
+    public void getFilteredItemList_modifyList_throwsUnsupportedOperationException() {
+        thrown.expect(UnsupportedOperationException.class);
+        modelManager.getFilteredItemList().remove(0);
     }
 
     @Test
@@ -257,9 +266,29 @@ public class ModelManagerTest {
     }
 
     @Test
-    public void getFilteredItemList_modifyList_throwsUnsupportedOperationException() {
-        thrown.expect(UnsupportedOperationException.class);
-        modelManager.getFilteredItemList().remove(0);
+    public void deleteItem_itemNotInMenu_throwsItemNotFoundException() {
+        thrown.expect(ItemNotFoundException.class);
+        modelManager.deleteItem(ITEM_DEFAULT);
+    }
+    @Test
+    public void deleteItem_itemInMenu_returnTrue() {
+        modelManager.addItem(ITEM_DEFAULT);
+        assertTrue(modelManager.hasItem(ITEM_DEFAULT));
+        modelManager.deleteItem(ITEM_DEFAULT);
+        assertFalse(modelManager.hasItem(ITEM_DEFAULT));
+    }
+    @Test
+    public void updateItem_itemNotInMenu_throwsItemNotFoundException() {
+        thrown.expect(ItemNotFoundException.class);
+        modelManager.updateItem(ITEM_DEFAULT, APPLE_JUICE);
+    }
+    @Test
+    public void updateItem_itemInMenu_returnTrue() {
+        modelManager.addItem(ITEM_DEFAULT);
+        Item item = new ItemBuilder(APPLE_JUICE).build();
+        modelManager.updateItem(ITEM_DEFAULT, item);
+        assertFalse(modelManager.hasItem(ITEM_DEFAULT));
+        assertTrue(modelManager.hasItem(item));
     }
 
     @Test
