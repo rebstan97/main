@@ -36,7 +36,6 @@ import seedu.address.logic.commands.menu.ClearMenuCommand;
 import seedu.address.logic.commands.menu.DeleteItemCommand;
 import seedu.address.logic.commands.menu.EditItemCommand;
 import seedu.address.logic.commands.menu.EditItemCommand.EditItemDescriptor;
-import seedu.address.logic.commands.menu.FindItemCommand;
 import seedu.address.logic.commands.menu.ListItemsCommand;
 import seedu.address.logic.commands.menu.SelectItemCommand;
 import seedu.address.logic.commands.salescommands.RecordSalesCommand;
