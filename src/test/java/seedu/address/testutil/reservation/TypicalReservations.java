@@ -12,14 +12,12 @@ import seedu.address.model.reservation.Reservation;
  */
 public class TypicalReservations {
 
-    public static final Reservation ANDREW = new ReservationBuilder().withName("Andrew Pauline")
-            .withPax("4")
-            .withDateTime("2018-10-03T12:00:00")
-            .withTags("allergies").build();
-    public static final Reservation BILLY = new ReservationBuilder().withName("Benson Meier")
+    public static final Reservation ANDREW = new ReservationBuilder().withName("Andrew")
             .withPax("2")
-            .withDateTime("2018-10-03T14:00:00")
-            .withTags("driving", "allergies").build();
+            .withDateTime("2018-12-03T12:00:00").build();
+    public static final Reservation BILLY = new ReservationBuilder().withName("Billy")
+            .withPax("4")
+            .withDateTime("2018-12-05T18:00:00").build();
     public static final Reservation CARL = new ReservationBuilder().withName("Carl Kurz")
             .withPax("1")
             .withDateTime("2018-10-03T15:00:00").build();

@@ -4,12 +4,14 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DATETIME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ID;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ITEM_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ITEM_PRICE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PASSWORD;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PAX;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PRICE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_QUANTITY_SOLD;
@@ -136,6 +138,23 @@ public class CommandTestUtil {
     public static final String VALID_RESERVATION_DATETIME_BILLY = "2018-12-05T18:00:00";
     public static final String VALID_RESERVATION_REMARK_ANDREW = "Driving";
     public static final String VALID_RESERVATION_REMARK_BILLY = "Allergies";
+    public static final String VALID_RESERVATION_TAG_ANDREW = "Driving";
+    public static final String VALID_RESERVATION_TAG_BILLY = "Allergies";
+
+    public static final String RESERVATION_NAME_DESC_ANDREW = " " + PREFIX_NAME + VALID_RESERVATION_NAME_ANDREW;
+    public static final String RESERVATION_NAME_DESC_BILLY = " " + PREFIX_NAME + VALID_RESERVATION_NAME_BILLY;
+    public static final String RESERVATION_PAX_DESC_ANDREW = " " + PREFIX_PAX + VALID_RESERVATION_PAX_ANDREW;
+    public static final String RESERVATION_PAX_DESC_BILLY = " " + PREFIX_PAX + VALID_RESERVATION_PAX_BILLY;
+    public static final String RESERVATION_DATETIME_DESC_ANDREW =
+            " " + PREFIX_DATETIME + VALID_RESERVATION_DATETIME_ANDREW;
+    public static final String RESERVATION_DATETIME_DESC_BILLY =
+            " " + PREFIX_DATETIME + VALID_RESERVATION_DATETIME_BILLY;
+    public static final String RESERVATION_TAG_DESC_ANDREW = " " + PREFIX_TAG + VALID_RESERVATION_TAG_ANDREW;
+    public static final String RESERVATION_TAG_DESC_BILLY = " " + PREFIX_TAG + VALID_RESERVATION_TAG_BILLY;
+
+    public static final String INVALID_RESERVATION_NAME_DESC = " " + PREFIX_NAME + "S&shrew"; // '&' not allowed
+    public static final String INVALID_RESERVATION_PAX_DESC = " " + PREFIX_PAX + "a4"; // letters not allowed
+    public static final String INVALID_RESERVATION_DATETIME_DESC = " " + PREFIX_DATETIME + "2018-99"; // incomplete
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
