@@ -15,15 +15,15 @@ import static seedu.address.testutil.accounts.TypicalAccounts.DEMO_ONE;
 
 import org.junit.Test;
 
-import seedu.address.logic.commands.accounts.CreateCommand;
+import seedu.address.logic.commands.accounts.RegisterCommand;
 import seedu.address.model.accounts.Account;
 import seedu.address.model.accounts.Password;
 import seedu.address.model.accounts.Username;
 import seedu.address.testutil.accounts.AccountBuilder;
 
-public class CreateCommandParserTest {
+public class RegisterCommandParserTest {
 
-    private CreateCommandParser parser = new CreateCommandParser();
+    private RegisterCommandParser parser = new RegisterCommandParser();
 
     @Test
     public void parse_allFieldsPresent_success() {
@@ -31,16 +31,16 @@ public class CreateCommandParserTest {
 
         // whitespace only preamble
         assertParseSuccess(parser, PREAMBLE_WHITESPACE + PREFIX_WITH_VALID_USERNAME
-                + PREFIX_WITH_VALID_PASSWORD, new CreateCommand(expectedAccount));
+                + PREFIX_WITH_VALID_PASSWORD, new RegisterCommand(expectedAccount));
 
         // whitespace only
         assertParseSuccess(parser, PREFIX_WITH_VALID_USERNAME + PREFIX_WITH_VALID_PASSWORD,
-                new CreateCommand(expectedAccount));
+                new RegisterCommand(expectedAccount));
     }
 
     @Test
     public void parse_compulsoryFieldMissing_failure() {
-        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, CreateCommand.MESSAGE_USAGE);
+        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, RegisterCommand.MESSAGE_USAGE);
 
         // missing username
         assertParseFailure(parser, PREFIX_WITH_VALID_PASSWORD, expectedMessage);
@@ -75,6 +75,6 @@ public class CreateCommandParserTest {
         // non-empty preamble
         assertParseFailure(parser, PREAMBLE_NON_EMPTY + PREFIX_WITH_VALID_USERNAME
                 + PREFIX_WITH_VALID_PASSWORD, String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                CreateCommand.MESSAGE_USAGE));
+                RegisterCommand.MESSAGE_USAGE));
     }
 }
