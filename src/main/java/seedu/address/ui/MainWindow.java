@@ -260,6 +260,10 @@ public class MainWindow extends UiPart<Stage> {
         return itemListPanel;
     }
 
+    public RecordListPanel getRecordListPanel() {
+        return recordListPanel;
+    }
+
     void releaseResources() {
         browserPanel.freeResources();
     }
