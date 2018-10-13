@@ -2,7 +2,7 @@ package seedu.address.storage.reservation;
 
 import static org.junit.Assert.assertEquals;
 import static seedu.address.storage.reservation.XmlAdaptedReservation.MISSING_FIELD_MESSAGE_FORMAT;
-import static seedu.address.testutil.TypicalReservations.BILLY;
+import static seedu.address.testutil.reservation.TypicalReservations.BILLY;
 
 import java.util.ArrayList;
 import java.util.List;

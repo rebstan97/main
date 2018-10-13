@@ -9,7 +9,7 @@ import org.junit.Test;
 
 import guitests.guihandles.reservation.ReservationCardHandle;
 import seedu.address.model.reservation.Reservation;
-import seedu.address.testutil.ReservationBuilder;
+import seedu.address.testutil.reservation.ReservationBuilder;
 import seedu.address.ui.GuiUnitTest;
 
 public class ReservationCardTest extends GuiUnitTest {

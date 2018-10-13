@@ -26,7 +26,7 @@ import seedu.address.model.person.Person;
 import seedu.address.model.reservation.Reservation;
 import seedu.address.model.salesrecord.SalesRecord;
 import seedu.address.model.tag.Tag;
-import seedu.address.testutil.ReservationBuilder;
+import seedu.address.testutil.reservation.ReservationBuilder;
 
 public class AddReservationCommandTest {
 

@@ -1,4 +1,4 @@
-package seedu.address.testutil;
+package seedu.address.testutil.reservation;
 
 import java.time.LocalDateTime;
 import java.util.HashSet;

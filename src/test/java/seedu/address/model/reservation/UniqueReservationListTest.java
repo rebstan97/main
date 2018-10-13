@@ -4,8 +4,8 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_RESERVATION_PAX_BILLY;
-import static seedu.address.testutil.TypicalReservations.ANDREW;
-import static seedu.address.testutil.TypicalReservations.BILLY;
+import static seedu.address.testutil.reservation.TypicalReservations.ANDREW;
+import static seedu.address.testutil.reservation.TypicalReservations.BILLY;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -17,7 +17,7 @@ import org.junit.rules.ExpectedException;
 
 import seedu.address.model.reservation.exceptions.DuplicateReservationException;
 import seedu.address.model.reservation.exceptions.ReservationNotFoundException;
-import seedu.address.testutil.ReservationBuilder;
+import seedu.address.testutil.reservation.ReservationBuilder;
 
 public class UniqueReservationListTest {
     @Rule
