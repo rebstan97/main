@@ -2,6 +2,9 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeParseException;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
@@ -15,6 +18,7 @@ import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
+import seedu.address.model.reservation.Pax;
 import seedu.address.model.salesrecord.Date;
 import seedu.address.model.salesrecord.ItemName;
 import seedu.address.model.salesrecord.Price;
@@ -211,5 +215,38 @@ public class ParserUtil {
             throw new ParseException(Password.MESSAGE_PASSWORD_CONSTRAINT);
         }
         return new Password(trimmedPassword);
+    }
+
+    //================ Reservation Commands Parser Util ===================================================
+
+    /**
+     * Parses a {@code String pax} into a {@code Pax}. Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code pax} is invalid.
+     */
+    public static Pax parsePax(String pax) throws ParseException {
+        requireNonNull(pax);
+        String trimmedPhone = pax.trim();
+        if (!Pax.isValidPax(trimmedPhone)) {
+            throw new ParseException(Pax.MESSAGE_PAX_CONSTRAINTS);
+        }
+        return new Pax(trimmedPhone);
+    }
+
+    /**
+     * Parses a {@code String dateTime} into a {@code LocalDateTime}. Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code dateTime} is invalid.
+     */
+    public static LocalDateTime parseDateTime(String dateTime) throws ParseException {
+        requireNonNull(dateTime);
+        String trimmedDateTime = dateTime.trim();
+        LocalDateTime parsedDateTime;
+        try {
+            parsedDateTime = LocalDateTime.parse(trimmedDateTime);
+        } catch (DateTimeParseException e) {
+            throw new ParseException("DateTime value should be in the form 2018-12-31T10:00:00");
+        }
+        return parsedDateTime;
     }
 }
