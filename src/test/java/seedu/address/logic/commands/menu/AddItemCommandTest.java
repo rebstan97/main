@@ -25,6 +25,7 @@ import seedu.address.model.menu.Item;
 import seedu.address.model.person.Person;
 import seedu.address.model.salesrecord.Date;
 import seedu.address.model.salesrecord.SalesRecord;
+import seedu.address.model.salesrecord.SalesReport;
 import seedu.address.model.tag.Tag;
 import seedu.address.testutil.menu.ItemBuilder;
 
@@ -258,7 +259,7 @@ public class AddItemCommandTest {
         }
 
         @Override
-        public ObservableList<SalesRecord> getRecordListWithDate(Date date) {
+        public SalesReport getSalesReport(Date date) {
             throw new AssertionError("This method should not be called.");
         }
 
