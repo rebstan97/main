@@ -1,8 +1,7 @@
 package seedu.address.model.salesrecord;
 
-
-import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DATE_RECORD_TWO;
 import static seedu.address.testutil.salesrecords.TypicalRecords.RECORD_DEFAULT;
 import static seedu.address.testutil.salesrecords.TypicalRecords.RECORD_ONE;

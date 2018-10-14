@@ -22,24 +22,13 @@ public class ReportBuilder {
     private ObservableList<SalesRecord> records;
     private double totalRevenue;
 
+    /**
+     * Initializes the ReportBuilder with default data.
+     */
     public ReportBuilder() {
         date = new Date(DEFAULT_REPORT_DATE);
         records = DEFAULT_REPORT_RECORDS;
         computeTotalRevenue();
-    }
-
-    public ReportBuilder(Date date, ObservableList<SalesRecord> records) {
-        this.date = date;
-        this.records = records;
-        computeTotalRevenue();
-    }
-
-    private void computeTotalRevenue() {
-        double total = 0;
-        for (SalesRecord s: records) {
-            total += s.getRevenue();
-        }
-        totalRevenue = total;
     }
 
     /**
@@ -49,6 +38,26 @@ public class ReportBuilder {
         date = reportToCopy.getDate();
         records = reportToCopy.getRecords();
         totalRevenue = reportToCopy.getTotalRevenue();
+    }
+
+    /**
+     * Initializes the ReportBuilder with the given {@code date} and {@code records}.
+     */
+    public ReportBuilder(Date date, ObservableList<SalesRecord> records) {
+        this.date = date;
+        this.records = records;
+        computeTotalRevenue();
+    }
+
+    /**
+     * Computes the total revenue for the day using each SalesRecord's revenue
+     */
+    private void computeTotalRevenue() {
+        double total = 0;
+        for (SalesRecord s: records) {
+            total += s.getRevenue();
+        }
+        totalRevenue = total;
     }
 
     /**

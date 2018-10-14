@@ -1,6 +1,7 @@
 package seedu.address.logic.commands.sales;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DATE_RECORD_ONE;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DATE_RECORD_TWO;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
@@ -31,7 +32,7 @@ class DisplaySalesCommandTest {
     }
 
     @Test
-    public void execute_display_sales_success() {
+    public void execute_displaySales_success() {
         Date date = new Date(VALID_DATE_RECORD_ONE);
         assertCommandSuccess(new DisplaySalesCommand(date), model, commandHistory,
                 String.format(DISPLAYING_REPORT_MESSAGE, date.toString()), expectedModel);
