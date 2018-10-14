@@ -49,4 +49,11 @@ public class RegisterCommand extends Command {
         model.commitAddressBook();
         return new CommandResult(String.format(MESSAGE_SUCCESS, account));
     }
+
+    @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof RegisterCommand // instanceof handles nulls
+                && account.equals(((RegisterCommand) other).account));
+    }
 }
