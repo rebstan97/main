@@ -7,7 +7,6 @@ import org.junit.Before;
 import org.junit.Test;
 import org.testfx.api.FxToolkit;
 
-//import guitests.guihandles.sales.SalesReportWindowHandle;
 import seedu.address.model.salesrecord.SalesReport;
 import seedu.address.testutil.salesrecords.ReportBuilder;
 import seedu.address.ui.GuiUnitTest;
