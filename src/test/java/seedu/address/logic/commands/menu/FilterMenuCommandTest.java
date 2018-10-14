@@ -21,7 +21,7 @@ import seedu.address.model.UserPrefs;
 import seedu.address.model.menu.TagContainsKeywordsPredicate;
 
 /**
- * Contains integration tests (interaction with the Model) for {@code FindItemCommand}.
+ * Contains integration tests (interaction with the Model) for {@code FilterMenuCommand}.
  */
 public class FilterMenuCommandTest {
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
