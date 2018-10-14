@@ -20,6 +20,8 @@ public class AddIngredientCommand extends Command {
 
     public static final String COMMAND_WORD = "add-ingredient";
 
+    public static final String COMMAND_ALIAS = "add-ing";
+
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds an ingredient to the address book. "
             + "Parameters: "
             + PREFIX_INGREDIENT_NAME + "NAME "

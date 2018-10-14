@@ -127,15 +127,19 @@ public class AddressBookParser {
             return new RegisterCommandParser().parse(arguments);
 
         case AddIngredientCommand.COMMAND_WORD:
+        case AddIngredientCommand.COMMAND_ALIAS:
             return new AddIngredientCommandParser().parse(arguments);
 
         case ListIngredientsCommand.COMMAND_WORD:
+        case ListIngredientsCommand.COMMAND_ALIAS:
             return new ListIngredientsCommand();
 
         case DeleteIngredientCommand.COMMAND_WORD:
+        case DeleteIngredientCommand.COMMAND_ALIAS:
             return new DeleteIngredientCommandParser().parse(arguments);
 
         case EditIngredientCommand.COMMAND_WORD:
+        case EditIngredientCommand.COMMAND_ALIAS:
             return new EditIngredientCommandParser().parse(arguments);
 
         case AddItemCommand.COMMAND_WORD:

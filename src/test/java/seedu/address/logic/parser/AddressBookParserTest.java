@@ -228,18 +228,28 @@ public class AddressBookParserTest {
         AddIngredientCommand command =
                 (AddIngredientCommand) parser.parseCommand(IngredientUtil.getAddIngredientCommand(ingredient));
         assertEquals(new AddIngredientCommand(ingredient), command);
+        command = (AddIngredientCommand) parser.parseCommand(AddIngredientCommand.COMMAND_ALIAS
+                + " " + IngredientUtil.getIngredientDetails(ingredient));
+        assertEquals(new AddIngredientCommand(ingredient), command);
     }
 
     @Test
     public void parseCommand_listIngredients() throws Exception {
         assertTrue(parser.parseCommand(ListIngredientsCommand.COMMAND_WORD) instanceof ListIngredientsCommand);
-        assertTrue(parser.parseCommand(ListIngredientsCommand.COMMAND_WORD + " 3") instanceof ListIngredientsCommand);
+        assertTrue(parser
+                .parseCommand(ListIngredientsCommand.COMMAND_WORD + " 3") instanceof ListIngredientsCommand);
+        assertTrue(parser.parseCommand(ListIngredientsCommand.COMMAND_ALIAS) instanceof ListIngredientsCommand);
+        assertTrue(parser
+                .parseCommand(ListIngredientsCommand.COMMAND_ALIAS + " 3") instanceof ListIngredientsCommand);
     }
 
     @Test
     public void parseCommand_deleteIngredient() throws Exception {
         DeleteIngredientCommand command = (DeleteIngredientCommand) parser.parseCommand(
                 DeleteIngredientCommand.COMMAND_WORD + " " + INDEX_FIRST.getOneBased());
+        assertEquals(new DeleteIngredientCommand(INDEX_FIRST), command);
+        command = (DeleteIngredientCommand) parser.parseCommand(
+                DeleteIngredientCommand.COMMAND_ALIAS + " " + INDEX_FIRST.getOneBased());
         assertEquals(new DeleteIngredientCommand(INDEX_FIRST), command);
     }
 
@@ -250,6 +260,10 @@ public class AddressBookParserTest {
         EditIngredientCommand command =
                 (EditIngredientCommand) parser.parseCommand(
                         EditIngredientCommand.COMMAND_WORD + " " + INDEX_FIRST.getOneBased()
+                                + " " + IngredientUtil.getEditIngredientDescriptorDetails(descriptor));
+        assertEquals(new EditIngredientCommand(INDEX_FIRST, descriptor), command);
+        command = (EditIngredientCommand) parser.parseCommand(
+                EditIngredientCommand.COMMAND_ALIAS + " " + INDEX_FIRST.getOneBased()
                                 + " " + IngredientUtil.getEditIngredientDescriptorDetails(descriptor));
         assertEquals(new EditIngredientCommand(INDEX_FIRST, descriptor), command);
     }

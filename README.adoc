@@ -43,6 +43,5 @@ _Marco Jakob_.
 * Free icons: https://www.flaticon.com/authors/smashicons[Smashicons], https://thenounproject.com/term/my-account/219377/[User account icon],
 http://free-icon-rainbow.com/restaurant-menu-free-icon-3/[Menu icon], http://www.iconarchive.com/show/ios7-icons-by-icons8/Food-Bunch-Ingredients-icon.html[Ingredient icon],
 https://icons8.com/icon/pack/city/dotty[Reservation icon], https://mbtskoudsalg.com/explore/sales-icons-png/[Sales icon], http://img.grouponcdn.com/deal/6116wnYU3ci3GdedPMKw/hE-1000x600[Chicken Burger Set photo]
->>>>>>> master
 
 == Licence : link:LICENSE[MIT]

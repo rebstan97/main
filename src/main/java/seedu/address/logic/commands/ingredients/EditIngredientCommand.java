@@ -31,6 +31,8 @@ public class EditIngredientCommand extends Command {
 
     public static final String COMMAND_WORD = "edit-ingredient";
 
+    public static final String COMMAND_ALIAS = "edit-ing";
+
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the ingredient identified "
             + "by the index number used in the displayed ingredient list. "
             + "Existing values will be overwritten by the input values.\n"

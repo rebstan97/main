@@ -67,19 +67,19 @@ public class XmlAdaptedIngredient {
      */
     public Ingredient toModelType() throws IllegalValueException {
 
-        checkIfValidName();
+        validateName();
         final IngredientName modelName = new IngredientName(name);
 
-        checkIfValidUnit();
+        validateUnit();
         final IngredientUnit modelUnit = new IngredientUnit(unit);
 
-        checkIfValidPrice();
+        validatePrice();
         final IngredientPrice modelPrice = new IngredientPrice(price);
 
-        checkIfValidMinimum();
+        validateMinimum();
         final MinimumUnit modelMinimum = new MinimumUnit(minimum);
 
-        checkIfValidNumUnits();
+        validateNumUnits();
         final NumUnits modelNumUnits = new NumUnits(numUnits);
 
         return new Ingredient(modelName, modelUnit, modelPrice, modelMinimum, modelNumUnits);
@@ -90,7 +90,7 @@ public class XmlAdaptedIngredient {
      *
      * @throws IllegalValueException if {@code name} is null or invalid
      */
-    private void checkIfValidName() throws IllegalValueException {
+    private void validateName() throws IllegalValueException {
         if (name == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
                     IngredientName.class.getSimpleName()));
@@ -105,7 +105,7 @@ public class XmlAdaptedIngredient {
      *
      * @throws IllegalValueException if {@code unit} is null or invalid
      */
-    private void checkIfValidUnit() throws IllegalValueException {
+    private void validateUnit() throws IllegalValueException {
         if (unit == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
                     IngredientUnit.class.getSimpleName()));
@@ -120,7 +120,7 @@ public class XmlAdaptedIngredient {
      *
      * @throws IllegalValueException if {@code price} is null or invalid
      */
-    private void checkIfValidPrice() throws IllegalValueException {
+    private void validatePrice() throws IllegalValueException {
         if (price == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
                     IngredientPrice.class.getSimpleName()));
@@ -135,7 +135,7 @@ public class XmlAdaptedIngredient {
      *
      * @throws IllegalValueException if {@code minimum} is null or invalid
      */
-    private void checkIfValidMinimum() throws IllegalValueException {
+    private void validateMinimum() throws IllegalValueException {
         if (minimum == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
                     MinimumUnit.class.getSimpleName()));
@@ -150,7 +150,7 @@ public class XmlAdaptedIngredient {
      *
      * @throws IllegalValueException if {@code numUnits} is null or invalid
      */
-    private void checkIfValidNumUnits() throws IllegalValueException {
+    private void validateNumUnits() throws IllegalValueException {
         if (numUnits == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
                     NumUnits.class.getSimpleName()));

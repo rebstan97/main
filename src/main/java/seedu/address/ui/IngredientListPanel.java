@@ -68,10 +68,10 @@ public class IngredientListPanel extends UiPart<Region> {
      */
     class IngredientListViewCell extends ListCell<Ingredient> {
         @Override
-        protected void updateItem(Ingredient ingredient, boolean empty) {
-            super.updateItem(ingredient, empty);
+        protected void updateItem(Ingredient ingredient, boolean isEmpty) {
+            super.updateItem(ingredient, isEmpty);
 
-            if (empty || ingredient == null) {
+            if (isEmpty || ingredient == null) {
                 setGraphic(null);
                 setText(null);
             } else {

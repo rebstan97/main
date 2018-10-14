@@ -15,6 +15,8 @@ public class ListIngredientsCommand extends Command {
 
     public static final String COMMAND_WORD = "list-ingredients";
 
+    public static final String COMMAND_ALIAS = "list-ing";
+
     public static final String MESSAGE_SUCCESS = "Listed all ingredients";
 
 

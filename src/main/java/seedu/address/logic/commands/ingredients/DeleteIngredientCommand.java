@@ -20,6 +20,8 @@ public class DeleteIngredientCommand extends Command {
 
     public static final String COMMAND_WORD = "delete-ingredient";
 
+    public static final String COMMAND_ALIAS = "delete-ing";
+
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Deletes the person identified by the index number used in the displayed person list.\n"
             + "Parameters: INDEX (must be a positive integer)\n"
