@@ -106,16 +106,17 @@ public class UniqueRecordList implements Iterable<SalesRecord> {
     }
 
     /**
-     * Returns the backing list as an unmodifiable {@code ObservableList} of sales records with the specified date.
+     * Generates and returns the sales report of the specified date.
+     * @param date Date of sales report to generate
      */
-    public ObservableList<SalesRecord> asUnmodifiableObservableListWithDate(Date date) {
+    public SalesReport generateSalesReport(Date date) {
         ObservableList<SalesRecord> observableRecordList = FXCollections.observableArrayList();
         for (SalesRecord salesRecord: internalList) {
             if (salesRecord.getDate().equals(date)) {
                 observableRecordList.add(salesRecord);
             }
         }
-        return FXCollections.unmodifiableObservableList(observableRecordList);
+        return new SalesReport(date, FXCollections.unmodifiableObservableList(observableRecordList));
     }
 
     @Override

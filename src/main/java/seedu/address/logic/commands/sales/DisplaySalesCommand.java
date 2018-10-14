@@ -11,6 +11,7 @@ import seedu.address.logic.commands.CommandResult;
 import seedu.address.model.Model;
 import seedu.address.model.salesrecord.Date;
 import seedu.address.model.salesrecord.SalesRecord;
+import seedu.address.model.salesrecord.SalesReport;
 
 /**
  * Display sales report of a specific date
@@ -36,7 +37,7 @@ public class DisplaySalesCommand extends Command {
 
     @Override
     public CommandResult execute(Model model, CommandHistory history) {
-        ObservableList<SalesRecord> salesReport = model.getRecordListWithDate(date);
+        SalesReport salesReport = model.getSalesReport(date);
         EventsCenter.getInstance().post(new DisplaySalesReportEvent(salesReport));
         return new CommandResult(String.format(DISPLAYING_REPORT_MESSAGE, date.toString()));
     }

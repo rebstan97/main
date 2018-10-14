@@ -2,28 +2,31 @@ package seedu.address.ui.sales;
 
 import java.util.logging.Logger;
 
-import javax.swing.text.TableView;
 
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.control.TableView;
 import javafx.stage.Stage;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.salesrecord.SalesRecord;
+import seedu.address.model.salesrecord.SalesReport;
 import seedu.address.ui.UiPart;
 
 /**
- * Controller for a sales report
+ * Controller for a sales report window
  */
 public class SalesReportWindow extends UiPart<Stage> {
 
     private static final Logger logger = LogsCenter.getLogger(SalesReportWindow.class);
     private static final String FXML = "SalesReportWindow.fxml";
 
-    private ObservableList<SalesRecord> salesReport;
+    private SalesReport salesReport;
 
     @FXML
-    private TableView table ;
+    private TableView<SalesRecord> tableView;
+//    @FXML
+//    private Tabl
     @FXML
     private Label date;
 
@@ -31,9 +34,9 @@ public class SalesReportWindow extends UiPart<Stage> {
      * Creates a new SalesReportWindow
      *
      * @param root Stage to use as the root of the SalesReportWindow.
-     * @param salesReport ObservableList of sales records that make up the salesReport
+     * @param salesReport the {@code SalesReport} to display in this window
      */
-    public SalesReportWindow(Stage root, ObservableList<SalesRecord> salesReport) {
+    public SalesReportWindow(Stage root, SalesReport salesReport) {
         super(FXML, root);
         this.salesReport = salesReport;
     }
@@ -41,12 +44,12 @@ public class SalesReportWindow extends UiPart<Stage> {
     /**
      * Creates a new SalesReportWindow.
      */
-    public SalesReportWindow(ObservableList<SalesRecord> salesReport) {
+    public SalesReportWindow(SalesReport salesReport) {
         this(new Stage(), salesReport);
     }
 
     /**
-     * Shows the SalesReportWindow window.
+     * Shows the SalesReportWindow.
      * @throws IllegalStateException
      * <ul>
      *     <li>
@@ -64,7 +67,7 @@ public class SalesReportWindow extends UiPart<Stage> {
      * </ul>
      */
     public void show() {
-        logger.fine("Showing sales report.");
+        logger.fine("Displaying sales report.");
         getRoot().show();
     }
 

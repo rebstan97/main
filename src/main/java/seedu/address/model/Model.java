@@ -8,6 +8,7 @@ import seedu.address.model.menu.Item;
 import seedu.address.model.person.Person;
 import seedu.address.model.salesrecord.Date;
 import seedu.address.model.salesrecord.SalesRecord;
+import seedu.address.model.salesrecord.SalesReport;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -104,8 +105,8 @@ public interface Model {
      */
     void updateRecord(SalesRecord target, SalesRecord editedRecord);
 
-    /** Returns an unmodifiable list of sales records with the specified date. */
-    ObservableList<SalesRecord> getRecordListWithDate(Date date);
+    /** Returns the sales report of the specified date. */
+    SalesReport getSalesReport(Date date);
 
     /**
      * Returns an unmodifiable view of the filtered record list
