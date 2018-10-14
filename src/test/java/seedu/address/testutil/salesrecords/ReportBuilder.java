@@ -13,7 +13,7 @@ import seedu.address.model.salesrecord.SalesReport;
  * A utility class to help with building SalesReport objects.
  */
 public class ReportBuilder {
-    private static final String DEFAULT_REPORT_DATE = "28-02-2018";
+    private static final String DEFAULT_REPORT_DATE = "02-02-2018";
     private static final ObservableList<SalesRecord> DEFAULT_REPORT_RECORDS =
             FXCollections.observableArrayList(RECORD_ONE,
                     new RecordBuilder(RECORD_DEFAULT).withDate(RECORD_ONE.getDate().toString()).build());
