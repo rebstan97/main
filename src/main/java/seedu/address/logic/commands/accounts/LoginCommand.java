@@ -4,7 +4,9 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ID;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PASSWORD;
 
+import seedu.address.commons.core.EventsCenter;
 import seedu.address.commons.core.session.UserSession;
+import seedu.address.commons.events.ui.LoginEvent;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
@@ -54,6 +56,7 @@ public class LoginCommand extends Command {
 
         if (isVerified) {
             UserSession.login(toLogin);
+            EventsCenter.getInstance().post(new LoginEvent(toLogin));
             return new CommandResult(String.format(MESSAGE_SUCCESS, toLogin));
         }
 
