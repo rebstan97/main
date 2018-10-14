@@ -7,8 +7,6 @@ import seedu.address.commons.events.BaseEvent;
  */
 public class LogoutEvent extends BaseEvent {
 
-    public LogoutEvent() {}
-
     @Override
     public String toString() {
         return getClass().getSimpleName();
