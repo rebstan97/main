@@ -26,6 +26,22 @@ public class TodaySpecialCommand extends Command {
     private final TagContainsKeywordsPredicate predicate;
 
     public TodaySpecialCommand() {
+        this.predicate = preparePredicate();
+    }
+
+    @Override
+    public CommandResult execute(Model model, CommandHistory history) {
+        requireNonNull(model);
+        model.updateFilteredItemList(predicate);
+        EventsCenter.getInstance().post(new DisplayItemListRequestEvent());
+        return new CommandResult(
+                String.format(Messages.MESSAGE_ITEMS_LISTED_OVERVIEW, model.getFilteredItemList().size()));
+    }
+
+    /**
+     * Parses DAY_OF_WEEK into a {@code TagContainsKeywordsPredicate}.
+     */
+    public static TagContainsKeywordsPredicate preparePredicate() {
         String str;
         switch (Calendar.getInstance().get(Calendar.DAY_OF_WEEK)) {
         case Calendar.SUNDAY:
@@ -46,18 +62,13 @@ public class TodaySpecialCommand extends Command {
         case Calendar.FRIDAY:
             str = "friday";
             break;
-        default:
+        case Calendar.SATURDAY:
             str = "saturday";
+            break;
+        default:
+            str = ""; // Invalid Tag Name
+            break;
         }
-        this.predicate = new TagContainsKeywordsPredicate(Collections.singletonList(str));
-    }
-
-    @Override
-    public CommandResult execute(Model model, CommandHistory history) {
-        requireNonNull(model);
-        model.updateFilteredItemList(predicate);
-        EventsCenter.getInstance().post(new DisplayItemListRequestEvent());
-        return new CommandResult(
-                String.format(Messages.MESSAGE_ITEMS_LISTED_OVERVIEW, model.getFilteredItemList().size()));
+        return new TagContainsKeywordsPredicate(Collections.singletonList(str));
     }
 }
