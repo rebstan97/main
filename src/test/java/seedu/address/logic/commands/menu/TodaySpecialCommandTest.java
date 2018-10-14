@@ -3,6 +3,7 @@ package seedu.address.logic.commands.menu;
 import static org.junit.Assert.assertEquals;
 import static seedu.address.commons.core.Messages.MESSAGE_ITEMS_LISTED_OVERVIEW;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.address.logic.commands.menu.TodaySpecialCommand.preparePredicate;
 import static seedu.address.testutil.TypicalAddressBook.getTypicalAddressBook;
 
 import java.util.Calendar;
@@ -48,33 +49,4 @@ public class TodaySpecialCommandTest {
         assertEquals(Collections.emptyList(), model.getFilteredItemList());
     }
 
-    /**
-     * Parses {@code userInput} into a {@code TagContainsKeywordsPredicate}.
-     */
-    private TagContainsKeywordsPredicate preparePredicate() {
-        String str;
-        switch (Calendar.getInstance().get(Calendar.DAY_OF_WEEK)) {
-        case Calendar.SUNDAY:
-            str = "sunday";
-            break;
-        case Calendar.MONDAY:
-            str = "monday";
-            break;
-        case Calendar.TUESDAY:
-            str = "tuesday";
-            break;
-        case Calendar.WEDNESDAY:
-            str = "wednesday";
-            break;
-        case Calendar.THURSDAY:
-            str = "thursday";
-            break;
-        case Calendar.FRIDAY:
-            str = "friday";
-            break;
-        default:
-            str = "saturday";
-        }
-        return new TagContainsKeywordsPredicate(Collections.singletonList(str));
-    }
 }
