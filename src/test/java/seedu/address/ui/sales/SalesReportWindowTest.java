@@ -7,7 +7,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.testfx.api.FxToolkit;
 
-import guitests.guihandles.sales.SalesReportWindowHandle;
+//import guitests.guihandles.sales.SalesReportWindowHandle;
 import seedu.address.model.salesrecord.SalesReport;
 import seedu.address.testutil.salesrecords.ReportBuilder;
 import seedu.address.ui.GuiUnitTest;
@@ -15,14 +15,14 @@ import seedu.address.ui.GuiUnitTest;
 public class SalesReportWindowTest extends GuiUnitTest {
 
     private SalesReportWindow salesReportWindow;
+    //private SalesReportWindowHandle salesReportWindowHandle; // to be used in the future
 
     @Before
     public void setUp() throws Exception {
         SalesReport report = new ReportBuilder().build();
         guiRobot.interact(() -> salesReportWindow = new SalesReportWindow(report));
         FxToolkit.registerStage(salesReportWindow::getRoot);
-        SalesReportWindowHandle salesReportWindowHandle = new SalesReportWindowHandle(salesReportWindow.getRoot(),
-                report);
+        //salesReportWindowHandle = new SalesReportWindowHandle(salesReportWindow.getRoot(), report);
     }
 
     @Test
