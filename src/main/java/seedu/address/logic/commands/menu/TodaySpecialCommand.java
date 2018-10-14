@@ -5,7 +5,9 @@ import static java.util.Objects.requireNonNull;
 import java.util.Calendar;
 import java.util.Collections;
 
+import seedu.address.commons.core.EventsCenter;
 import seedu.address.commons.core.Messages;
+import seedu.address.commons.events.ui.DisplayItemListRequestEvent;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
@@ -54,6 +56,7 @@ public class TodaySpecialCommand extends Command {
     public CommandResult execute(Model model, CommandHistory history) {
         requireNonNull(model);
         model.updateFilteredItemList(predicate);
+        EventsCenter.getInstance().post(new DisplayItemListRequestEvent());
         return new CommandResult(
                 String.format(Messages.MESSAGE_ITEMS_LISTED_OVERVIEW, model.getFilteredItemList().size()));
     }

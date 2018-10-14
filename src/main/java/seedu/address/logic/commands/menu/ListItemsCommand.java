@@ -3,6 +3,8 @@ package seedu.address.logic.commands.menu;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_ITEMS;
 
+import seedu.address.commons.core.EventsCenter;
+import seedu.address.commons.events.ui.DisplayItemListRequestEvent;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
@@ -24,6 +26,7 @@ public class ListItemsCommand extends Command {
     public CommandResult execute(Model model, CommandHistory history) {
         requireNonNull(model);
         model.updateFilteredItemList(PREDICATE_SHOW_ALL_ITEMS);
+        EventsCenter.getInstance().post(new DisplayItemListRequestEvent());
         return new CommandResult(MESSAGE_SUCCESS);
     }
 }
