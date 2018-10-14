@@ -16,6 +16,7 @@ import javafx.stage.Stage;
 import seedu.address.commons.core.Config;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.commons.events.ui.DisplayItemListRequestEvent;
 import seedu.address.commons.events.ui.ExitAppRequestEvent;
 import seedu.address.commons.events.ui.ShowHelpRequestEvent;
 import seedu.address.logic.Logic;
@@ -141,9 +142,6 @@ public class MainWindow extends UiPart<Stage> {
         //recordListPanel = new RecordListPanel(logic.getFilteredRecordList());
         //personListPanelPlaceholder.getChildren().add(recordListPanel.getRoot()); // Show sales book
 
-        //itemListPanel = new ItemListPanel(logic.getFilteredItemList());
-        //personListPanelPlaceholder.getChildren().add(itemListPanel.getRoot());
-
         ResultDisplay resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
 
@@ -200,8 +198,8 @@ public class MainWindow extends UiPart<Stage> {
      */
     @FXML
     public void handleSwitchToMenu() {
-        // TODO: Some might require raising/posting event, for example, if you call the list method, so it
-        // should raise an event and automatically update the UI
+        itemListPanel = new ItemListPanel(logic.getFilteredItemList());
+        personListPanelPlaceholder.getChildren().add(itemListPanel.getRoot());
     }
 
     /**
@@ -271,5 +269,11 @@ public class MainWindow extends UiPart<Stage> {
     private void handleShowHelpEvent(ShowHelpRequestEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
         handleHelp();
+    }
+
+    @Subscribe
+    private void handleDisplayItemListEvent(DisplayItemListRequestEvent event) {
+        logger.info(LogsCenter.getEventHandlingLogMessage(event));
+        handleSwitchToMenu();
     }
 }
