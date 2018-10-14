@@ -41,6 +41,7 @@ import seedu.address.logic.commands.menu.ListItemsCommand;
 import seedu.address.logic.commands.menu.SelectItemCommand;
 import seedu.address.logic.commands.menu.SortMenuCommand;
 import seedu.address.logic.commands.menu.SortMenuCommand.SortMethod;
+import seedu.address.logic.commands.menu.TodaySpecialCommand;
 import seedu.address.logic.commands.salescommands.RecordSalesCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.accounts.Account;
@@ -295,6 +296,14 @@ public class AddressBookParserTest {
         command = (FilterMenuCommand) parser.parseCommand(FilterMenuCommand.COMMAND_ALIAS + " "
                 + keywords.stream().collect(Collectors.joining(" ")));
         assertEquals(new FilterMenuCommand(new TagContainsKeywordsPredicate(keywords)), command);
+    }
+
+    @Test
+    public void parseCommand_todaySpecial() throws Exception {
+        assertTrue(parser.parseCommand(TodaySpecialCommand.COMMAND_WORD) instanceof TodaySpecialCommand);
+        assertTrue(parser.parseCommand(TodaySpecialCommand.COMMAND_ALIAS) instanceof TodaySpecialCommand);
+        assertTrue(parser.parseCommand(TodaySpecialCommand.COMMAND_WORD + " 3") instanceof TodaySpecialCommand);
+        assertTrue(parser.parseCommand(TodaySpecialCommand.COMMAND_ALIAS + " 3") instanceof TodaySpecialCommand);
     }
 
     @Test
