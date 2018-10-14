@@ -13,6 +13,7 @@ import seedu.address.commons.core.ComponentManager;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.events.model.AddressBookChangedEvent;
 import seedu.address.model.accounts.Account;
+import seedu.address.model.accounts.Username;
 import seedu.address.model.menu.Item;
 import seedu.address.model.person.Person;
 import seedu.address.model.salesrecord.SalesRecord;
@@ -146,8 +147,8 @@ public class ModelManager extends ComponentManager implements Model {
 
 
     /**
-     * Returns an unmodifiable view of the list of {@code SalesRecord} backed by the internal list of
-     * {@code versionedAddressBook}
+     * Returns an unmodifiable view of the list of {@code SalesRecord} backed by the internal list of {@code
+     * versionedAddressBook}
      */
     @Override
     public ObservableList<SalesRecord> getFilteredRecordList() {
@@ -166,6 +167,11 @@ public class ModelManager extends ComponentManager implements Model {
     public void addAccount(Account account) {
         versionedAddressBook.addAccount(account);
         indicateAddressBookChanged();
+    }
+
+    @Override
+    public Account getAccount(Account account) {
+        return versionedAddressBook.getAccount(account);
     }
 
     @Override

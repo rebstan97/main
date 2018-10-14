@@ -177,6 +177,11 @@ public class RecordSalesCommandTest {
         }
 
         @Override
+        public Account getAccount(Account account) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public boolean hasAccount(Account account) {
             throw new AssertionError("This method should not be called.");
         }
