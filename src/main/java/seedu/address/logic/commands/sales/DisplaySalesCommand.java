@@ -44,6 +44,6 @@ public class DisplaySalesCommand extends Command {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof DisplaySalesCommand // instanceof handles nulls
-                && date.equals(((DisplaySalesCommand) other).date));
+                    && date.equals(((DisplaySalesCommand) other).date));
     }
 }
