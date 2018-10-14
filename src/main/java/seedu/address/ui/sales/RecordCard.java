@@ -56,7 +56,7 @@ public class RecordCard extends UiPart<Region> {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof PersonCard)) {
+        if (!(other instanceof RecordCard)) {
             return false;
         }
 
