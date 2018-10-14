@@ -41,7 +41,7 @@ public class LogoutCommandTest {
     }
 
     @Test
-    public void session_Authenticated() {
+    public void session_isAuthenticated() {
         assertTrue(UserSession.isAuthenticated());
     }
 

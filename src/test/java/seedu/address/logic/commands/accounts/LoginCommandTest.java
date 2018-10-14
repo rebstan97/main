@@ -43,7 +43,7 @@ public class LoginCommandTest {
     }
 
     @Test
-    public void execute_validAccount_session_isAuthenticated() throws CommandException {
+    public void execute_validAccount_setUserSession() throws CommandException {
         Account validAccount = new AccountBuilder().build();
         CommandResult commandResult = new LoginCommand(validAccount).execute(model, commandHistory);
 
@@ -56,7 +56,7 @@ public class LoginCommandTest {
     }
 
     @Test
-    public void execute_validAccount_session_isAuthenticated_loginAgain() throws CommandException {
+    public void execute_loginIfAlreadyLoggedIn() throws CommandException {
         thrown.expect(CommandException.class);
         thrown.expectMessage(LoginCommand.MESSAGE_ALREADY_AUTHENTICATED);
 
