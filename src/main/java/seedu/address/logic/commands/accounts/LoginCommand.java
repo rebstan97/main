@@ -33,6 +33,7 @@ public class LoginCommand extends Command {
     public static final String MESSAGE_SUCCESS = "Successfully logged in to %s!";
     public static final String MESSAGE_ACCOUNT_NOT_FOUND = "The account does not exists.";
     public static final String MESSAGE_WRONG_PASSWORD = "The credential is invalid.";
+    public static final String MESSAGE_ALREADY_AUTHENTICATED = "You are already authenticated.";
 
     private final Account toLogin;
 
@@ -44,6 +45,10 @@ public class LoginCommand extends Command {
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
+
+        if (UserSession.isAuthenticated()) {
+            throw new CommandException(MESSAGE_ALREADY_AUTHENTICATED);
+        }
 
         if (!model.hasAccount(toLogin)) {
             throw new CommandException(MESSAGE_ACCOUNT_NOT_FOUND);

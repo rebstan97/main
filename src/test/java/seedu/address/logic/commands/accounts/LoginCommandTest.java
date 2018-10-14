@@ -56,6 +56,16 @@ public class LoginCommandTest {
     }
 
     @Test
+    public void execute_validAccount_session_isAuthenticated_loginAgain() throws CommandException {
+        thrown.expect(CommandException.class);
+        thrown.expectMessage(LoginCommand.MESSAGE_ALREADY_AUTHENTICATED);
+
+        Account validAccount = new AccountBuilder().build();
+        new LoginCommand(validAccount).execute(model, commandHistory);
+        new LoginCommand(validAccount).execute(model, commandHistory);
+    }
+
+    @Test
     public void execute_invalidPassword() throws CommandException {
         Account invalidAccount = new AccountBuilder().withPassword("1122qq!@#123").build();
         CommandResult commandResult = new LoginCommand(invalidAccount).execute(model, commandHistory);
@@ -67,6 +77,8 @@ public class LoginCommandTest {
     @Test
     public void execute_invalidAccount() throws CommandException {
         thrown.expect(CommandException.class);
+        thrown.expectMessage(LoginCommand.MESSAGE_ACCOUNT_NOT_FOUND);
+
         Account invalidAccount = new AccountBuilder().withUsername("invalidusername").build();
         new LoginCommand(invalidAccount).execute(model, commandHistory);
     }
