@@ -1,12 +1,7 @@
 package seedu.address.ui.sales;
 
-import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
-import static org.junit.Assume.assumeFalse;
-import static seedu.address.ui.HelpWindow.USERGUIDE_FILE_PATH;
-
-import java.net.URL;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -20,14 +15,14 @@ import seedu.address.ui.GuiUnitTest;
 public class SalesReportWindowTest extends GuiUnitTest {
 
     private SalesReportWindow salesReportWindow;
-    private SalesReportWindowHandle salesReportWindowHandle;
 
     @Before
     public void setUp() throws Exception {
         SalesReport report = new ReportBuilder().build();
         guiRobot.interact(() -> salesReportWindow = new SalesReportWindow(report));
         FxToolkit.registerStage(salesReportWindow::getRoot);
-        salesReportWindowHandle = new SalesReportWindowHandle(salesReportWindow.getRoot(), report);
+        SalesReportWindowHandle salesReportWindowHandle = new SalesReportWindowHandle(salesReportWindow.getRoot(),
+                report);
     }
 
     @Test

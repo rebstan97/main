@@ -66,7 +66,7 @@ public class GuiTestAssert {
     public static void assertCardDisplaysRecord(SalesRecord expectedRecord, RecordCardHandle actualCard) {
         assertEquals(expectedRecord.getDate().toString(), actualCard.getDate());
         assertEquals(expectedRecord.getName().toString(), actualCard.getItemName());
-        assertEquals("Quantity Sold: "+ expectedRecord.getQuantitySold().toString(), actualCard.getQuantitySold());
+        assertEquals("Quantity Sold: " + expectedRecord.getQuantitySold().toString(), actualCard.getQuantitySold());
         assertEquals("Item Price: $" + expectedRecord.getPrice().toString(), actualCard.getPrice());
     }
 
