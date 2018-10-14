@@ -30,6 +30,7 @@ import seedu.address.logic.commands.menu.FindItemCommand;
 import seedu.address.logic.commands.menu.ListItemsCommand;
 import seedu.address.logic.commands.menu.SelectItemCommand;
 import seedu.address.logic.commands.menu.SortMenuCommand;
+import seedu.address.logic.commands.menu.TodaySpecialCommand;
 import seedu.address.logic.commands.salescommands.RecordSalesCommand;
 import seedu.address.logic.parser.accounts.RegisterCommandParser;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -155,6 +156,10 @@ public class AddressBookParser {
         case FilterMenuCommand.COMMAND_WORD:
         case FilterMenuCommand.COMMAND_ALIAS:
             return new FilterMenuCommandParser().parse(arguments);
+
+        case TodaySpecialCommand.COMMAND_WORD:
+        case TodaySpecialCommand.COMMAND_ALIAS:
+            return new TodaySpecialCommand();
 
         case ClearMenuCommand.COMMAND_WORD:
         case ClearMenuCommand.COMMAND_ALIAS:
