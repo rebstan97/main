@@ -388,6 +388,22 @@ public class AddressBookTest {
     }
 
     @Test
+    public void sortMenuByName_addressBookModified() {
+        AddressBook sortedByName = new AddressBookBuilder().withItem(BEEF_BURGER).withItem(APPLE_JUICE).build();
+        sortedByName.sortMenuByName();
+        addressBookWithPersons = new AddressBookBuilder().withItem(APPLE_JUICE).withItem(BEEF_BURGER).build();
+        assertEquals(sortedByName, addressBookWithPersons);
+    }
+
+    @Test
+    public void sortMenuByPrice_addressBookModified() {
+        AddressBook sortedByPrice = new AddressBookBuilder().withItem(BEEF_BURGER).withItem(APPLE_JUICE).build();
+        sortedByPrice.sortMenuByPrice();
+        addressBookWithPersons = new AddressBookBuilder().withItem(APPLE_JUICE).withItem(BEEF_BURGER).build();
+        assertEquals(sortedByPrice, addressBookWithPersons);
+    }
+
+    @Test
     public void equals() {
         addressBookWithPersons = new AddressBookBuilder().withPerson(AMY).withPerson(DYLAN).build();
         // same object
