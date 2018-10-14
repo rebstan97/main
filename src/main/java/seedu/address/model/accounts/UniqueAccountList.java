@@ -103,16 +103,6 @@ public class UniqueAccountList implements Iterable<Account> {
         internalList.setAll(accounts);
     }
 
-    //TODO: Javadoc to add
-    private Account findAccount(Account toFind) {
-        for (Account account : internalList) {
-            if (account.isSameUsername(toFind)) {
-                return account;
-            }
-        }
-        return null;
-    }
-
     /**
      * Returns true if {@code accounts} contains only unique accounts.
      */
