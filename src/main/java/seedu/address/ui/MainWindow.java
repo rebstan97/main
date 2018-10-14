@@ -18,6 +18,7 @@ import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.events.ui.ExitAppRequestEvent;
 import seedu.address.commons.events.ui.LoginEvent;
+import seedu.address.commons.events.ui.LogoutEvent;
 import seedu.address.commons.events.ui.ShowHelpRequestEvent;
 import seedu.address.logic.Logic;
 import seedu.address.model.UserPrefs;
@@ -277,6 +278,12 @@ public class MainWindow extends UiPart<Stage> {
     @Subscribe
     private void handleLoginEvent(LoginEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
-        setUsername("Welcome, " + event.username.toString().toUpperCase() + "!");
+        setUsername(String.format(ACCOUNT_STATUS, event.username.toString().toUpperCase()));
+    }
+
+    @Subscribe
+    private void handleLogoutEvent(LogoutEvent event) {
+        logger.info(LogsCenter.getEventHandlingLogMessage(event));
+        setUsername(ACCOUNT_STATUS_INITIAL);
     }
 }
