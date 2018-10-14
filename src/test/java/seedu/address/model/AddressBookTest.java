@@ -272,6 +272,7 @@ public class AddressBookTest {
 
     @Test
     public void hasAccount_accountWithSamePasswordInAddressBook_returnsTrue() {
+        // same raw password, but with different username.
         addressBook.addAccount(DEMO_ADMIN);
         Account account = new AccountBuilder(DEMO_ONE)
                 .withPassword(DEMO_ADMIN.getPassword().toString())
