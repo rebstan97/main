@@ -252,7 +252,7 @@ public class ParserUtilTest {
 
     @Test
     public void parseIngredientUnit_invalidValue_throwsParseException() {
-        Assert.assertThrows(ParseException.class, () -> ParserUtil.parseIngredientName(INVALID_INGREDIENT_UNIT));
+        Assert.assertThrows(ParseException.class, () -> ParserUtil.parseIngredientUnit(INVALID_INGREDIENT_UNIT));
     }
 
     @Test
