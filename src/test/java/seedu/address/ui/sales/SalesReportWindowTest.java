@@ -14,7 +14,7 @@ import seedu.address.ui.GuiUnitTest;
 public class SalesReportWindowTest extends GuiUnitTest {
 
     private SalesReportWindow salesReportWindow;
-    //private SalesReportWindowHandle salesReportWindowHandle; // to be used in the future
+    //private SalesReportWindowHandle salesReportWindowHandle; // Handle to be used in the future
 
     @Before
     public void setUp() throws Exception {
