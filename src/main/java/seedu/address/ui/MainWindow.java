@@ -82,7 +82,7 @@ public class MainWindow extends UiPart<Stage> {
 
         // Configure the UI
         setTitle(config.getAppTitle());
-        setUsername(ACCOUNT_STATUS_INITIAL);
+        setUsername(ACCOUNT_STATUS_INITIAL); // TODO: Shift it to UsernameDisplay
         setWindowDefaultSize(prefs);
 
         setAccelerators();
