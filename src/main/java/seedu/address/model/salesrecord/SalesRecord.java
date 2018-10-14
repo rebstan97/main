@@ -28,7 +28,7 @@ public class SalesRecord {
         this.name = name;
         this.quantitySold = quantitySold;
         this.price = price;
-        this.revenue = Integer.parseInt(quantitySold.toString()) * Double.parseDouble(price.toString());
+        this.revenue = quantitySold.getValue() * price.getValue();
     }
 
     public Date getDate() {
