@@ -63,10 +63,7 @@ public class MainWindow extends UiPart<Stage> {
     private Label accountStatus;
 
     @FXML
-    private StackPane personListPanelPlaceholder;
-
-    //@FXML
-    //private StackPane ingredientListPanelPlaceholder;
+    private StackPane personListPanelPlaceholder; //rename to ModelListPanelPlaceholder
 
     @FXML
     private StackPane resultDisplayPlaceholder;
@@ -146,9 +143,6 @@ public class MainWindow extends UiPart<Stage> {
         //recordListPanel = new RecordListPanel(logic.getFilteredRecordList());
         //personListPanelPlaceholder.getChildren().add(recordListPanel.getRoot()); // Show sales book
 
-        //ingredientListPanel = new IngredientListPanel(logic.getFilteredIngredientList());
-        //ingredientListPanelPlaceholder.getChildren().add(ingredientListPanel.getRoot());
-
         //itemListPanel = new ItemListPanel(logic.getFilteredItemList());
         //personListPanelPlaceholder.getChildren().add(itemListPanel.getRoot());
 
@@ -225,9 +219,11 @@ public class MainWindow extends UiPart<Stage> {
      * Switch to the ingredient view.
      */
     @FXML
-    public void handleSwitchToIngredient() {
-        // TODO: Some might require raising/posting event, for example, if you call the list method, so it
-        // should raise an event and automatically update the UI
+    public void handleClickIngredientIcon() {
+        //Replaces current list with ingredient list in the panel placeholder
+        logger.info("GUI interaction: Ingredient icon was clicked");
+        ingredientListPanel = new IngredientListPanel(logic.getFilteredIngredientList());
+        personListPanelPlaceholder.getChildren().add(ingredientListPanel.getRoot());
     }
 
     /**
