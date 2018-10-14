@@ -45,7 +45,6 @@ public class MainWindow extends UiPart<Stage> {
     private BrowserPanel browserPanel;
     private PersonListPanel personListPanel;
     private RecordListPanel recordListPanel; // Panels stack on top of each other, only one visible at a time
-    private SalesReportWindow salesReportWindow;
     private Config config;
     private UserPrefs prefs;
     private HelpWindow helpWindow;
@@ -281,7 +280,7 @@ public class MainWindow extends UiPart<Stage> {
     @Subscribe
     private void handleDisplaySalesReportEvent(DisplaySalesReportEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
-        salesReportWindow = new SalesReportWindow(event.getSalesReportToDisplay());
+        SalesReportWindow salesReportWindow = new SalesReportWindow(event.getSalesReportToDisplay());
         salesReportWindow.show();
     }
 }
