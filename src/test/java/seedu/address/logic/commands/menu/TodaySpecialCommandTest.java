@@ -27,7 +27,7 @@ public class TodaySpecialCommandTest {
     private CommandHistory commandHistory = new CommandHistory();
 
     @Test
-    public void execute_ItemFound() {
+    public void execute_itemFound() {
         String expectedMessage = String.format(MESSAGE_ITEMS_LISTED_OVERVIEW, 1);
         TagContainsKeywordsPredicate predicate = preparePredicate();
         TodaySpecialCommand command = new TodaySpecialCommand();
