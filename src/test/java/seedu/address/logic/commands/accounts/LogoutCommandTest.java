@@ -28,6 +28,9 @@ public class LogoutCommandTest {
     @Rule
     public ExpectedException thrown = ExpectedException.none();
 
+    private CommandHistory commandHistory = new CommandHistory();
+    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+
     @Before
     public void setUp() throws CommandException {
         // Logs in before every test case, if not logged in yet
@@ -36,9 +39,6 @@ public class LogoutCommandTest {
             new LoginCommand(validAccount).execute(model, commandHistory);
         }
     }
-
-    private CommandHistory commandHistory = new CommandHistory();
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
     @Test
     public void session_Authenticated() {
