@@ -87,7 +87,10 @@ public class SalesReportWindow extends UiPart<Stage> {
         getRoot().show();
     }
 
-    private void initialize(){
+    /**
+     * Initializes the SalesReportWindow according to the sales report
+     */
+    private void initialize() {
         itemName.setCellValueFactory(new PropertyValueFactory<>("name"));
         quantitySold.setCellValueFactory(new PropertyValueFactory<>("quantitySold"));
         initializePriceColumn();
@@ -97,6 +100,9 @@ public class SalesReportWindow extends UiPart<Stage> {
                 currencyFormatter.format(salesReport.getTotalRevenue())));
     }
 
+    /**
+     * Initializes the price column in the TableView according to the records in the sales report
+     */
     private void initializePriceColumn() {
         price.setCellValueFactory(new PropertyValueFactory<>("price"));
         price.setCellFactory(cell -> new TableCell<>() {
@@ -108,6 +114,9 @@ public class SalesReportWindow extends UiPart<Stage> {
         });
     }
 
+    /**
+     * Initializes the revenue column in the TableView according to the records in the sales report
+     */
     private void initializeRevenueColumn() {
         revenue.setCellValueFactory(new PropertyValueFactory<>("revenue"));
         revenue.setCellFactory(cell -> new TableCell<>() {

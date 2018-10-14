@@ -38,6 +38,11 @@ public class SalesReport {
         return totalRevenue;
     }
 
+    /**
+     * Computes the total revenue for the day using each SalesRecord's revenue
+     * @param records List of SalesRecord belonging to the day of interest
+     * @return the total revenue for the day
+     */
     private double computeTotalRevenue(ObservableList<SalesRecord> records) {
         double total = 0;
         for (SalesRecord s: records) {
@@ -59,7 +64,7 @@ public class SalesReport {
             return false;
         }
 
-        SalesReport otherReport= (SalesReport) other;
+        SalesReport otherReport = (SalesReport) other;
         return otherReport.getDate().equals(getDate())
                 && otherReport.getRecords().equals(getRecords())
                 && otherReport.getTotalRevenue() == getTotalRevenue();
