@@ -28,6 +28,7 @@ public class UserSession {
         if (isAuthenticated) {
             isAuthenticated = false;
             logger.info("Successfully logged out from \"" + username.toString() + "\".");
+            username = null;
         }
     }
 
