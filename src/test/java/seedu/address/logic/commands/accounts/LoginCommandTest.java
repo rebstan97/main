@@ -28,14 +28,14 @@ public class LoginCommandTest {
     @Rule
     public ExpectedException thrown = ExpectedException.none();
 
+    private CommandHistory commandHistory = new CommandHistory();
+    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+
     @Before
     public void setUp() {
         // Logs out before every test case
         UserSession.logout();
     }
-
-    private CommandHistory commandHistory = new CommandHistory();
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
     @Test
     public void session_notAuthenticated() {
