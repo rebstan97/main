@@ -33,6 +33,9 @@ public class TypicalAddressBook {
         for (Ingredient ingredient : getTypicalIngredients()) {
             ab.addIngredient(ingredient);
         }
+        /*for (Item item : getTypicalItems()) {
+            ab.addItem(item); // @Yi Can: Need to add this, and update the xml test file(s)
+        }*/
         return ab;
     }
 

@@ -147,7 +147,6 @@ public class AddressBook implements ReadOnlyAddressBook {
         return persons.asUnmodifiableObservableList();
     }
 
-
     //// sales record-level operation
 
     /**
@@ -218,8 +217,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      * Adds a account to the account record. The account must not already exist in the account record.
      */
     public void addAccount(Account account) {
-        // hash password before
-        //account.getPassword().hash(account.getUsername().toString());
+        account.getPassword().hash(account.getUsername().toString());
         accounts.add(account);
     }
 
@@ -229,6 +227,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      * address book.
      */
     public void updateAccount(Account target, Account editedAccount) {
+        //TODO: Handle hashing of new password here as well
         accounts.update(target, editedAccount);
     }
 
@@ -292,6 +291,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     // Menu Management
+
     /**
      * Replaces the contents of the person list with {@code persons}. {@code persons} must not contain duplicate
      * persons.

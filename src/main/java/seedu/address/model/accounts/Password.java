@@ -18,13 +18,13 @@ public class Password {
      * of this module, let us assume that the average user's password length of between 6 to 20 characters.
      */
     public static final String MESSAGE_PASSWORD_CONSTRAINT =
-            "Password should not contain spaces, and must be at least length of 6.";
+            "Password should not contain spaces, and must be between length 6 and 20";
 
     /*
      * The first character of the password must not be a whitespace,
      * otherwise " " (a blank string) becomes a valid input.
      */
-    private static final String PASSWORD_VALIDATION_REGEX = "[\\p{ASCII}&&[\\S]]{6,}";
+    private static final String PASSWORD_VALIDATION_REGEX = "[\\p{ASCII}&&[\\S]]{6,20}";
 
     private static final int MAX_SALT_LENGTH = 16;
 
@@ -36,6 +36,7 @@ public class Password {
      * @param password A valid password.
      */
     public Password(String password) {
+        // maybe should not hash here since we create new account obj ...?
         requireNonNull(password);
         checkArgument(isValidPassword(password), MESSAGE_PASSWORD_CONSTRAINT);
         this.password = password;
@@ -47,6 +48,9 @@ public class Password {
      * @param password Password to validate.
      */
     public static boolean isValidPassword(String password) {
+        if (isHashed(password)) { // if it's already a hash, we assume it to be valid
+            return true;
+        }
         return password.matches(PASSWORD_VALIDATION_REGEX);
     }
 
@@ -63,15 +67,27 @@ public class Password {
     }
 
     /**
+     * Checks if the password is already a hash.
+     *
+     * @return true if password is already a hash. Otherwise, returns false.
+     */
+    public static boolean isHashed(String password) {
+        return password.contains("$2a$06$") && password.length() > 20;
+    }
+
+    /**
      * Hash the password.
      *
      * @param username The username to generate the salt from.
      */
     public void hash(String username) {
-        byte[] salt = generateSalt(username);
+        if (!isHashed(password)) {
+            byte[] salt = generateSalt(username);
 
-        byte[] hash = BCrypt.withDefaults().hash(6, salt, password.getBytes());
-        password = new String(hash);
+            //TODO: Removing the salt certain test cases to fail due to mismatch of hashes.
+            byte[] hash = BCrypt.withDefaults().hash(6, salt, password.getBytes());
+            password = new String(hash);
+        }
     }
 
     /**
@@ -94,7 +110,7 @@ public class Password {
         // username is shorter than 16 characters, fill up the remaining gaps
         char[] usernameArray = Arrays.copyOf(usernameToProcess.toCharArray(), MAX_SALT_LENGTH);
         for (int i = username.length(); i < MAX_SALT_LENGTH; i++) {
-            usernameArray[i] = '@';
+            usernameArray[i] = 'A';
         }
 
         byte[] result = String.valueOf(usernameArray).getBytes();
