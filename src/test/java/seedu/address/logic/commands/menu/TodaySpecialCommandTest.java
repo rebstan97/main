@@ -6,7 +6,6 @@ import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.menu.TodaySpecialCommand.preparePredicate;
 import static seedu.address.testutil.TypicalAddressBook.getTypicalAddressBook;
 
-import java.util.Calendar;
 import java.util.Collections;
 
 import org.junit.Test;
