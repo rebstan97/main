@@ -18,12 +18,20 @@ public class UserSession {
     private static boolean isAuthenticated = false;
     private static Username username;
 
+    /**
+     * Stores this {@link Account} info as part of this session.
+     *
+     * @param account logged in for this session.
+     */
     public static void login(Account account) {
         isAuthenticated = true;
         username = account.getUsername();
         logger.info("Successfully logged in as \"" + username.toString() + "\".");
     }
 
+    /**
+     * Logs out of this account which releases this session.
+     */
     public static void logout() {
         if (isAuthenticated) {
             isAuthenticated = false;
@@ -32,10 +40,20 @@ public class UserSession {
         }
     }
 
+    /**
+     * Checks if this session exists.
+     *
+     * @return true if this session exists. Otherwise, false.
+     */
     public static boolean isAuthenticated() {
         return isAuthenticated;
     }
 
+    /**
+     * Gets the username that is logged in for this session.
+     *
+     * @return a {@link Username} object.
+     */
     public static Username getUsername() {
         return username;
     }
