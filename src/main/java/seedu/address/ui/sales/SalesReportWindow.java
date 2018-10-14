@@ -135,4 +135,3 @@ public class SalesReportWindow extends UiPart<Stage> {
         return getRoot().isShowing();
     }
 }
-
