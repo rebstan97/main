@@ -10,7 +10,7 @@ import seedu.address.model.Model;
 import seedu.address.model.menu.TagContainsKeywordsPredicate;
 
 /**
- * Finds and lists all items in menu whose name contains any of the argument keywords.
+ * Finds and lists all items in menu whose tags contains any of the argument keywords.
  * Keyword matching is case insensitive.
  */
 public class FilterMenuCommand extends Command {
