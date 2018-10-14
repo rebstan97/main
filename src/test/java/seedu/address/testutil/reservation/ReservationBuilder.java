@@ -79,7 +79,7 @@ public class ReservationBuilder {
     }
 
     /**
-     * Sets the {@code Remark} of the {@code Person} that we are building.
+     * Sets the {@code Remark} of the {@code Reservation} that we are building.
      */
     public ReservationBuilder withRemark(String remark) {
         this.remark = new Remark(remark);
