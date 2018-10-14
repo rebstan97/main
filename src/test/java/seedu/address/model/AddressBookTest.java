@@ -21,6 +21,7 @@ import static seedu.address.testutil.menu.TypicalItems.BEEF_BURGER;
 import static seedu.address.testutil.menu.TypicalItems.BURGER;
 import static seedu.address.testutil.menu.TypicalItems.CHEESE_BURGER;
 import static seedu.address.testutil.menu.TypicalItems.FRIES;
+import static seedu.address.testutil.salesrecords.RecordBuilder.DEFAULT_DATE;
 import static seedu.address.testutil.salesrecords.TypicalRecords.RECORD_DEFAULT;
 import static seedu.address.testutil.salesrecords.TypicalRecords.RECORD_ONE;
 import static seedu.address.testutil.salesrecords.TypicalRecords.RECORD_THREE;
@@ -43,7 +44,9 @@ import seedu.address.model.menu.Item;
 import seedu.address.model.menu.exceptions.DuplicateItemException;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
+import seedu.address.model.salesrecord.Date;
 import seedu.address.model.salesrecord.SalesRecord;
+import seedu.address.model.salesrecord.SalesReport;
 import seedu.address.model.salesrecord.exceptions.DuplicateRecordException;
 import seedu.address.model.tag.Tag;
 import seedu.address.testutil.AddressBookBuilder;
@@ -234,6 +237,11 @@ public class AddressBookTest {
     public void getRecordList_modifyList_throwsUnsupportedOperationException() {
         thrown.expect(UnsupportedOperationException.class);
         addressBook.getRecordList().remove(0);
+    }
+    @Test
+    public void getSalesReport_nullDate_throwsNullPointerException() {
+        thrown.expect(NullPointerException.class);
+        addressBook.getSalesReport(null);
     }
 
     @Test
