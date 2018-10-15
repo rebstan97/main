@@ -5,6 +5,7 @@ import seedu.address.model.accounts.Account;
 import seedu.address.model.ingredient.Ingredient;
 import seedu.address.model.menu.Item;
 import seedu.address.model.person.Person;
+import seedu.address.model.reservation.Reservation;
 import seedu.address.model.salesrecord.SalesRecord;
 
 /**
@@ -37,4 +38,12 @@ public interface ReadOnlyAddressBook {
      * This list will not contain any duplicate items.
      */
     ObservableList<Item> getItemList();
+
+    // Reservation Management
+    /**
+     * Returns an unmodifiable view of the reservations list.
+     * This list will not contain any duplicate reservations.
+     */
+    ObservableList<Reservation> getReservationList();
+
 }

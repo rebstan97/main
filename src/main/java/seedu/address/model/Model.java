@@ -8,6 +8,7 @@ import seedu.address.model.accounts.Account;
 import seedu.address.model.ingredient.Ingredient;
 import seedu.address.model.menu.Item;
 import seedu.address.model.person.Person;
+import seedu.address.model.reservation.Reservation;
 import seedu.address.model.salesrecord.SalesRecord;
 import seedu.address.model.tag.Tag;
 
@@ -23,6 +24,7 @@ public interface Model {
     Predicate<Account> PREDICATE_SHOW_ALL_ACCOUNTS = unused -> true;
     Predicate<Ingredient> PREDICATE_SHOW_ALL_INGREDIENTS = unused -> true;
     Predicate<Item> PREDICATE_SHOW_ALL_ITEMS = unused -> true;
+    Predicate<Person> PREDICATE_SHOW_ALL_RESERVATIONS = unused -> true;
     Predicate<SalesRecord> PREDICATE_SHOW_ALL_RECORDS = unused -> true;
 
     /**
@@ -117,6 +119,49 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredRecordList(Predicate<SalesRecord> predicate);
+
+    // =========== API for Reservations =============================================================
+
+    /**
+     * Returns true if a reservation with the same identity as {@code reservation} exists in the address book.
+     */
+    boolean hasReservation(Reservation reservation);
+
+    /**
+     * Deletes the given reservation. The reservation must exist in the address book.
+     */
+    void deleteReservation(Reservation target);
+
+    /**
+     * Adds the given reservation. {@code reservation} must not already exist in the address book.
+     */
+    void addReservation(Reservation reservation);
+
+    /**
+     * Replaces the given reservation {@code target} with {@code editedPerson}. {@code target} must exist in the address
+     * book. The reservation identity of {@code editedReservation} must not be the same as another existing reservation
+     * in the address book.
+     */
+    void updateReservation(Reservation target, Reservation editedReservation);
+
+    /**
+     * Removes the given {@code tag} from all {@code Reservation}
+     *
+     * @param tag to be removed.
+     */
+    void removeTagForReservation(Tag tag);
+
+    /**
+     * Returns an unmodifiable view of the filtered reservation list
+     */
+    ObservableList<Reservation> getFilteredReservationList();
+
+    /**
+     * Updates the filter of the filtered reservation list to filter by the given {@code predicate}.
+     *
+     * @throws NullPointerException if {@code predicate} is null.
+     */
+    void updateFilteredReservationList(Predicate<Reservation> predicate);
 
     //=========== API for Accounts =============================================================
 
@@ -263,4 +308,5 @@ public interface Model {
      * Saves the current address book state for undo/redo.
      */
     void commitAddressBook();
+
 }
