@@ -39,6 +39,7 @@ import seedu.address.logic.commands.ingredients.ListIngredientsCommand;
 import seedu.address.logic.commands.menu.ClearMenuCommand;
 import seedu.address.logic.commands.menu.ListItemsCommand;
 import seedu.address.logic.commands.menu.SelectItemCommand;
+import seedu.address.logic.commands.salescommands.DeleteSalesCommand;
 import seedu.address.logic.commands.salescommands.RecordSalesCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.accounts.Account;
@@ -184,10 +185,20 @@ public class AddressBookParserTest {
     }
 
     @Test
-    public void parseCommand_record_sales() throws Exception {
+    public void parseCommand_recordSales() throws Exception {
         SalesRecord record = new RecordBuilder().build();
         RecordSalesCommand command = (RecordSalesCommand) parser.parseCommand(RecordUtil.getRecordSalesCommand(record));
         assertEquals(new RecordSalesCommand(record), command);
+    }
+
+    @Test
+    public void parseCommand_deleteSales() throws Exception {
+        DeleteSalesCommand command = (DeleteSalesCommand) parser.parseCommand(
+                DeleteSalesCommand.COMMAND_WORD + " " + INDEX_FIRST.getOneBased());
+        assertEquals(new DeleteSalesCommand(INDEX_FIRST), command);
+//        command = (DeleteSalesCommand) parser.parseCommand(DeleteCommand.COMMAND_ALIAS
+//                + " " + INDEX_FIRST.getOneBased());
+//        assertEquals(new DeleteCommand(INDEX_FIRST), command); // to be implemented once alias is supported
     }
 
     @Test
