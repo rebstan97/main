@@ -297,6 +297,16 @@ public class AddIngredientCommandTest {
             throw new AssertionError("This method should not be called.");
         }
 
+        @Override
+        public void sortMenuByName() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void sortMenuByPrice() {
+            throw new AssertionError("This method should not be called.");
+        }
+
     }
 
     /**
