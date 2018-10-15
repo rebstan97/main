@@ -141,7 +141,8 @@ public class EditSalesCommandTest {
     @Test
     public void execute_invalidRecordIndexUnfilteredList_failure() {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredRecordList().size() + 1);
-        EditRecordDescriptor descriptor = new EditRecordDescriptorBuilder().withName(VALID_ITEM_NAME_RECORD_TWO).build();
+        EditRecordDescriptor descriptor = new EditRecordDescriptorBuilder()
+                .withName(VALID_ITEM_NAME_RECORD_TWO).build();
         EditSalesCommand editSalesCommand = new EditSalesCommand(outOfBoundIndex, descriptor);
 
         assertCommandFailure(editSalesCommand, model, commandHistory, Messages.MESSAGE_INVALID_RECORD_DISPLAYED_INDEX);
@@ -188,7 +189,8 @@ public class EditSalesCommandTest {
     @Test
     public void executeUndoRedo_invalidIndexUnfilteredList_failure() {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredRecordList().size() + 1);
-        EditRecordDescriptor descriptor = new EditRecordDescriptorBuilder().withName(VALID_ITEM_NAME_RECORD_TWO).build();
+        EditRecordDescriptor descriptor = new EditRecordDescriptorBuilder()
+                .withName(VALID_ITEM_NAME_RECORD_TWO).build();
         EditSalesCommand editSalesCommand = new EditSalesCommand(outOfBoundIndex, descriptor);
 
         // execution failed -> address book state not added into model

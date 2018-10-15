@@ -1,6 +1,5 @@
 package seedu.address.logic.commands.sales;
 
-
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DATE_RECORD_TWO;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
