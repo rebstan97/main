@@ -34,8 +34,8 @@ public class RecordUtil {
         StringBuilder sb = new StringBuilder();
         descriptor.getDate().ifPresent(date -> sb.append(PREFIX_DATE).append(date.toString()).append(" "));
         descriptor.getName().ifPresent(name -> sb.append(PREFIX_ITEM_NAME).append(name.toString()).append(" "));
-        descriptor.getQuantitySold().ifPresent(
-                quantitySold-> sb.append(PREFIX_QUANTITY_SOLD).append(quantitySold.toString()).append(" "));
+        descriptor.getQuantitySold().ifPresent(quantitySold -> sb.append(PREFIX_QUANTITY_SOLD)
+                .append(quantitySold.toString()).append(" "));
         descriptor.getPrice().ifPresent(price -> sb.append(PREFIX_ITEM_PRICE).append(price.toString()).append(" "));
         return sb.toString();
     }
