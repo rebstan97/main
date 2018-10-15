@@ -38,6 +38,7 @@ import org.junit.rules.ExpectedException;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import seedu.address.logic.commands.menu.SortMenuCommand.SortMethod;
 import seedu.address.model.accounts.Account;
 import seedu.address.model.accounts.exceptions.DuplicateAccountException;
 import seedu.address.model.ingredient.Ingredient;
@@ -391,7 +392,7 @@ public class AddressBookTest {
     @Test
     public void sortMenuByName_addressBookModified() {
         AddressBook sortedByName = new AddressBookBuilder().withItem(BEEF_BURGER).withItem(APPLE_JUICE).build();
-        sortedByName.sortMenuByName();
+        sortedByName.sortMenu(SortMethod.NAME);
         addressBookWithPersons = new AddressBookBuilder().withItem(APPLE_JUICE).withItem(BEEF_BURGER).build();
         assertEquals(sortedByName, addressBookWithPersons);
     }
@@ -399,7 +400,7 @@ public class AddressBookTest {
     @Test
     public void sortMenuByPrice_addressBookModified() {
         AddressBook sortedByPrice = new AddressBookBuilder().withItem(BEEF_BURGER).withItem(APPLE_JUICE).build();
-        sortedByPrice.sortMenuByPrice();
+        sortedByPrice.sortMenu(SortMethod.PRICE);
         addressBookWithPersons = new AddressBookBuilder().withItem(APPLE_JUICE).withItem(BEEF_BURGER).build();
         assertEquals(sortedByPrice, addressBookWithPersons);
     }
