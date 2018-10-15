@@ -21,7 +21,6 @@ public class SalesReportWindowHandle extends StageHandle {
      * Returns true if a sales report window is currently present in the application.
      */
     public boolean isWindowPresent() {
-        String date = salesReport.getDate().toString();
         return new GuiRobot().isWindowShown(salesReport.toString());
     }
 }
