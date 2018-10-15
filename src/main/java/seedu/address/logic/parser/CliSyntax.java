@@ -23,6 +23,12 @@ public class CliSyntax {
     public static final Prefix PREFIX_ID = new Prefix("id/");
     public static final Prefix PREFIX_PASSWORD = new Prefix("pw/");
 
+    /* Prefix definitions for ingredient */
+    public static final Prefix PREFIX_INGREDIENT_NAME = new Prefix("n/");
+    public static final Prefix PREFIX_INGREDIENT_UNIT = new Prefix("u/");
+    public static final Prefix PREFIX_INGREDIENT_PRICE = new Prefix("p/");
+    public static final Prefix PREFIX_INGREDIENT_MINIMUM = new Prefix("m/");
+
     /*Prefix definitions for menu management */
     public static final Prefix PREFIX_PRICE = new Prefix("p/");
 

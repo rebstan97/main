@@ -21,6 +21,7 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.accounts.Account;
+import seedu.address.model.ingredient.Ingredient;
 import seedu.address.model.menu.Item;
 import seedu.address.model.person.Person;
 import seedu.address.model.reservation.Reservation;
@@ -235,6 +236,37 @@ public class AddReservationCommandTest {
 
         @Override
         public void updateFilteredItemList(Predicate<Item> predicate) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        // Ingredient Management
+        @Override
+        public boolean hasIngredient(Ingredient ingredient) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void addIngredient(Ingredient ingredient) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void deleteIngredient(Ingredient ingredient) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void updateIngredient(Ingredient target, Ingredient editedIngredient) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ObservableList<Ingredient> getFilteredIngredientList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void updateFilteredIngredientList(Predicate<Ingredient> predicate) {
             throw new AssertionError("This method should not be called.");
         }
 

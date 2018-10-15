@@ -2,6 +2,7 @@ package seedu.address.model;
 
 import javafx.collections.ObservableList;
 import seedu.address.model.accounts.Account;
+import seedu.address.model.ingredient.Ingredient;
 import seedu.address.model.menu.Item;
 import seedu.address.model.person.Person;
 import seedu.address.model.reservation.Reservation;
@@ -27,7 +28,11 @@ public interface ReadOnlyAddressBook {
      */
     ObservableList<Account> getAccountList();
 
-    // Menu management
+    /**
+     * Returns an unmodifiable view of the ingredients list. This list will not contain any duplicate ingredients.
+     */
+    ObservableList<Ingredient> getIngredientList();
+
     /**
      * Returns an unmodifiable view of the items list.
      * This list will not contain any duplicate items.

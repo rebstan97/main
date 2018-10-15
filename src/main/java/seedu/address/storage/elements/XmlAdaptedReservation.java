@@ -1,4 +1,4 @@
-package seedu.address.storage.reservation;
+package seedu.address.storage.elements;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;

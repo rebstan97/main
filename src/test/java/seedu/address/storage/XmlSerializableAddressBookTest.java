@@ -15,6 +15,7 @@ import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.commons.util.XmlUtil;
 import seedu.address.model.AddressBook;
 import seedu.address.testutil.TypicalAddressBook;
+import seedu.address.testutil.ingredients.TypicalIngredients;
 import seedu.address.testutil.menu.TypicalItems;
 
 
@@ -30,6 +31,12 @@ public class XmlSerializableAddressBookTest {
     private static final Path DUPLICATE_RECORD_FILE = TEST_DATA_FOLDER.resolve("duplicateRecordAddressBook.xml");
     private static final Path INVALID_ACCOUNT_FILE = TEST_DATA_FOLDER.resolve("invalidAccountOnlyAddressBook.xml");
     private static final Path DUPLICATE_ACCOUNT_FILE = TEST_DATA_FOLDER.resolve("duplicateAccountOnlyAddressBook.xml");
+    private static final Path TYPICAL_INGREDIENTS_FILE = TEST_DATA_FOLDER.resolve("typicalIngredientsOnlyAddressBook"
+            + ".xml");
+    private static final Path INVALID_INGREDIENT_FILE = TEST_DATA_FOLDER.resolve("invalidIngredientOnlyAddressBook"
+            + ".xml");
+    private static final Path DUPLICATE_INGREDIENT_FILE = TEST_DATA_FOLDER.resolve("duplicateIngredientOnlyAddressBook"
+            + ".xml");
     private static final Path TYPICAL_DUPLICATE_FILE = TEST_DATA_FOLDER.resolve("typicalDuplicateAddressBook.xml");
     // Menu Management
     private static final Path TYPICAL_ITEMS_FILE = TEST_DATA_FOLDER.resolve("typicalItemsOnlyAddressBook.xml");
@@ -82,6 +89,30 @@ public class XmlSerializableAddressBookTest {
         thrown.expect(IllegalValueException.class);
         thrown.expectMessage(XmlSerializableAddressBook.MESSAGE_DUPLICATE_RECORD);
         dataFromFile.toModelType();
+    }
+
+    @Test
+    public void toModelType_invalidIngredientFile_throwsIllegalValueException() throws Exception {
+        dataFromFile = XmlUtil.getDataFromFile(INVALID_INGREDIENT_FILE, XmlSerializableAddressBook.class);
+        thrown.expect(IllegalValueException.class);
+        dataFromFile.toModelType();
+    }
+
+    @Test
+    public void toModelType_duplicateIngredients_throwsIllegalValueException() throws Exception {
+        dataFromFile = XmlUtil.getDataFromFile(DUPLICATE_INGREDIENT_FILE, XmlSerializableAddressBook.class);
+        thrown.expect(IllegalValueException.class);
+        thrown.expectMessage(XmlSerializableAddressBook.MESSAGE_DUPLICATE_INGREDIENT);
+        dataFromFile.toModelType();
+    }
+
+    @Test
+    public void toModelType_typicalIngredientsOnlyFile_success() throws Exception {
+        XmlSerializableAddressBook dataFromFile = XmlUtil.getDataFromFile(TYPICAL_INGREDIENTS_FILE,
+                XmlSerializableAddressBook.class);
+        AddressBook addressBookFromFile = dataFromFile.toModelType();
+        AddressBook typicalIngredientsAddressBook = TypicalIngredients.getTypicalAddressBookWithIngredientsOnly();
+        assertEquals(addressBookFromFile, typicalIngredientsAddressBook);
     }
 
     @Test

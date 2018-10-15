@@ -1,7 +1,7 @@
 package seedu.address.storage.reservation;
 
 import static org.junit.Assert.assertEquals;
-import static seedu.address.storage.reservation.XmlAdaptedReservation.MISSING_FIELD_MESSAGE_FORMAT;
+import static seedu.address.storage.elements.XmlAdaptedReservation.MISSING_FIELD_MESSAGE_FORMAT;
 import static seedu.address.testutil.reservation.TypicalReservations.BILLY;
 
 import java.util.ArrayList;
@@ -14,6 +14,7 @@ import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.reservation.Name;
 import seedu.address.model.reservation.Pax;
 import seedu.address.storage.XmlAdaptedTag;
+import seedu.address.storage.elements.XmlAdaptedReservation;
 import seedu.address.testutil.Assert;
 
 public class XmlAdaptedReservationTest {

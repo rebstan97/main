@@ -41,6 +41,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.model.accounts.Account;
 import seedu.address.model.accounts.exceptions.DuplicateAccountException;
+import seedu.address.model.ingredient.Ingredient;
 import seedu.address.model.menu.Item;
 import seedu.address.model.menu.exceptions.DuplicateItemException;
 import seedu.address.model.person.Person;
@@ -456,6 +457,7 @@ public class AddressBookTest {
 
         private final ObservableList<Person> persons = FXCollections.observableArrayList();
         private final ObservableList<Account> accounts = FXCollections.observableArrayList();
+        private final ObservableList<Ingredient> ingredients = FXCollections.observableArrayList();
         private final ObservableList<Item> items = FXCollections.observableArrayList();
         private final ObservableList<Reservation> reservations = FXCollections.observableArrayList();
         private final ObservableList<SalesRecord> records = FXCollections.observableArrayList();
@@ -464,6 +466,7 @@ public class AddressBookTest {
                 Collection<Reservation> reservations, Collection<SalesRecord> records) {
             this.persons.setAll(persons);
             this.accounts.setAll(accounts);
+            this.ingredients.setAll(ingredients);
             this.items.setAll(items);
             this.reservations.setAll(reservations);
             this.records.setAll(records);
@@ -487,6 +490,11 @@ public class AddressBookTest {
         @Override
         public ObservableList<SalesRecord> getRecordList() {
             return records;
+        }
+
+        @Override
+        public ObservableList<Ingredient> getIngredientList() {
+            return ingredients;
         }
 
         @Override
