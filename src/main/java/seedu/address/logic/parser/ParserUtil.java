@@ -11,6 +11,10 @@ import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.accounts.Password;
 import seedu.address.model.accounts.Username;
+import seedu.address.model.ingredient.IngredientName;
+import seedu.address.model.ingredient.IngredientPrice;
+import seedu.address.model.ingredient.IngredientUnit;
+import seedu.address.model.ingredient.MinimumUnit;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
@@ -211,5 +215,64 @@ public class ParserUtil {
             throw new ParseException(Password.MESSAGE_PASSWORD_CONSTRAINT);
         }
         return new Password(trimmedPassword);
+    }
+
+    //================ Ingredients Parser Util ===================================================
+
+    /**
+     * Parses a {@code String name} into an {@code IngredientName}. Leading and trailing whitespaces
+     * will be trimmed.
+     *
+     * @throws ParseException if the given {@code name} is invalid.
+     */
+    public static IngredientName parseIngredientName(String name) throws ParseException {
+        requireNonNull(name);
+        String trimmedName = name.trim();
+        if (!IngredientName.isValidName(trimmedName)) {
+            throw new ParseException(IngredientName.MESSAGE_NAME_CONSTRAINTS);
+        }
+        return new IngredientName(trimmedName);
+    }
+
+    /**
+     * Parses a {@code String unit} into an {@code IngredientUnit}. Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code IngredientUnit} is invalid.
+     */
+    public static IngredientUnit parseIngredientUnit(String unit) throws ParseException {
+        requireNonNull(unit);
+        String trimmedUnit = unit.trim();
+        if (!IngredientUnit.isValidUnit(trimmedUnit)) {
+            throw new ParseException(IngredientUnit.MESSAGE_UNIT_CONSTRAINTS);
+        }
+        return new IngredientUnit(trimmedUnit);
+    }
+
+    /**
+     * Parses a {@code String price} into an {@code IngredientPrice}. Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code IngredientPrice} is invalid.
+     */
+    public static IngredientPrice parseIngredientPrice(String price) throws ParseException {
+        requireNonNull(price);
+        String trimmedPrice = price.trim();
+        if (!IngredientPrice.isValidPrice(trimmedPrice)) {
+            throw new ParseException(IngredientPrice.MESSAGE_PRICE_CONSTRAINTS);
+        }
+        return new IngredientPrice(trimmedPrice);
+    }
+
+    /**
+     * Parses a {@code String minimum} into an {@code MinimumUnit}. Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code MinimumUnit} is invalid.
+     */
+    public static MinimumUnit parseMinimumUnit(String minimum) throws ParseException {
+        requireNonNull(minimum);
+        String trimmedMinimum = minimum.trim();
+        if (!MinimumUnit.isValidMinimum(trimmedMinimum)) {
+            throw new ParseException(MinimumUnit.MESSAGE_MINIMUM_CONSTRAINTS);
+        }
+        return new MinimumUnit(trimmedMinimum);
     }
 }
