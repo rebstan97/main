@@ -51,5 +51,7 @@ public class MainWindowHandle extends StageHandle {
         return browserPanel;
     }
 
-    public UsernameHandle getUsername() { return username; }
+    public UsernameHandle getUsername() {
+        return username;
+    }
 }
