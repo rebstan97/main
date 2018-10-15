@@ -143,9 +143,6 @@ public class MainWindow extends UiPart<Stage> {
         personListPanel = new PersonListPanel(logic.getFilteredPersonList());
         personListPanelPlaceholder.getChildren().add(personListPanel.getRoot()); // Show address book
 
-        //recordListPanel = new RecordListPanel(logic.getFilteredRecordList());
-        //personListPanelPlaceholder.getChildren().add(recordListPanel.getRoot()); // Show sales book
-
         //ingredientListPanel = new IngredientListPanel(logic.getFilteredIngredientList());
         //ingredientListPanelPlaceholder.getChildren().add(ingredientListPanel.getRoot());
 
@@ -217,8 +214,8 @@ public class MainWindow extends UiPart<Stage> {
      */
     @FXML
     public void handleSwitchToSales() {
-        // To implement. Some might require raising/posting event, for example, if you call the list method, so it
-        // should raise an event and automatically update the UI
+        recordListPanel = new RecordListPanel(logic.getFilteredRecordList());
+        personListPanelPlaceholder.getChildren().add(recordListPanel.getRoot()); // Show sales book
     }
 
     /**

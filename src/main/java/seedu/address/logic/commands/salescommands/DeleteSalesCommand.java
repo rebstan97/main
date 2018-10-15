@@ -22,10 +22,10 @@ public class DeleteSalesCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Deletes the sales record identified by the index number used in the displayed sales list.\n"
-            + "Parameters: INDEX (must be a positive integer)\n"
+            + "Parameters: INDEX (must be a positive integer)"
             + "Example: " + COMMAND_WORD + " 1";
 
-    public static final String MESSAGE_DELETE_RECORD_SUCCESS = "Deleted Sales record: %1$s";
+    public static final String MESSAGE_DELETE_SALES_SUCCESS = "Deleted Sales record: %1$s";
 
     private final Index targetIndex;
 
@@ -45,7 +45,7 @@ public class DeleteSalesCommand extends Command {
         SalesRecord recordToDelete = lastShownList.get(targetIndex.getZeroBased());
         model.deleteRecord(recordToDelete);
         model.commitAddressBook();
-        return new CommandResult(String.format(MESSAGE_DELETE_RECORD_SUCCESS, recordToDelete));
+        return new CommandResult(String.format(MESSAGE_DELETE_SALES_SUCCESS, recordToDelete));
     }
     @Override
     public boolean equals(Object other) {
