@@ -43,15 +43,7 @@ public class SortMenuCommand extends Command {
     @Override
     public CommandResult execute(Model model, CommandHistory history) {
         requireNonNull(model);
-        switch (sortMethod) {
-        case NAME:
-            model.sortMenuByName();
-            break;
-        case PRICE:
-            model.sortMenuByPrice();
-            break;
-        default:
-        }
+        model.sortMenu(sortMethod);
         model.updateFilteredItemList(PREDICATE_SHOW_ALL_ITEMS);
         model.commitAddressBook();
         EventsCenter.getInstance().post(new DisplayItemListRequestEvent());

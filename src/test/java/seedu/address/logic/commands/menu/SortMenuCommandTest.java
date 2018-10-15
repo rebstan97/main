@@ -29,7 +29,7 @@ public class SortMenuCommandTest {
         SortMethod sortMethod = SortMethod.NAME;
         String expectedMessage = String.format(MESSAGE_SORTED, sortMethod.name());
         SortMenuCommand command = new SortMenuCommand(sortMethod);
-        expectedModel.sortMenuByName();
+        expectedModel.sortMenu(sortMethod);
         expectedModel.commitAddressBook();
         assertCommandSuccess(command, model, commandHistory, expectedMessage, expectedModel);
     }
@@ -39,7 +39,7 @@ public class SortMenuCommandTest {
         SortMethod sortMethod = SortMethod.PRICE;
         String expectedMessage = String.format(MESSAGE_SORTED, sortMethod.name());
         SortMenuCommand command = new SortMenuCommand(sortMethod);
-        expectedModel.sortMenuByPrice();
+        expectedModel.sortMenu(sortMethod);
         expectedModel.commitAddressBook();
         assertCommandSuccess(command, model, commandHistory, expectedMessage, expectedModel);
     }

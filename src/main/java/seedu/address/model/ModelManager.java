@@ -12,6 +12,7 @@ import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.ComponentManager;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.events.model.AddressBookChangedEvent;
+import seedu.address.logic.commands.menu.SortMenuCommand.SortMethod;
 import seedu.address.model.accounts.Account;
 import seedu.address.model.ingredient.Ingredient;
 import seedu.address.model.menu.Item;
@@ -283,14 +284,8 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
-    public void sortMenuByName() {
-        versionedAddressBook.sortMenuByName();
-        indicateAddressBookChanged();
-    }
-
-    @Override
-    public void sortMenuByPrice() {
-        versionedAddressBook.sortMenuByPrice();
+    public void sortMenu(SortMethod sortMethod) {
+        versionedAddressBook.sortMenu(sortMethod);
         indicateAddressBookChanged();
     }
 

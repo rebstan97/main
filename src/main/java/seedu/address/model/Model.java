@@ -4,6 +4,7 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 
+import seedu.address.logic.commands.menu.SortMenuCommand.SortMethod;
 import seedu.address.model.accounts.Account;
 import seedu.address.model.ingredient.Ingredient;
 import seedu.address.model.menu.Item;
@@ -226,14 +227,9 @@ public interface Model {
     void resetMenuData(ReadOnlyAddressBook newData);
 
     /**
-     * Sort the item list by name in alphabetical order.
+     * Sort the item list by given sorting method.
      */
-    void sortMenuByName();
-
-    /**
-     * Sort the item list by price in ascending order.
-     */
-    void sortMenuByPrice();
+    void sortMenu(SortMethod sortMethod);
 
     /**
      * Returns an unmodifiable view of the filtered item list
