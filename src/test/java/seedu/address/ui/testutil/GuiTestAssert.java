@@ -10,9 +10,11 @@ import guitests.guihandles.PersonCardHandle;
 import guitests.guihandles.PersonListPanelHandle;
 import guitests.guihandles.ResultDisplayHandle;
 import guitests.guihandles.menu.ItemCardHandle;
+import guitests.guihandles.reservation.ReservationCardHandle;
 import guitests.guihandles.sales.RecordCardHandle;
 import seedu.address.model.menu.Item;
 import seedu.address.model.person.Person;
+import seedu.address.model.reservation.Reservation;
 import seedu.address.model.salesrecord.SalesRecord;
 
 /**
@@ -185,4 +187,46 @@ public class GuiTestAssert {
                 assertEquals(Arrays.asList(LABEL_DEFAULT_STYLE, getTagColorStyleFor(tag)),
                         actualCard.getTagStyleClasses(tag)));
     }
+
+    // Reservation Management
+    /**
+     * Asserts that {@code actualCard} displays the same values as {@code expectedCard}.
+     */
+    public static void assertReservationCardEquals(ReservationCardHandle expectedCard,
+            ReservationCardHandle actualCard) {
+        assertEquals(expectedCard.getId(), actualCard.getId());
+        assertEquals(expectedCard.getName(), actualCard.getName());
+        assertEquals(expectedCard.getPax(), actualCard.getPax());
+        assertEquals(expectedCard.getDateTime(), actualCard.getDateTime());
+        assertEquals(expectedCard.getTags(), actualCard.getTags());
+        expectedCard.getTags().forEach(tag ->
+                assertEquals(expectedCard.getTagStyleClasses(tag), actualCard.getTagStyleClasses(tag)));
+    }
+    /**
+     * Asserts that {@code actualCard} displays the details of {@code expectedReservation}.
+     */
+    public static void assertCardDisplaysReservation(Reservation expectedReservation,
+            ReservationCardHandle actualCard) {
+        assertEquals(expectedReservation.getName().fullName, actualCard.getName());
+        assertEquals(expectedReservation.getPax().value, actualCard.getPax());
+        assertEquals(expectedReservation.getDateTime().toString(), actualCard.getDateTime());
+        assertTagsEqualForReservation(expectedReservation, actualCard);
+        assertEquals(expectedReservation.getRemark().value, actualCard.getRemark());
+        assertEquals(expectedReservation.getTags().stream().map(tag -> tag.tagName).collect(Collectors.toList()),
+                actualCard.getTags());
+    }
+    /**
+     * Asserts that the tags in {@code actualCard} matches all the tags in {@code expectedReservation} with the
+     * correct color.
+     */
+    private static void assertTagsEqualForReservation(Reservation expectedReservation,
+            ReservationCardHandle actualCard) {
+        List<String> expectedTags = expectedReservation.getTags().stream()
+                .map(tag -> tag.tagName).collect(Collectors.toList());
+        assertEquals(expectedTags, actualCard.getTags());
+        expectedTags.forEach(tag ->
+                assertEquals(Arrays.asList(LABEL_DEFAULT_STYLE, getTagColorStyleFor(tag)),
+                        actualCard.getTagStyleClasses(tag)));
+    }
+
 }

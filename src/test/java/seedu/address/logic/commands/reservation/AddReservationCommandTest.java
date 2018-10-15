@@ -1,4 +1,4 @@
-package seedu.address.logic.commands;
+package seedu.address.logic.commands.reservation;
 
 import static java.util.Objects.requireNonNull;
 import static org.junit.Assert.assertEquals;
@@ -15,6 +15,7 @@ import org.junit.rules.ExpectedException;
 
 import javafx.collections.ObservableList;
 import seedu.address.logic.CommandHistory;
+import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
@@ -28,9 +29,9 @@ import seedu.address.model.salesrecord.Date;
 import seedu.address.model.salesrecord.SalesRecord;
 import seedu.address.model.salesrecord.SalesReport;
 import seedu.address.model.tag.Tag;
-import seedu.address.testutil.PersonBuilder;
+import seedu.address.testutil.reservation.ReservationBuilder;
 
-public class AddCommandTest {
+public class AddReservationCommandTest {
 
     private static final CommandHistory EMPTY_COMMAND_HISTORY = new CommandHistory();
 
@@ -40,56 +41,57 @@ public class AddCommandTest {
     private CommandHistory commandHistory = new CommandHistory();
 
     @Test
-    public void constructor_nullPerson_throwsNullPointerException() {
+    public void constructor_nullReservation_throwsNullPointerException() {
         thrown.expect(NullPointerException.class);
-        new AddCommand(null);
+        new AddReservationCommand(null);
     }
 
     @Test
-    public void execute_personAcceptedByModel_addSuccessful() throws Exception {
-        ModelStubAcceptingPersonAdded modelStub = new ModelStubAcceptingPersonAdded();
-        Person validPerson = new PersonBuilder().build();
+    public void execute_itemAcceptedByModel_addSuccessful() throws Exception {
+        ModelStubAcceptingReservationAdded modelStub = new ModelStubAcceptingReservationAdded();
+        Reservation validReservation = new ReservationBuilder().build();
 
-        CommandResult commandResult = new AddCommand(validPerson).execute(modelStub, commandHistory);
+        CommandResult commandResult = new AddReservationCommand(validReservation).execute(modelStub, commandHistory);
 
-        assertEquals(String.format(AddCommand.MESSAGE_SUCCESS, validPerson), commandResult.feedbackToUser);
-        assertEquals(Arrays.asList(validPerson), modelStub.personsAdded);
+        assertEquals(String.format(AddReservationCommand.MESSAGE_SUCCESS, validReservation),
+                commandResult.feedbackToUser);
+        assertEquals(Arrays.asList(validReservation), modelStub.getReservationsAdded());
         assertEquals(EMPTY_COMMAND_HISTORY, commandHistory);
     }
 
     @Test
-    public void execute_duplicatePerson_throwsCommandException() throws Exception {
-        Person validPerson = new PersonBuilder().build();
-        AddCommand addCommand = new AddCommand(validPerson);
-        ModelStub modelStub = new ModelStubWithPerson(validPerson);
+    public void execute_duplicateReservation_throwsCommandException() throws Exception {
+        Reservation validReservation = new ReservationBuilder().build();
+        AddReservationCommand addReservationCommand = new AddReservationCommand(validReservation);
+        ModelStub modelStub = new ModelStubWithReservation(validReservation);
 
         thrown.expect(CommandException.class);
-        thrown.expectMessage(AddCommand.MESSAGE_DUPLICATE_PERSON);
-        addCommand.execute(modelStub, commandHistory);
+        thrown.expectMessage(AddReservationCommand.MESSAGE_DUPLICATE_RESERVATION);
+        addReservationCommand.execute(modelStub, commandHistory);
     }
 
     @Test
     public void equals() {
-        Person alice = new PersonBuilder().withName("Alice").build();
-        Person bob = new PersonBuilder().withName("Bob").build();
-        AddCommand addAliceCommand = new AddCommand(alice);
-        AddCommand addBobCommand = new AddCommand(bob);
+        Reservation andrew = new ReservationBuilder().withName("Andrew").build();
+        Reservation billy = new ReservationBuilder().withName("Billy").build();
+        AddReservationCommand addAndrewCommand = new AddReservationCommand(andrew);
+        AddReservationCommand addBillyCommand = new AddReservationCommand(billy);
 
         // same object -> returns true
-        assertTrue(addAliceCommand.equals(addAliceCommand));
+        assertTrue(addAndrewCommand.equals(addAndrewCommand));
 
         // same values -> returns true
-        AddCommand addAliceCommandCopy = new AddCommand(alice);
-        assertTrue(addAliceCommand.equals(addAliceCommandCopy));
+        AddReservationCommand addAndrewCommandCopy = new AddReservationCommand(andrew);
+        assertTrue(addAndrewCommand.equals(addAndrewCommandCopy));
 
         // different types -> returns false
-        assertFalse(addAliceCommand.equals(1));
+        assertFalse(addAndrewCommand.equals(1));
 
         // null -> returns false
-        assertFalse(addAliceCommand.equals(null));
+        assertFalse(addAndrewCommand.equals(null));
 
         // different person -> returns false
-        assertFalse(addAliceCommand.equals(addBobCommand));
+        assertFalse(addAndrewCommand.equals(addBillyCommand));
     }
 
     /**
@@ -182,6 +184,7 @@ public class AddCommandTest {
             throw new AssertionError("This method should not be called.");
         }
 
+
         @Override
         public void updateAccount(Account target, Account editedAccount) {
             throw new AssertionError("This method should not be called.");
@@ -238,6 +241,37 @@ public class AddCommandTest {
             throw new AssertionError("This method should not be called.");
         }
 
+        // Ingredient Management
+        @Override
+        public boolean hasIngredient(Ingredient ingredient) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void addIngredient(Ingredient ingredient) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void deleteIngredient(Ingredient ingredient) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void updateIngredient(Ingredient target, Ingredient editedIngredient) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ObservableList<Ingredient> getFilteredIngredientList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void updateFilteredIngredientList(Predicate<Ingredient> predicate) {
+            throw new AssertionError("This method should not be called.");
+        }
+
         // Reservation Management
         @Override
         public boolean hasReservation(Reservation reservation) {
@@ -275,42 +309,12 @@ public class AddCommandTest {
         }
 
         @Override
-        public boolean hasIngredient(Ingredient ingredient) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public void addIngredient(Ingredient ingredient) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public void deleteIngredient(Ingredient ingredient) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public void updateIngredient(Ingredient target, Ingredient editedIngredient) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public ObservableList<Ingredient> getFilteredIngredientList() {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public void updateFilteredIngredientList(Predicate<Ingredient> predicate) {
+        public void addRecord(SalesRecord record) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
         public boolean hasRecord(SalesRecord record) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public void addRecord(SalesRecord record) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -338,45 +342,44 @@ public class AddCommandTest {
         public void updateFilteredRecordList(Predicate<SalesRecord> predicate) {
             throw new AssertionError("This method should not be called.");
         }
-
     }
 
     /**
-     * A Model stub that contains a person.
+     * A Model stub that contains a single reservation.
      */
-    private class ModelStubWithPerson extends ModelStub {
+    private class ModelStubWithReservation extends ModelStub {
 
-        private final Person person;
+        private final Reservation reservation;
 
-        ModelStubWithPerson(Person person) {
-            requireNonNull(person);
-            this.person = person;
+        ModelStubWithReservation(Reservation reservation) {
+            requireNonNull(reservation);
+            this.reservation = reservation;
         }
 
         @Override
-        public boolean hasPerson(Person person) {
-            requireNonNull(person);
-            return this.person.isSamePerson(person);
+        public boolean hasReservation(Reservation reservation) {
+            requireNonNull(reservation);
+            return this.reservation.isSameReservation(reservation);
         }
     }
 
     /**
-     * A Model stub that always accept the person being added.
+     * A Model stub that always accept the reservation being added.
      */
-    private class ModelStubAcceptingPersonAdded extends ModelStub {
+    private class ModelStubAcceptingReservationAdded extends ModelStub {
 
-        final ArrayList<Person> personsAdded = new ArrayList<>();
+        private final ArrayList<Reservation> reservationsAdded = new ArrayList<>();
 
         @Override
-        public boolean hasPerson(Person person) {
-            requireNonNull(person);
-            return personsAdded.stream().anyMatch(person::isSamePerson);
+        public boolean hasReservation(Reservation reservation) {
+            requireNonNull(reservation);
+            return reservationsAdded.stream().anyMatch(reservation::isSameReservation);
         }
 
         @Override
-        public void addPerson(Person person) {
-            requireNonNull(person);
-            personsAdded.add(person);
+        public void addReservation(Reservation reservation) {
+            requireNonNull(reservation);
+            reservationsAdded.add(reservation);
         }
 
         @Override
@@ -387,6 +390,10 @@ public class AddCommandTest {
         @Override
         public ReadOnlyAddressBook getAddressBook() {
             return new AddressBook();
+        }
+
+        public ArrayList<Reservation> getReservationsAdded() {
+            return reservationsAdded;
         }
     }
 
