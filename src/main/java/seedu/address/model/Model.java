@@ -3,7 +3,9 @@ package seedu.address.model;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
+
 import seedu.address.model.accounts.Account;
+import seedu.address.model.ingredient.Ingredient;
 import seedu.address.model.menu.Item;
 import seedu.address.model.person.Person;
 import seedu.address.model.salesrecord.SalesRecord;
@@ -19,6 +21,7 @@ public interface Model {
      */
     Predicate<Person> PREDICATE_SHOW_ALL_PERSONS = unused -> true;
     Predicate<Account> PREDICATE_SHOW_ALL_ACCOUNTS = unused -> true;
+    Predicate<Ingredient> PREDICATE_SHOW_ALL_INGREDIENTS = unused -> true;
     Predicate<Item> PREDICATE_SHOW_ALL_ITEMS = unused -> true;
     Predicate<SalesRecord> PREDICATE_SHOW_ALL_RECORDS = unused -> true;
 
@@ -156,7 +159,43 @@ public interface Model {
 
     void updateFilteredAccountList(Predicate<Account> predicate);
 
-    // API for Menu Management
+    //=============== API for Ingredient ===============
+
+    /**
+     * Returns true if an ingredient with the same identity as {@code ingredient} exists in the address book.
+     */
+    boolean hasIngredient(Ingredient ingredient);
+
+    /**
+     * Deletes the given ingredient. The ingredient must exist in the address book.
+     */
+    void deleteIngredient(Ingredient target);
+
+    /**
+     * Adds the given ingredient. {@code ingredient} must not already exist in the address book.
+     */
+    void addIngredient(Ingredient ingredient);
+
+    /**
+     * Replaces the given ingredient {@code target} with {@code editedIngredient}. {@code target} must exist in
+     * the address book. The ingredient identity of {@code editedIngredient} must not be the same as another
+     * existing ingredient in the address book.
+     */
+    void updateIngredient(Ingredient target, Ingredient editedIngredient);
+
+    /**
+     * Returns an unmodifiable view of the filtered ingredient list
+     */
+    ObservableList<Ingredient> getFilteredIngredientList();
+
+    /**
+     * Updates the filter of the filtered ingredient list to filter by the given {@code predicate}.
+     *
+     * @throws NullPointerException if {@code predicate} is null.
+     */
+    void updateFilteredIngredientList(Predicate<Ingredient> predicate);
+
+    //=============== API for Menu ===============
 
     /**
      * Returns true if an item with the same identity as {@code item} exists in the address book.

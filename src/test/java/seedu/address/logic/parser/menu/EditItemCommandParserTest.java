@@ -19,9 +19,9 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_ITEM_TAG_CHEESE
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
-import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
-import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
-import static seedu.address.testutil.TypicalIndexes.INDEX_THIRD_PERSON;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST;
+import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND;
+import static seedu.address.testutil.TypicalIndexes.INDEX_THIRD;
 
 import org.junit.Test;
 
@@ -100,7 +100,7 @@ public class EditItemCommandParserTest {
 
     @Test
     public void parse_allFieldsSpecified_success() {
-        Index targetIndex = INDEX_SECOND_PERSON;
+        Index targetIndex = INDEX_SECOND;
         String userInput = targetIndex.getOneBased() + ITEM_PRICE_DESC_BURGER + ITEM_TAG_DESC_BURGER
                 + ITEM_NAME_DESC_FRIES + ITEM_TAG_DESC_CHEESE;
 
@@ -115,7 +115,7 @@ public class EditItemCommandParserTest {
     @Test
     public void parse_oneFieldSpecified_success() {
         // name
-        Index targetIndex = INDEX_THIRD_PERSON;
+        Index targetIndex = INDEX_THIRD;
         String userInput = targetIndex.getOneBased() + ITEM_NAME_DESC_FRIES;
         EditItemDescriptor descriptor = new EditItemDescriptorBuilder().withName(VALID_ITEM_NAME_FRIES).build();
         EditItemCommand expectedCommand = new EditItemCommand(targetIndex, descriptor);
@@ -136,7 +136,7 @@ public class EditItemCommandParserTest {
 
     @Test
     public void parse_multipleRepeatedFields_acceptsLast() {
-        Index targetIndex = INDEX_FIRST_PERSON;
+        Index targetIndex = INDEX_FIRST;
         String userInput = targetIndex.getOneBased() + ITEM_PRICE_DESC_FRIES + ITEM_TAG_DESC_CHEESE
                 + ITEM_PRICE_DESC_FRIES + ITEM_TAG_DESC_CHEESE
                 + ITEM_PRICE_DESC_BURGER + ITEM_TAG_DESC_BURGER;
@@ -151,7 +151,7 @@ public class EditItemCommandParserTest {
     @Test
     public void parse_invalidValueFollowedByValidValue_success() {
         // no other valid values specified
-        Index targetIndex = INDEX_FIRST_PERSON;
+        Index targetIndex = INDEX_FIRST;
         String userInput = targetIndex.getOneBased() + INVALID_PRICE_DESC + ITEM_PRICE_DESC_BURGER;
         EditItemDescriptor descriptor = new EditItemDescriptorBuilder().withPrice(VALID_ITEM_PRICE_BURGER).build();
         EditItemCommand expectedCommand = new EditItemCommand(targetIndex, descriptor);
@@ -167,7 +167,7 @@ public class EditItemCommandParserTest {
 
     @Test
     public void parse_resetTags_success() {
-        Index targetIndex = INDEX_THIRD_PERSON;
+        Index targetIndex = INDEX_THIRD;
         String userInput = targetIndex.getOneBased() + TAG_EMPTY;
 
         EditItemDescriptor descriptor = new EditItemDescriptorBuilder().withTags().build();

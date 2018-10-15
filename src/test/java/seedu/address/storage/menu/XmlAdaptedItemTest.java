@@ -1,7 +1,7 @@
 package seedu.address.storage.menu;
 
 import static org.junit.Assert.assertEquals;
-import static seedu.address.storage.menu.XmlAdaptedItem.MISSING_FIELD_MESSAGE_FORMAT;
+import static seedu.address.storage.elements.XmlAdaptedItem.MISSING_FIELD_MESSAGE_FORMAT;
 import static seedu.address.testutil.menu.TypicalItems.APPLE_JUICE;
 
 import java.util.ArrayList;
@@ -14,6 +14,7 @@ import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.menu.Name;
 import seedu.address.model.menu.Price;
 import seedu.address.storage.XmlAdaptedTag;
+import seedu.address.storage.elements.XmlAdaptedItem;
 import seedu.address.testutil.Assert;
 
 public class XmlAdaptedItemTest {
