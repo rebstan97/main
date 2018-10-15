@@ -8,6 +8,7 @@ import java.util.Objects;
 import java.util.Set;
 
 import javafx.collections.ObservableList;
+import seedu.address.logic.commands.menu.SortMenuCommand.SortMethod;
 import seedu.address.model.accounts.Account;
 import seedu.address.model.accounts.UniqueAccountList;
 import seedu.address.model.ingredient.Ingredient;
@@ -367,17 +368,19 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Sorts the menu by name in alphabetical order.
+     * Sorts the menu by the given sorting method.
      */
-    public void sortMenuByName() {
-        items.sortItemsByName();
-    }
-
-    /**
-     * Sorts the menu by price in ascending order.
-     */
-    public void sortMenuByPrice() {
-        items.sortItemsByPrice();
+    public void sortMenu(SortMethod sortMethod) {
+        switch (sortMethod){
+        case NAME:
+            items.sortItemsByName();
+            return;
+        case PRICE:
+            items.sortItemsByPrice();
+            return;
+        default:
+            return;
+        }
     }
 
     @Override
