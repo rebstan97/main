@@ -6,6 +6,10 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ID;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_INGREDIENT_MINIMUM;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_INGREDIENT_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_INGREDIENT_PRICE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_INGREDIENT_UNIT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ITEM_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ITEM_PRICE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
@@ -22,12 +26,16 @@ import java.util.List;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.commands.ingredients.EditIngredientCommand;
 import seedu.address.logic.commands.menu.EditItemCommand;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
+import seedu.address.model.ingredient.Ingredient;
+import seedu.address.model.ingredient.IngredientNameContainsKeywordsPredicate;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
+import seedu.address.testutil.ingredients.EditIngredientDescriptorBuilder;
 import seedu.address.testutil.menu.EditItemDescriptorBuilder;
 
 /**
@@ -106,7 +114,27 @@ public class CommandTestUtil {
     public static final String PREFIX_WITH_INVALID_USERNAME = " " + PREFIX_ID + "azhi kai"; // space not allowed
     public static final String PREFIX_WITH_INVALID_PASSWORD = " " + PREFIX_PASSWORD + "11 22qq"; // space not allowed
 
-    // Menu Management
+    /** For ingredients */
+    public static final String VALID_NAME_APPLE = "Granny Smith Apple";
+    public static final String VALID_NAME_BROCCOLI = "Australian Broccoli";
+    public static final String VALID_UNIT_APPLE = "packet of 5";
+    public static final String VALID_UNIT_BROCCOLI = "kilograms";
+    public static final String VALID_PRICE_APPLE = "1.90";
+    public static final String VALID_PRICE_BROCCOLI = "6.50";
+    public static final String VALID_MINIMUM_APPLE = "3";
+    public static final String VALID_MINIMUM_BROCCOLI = "5";
+
+    public static final String INGREDIENT_NAME_DESC_APPLE = " " + PREFIX_INGREDIENT_NAME + VALID_NAME_APPLE;
+    public static final String INGREDIENT_NAME_DESC_BROCCOLI = " " + PREFIX_INGREDIENT_NAME + VALID_NAME_BROCCOLI;
+    public static final String INGREDIENT_UNIT_DESC_APPLE = " " + PREFIX_INGREDIENT_UNIT + VALID_UNIT_APPLE;
+    public static final String INGREDIENT_UNIT_DESC_BROCCOLI = " " + PREFIX_INGREDIENT_UNIT + VALID_UNIT_BROCCOLI;
+    public static final String INGREDIENT_PRICE_DESC_APPLE = " " + PREFIX_INGREDIENT_PRICE + VALID_PRICE_APPLE;
+    public static final String INGREDIENT_PRICE_DESC_BROCCOLI = " " + PREFIX_INGREDIENT_PRICE + VALID_PRICE_BROCCOLI;
+    public static final String INGREDIENT_MINIMUM_DESC_APPLE = " " + PREFIX_INGREDIENT_MINIMUM + VALID_MINIMUM_APPLE;
+    public static final String INGREDIENT_MINIMUM_DESC_BROCCOLI = " " + PREFIX_INGREDIENT_MINIMUM
+            + VALID_MINIMUM_BROCCOLI;
+
+    /** For menu */
     public static final String VALID_ITEM_NAME_BURGER = "Burger";
     public static final String VALID_ITEM_NAME_FRIES = "Cheese Fries";
     public static final String VALID_ITEM_PRICE_BURGER = "2.50";
@@ -126,7 +154,6 @@ public class CommandTestUtil {
     public static final String INVALID_ITEM_NAME_DESC = " " + PREFIX_NAME + "Fries&"; // '&' not allowed in names
     public static final String INVALID_PRICE_DESC = " " + PREFIX_PRICE + "9.000"; // 3 decimal places not allowed in
     // prices
-
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
 
@@ -136,6 +163,9 @@ public class CommandTestUtil {
     public static final EditItemCommand.EditItemDescriptor DESC_BURGER;
     public static final EditItemCommand.EditItemDescriptor DESC_FRIES;
 
+    public static final EditIngredientCommand.EditIngredientDescriptor DESC_APPLE;
+    public static final EditIngredientCommand.EditIngredientDescriptor DESC_BROCCOLI;
+
     static {
         DESC_AMY = new EditPersonDescriptorBuilder().withName(VALID_NAME_AMY)
                 .withPhone(VALID_PHONE_AMY).withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_AMY)
@@ -143,11 +173,19 @@ public class CommandTestUtil {
         DESC_BOB = new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB)
                 .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB)
                 .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
+
         // Menu Management
         DESC_BURGER = new EditItemDescriptorBuilder().withName(VALID_ITEM_NAME_BURGER)
                 .withPrice(VALID_ITEM_PRICE_BURGER).build();
         DESC_FRIES = new EditItemDescriptorBuilder().withName(VALID_ITEM_NAME_FRIES).withPrice(VALID_ITEM_PRICE_FRIES)
                         .withTags(VALID_ITEM_TAG_CHEESE).build();
+
+        // Ingredient Management
+        DESC_APPLE = new EditIngredientDescriptorBuilder().withName(VALID_NAME_APPLE)
+                .withPrice(VALID_PRICE_APPLE).build();
+        DESC_BROCCOLI =
+                new EditIngredientDescriptorBuilder().withName(VALID_NAME_BROCCOLI).withPrice(VALID_PRICE_BROCCOLI)
+                .withUnit(VALID_UNIT_BROCCOLI).build();
     }
 
     /**
@@ -218,4 +256,20 @@ public class CommandTestUtil {
         model.deletePerson(firstPerson);
         model.commitAddressBook();
     }
+
+    /**
+     * Updates {@code model}'s filtered list to show only the ingredient at the given {@code targetIndex} in the
+     * {@code model}'s address book.
+     */
+    public static void showIngredientAtIndex(Model model, Index targetIndex) {
+        assertTrue(targetIndex.getZeroBased() < model.getFilteredIngredientList().size());
+
+        Ingredient ingredient = model.getFilteredIngredientList().get(targetIndex.getZeroBased());
+        final String[] splitIngredient = ingredient.getName().fullName.split("\\s+");
+        model.updateFilteredIngredientList(
+                new IngredientNameContainsKeywordsPredicate(Arrays.asList(splitIngredient[0])));
+
+        assertEquals(1, model.getFilteredIngredientList().size());
+    }
+
 }

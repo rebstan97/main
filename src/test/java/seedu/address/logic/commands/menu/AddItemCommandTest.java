@@ -21,6 +21,7 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.accounts.Account;
+import seedu.address.model.ingredient.Ingredient;
 import seedu.address.model.menu.Item;
 import seedu.address.model.person.Person;
 import seedu.address.model.salesrecord.Date;
@@ -181,7 +182,6 @@ public class AddItemCommandTest {
             throw new AssertionError("This method should not be called.");
         }
 
-
         @Override
         public void updateAccount(Account target, Account editedAccount) {
             throw new AssertionError("This method should not be called.");
@@ -194,47 +194,6 @@ public class AddItemCommandTest {
 
         @Override
         public void updateFilteredAccountList(Predicate<Account> predicate) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        // Menu Management
-        @Override
-        public void addItem(Item item) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public boolean hasItem(Item item) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public void deleteItem(Item target) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public void updateItem(Item target, Item editedItem) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public void removeTagForMenu(Tag tag) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public void resetMenuData(ReadOnlyAddressBook newData) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public ObservableList<Item> getFilteredItemList() {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
-        public void updateFilteredItemList(Predicate<Item> predicate) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -272,10 +231,80 @@ public class AddItemCommandTest {
         public void updateFilteredRecordList(Predicate<SalesRecord> predicate) {
             throw new AssertionError("This method should not be called.");
         }
+
+        @Override
+        public void addItem(Item item) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean hasItem(Item item) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void deleteItem(Item item) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void updateItem(Item target, Item editedRecord) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void removeTagForMenu(Tag tag) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+
+        @Override
+        public ObservableList<Item> getFilteredItemList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void updateFilteredItemList(Predicate<Item> predicate) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void resetMenuData(ReadOnlyAddressBook newData) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean hasIngredient(Ingredient ingredient) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void addIngredient(Ingredient ingredient) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void deleteIngredient(Ingredient ingredient) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void updateIngredient(Ingredient target, Ingredient editedIngredient) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        public ObservableList<Ingredient> getFilteredIngredientList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void updateFilteredIngredientList(Predicate<Ingredient> predicate) {
+            throw new AssertionError("This method should not be called.");
+        }
     }
 
     /**
-     * A Model stub that contains a single person.
+     * A Model stub that contains a single item.
      */
     private class ModelStubWithItem extends ModelStub {
 
