@@ -32,13 +32,13 @@ public class EditSalesCommand extends Command {
     public static final String COMMAND_WORD = "edit-sales";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the sales record identified "
-            + "by the index number used in the displayed sales list. "
+            + "by the index number used in the displayed sales list.\n"
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: INDEX (must be a positive integer) "
             + "[" + PREFIX_DATE + "DATE] "
             + "[" + PREFIX_ITEM_NAME + "NAME] "
             + "[" + PREFIX_QUANTITY_SOLD + "QUANTITY_SOLD] "
-            + "[" + PREFIX_ITEM_PRICE + "PRICE] "
+            + "[" + PREFIX_ITEM_PRICE + "PRICE]\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_DATE + "25-12-2018 "
             + PREFIX_QUANTITY_SOLD + "80";
