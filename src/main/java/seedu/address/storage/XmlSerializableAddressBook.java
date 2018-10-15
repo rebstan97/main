@@ -179,7 +179,7 @@ public class XmlSerializableAddressBook {
         }
     }
 
-     /**
+    /**
      * Converts this item record into the model's {@code Item} object.
      * @throws IllegalValueException if there were any data constraints violated or duplicates in the {@code
      * XmlAdaptedItem}.
