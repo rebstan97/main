@@ -14,6 +14,8 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.events.model.AddressBookChangedEvent;
 import seedu.address.model.accounts.Account;
 import seedu.address.model.ingredient.Ingredient;
+import seedu.address.model.ingredient.IngredientName;
+import seedu.address.model.ingredient.exceptions.IngredientNotFoundException;
 import seedu.address.model.menu.Item;
 import seedu.address.model.person.Person;
 import seedu.address.model.salesrecord.SalesRecord;
@@ -218,7 +220,11 @@ public class ModelManager extends ComponentManager implements Model {
     public void addIngredient(Ingredient ingredient) {
         versionedAddressBook.addIngredient(ingredient);
         updateFilteredIngredientList(PREDICATE_SHOW_ALL_INGREDIENTS);
+    }
 
+    @Override
+    public Ingredient findIngredient(IngredientName ingredientName) throws IngredientNotFoundException {
+        return versionedAddressBook.findIngredient(ingredientName);
     }
 
     @Override

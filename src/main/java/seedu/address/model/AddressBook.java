@@ -6,12 +6,15 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
 import java.util.Set;
+import java.util.stream.Stream;
 
 import javafx.collections.ObservableList;
 import seedu.address.model.accounts.Account;
 import seedu.address.model.accounts.UniqueAccountList;
 import seedu.address.model.ingredient.Ingredient;
+import seedu.address.model.ingredient.IngredientName;
 import seedu.address.model.ingredient.UniqueIngredientList;
+import seedu.address.model.ingredient.exceptions.IngredientNotFoundException;
 import seedu.address.model.menu.Item;
 import seedu.address.model.menu.UniqueItemList;
 import seedu.address.model.person.Person;
@@ -253,6 +256,14 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public boolean hasIngredient(Ingredient ingredient) {
         return ingredients.contains(ingredient);
+    }
+
+    /**
+     * Finds an ingredient in the address book with the name {@code IngredientName}. The ingredient must already
+     * exist in the address book.
+     */
+    public Ingredient findIngredient(IngredientName name) throws IngredientNotFoundException {
+        return ingredients.find(name);
     }
 
     /**
