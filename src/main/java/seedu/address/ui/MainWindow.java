@@ -288,6 +288,7 @@ public class MainWindow extends UiPart<Stage> {
     @Subscribe
     private void handleDisplaySalesReportEvent(DisplaySalesReportEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
+        handleSwitchToSales();
         SalesReportWindow salesReportWindow = new SalesReportWindow(event.getSalesReportToDisplay());
         salesReportWindow.show();
     }
