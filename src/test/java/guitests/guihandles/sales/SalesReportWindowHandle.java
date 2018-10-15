@@ -10,8 +10,6 @@ import seedu.address.model.salesrecord.SalesReport;
  */
 public class SalesReportWindowHandle extends StageHandle {
 
-    public static final String SALES_REPORT_WINDOW_TITLE = "Sales Report for %s";
-
     private final SalesReport salesReport;
 
     public SalesReportWindowHandle(Stage salesReportWindowStage, SalesReport salesReport) {
@@ -24,6 +22,6 @@ public class SalesReportWindowHandle extends StageHandle {
      */
     public boolean isWindowPresent() {
         String date = salesReport.getDate().toString();
-        return new GuiRobot().isWindowShown(String.format(SALES_REPORT_WINDOW_TITLE, date));
+        return new GuiRobot().isWindowShown(salesReport.toString());
     }
 }

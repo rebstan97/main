@@ -25,7 +25,6 @@ public class SalesReportWindow extends UiPart<Stage> {
 
     private static final Logger logger = LogsCenter.getLogger(SalesReportWindow.class);
     private static final String FXML = "SalesReportWindow.fxml";
-    private static final String title = "Sales Report for %s";
     private static final String totalRevenueMessage = "Total revenue: %s";
     private static final NumberFormat currencyFormatter = NumberFormat.getCurrencyInstance();
 
@@ -52,7 +51,7 @@ public class SalesReportWindow extends UiPart<Stage> {
      */
     public SalesReportWindow(Stage root, SalesReport salesReport) {
         super(FXML, root);
-        root.setTitle(String.format(title, salesReport.getDate().toString()));
+        root.setTitle(salesReport.toString());
         this.salesReport = salesReport;
     }
 

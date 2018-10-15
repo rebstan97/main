@@ -78,6 +78,6 @@ public class SalesReport {
 
     @Override
     public String toString() {
-        return "Sales Report for  " + getDate();
+        return "Sales Report for " + getDate();
     }
 }
