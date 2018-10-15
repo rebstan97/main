@@ -113,7 +113,7 @@ public class UniqueReservationList implements Iterable<Reservation> {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof UniqueReservationList // instanceof handles nulls
-                        && internalList.equals(((UniqueReservationList) other).internalList));
+                    && internalList.equals(((UniqueReservationList) other).internalList));
     }
 
     @Override

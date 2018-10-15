@@ -42,7 +42,7 @@ public class Pax {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof Pax // instanceof handles nulls
-                && value.equals(((Pax) other).value)); // state check
+                    && value.equals(((Pax) other).value)); // state check
     }
 
     @Override
