@@ -14,11 +14,13 @@ import seedu.address.model.accounts.Account;
 import seedu.address.model.ingredient.Ingredient;
 import seedu.address.model.menu.Item;
 import seedu.address.model.person.Person;
+import seedu.address.model.reservation.Reservation;
 import seedu.address.model.salesrecord.SalesRecord;
 import seedu.address.storage.elements.XmlAdaptedAccount;
 import seedu.address.storage.elements.XmlAdaptedIngredient;
 import seedu.address.storage.elements.XmlAdaptedItem;
 import seedu.address.storage.elements.XmlAdaptedRecord;
+import seedu.address.storage.elements.XmlAdaptedReservation;
 
 /**
  * An Immutable AddressBook that is serializable to XML format
@@ -30,8 +32,8 @@ public class XmlSerializableAddressBook {
     public static final String MESSAGE_DUPLICATE_RECORD = "Records list contains duplicate record(s).";
     public static final String MESSAGE_DUPLICATE_ACCOUNT = "Account list contains duplicate account(s).";
     public static final String MESSAGE_DUPLICATE_INGREDIENT = "Ingredient list contains duplicate ingredient(s).";
-
     public static final String MESSAGE_DUPLICATE_ITEM = "Items list contains duplicate item(s).";
+    public static final String MESSAGE_DUPLICATE_RESERVATION = "Reservation list contains duplicate reservation(s).";
 
     private AddressBook addressBook;
 
@@ -50,6 +52,9 @@ public class XmlSerializableAddressBook {
     @XmlElement
     private List<XmlAdaptedItem> items;
 
+    @XmlElement
+    private List<XmlAdaptedReservation> reservations;
+
     /**
      * Creates an empty XmlSerializableAddressBook. This empty constructor is required for marshalling.
      */
@@ -60,6 +65,7 @@ public class XmlSerializableAddressBook {
         accounts = new ArrayList<>();
         ingredients = new ArrayList<>();
         items = new ArrayList<>();
+        reservations = new ArrayList<>();
     }
 
     /**
@@ -73,6 +79,8 @@ public class XmlSerializableAddressBook {
         ingredients.addAll(src.getIngredientList().stream().map(XmlAdaptedIngredient::new)
                 .collect(Collectors.toList()));
         items.addAll(src.getItemList().stream().map(XmlAdaptedItem::new).collect(Collectors.toList()));
+        reservations.addAll(src.getReservationList().stream()
+                .map(XmlAdaptedReservation::new).collect(Collectors.toList()));
     }
 
     /**
@@ -87,6 +95,7 @@ public class XmlSerializableAddressBook {
         processIngredients();
         processRecords();
         processItems();
+        processReservations();
         return addressBook;
     }
 
@@ -139,6 +148,22 @@ public class XmlSerializableAddressBook {
     }
 
     /**
+     * Converts this reservation record into the model's {@code Reservation} object.
+     *
+     * @throws IllegalValueException if there were any data constraints violated or duplicates in the {@code
+     *         XmlAdaptedReservation}.
+     */
+    public void processReservations() throws IllegalValueException {
+        for (XmlAdaptedReservation res : reservations) {
+            Reservation reservation = res.toModelType();
+            if (addressBook.hasReservation(reservation)) {
+                throw new IllegalValueException(MESSAGE_DUPLICATE_RESERVATION);
+            }
+            addressBook.addReservation(reservation);
+        }
+    }
+
+    /**
      * Converts this ingredient record into the model's {@code Ingredient} object.
      *
      * @throws IllegalValueException if there were any data constraints violated or duplicates in the {@code
@@ -154,7 +179,8 @@ public class XmlSerializableAddressBook {
         }
     }
 
-    /** Converts this item record into the model's {@code Item} object.
+    /**
+     * Converts this item record into the model's {@code Item} object.
      * @throws IllegalValueException if there were any data constraints violated or duplicates in the {@code
      * XmlAdaptedItem}.
      */
@@ -181,6 +207,7 @@ public class XmlSerializableAddressBook {
                 && accounts.equals(((XmlSerializableAddressBook) other).accounts)
                 && ingredients.equals(((XmlSerializableAddressBook) other).ingredients)
                 && items.equals(((XmlSerializableAddressBook) other).items)
+                && reservations.equals(((XmlSerializableAddressBook) other).reservations)
                 && records.equals(((XmlSerializableAddressBook) other).records);
     }
 }
