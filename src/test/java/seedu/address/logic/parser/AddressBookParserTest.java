@@ -40,6 +40,8 @@ import seedu.address.logic.commands.menu.ClearMenuCommand;
 import seedu.address.logic.commands.menu.ListItemsCommand;
 import seedu.address.logic.commands.menu.SelectItemCommand;
 import seedu.address.logic.commands.salescommands.DeleteSalesCommand;
+import seedu.address.logic.commands.salescommands.EditSalesCommand;
+import seedu.address.logic.commands.salescommands.EditSalesCommand.EditRecordDescriptor;
 import seedu.address.logic.commands.salescommands.RecordSalesCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.accounts.Account;
@@ -56,6 +58,7 @@ import seedu.address.testutil.accounts.AccountUtil;
 import seedu.address.testutil.ingredients.EditIngredientDescriptorBuilder;
 import seedu.address.testutil.ingredients.IngredientBuilder;
 import seedu.address.testutil.ingredients.IngredientUtil;
+import seedu.address.testutil.salesrecords.EditRecordDescriptorBuilder;
 import seedu.address.testutil.salesrecords.RecordBuilder;
 import seedu.address.testutil.salesrecords.RecordUtil;
 
@@ -196,9 +199,22 @@ public class AddressBookParserTest {
         DeleteSalesCommand command = (DeleteSalesCommand) parser.parseCommand(
                 DeleteSalesCommand.COMMAND_WORD + " " + INDEX_FIRST.getOneBased());
         assertEquals(new DeleteSalesCommand(INDEX_FIRST), command);
-//        command = (DeleteSalesCommand) parser.parseCommand(DeleteCommand.COMMAND_ALIAS
-//                + " " + INDEX_FIRST.getOneBased());
-//        assertEquals(new DeleteCommand(INDEX_FIRST), command); // to be implemented once alias is supported
+        //command = (DeleteSalesCommand) parser.parseCommand(DeleteSalesCommand.COMMAND_ALIAS
+        //        + " " + INDEX_FIRST.getOneBased());
+        //assertEquals(new DeleteSalesCommand(INDEX_FIRST), command); // to be implemented once alias is supported
+    }
+
+    @Test
+    public void parseCommand_editSales() throws Exception {
+        SalesRecord salesRecord = new RecordBuilder().build();
+        EditRecordDescriptor descriptor = new EditRecordDescriptorBuilder(salesRecord).build();
+        EditSalesCommand command = (EditSalesCommand) parser.parseCommand(EditSalesCommand.COMMAND_WORD + " "
+                + INDEX_FIRST.getOneBased() + " " + RecordUtil.getEditRecordDescriptorDetails(descriptor));
+        assertEquals(new EditSalesCommand(INDEX_FIRST, descriptor), command);
+
+        //command = (EditSalesCommand) parser.parseCommand(EditSalesCommand.COMMAND_ALIAS + " "
+        //        + INDEX_FIRST.getOneBased() + " " + RecordUtil.getEditRecordDescriptorDetails(descriptor));
+        //assertEquals(new EditSalesCommand(INDEX_FIRST, descriptor), command); // to be implemented
     }
 
     @Test
