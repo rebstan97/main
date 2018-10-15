@@ -34,6 +34,8 @@ import seedu.address.model.ingredient.Ingredient;
 import seedu.address.model.ingredient.IngredientNameContainsKeywordsPredicate;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
+import seedu.address.model.salesrecord.ItemNameContainsKeywordsPredicate;
+import seedu.address.model.salesrecord.SalesRecord;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 import seedu.address.testutil.ingredients.EditIngredientDescriptorBuilder;
 import seedu.address.testutil.menu.EditItemDescriptorBuilder;
@@ -272,4 +274,17 @@ public class CommandTestUtil {
         assertEquals(1, model.getFilteredIngredientList().size());
     }
 
+    /**
+     * Updates {@code model}'s filtered list to show only the sales record at the given {@code targetIndex} in the
+     * {@code model}'s address book.
+     */
+    public static void showRecordAtIndex(Model model, Index targetIndex) {
+        assertTrue(targetIndex.getZeroBased() < model.getFilteredRecordList().size());
+
+        SalesRecord salesRecord = model.getFilteredRecordList().get(targetIndex.getZeroBased());
+        final String[] splitRecord = salesRecord.getName().toString().split("\\s+");
+        model.updateFilteredRecordList(new ItemNameContainsKeywordsPredicate(Arrays.asList(splitRecord[0])));
+
+        assertEquals(1, model.getFilteredRecordList().size());
+    }
 }
