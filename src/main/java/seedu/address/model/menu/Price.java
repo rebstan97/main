@@ -13,8 +13,7 @@ public class Price {
             "Price should only contain numbers, and it should be at most 2 decimal place";
     private static final String DECIMAL_PLACE_REGEX = "\\d{0,2}";
     public static final String PRICE_VALIDATION_REGEX = "\\d+" + ".?" + DECIMAL_PLACE_REGEX;
-    public final String value;
-    public final double valueDble;
+    public final double value;
 
     /**
      * Constructs a {@code Price}.
@@ -24,8 +23,7 @@ public class Price {
     public Price(String price) {
         requireNonNull(price);
         checkArgument(isValidPrice(price), MESSAGE_PRICE_CONSTRAINTS);
-        value = price;
-        valueDble = Double.parseDouble(price);
+        value = Double.parseDouble(price);
     }
 
     /**
@@ -37,20 +35,20 @@ public class Price {
 
     @Override
     public String toString() {
-        //return value;
-        return String.format("%.2f", valueDble);
+        //return valueInString;
+        return String.format("%.2f", value);
     }
 
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof Price // instanceof handles nulls
-                    && valueDble == ((Price) other).valueDble); // state check
+                    && value == ((Price) other).value); // state check
     }
 
     @Override
     public int hashCode() {
-        return Double.valueOf(valueDble).hashCode();
+        return Double.valueOf(value).hashCode();
     }
 
 }

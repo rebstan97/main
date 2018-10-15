@@ -59,7 +59,7 @@ public class XmlAdaptedItem {
      */
     public XmlAdaptedItem(Item source) {
         name = source.getName().fullName;
-        price = source.getPrice().value;
+        price = source.getPrice().toString();
         remark = source.getRemark().value;
         tagged = source.getTags().stream()
                 .map(XmlAdaptedTag::new)
