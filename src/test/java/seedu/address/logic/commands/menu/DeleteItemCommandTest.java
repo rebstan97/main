@@ -6,8 +6,8 @@ import static org.junit.Assert.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.menu.MenuCommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.menu.MenuCommandTestUtil.showItemAtIndex;
-import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
-import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST;
+import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND;
 
 import org.junit.Test;
 
@@ -33,8 +33,8 @@ public class DeleteItemCommandTest {
 
     @Test
     public void execute_validIndexUnfilteredList_success() {
-        Item itemToDelete = model.getFilteredItemList().get(INDEX_FIRST_PERSON.getZeroBased());
-        DeleteItemCommand deleteItemCommand = new DeleteItemCommand(INDEX_FIRST_PERSON);
+        Item itemToDelete = model.getFilteredItemList().get(INDEX_FIRST.getZeroBased());
+        DeleteItemCommand deleteItemCommand = new DeleteItemCommand(INDEX_FIRST);
 
         String expectedMessage = String.format(DeleteItemCommand.MESSAGE_DELETE_ITEM_SUCCESS, itemToDelete);
 
@@ -55,10 +55,10 @@ public class DeleteItemCommandTest {
 
     @Test
     public void execute_validIndexFilteredList_success() {
-        showItemAtIndex(model, INDEX_FIRST_PERSON);
+        showItemAtIndex(model, INDEX_FIRST);
 
-        Item itemToDelete = model.getFilteredItemList().get(INDEX_FIRST_PERSON.getZeroBased());
-        DeleteItemCommand deleteItemCommand = new DeleteItemCommand(INDEX_FIRST_PERSON);
+        Item itemToDelete = model.getFilteredItemList().get(INDEX_FIRST.getZeroBased());
+        DeleteItemCommand deleteItemCommand = new DeleteItemCommand(INDEX_FIRST);
 
         String expectedMessage = String.format(DeleteItemCommand.MESSAGE_DELETE_ITEM_SUCCESS, itemToDelete);
 
@@ -72,9 +72,9 @@ public class DeleteItemCommandTest {
 
     @Test
     public void execute_invalidIndexFilteredList_throwsCommandException() {
-        showItemAtIndex(model, INDEX_FIRST_PERSON);
+        showItemAtIndex(model, INDEX_FIRST);
 
-        Index outOfBoundIndex = INDEX_SECOND_PERSON;
+        Index outOfBoundIndex = INDEX_SECOND;
         // ensures that outOfBoundIndex is still in bounds of address book list
         assertTrue(outOfBoundIndex.getZeroBased() < model.getAddressBook().getItemList().size());
 
@@ -85,8 +85,8 @@ public class DeleteItemCommandTest {
 
     @Test
     public void executeUndoRedo_validIndexUnfilteredList_success() throws Exception {
-        Item itemToDelete = model.getFilteredItemList().get(INDEX_FIRST_PERSON.getZeroBased());
-        DeleteItemCommand deleteItemCommand = new DeleteItemCommand(INDEX_FIRST_PERSON);
+        Item itemToDelete = model.getFilteredItemList().get(INDEX_FIRST.getZeroBased());
+        DeleteItemCommand deleteItemCommand = new DeleteItemCommand(INDEX_FIRST);
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         expectedModel.deleteItem(itemToDelete);
         expectedModel.commitAddressBook();
@@ -124,11 +124,11 @@ public class DeleteItemCommandTest {
      */
     @Test
     public void executeUndoRedo_validIndexFilteredList_samePersonDeleted() throws Exception {
-        DeleteItemCommand deleteItemCommand = new DeleteItemCommand(INDEX_FIRST_PERSON);
+        DeleteItemCommand deleteItemCommand = new DeleteItemCommand(INDEX_FIRST);
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
 
-        showItemAtIndex(model, INDEX_SECOND_PERSON);
-        Item itemToDelete = model.getFilteredItemList().get(INDEX_FIRST_PERSON.getZeroBased());
+        showItemAtIndex(model, INDEX_SECOND);
+        Item itemToDelete = model.getFilteredItemList().get(INDEX_FIRST.getZeroBased());
         expectedModel.deleteItem(itemToDelete);
         expectedModel.commitAddressBook();
 
@@ -139,7 +139,7 @@ public class DeleteItemCommandTest {
         expectedModel.undoAddressBook();
         assertCommandSuccess(new UndoCommand(), model, commandHistory, UndoCommand.MESSAGE_SUCCESS, expectedModel);
 
-        assertNotEquals(itemToDelete, model.getFilteredItemList().get(INDEX_FIRST_PERSON.getZeroBased()));
+        assertNotEquals(itemToDelete, model.getFilteredItemList().get(INDEX_FIRST.getZeroBased()));
         // redo -> deletes same second item in unfiltered item list
         expectedModel.redoAddressBook();
         assertCommandSuccess(new RedoCommand(), model, commandHistory, RedoCommand.MESSAGE_SUCCESS, expectedModel);
@@ -147,14 +147,14 @@ public class DeleteItemCommandTest {
 
     @Test
     public void equals() {
-        DeleteItemCommand deleteFirstCommand = new DeleteItemCommand(INDEX_FIRST_PERSON);
-        DeleteItemCommand deleteSecondCommand = new DeleteItemCommand(INDEX_SECOND_PERSON);
+        DeleteItemCommand deleteFirstCommand = new DeleteItemCommand(INDEX_FIRST);
+        DeleteItemCommand deleteSecondCommand = new DeleteItemCommand(INDEX_SECOND);
 
         // same object -> returns true
         assertTrue(deleteFirstCommand.equals(deleteFirstCommand));
 
         // same values -> returns true
-        DeleteItemCommand deleteFirstCommandCopy = new DeleteItemCommand(INDEX_FIRST_PERSON);
+        DeleteItemCommand deleteFirstCommandCopy = new DeleteItemCommand(INDEX_FIRST);
         assertTrue(deleteFirstCommand.equals(deleteFirstCommandCopy));
 
         // different types -> returns false

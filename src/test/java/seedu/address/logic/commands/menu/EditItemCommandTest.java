@@ -11,8 +11,8 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_ITEM_TAG_CHEESE
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.menu.MenuCommandTestUtil.showItemAtIndex;
-import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
-import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST;
+import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND;
 
 import org.junit.Test;
 
@@ -43,7 +43,7 @@ public class EditItemCommandTest {
     public void execute_allFieldsSpecifiedUnfilteredList_success() {
         Item editedItem = new ItemBuilder().build();
         EditItemDescriptor descriptor = new EditItemDescriptorBuilder(editedItem).build();
-        EditItemCommand editItemCommand = new EditItemCommand(INDEX_FIRST_PERSON, descriptor);
+        EditItemCommand editItemCommand = new EditItemCommand(INDEX_FIRST, descriptor);
 
         String expectedMessage = String.format(EditItemCommand.MESSAGE_EDIT_ITEM_SUCCESS, editedItem);
 
@@ -78,8 +78,8 @@ public class EditItemCommandTest {
 
     @Test
     public void execute_noFieldSpecifiedUnfilteredList_success() {
-        EditItemCommand editItemCommand = new EditItemCommand(INDEX_FIRST_PERSON, new EditItemDescriptor());
-        Item editedItem = model.getFilteredItemList().get(INDEX_FIRST_PERSON.getZeroBased());
+        EditItemCommand editItemCommand = new EditItemCommand(INDEX_FIRST, new EditItemDescriptor());
+        Item editedItem = model.getFilteredItemList().get(INDEX_FIRST.getZeroBased());
 
         String expectedMessage = String.format(EditItemCommand.MESSAGE_EDIT_ITEM_SUCCESS, editedItem);
 
@@ -91,11 +91,11 @@ public class EditItemCommandTest {
 
     @Test
     public void execute_filteredList_success() {
-        showItemAtIndex(model, INDEX_FIRST_PERSON);
+        showItemAtIndex(model, INDEX_FIRST);
 
-        Item itemInFilteredList = model.getFilteredItemList().get(INDEX_FIRST_PERSON.getZeroBased());
+        Item itemInFilteredList = model.getFilteredItemList().get(INDEX_FIRST.getZeroBased());
         Item editedItem = new ItemBuilder(itemInFilteredList).withName(VALID_ITEM_NAME_FRIES).build();
-        EditItemCommand editItemCommand = new EditItemCommand(INDEX_FIRST_PERSON,
+        EditItemCommand editItemCommand = new EditItemCommand(INDEX_FIRST,
                 new EditItemDescriptorBuilder().withName(VALID_ITEM_NAME_FRIES).build());
 
         String expectedMessage = String.format(EditItemCommand.MESSAGE_EDIT_ITEM_SUCCESS, editedItem);
@@ -109,20 +109,20 @@ public class EditItemCommandTest {
 
     @Test
     public void execute_duplicateItemUnfilteredList_failure() {
-        Item firstItem = model.getFilteredItemList().get(INDEX_FIRST_PERSON.getZeroBased());
+        Item firstItem = model.getFilteredItemList().get(INDEX_FIRST.getZeroBased());
         EditItemDescriptor descriptor = new EditItemDescriptorBuilder(firstItem).build();
-        EditItemCommand editCommand = new EditItemCommand(INDEX_SECOND_PERSON, descriptor);
+        EditItemCommand editCommand = new EditItemCommand(INDEX_SECOND, descriptor);
 
         assertCommandFailure(editCommand, model, commandHistory, EditItemCommand.MESSAGE_DUPLICATE_ITEM);
     }
 
     @Test
     public void execute_duplicateItemFilteredList_failure() {
-        showItemAtIndex(model, INDEX_FIRST_PERSON);
+        showItemAtIndex(model, INDEX_FIRST);
 
         // edit item in filtered list into a duplicate in menu
-        Item itemInList = model.getAddressBook().getItemList().get(INDEX_SECOND_PERSON.getZeroBased());
-        EditItemCommand editItemCommand = new EditItemCommand(INDEX_FIRST_PERSON,
+        Item itemInList = model.getAddressBook().getItemList().get(INDEX_SECOND.getZeroBased());
+        EditItemCommand editItemCommand = new EditItemCommand(INDEX_FIRST,
                 new EditItemDescriptorBuilder(itemInList).build());
 
         assertCommandFailure(editItemCommand, model, commandHistory, EditItemCommand.MESSAGE_DUPLICATE_ITEM);
@@ -142,8 +142,8 @@ public class EditItemCommandTest {
      */
     @Test
     public void execute_invalidPersonIndexFilteredList_failure() {
-        showItemAtIndex(model, INDEX_FIRST_PERSON);
-        Index outOfBoundIndex = INDEX_SECOND_PERSON;
+        showItemAtIndex(model, INDEX_FIRST);
+        Index outOfBoundIndex = INDEX_SECOND;
         // ensures that outOfBoundIndex is still in bounds of address book list
         assertTrue(outOfBoundIndex.getZeroBased() < model.getAddressBook().getItemList().size());
 
@@ -156,9 +156,9 @@ public class EditItemCommandTest {
     @Test
     public void executeUndoRedo_validIndexUnfilteredList_success() throws Exception {
         Item editedItem = new ItemBuilder().build();
-        Item itemToEdit = model.getFilteredItemList().get(INDEX_FIRST_PERSON.getZeroBased());
+        Item itemToEdit = model.getFilteredItemList().get(INDEX_FIRST.getZeroBased());
         EditItemDescriptor descriptor = new EditItemDescriptorBuilder(editedItem).build();
-        EditItemCommand editItemCommand = new EditItemCommand(INDEX_FIRST_PERSON, descriptor);
+        EditItemCommand editItemCommand = new EditItemCommand(INDEX_FIRST, descriptor);
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.updateItem(itemToEdit, editedItem);
         expectedModel.commitAddressBook();
@@ -199,11 +199,11 @@ public class EditItemCommandTest {
     public void executeUndoRedo_validIndexFilteredList_sameItemEdited() throws Exception {
         Item editedItem = new ItemBuilder().build();
         EditItemDescriptor descriptor = new EditItemDescriptorBuilder(editedItem).build();
-        EditItemCommand editItemCommand = new EditItemCommand(INDEX_FIRST_PERSON, descriptor);
+        EditItemCommand editItemCommand = new EditItemCommand(INDEX_FIRST, descriptor);
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
 
-        showItemAtIndex(model, INDEX_SECOND_PERSON);
-        Item itemToEdit = model.getFilteredItemList().get(INDEX_FIRST_PERSON.getZeroBased());
+        showItemAtIndex(model, INDEX_SECOND);
+        Item itemToEdit = model.getFilteredItemList().get(INDEX_FIRST.getZeroBased());
         expectedModel.updateItem(itemToEdit, editedItem);
         expectedModel.commitAddressBook();
 
@@ -214,7 +214,7 @@ public class EditItemCommandTest {
         expectedModel.undoAddressBook();
         assertCommandSuccess(new UndoCommand(), model, commandHistory, UndoCommand.MESSAGE_SUCCESS, expectedModel);
 
-        assertNotEquals(model.getFilteredItemList().get(INDEX_FIRST_PERSON.getZeroBased()), itemToEdit);
+        assertNotEquals(model.getFilteredItemList().get(INDEX_FIRST.getZeroBased()), itemToEdit);
         // redo -> edits same second item in unfiltered item list
         expectedModel.redoAddressBook();
         assertCommandSuccess(new RedoCommand(), model, commandHistory, RedoCommand.MESSAGE_SUCCESS, expectedModel);
@@ -222,11 +222,11 @@ public class EditItemCommandTest {
 
     @Test
     public void equals() {
-        final EditItemCommand standardCommand = new EditItemCommand(INDEX_FIRST_PERSON, DESC_FRIES);
+        final EditItemCommand standardCommand = new EditItemCommand(INDEX_FIRST, DESC_FRIES);
 
         // same values -> returns true
         EditItemDescriptor copyDescriptor = new EditItemDescriptor(DESC_FRIES);
-        EditItemCommand commandWithSameValues = new EditItemCommand(INDEX_FIRST_PERSON, copyDescriptor);
+        EditItemCommand commandWithSameValues = new EditItemCommand(INDEX_FIRST, copyDescriptor);
         assertTrue(standardCommand.equals(commandWithSameValues));
 
         // same object -> returns true
@@ -239,10 +239,10 @@ public class EditItemCommandTest {
         assertFalse(standardCommand.equals(new ClearMenuCommand()));
 
         // different index -> returns false
-        assertFalse(standardCommand.equals(new EditItemCommand(INDEX_SECOND_PERSON, DESC_FRIES)));
+        assertFalse(standardCommand.equals(new EditItemCommand(INDEX_SECOND, DESC_FRIES)));
 
         // different descriptor -> returns false
-        assertFalse(standardCommand.equals(new EditItemCommand(INDEX_FIRST_PERSON, DESC_BURGER)));
+        assertFalse(standardCommand.equals(new EditItemCommand(INDEX_FIRST, DESC_BURGER)));
     }
 
 }
