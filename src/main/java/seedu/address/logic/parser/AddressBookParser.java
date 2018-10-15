@@ -43,7 +43,6 @@ import seedu.address.logic.parser.menu.EditItemCommandParser;
 import seedu.address.logic.parser.menu.SelectItemCommandParser;
 import seedu.address.logic.parser.salescommandsparser.RecordSalesCommandParser;
 
-
 /**
  * Parses user input.
  */

@@ -42,7 +42,6 @@ public class MainWindow extends UiPart<Stage> {
     // Independent Ui parts residing in this Ui container
     private BrowserPanel browserPanel;
     private PersonListPanel personListPanel;
-    private IngredientListPanel ingredientListPanel;
     private RecordListPanel recordListPanel; // Panels stack on top of each other, only one visible at a time
 
     private Config config;
@@ -222,7 +221,7 @@ public class MainWindow extends UiPart<Stage> {
     public void handleClickIngredientIcon() {
         //Replaces current list with ingredient list in the panel placeholder
         logger.info("GUI interaction: Ingredient icon was clicked");
-        ingredientListPanel = new IngredientListPanel(logic.getFilteredIngredientList());
+        IngredientListPanel ingredientListPanel = new IngredientListPanel(logic.getFilteredIngredientList());
         personListPanelPlaceholder.getChildren().add(ingredientListPanel.getRoot());
     }
 

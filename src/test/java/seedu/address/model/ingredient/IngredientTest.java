@@ -27,10 +27,10 @@ public class IngredientTest {
         // null -> returns false
         assertFalse(APPLE.isSameIngredient(null));
 
-        // different unit and price -> returns false
+        // same name, different unit and price -> returns false
         Ingredient editedApple = new IngredientBuilder(APPLE).withUnit(VALID_UNIT_BROCCOLI)
                 .withPrice(VALID_PRICE_BROCCOLI).build();
-        assertFalse(APPLE.isSameIngredient(editedApple));
+        assertTrue(APPLE.isSameIngredient(editedApple));
 
         // different name -> returns false
         editedApple = new IngredientBuilder(APPLE).withName(VALID_NAME_BROCCOLI).build();

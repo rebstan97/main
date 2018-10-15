@@ -3,7 +3,6 @@ package seedu.address.logic.commands.ingredients;
 import static java.util.Objects.requireNonNull;
 
 import java.util.List;
-import java.util.function.Predicate;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
@@ -53,15 +52,22 @@ public class DeleteIngredientCommand extends Command {
         requireNonNull(model);
 
         if (this.targetIndex != null && this.targetName == null) {
-            return executeDeleteByIndex(model, history);
+            return executeDeleteByIndex(model);
         } else if (this.targetName != null && this.targetIndex == null) {
-            return executeDeleteByName(model, history, targetName);
+            return executeDeleteByName(model, targetName);
         } else {
             throw new CommandException(Messages.MESSAGE_INVALID_INDEX_OR_NAME);
         }
     }
 
-    private CommandResult executeDeleteByIndex(Model model, CommandHistory history) throws CommandException {
+    /**
+     * Deletes an ingredient with the given index and returns the result of the command.
+     *
+     * @param model {@code Model} which the command should operate on.
+     * @return The result of the delete by index command
+     * @throws CommandException If an error occurs during command execution.
+     */
+    private CommandResult executeDeleteByIndex(Model model) throws CommandException {
         List<Ingredient> lastShownList = model.getFilteredIngredientList();
 
         if (targetIndex.getZeroBased() >= lastShownList.size()) {
@@ -74,14 +80,22 @@ public class DeleteIngredientCommand extends Command {
         return new CommandResult(String.format(MESSAGE_DELETE_INGREDIENT_SUCCESS, ingredientToDelete));
     }
 
-    private CommandResult executeDeleteByName(Model model, CommandHistory history, IngredientName ingredientName)
+    /**
+     * Deletes an ingredient with the given name and returns the result of the command.
+     *
+     * @param model {@code Model} which the command should operate on.
+     * @param ingredientName {@code IngredientName} which the command should operate on.
+     * @return The result of the delete by name command
+     * @throws CommandException If an error occurs during command execution.
+     */
+    private CommandResult executeDeleteByName(Model model, IngredientName ingredientName)
             throws CommandException {
         try {
             Ingredient ingredientToDelete = model.findIngredient(ingredientName);
             model.deleteIngredient(ingredientToDelete);
             model.commitAddressBook();
             return new CommandResult(String.format(MESSAGE_DELETE_INGREDIENT_SUCCESS, ingredientToDelete));
-        } catch(IngredientNotFoundException e) {
+        } catch (IngredientNotFoundException e) {
             throw new CommandException(Messages.MESSAGE_INGREDIENT_NAME_NOT_FOUND);
         }
     }

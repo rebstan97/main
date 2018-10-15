@@ -24,10 +24,10 @@ public class DeleteIngredientCommandParser implements Parser<DeleteIngredientCom
         try {
             Object indexOrName = ParserUtil.parseIndexOrIngredientName(args);
             if (indexOrName instanceof Index) {
-                return new DeleteIngredientCommand((Index)indexOrName);
+                return new DeleteIngredientCommand((Index) indexOrName);
             }
             if (indexOrName instanceof IngredientName) {
-                return new DeleteIngredientCommand((IngredientName)indexOrName);
+                return new DeleteIngredientCommand((IngredientName) indexOrName);
             } else {
                 throw new ParseException(String.format(MESSAGE_INVALID_INDEX_OR_NAME));
             }
