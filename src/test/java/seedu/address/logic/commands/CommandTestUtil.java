@@ -98,6 +98,11 @@ public class CommandTestUtil {
     public static final String PREFIX_WITH_VALID_QUANTITY_SOLD =
             " " + PREFIX_QUANTITY_SOLD + VALID_QUANTITY_SOLD_RECORD_ONE;
     public static final String PREFIX_WITH_VALID_PRICE = " " + PREFIX_ITEM_PRICE + VALID_PRICE_RECORD_ONE;
+    public static final String PREFIX_WITH_VALID_DATE_TWO = " " + PREFIX_DATE + VALID_DATE_RECORD_TWO;
+    public static final String PREFIX_WITH_VALID_ITEM_NAME_TWO = " " + PREFIX_ITEM_NAME + VALID_ITEM_NAME_RECORD_TWO;
+    public static final String PREFIX_WITH_VALID_QUANTITY_SOLD_TWO =
+            " " + PREFIX_QUANTITY_SOLD + VALID_QUANTITY_SOLD_RECORD_TWO;
+    public static final String PREFIX_WITH_VALID_PRICE_TWO = " " + PREFIX_ITEM_PRICE + VALID_PRICE_RECORD_TWO;
     public static final String PREFIX_WITH_INVALID_DATE = " " + PREFIX_DATE + "31-02-2018"; // no such date
     public static final String PREFIX_WITH_INVALID_ITEM_NAME = " " + PREFIX_ITEM_NAME + "Fried Rice!"; // symbols not
     // allowed
