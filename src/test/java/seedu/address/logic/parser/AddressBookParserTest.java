@@ -61,12 +61,9 @@ import seedu.address.testutil.accounts.AccountUtil;
 import seedu.address.testutil.ingredients.EditIngredientDescriptorBuilder;
 import seedu.address.testutil.ingredients.IngredientBuilder;
 import seedu.address.testutil.ingredients.IngredientUtil;
-<<<<<<< HEAD
-import seedu.address.testutil.salesrecords.EditRecordDescriptorBuilder;
-=======
 import seedu.address.testutil.menu.ItemBuilder;
 import seedu.address.testutil.menu.ItemUtil;
->>>>>>> master
+import seedu.address.testutil.salesrecords.EditRecordDescriptorBuilder;
 import seedu.address.testutil.salesrecords.RecordBuilder;
 import seedu.address.testutil.salesrecords.RecordUtil;
 
