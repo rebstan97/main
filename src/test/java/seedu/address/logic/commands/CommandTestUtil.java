@@ -31,7 +31,6 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.commands.ingredients.EditIngredientCommand;
 import seedu.address.logic.commands.menu.EditItemCommand;
 import seedu.address.logic.commands.salescommands.EditSalesCommand;
-import seedu.address.logic.commands.salescommands.EditSalesCommand.EditRecordDescriptor;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ingredient.Ingredient;
