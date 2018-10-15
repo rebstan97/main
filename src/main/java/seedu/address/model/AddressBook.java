@@ -371,7 +371,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      * Sorts the menu by the given sorting method.
      */
     public void sortMenu(SortMethod sortMethod) {
-        switch (sortMethod){
+        switch (sortMethod) {
         case NAME:
             items.sortItemsByName();
             return;
