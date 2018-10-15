@@ -42,6 +42,11 @@ public class XmlSerializableAddressBookTest {
     private static final Path TYPICAL_ITEMS_FILE = TEST_DATA_FOLDER.resolve("typicalItemsOnlyAddressBook.xml");
     private static final Path INVALID_ITEM_FILE = TEST_DATA_FOLDER.resolve("invalidItemOnlyAddressBook.xml");
     private static final Path DUPLICATE_ITEM_FILE = TEST_DATA_FOLDER.resolve("duplicateItemOnlyAddressBook.xml");
+    // Reservation Management
+    private static final Path INVALID_RESERVATION_FILE = TEST_DATA_FOLDER.resolve(
+            "invalidReservationOnlyAddressBook.xml");
+    private static final Path DUPLICATE_RESERVATION_FILE = TEST_DATA_FOLDER.resolve(
+            "duplicateReservationOnlyAddressBook.xml");
 
     @Rule
     public ExpectedException thrown = ExpectedException.none();
@@ -157,6 +162,24 @@ public class XmlSerializableAddressBookTest {
                 XmlSerializableAddressBook.class);
         thrown.expect(IllegalValueException.class);
         thrown.expectMessage(XmlSerializableAddressBook.MESSAGE_DUPLICATE_ITEM);
+        dataFromFile.toModelType();
+    }
+
+    //Reservation Management
+    @Test
+    public void toModelType_invalidReservationOnlyFile_throwsIllegalValueException() throws Exception {
+        XmlSerializableAddressBook dataFromFile = XmlUtil.getDataFromFile(INVALID_RESERVATION_FILE,
+                XmlSerializableAddressBook.class);
+        thrown.expect(IllegalValueException.class);
+        dataFromFile.toModelType();
+    }
+
+    @Test
+    public void toModelType_duplicateReservationOnly_throwsIllegalValueException() throws Exception {
+        XmlSerializableAddressBook dataFromFile = XmlUtil.getDataFromFile(DUPLICATE_RESERVATION_FILE,
+                XmlSerializableAddressBook.class);
+        thrown.expect(IllegalValueException.class);
+        thrown.expectMessage(XmlSerializableAddressBook.MESSAGE_DUPLICATE_RESERVATION);
         dataFromFile.toModelType();
     }
 

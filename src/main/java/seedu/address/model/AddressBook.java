@@ -17,6 +17,8 @@ import seedu.address.model.menu.Item;
 import seedu.address.model.menu.UniqueItemList;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.UniquePersonList;
+import seedu.address.model.reservation.Reservation;
+import seedu.address.model.reservation.UniqueReservationList;
 import seedu.address.model.salesrecord.SalesRecord;
 import seedu.address.model.salesrecord.UniqueRecordList;
 import seedu.address.model.tag.Tag;
@@ -27,6 +29,7 @@ import seedu.address.model.tag.Tag;
 public class AddressBook implements ReadOnlyAddressBook {
 
     private final UniquePersonList persons;
+    private final UniqueReservationList reservations;
     private final UniqueRecordList records;
     private final UniqueAccountList accounts;
     private final UniqueIngredientList ingredients;
@@ -41,6 +44,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     {
         persons = new UniquePersonList();
+        reservations = new UniqueReservationList();
         records = new UniqueRecordList();
         accounts = new UniqueAccountList();
         ingredients = new UniqueIngredientList();
@@ -74,6 +78,7 @@ public class AddressBook implements ReadOnlyAddressBook {
         requireNonNull(newData);
 
         setPersons(newData.getPersonList());
+        setReservations(newData.getReservationList());
         setRecords(newData.getRecordList());
         setAccounts(newData.getAccountList());
         setIngredients(newData.getIngredientList());
@@ -142,6 +147,53 @@ public class AddressBook implements ReadOnlyAddressBook {
         persons.forEach(person -> removeTagForPerson(person, tag));
     }
 
+    // Reservation Management
+
+    /**
+     * Replaces the contents of the reservation list with {@code reservations}. {@code reservations} must not contain
+     * duplicate reservations.
+     */
+    public void setReservations(List<Reservation> reservations) {
+        this.reservations.setReservations(reservations);
+    }
+
+    /**
+     * Returns true if a reservation with the same identity as {@code reservation} exists in the address book.
+     */
+    public boolean hasReservation(Reservation reservation) {
+        requireNonNull(reservation);
+        return reservations.contains(reservation);
+    }
+
+    /**
+     * Adds a reservation to the address book. The reservation must not already exist in the address book.
+     */
+    public void addReservation(Reservation r) {
+        reservations.add(r);
+    }
+
+    /**
+     * Replaces the given reservation {@code target} in the list with {@code editedReservation}. {@code target} must
+     * exist in the address book. The person identity of {@code editedReservation} must not be the same as
+     * another existing person in the address book.
+     */
+    public void updateReservation(Reservation target, Reservation editedReservation) {
+        requireNonNull(editedReservation);
+
+        reservations.setReservation(target, editedReservation);
+    }
+
+    /**
+     * Removes {@code key} from this {@code AddressBook}. {@code key} must exist in the address book.
+     */
+    public void removeReservation(Reservation key) {
+        reservations.remove(key);
+    }
+
+    @Override
+    public ObservableList<Reservation> getReservationList() {
+        return reservations.asUnmodifiableObservableList();
+    }
 
     @Override
     public ObservableList<Person> getPersonList() {
