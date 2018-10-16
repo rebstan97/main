@@ -16,6 +16,7 @@ import javafx.stage.Stage;
 import seedu.address.commons.core.Config;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.commons.events.ui.DisplaySalesReportEvent;
 import seedu.address.commons.events.ui.ExitAppRequestEvent;
 import seedu.address.commons.events.ui.LoginEvent;
 import seedu.address.commons.events.ui.LogoutEvent;
@@ -24,6 +25,7 @@ import seedu.address.logic.Logic;
 import seedu.address.model.UserPrefs;
 import seedu.address.ui.menu.ItemListPanel;
 import seedu.address.ui.sales.RecordListPanel;
+import seedu.address.ui.sales.SalesReportWindow;
 
 /**
  * The Main Window. Provides the basic application layout containing a menu bar and space where other JavaFX elements
@@ -145,9 +147,6 @@ public class MainWindow extends UiPart<Stage> {
         personListPanel = new PersonListPanel(logic.getFilteredPersonList());
         personListPanelPlaceholder.getChildren().add(personListPanel.getRoot()); // Show address book
 
-        //recordListPanel = new RecordListPanel(logic.getFilteredRecordList());
-        //personListPanelPlaceholder.getChildren().add(recordListPanel.getRoot()); // Show sales book
-
         //ingredientListPanel = new IngredientListPanel(logic.getFilteredIngredientList());
         //ingredientListPanelPlaceholder.getChildren().add(ingredientListPanel.getRoot());
 
@@ -219,8 +218,8 @@ public class MainWindow extends UiPart<Stage> {
      */
     @FXML
     public void handleSwitchToSales() {
-        // To implement. Some might require raising/posting event, for example, if you call the list method, so it
-        // should raise an event and automatically update the UI
+        recordListPanel = new RecordListPanel(logic.getFilteredRecordList());
+        personListPanelPlaceholder.getChildren().add(recordListPanel.getRoot());
     }
 
     /**
@@ -273,6 +272,10 @@ public class MainWindow extends UiPart<Stage> {
         return itemListPanel;
     }
 
+    public RecordListPanel getRecordListPanel() {
+        return recordListPanel;
+    }
+
     void releaseResources() {
         browserPanel.freeResources();
     }
@@ -293,5 +296,13 @@ public class MainWindow extends UiPart<Stage> {
     private void handleLogoutEvent(LogoutEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
         setUsername(ACCOUNT_STATUS_INITIAL);
+    }
+
+    @Subscribe
+    private void handleDisplaySalesReportEvent(DisplaySalesReportEvent event) {
+        logger.info(LogsCenter.getEventHandlingLogMessage(event));
+        handleSwitchToSales();
+        SalesReportWindow salesReportWindow = new SalesReportWindow(event.getSalesReportToDisplay());
+        salesReportWindow.show();
     }
 }
