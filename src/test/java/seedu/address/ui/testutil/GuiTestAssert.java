@@ -71,7 +71,8 @@ public class GuiTestAssert {
         assertEquals(expectedRecord.getName().toString(), actualCard.getItemName());
         assertEquals("Quantity Sold: " + expectedRecord.getQuantitySold().toString(), actualCard.getQuantitySold());
         NumberFormat currencyFormatter = NumberFormat.getCurrencyInstance();
-        assertEquals("Item Price: " + currencyFormatter.format(expectedRecord.getPrice().getValue()), actualCard.getPrice());
+        assertEquals("Item Price: "
+                + currencyFormatter.format(expectedRecord.getPrice().getValue()), actualCard.getPrice());
     }
 
     /**
