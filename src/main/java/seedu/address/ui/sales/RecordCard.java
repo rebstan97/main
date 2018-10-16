@@ -48,7 +48,7 @@ public class RecordCard extends UiPart<Region> {
         quantitySold.setText("Quantity Sold: " + String.valueOf(record.getQuantitySold().toString()));
 
         NumberFormat currencyFormatter = NumberFormat.getCurrencyInstance();
-        price.setText("Item Price: " + currencyFormatter.format(Float.parseFloat(record.getPrice().toString())));
+        price.setText("Item Price: " + currencyFormatter.format(record.getPrice().getValue()));
     }
 
     @Override
