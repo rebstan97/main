@@ -55,7 +55,7 @@ public class ItemCard extends UiPart<Region> {
         super(FXML);
         this.item = item;
         id.setText(displayedIndex + ". ");
-        name.setText(item.getName().fullName);
+        name.setText(item.getName().getFullName());
         price.setText("$" + item.getPrice().toString());
         remark.setText(item.getRemark().value);
         initTags(item);

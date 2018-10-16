@@ -144,7 +144,7 @@ public class GuiTestAssert {
      * Asserts that {@code actualCard} displays the details of {@code expectedItem}.
      */
     public static void assertCardDisplaysItem(Item expectedItem, ItemCardHandle actualCard) {
-        assertEquals(expectedItem.getName().fullName, actualCard.getName());
+        assertEquals(expectedItem.getName().getFullName(), actualCard.getName());
         assertEquals("$" + expectedItem.getPrice().toString(), actualCard.getPrice());
         assertTagsEqualForItem(expectedItem, actualCard);
         assertEquals(expectedItem.getRemark().value, actualCard.getRemark());

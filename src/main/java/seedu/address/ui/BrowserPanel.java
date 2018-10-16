@@ -49,7 +49,7 @@ public class BrowserPanel extends UiPart<Region> {
 
     // Menu Management
     private void loadItemPage(Item item) {
-        loadPage(SEARCH_PAGE_URL + item.getName().fullName);
+        loadPage(SEARCH_PAGE_URL + item.getName().getFullName());
     }
 
     public void loadPage(String url) {
