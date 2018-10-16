@@ -6,11 +6,11 @@ import com.google.common.eventbus.Subscribe;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextInputControl;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import seedu.address.commons.core.Config;
@@ -18,11 +18,10 @@ import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.events.ui.DisplaySalesReportEvent;
 import seedu.address.commons.events.ui.ExitAppRequestEvent;
-import seedu.address.commons.events.ui.LoginEvent;
-import seedu.address.commons.events.ui.LogoutEvent;
 import seedu.address.commons.events.ui.ShowHelpRequestEvent;
 import seedu.address.logic.Logic;
 import seedu.address.model.UserPrefs;
+import seedu.address.ui.accounts.UsernameDisplay;
 import seedu.address.ui.menu.ItemListPanel;
 import seedu.address.ui.sales.RecordListPanel;
 import seedu.address.ui.sales.SalesReportWindow;
@@ -34,9 +33,6 @@ import seedu.address.ui.sales.SalesReportWindow;
 public class MainWindow extends UiPart<Stage> {
 
     private static final String FXML = "MainWindow.fxml";
-
-    private static final String ACCOUNT_STATUS_INITIAL = "Guest";
-    private static final String ACCOUNT_STATUS = "Welcome, %s";
 
     private final Logger logger = LogsCenter.getLogger(getClass());
 
@@ -64,7 +60,7 @@ public class MainWindow extends UiPart<Stage> {
     private MenuItem helpMenuItem;
 
     @FXML
-    private Label accountStatus;
+    private Pane usernameDisplayPlaceholder;
 
     @FXML
     private StackPane personListPanelPlaceholder;
@@ -89,7 +85,6 @@ public class MainWindow extends UiPart<Stage> {
 
         // Configure the UI
         setTitle(config.getAppTitle());
-        setUsername(ACCOUNT_STATUS_INITIAL); // TODO: Shift it to UsernameDisplay
         setWindowDefaultSize(prefs);
 
         setAccelerators();
@@ -156,6 +151,17 @@ public class MainWindow extends UiPart<Stage> {
         ResultDisplay resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
 
+        UsernameDisplay usernameDisplay = new UsernameDisplay();
+        // Centralize the width
+        usernameDisplay.getRoot().layoutXProperty().bind(usernameDisplayPlaceholder.widthProperty()
+                .subtract(usernameDisplay.getRoot().widthProperty())
+                .divide(2));
+        // Centralize the height
+        usernameDisplay.getRoot().layoutYProperty().bind(usernameDisplayPlaceholder.heightProperty()
+                .subtract(usernameDisplay.getRoot().heightProperty())
+                .divide(2));
+        usernameDisplayPlaceholder.getChildren().add(usernameDisplay.getRoot());
+
         StatusBarFooter statusBarFooter = new StatusBarFooter(prefs.getAddressBookFilePath());
         statusbarPlaceholder.getChildren().add(statusBarFooter.getRoot());
 
@@ -169,10 +175,6 @@ public class MainWindow extends UiPart<Stage> {
 
     private void setTitle(String appTitle) {
         primaryStage.setTitle(appTitle);
-    }
-
-    private void setUsername(String message) {
-        accountStatus.setText(message);
     }
 
     /**
@@ -284,18 +286,6 @@ public class MainWindow extends UiPart<Stage> {
     private void handleShowHelpEvent(ShowHelpRequestEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
         handleHelp();
-    }
-
-    @Subscribe
-    private void handleLoginEvent(LoginEvent event) {
-        logger.info(LogsCenter.getEventHandlingLogMessage(event));
-        setUsername(String.format(ACCOUNT_STATUS, event.username.toString().toUpperCase()));
-    }
-
-    @Subscribe
-    private void handleLogoutEvent(LogoutEvent event) {
-        logger.info(LogsCenter.getEventHandlingLogMessage(event));
-        setUsername(ACCOUNT_STATUS_INITIAL);
     }
 
     @Subscribe
