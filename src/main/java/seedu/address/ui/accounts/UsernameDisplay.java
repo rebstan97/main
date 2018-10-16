@@ -17,11 +17,11 @@ import seedu.address.ui.UiPart;
  */
 public class UsernameDisplay extends UiPart<Region> {
 
-    private static final Logger logger = LogsCenter.getLogger(UsernameDisplay.class);
-    private static final String FXML = "UsernameDisplay.fxml";
-
     public static final String ACCOUNT_STATUS_GUEST = "Guest";
     public static final String ACCOUNT_STATUS = "Welcome, %s";
+
+    private static final Logger logger = LogsCenter.getLogger(UsernameDisplay.class);
+    private static final String FXML = "UsernameDisplay.fxml";
 
     @FXML
     private Label usernameDisplay;
