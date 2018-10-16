@@ -16,12 +16,14 @@ import javafx.stage.Stage;
 import seedu.address.commons.core.Config;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.commons.events.ui.DisplaySalesReportEvent;
 import seedu.address.commons.events.ui.ExitAppRequestEvent;
 import seedu.address.commons.events.ui.ShowHelpRequestEvent;
 import seedu.address.logic.Logic;
 import seedu.address.model.UserPrefs;
 import seedu.address.ui.menu.ItemListPanel;
 import seedu.address.ui.sales.RecordListPanel;
+import seedu.address.ui.sales.SalesReportWindow;
 
 /**
  * The Main Window. Provides the basic application layout containing a menu bar and space where other JavaFX elements
@@ -43,6 +45,7 @@ public class MainWindow extends UiPart<Stage> {
     private BrowserPanel browserPanel;
     private PersonListPanel personListPanel;
     private IngredientListPanel ingredientListPanel;
+    private RecordListPanel recordListPanel;
 
     private Config config;
     private UserPrefs prefs;
@@ -214,7 +217,7 @@ public class MainWindow extends UiPart<Stage> {
     @FXML
     public void handleSwitchToSales() {
         // Panels stack on top of each other, only one visible at a time
-        RecordListPanel recordListPanel = new RecordListPanel(logic.getFilteredRecordList());
+        recordListPanel = new RecordListPanel(logic.getFilteredRecordList());
         personListPanelPlaceholder.getChildren().add(recordListPanel.getRoot());
     }
 
@@ -268,6 +271,10 @@ public class MainWindow extends UiPart<Stage> {
         return itemListPanel;
     }
 
+    public RecordListPanel getRecordListPanel() {
+        return recordListPanel;
+    }
+
     void releaseResources() {
         browserPanel.freeResources();
     }
@@ -276,5 +283,14 @@ public class MainWindow extends UiPart<Stage> {
     private void handleShowHelpEvent(ShowHelpRequestEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
         handleHelp();
+    }
+
+
+    @Subscribe
+    private void handleDisplaySalesReportEvent(DisplaySalesReportEvent event) {
+        logger.info(LogsCenter.getEventHandlingLogMessage(event));
+        handleSwitchToSales();
+        SalesReportWindow salesReportWindow = new SalesReportWindow(event.getSalesReportToDisplay());
+        salesReportWindow.show();
     }
 }

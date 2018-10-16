@@ -1,6 +1,6 @@
 package seedu.address.testutil.salesrecords;
 
-import seedu.address.logic.commands.salescommands.EditSalesCommand.EditRecordDescriptor;
+import seedu.address.logic.commands.sales.EditSalesCommand.EditRecordDescriptor;
 import seedu.address.model.salesrecord.Date;
 import seedu.address.model.salesrecord.ItemName;
 import seedu.address.model.salesrecord.Price;

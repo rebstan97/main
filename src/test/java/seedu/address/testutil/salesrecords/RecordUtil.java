@@ -4,9 +4,10 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_ITEM_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ITEM_PRICE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_QUANTITY_SOLD;
 
-import seedu.address.logic.commands.salescommands.EditSalesCommand.EditRecordDescriptor;
-import seedu.address.logic.commands.salescommands.RecordSalesCommand;
+import seedu.address.logic.commands.sales.EditSalesCommand.EditRecordDescriptor;
+import seedu.address.logic.commands.sales.RecordSalesCommand;
 import seedu.address.model.salesrecord.SalesRecord;
+
 /**
  * A utility class for {@code SalesRecord}.
  */

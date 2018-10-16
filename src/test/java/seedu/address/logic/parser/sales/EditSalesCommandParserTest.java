@@ -30,9 +30,8 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_THIRD;
 import org.junit.Test;
 
 import seedu.address.commons.core.index.Index;
-import seedu.address.logic.commands.salescommands.EditSalesCommand;
-import seedu.address.logic.commands.salescommands.EditSalesCommand.EditRecordDescriptor;
-import seedu.address.logic.parser.salescommandsparser.EditSalesCommandParser;
+import seedu.address.logic.commands.sales.EditSalesCommand;
+import seedu.address.logic.commands.sales.EditSalesCommand.EditRecordDescriptor;
 import seedu.address.model.salesrecord.Date;
 import seedu.address.model.salesrecord.ItemName;
 import seedu.address.model.salesrecord.Price;

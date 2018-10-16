@@ -5,6 +5,7 @@ import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertTrue;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_DATE_RECORD_ONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_REMARK;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST;
 
@@ -41,10 +42,13 @@ import seedu.address.logic.commands.menu.ClearMenuCommand;
 import seedu.address.logic.commands.menu.DeleteItemCommand;
 import seedu.address.logic.commands.menu.ListItemsCommand;
 import seedu.address.logic.commands.menu.SelectItemCommand;
-import seedu.address.logic.commands.salescommands.DeleteSalesCommand;
-import seedu.address.logic.commands.salescommands.EditSalesCommand;
-import seedu.address.logic.commands.salescommands.EditSalesCommand.EditRecordDescriptor;
-import seedu.address.logic.commands.salescommands.RecordSalesCommand;
+
+import seedu.address.logic.commands.sales.DeleteSalesCommand;
+import seedu.address.logic.commands.sales.DisplaySalesCommand;
+import seedu.address.logic.commands.sales.EditSalesCommand;
+import seedu.address.logic.commands.sales.EditSalesCommand.EditRecordDescriptor;
+import seedu.address.logic.commands.sales.RecordSalesCommand;
+
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.accounts.Account;
 import seedu.address.model.ingredient.Ingredient;
@@ -52,6 +56,7 @@ import seedu.address.model.menu.Item;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Remark;
+import seedu.address.model.salesrecord.Date;
 import seedu.address.model.salesrecord.SalesRecord;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 import seedu.address.testutil.PersonBuilder;
@@ -220,6 +225,14 @@ public class AddressBookParserTest {
         //command = (EditSalesCommand) parser.parseCommand(EditSalesCommand.COMMAND_ALIAS + " "
         //        + INDEX_FIRST.getOneBased() + " " + RecordUtil.getEditRecordDescriptorDetails(descriptor));
         //assertEquals(new EditSalesCommand(INDEX_FIRST, descriptor), command); // to be implemented
+    }
+
+    @Test
+    public void parseCommand_display_sales() throws Exception {
+        Date date = new Date(VALID_DATE_RECORD_ONE);
+        DisplaySalesCommand command = (DisplaySalesCommand) parser.parseCommand(
+                DisplaySalesCommand.COMMAND_WORD + " " + VALID_DATE_RECORD_ONE);
+        assertEquals(new DisplaySalesCommand(date), command);
     }
 
     @Test

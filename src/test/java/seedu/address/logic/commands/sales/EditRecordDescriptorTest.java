@@ -11,7 +11,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_QUANTITY_SOLD_R
 
 import org.junit.Test;
 
-import seedu.address.logic.commands.salescommands.EditSalesCommand.EditRecordDescriptor;
+import seedu.address.logic.commands.sales.EditSalesCommand.EditRecordDescriptor;
 import seedu.address.testutil.salesrecords.EditRecordDescriptorBuilder;
 
 public class EditRecordDescriptorTest {

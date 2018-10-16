@@ -7,7 +7,6 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import seedu.address.model.salesrecord.SalesRecord;
-import seedu.address.ui.PersonCard;
 import seedu.address.ui.UiPart;
 
 /**
@@ -60,7 +59,7 @@ public class RecordCard extends UiPart<Region> {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof PersonCard)) {
+        if (!(other instanceof RecordCard)) {
             return false;
         }
 
