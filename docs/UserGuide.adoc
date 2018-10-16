@@ -288,19 +288,20 @@ Examples:
 Logs out of the account. +
 Format: `logout`
 
-=== Creating user account: `create-acc`
+=== Creating user account: `register` or `reg`
 
-Creates a new user account with a given role. +
-Format: `create-acc id/USERNAME pw/PASSWORD r/ROLE_ID`
+Creates a new user account. +
+Format: `register id/USERNAME pw/PASSWORD`
 
 Examples:
 
-* `create-acc id/azhikai pw/p@55w0rd r/0`
+* `register id/azhikai pw/p@55w0rd`
+* `reg id/azhikai pw/p@55w0rd`
 
-=== Editing user account: `edit-acc`
+=== Editing user account: `edit-acc` or `ea`
 
 Edits an existing user account. +
-Format: `edit-acc id/USERNAME [nid/NEW_USERNAME] [pw/NEW_PASSWORD] [r/NEW_ROLE_ID]`
+Format: `edit-acc id/USERNAME [nid/NEW_USERNAME] [pw/NEW_PASSWORD]`
 
 ****
 * The account's data will remain intact if none of the optional fields are provided.
@@ -311,61 +312,18 @@ Examples:
 * `edit-acc id/azhikai`
 ** Nothing happens in this case.
 * `edit-acc id/azhikai nid/angzhikai`
+* `ea id/azhikai nid/angzhikai`
 * `edit-acc id/azhikai nid/angzhikai pw/n3wp@55w0rd`
-* `edit-acc id/azhikai r/1`
 
-=== Deleting user account: `delete-acc`
+=== Deleting user account: `deregister` or `dereg`
 
 Deletes an existing user account. +
-Format: `delete-acc id/USERNAME `
+Format: `deregister id/USERNAME`
 
 Examples:
 
-* `delete-acc id/azhikai`
-
-=== List all user accounts: `list-acc`
-
-List all existing user accounts. +
-Format: `list-acc`
-
-=== Creating user role: `create-role`
-
-Creates a new user role. +
-Format: `create-role id/ROLE_ID n/ROLE_NAME`
-
-Examples:
-
-* `create-role id/0 n/Administrator`
-* `create-role id/1 n/Manager`
-
-=== Editing user role: `edit-role`
-
-Edits an existing role. +
-Format: `edit-role id/ROLE_ID [nid/NEW_ROLE_ID] [n/ROLE_NAME]`
-
-****
-* The role's data will remain intact if none of the optional fields are provided.
-****
-
-Examples:
-
-* `edit-role id/0`
-** Nothing happens in this case.
-* `edit-role id/0 nid/2 n/Supervisor`
-
-=== Deleting user role: `delete-role`
-
-Deletes an existing user role. +
-Format: `delete-role id/ROLE_ID `
-
-Examples:
-
-* `delete-role id/0`
-
-=== List all user roles: `list-role`
-
-List all existing user roles. +
-Format: `list-role`
+* `deregister id/azhikai`
+* `dereg id/azhikai`
 
 === Adding an ingredient: `add-ingredient`
 
@@ -850,14 +808,10 @@ e.g.`select 2`
 * *Redo* : `redo`
 * *Logging in*: `login id/USERNAME pw/PASSWORD`
 * *Logging out*: `logout`
-* *Creating user account*: `create-acc id/USERNAME pw/PASSWORD r/ROLE_ID`
-* *Editing user account*: `edit-acc id/USERNAME [nid/NEW_USERNAME] [pw/NEW_PASSWORD] [r/NEW_ROLE_ID]`
+* *Creating user account*: `create-acc id/USERNAME pw/PASSWORD`
+* *Editing user account*: `edit-acc id/USERNAME [nid/NEW_USERNAME] [pw/NEW_PASSWORD]`
 * *Deleting user account*: `delete-acc id/USERNAME`
 * *Listing user accounts*: `list-acc`
-* *Creating user role*: `create-role id/ROLE_ID n/ROLE_NAME`
-* *Editing user role*: `edit-role id/ROLE_ID [nid/NEW_ROLE_ID] [n/NEW_ROLE_NAME]`
-* *Deleting user role*: `delete-role id/ROLE_ID`
-* *Listing user roles*: `list-role`
 * *Add ingredient* : `add-ingredient n/INGREDIENT_NAME t/UNIT_TYPE p/PRICE_PER_UNIT m/MINIMUM` +
 e.g. `add-ingredient n/cod fish t/kilogram p/20 m/1`
 * *List ingredients* : `list-ingredients`
