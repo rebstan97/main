@@ -325,6 +325,10 @@ Examples:
 * `deregister id/azhikai`
 * `dereg id/azhikai`
 
+=== User roles `[coming in v2.0]`
+With user role, each user will only be able to execute certain commands, other than the administrator and/or
+restaurant owner who is able to execute all commands.
+
 === Adding an ingredient: `add-ingredient`
 
 Adds a new ingredient to the ingredient list. +
