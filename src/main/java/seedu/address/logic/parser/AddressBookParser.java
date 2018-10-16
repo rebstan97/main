@@ -33,8 +33,8 @@ import seedu.address.logic.commands.menu.ListItemsCommand;
 import seedu.address.logic.commands.menu.SelectItemCommand;
 import seedu.address.logic.commands.reservation.AddReservationCommand;
 import seedu.address.logic.commands.sales.DeleteSalesCommand;
-import seedu.address.logic.commands.sales.EditSalesCommand;
 import seedu.address.logic.commands.sales.DisplaySalesCommand;
+import seedu.address.logic.commands.sales.EditSalesCommand;
 import seedu.address.logic.commands.sales.RecordSalesCommand;
 import seedu.address.logic.parser.accounts.RegisterCommandParser;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -133,11 +133,10 @@ public class AddressBookParser {
             return new DisplaySalesCommandParser().parse(arguments);
 
         case DeleteSalesCommand.COMMAND_WORD:
-        return new DeleteSalesCommandParser().parse(arguments);
+            return new DeleteSalesCommandParser().parse(arguments);
 
         case EditSalesCommand.COMMAND_WORD:
-        return new EditSalesCommandParser().parse(arguments);
-
+            return new EditSalesCommandParser().parse(arguments);
 
         case RegisterCommand.COMMAND_WORD:
         case RegisterCommand.COMMAND_ALIAS:
