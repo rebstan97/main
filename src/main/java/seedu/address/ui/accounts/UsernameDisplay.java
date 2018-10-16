@@ -22,8 +22,8 @@ public class UsernameDisplay extends UiPart<Region> {
     private static final Logger logger = LogsCenter.getLogger(UsernameDisplay.class);
     private static final String FXML = "UsernameDisplay.fxml";
 
-    private static final String ACCOUNT_STATUS_GUEST = "Guest";
-    private static final String ACCOUNT_STATUS = "Welcome, %s";
+    public static final String ACCOUNT_STATUS_GUEST = "Guest";
+    public static final String ACCOUNT_STATUS = "Welcome, %s";
 
     private final StringProperty displayed = new SimpleStringProperty(ACCOUNT_STATUS_GUEST);
 
@@ -51,23 +51,4 @@ public class UsernameDisplay extends UiPart<Region> {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
         setUsername(ACCOUNT_STATUS_GUEST);
     }
-
- /*   @Override
-    public boolean equals(Object other) {
-        // short circuit if same object
-        if (other == this) {
-            return true;
-        }
-
-        // instanceof handles nulls
-        if (!(other instanceof PersonCard)) {
-            return false;
-        }
-
-        // state check
-        PersonCard card = (PersonCard) other;
-        return id.getText().equals(card.id.getText())
-                && person.equals(card.person);
-    }*/
-
 }
