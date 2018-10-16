@@ -22,7 +22,7 @@ public class LogoutCommand extends Command {
             + "Example: " + COMMAND_WORD;
 
     public static final String MESSAGE_SUCCESS = "You have been logged out.";
-    public static final String MESSAGE_NOT_AUTHENTICATED = "You are not logged in yet. Please login to logout.";
+    public static final String MESSAGE_NOT_AUTHENTICATED = "You are not logged in.";
 
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
