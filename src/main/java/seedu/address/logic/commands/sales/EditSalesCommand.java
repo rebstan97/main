@@ -31,6 +31,8 @@ public class EditSalesCommand extends Command {
 
     public static final String COMMAND_WORD = "edit-sales";
 
+    public static final String COMMAND_ALIAS = "es";
+
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the sales record identified "
             + "by the index number used in the displayed sales list.\n"
             + "Existing values will be overwritten by the input values.\n"

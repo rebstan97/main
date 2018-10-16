@@ -202,6 +202,10 @@ public class AddressBookParserTest {
         SalesRecord record = new RecordBuilder().build();
         RecordSalesCommand command = (RecordSalesCommand) parser.parseCommand(RecordUtil.getRecordSalesCommand(record));
         assertEquals(new RecordSalesCommand(record), command);
+        // alias test
+        command = (RecordSalesCommand) parser.parseCommand(RecordSalesCommand.COMMAND_ALIAS
+                + " " + RecordUtil.getRecordDetails(record));
+        assertEquals(new RecordSalesCommand(record), command);
     }
 
     @Test
@@ -209,9 +213,10 @@ public class AddressBookParserTest {
         DeleteSalesCommand command = (DeleteSalesCommand) parser.parseCommand(
                 DeleteSalesCommand.COMMAND_WORD + " " + INDEX_FIRST.getOneBased());
         assertEquals(new DeleteSalesCommand(INDEX_FIRST), command);
-        //command = (DeleteSalesCommand) parser.parseCommand(DeleteSalesCommand.COMMAND_ALIAS
-        //        + " " + INDEX_FIRST.getOneBased());
-        //assertEquals(new DeleteSalesCommand(INDEX_FIRST), command); // to be implemented once alias is supported
+        // alias test
+        command = (DeleteSalesCommand) parser.parseCommand(DeleteSalesCommand.COMMAND_ALIAS
+                + " " + INDEX_FIRST.getOneBased());
+        assertEquals(new DeleteSalesCommand(INDEX_FIRST), command);
     }
 
     @Test
@@ -221,10 +226,10 @@ public class AddressBookParserTest {
         EditSalesCommand command = (EditSalesCommand) parser.parseCommand(EditSalesCommand.COMMAND_WORD + " "
                 + INDEX_FIRST.getOneBased() + " " + RecordUtil.getEditRecordDescriptorDetails(descriptor));
         assertEquals(new EditSalesCommand(INDEX_FIRST, descriptor), command);
-
-        //command = (EditSalesCommand) parser.parseCommand(EditSalesCommand.COMMAND_ALIAS + " "
-        //        + INDEX_FIRST.getOneBased() + " " + RecordUtil.getEditRecordDescriptorDetails(descriptor));
-        //assertEquals(new EditSalesCommand(INDEX_FIRST, descriptor), command); // to be implemented
+        // alias test
+        command = (EditSalesCommand) parser.parseCommand(EditSalesCommand.COMMAND_ALIAS + " "
+                + INDEX_FIRST.getOneBased() + " " + RecordUtil.getEditRecordDescriptorDetails(descriptor));
+        assertEquals(new EditSalesCommand(INDEX_FIRST, descriptor), command);
     }
 
     @Test
@@ -232,6 +237,10 @@ public class AddressBookParserTest {
         Date date = new Date(VALID_DATE_RECORD_ONE);
         DisplaySalesCommand command = (DisplaySalesCommand) parser.parseCommand(
                 DisplaySalesCommand.COMMAND_WORD + " " + VALID_DATE_RECORD_ONE);
+        assertEquals(new DisplaySalesCommand(date), command);
+        // alias test
+        command = (DisplaySalesCommand) parser.parseCommand(DisplaySalesCommand.COMMAND_ALIAS + " "
+                + VALID_DATE_RECORD_ONE);
         assertEquals(new DisplaySalesCommand(date), command);
     }
 

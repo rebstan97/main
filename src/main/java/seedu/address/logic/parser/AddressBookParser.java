@@ -127,15 +127,19 @@ public class AddressBookParser {
             return new RemarkCommandParser().parse(arguments);
 
         case RecordSalesCommand.COMMAND_WORD:
+        case RecordSalesCommand.COMMAND_ALIAS:
             return new RecordSalesCommandParser().parse(arguments);
 
         case DisplaySalesCommand.COMMAND_WORD:
+        case DisplaySalesCommand.COMMAND_ALIAS:
             return new DisplaySalesCommandParser().parse(arguments);
 
         case DeleteSalesCommand.COMMAND_WORD:
+        case DeleteSalesCommand.COMMAND_ALIAS:
             return new DeleteSalesCommandParser().parse(arguments);
 
         case EditSalesCommand.COMMAND_WORD:
+        case EditSalesCommand.COMMAND_ALIAS:
             return new EditSalesCommandParser().parse(arguments);
 
         case RegisterCommand.COMMAND_WORD:

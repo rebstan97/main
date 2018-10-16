@@ -20,6 +20,8 @@ public class DeleteSalesCommand extends Command {
 
     public static final String COMMAND_WORD = "delete-sales";
 
+    public static final String COMMAND_ALIAS = "des";
+
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Deletes the sales record identified by the index number used in the displayed sales list.\n"
             + "Parameters: INDEX (must be a positive integer)"
