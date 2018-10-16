@@ -13,7 +13,7 @@ public class Price {
             "Price should only contain numbers, and it should be at most 2 decimal place";
     private static final String DECIMAL_PLACE_REGEX = "\\d{0,2}";
     public static final String PRICE_VALIDATION_REGEX = "\\d+" + ".?" + DECIMAL_PLACE_REGEX;
-    public final double value;
+    private final double value;
 
     /**
      * Constructs a {@code Price}.
@@ -31,6 +31,10 @@ public class Price {
      */
     public static boolean isValidPrice(String test) {
         return test.matches(PRICE_VALIDATION_REGEX);
+    }
+
+    public double getValue() {
+        return value;
     }
 
     @Override

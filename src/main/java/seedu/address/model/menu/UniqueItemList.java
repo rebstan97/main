@@ -108,7 +108,7 @@ public class UniqueItemList implements Iterable<Item> {
      * Sorts the contents of this list by price in ascending order.
      */
     public void sortItemsByPrice() {
-        FXCollections.sort(internalList, Comparator.comparingDouble(item -> item.getPrice().value));
+        FXCollections.sort(internalList, Comparator.comparingDouble(item -> item.getPrice().getValue()));
     }
 
     /**
