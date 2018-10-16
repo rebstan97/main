@@ -59,7 +59,7 @@ public class BrowserPanelTest extends GuiUnitTest {
         // associated web page of an item
         postNow(itemSelectionChangedEventStub);
         URL expectedPersonUrl = new URL(BrowserPanel.SEARCH_PAGE_URL
-                + APPLE_JUICE.getName().getFullName().replaceAll(" ", "%20"));
+                + APPLE_JUICE.getName().toString().replaceAll(" ", "%20"));
 
         waitUntilBrowserLoaded(browserPanelHandle);
         assertEquals(expectedPersonUrl, browserPanelHandle.getLoadedUrl());

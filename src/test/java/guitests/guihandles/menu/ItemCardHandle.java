@@ -79,7 +79,7 @@ public class ItemCardHandle extends NodeHandle<Node> {
      * Returns true if this handle contains {@code item}.
      */
     public boolean equals(Item item) {
-        return getName().equals(item.getName().getFullName())
+        return getName().equals(item.getName().toString())
                 && getPrice().equals(item.getPrice().toString())
                 && ImmutableMultiset.copyOf(getTags()).equals(ImmutableMultiset.copyOf(item.getTags().stream()
                         .map(tag -> tag.tagName)

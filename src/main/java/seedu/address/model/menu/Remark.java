@@ -19,10 +19,6 @@ public class Remark {
         value = remark;
     }
 
-    public String getValue() {
-        return value;
-    }
-
     @Override
     public String toString() {
         return value;
