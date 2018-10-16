@@ -57,7 +57,7 @@ public class ItemCard extends UiPart<Region> {
         id.setText(displayedIndex + ". ");
         name.setText(item.getName().getFullName());
         price.setText("$" + item.getPrice().toString());
-        remark.setText(item.getRemark().value);
+        remark.setText(item.getRemark().getValue());
         initTags(item);
     }
 

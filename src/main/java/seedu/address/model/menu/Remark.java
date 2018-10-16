@@ -7,7 +7,7 @@ import static java.util.Objects.requireNonNull;
  * Guarantees: immutable; Always valid
  */
 public class Remark {
-    public final String value;
+    private final String value;
 
     /**
      * Constructs a remark.
@@ -17,6 +17,10 @@ public class Remark {
     public Remark(String remark) {
         requireNonNull(remark);
         value = remark;
+    }
+
+    public String getValue() {
+        return value;
     }
 
     @Override
