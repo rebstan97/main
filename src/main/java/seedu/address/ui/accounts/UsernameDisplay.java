@@ -4,8 +4,6 @@ import java.util.logging.Logger;
 
 import com.google.common.eventbus.Subscribe;
 
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.StringProperty;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Region;
@@ -24,8 +22,6 @@ public class UsernameDisplay extends UiPart<Region> {
 
     public static final String ACCOUNT_STATUS_GUEST = "Guest";
     public static final String ACCOUNT_STATUS = "Welcome, %s";
-
-    private final StringProperty displayed = new SimpleStringProperty(ACCOUNT_STATUS_GUEST);
 
     @FXML
     private Label usernameDisplay;
