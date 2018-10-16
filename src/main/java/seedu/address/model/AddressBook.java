@@ -19,7 +19,9 @@ import seedu.address.model.person.Person;
 import seedu.address.model.person.UniquePersonList;
 import seedu.address.model.reservation.Reservation;
 import seedu.address.model.reservation.UniqueReservationList;
+import seedu.address.model.salesrecord.Date;
 import seedu.address.model.salesrecord.SalesRecord;
+import seedu.address.model.salesrecord.SalesReport;
 import seedu.address.model.salesrecord.UniqueRecordList;
 import seedu.address.model.tag.Tag;
 
@@ -247,6 +249,11 @@ public class AddressBook implements ReadOnlyAddressBook {
     @Override
     public ObservableList<SalesRecord> getRecordList() {
         return records.asUnmodifiableObservableList();
+    }
+
+    public SalesReport getSalesReport(Date date) {
+        requireNonNull(date);
+        return records.generateSalesReport(date);
     }
 
     //// account-level operations

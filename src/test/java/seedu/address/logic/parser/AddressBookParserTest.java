@@ -5,6 +5,7 @@ import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertTrue;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_DATE_RECORD_ONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_REMARK;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST;
 
@@ -47,7 +48,8 @@ import seedu.address.logic.commands.menu.SelectItemCommand;
 import seedu.address.logic.commands.menu.SortMenuCommand;
 import seedu.address.logic.commands.menu.SortMenuCommand.SortMethod;
 import seedu.address.logic.commands.menu.TodaySpecialCommand;
-import seedu.address.logic.commands.salescommands.RecordSalesCommand;
+import seedu.address.logic.commands.sales.DisplaySalesCommand;
+import seedu.address.logic.commands.sales.RecordSalesCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.accounts.Account;
 import seedu.address.model.ingredient.Ingredient;
@@ -56,6 +58,7 @@ import seedu.address.model.menu.TagContainsKeywordsPredicate;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Remark;
+import seedu.address.model.salesrecord.Date;
 import seedu.address.model.salesrecord.SalesRecord;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 import seedu.address.testutil.PersonBuilder;
@@ -201,6 +204,14 @@ public class AddressBookParserTest {
         SalesRecord record = new RecordBuilder().build();
         RecordSalesCommand command = (RecordSalesCommand) parser.parseCommand(RecordUtil.getRecordSalesCommand(record));
         assertEquals(new RecordSalesCommand(record), command);
+    }
+
+    @Test
+    public void parseCommand_display_sales() throws Exception {
+        Date date = new Date(VALID_DATE_RECORD_ONE);
+        DisplaySalesCommand command = (DisplaySalesCommand) parser.parseCommand(
+                DisplaySalesCommand.COMMAND_WORD + " " + VALID_DATE_RECORD_ONE);
+        assertEquals(new DisplaySalesCommand(date), command);
     }
 
     @Test
