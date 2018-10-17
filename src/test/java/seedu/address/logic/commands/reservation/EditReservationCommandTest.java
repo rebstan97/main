@@ -71,7 +71,8 @@ public class EditReservationCommandTest {
                 .withTags(VALID_RESERVATION_TAG_BILLY).build();
         EditReservationCommand editReservationCommand = new EditReservationCommand(indexLastReservation, descriptor);
 
-        String expectedMessage = String.format(EditReservationCommand.MESSAGE_EDIT_RESERVATION_SUCCESS, editedReservation);
+        String expectedMessage = String.format(EditReservationCommand.MESSAGE_EDIT_RESERVATION_SUCCESS,
+                editedReservation);
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.updateReservation(lastReservation, editedReservation);
@@ -82,10 +83,12 @@ public class EditReservationCommandTest {
 
     @Test
     public void execute_noFieldSpecifiedUnfilteredList_success() {
-        EditReservationCommand editReservationCommand = new EditReservationCommand(INDEX_FIRST, new EditReservationDescriptor());
+        EditReservationCommand editReservationCommand = new EditReservationCommand(INDEX_FIRST,
+                new EditReservationDescriptor());
         Reservation editedReservation = model.getFilteredReservationList().get(INDEX_FIRST.getZeroBased());
 
-        String expectedMessage = String.format(EditReservationCommand.MESSAGE_EDIT_RESERVATION_SUCCESS, editedReservation);
+        String expectedMessage = String.format(EditReservationCommand.MESSAGE_EDIT_RESERVATION_SUCCESS,
+                editedReservation);
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.commitAddressBook();
@@ -98,11 +101,13 @@ public class EditReservationCommandTest {
         showReservationAtIndex(model, INDEX_FIRST);
 
         Reservation reservationInFilteredList = model.getFilteredReservationList().get(INDEX_FIRST.getZeroBased());
-        Reservation editedReservation = new ReservationBuilder(reservationInFilteredList).withName(VALID_RESERVATION_NAME_BILLY).build();
+        Reservation editedReservation = new ReservationBuilder(reservationInFilteredList)
+                .withName(VALID_RESERVATION_NAME_BILLY).build();
         EditReservationCommand editReservationCommand = new EditReservationCommand(INDEX_FIRST,
                 new EditReservationDescriptorBuilder().withName(VALID_RESERVATION_NAME_BILLY).build());
 
-        String expectedMessage = String.format(EditReservationCommand.MESSAGE_EDIT_RESERVATION_SUCCESS, editedReservation);
+        String expectedMessage = String.format(EditReservationCommand.MESSAGE_EDIT_RESERVATION_SUCCESS,
+                editedReservation);
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.updateReservation(model.getFilteredReservationList().get(0), editedReservation);
@@ -117,7 +122,8 @@ public class EditReservationCommandTest {
         EditReservationDescriptor descriptor = new EditReservationDescriptorBuilder(firstReservation).build();
         EditReservationCommand editReservationCommand = new EditReservationCommand(INDEX_SECOND, descriptor);
 
-        assertCommandFailure(editReservationCommand, model, commandHistory, EditReservationCommand.MESSAGE_DUPLICATE_RESERVATION);
+        assertCommandFailure(editReservationCommand, model, commandHistory,
+                EditReservationCommand.MESSAGE_DUPLICATE_RESERVATION);
     }
 
     @Test
@@ -129,16 +135,19 @@ public class EditReservationCommandTest {
         EditReservationCommand editReservationCommand = new EditReservationCommand(INDEX_FIRST,
                 new EditReservationDescriptorBuilder(reservationInList).build());
 
-        assertCommandFailure(editReservationCommand, model, commandHistory, EditReservationCommand.MESSAGE_DUPLICATE_RESERVATION);
+        assertCommandFailure(editReservationCommand, model, commandHistory,
+                EditReservationCommand.MESSAGE_DUPLICATE_RESERVATION);
     }
 
     @Test
     public void execute_invalidReservationIndexUnfilteredList_failure() {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredReservationList().size() + 1);
-        EditReservationDescriptor descriptor = new EditReservationDescriptorBuilder().withName(VALID_RESERVATION_NAME_BILLY).build();
+        EditReservationDescriptor descriptor = new EditReservationDescriptorBuilder()
+                .withName(VALID_RESERVATION_NAME_BILLY).build();
         EditReservationCommand editReservationCommand = new EditReservationCommand(outOfBoundIndex, descriptor);
 
-        assertCommandFailure(editReservationCommand, model, commandHistory, Messages.MESSAGE_INVALID_RESERVATION_DISPLAYED_INDEX);
+        assertCommandFailure(editReservationCommand, model, commandHistory,
+                Messages.MESSAGE_INVALID_RESERVATION_DISPLAYED_INDEX);
     }
 
     /**
@@ -154,7 +163,8 @@ public class EditReservationCommandTest {
         EditReservationCommand editReservationCommand = new EditReservationCommand(outOfBoundIndex,
                 new EditReservationDescriptorBuilder().withName(VALID_RESERVATION_NAME_BILLY).build());
 
-        assertCommandFailure(editReservationCommand, model, commandHistory, Messages.MESSAGE_INVALID_RESERVATION_DISPLAYED_INDEX);
+        assertCommandFailure(editReservationCommand, model, commandHistory,
+                Messages.MESSAGE_INVALID_RESERVATION_DISPLAYED_INDEX);
     }
 
     @Test
@@ -182,11 +192,13 @@ public class EditReservationCommandTest {
     @Test
     public void executeUndoRedo_invalidIndexUnfilteredList_failure() {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredReservationList().size() + 1);
-        EditReservationDescriptor descriptor = new EditReservationDescriptorBuilder().withName(VALID_RESERVATION_NAME_BILLY).build();
+        EditReservationDescriptor descriptor = new EditReservationDescriptorBuilder()
+                .withName(VALID_RESERVATION_NAME_BILLY).build();
         EditReservationCommand editReservationCommand = new EditReservationCommand(outOfBoundIndex, descriptor);
 
         // execution failed -> address book state not added into model
-        assertCommandFailure(editReservationCommand, model, commandHistory, Messages.MESSAGE_INVALID_RESERVATION_DISPLAYED_INDEX);
+        assertCommandFailure(editReservationCommand, model, commandHistory,
+                Messages.MESSAGE_INVALID_RESERVATION_DISPLAYED_INDEX);
 
         // single address book state in model -> undoCommand and redoCommand fail
         assertCommandFailure(new UndoCommand(), model, commandHistory, UndoCommand.MESSAGE_FAILURE);
@@ -194,10 +206,10 @@ public class EditReservationCommandTest {
     }
 
     /**
-     * 1. Edits a {@code Reservation} from a filtered list. 2. Undo the edit. 3. The unfiltered list should be shown now.
-     * Verify that the index of the previously edited reservation in the unfiltered list is different from the index at the
-     * filtered list. 4. Redo the edit. This ensures {@code RedoCommand} edits the reservation object regardless of
-     * indexing.
+     * 1. Edits a {@code Reservation} from a filtered list. 2. Undo the edit. 3.
+     * The unfiltered list should be shown now. Verify that the index of the previously edited reservation in the
+     * unfiltered list is different from the index at the filtered list. 4. Redo the edit. This ensures
+     * {@code RedoCommand} edits the reservation object regardless of indexing.
      */
     @Test
     public void executeUndoRedo_validIndexFilteredList_sameReservationEdited() throws Exception {
@@ -211,7 +223,7 @@ public class EditReservationCommandTest {
         expectedModel.updateReservation(reservationToEdit, editedReservation);
         expectedModel.commitAddressBook();
 
-        // edit -> edits second reservation in unfiltered reservation list / first reservation in filtered reservation list
+        // edit -> edits second reservation in unfiltered list / first reservation in filtered list
         editReservationCommand.execute(model, commandHistory);
 
         // undo -> reverts addressbook back to previous state and filtered reservation list to show all reservations
