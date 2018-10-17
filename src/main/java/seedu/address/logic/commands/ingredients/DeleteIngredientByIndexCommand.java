@@ -2,8 +2,10 @@ package seedu.address.logic.commands.ingredients;
 
 import java.util.List;
 
+import seedu.address.commons.core.EventsCenter;
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
+import seedu.address.commons.events.ui.DisplayIngredientListRequestEvent;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -32,6 +34,7 @@ public class DeleteIngredientByIndexCommand extends DeleteIngredientCommand {
         Ingredient ingredientToDelete = lastShownList.get(targetIndex.getZeroBased());
         model.deleteIngredient(ingredientToDelete);
         model.commitAddressBook();
+        EventsCenter.getInstance().post(new DisplayIngredientListRequestEvent());
         return new CommandResult(String.format(MESSAGE_DELETE_INGREDIENT_SUCCESS, ingredientToDelete));
     }
 

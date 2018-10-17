@@ -1,6 +1,8 @@
 package seedu.address.logic.commands.ingredients;
 
+import seedu.address.commons.core.EventsCenter;
 import seedu.address.commons.core.Messages;
+import seedu.address.commons.events.ui.DisplayIngredientListRequestEvent;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -26,6 +28,7 @@ public class DeleteIngredientByNameCommand extends DeleteIngredientCommand {
             Ingredient ingredientToDelete = model.findIngredient(targetName);
             model.deleteIngredient(ingredientToDelete);
             model.commitAddressBook();
+            EventsCenter.getInstance().post(new DisplayIngredientListRequestEvent());
             return new CommandResult(String.format(MESSAGE_DELETE_INGREDIENT_SUCCESS, ingredientToDelete));
         } catch (IngredientNotFoundException e) {
             throw new CommandException(Messages.MESSAGE_INGREDIENT_NAME_NOT_FOUND);

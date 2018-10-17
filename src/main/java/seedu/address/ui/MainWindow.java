@@ -16,6 +16,7 @@ import javafx.stage.Stage;
 import seedu.address.commons.core.Config;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.commons.events.ui.DisplayIngredientListRequestEvent;
 import seedu.address.commons.events.ui.DisplayItemListRequestEvent;
 import seedu.address.commons.events.ui.DisplaySalesReportEvent;
 import seedu.address.commons.events.ui.ExitAppRequestEvent;
@@ -220,9 +221,7 @@ public class MainWindow extends UiPart<Stage> {
      * Switch to the ingredient view.
      */
     @FXML
-    public void handleClickIngredientIcon() {
-        //Replaces current list with ingredient list in the panel placeholder
-        logger.info("GUI interaction: Ingredient icon was clicked");
+    public void handleSwitchToIngredient() {
         IngredientListPanel ingredientListPanel = new IngredientListPanel(logic.getFilteredIngredientList());
         personListPanelPlaceholder.getChildren().add(ingredientListPanel.getRoot());
     }
@@ -286,6 +285,12 @@ public class MainWindow extends UiPart<Stage> {
     private void handleDisplayItemListEvent(DisplayItemListRequestEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
         handleSwitchToMenu();
+    }
+
+    @Subscribe
+    private void handleDisplayIngredientListEvent(DisplayIngredientListRequestEvent event) {
+        logger.info(LogsCenter.getEventHandlingLogMessage(event));
+        handleSwitchToIngredient();
     }
 
     @Subscribe

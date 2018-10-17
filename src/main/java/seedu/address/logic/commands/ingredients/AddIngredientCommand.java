@@ -6,6 +6,8 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_INGREDIENT_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_INGREDIENT_PRICE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_INGREDIENT_UNIT;
 
+import seedu.address.commons.core.EventsCenter;
+import seedu.address.commons.events.ui.DisplayIngredientListRequestEvent;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
@@ -57,6 +59,7 @@ public class AddIngredientCommand extends Command {
 
         model.addIngredient(toAdd);
         model.commitAddressBook();
+        EventsCenter.getInstance().post(new DisplayIngredientListRequestEvent());
         return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
     }
 
