@@ -169,9 +169,31 @@ public class UniqueItemListTest {
 
     @Test
     public void setItems_listWithDuplicateItems_throwsDuplicateItemException() {
-        List<Item> listWithItemPersons = Arrays.asList(APPLE_JUICE, APPLE_JUICE);
+        List<Item> listWithItems = Arrays.asList(APPLE_JUICE, APPLE_JUICE);
         thrown.expect(DuplicateItemException.class);
-        uniqueItemList.setItems(listWithItemPersons);
+        uniqueItemList.setItems(listWithItems);
+    }
+
+    @Test
+    public void sortItemsByName_success() {
+        uniqueItemList.add(BEEF_BURGER);
+        uniqueItemList.add(APPLE_JUICE);
+        UniqueItemList expectedUniqueItemList = new UniqueItemList();
+        expectedUniqueItemList.add(APPLE_JUICE);
+        expectedUniqueItemList.add(BEEF_BURGER);
+        uniqueItemList.sortItemsByName();
+        assertEquals(expectedUniqueItemList, uniqueItemList);
+    }
+
+    @Test
+    public void sortItemsByPrice_success() {
+        uniqueItemList.add(BEEF_BURGER);
+        uniqueItemList.add(APPLE_JUICE);
+        UniqueItemList expectedUniqueItemList = new UniqueItemList();
+        expectedUniqueItemList.add(APPLE_JUICE);
+        expectedUniqueItemList.add(BEEF_BURGER);
+        uniqueItemList.sortItemsByPrice();
+        assertEquals(expectedUniqueItemList, uniqueItemList);
     }
 
     @Test

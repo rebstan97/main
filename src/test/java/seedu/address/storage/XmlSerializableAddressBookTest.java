@@ -3,6 +3,8 @@ package seedu.address.storage;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
+import static seedu.address.testutil.TypicalAddressBook.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalAddressBook.getTypicalAddressBookWithItemOnly;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -14,9 +16,7 @@ import org.junit.rules.ExpectedException;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.commons.util.XmlUtil;
 import seedu.address.model.AddressBook;
-import seedu.address.testutil.TypicalAddressBook;
 import seedu.address.testutil.ingredients.TypicalIngredients;
-import seedu.address.testutil.menu.TypicalItems;
 
 
 public class XmlSerializableAddressBookTest {
@@ -57,7 +57,7 @@ public class XmlSerializableAddressBookTest {
     public void toModelType_typicalPersonsFile_success() throws Exception {
         dataFromFile = XmlUtil.getDataFromFile(TYPICAL_PERSONS_FILE, XmlSerializableAddressBook.class);
         AddressBook addressBookFromFile = dataFromFile.toModelType();
-        AddressBook typicalPersonsAddressBook = TypicalAddressBook.getTypicalAddressBook();
+        AddressBook typicalPersonsAddressBook = getTypicalAddressBook();
         assertEquals(addressBookFromFile, typicalPersonsAddressBook);
     }
 
@@ -144,7 +144,7 @@ public class XmlSerializableAddressBookTest {
         XmlSerializableAddressBook dataFromFile = XmlUtil.getDataFromFile(TYPICAL_ITEMS_FILE,
                 XmlSerializableAddressBook.class);
         AddressBook addressBookFromFile = dataFromFile.toModelType();
-        AddressBook typicalItemsAddressBook = TypicalItems.getTypicalAddressBook();
+        AddressBook typicalItemsAddressBook = getTypicalAddressBookWithItemOnly();
         assertEquals(addressBookFromFile, typicalItemsAddressBook);
     }
 

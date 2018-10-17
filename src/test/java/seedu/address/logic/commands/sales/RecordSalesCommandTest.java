@@ -17,6 +17,7 @@ import javafx.collections.ObservableList;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.commands.menu.SortMenuCommand.SortMethod;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
@@ -238,6 +239,11 @@ public class RecordSalesCommandTest {
 
         @Override
         public void resetMenuData(ReadOnlyAddressBook newData) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void sortMenu(SortMethod sortMethod) {
             throw new AssertionError("This method should not be called.");
         }
 
