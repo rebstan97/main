@@ -54,7 +54,7 @@ public class LogicManager extends ComponentManager implements Logic {
         try {
             Command command = addressBookParser.parseCommand(commandText);
             if (!isPublicCommand(command) && !UserSession.isAuthenticated()) {
-                throw new CommandException(Messages.MESSAGE_NOT_AUTHENTICATED);
+                throw new CommandException(Messages.MESSAGE_COMMAND_FORBIDDEN);
             }
             return command.execute(model, history);
         } finally {
