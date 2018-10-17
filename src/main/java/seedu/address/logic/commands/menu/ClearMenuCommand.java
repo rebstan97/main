@@ -2,6 +2,8 @@ package seedu.address.logic.commands.menu;
 
 import static java.util.Objects.requireNonNull;
 
+import seedu.address.commons.core.EventsCenter;
+import seedu.address.commons.events.ui.DisplayItemListRequestEvent;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
@@ -23,6 +25,7 @@ public class ClearMenuCommand extends Command {
         requireNonNull(model);
         model.resetMenuData(new AddressBook());
         model.commitAddressBook();
+        EventsCenter.getInstance().post(new DisplayItemListRequestEvent());
         return new CommandResult(MESSAGE_SUCCESS);
     }
 }

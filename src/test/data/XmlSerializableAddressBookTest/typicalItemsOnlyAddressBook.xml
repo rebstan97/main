@@ -6,6 +6,7 @@
         <price>2</price>
         <remark></remark>
         <tagged>drink</tagged>
+        <tagged>monday</tagged>
     </items>
 
     <items>
@@ -14,30 +15,36 @@
         <remark></remark>
         <tagged>beef</tagged>
         <tagged>burger</tagged>
+        <tagged>tuesday</tagged>
     </items>
     <items>
         <name>Chocolate Cake</name>
         <price>2</price>
         <remark></remark>
+        <tagged>wednesday</tagged>
     </items>
     <items>
         <name>Duck Rice</name>
         <price>3</price>
         <remark></remark>
+        <tagged>thursday</tagged>
     </items>
     <items>
         <name>Egg</name>
         <price>0.5</price>
         <remark></remark>
+        <tagged>friday</tagged>
     </items>
     <items>
         <name>Fruit Cake</name>
         <price>2</price>
         <remark></remark>
+        <tagged>saturday</tagged>
     </items>
     <items>
         <name>Garlic Bread</name>
         <price>1</price>
         <remark>Consists of bread topped with garlic and olive oil</remark>
+        <tagged>sunday</tagged>
     </items>
 </addressbook>

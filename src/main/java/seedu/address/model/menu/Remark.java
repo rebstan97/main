@@ -3,16 +3,16 @@ package seedu.address.model.menu;
 import static java.util.Objects.requireNonNull;
 
 /**
- * Represents a Person's remark in the address book.
+ * Represents an Item's remark in the menu.
  * Guarantees: immutable; Always valid
  */
 public class Remark {
-    public final String value;
+    private final String value;
 
     /**
-     * Constructs an {@code Address}.
+     * Constructs a remark.
      *
-     * @param remark A valid address.
+     * @param remark A valid remark.
      */
     public Remark(String remark) {
         requireNonNull(remark);

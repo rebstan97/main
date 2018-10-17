@@ -1,9 +1,9 @@
-package seedu.address.logic.commands;
+package seedu.address.logic.commands.sales;
 
 import static java.util.Objects.requireNonNull;
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
-import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -15,8 +15,9 @@ import org.junit.rules.ExpectedException;
 
 import javafx.collections.ObservableList;
 import seedu.address.logic.CommandHistory;
+import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.logic.commands.salescommands.RecordSalesCommand;
+import seedu.address.logic.commands.menu.SortMenuCommand.SortMethod;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
@@ -25,7 +26,10 @@ import seedu.address.model.ingredient.Ingredient;
 import seedu.address.model.ingredient.IngredientName;
 import seedu.address.model.menu.Item;
 import seedu.address.model.person.Person;
+import seedu.address.model.reservation.Reservation;
+import seedu.address.model.salesrecord.Date;
 import seedu.address.model.salesrecord.SalesRecord;
+import seedu.address.model.salesrecord.SalesReport;
 import seedu.address.model.tag.Tag;
 import seedu.address.testutil.salesrecords.RecordBuilder;
 
@@ -164,6 +168,11 @@ public class RecordSalesCommandTest {
         }
 
         @Override
+        public SalesReport getSalesReport(Date date) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public ObservableList<SalesRecord> getFilteredRecordList() {
             throw new AssertionError("This method should not be called.");
         }
@@ -235,12 +244,53 @@ public class RecordSalesCommandTest {
         }
 
         @Override
+        public void sortMenu(SortMethod sortMethod) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public ObservableList<Item> getFilteredItemList() {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
         public void updateFilteredItemList(Predicate<Item> predicate) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        // Reservation Management
+        @Override
+        public boolean hasReservation(Reservation reservation) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void deleteReservation(Reservation target) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void addReservation(Reservation reservation) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void updateReservation(Reservation target, Reservation editedReservation) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void removeTagForReservation(Tag tag) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ObservableList<Reservation> getFilteredReservationList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void updateFilteredReservationList(Predicate<Reservation> predicate) {
             throw new AssertionError("This method should not be called.");
         }
 
