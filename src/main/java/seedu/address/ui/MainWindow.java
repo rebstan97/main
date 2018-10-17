@@ -9,6 +9,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.SplitPane;
 import javafx.scene.control.TextInputControl;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
@@ -80,6 +81,21 @@ public class MainWindow extends UiPart<Stage> {
 
     @FXML
     private StackPane statusbarPlaceholder;
+
+    @FXML
+    private ImageView switchToAccountButton;
+
+    @FXML
+    private ImageView switchToMenuButton;
+
+    @FXML
+    private ImageView switchToSalesButton;
+
+    @FXML
+    private ImageView switchToIngredientButton;
+
+    @FXML
+    private ImageView switchToReservationButton;
 
     public MainWindow(Stage primaryStage, Config config, UserPrefs prefs, Logic logic) {
         super(FXML, primaryStage);
@@ -177,6 +193,14 @@ public class MainWindow extends UiPart<Stage> {
 
     private void setTitle(String appTitle) {
         primaryStage.setTitle(appTitle);
+    }
+
+    private void setButton(boolean isActive) {
+        switchToAccountButton.setOpacity(isActive ? 1.0 : 0.5);
+        switchToMenuButton.setOpacity(isActive ? 1.0 : 0.5);
+        switchToIngredientButton.setOpacity(isActive ? 1.0 : 0.5);
+        switchToSalesButton.setOpacity(isActive ? 1.0 : 0.5);
+        switchToReservationButton.setOpacity(isActive ? 1.0 : 0.5);
     }
 
     /**
@@ -326,11 +350,13 @@ public class MainWindow extends UiPart<Stage> {
     private void handleLoginEvent(LoginEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
         personListPanelPlaceholder.getChildren().add(itemListPanel.getRoot()); // Show menu by default
+        setButton(true);
     }
 
     @Subscribe
     private void handleLogoutEvent(LogoutEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
         personListPanelPlaceholder.getChildren().clear();
+        setButton(false);
     }
 }
