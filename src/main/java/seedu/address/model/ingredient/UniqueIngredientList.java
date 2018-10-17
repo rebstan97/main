@@ -5,6 +5,7 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Iterator;
 import java.util.List;
+import java.util.function.Predicate;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -77,6 +78,19 @@ public class UniqueIngredientList implements Iterable<Ingredient> {
         if (!internalList.remove(toRemove)) {
             throw new IngredientNotFoundException();
         }
+    }
+
+    /**
+     * Finds the ingredient with the equivalent name from the list.
+     * The ingredient must exist in the list and be the only one with this name.
+     */
+    public Ingredient find(IngredientName ingredientName) throws IngredientNotFoundException {
+        requireNonNull(ingredientName);
+        Predicate<Ingredient> predicate = ingredient -> ingredient.getName().equals(ingredientName);
+        if (!internalList.stream().anyMatch(predicate)) {
+            throw new IngredientNotFoundException();
+        }
+        return internalList.stream().filter(predicate).findFirst().get();
     }
 
     public void setIngredients(UniqueIngredientList replacement) {
