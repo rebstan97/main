@@ -18,6 +18,9 @@ import seedu.address.model.salesrecord.SalesRecord;
  */
 public class RecordSalesCommand extends Command {
     public static final String COMMAND_WORD = "record-sales";
+
+    public static final String COMMAND_ALIAS = "rs";
+
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Records the sales volume of a menu item within a day"
             + " into the sales book.\n"
             + "Parameters: "

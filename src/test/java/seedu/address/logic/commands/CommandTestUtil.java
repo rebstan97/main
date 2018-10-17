@@ -30,15 +30,19 @@ import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.commands.ingredients.EditIngredientCommand;
 import seedu.address.logic.commands.menu.EditItemCommand;
+import seedu.address.logic.commands.sales.EditSalesCommand;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ingredient.Ingredient;
 import seedu.address.model.ingredient.IngredientNameContainsKeywordsPredicate;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
+import seedu.address.model.salesrecord.ItemNameContainsKeywordsPredicate;
+import seedu.address.model.salesrecord.SalesRecord;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 import seedu.address.testutil.ingredients.EditIngredientDescriptorBuilder;
 import seedu.address.testutil.menu.EditItemDescriptorBuilder;
+import seedu.address.testutil.salesrecords.EditRecordDescriptorBuilder;
 
 /**
  * Contains helper methods for testing commands.
@@ -95,6 +99,11 @@ public class CommandTestUtil {
     public static final String PREFIX_WITH_VALID_QUANTITY_SOLD =
             " " + PREFIX_QUANTITY_SOLD + VALID_QUANTITY_SOLD_RECORD_ONE;
     public static final String PREFIX_WITH_VALID_PRICE = " " + PREFIX_ITEM_PRICE + VALID_PRICE_RECORD_ONE;
+    public static final String PREFIX_WITH_VALID_DATE_TWO = " " + PREFIX_DATE + VALID_DATE_RECORD_TWO;
+    public static final String PREFIX_WITH_VALID_ITEM_NAME_TWO = " " + PREFIX_ITEM_NAME + VALID_ITEM_NAME_RECORD_TWO;
+    public static final String PREFIX_WITH_VALID_QUANTITY_SOLD_TWO =
+            " " + PREFIX_QUANTITY_SOLD + VALID_QUANTITY_SOLD_RECORD_TWO;
+    public static final String PREFIX_WITH_VALID_PRICE_TWO = " " + PREFIX_ITEM_PRICE + VALID_PRICE_RECORD_TWO;
     public static final String PREFIX_WITH_INVALID_DATE = " " + PREFIX_DATE + "31-02-2018"; // no such date
     public static final String PREFIX_WITH_INVALID_ITEM_NAME = " " + PREFIX_ITEM_NAME + "Fried Rice!"; // symbols not
     // allowed
@@ -196,6 +205,9 @@ public class CommandTestUtil {
     public static final EditIngredientCommand.EditIngredientDescriptor DESC_APPLE;
     public static final EditIngredientCommand.EditIngredientDescriptor DESC_BROCCOLI;
 
+    public static final EditSalesCommand.EditRecordDescriptor DESC_RECORD_ONE;
+    public static final EditSalesCommand.EditRecordDescriptor DESC_RECORD_TWO;
+
     static {
         DESC_AMY = new EditPersonDescriptorBuilder().withName(VALID_NAME_AMY)
                 .withPhone(VALID_PHONE_AMY).withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_AMY)
@@ -216,6 +228,13 @@ public class CommandTestUtil {
         DESC_BROCCOLI =
                 new EditIngredientDescriptorBuilder().withName(VALID_NAME_BROCCOLI).withPrice(VALID_PRICE_BROCCOLI)
                 .withUnit(VALID_UNIT_BROCCOLI).build();
+
+        // Sales Management
+        DESC_RECORD_ONE = new EditRecordDescriptorBuilder().withDate(VALID_DATE_RECORD_ONE)
+                .withPrice(VALID_PRICE_RECORD_ONE).build();
+        DESC_RECORD_TWO = new EditRecordDescriptorBuilder().withDate(VALID_DATE_RECORD_TWO)
+                .withName(VALID_ITEM_NAME_RECORD_TWO).withPrice(VALID_PRICE_RECORD_TWO)
+                .withQuantitySold(VALID_QUANTITY_SOLD_RECORD_TWO).build();
     }
 
     /**
@@ -302,4 +321,17 @@ public class CommandTestUtil {
         assertEquals(1, model.getFilteredIngredientList().size());
     }
 
+    /**
+     * Updates {@code model}'s filtered list to show only the sales record at the given {@code targetIndex} in the
+     * {@code model}'s address book.
+     */
+    public static void showRecordAtIndex(Model model, Index targetIndex) {
+        assertTrue(targetIndex.getZeroBased() < model.getFilteredRecordList().size());
+
+        SalesRecord salesRecord = model.getFilteredRecordList().get(targetIndex.getZeroBased());
+        final String[] splitRecord = salesRecord.getName().toString().split("\\s+");
+        model.updateFilteredRecordList(new ItemNameContainsKeywordsPredicate(Arrays.asList(splitRecord[0])));
+
+        assertEquals(1, model.getFilteredRecordList().size());
+    }
 }

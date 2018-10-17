@@ -16,6 +16,9 @@ import seedu.address.model.salesrecord.SalesReport;
  */
 public class DisplaySalesCommand extends Command {
     public static final String COMMAND_WORD = "display-sales";
+
+    public static final String COMMAND_ALIAS = "dis";
+
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Generate and display the sales report of a specified "
             + "date.\n"
             + "Parameters: DATE (must be in DD-MM-YYYY format) "
