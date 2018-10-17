@@ -36,7 +36,8 @@ public class DeleteReservationCommandTest {
         Reservation reservationToDelete = model.getFilteredReservationList().get(INDEX_FIRST.getZeroBased());
         DeleteReservationCommand deleteCommand = new DeleteReservationCommand(INDEX_FIRST);
 
-        String expectedMessage = String.format(DeleteReservationCommand.MESSAGE_DELETE_RESERVATION_SUCCESS, reservationToDelete);
+        String expectedMessage = String.format(DeleteReservationCommand.MESSAGE_DELETE_RESERVATION_SUCCESS,
+                reservationToDelete);
 
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         expectedModel.deleteReservation(reservationToDelete);
@@ -50,7 +51,8 @@ public class DeleteReservationCommandTest {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredReservationList().size() + 1);
         DeleteReservationCommand deleteCommand = new DeleteReservationCommand(outOfBoundIndex);
 
-        assertCommandFailure(deleteCommand, model, commandHistory, Messages.MESSAGE_INVALID_RESERVATION_DISPLAYED_INDEX);
+        assertCommandFailure(deleteCommand, model, commandHistory,
+                Messages.MESSAGE_INVALID_RESERVATION_DISPLAYED_INDEX);
     }
 
     @Test
@@ -60,7 +62,8 @@ public class DeleteReservationCommandTest {
         Reservation reservationToDelete = model.getFilteredReservationList().get(INDEX_FIRST.getZeroBased());
         DeleteReservationCommand deleteCommand = new DeleteReservationCommand(INDEX_FIRST);
 
-        String expectedMessage = String.format(DeleteReservationCommand.MESSAGE_DELETE_RESERVATION_SUCCESS, reservationToDelete);
+        String expectedMessage = String.format(DeleteReservationCommand.MESSAGE_DELETE_RESERVATION_SUCCESS,
+                reservationToDelete);
 
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         expectedModel.deleteReservation(reservationToDelete);
@@ -80,7 +83,8 @@ public class DeleteReservationCommandTest {
 
         DeleteReservationCommand deleteCommand = new DeleteReservationCommand(outOfBoundIndex);
 
-        assertCommandFailure(deleteCommand, model, commandHistory, Messages.MESSAGE_INVALID_RESERVATION_DISPLAYED_INDEX);
+        assertCommandFailure(deleteCommand, model, commandHistory,
+                Messages.MESSAGE_INVALID_RESERVATION_DISPLAYED_INDEX);
     }
 
     @Test
