@@ -159,12 +159,11 @@ public class MainWindow extends UiPart<Stage> {
      * Fills up all the placeholders of this window.
      */
     void fillInnerParts() {
-        personListPanel = new PersonListPanel(logic.getFilteredPersonList());
-        itemListPanel = new ItemListPanel(logic.getFilteredItemList());
-        recordListPanel = new RecordListPanel(logic.getFilteredRecordList());
+        browserPanel = new BrowserPanel();
+        browserPlaceholder.getChildren().add(browserPanel.getRoot());
 
-        // include this, else current systemtests all will fail
-        personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
+        ResultDisplay resultDisplay = new ResultDisplay();
+        resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
 
         UsernameDisplay usernameDisplay = new UsernameDisplay();
         // Centralize the width
@@ -177,17 +176,14 @@ public class MainWindow extends UiPart<Stage> {
                 .divide(2));
         usernameDisplayPlaceholder.getChildren().add(usernameDisplay.getRoot());
 
+        StatusBarFooter statusBarFooter = new StatusBarFooter(prefs.getAddressBookFilePath());
+        statusbarPlaceholder.getChildren().add(statusBarFooter.getRoot());
+
         CommandBox commandBox = new CommandBox(logic);
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
 
-        ResultDisplay resultDisplay = new ResultDisplay();
-        resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
-
-        browserPanel = new BrowserPanel();
-        browserPlaceholder.getChildren().add(browserPanel.getRoot());
-
-        StatusBarFooter statusBarFooter = new StatusBarFooter(prefs.getAddressBookFilePath());
-        statusbarPlaceholder.getChildren().add(statusBarFooter.getRoot());
+        personListPanel = new PersonListPanel(logic.getFilteredPersonList());
+        personListPanelPlaceholder.getChildren().add(personListPanel.getRoot()); // Show address book
     }
 
     void hide() {
@@ -196,14 +192,6 @@ public class MainWindow extends UiPart<Stage> {
 
     private void setTitle(String appTitle) {
         primaryStage.setTitle(appTitle);
-    }
-
-    private void setButton(boolean isActive) {
-        switchToAccountButton.setOpacity(isActive ? 1.0 : 0.5);
-        switchToMenuButton.setOpacity(isActive ? 1.0 : 0.5);
-        switchToIngredientButton.setOpacity(isActive ? 1.0 : 0.5);
-        switchToSalesButton.setOpacity(isActive ? 1.0 : 0.5);
-        switchToReservationButton.setOpacity(isActive ? 1.0 : 0.5);
     }
 
     /**
@@ -247,6 +235,7 @@ public class MainWindow extends UiPart<Stage> {
     @FXML
     public void handleSwitchToMenu() {
         personListPanelPlaceholder.getChildren().clear();
+        itemListPanel = new ItemListPanel(logic.getFilteredItemList());
         personListPanelPlaceholder.getChildren().add(itemListPanel.getRoot());
     }
 
@@ -256,6 +245,7 @@ public class MainWindow extends UiPart<Stage> {
     @FXML
     public void handleSwitchToSales() {
         personListPanelPlaceholder.getChildren().clear();
+        recordListPanel = new RecordListPanel(logic.getFilteredRecordList());
         personListPanelPlaceholder.getChildren().add(recordListPanel.getRoot());
     }
 
@@ -352,14 +342,12 @@ public class MainWindow extends UiPart<Stage> {
     @Subscribe
     private void handleLoginEvent(LoginEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
+        // If we show menu here, it will mess with systemtests. So it must be fixed together
         //personListPanelPlaceholder.getChildren().add(itemListPanel.getRoot()); // Show menu by default
-        setButton(true);
     }
 
     @Subscribe
     private void handleLogoutEvent(LogoutEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
-        personListPanelPlaceholder.getChildren().clear();
-        setButton(false);
     }
 }
