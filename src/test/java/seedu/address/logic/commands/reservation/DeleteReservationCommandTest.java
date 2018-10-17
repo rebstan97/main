@@ -113,8 +113,8 @@ public class DeleteReservationCommandTest {
         DeleteReservationCommand deleteCommand = new DeleteReservationCommand(outOfBoundIndex);
 
         // execution failed -> address book state not added into model
-        assertCommandFailure(deleteCommand, model, commandHistory
-                , Messages.MESSAGE_INVALID_RESERVATION_DISPLAYED_INDEX);
+        assertCommandFailure(deleteCommand, model, commandHistory,
+                Messages.MESSAGE_INVALID_RESERVATION_DISPLAYED_INDEX);
 
         // single address book state in model -> undoCommand and redoCommand fail
         assertCommandFailure(new UndoCommand(), model, commandHistory, UndoCommand.MESSAGE_FAILURE);
