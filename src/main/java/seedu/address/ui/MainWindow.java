@@ -18,6 +18,7 @@ import javafx.stage.Stage;
 import seedu.address.commons.core.Config;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.commons.events.ui.DisplayIngredientListRequestEvent;
 import seedu.address.commons.events.ui.DisplayItemListRequestEvent;
 import seedu.address.commons.events.ui.DisplaySalesReportEvent;
 import seedu.address.commons.events.ui.ExitAppRequestEvent;
@@ -47,8 +48,8 @@ public class MainWindow extends UiPart<Stage> {
     // Independent Ui parts residing in this Ui container
     private BrowserPanel browserPanel;
     private PersonListPanel personListPanel;
+    private RecordListPanel recordListPanel; // Panels stack on top of each other, only one visible at a time
     private IngredientListPanel ingredientListPanel;
-    private RecordListPanel recordListPanel;
 
     private Config config;
     private UserPrefs prefs;
@@ -71,10 +72,7 @@ public class MainWindow extends UiPart<Stage> {
     private Pane usernameDisplayPlaceholder;
 
     @FXML
-    private StackPane personListPanelPlaceholder;
-
-    //@FXML
-    //private StackPane ingredientListPanelPlaceholder;
+    private StackPane personListPanelPlaceholder; //rename to ModelListPanelPlaceholder
 
     @FXML
     private StackPane resultDisplayPlaceholder;
@@ -254,14 +252,9 @@ public class MainWindow extends UiPart<Stage> {
      */
     @FXML
     public void handleSwitchToIngredient() {
-        //ingredientListPanel = new IngredientListPanel(logic.getFilteredIngredientList());
-        //ingredientListPanelPlaceholder.getChildren().add(ingredientListPanel.getRoot());
-
-        // Proposed changes: e.g.
-        // userListPanel = new UserListPanel(logic.getFilteredAccountList());
-        // dataListPanelPlaceholder.getChildren().add(userListPanel.getRoot());
-        // Then when you want it cleared when switch to another option, do
-        // dataListPanelPlaceholder.getChildren().clear(); follow by repeating the top.
+        personListPanelPlaceholder.getChildren().clear();
+        ingredientListPanel = new IngredientListPanel(logic.getFilteredIngredientList());
+        personListPanelPlaceholder.getChildren().add(ingredientListPanel.getRoot());
     }
 
     /**
@@ -315,6 +308,8 @@ public class MainWindow extends UiPart<Stage> {
         return recordListPanel;
     }
 
+    public IngredientListPanel getIngredientListPanel() { return ingredientListPanel; }
+
     void releaseResources() {
         browserPanel.freeResources();
     }
@@ -329,6 +324,12 @@ public class MainWindow extends UiPart<Stage> {
     private void handleDisplayItemListEvent(DisplayItemListRequestEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
         handleSwitchToMenu();
+    }
+
+    @Subscribe
+    private void handleDisplayIngredientListEvent(DisplayIngredientListRequestEvent event) {
+        logger.info(LogsCenter.getEventHandlingLogMessage(event));
+        handleSwitchToIngredient();
     }
 
     @Subscribe

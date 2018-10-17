@@ -54,7 +54,7 @@ public class Ingredient {
 
 
     /**
-     * Returns true if both ingredients of the same name have at least one other identity field that is the same.
+     * Returns true if both ingredients have the same name.
      * This defines a weaker notion of equality between two ingredients.
      */
     public boolean isSameIngredient(Ingredient otherIngredient) {
@@ -63,8 +63,7 @@ public class Ingredient {
         }
 
         return otherIngredient != null
-                && otherIngredient.getName().equals(getName())
-                && (otherIngredient.getUnit().equals(getUnit()) || otherIngredient.getPrice().equals(getPrice()));
+                && otherIngredient.getName().equals(getName());
     }
 
     /**
