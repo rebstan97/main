@@ -45,7 +45,7 @@ Windows developers are highly recommended to use JDK `9`.
 . *IntelliJ* IDE
 +
 [NOTE]
-IntelliJ by default has Gradle and JavaFx plugins installed. +
+IntelliJ by default has Gradle and JavaFX plugins installed. +
 Do not disable them. If you have disabled them, go to `File` > `Settings` > `Plugins` to re-enable them.
 
 
@@ -70,13 +70,14 @@ This will generate all resources required by the application and tests.
 === Verifying the setup
 
 . Run the `seedu.address.MainApp` and try a few commands
-. <<Testing,Run the tests>> to ensure they all pass.
+. <<Testing,Run the tests>> to ensure they all pass
 
 === Configurations to do before writing code
 
 ==== Configuring the coding style
 
-This project follows https://github.com/oss-generic/process/blob/master/docs/CodingStandards.adoc[oss-generic coding standards]. IntelliJ's default style is mostly compliant with ours but it uses a different import order from ours. To rectify,
+This project follows https://github.com/oss-generic/process/blob/master/docs/CodingStandards.adoc[oss-generic coding
+standards]. IntelliJ's default style is mostly compliant with ours but it uses a different import order from ours. To rectify:
 
 . Go to `File` > `Settings...` (Windows/Linux), or `IntelliJ IDEA` > `Preferences...` (macOS)
 . Select `Editor` > `Code Style` > `Java`
@@ -104,7 +105,7 @@ Set up Travis to perform Continuous Integration (CI) for your fork. See <<UsingT
 After setting up Travis, you can optionally set up coverage reporting for your team fork (see <<UsingCoveralls#, UsingCoveralls.adoc>>).
 
 [NOTE]
-Coverage reporting could be useful for a team repository that hosts the final version but it is not that useful for your personal fork.
+Coverage reporting could be useful for a team repository that hosts the final version but it is not that useful for your personal fork
 
 Optionally, you can set up AppVeyor as a second CI (see <<UsingAppVeyor#, UsingAppVeyor.adoc>>).
 
@@ -1318,11 +1319,11 @@ _{More to be added}_
 .  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
 .  Menu size should not be limited.
 .  System must be secured such that only authorised staffs can access it and execute commands.
-.  System should not require constant maintenance and work off-to-shelf without any installation.
+.  System should not require constant maintenance and work off-the-shelf without any installation.
 .  JAR file should not exceed 100 MB.
 .  Test coverage should be at least 80%.
 .  Should always favour security over efficiency in development.
-.  Any user who has the basic proficiency of the English language should be able to use the application with the help
+.  Any user who has the basic proficiency of the English language should be able to use the App with the help
  of the link:{repoURL}/docs/UserGuide.adoc[`UserGuide.adoc`].
 .  System should not require any internet access except for updating.
 
@@ -1338,7 +1339,7 @@ Windows, Linux, Unix, OS-X
 Given below are instructions to test the app manually.
 
 [NOTE]
-These instructions only provide a starting point for testers to work on; testers are expected to do more _exploratory_ testing.
+These instructions only provide a starting point for testers to work on; testers are expected to do more _exploratory_ testing
 
 === Launch and Shutdown
 
