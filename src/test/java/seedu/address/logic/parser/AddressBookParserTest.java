@@ -31,6 +31,8 @@ import seedu.address.logic.commands.RedoCommand;
 import seedu.address.logic.commands.RemarkCommand;
 import seedu.address.logic.commands.SelectCommand;
 import seedu.address.logic.commands.UndoCommand;
+import seedu.address.logic.commands.accounts.LoginCommand;
+import seedu.address.logic.commands.accounts.LogoutCommand;
 import seedu.address.logic.commands.accounts.RegisterCommand;
 import seedu.address.logic.commands.ingredients.AddIngredientCommand;
 import seedu.address.logic.commands.ingredients.DeleteIngredientCommand;
@@ -236,6 +238,18 @@ public class AddressBookParserTest {
     }
 
     @Test
+    public void parseCommand_login() throws ParseException {
+        Account account = new AccountBuilder().build();
+        LoginCommand command = (LoginCommand) parser.parseCommand(AccountUtil.getLoginCommand(account));
+        assertEquals(new LoginCommand(account), command);
+    }
+
+    @Test
+    public void parseCommand_logout() throws ParseException {
+        assertTrue(parser.parseCommand(LogoutCommand.COMMAND_WORD) instanceof LogoutCommand);
+    }
+
+    @Test
     public void parseCommand_createAccount_notEquals() throws ParseException {
         Account accountOneCommand = new AccountBuilder().build();
         Account accountTwoCommand = new AccountBuilder().withUsername("demo1").withPassword("1122qq").build();
@@ -256,6 +270,8 @@ public class AddressBookParserTest {
                 + " " + IngredientUtil.getIngredientDetails(ingredient));
         assertEquals(new AddIngredientCommand(ingredient), command);
     }
+
+    //TODO: Add test for EditItemCommandParser
 
     @Test
     public void parseCommand_listIngredients() throws Exception {
