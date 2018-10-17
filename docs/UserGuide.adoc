@@ -17,7 +17,7 @@ endif::[]
 By: `Team CS2103-AY1819S1-F10-4`      Since: `Sep 2018`      Licence: `MIT`
 
 == Introduction
-As the name implies, link:{repoURL}[MeNUS] helps you improve the Management(M) and its efficiency(e) of your
+link:{repoURL}[MeNUS] empowers you in improving the Management(M) and its efficiency(e) of your
 restaurants in NUS.
 
 MeNUS is for restaurant owners who prefer to use a desktop application to manage their restaurants. More importantly,
@@ -47,7 +47,10 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 
 [[Components]]
 == Components
-*MeNUS* consists of four main components: menus, inventory, sales and bookings management.
+*MeNUS* consists of five main components: menus, inventory, sales and bookings management.
+
+=== Accounts
+* You can create accounts for your employees to manage the system on your behalf.
 
 === Menus
 _To be completed by Yi Can_
@@ -68,22 +71,21 @@ _To be completed by Ming Xian_
 It is an ultimate All-In-One application that will provide you with the utmost convenience to manage your
 restaurants in NUS.
 
-* Export data to `.xml` (default) or Excel file.
+* Export data to `.xml` (default) or Excel file `[coming in v2.0]`.
 
 === Security
 Security is key to a business's success. *MeNUS* ensures the security of your restaurant's data by:
 
-* Encrypting all restaurant data using AES-265.
+* Encrypting all restaurant data using AES-265. `[coming in v2.0]`
 * Securing account passwords using bcrypt.
 * User needs to be authenticated before they can run any commands.
-* Authentication attempts (both succeed and failed) are logged.
+* Login attempts, both success and failure are logged.
 
 === Efficiency
 Time is money. *MeNUS* ensures that the application will:
 
 * Load within 5 seconds.
-* Execute command within split of a second.
-** Update the GUI almost instantaneously.
+* Execute command within split of a second and updating the GUI almost instantaneously.
 
 [[Commands]]
 == Commands
@@ -831,12 +833,15 @@ e.g.`select 2`
 * *History* : `history`
 * *Undo* : `undo`
 * *Redo* : `redo`
-* *Logging in*: `login id/USERNAME pw/PASSWORD`
+* *Logging in*: `login id/USERNAME pw/PASSWORD` +
+e.g. `login id/azhikai pw/1122qq`
 * *Logging out*: `logout`
-* *Creating user account*: `create-acc id/USERNAME pw/PASSWORD`
-* *Editing user account*: `edit-acc id/USERNAME [nid/NEW_USERNAME] [pw/NEW_PASSWORD]`
-* *Deleting user account*: `delete-acc id/USERNAME`
-* *Listing user accounts*: `list-acc`
+* *Creating user account*: `register id/USERNAME pw/PASSWORD` +
+e.g. `register id/azhikai pw/1122qq`
+* *Editing user account*: `edit-acc id/USERNAME [nid/NEW_USERNAME] [pw/NEW_PASSWORD]` +
+e.g. `edit-acc id/azhikai nid/angzhikai`
+* *Deleting user account*: `deregister id/USERNAME` +
+e.g. `deregister id/azhikai`
 * *Add ingredient* : `add-ingredient n/INGREDIENT_NAME t/UNIT_TYPE p/PRICE_PER_UNIT m/MINIMUM` +
 e.g. `add-ingredient n/cod fish t/kilogram p/20 m/1`
 * *List ingredients* : `list-ingredients`
@@ -896,3 +901,10 @@ e.g. `edit-sales 12-02-2018 Pasta q/37 p/6.50` or `edit-sales 3 n/Fried Omelet`
 e.g. `check-sales Fried Rice`
 * *Rank menu items according to profitability* : `rank-dish` +
 * *Rank dates according to profitability* : `rank-date`
+
+[appendix]
+== Glossary
+
+[[gui]] GUI::
+*Graphical User Interface* allows the use of icons or other visual indicators to interact with electronic devices,
+rather than using only text via the command line.
