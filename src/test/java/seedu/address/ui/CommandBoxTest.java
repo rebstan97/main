@@ -1,6 +1,7 @@
 package seedu.address.ui;
 
 import static org.junit.Assert.assertEquals;
+import static seedu.address.testutil.EventsUtil.postNow;
 
 import java.util.ArrayList;
 
@@ -9,11 +10,13 @@ import org.junit.Test;
 
 import guitests.guihandles.CommandBoxHandle;
 import javafx.scene.input.KeyCode;
+import seedu.address.commons.events.ui.LoginEvent;
 import seedu.address.logic.Logic;
 import seedu.address.logic.LogicManager;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
+import seedu.address.testutil.accounts.AccountBuilder;
 
 public class CommandBoxTest extends GuiUnitTest {
 
@@ -29,6 +32,8 @@ public class CommandBoxTest extends GuiUnitTest {
     public void setUp() {
         Model model = new ModelManager();
         Logic logic = new LogicManager(model);
+
+        postNow(new LoginEvent(new AccountBuilder().build()));
 
         CommandBox commandBox = new CommandBox(logic);
         commandBoxHandle = new CommandBoxHandle(getChildNode(commandBox.getRoot(),

@@ -10,6 +10,10 @@ public class Messages {
     public static final String MESSAGE_INVALID_PERSON_DISPLAYED_INDEX = "The person index provided is invalid";
     public static final String MESSAGE_PERSONS_LISTED_OVERVIEW = "%1$d persons listed!";
 
+    // User Management
+    public static final String MESSAGE_COMMAND_FORBIDDEN = "Please login to execute commands. For more information, "
+            + "enter `help`.";
+
     // Ingredient Management
     public static final String MESSAGE_INVALID_INGREDIENT_DISPLAYED_INDEX = "The ingredient index provided is invalid";
     public static final String MESSAGE_INGREDIENT_NAME_NOT_FOUND = "The ingredient name provided does not exist";

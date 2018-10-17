@@ -63,7 +63,6 @@ public class LoginCommand extends Command {
             return new CommandResult(MESSAGE_WRONG_PASSWORD);
         }
 
-        UserSession.login(toLogin);
         EventsCenter.getInstance().post(new LoginEvent(toLogin));
         return new CommandResult(String.format(MESSAGE_SUCCESS, toLogin));
     }
