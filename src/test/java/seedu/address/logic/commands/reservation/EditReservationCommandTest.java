@@ -3,14 +3,14 @@ package seedu.address.logic.commands.reservation;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertTrue;
-import static seedu.address.logic.commands.CommandTestUtil.DESC_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.DESC_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
+import static seedu.address.logic.commands.CommandTestUtil.DESC_ANDREW;
+import static seedu.address.logic.commands.CommandTestUtil.DESC_BILLY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_RESERVATION_NAME_BILLY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_RESERVATION_PAX_BILLY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_RESERVATION_TAG_BILLY;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.logic.commands.CommandTestUtil.showPersonAtIndex;
+import static seedu.address.logic.commands.reservation.ReservationCommandTestUtil.showReservationAtIndex;
 import static seedu.address.testutil.TypicalAddressBook.getTypicalAddressBook;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND;
@@ -21,20 +21,20 @@ import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.ClearCommand;
-import seedu.address.logic.commands.EditCommand;
-import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.logic.commands.RedoCommand;
 import seedu.address.logic.commands.UndoCommand;
+import seedu.address.logic.commands.reservation.EditReservationCommand.EditReservationDescriptor;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.person.Person;
-import seedu.address.testutil.EditPersonDescriptorBuilder;
-import seedu.address.testutil.PersonBuilder;
+import seedu.address.model.reservation.Reservation;
+import seedu.address.testutil.reservation.EditReservationDescriptorBuilder;
+import seedu.address.testutil.reservation.ReservationBuilder;
 
 /**
- * Contains integration tests (interaction with the Model, UndoCommand and RedoCommand) and unit tests for EditCommand.
+ * Contains integration tests (interaction with the Model, UndoCommand and RedoCommand) and unit tests for
+ * EditReservationCommand.
  */
 public class EditReservationCommandTest {
 
@@ -43,148 +43,150 @@ public class EditReservationCommandTest {
 
     @Test
     public void execute_allFieldsSpecifiedUnfilteredList_success() {
-        Person editedPerson = new PersonBuilder().build();
-        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(editedPerson).build();
-        EditCommand editCommand = new EditCommand(INDEX_FIRST, descriptor);
+        Reservation editedReservation = new ReservationBuilder().build();
+        EditReservationDescriptor descriptor = new EditReservationDescriptorBuilder(editedReservation).build();
+        EditReservationCommand editReservationCommand = new EditReservationCommand(INDEX_FIRST, descriptor);
 
-        String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, editedPerson);
+        String expectedMessage = String.format(EditReservationCommand.MESSAGE_EDIT_RESERVATION_SUCCESS,
+                editedReservation);
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
-        expectedModel.updatePerson(model.getFilteredPersonList().get(0), editedPerson);
+        expectedModel.updateReservation(model.getFilteredReservationList().get(0), editedReservation);
         expectedModel.commitAddressBook();
 
-        assertCommandSuccess(editCommand, model, commandHistory, expectedMessage, expectedModel);
+        assertCommandSuccess(editReservationCommand, model, commandHistory, expectedMessage, expectedModel);
     }
 
     @Test
     public void execute_someFieldsSpecifiedUnfilteredList_success() {
-        Index indexLastPerson = Index.fromOneBased(model.getFilteredPersonList().size());
-        Person lastPerson = model.getFilteredPersonList().get(indexLastPerson.getZeroBased());
+        Index indexLastReservation = Index.fromOneBased(model.getFilteredReservationList().size());
+        Reservation lastReservation = model.getFilteredReservationList().get(indexLastReservation.getZeroBased());
 
-        PersonBuilder personInList = new PersonBuilder(lastPerson);
-        Person editedPerson = personInList.withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB)
-                .withTags(VALID_TAG_HUSBAND).build();
+        ReservationBuilder reservationInList = new ReservationBuilder(lastReservation);
+        Reservation editedReservation = reservationInList.withName(VALID_RESERVATION_NAME_BILLY)
+                .withPax(VALID_RESERVATION_PAX_BILLY).withTags(VALID_RESERVATION_TAG_BILLY).build();
 
-        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB)
-                .withPhone(VALID_PHONE_BOB).withTags(VALID_TAG_HUSBAND).build();
-        EditCommand editCommand = new EditCommand(indexLastPerson, descriptor);
+        EditReservationDescriptor descriptor = new EditReservationDescriptorBuilder()
+                .withName(VALID_RESERVATION_NAME_BILLY).withPax(VALID_RESERVATION_PAX_BILLY)
+                .withTags(VALID_RESERVATION_TAG_BILLY).build();
+        EditReservationCommand editReservationCommand = new EditReservationCommand(indexLastReservation, descriptor);
 
-        String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, editedPerson);
+        String expectedMessage = String.format(EditReservationCommand.MESSAGE_EDIT_RESERVATION_SUCCESS, editedReservation);
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
-        expectedModel.updatePerson(lastPerson, editedPerson);
+        expectedModel.updateReservation(lastReservation, editedReservation);
         expectedModel.commitAddressBook();
 
-        assertCommandSuccess(editCommand, model, commandHistory, expectedMessage, expectedModel);
+        assertCommandSuccess(editReservationCommand, model, commandHistory, expectedMessage, expectedModel);
     }
 
     @Test
     public void execute_noFieldSpecifiedUnfilteredList_success() {
-        EditCommand editCommand = new EditCommand(INDEX_FIRST, new EditPersonDescriptor());
-        Person editedPerson = model.getFilteredPersonList().get(INDEX_FIRST.getZeroBased());
+        EditReservationCommand editReservationCommand = new EditReservationCommand(INDEX_FIRST, new EditReservationDescriptor());
+        Reservation editedReservation = model.getFilteredReservationList().get(INDEX_FIRST.getZeroBased());
 
-        String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, editedPerson);
+        String expectedMessage = String.format(EditReservationCommand.MESSAGE_EDIT_RESERVATION_SUCCESS, editedReservation);
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.commitAddressBook();
 
-        assertCommandSuccess(editCommand, model, commandHistory, expectedMessage, expectedModel);
+        assertCommandSuccess(editReservationCommand, model, commandHistory, expectedMessage, expectedModel);
     }
 
     @Test
     public void execute_filteredList_success() {
-        showPersonAtIndex(model, INDEX_FIRST);
+        showReservationAtIndex(model, INDEX_FIRST);
 
-        Person personInFilteredList = model.getFilteredPersonList().get(INDEX_FIRST.getZeroBased());
-        Person editedPerson = new PersonBuilder(personInFilteredList).withName(VALID_NAME_BOB).build();
-        EditCommand editCommand = new EditCommand(INDEX_FIRST,
-                new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB).build());
+        Reservation reservationInFilteredList = model.getFilteredReservationList().get(INDEX_FIRST.getZeroBased());
+        Reservation editedReservation = new ReservationBuilder(reservationInFilteredList).withName(VALID_RESERVATION_NAME_BILLY).build();
+        EditReservationCommand editReservationCommand = new EditReservationCommand(INDEX_FIRST,
+                new EditReservationDescriptorBuilder().withName(VALID_RESERVATION_NAME_BILLY).build());
 
-        String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, editedPerson);
+        String expectedMessage = String.format(EditReservationCommand.MESSAGE_EDIT_RESERVATION_SUCCESS, editedReservation);
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
-        expectedModel.updatePerson(model.getFilteredPersonList().get(0), editedPerson);
+        expectedModel.updateReservation(model.getFilteredReservationList().get(0), editedReservation);
         expectedModel.commitAddressBook();
 
-        assertCommandSuccess(editCommand, model, commandHistory, expectedMessage, expectedModel);
+        assertCommandSuccess(editReservationCommand, model, commandHistory, expectedMessage, expectedModel);
     }
 
     @Test
-    public void execute_duplicatePersonUnfilteredList_failure() {
-        Person firstPerson = model.getFilteredPersonList().get(INDEX_FIRST.getZeroBased());
-        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(firstPerson).build();
-        EditCommand editCommand = new EditCommand(INDEX_SECOND, descriptor);
+    public void execute_duplicateReservationUnfilteredList_failure() {
+        Reservation firstReservation = model.getFilteredReservationList().get(INDEX_FIRST.getZeroBased());
+        EditReservationDescriptor descriptor = new EditReservationDescriptorBuilder(firstReservation).build();
+        EditReservationCommand editReservationCommand = new EditReservationCommand(INDEX_SECOND, descriptor);
 
-        assertCommandFailure(editCommand, model, commandHistory, EditCommand.MESSAGE_DUPLICATE_PERSON);
+        assertCommandFailure(editReservationCommand, model, commandHistory, EditReservationCommand.MESSAGE_DUPLICATE_RESERVATION);
     }
 
     @Test
-    public void execute_duplicatePersonFilteredList_failure() {
-        showPersonAtIndex(model, INDEX_FIRST);
+    public void execute_duplicateReservationFilteredList_failure() {
+        showReservationAtIndex(model, INDEX_FIRST);
 
-        // edit person in filtered list into a duplicate in address book
-        Person personInList = model.getAddressBook().getPersonList().get(INDEX_SECOND.getZeroBased());
-        EditCommand editCommand = new EditCommand(INDEX_FIRST,
-                new EditPersonDescriptorBuilder(personInList).build());
+        // edit reservation in filtered list into a duplicate in address book
+        Reservation reservationInList = model.getAddressBook().getReservationList().get(INDEX_SECOND.getZeroBased());
+        EditReservationCommand editReservationCommand = new EditReservationCommand(INDEX_FIRST,
+                new EditReservationDescriptorBuilder(reservationInList).build());
 
-        assertCommandFailure(editCommand, model, commandHistory, EditCommand.MESSAGE_DUPLICATE_PERSON);
+        assertCommandFailure(editReservationCommand, model, commandHistory, EditReservationCommand.MESSAGE_DUPLICATE_RESERVATION);
     }
 
     @Test
-    public void execute_invalidPersonIndexUnfilteredList_failure() {
-        Index outOfBoundIndex = Index.fromOneBased(model.getFilteredPersonList().size() + 1);
-        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB).build();
-        EditCommand editCommand = new EditCommand(outOfBoundIndex, descriptor);
+    public void execute_invalidReservationIndexUnfilteredList_failure() {
+        Index outOfBoundIndex = Index.fromOneBased(model.getFilteredReservationList().size() + 1);
+        EditReservationDescriptor descriptor = new EditReservationDescriptorBuilder().withName(VALID_RESERVATION_NAME_BILLY).build();
+        EditReservationCommand editReservationCommand = new EditReservationCommand(outOfBoundIndex, descriptor);
 
-        assertCommandFailure(editCommand, model, commandHistory, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        assertCommandFailure(editReservationCommand, model, commandHistory, Messages.MESSAGE_INVALID_RESERVATION_DISPLAYED_INDEX);
     }
 
     /**
      * Edit filtered list where index is larger than size of filtered list, but smaller than size of address book
      */
     @Test
-    public void execute_invalidPersonIndexFilteredList_failure() {
-        showPersonAtIndex(model, INDEX_FIRST);
+    public void execute_invalidReservationIndexFilteredList_failure() {
+        showReservationAtIndex(model, INDEX_FIRST);
         Index outOfBoundIndex = INDEX_SECOND;
         // ensures that outOfBoundIndex is still in bounds of address book list
-        assertTrue(outOfBoundIndex.getZeroBased() < model.getAddressBook().getPersonList().size());
+        assertTrue(outOfBoundIndex.getZeroBased() < model.getAddressBook().getReservationList().size());
 
-        EditCommand editCommand = new EditCommand(outOfBoundIndex,
-                new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB).build());
+        EditReservationCommand editReservationCommand = new EditReservationCommand(outOfBoundIndex,
+                new EditReservationDescriptorBuilder().withName(VALID_RESERVATION_NAME_BILLY).build());
 
-        assertCommandFailure(editCommand, model, commandHistory, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        assertCommandFailure(editReservationCommand, model, commandHistory, Messages.MESSAGE_INVALID_RESERVATION_DISPLAYED_INDEX);
     }
 
     @Test
     public void executeUndoRedo_validIndexUnfilteredList_success() throws Exception {
-        Person editedPerson = new PersonBuilder().build();
-        Person personToEdit = model.getFilteredPersonList().get(INDEX_FIRST.getZeroBased());
-        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(editedPerson).build();
-        EditCommand editCommand = new EditCommand(INDEX_FIRST, descriptor);
+        Reservation editedReservation = new ReservationBuilder().build();
+        Reservation reservationToEdit = model.getFilteredReservationList().get(INDEX_FIRST.getZeroBased());
+        EditReservationDescriptor descriptor = new EditReservationDescriptorBuilder(editedReservation).build();
+        EditReservationCommand editReservationCommand = new EditReservationCommand(INDEX_FIRST, descriptor);
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
-        expectedModel.updatePerson(personToEdit, editedPerson);
+        expectedModel.updateReservation(reservationToEdit, editedReservation);
         expectedModel.commitAddressBook();
 
-        // edit -> first person edited
-        editCommand.execute(model, commandHistory);
+        // edit -> first reservation edited
+        editReservationCommand.execute(model, commandHistory);
 
-        // undo -> reverts addressbook back to previous state and filtered person list to show all persons
+        // undo -> reverts addressbook back to previous state and filtered reservation list to show all reservations
         expectedModel.undoAddressBook();
         assertCommandSuccess(new UndoCommand(), model, commandHistory, UndoCommand.MESSAGE_SUCCESS, expectedModel);
 
-        // redo -> same first person edited again
+        // redo -> same first reservation edited again
         expectedModel.redoAddressBook();
         assertCommandSuccess(new RedoCommand(), model, commandHistory, RedoCommand.MESSAGE_SUCCESS, expectedModel);
     }
 
     @Test
     public void executeUndoRedo_invalidIndexUnfilteredList_failure() {
-        Index outOfBoundIndex = Index.fromOneBased(model.getFilteredPersonList().size() + 1);
-        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB).build();
-        EditCommand editCommand = new EditCommand(outOfBoundIndex, descriptor);
+        Index outOfBoundIndex = Index.fromOneBased(model.getFilteredReservationList().size() + 1);
+        EditReservationDescriptor descriptor = new EditReservationDescriptorBuilder().withName(VALID_RESERVATION_NAME_BILLY).build();
+        EditReservationCommand editReservationCommand = new EditReservationCommand(outOfBoundIndex, descriptor);
 
         // execution failed -> address book state not added into model
-        assertCommandFailure(editCommand, model, commandHistory, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        assertCommandFailure(editReservationCommand, model, commandHistory, Messages.MESSAGE_INVALID_RESERVATION_DISPLAYED_INDEX);
 
         // single address book state in model -> undoCommand and redoCommand fail
         assertCommandFailure(new UndoCommand(), model, commandHistory, UndoCommand.MESSAGE_FAILURE);
@@ -192,43 +194,43 @@ public class EditReservationCommandTest {
     }
 
     /**
-     * 1. Edits a {@code Person} from a filtered list. 2. Undo the edit. 3. The unfiltered list should be shown now.
-     * Verify that the index of the previously edited person in the unfiltered list is different from the index at the
-     * filtered list. 4. Redo the edit. This ensures {@code RedoCommand} edits the person object regardless of
+     * 1. Edits a {@code Reservation} from a filtered list. 2. Undo the edit. 3. The unfiltered list should be shown now.
+     * Verify that the index of the previously edited reservation in the unfiltered list is different from the index at the
+     * filtered list. 4. Redo the edit. This ensures {@code RedoCommand} edits the reservation object regardless of
      * indexing.
      */
     @Test
-    public void executeUndoRedo_validIndexFilteredList_samePersonEdited() throws Exception {
-        Person editedPerson = new PersonBuilder().build();
-        EditPersonDescriptor descriptor = new EditPersonDescriptorBuilder(editedPerson).build();
-        EditCommand editCommand = new EditCommand(INDEX_FIRST, descriptor);
+    public void executeUndoRedo_validIndexFilteredList_sameReservationEdited() throws Exception {
+        Reservation editedReservation = new ReservationBuilder().build();
+        EditReservationDescriptor descriptor = new EditReservationDescriptorBuilder(editedReservation).build();
+        EditReservationCommand editReservationCommand = new EditReservationCommand(INDEX_FIRST, descriptor);
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
 
-        showPersonAtIndex(model, INDEX_SECOND);
-        Person personToEdit = model.getFilteredPersonList().get(INDEX_FIRST.getZeroBased());
-        expectedModel.updatePerson(personToEdit, editedPerson);
+        showReservationAtIndex(model, INDEX_SECOND);
+        Reservation reservationToEdit = model.getFilteredReservationList().get(INDEX_FIRST.getZeroBased());
+        expectedModel.updateReservation(reservationToEdit, editedReservation);
         expectedModel.commitAddressBook();
 
-        // edit -> edits second person in unfiltered person list / first person in filtered person list
-        editCommand.execute(model, commandHistory);
+        // edit -> edits second reservation in unfiltered reservation list / first reservation in filtered reservation list
+        editReservationCommand.execute(model, commandHistory);
 
-        // undo -> reverts addressbook back to previous state and filtered person list to show all persons
+        // undo -> reverts addressbook back to previous state and filtered reservation list to show all reservations
         expectedModel.undoAddressBook();
         assertCommandSuccess(new UndoCommand(), model, commandHistory, UndoCommand.MESSAGE_SUCCESS, expectedModel);
 
-        assertNotEquals(model.getFilteredPersonList().get(INDEX_FIRST.getZeroBased()), personToEdit);
-        // redo -> edits same second person in unfiltered person list
+        assertNotEquals(model.getFilteredReservationList().get(INDEX_FIRST.getZeroBased()), reservationToEdit);
+        // redo -> edits same second reservation in unfiltered reservation list
         expectedModel.redoAddressBook();
         assertCommandSuccess(new RedoCommand(), model, commandHistory, RedoCommand.MESSAGE_SUCCESS, expectedModel);
     }
 
     @Test
     public void equals() {
-        final EditCommand standardCommand = new EditCommand(INDEX_FIRST, DESC_AMY);
+        final EditReservationCommand standardCommand = new EditReservationCommand(INDEX_FIRST, DESC_ANDREW);
 
         // same values -> returns true
-        EditPersonDescriptor copyDescriptor = new EditPersonDescriptor(DESC_AMY);
-        EditCommand commandWithSameValues = new EditCommand(INDEX_FIRST, copyDescriptor);
+        EditReservationDescriptor copyDescriptor = new EditReservationDescriptor(DESC_ANDREW);
+        EditReservationCommand commandWithSameValues = new EditReservationCommand(INDEX_FIRST, copyDescriptor);
         assertTrue(standardCommand.equals(commandWithSameValues));
 
         // same object -> returns true
@@ -241,10 +243,10 @@ public class EditReservationCommandTest {
         assertFalse(standardCommand.equals(new ClearCommand()));
 
         // different index -> returns false
-        assertFalse(standardCommand.equals(new EditCommand(INDEX_SECOND, DESC_AMY)));
+        assertFalse(standardCommand.equals(new EditReservationCommand(INDEX_SECOND, DESC_ANDREW)));
 
         // different descriptor -> returns false
-        assertFalse(standardCommand.equals(new EditCommand(INDEX_FIRST, DESC_BOB)));
+        assertFalse(standardCommand.equals(new EditReservationCommand(INDEX_FIRST, DESC_BILLY)));
     }
 
 }
