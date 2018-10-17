@@ -32,8 +32,13 @@ public class RegisterCommandTest {
         CommandResult commandResult = new RegisterCommand(validAccount).execute(model, commandHistory);
 
         assertEquals(String.format(RegisterCommand.MESSAGE_SUCCESS, validAccount), commandResult.feedbackToUser);
-        Assert.assertEquals(EMPTY_COMMAND_HISTORY, commandHistory); //TODO: remove?
+        Assert.assertEquals(EMPTY_COMMAND_HISTORY, commandHistory);
     }
 
-    //TODO: Improve
+    @Test
+    public void execute_accountExists() throws CommandException {
+        thrown.expect(CommandException.class);
+        Account invalidAccount = new AccountBuilder().build();
+        new LoginCommand(invalidAccount).execute(model, commandHistory);
+    }
 }

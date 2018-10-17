@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_ACCOUNTS;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_INGREDIENTS;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_ITEMS;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
@@ -32,6 +33,7 @@ public class UndoCommand extends Command {
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         model.updateFilteredIngredientList(PREDICATE_SHOW_ALL_INGREDIENTS);
         model.updateFilteredItemList(PREDICATE_SHOW_ALL_ITEMS);
+        model.updateFilteredAccountList(PREDICATE_SHOW_ALL_ACCOUNTS);
         model.updateFilteredRecordList(PREDICATE_SHOW_ALL_RECORDS);
         return new CommandResult(MESSAGE_SUCCESS);
     }

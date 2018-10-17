@@ -2,9 +2,11 @@ package seedu.address.model.accounts;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 import static seedu.address.testutil.accounts.TypicalAccounts.DEMO_ADMIN;
 import static seedu.address.testutil.accounts.TypicalAccounts.DEMO_ONE;
+import static seedu.address.testutil.accounts.TypicalAccounts.DEMO_THREE;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -46,6 +48,24 @@ public class UniqueAccountListTest {
     public void add_nullAccount_throwsNullPointerException() {
         thrown.expect(NullPointerException.class);
         uniqueAccountList.add(null);
+    }
+
+    @Test
+    public void get_nullAccount_throwsNullPointerException() {
+        thrown.expect(NullPointerException.class);
+        uniqueAccountList.get(null);
+    }
+
+    @Test
+    public void get_accountNotInList_throwsAccountNotFoundException() {
+        thrown.expect(AccountNotFoundException.class);
+        uniqueAccountList.get(DEMO_THREE);
+    }
+
+    @Test
+    public void get_accountInList() {
+        uniqueAccountList.add(DEMO_ADMIN);
+        assertNotNull(uniqueAccountList.get(DEMO_ADMIN));
     }
 
     @Test

@@ -17,6 +17,7 @@ import javafx.collections.ObservableList;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.commands.menu.SortMenuCommand.SortMethod;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
@@ -175,6 +176,11 @@ public class AddReservationCommandTest {
         }
 
         @Override
+        public Account getAccount(Account account) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public boolean hasAccount(Account account) {
             throw new AssertionError("This method should not be called.");
         }
@@ -218,6 +224,11 @@ public class AddReservationCommandTest {
 
         @Override
         public void updateItem(Item target, Item editedItem) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void sortMenu(SortMethod sortMethod) {
             throw new AssertionError("This method should not be called.");
         }
 

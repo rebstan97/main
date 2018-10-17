@@ -20,6 +20,8 @@ import seedu.address.logic.commands.RedoCommand;
 import seedu.address.logic.commands.RemarkCommand;
 import seedu.address.logic.commands.SelectCommand;
 import seedu.address.logic.commands.UndoCommand;
+import seedu.address.logic.commands.accounts.LoginCommand;
+import seedu.address.logic.commands.accounts.LogoutCommand;
 import seedu.address.logic.commands.accounts.RegisterCommand;
 import seedu.address.logic.commands.ingredients.AddIngredientCommand;
 import seedu.address.logic.commands.ingredients.DeleteIngredientCommand;
@@ -29,13 +31,18 @@ import seedu.address.logic.commands.menu.AddItemCommand;
 import seedu.address.logic.commands.menu.ClearMenuCommand;
 import seedu.address.logic.commands.menu.DeleteItemCommand;
 import seedu.address.logic.commands.menu.EditItemCommand;
+import seedu.address.logic.commands.menu.FilterMenuCommand;
+import seedu.address.logic.commands.menu.FindItemCommand;
 import seedu.address.logic.commands.menu.ListItemsCommand;
 import seedu.address.logic.commands.menu.SelectItemCommand;
+import seedu.address.logic.commands.menu.SortMenuCommand;
+import seedu.address.logic.commands.menu.TodaySpecialCommand;
 import seedu.address.logic.commands.reservation.AddReservationCommand;
 import seedu.address.logic.commands.sales.DeleteSalesCommand;
 import seedu.address.logic.commands.sales.DisplaySalesCommand;
 import seedu.address.logic.commands.sales.EditSalesCommand;
 import seedu.address.logic.commands.sales.RecordSalesCommand;
+import seedu.address.logic.parser.accounts.LoginCommandParser;
 import seedu.address.logic.parser.accounts.RegisterCommandParser;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.logic.parser.ingredients.AddIngredientCommandParser;
@@ -44,7 +51,10 @@ import seedu.address.logic.parser.ingredients.EditIngredientCommandParser;
 import seedu.address.logic.parser.menu.AddItemCommandParser;
 import seedu.address.logic.parser.menu.DeleteItemCommandParser;
 import seedu.address.logic.parser.menu.EditItemCommandParser;
+import seedu.address.logic.parser.menu.FilterMenuCommandParser;
+import seedu.address.logic.parser.menu.FindItemCommandParser;
 import seedu.address.logic.parser.menu.SelectItemCommandParser;
+import seedu.address.logic.parser.menu.SortMenuCommandParser;
 import seedu.address.logic.parser.reservation.AddReservationCommandParser;
 import seedu.address.logic.parser.sales.DeleteSalesCommandParser;
 import seedu.address.logic.parser.sales.DisplaySalesCommandParser;
@@ -146,6 +156,12 @@ public class AddressBookParser {
         case RegisterCommand.COMMAND_ALIAS:
             return new RegisterCommandParser().parse(arguments);
 
+        case LoginCommand.COMMAND_WORD:
+            return new LoginCommandParser().parse(arguments);
+
+        case LogoutCommand.COMMAND_WORD:
+            return new LogoutCommand();
+
         case AddIngredientCommand.COMMAND_WORD:
         case AddIngredientCommand.COMMAND_ALIAS:
             return new AddIngredientCommandParser().parse(arguments);
@@ -181,6 +197,22 @@ public class AddressBookParser {
         case SelectItemCommand.COMMAND_WORD:
         case SelectItemCommand.COMMAND_ALIAS:
             return new SelectItemCommandParser().parse(arguments);
+
+        case FindItemCommand.COMMAND_WORD:
+        case FindItemCommand.COMMAND_ALIAS:
+            return new FindItemCommandParser().parse(arguments);
+
+        case SortMenuCommand.COMMAND_WORD:
+        case SortMenuCommand.COMMAND_ALIAS:
+            return new SortMenuCommandParser().parse(arguments);
+
+        case FilterMenuCommand.COMMAND_WORD:
+        case FilterMenuCommand.COMMAND_ALIAS:
+            return new FilterMenuCommandParser().parse(arguments);
+
+        case TodaySpecialCommand.COMMAND_WORD:
+        case TodaySpecialCommand.COMMAND_ALIAS:
+            return new TodaySpecialCommand();
 
         case ClearMenuCommand.COMMAND_WORD:
         case ClearMenuCommand.COMMAND_ALIAS:

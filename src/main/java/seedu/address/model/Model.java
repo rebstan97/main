@@ -4,6 +4,7 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 
+import seedu.address.logic.commands.menu.SortMenuCommand.SortMethod;
 import seedu.address.model.accounts.Account;
 import seedu.address.model.ingredient.Ingredient;
 import seedu.address.model.menu.Item;
@@ -96,7 +97,7 @@ public interface Model {
     /**
      * Returns true if a record with the same identity as {@code record} exists in the sales book.
      */
-    boolean hasRecord (SalesRecord record);
+    boolean hasRecord(SalesRecord record);
 
     /**
      * Deletes the given record. The record must exist in the sales book.
@@ -104,9 +105,8 @@ public interface Model {
     void deleteRecord(SalesRecord target);
 
     /**
-     * Replaces the given record {@code target} with {@code editedRecord}. {@code target} must exist in the sales
-     * book. The record identity of {@code editedRecord} must not be the same as another existing record in the sales
-     * book.
+     * Replaces the given record {@code target} with {@code editedRecord}. {@code target} must exist in the sales book.
+     * The record identity of {@code editedRecord} must not be the same as another existing record in the sales book.
      */
     void updateRecord(SalesRecord target, SalesRecord editedRecord);
 
@@ -176,6 +176,13 @@ public interface Model {
      * @param account to be added.
      */
     void addAccount(Account account);
+
+    /**
+     * Retrieve the account. {@code account} must already exist in the account storage.
+     *
+     * @param account to retrieve.
+     */
+    Account getAccount(Account account);
 
     /**
      * Returns true if a person with the same identity as {@code person} exists in the address book.
@@ -257,9 +264,8 @@ public interface Model {
     void addItem(Item item);
 
     /**
-     * Replaces the given item {@code target} with {@code editedItem}. {@code target} must exist in the address
-     * book. The item identity of {@code editedItem} must not be the same as another existing item in the address
-     * book.
+     * Replaces the given item {@code target} with {@code editedItem}. {@code target} must exist in the address book.
+     * The item identity of {@code editedItem} must not be the same as another existing item in the address book.
      */
     void updateItem(Item target, Item editedItem);
 
@@ -274,6 +280,11 @@ public interface Model {
      * Clears the item list and replaces with the provided new data for AddressBook.
      */
     void resetMenuData(ReadOnlyAddressBook newData);
+
+    /**
+     * Sort the item list by given sorting method.
+     */
+    void sortMenu(SortMethod sortMethod);
 
     /**
      * Returns an unmodifiable view of the filtered item list

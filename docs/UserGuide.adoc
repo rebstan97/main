@@ -478,7 +478,7 @@ Format: `history [stockup] [consumption]`
 * At least one of the optional fields must be provided.
 ****
 
-=== Adding an item to the menu: `add-item`
+=== Adding an item to the menu: `add-item` or `ai`
 
 Adds an item to the menu +
 Format: `add-item n/ITEM_NAME p/ITEM_PRICE [t/TAG]...`
@@ -493,12 +493,12 @@ Examples:
 * `add-item n/Burger p/2`
 * `add-item n/Burger Set p/4.5 t/Set`
 
-=== Listing all items in the menu : `list-items`
+=== Listing all items in the menu : `list-items` or 'li'
 
 Shows a list of all items in the menu. +
 Format: `list-items`
 
-=== Editing an item in the menu : `edit-item`
+=== Editing an item in the menu : `edit-item` or `ei`
 
 Edits an existing item in the menu. +
 Format: `edit-item INDEX [n/ITEM_NAME] [p/ITEM_PRICE] [t/TAG]...` or `edit-item NAME [n/ITEM_NAME] [p/ITEM_PRICE]
@@ -521,7 +521,7 @@ Edits the name and price of the 1st item to be `burger` and `3` respectively.
 * `edit-item 2 p/4 t/` +
 Edits the price of the 2nd item to be `4` and clears all existing tags.
 
-=== Deleting an item : `delete-item`
+=== Deleting an item : `delete-item` or `di`
 
 Deletes the specified item from the menu. +
 Format: `delete-item INDEX` or `delete-item NAME`
@@ -542,7 +542,27 @@ Deletes the 2nd item in the menu.
 `delete-item 1` +
 Deletes the 1st item in the results of the `find` command.
 
-=== Locating items by name: `find-item`
+=== Selecting an item : `select-item` or `si`
+
+Selects the item identified by the index number used in the menu. +
+Format: `select-item INDEX`
+
+****
+* Selects the item and loads the page the item at the specified `INDEX`.
+* The index refers to the index number shown in the displayed item list.
+* The index *must be a positive integer* `1, 2, 3, ...`
+****
+
+Examples:
+
+* `list` +
+`select-item 2` +
+Selects the 2nd item in the menu.
+* `find Burger` +
+`select-item 1` +
+Selects the 1st item in the results of the `find` command.
+
+=== Locating items by name: `find-item` or `fi`
 
 Finds items whose names contain any of the given keywords. +
 Format: `find-item KEYWORD [MORE_KEYWORDS]`
@@ -563,7 +583,7 @@ Returns `burger` and `Cheese Burger`
 * `find-item Cheese Chocolate Fruit` +
 Returns any item having names `Cheese`, `Chocolate`, or `Fruit`
 
-=== Filter menu by tag: `filter-menu`
+=== Filter menu by tag: `filter-menu` or `fm`
 
 Finds items that contain the given tag in the menu. +
 Format: `filter-menu t/TAG`
@@ -583,29 +603,30 @@ Returns any item that contains tag `monday`
 * `filter-menu t/set` +
 Returns any item that contains tag `set`
 
-=== Sort menu : `sort-menu`
+=== Sort menu : `sort-menu` or `sm`
 
-Sort the menu by name or tags. +
-Format: `sort-menu [sm/NAME] [sm/TAG]`
+Sort the menu by name or price. +
+Format: `sort-menu [NAME] [PRICE]`
 
 ****
-* Sort the menu by name or tag.
+* Sort the menu by name or price.
+* Case-insensitive, can be: `sort-menu name` or `sort-menu NAME`
 * Only one of the sorting method should be provided.
 ****
 
 Examples:
 
-* `sort-menu sm/NAME` +
-Sorts the menu by item name.
-* `sort-menu sm/TAG` +
-Sorts the menu by item tags.
+* `sort-menu NAME` +
+Sorts the menu by item name in alphabetical order.
+* `sort-menu PRICE` +
+Sorts the menu by item price in ascending order(lowest to highest).
 
-=== Clearing all entries : `clear-menu`
+=== Clearing all entries : `clear-menu` or `cm`
 
 Clears all entries from the menu. +
 Format: `clear-menu`
 
-=== Giving a discount to an item : `discount-item`
+=== Giving a discount to an item : `discount-item` or `di`
 
 Gives the item identified by the index number used in the displayed item list a discount. +
 Format: `discount-item INDEX|ALL d/PERCENTAGE`
@@ -628,7 +649,7 @@ Discount the 2nd item in the menu.
 `discount-item 1` +
 Discounts the 1st item in the results of the `find` command.
 
-=== Today's specials : `today-special`
+=== Today's specials : `today-special` or `ts`
 
 Lists the items that have been tagged with the particular day in the menu. +
 Format: `today-special`
@@ -639,7 +660,7 @@ Examples:
 If today is Monday +
 List the items that have been tagged with `Monday` in the menu.
 
-=== Export menu : `export-menu`
+=== Export menu : `export-menu` or `em`
 
 Exports the menu to a particular file path. +
 Format: `export-menu fp/FILEPATH fn/FILENAME`
@@ -649,7 +670,7 @@ Examples:
 * `export-menu f/test/ n/menu.txt` +
 Export the menu to test folder with the file name `menu.txt`
 
-=== Import menu : `import-menu`
+=== Import menu : `import-menu` or `im`
 
 Imports an existing menu from specified file path to replace current menu. +
 Format: `import-menu fp/FILEPATH fn/FILENAME`
@@ -883,10 +904,12 @@ e.g. `edit-item 2 n/Fries p/3`
 * *Find item* : `find-item KEYWORD [MORE_KEYWORDS]` +
 e.g. `find-item Cheese Burger`
 * *List items* : `list-items`
+* *Select item* : `select-items INDEX`
+e.g. `select-item 3`
 * *Filter menu* : `fiiter-menu t/TAG` +
 e.g. `filter-menu t/cheese`
 * *Sort menu* : `sort-menu`
-e.g. `sort-menu sm/NAME`
+e.g. `sort-menu NAME`
 * *Give an item a discount* : `discount-item`
 e.g. `discount-item 2 d/20`
 * *Today's special* : `today-special`

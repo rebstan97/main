@@ -3,11 +3,13 @@ package seedu.address.testutil;
 import static seedu.address.testutil.TypicalPersons.getTypicalPersons;
 import static seedu.address.testutil.accounts.TypicalAccounts.getTypicalAccounts;
 import static seedu.address.testutil.ingredients.TypicalIngredients.getTypicalIngredients;
+import static seedu.address.testutil.menu.TypicalItems.getTypicalItems;
 import static seedu.address.testutil.salesrecords.TypicalRecords.getTypicalRecords;
 
 import seedu.address.model.AddressBook;
 import seedu.address.model.accounts.Account;
 import seedu.address.model.ingredient.Ingredient;
+import seedu.address.model.menu.Item;
 import seedu.address.model.person.Person;
 import seedu.address.model.salesrecord.SalesRecord;
 
@@ -33,9 +35,9 @@ public class TypicalAddressBook {
         for (Ingredient ingredient : getTypicalIngredients()) {
             ab.addIngredient(ingredient);
         }
-        /*for (Item item : getTypicalItems()) {
-            ab.addItem(item); // @Yi Can: Need to add this, and update the xml test file(s)
-        }*/
+        for (Item item : getTypicalItems()) {
+            ab.addItem(item);
+        }
         return ab;
     }
 
@@ -79,6 +81,17 @@ public class TypicalAddressBook {
         AddressBook ab = new AddressBook();
         for (Ingredient ingredient : getTypicalIngredients()) {
             ab.addIngredient(ingredient);
+        }
+        return ab;
+    }
+
+    /**
+     * Returns an {@code AddressBook} with {@code Item} objects only.
+     */
+    public static AddressBook getTypicalAddressBookWithItemOnly() {
+        AddressBook ab = new AddressBook();
+        for (Item item : getTypicalItems()) {
+            ab.addItem(item);
         }
         return ab;
     }
