@@ -11,7 +11,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import seedu.address.model.AddressBook;
 import seedu.address.model.menu.Item;
 
 /**
@@ -19,18 +18,24 @@ import seedu.address.model.menu.Item;
  */
 public class TypicalItems {
 
+    public static final Item ITEM_DEFAULT = new ItemBuilder().build();
+
     public static final Item APPLE_JUICE = new ItemBuilder().withName("Apple Juice")
             .withPrice("2")
-            .withTags("drink").build();
+            .withTags("drink", "monday").build();
     public static final Item BEEF_BURGER = new ItemBuilder().withName("Beef Burger")
             .withPrice("3")
-            .withTags("beef", VALID_ITEM_TAG_BURGER).build();
-    public static final Item CHOCO_CAKE = new ItemBuilder().withName("Chocolate Cake").withPrice("2").build();
-    public static final Item DUCK_RICE = new ItemBuilder().withName("Duck Rice").withPrice("3").build();
-    public static final Item EGG = new ItemBuilder().withName("Egg").withPrice("0.5").build();
-    public static final Item FRUIT_CAKE = new ItemBuilder().withName("Fruit Cake").withPrice("2").build();
-    public static final Item GARLIC_BREAD = new ItemBuilder().withName("Garlic Bread")
-            .withPrice("1").withRemark("Consists of bread topped with garlic and olive oil").build();
+            .withTags("beef", VALID_ITEM_TAG_BURGER, "tuesday").build();
+    public static final Item CHOCO_CAKE = new ItemBuilder().withName("Chocolate Cake").withPrice("2")
+            .withTags("wednesday").build();
+    public static final Item DUCK_RICE = new ItemBuilder().withName("Duck Rice").withPrice("3")
+            .withTags("thursday").build();
+    public static final Item EGG = new ItemBuilder().withName("Egg").withPrice("0.5")
+            .withTags("friday").build();
+    public static final Item FRUIT_CAKE = new ItemBuilder().withName("Fruit Cake").withPrice("2")
+            .withTags("saturday").build();
+    public static final Item GARLIC_BREAD = new ItemBuilder().withName("Garlic Bread").withPrice("1")
+            .withTags("sunday").withRemark("Consists of bread topped with garlic and olive oil").build();
 
     // Manually added
     public static final Item HAINANESE = new ItemBuilder().withName("Hainanese Chicken Rice").withPrice("2.50").build();
@@ -47,17 +52,6 @@ public class TypicalItems {
     public static final String KEYWORD_MATCHING_HAINANESE = "Hainanese"; // A keyword that matches HAINANESE
 
     private TypicalItems() {} // prevents instantiation
-
-    /**
-     * Returns an {@code AddressBook} with all the typical persons.
-     */
-    public static AddressBook getTypicalAddressBook() {
-        AddressBook ab = new AddressBook();
-        for (Item item : getTypicalItems()) {
-            ab.addItem(item);
-        }
-        return ab;
-    }
 
     public static List<Item> getTypicalItems() {
         return new ArrayList<>(
