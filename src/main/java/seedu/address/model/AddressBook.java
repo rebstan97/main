@@ -276,7 +276,16 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Adds a account to the account record. The account must not already exist in the account record.
+     * Returns the {@code Account} of the given {@code account}. That is, the account in storage is retrieved that
+     * matches the {@code account} input given by the user.
+     */
+    public Account getAccount(Account account) {
+        return accounts.get(account);
+    }
+
+
+    /**
+     * Adds an account to the account record. The account must not already exist in the account record.
      */
     public void addAccount(Account account) {
         account.getPassword().hash(account.getUsername().toString());

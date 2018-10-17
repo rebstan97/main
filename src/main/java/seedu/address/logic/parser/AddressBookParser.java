@@ -20,6 +20,8 @@ import seedu.address.logic.commands.RedoCommand;
 import seedu.address.logic.commands.RemarkCommand;
 import seedu.address.logic.commands.SelectCommand;
 import seedu.address.logic.commands.UndoCommand;
+import seedu.address.logic.commands.accounts.LoginCommand;
+import seedu.address.logic.commands.accounts.LogoutCommand;
 import seedu.address.logic.commands.accounts.RegisterCommand;
 import seedu.address.logic.commands.ingredients.AddIngredientCommand;
 import seedu.address.logic.commands.ingredients.DeleteIngredientCommand;
@@ -36,8 +38,11 @@ import seedu.address.logic.commands.menu.SelectItemCommand;
 import seedu.address.logic.commands.menu.SortMenuCommand;
 import seedu.address.logic.commands.menu.TodaySpecialCommand;
 import seedu.address.logic.commands.reservation.AddReservationCommand;
+import seedu.address.logic.commands.sales.DeleteSalesCommand;
 import seedu.address.logic.commands.sales.DisplaySalesCommand;
+import seedu.address.logic.commands.sales.EditSalesCommand;
 import seedu.address.logic.commands.sales.RecordSalesCommand;
+import seedu.address.logic.parser.accounts.LoginCommandParser;
 import seedu.address.logic.parser.accounts.RegisterCommandParser;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.logic.parser.ingredients.AddIngredientCommandParser;
@@ -51,7 +56,9 @@ import seedu.address.logic.parser.menu.FindItemCommandParser;
 import seedu.address.logic.parser.menu.SelectItemCommandParser;
 import seedu.address.logic.parser.menu.SortMenuCommandParser;
 import seedu.address.logic.parser.reservation.AddReservationCommandParser;
+import seedu.address.logic.parser.sales.DeleteSalesCommandParser;
 import seedu.address.logic.parser.sales.DisplaySalesCommandParser;
+import seedu.address.logic.parser.sales.EditSalesCommandParser;
 import seedu.address.logic.parser.sales.RecordSalesCommandParser;
 
 /**
@@ -130,14 +137,30 @@ public class AddressBookParser {
             return new RemarkCommandParser().parse(arguments);
 
         case RecordSalesCommand.COMMAND_WORD:
+        case RecordSalesCommand.COMMAND_ALIAS:
             return new RecordSalesCommandParser().parse(arguments);
 
         case DisplaySalesCommand.COMMAND_WORD:
+        case DisplaySalesCommand.COMMAND_ALIAS:
             return new DisplaySalesCommandParser().parse(arguments);
+
+        case DeleteSalesCommand.COMMAND_WORD:
+        case DeleteSalesCommand.COMMAND_ALIAS:
+            return new DeleteSalesCommandParser().parse(arguments);
+
+        case EditSalesCommand.COMMAND_WORD:
+        case EditSalesCommand.COMMAND_ALIAS:
+            return new EditSalesCommandParser().parse(arguments);
 
         case RegisterCommand.COMMAND_WORD:
         case RegisterCommand.COMMAND_ALIAS:
             return new RegisterCommandParser().parse(arguments);
+
+        case LoginCommand.COMMAND_WORD:
+            return new LoginCommandParser().parse(arguments);
+
+        case LogoutCommand.COMMAND_WORD:
+            return new LogoutCommand();
 
         case AddIngredientCommand.COMMAND_WORD:
         case AddIngredientCommand.COMMAND_ALIAS:

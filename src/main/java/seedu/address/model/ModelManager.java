@@ -168,8 +168,8 @@ public class ModelManager extends ComponentManager implements Model {
 
 
     /**
-     * Returns an unmodifiable view of the list of {@code SalesRecord} backed by the internal list of
-     * {@code versionedAddressBook}
+     * Returns an unmodifiable view of the list of {@code SalesRecord} backed by the internal list of {@code
+     * versionedAddressBook}
      */
     @Override
     public ObservableList<SalesRecord> getFilteredRecordList() {
@@ -188,6 +188,11 @@ public class ModelManager extends ComponentManager implements Model {
     public void addAccount(Account account) {
         versionedAddressBook.addAccount(account);
         indicateAddressBookChanged();
+    }
+
+    @Override
+    public Account getAccount(Account account) {
+        return versionedAddressBook.getAccount(account);
     }
 
     @Override

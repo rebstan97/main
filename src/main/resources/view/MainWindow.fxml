@@ -2,17 +2,18 @@
 
 <?import java.net.URL?>
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Label?>
+<?import javafx.scene.Scene?>
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.Scene?>
 <?import javafx.stage.Stage?>
+
 <fx:root minHeight="600" minWidth="450" onCloseRequest="#handleExit" type="javafx.stage.Stage"
          xmlns="http://javafx.com/javafx/9.0.4" xmlns:fx="http://javafx.com/fxml/1">
   <icons>
@@ -26,8 +27,8 @@
       </stylesheets>
 
       <VBox>
-        <SplitPane dividerPositions="0.5" prefHeight="0.0" prefWidth="600.0">
-          <MenuBar fx:id="menuBar" prefHeight="35.0" prefWidth="215.0">
+        <SplitPane dividerPositions="0.6" prefHeight="0.0" prefWidth="600.0">
+          <MenuBar fx:id="menuBar" prefHeight="35.0" prefWidth="402.0">
             <Menu mnemonicParsing="false" text="File">
               <MenuItem mnemonicParsing="false" onAction="#handleExit" text="Exit" />
             </Menu>
@@ -35,9 +36,8 @@
               <MenuItem fx:id="helpMenuItem" mnemonicParsing="false" onAction="#handleHelp" text="Help" />
             </Menu>
           </MenuBar>
-          <!--TODO: Style using CSS instead-->
-          <Label fx:id="accountStatus" alignment="CENTER" contentDisplay="CENTER" prefHeight="35.0" prefWidth="215.0"
-                 style="-fx-text-fill: white;" textAlignment="CENTER" textFill="WHITE" />
+          <Pane fx:id="usernameDisplayPlaceholder" maxWidth="350.0" minWidth="200.0" prefWidth="200.0">
+          </Pane>
         </SplitPane>
 
         <StackPane fx:id="commandBoxPlaceholder" styleClass="pane-with-border" VBox.vgrow="NEVER">
@@ -53,7 +53,7 @@
           </padding>
         </StackPane>
 
-        <SplitPane id="splitPane" fx:id="splitPane" dividerPositions="0.4" VBox.vgrow="ALWAYS">
+        <SplitPane id="splitPane" fx:id="splitPane" dividerPositions="0.4, 0.5" VBox.vgrow="ALWAYS">
           <VBox fx:id="sideButtonBar" alignment="CENTER" maxWidth="80.0" minWidth="80.0" prefWidth="80.0">
             <ImageView fx:id="switchToAccountButton" fitHeight="50.0" fitWidth="50.0"
                        onMouseClicked="#handleSwitchToAccount" pickOnBounds="true">
