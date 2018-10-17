@@ -143,11 +143,9 @@ public class MainWindow extends UiPart<Stage> {
      * Fills up all the placeholders of this window.
      */
     void fillInnerParts() {
-        browserPanel = new BrowserPanel();
-        browserPlaceholder.getChildren().add(browserPanel.getRoot());
-
-        ResultDisplay resultDisplay = new ResultDisplay();
-        resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
+        personListPanel = new PersonListPanel(logic.getFilteredPersonList());
+        itemListPanel = new ItemListPanel(logic.getFilteredItemList());
+        recordListPanel = new RecordListPanel(logic.getFilteredRecordList());
 
         UsernameDisplay usernameDisplay = new UsernameDisplay();
         // Centralize the width
@@ -160,11 +158,17 @@ public class MainWindow extends UiPart<Stage> {
                 .divide(2));
         usernameDisplayPlaceholder.getChildren().add(usernameDisplay.getRoot());
 
-        StatusBarFooter statusBarFooter = new StatusBarFooter(prefs.getAddressBookFilePath());
-        statusbarPlaceholder.getChildren().add(statusBarFooter.getRoot());
-
         CommandBox commandBox = new CommandBox(logic);
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
+
+        ResultDisplay resultDisplay = new ResultDisplay();
+        resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
+
+        browserPanel = new BrowserPanel();
+        browserPlaceholder.getChildren().add(browserPanel.getRoot());
+
+        StatusBarFooter statusBarFooter = new StatusBarFooter(prefs.getAddressBookFilePath());
+        statusbarPlaceholder.getChildren().add(statusBarFooter.getRoot());
     }
 
     void hide() {
@@ -200,8 +204,14 @@ public class MainWindow extends UiPart<Stage> {
      */
     @FXML
     public void handleSwitchToAccount() {
-        // TODO: Some might require raising/posting event, for example, if you call the list method, so it
-        // should raise an event and automatically update the UI
+        //ingredientListPanel = new IngredientListPanel(logic.getFilteredIngredientList());
+        //ingredientListPanelPlaceholder.getChildren().add(ingredientListPanel.getRoot());
+
+        // Proposed changes: e.g.
+        // userListPanel = new UserListPanel(logic.getFilteredAccountList());
+        // dataListPanelPlaceholder.getChildren().add(userListPanel.getRoot());
+        // Then when you want it cleared when switch to another option, do
+        // dataListPanelPlaceholder.getChildren().clear(); follow by repeating the top.
     }
 
     /**
@@ -209,7 +219,7 @@ public class MainWindow extends UiPart<Stage> {
      */
     @FXML
     public void handleSwitchToMenu() {
-        itemListPanel = new ItemListPanel(logic.getFilteredItemList());
+        personListPanelPlaceholder.getChildren().clear();
         personListPanelPlaceholder.getChildren().add(itemListPanel.getRoot());
     }
 
@@ -218,8 +228,7 @@ public class MainWindow extends UiPart<Stage> {
      */
     @FXML
     public void handleSwitchToSales() {
-        // Panels stack on top of each other, only one visible at a time
-        recordListPanel = new RecordListPanel(logic.getFilteredRecordList());
+        personListPanelPlaceholder.getChildren().clear();
         personListPanelPlaceholder.getChildren().add(recordListPanel.getRoot());
     }
 
@@ -228,8 +237,14 @@ public class MainWindow extends UiPart<Stage> {
      */
     @FXML
     public void handleSwitchToIngredient() {
-        // TODO: Some might require raising/posting event, for example, if you call the list method, so it
-        // should raise an event and automatically update the UI
+        //ingredientListPanel = new IngredientListPanel(logic.getFilteredIngredientList());
+        //ingredientListPanelPlaceholder.getChildren().add(ingredientListPanel.getRoot());
+
+        // Proposed changes: e.g.
+        // userListPanel = new UserListPanel(logic.getFilteredAccountList());
+        // dataListPanelPlaceholder.getChildren().add(userListPanel.getRoot());
+        // Then when you want it cleared when switch to another option, do
+        // dataListPanelPlaceholder.getChildren().clear(); follow by repeating the top.
     }
 
     /**
@@ -237,8 +252,14 @@ public class MainWindow extends UiPart<Stage> {
      */
     @FXML
     public void handleSwitchToReservation() {
-        // TODO: Some might require raising/posting event, for example, if you call the list method, so it
-        // should raise an event and automatically update the UI
+        //ingredientListPanel = new IngredientListPanel(logic.getFilteredIngredientList());
+        //ingredientListPanelPlaceholder.getChildren().add(ingredientListPanel.getRoot());
+
+        // Proposed changes: e.g.
+        // userListPanel = new UserListPanel(logic.getFilteredAccountList());
+        // dataListPanelPlaceholder.getChildren().add(userListPanel.getRoot());
+        // Then when you want it cleared when switch to another option, do
+        // dataListPanelPlaceholder.getChildren().clear(); follow by repeating the top.
     }
 
     /**
@@ -301,21 +322,10 @@ public class MainWindow extends UiPart<Stage> {
         salesReportWindow.show();
     }
 
-    //TODO: Everyone's data make use of personListPanelPlaceholder by clearing and adding child instead.
     @Subscribe
     private void handleLoginEvent(LoginEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
-        personListPanel = new PersonListPanel(logic.getFilteredPersonList());
-        personListPanelPlaceholder.getChildren().add(personListPanel.getRoot()); // Show address book
-
-        //ingredientListPanel = new IngredientListPanel(logic.getFilteredIngredientList());
-        //ingredientListPanelPlaceholder.getChildren().add(ingredientListPanel.getRoot());
-
-        // Proposed changes: e.g.
-        // userListPanel = new UserListPanel(logic.getFilteredAccountList());
-        // dataListPanelPlaceholder.getChildren().add(userListPanel.getRoot());
-        // Then when you want it cleared when switch to another option, do
-        // dataListPanelPlaceholder.getChildren().clear(); follow by repeating the top.
+        personListPanelPlaceholder.getChildren().add(itemListPanel.getRoot()); // Show menu by default
     }
 
     @Subscribe
