@@ -7,6 +7,7 @@ import com.google.common.eventbus.Subscribe;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.MenuItem;
+import javafx.scene.control.SplitPane;
 import javafx.scene.control.TextInputControl;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
@@ -19,6 +20,8 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.events.ui.DisplayItemListRequestEvent;
 import seedu.address.commons.events.ui.DisplaySalesReportEvent;
 import seedu.address.commons.events.ui.ExitAppRequestEvent;
+import seedu.address.commons.events.ui.LoginEvent;
+import seedu.address.commons.events.ui.LogoutEvent;
 import seedu.address.commons.events.ui.ShowHelpRequestEvent;
 import seedu.address.logic.Logic;
 import seedu.address.model.UserPrefs;
@@ -50,6 +53,9 @@ public class MainWindow extends UiPart<Stage> {
     private UserPrefs prefs;
     private HelpWindow helpWindow;
     private ItemListPanel itemListPanel;
+
+    @FXML
+    private SplitPane splitPane;
 
     @FXML
     private StackPane browserPlaceholder;
@@ -139,12 +145,6 @@ public class MainWindow extends UiPart<Stage> {
     void fillInnerParts() {
         browserPanel = new BrowserPanel();
         browserPlaceholder.getChildren().add(browserPanel.getRoot());
-
-        personListPanel = new PersonListPanel(logic.getFilteredPersonList());
-        personListPanelPlaceholder.getChildren().add(personListPanel.getRoot()); // Show address book
-
-        //ingredientListPanel = new IngredientListPanel(logic.getFilteredIngredientList());
-        //ingredientListPanelPlaceholder.getChildren().add(ingredientListPanel.getRoot());
 
         ResultDisplay resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
@@ -299,5 +299,28 @@ public class MainWindow extends UiPart<Stage> {
         handleSwitchToSales();
         SalesReportWindow salesReportWindow = new SalesReportWindow(event.getSalesReportToDisplay());
         salesReportWindow.show();
+    }
+
+    //TODO: Everyone's data make use of personListPanelPlaceholder by clearing and adding child instead.
+    @Subscribe
+    private void handleLoginEvent(LoginEvent event) {
+        logger.info(LogsCenter.getEventHandlingLogMessage(event));
+        personListPanel = new PersonListPanel(logic.getFilteredPersonList());
+        personListPanelPlaceholder.getChildren().add(personListPanel.getRoot()); // Show address book
+
+        //ingredientListPanel = new IngredientListPanel(logic.getFilteredIngredientList());
+        //ingredientListPanelPlaceholder.getChildren().add(ingredientListPanel.getRoot());
+
+        // Proposed changes: e.g.
+        // userListPanel = new UserListPanel(logic.getFilteredAccountList());
+        // dataListPanelPlaceholder.getChildren().add(userListPanel.getRoot());
+        // Then when you want it cleared when switch to another option, do
+        // dataListPanelPlaceholder.getChildren().clear(); follow by repeating the top.
+    }
+
+    @Subscribe
+    private void handleLogoutEvent(LogoutEvent event) {
+        logger.info(LogsCenter.getEventHandlingLogMessage(event));
+        personListPanelPlaceholder.getChildren().clear();
     }
 }
