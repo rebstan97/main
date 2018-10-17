@@ -30,6 +30,7 @@ import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.commands.ingredients.EditIngredientCommand;
 import seedu.address.logic.commands.menu.EditItemCommand;
+import seedu.address.logic.commands.reservation.EditReservationCommand;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ingredient.Ingredient;
@@ -39,6 +40,7 @@ import seedu.address.model.person.Person;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 import seedu.address.testutil.ingredients.EditIngredientDescriptorBuilder;
 import seedu.address.testutil.menu.EditItemDescriptorBuilder;
+import seedu.address.testutil.reservation.EditReservationDescriptorBuilder;
 
 /**
  * Contains helper methods for testing commands.
@@ -196,6 +198,9 @@ public class CommandTestUtil {
     public static final EditIngredientCommand.EditIngredientDescriptor DESC_APPLE;
     public static final EditIngredientCommand.EditIngredientDescriptor DESC_BROCCOLI;
 
+    public static final EditReservationCommand.EditReservationDescriptor DESC_ANDREW;
+    public static final EditReservationCommand.EditReservationDescriptor DESC_BILLY;
+
     static {
         DESC_AMY = new EditPersonDescriptorBuilder().withName(VALID_NAME_AMY)
                 .withPhone(VALID_PHONE_AMY).withEmail(VALID_EMAIL_AMY).withAddress(VALID_ADDRESS_AMY)
@@ -216,6 +221,12 @@ public class CommandTestUtil {
         DESC_BROCCOLI =
                 new EditIngredientDescriptorBuilder().withName(VALID_NAME_BROCCOLI).withPrice(VALID_PRICE_BROCCOLI)
                 .withUnit(VALID_UNIT_BROCCOLI).build();
+
+        // Reservation Management
+        DESC_ANDREW = new EditReservationDescriptorBuilder().withName(VALID_RESERVATION_NAME_ANDREW)
+                .withPax(VALID_RESERVATION_PAX_ANDREW).withDateTime(VALID_RESERVATION_DATETIME_ANDREW).build();
+        DESC_BILLY = new EditReservationDescriptorBuilder().withName(VALID_RESERVATION_NAME_BILLY)
+                .withPax(VALID_RESERVATION_PAX_BILLY).withDateTime(VALID_RESERVATION_DATETIME_BILLY).build();
     }
 
     /**
