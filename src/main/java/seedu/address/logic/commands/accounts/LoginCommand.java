@@ -71,6 +71,6 @@ public class LoginCommand extends Command {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof LoginCommand // instanceof handles nulls
-                && toLogin.equals(((LoginCommand) other).toLogin));
+                    && toLogin.equals(((LoginCommand) other).toLogin));
     }
 }
