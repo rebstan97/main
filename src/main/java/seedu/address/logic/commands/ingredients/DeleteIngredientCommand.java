@@ -37,6 +37,11 @@ public class DeleteIngredientCommand extends Command {
 
     private final IngredientName targetName;
 
+    public DeleteIngredientCommand() {
+        this.targetIndex = null;
+        this.targetName = null;
+    }
+
     public DeleteIngredientCommand(Index targetIndex) {
         this.targetIndex = targetIndex;
         this.targetName = null;
@@ -50,14 +55,18 @@ public class DeleteIngredientCommand extends Command {
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
+        CommandResult result = new CommandResult("");
 
         if (this.targetIndex != null && this.targetName == null) {
-            return executeDeleteByIndex(model);
-        } else if (this.targetName != null && this.targetIndex == null) {
-            return executeDeleteByName(model, targetName);
-        } else {
-            throw new CommandException(Messages.MESSAGE_INVALID_INDEX_OR_NAME);
+            result = executeDeleteByIndex(model);
         }
+
+        if (this.targetName != null && this.targetIndex == null) {
+            result = executeDeleteByName(model, targetName);
+        }
+
+        return result;
+
     }
 
     /**

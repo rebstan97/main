@@ -31,7 +31,7 @@ import seedu.address.model.tag.Tag;
 public class ParserUtil {
 
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
-    public static final String MESSAGE_NOT_INDEX_OR_NAME = "Index or ingredient name must be entered.";
+    public static final String MESSAGE_NOT_INDEX_OR_NAME = "A valid index or ingredient name must be entered.";
 
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
@@ -244,13 +244,16 @@ public class ParserUtil {
     public static Object parseIndexOrIngredientName(String indexOrName) throws ParseException {
         requireNonNull(indexOrName);
         String trimmedIndexOrName = indexOrName.trim();
+
         if (StringUtil.isNonZeroUnsignedInteger(trimmedIndexOrName)) {
             return Index.fromOneBased(Integer.parseInt(trimmedIndexOrName));
-        } else if (IngredientName.isValidName(trimmedIndexOrName)) {
-            return new IngredientName(trimmedIndexOrName);
-        } else {
-            throw new ParseException(MESSAGE_NOT_INDEX_OR_NAME);
         }
+
+        if (IngredientName.isValidName(trimmedIndexOrName)) {
+            return new IngredientName(trimmedIndexOrName);
+        }
+
+        throw new ParseException(MESSAGE_NOT_INDEX_OR_NAME);
     }
 
 

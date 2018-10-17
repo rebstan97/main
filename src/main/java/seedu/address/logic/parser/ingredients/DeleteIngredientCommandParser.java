@@ -1,9 +1,9 @@
 package seedu.address.logic.parser.ingredients;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.commons.core.Messages.MESSAGE_INVALID_INDEX_OR_NAME;
 
 import seedu.address.commons.core.index.Index;
+import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.ingredients.DeleteIngredientCommand;
 import seedu.address.logic.parser.Parser;
 import seedu.address.logic.parser.ParserUtil;
@@ -21,21 +21,24 @@ public class DeleteIngredientCommandParser implements Parser<DeleteIngredientCom
      * @throws ParseException if the user input does not conform the expected format
      */
     public DeleteIngredientCommand parse(String args) throws ParseException {
-        try {
-            Object indexOrName = ParserUtil.parseIndexOrIngredientName(args);
-            if (indexOrName instanceof Index) {
-                return new DeleteIngredientCommand((Index) indexOrName);
-            }
-            if (indexOrName instanceof IngredientName) {
-                return new DeleteIngredientCommand((IngredientName) indexOrName);
-            } else {
-                throw new ParseException(String.format(MESSAGE_INVALID_INDEX_OR_NAME));
-            }
-        } catch (ParseException pe) {
-            throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                            DeleteIngredientCommand.MESSAGE_USAGE), pe);
+
+        if (args.isEmpty()) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    DeleteIngredientCommand.MESSAGE_USAGE));
         }
+
+        Object indexOrName = ParserUtil.parseIndexOrIngredientName(args);
+        DeleteIngredientCommand deleteCommand = new DeleteIngredientCommand();
+
+        if (indexOrName instanceof Index) {
+            deleteCommand = new DeleteIngredientCommand((Index) indexOrName);
+        }
+
+        if (indexOrName instanceof IngredientName) {
+            deleteCommand = new DeleteIngredientCommand((IngredientName) indexOrName);
+        }
+
+        return deleteCommand;
     }
 
 }

@@ -13,7 +13,6 @@ public class Messages {
 
     // Ingredient Management
     public static final String MESSAGE_INVALID_INGREDIENT_DISPLAYED_INDEX = "The ingredient index provided is invalid";
-    public static final String MESSAGE_INVALID_INDEX_OR_NAME = "A valid ingredient index or name is not provided";
     public static final String MESSAGE_INGREDIENT_NAME_NOT_FOUND = "The ingredient name provided does not exist";
 
     // Menu Management
