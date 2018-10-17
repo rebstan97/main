@@ -5,8 +5,13 @@ import java.util.logging.Logger;
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.ComponentManager;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.commons.core.Messages;
+import seedu.address.commons.core.session.UserSession;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
+import seedu.address.logic.commands.ExitCommand;
+import seedu.address.logic.commands.HelpCommand;
+import seedu.address.logic.commands.accounts.LoginCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.AddressBookParser;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -22,6 +27,7 @@ import seedu.address.model.salesrecord.SalesRecord;
  * The main LogicManager of the app.
  */
 public class LogicManager extends ComponentManager implements Logic {
+
     private final Logger logger = LogsCenter.getLogger(LogicManager.class);
 
     private final Model model;
@@ -34,11 +40,22 @@ public class LogicManager extends ComponentManager implements Logic {
         addressBookParser = new AddressBookParser();
     }
 
+    /*
+     * We define public commands to be those that can be executed without being logged in.
+     */
+    private boolean isPublicCommand(Command command) {
+        return command instanceof LoginCommand || command instanceof HelpCommand || command instanceof ExitCommand;
+    }
+
     @Override
     public CommandResult execute(String commandText) throws CommandException, ParseException {
         logger.info("----------------[USER COMMAND][" + commandText + "]");
+
         try {
             Command command = addressBookParser.parseCommand(commandText);
+            if (!isPublicCommand(command) && !UserSession.isAuthenticated()) {
+                throw new CommandException(Messages.MESSAGE_NOT_AUTHENTICATED);
+            }
             return command.execute(model, history);
         } finally {
             history.add(commandText);
