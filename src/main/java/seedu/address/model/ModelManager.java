@@ -242,6 +242,7 @@ public class ModelManager extends ComponentManager implements Model {
     public void addIngredient(Ingredient ingredient) {
         versionedAddressBook.addIngredient(ingredient);
         updateFilteredIngredientList(PREDICATE_SHOW_ALL_INGREDIENTS);
+        indicateAddressBookChanged();
     }
 
     @Override
