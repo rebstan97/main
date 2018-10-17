@@ -28,8 +28,8 @@ public class ItemUtil {
      */
     public static String getItemDetails(Item item) {
         StringBuilder sb = new StringBuilder();
-        sb.append(PREFIX_NAME + item.getName().fullName + " ");
-        sb.append(PREFIX_PRICE + item.getPrice().value + " ");
+        sb.append(PREFIX_NAME + item.getName().toString() + " ");
+        sb.append(PREFIX_PRICE + item.getPrice().toString() + " ");
         item.getTags().stream().forEach(
             s -> sb.append(PREFIX_TAG + s.tagName + " ")
         );
@@ -41,8 +41,8 @@ public class ItemUtil {
      */
     public static String getEditItemDescriptorDetails(EditItemDescriptor descriptor) {
         StringBuilder sb = new StringBuilder();
-        descriptor.getName().ifPresent(name -> sb.append(PREFIX_NAME).append(name.fullName).append(" "));
-        descriptor.getPrice().ifPresent(price -> sb.append(PREFIX_PRICE).append(price.value).append(" "));
+        descriptor.getName().ifPresent(name -> sb.append(PREFIX_NAME).append(name.toString()).append(" "));
+        descriptor.getPrice().ifPresent(price -> sb.append(PREFIX_PRICE).append(price.toString()).append(" "));
         if (descriptor.getTags().isPresent()) {
             Set<Tag> tags = descriptor.getTags().get();
             if (tags.isEmpty()) {

@@ -7,6 +7,7 @@ import java.util.List;
 import seedu.address.commons.core.EventsCenter;
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
+import seedu.address.commons.events.ui.DisplayItemListRequestEvent;
 import seedu.address.commons.events.ui.JumpToListRequestEvent;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.Command;
@@ -46,7 +47,7 @@ public class SelectItemCommand extends Command {
         if (targetIndex.getZeroBased() >= filteredItemList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_ITEM_DISPLAYED_INDEX);
         }
-
+        EventsCenter.getInstance().post(new DisplayItemListRequestEvent());
         EventsCenter.getInstance().post(new JumpToListRequestEvent(targetIndex));
         return new CommandResult(String.format(MESSAGE_SELECT_ITEM_SUCCESS, targetIndex.getOneBased()));
 
