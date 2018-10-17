@@ -16,6 +16,7 @@ import javafx.stage.Stage;
 import seedu.address.commons.core.Config;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.commons.events.ui.DisplayIngredientListRequestEvent;
 import seedu.address.commons.events.ui.DisplayItemListRequestEvent;
 import seedu.address.commons.events.ui.DisplaySalesReportEvent;
 import seedu.address.commons.events.ui.ExitAppRequestEvent;
@@ -43,8 +44,7 @@ public class MainWindow extends UiPart<Stage> {
     // Independent Ui parts residing in this Ui container
     private BrowserPanel browserPanel;
     private PersonListPanel personListPanel;
-    private IngredientListPanel ingredientListPanel;
-    private RecordListPanel recordListPanel;
+    private RecordListPanel recordListPanel; // Panels stack on top of each other, only one visible at a time
 
     private Config config;
     private UserPrefs prefs;
@@ -64,10 +64,7 @@ public class MainWindow extends UiPart<Stage> {
     private Pane usernameDisplayPlaceholder;
 
     @FXML
-    private StackPane personListPanelPlaceholder;
-
-    //@FXML
-    //private StackPane ingredientListPanelPlaceholder;
+    private StackPane personListPanelPlaceholder; //rename to ModelListPanelPlaceholder
 
     @FXML
     private StackPane resultDisplayPlaceholder;
@@ -142,9 +139,6 @@ public class MainWindow extends UiPart<Stage> {
 
         personListPanel = new PersonListPanel(logic.getFilteredPersonList());
         personListPanelPlaceholder.getChildren().add(personListPanel.getRoot()); // Show address book
-
-        //ingredientListPanel = new IngredientListPanel(logic.getFilteredIngredientList());
-        //ingredientListPanelPlaceholder.getChildren().add(ingredientListPanel.getRoot());
 
         ResultDisplay resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
@@ -228,8 +222,8 @@ public class MainWindow extends UiPart<Stage> {
      */
     @FXML
     public void handleSwitchToIngredient() {
-        // TODO: Some might require raising/posting event, for example, if you call the list method, so it
-        // should raise an event and automatically update the UI
+        IngredientListPanel ingredientListPanel = new IngredientListPanel(logic.getFilteredIngredientList());
+        personListPanelPlaceholder.getChildren().add(ingredientListPanel.getRoot());
     }
 
     /**
@@ -291,6 +285,12 @@ public class MainWindow extends UiPart<Stage> {
     private void handleDisplayItemListEvent(DisplayItemListRequestEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
         handleSwitchToMenu();
+    }
+
+    @Subscribe
+    private void handleDisplayIngredientListEvent(DisplayIngredientListRequestEvent event) {
+        logger.info(LogsCenter.getEventHandlingLogMessage(event));
+        handleSwitchToIngredient();
     }
 
     @Subscribe
