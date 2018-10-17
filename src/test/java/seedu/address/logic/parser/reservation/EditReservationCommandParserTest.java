@@ -167,9 +167,9 @@ public class EditReservationCommandParserTest {
                 + TAG_DESC_FRIEND + RESERVATION_PAX_DESC_ANDREW + RESERVATION_DATETIME_DESC_ANDREW + TAG_DESC_FRIEND
                 + RESERVATION_PAX_DESC_BILLY + RESERVATION_DATETIME_DESC_BILLY + TAG_DESC_HUSBAND;
 
-        EditReservationDescriptor descriptor = new EditReservationDescriptorBuilder().withPax(VALID_RESERVATION_PAX_BILLY)
-                .withDateTime(VALID_RESERVATION_DATETIME_BILLY).withTags(VALID_TAG_FRIEND, VALID_TAG_HUSBAND)
-                .build();
+        EditReservationDescriptor descriptor = new EditReservationDescriptorBuilder()
+                .withPax(VALID_RESERVATION_PAX_BILLY).withDateTime(VALID_RESERVATION_DATETIME_BILLY)
+                .withTags(VALID_TAG_FRIEND, VALID_TAG_HUSBAND).build();
         EditReservationCommand expectedCommand = new EditReservationCommand(targetIndex, descriptor);
 
         assertParseSuccess(parser, userInput, expectedCommand);
