@@ -54,6 +54,6 @@ public class RegisterCommand extends Command {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof RegisterCommand // instanceof handles nulls
-                && account.equals(((RegisterCommand) other).account));
+                    && account.equals(((RegisterCommand) other).account));
     }
 }

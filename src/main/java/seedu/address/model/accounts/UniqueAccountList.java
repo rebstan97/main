@@ -35,7 +35,7 @@ public class UniqueAccountList implements Iterable<Account> {
     }
 
     /**
-     * Adds a account to the list. The account must not already exist in the list.
+     * Adds an account to the list. The account must not already exist in the list.
      */
     public void add(Account toAdd) {
         requireNonNull(toAdd);
@@ -43,6 +43,17 @@ public class UniqueAccountList implements Iterable<Account> {
             throw new DuplicateAccountException();
         }
         internalList.add(toAdd);
+    }
+
+    /**
+     * Retrieves an account from the list of the given {@code account}'s username.
+     */
+    public Account get(Account account) {
+        requireNonNull(account);
+        if (!contains(account)) {
+            throw new AccountNotFoundException();
+        }
+        return internalList.stream().filter(acc -> acc.isSameUsername(account)).findFirst().get();
     }
 
     /**
@@ -122,7 +133,7 @@ public class UniqueAccountList implements Iterable<Account> {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof UniqueAccountList // instanceof handles nulls
-                    && internalList.equals(((UniqueAccountList) other).internalList));
+                && internalList.equals(((UniqueAccountList) other).internalList));
     }
 
     @Override
