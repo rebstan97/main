@@ -17,6 +17,9 @@ public class Messages {
     public static final String MESSAGE_INVALID_ITEM_DISPLAYED_INDEX = "The item index provided is invalid";
     public static final String MESSAGE_ITEMS_LISTED_OVERVIEW = "%1$d items listed!";
 
+    // Sales Management
+    public static final String MESSAGE_INVALID_RECORD_DISPLAYED_INDEX = "The sales record index provided is invalid.";
+
     // Reservation Management
     public static final String MESSAGE_INVALID_RESERVATION_DISPLAYED_INDEX = "The reservation index provided is "
             + "invalid";

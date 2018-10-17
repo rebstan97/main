@@ -39,7 +39,9 @@ import seedu.address.logic.commands.menu.SortMenuCommand;
 import seedu.address.logic.commands.menu.TodaySpecialCommand;
 import seedu.address.logic.commands.reservation.AddReservationCommand;
 import seedu.address.logic.commands.reservation.EditReservationCommand;
+import seedu.address.logic.commands.sales.DeleteSalesCommand;
 import seedu.address.logic.commands.sales.DisplaySalesCommand;
+import seedu.address.logic.commands.sales.EditSalesCommand;
 import seedu.address.logic.commands.sales.RecordSalesCommand;
 import seedu.address.logic.parser.accounts.LoginCommandParser;
 import seedu.address.logic.parser.accounts.RegisterCommandParser;
@@ -56,9 +58,10 @@ import seedu.address.logic.parser.menu.SelectItemCommandParser;
 import seedu.address.logic.parser.menu.SortMenuCommandParser;
 import seedu.address.logic.parser.reservation.AddReservationCommandParser;
 import seedu.address.logic.parser.reservation.EditReservationCommandParser;
+import seedu.address.logic.parser.sales.DeleteSalesCommandParser;
 import seedu.address.logic.parser.sales.DisplaySalesCommandParser;
+import seedu.address.logic.parser.sales.EditSalesCommandParser;
 import seedu.address.logic.parser.sales.RecordSalesCommandParser;
-
 
 /**
  * Parses user input.
@@ -136,10 +139,20 @@ public class AddressBookParser {
             return new RemarkCommandParser().parse(arguments);
 
         case RecordSalesCommand.COMMAND_WORD:
+        case RecordSalesCommand.COMMAND_ALIAS:
             return new RecordSalesCommandParser().parse(arguments);
 
         case DisplaySalesCommand.COMMAND_WORD:
+        case DisplaySalesCommand.COMMAND_ALIAS:
             return new DisplaySalesCommandParser().parse(arguments);
+
+        case DeleteSalesCommand.COMMAND_WORD:
+        case DeleteSalesCommand.COMMAND_ALIAS:
+            return new DeleteSalesCommandParser().parse(arguments);
+
+        case EditSalesCommand.COMMAND_WORD:
+        case EditSalesCommand.COMMAND_ALIAS:
+            return new EditSalesCommandParser().parse(arguments);
 
         case RegisterCommand.COMMAND_WORD:
         case RegisterCommand.COMMAND_ALIAS:

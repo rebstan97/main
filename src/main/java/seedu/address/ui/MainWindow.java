@@ -44,7 +44,7 @@ public class MainWindow extends UiPart<Stage> {
     private BrowserPanel browserPanel;
     private PersonListPanel personListPanel;
     private IngredientListPanel ingredientListPanel;
-    private RecordListPanel recordListPanel; // Panels stack on top of each other, only one visible at a time
+    private RecordListPanel recordListPanel;
 
     private Config config;
     private UserPrefs prefs;
@@ -218,6 +218,7 @@ public class MainWindow extends UiPart<Stage> {
      */
     @FXML
     public void handleSwitchToSales() {
+        // Panels stack on top of each other, only one visible at a time
         recordListPanel = new RecordListPanel(logic.getFilteredRecordList());
         personListPanelPlaceholder.getChildren().add(recordListPanel.getRoot());
     }

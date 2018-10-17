@@ -931,8 +931,8 @@ e.g. `record-sales d/25-09-2018 n/Fried Rice q/35 p/5.50`
 e.g. `display-sales` or `display-sales 25-09-2018`
 * *Delete sales record* : `delete-sales DATE ITEM_NAME` or `delete-sales ITEM_INDEX` +
 e.g. `delete-sales 10-02-2018 Fried Rice` or `delete-sales 2`
-* *Edit sales record* : `edit-sales DATE NAME [n/ITEM_NAME] [q/QUANTITY SOLD] [p/ITEM_PRICE]` or `edit-sales
-INDEX [n/ITEM_NAME] [q/QUANTITY SOLD] [p/ITEM_PRICE]` +
+* *Edit sales record* : `edit-sales DATE NAME [d/DATE] [n/ITEM_NAME] [q/QUANTITY SOLD] [p/ITEM_PRICE]` or `edit-sales
+INDEX [d/DATE] [n/ITEM_NAME] [q/QUANTITY SOLD] [p/ITEM_PRICE]` +
 e.g. `edit-sales 12-02-2018 Pasta q/37 p/6.50` or `edit-sales 3 n/Fried Omelet`
 * *Check sales history of menu item* : `check-sales ITEM_NAME` +
 e.g. `check-sales Fried Rice`

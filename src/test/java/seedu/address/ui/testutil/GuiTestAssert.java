@@ -2,6 +2,7 @@ package seedu.address.ui.testutil;
 
 import static org.junit.Assert.assertEquals;
 
+import java.text.NumberFormat;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -69,7 +70,9 @@ public class GuiTestAssert {
         assertEquals(expectedRecord.getDate().toString(), actualCard.getDate());
         assertEquals(expectedRecord.getName().toString(), actualCard.getItemName());
         assertEquals("Quantity Sold: " + expectedRecord.getQuantitySold().toString(), actualCard.getQuantitySold());
-        assertEquals("Item Price: $" + expectedRecord.getPrice().toString(), actualCard.getPrice());
+        NumberFormat currencyFormatter = NumberFormat.getCurrencyInstance();
+        assertEquals("Item Price: "
+                + currencyFormatter.format(expectedRecord.getPrice().getValue()), actualCard.getPrice());
     }
 
     /**

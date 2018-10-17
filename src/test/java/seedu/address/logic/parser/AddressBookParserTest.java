@@ -50,8 +50,12 @@ import seedu.address.logic.commands.menu.SelectItemCommand;
 import seedu.address.logic.commands.menu.SortMenuCommand;
 import seedu.address.logic.commands.menu.SortMenuCommand.SortMethod;
 import seedu.address.logic.commands.menu.TodaySpecialCommand;
+import seedu.address.logic.commands.sales.DeleteSalesCommand;
 import seedu.address.logic.commands.sales.DisplaySalesCommand;
+import seedu.address.logic.commands.sales.EditSalesCommand;
+import seedu.address.logic.commands.sales.EditSalesCommand.EditRecordDescriptor;
 import seedu.address.logic.commands.sales.RecordSalesCommand;
+
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.accounts.Account;
 import seedu.address.model.ingredient.Ingredient;
@@ -73,6 +77,7 @@ import seedu.address.testutil.ingredients.IngredientUtil;
 import seedu.address.testutil.menu.EditItemDescriptorBuilder;
 import seedu.address.testutil.menu.ItemBuilder;
 import seedu.address.testutil.menu.ItemUtil;
+import seedu.address.testutil.salesrecords.EditRecordDescriptorBuilder;
 import seedu.address.testutil.salesrecords.RecordBuilder;
 import seedu.address.testutil.salesrecords.RecordUtil;
 
@@ -202,10 +207,38 @@ public class AddressBookParserTest {
     }
 
     @Test
-    public void parseCommand_record_sales() throws Exception {
+    public void parseCommand_recordSales() throws Exception {
         SalesRecord record = new RecordBuilder().build();
         RecordSalesCommand command = (RecordSalesCommand) parser.parseCommand(RecordUtil.getRecordSalesCommand(record));
         assertEquals(new RecordSalesCommand(record), command);
+        // alias test
+        command = (RecordSalesCommand) parser.parseCommand(RecordSalesCommand.COMMAND_ALIAS
+                + " " + RecordUtil.getRecordDetails(record));
+        assertEquals(new RecordSalesCommand(record), command);
+    }
+
+    @Test
+    public void parseCommand_deleteSales() throws Exception {
+        DeleteSalesCommand command = (DeleteSalesCommand) parser.parseCommand(
+                DeleteSalesCommand.COMMAND_WORD + " " + INDEX_FIRST.getOneBased());
+        assertEquals(new DeleteSalesCommand(INDEX_FIRST), command);
+        // alias test
+        command = (DeleteSalesCommand) parser.parseCommand(DeleteSalesCommand.COMMAND_ALIAS
+                + " " + INDEX_FIRST.getOneBased());
+        assertEquals(new DeleteSalesCommand(INDEX_FIRST), command);
+    }
+
+    @Test
+    public void parseCommand_editSales() throws Exception {
+        SalesRecord salesRecord = new RecordBuilder().build();
+        EditRecordDescriptor descriptor = new EditRecordDescriptorBuilder(salesRecord).build();
+        EditSalesCommand command = (EditSalesCommand) parser.parseCommand(EditSalesCommand.COMMAND_WORD + " "
+                + INDEX_FIRST.getOneBased() + " " + RecordUtil.getEditRecordDescriptorDetails(descriptor));
+        assertEquals(new EditSalesCommand(INDEX_FIRST, descriptor), command);
+        // alias test
+        command = (EditSalesCommand) parser.parseCommand(EditSalesCommand.COMMAND_ALIAS + " "
+                + INDEX_FIRST.getOneBased() + " " + RecordUtil.getEditRecordDescriptorDetails(descriptor));
+        assertEquals(new EditSalesCommand(INDEX_FIRST, descriptor), command);
     }
 
     @Test
@@ -213,6 +246,10 @@ public class AddressBookParserTest {
         Date date = new Date(VALID_DATE_RECORD_ONE);
         DisplaySalesCommand command = (DisplaySalesCommand) parser.parseCommand(
                 DisplaySalesCommand.COMMAND_WORD + " " + VALID_DATE_RECORD_ONE);
+        assertEquals(new DisplaySalesCommand(date), command);
+        // alias test
+        command = (DisplaySalesCommand) parser.parseCommand(DisplaySalesCommand.COMMAND_ALIAS + " "
+                + VALID_DATE_RECORD_ONE);
         assertEquals(new DisplaySalesCommand(date), command);
     }
 
