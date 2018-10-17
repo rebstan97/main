@@ -816,91 +816,58 @@ Format: `rank-date`
 contains the data of your previous *MeNUS* folder.
 
 == Command Summary
-
-* *Add* `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]...` +
-e.g. `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
-* *Clear* : `clear`
-* *Delete* : `delete INDEX` +
-e.g. `delete 3`
-* *Edit* : `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]...` +
-e.g. `edit 2 n/James Lee e/jameslee@example.com`
-* *Find* : `find KEYWORD [MORE_KEYWORDS]` +
-e.g. `find James Jake`
-* *List* : `list`
-* *Help* : `help`
-* *Select* : `select INDEX` +
-e.g.`select 2`
-* *History* : `history`
-* *Undo* : `undo`
-* *Redo* : `redo`
-* *Logging in*: `login id/USERNAME pw/PASSWORD` +
-e.g. `login id/azhikai pw/1122qq`
-* *Logging out*: `logout`
-* *Creating user account*: `register id/USERNAME pw/PASSWORD` +
-e.g. `register id/azhikai pw/1122qq`
-* *Editing user account*: `edit-acc id/USERNAME [nid/NEW_USERNAME] [pw/NEW_PASSWORD]` +
-e.g. `edit-acc id/azhikai nid/angzhikai`
-* *Deleting user account*: `deregister id/USERNAME` +
-e.g. `deregister id/azhikai`
-* *Add ingredient* : `add-ingredient n/INGREDIENT_NAME t/UNIT_TYPE p/PRICE_PER_UNIT m/MINIMUM` +
-e.g. `add-ingredient n/cod fish t/kilogram p/20 m/1`
-* *List ingredients* : `list-ingredients`
-* *List ingredients with low stock count* : `list-ingredients-low`
-* *Delete ingredient* : `delete-ingredient INDEX` or `delete-ingredient NAME` +
-e.g. `delete-ingredient 1` or `delete-ingredient cod fish`
-* *Edit ingredient* : `edit-ingredient INDEX [n/INGREDIENT_NAME] [t/UNIT_TYPE] [p/PRICE_PER_UNIT] [m/MINIMUM]` or `edit-ingredient NAME [n/INGREDIENT_NAME] [t/UNIT_TYPE] [p/PRICE_PER_UNIT] [m/MINIMUM]` +
-e.g. `edit-ingredient 3 n/thin fries` or `edit-ingredient ketchup n/tomato ketchup`
-* *Stock up* : `stockup n/INGREDIENT_NAME... u/NUMBER_OF_UNITS...` +
-e.g. `stockup n/cod fish u/5`
-* *Consume* : `consume n/INGREDIENT_NAME... u/NUMBER_OF_UNITS...` +
-e.g. `consume n/cod fish u/1`
-* *Remove dishes with low ingredients* : `remove-oos-dish`
-* *History of stockup/consumption* : `history [purchase] [consumption]` +
-e.g. `history stockup`
-* *Add item* `add-item n/ITEM_NAME p/ITEM_PRICE [t/TAG]...` +
-e.g. `add-item n/Burger Set p/3 t/set`
-* *Clear menu* : `clear-menu`
-* *Delete item* : `delete-item INDEX` +
-e.g. `delete-item 3`
-* *Edit item* : `edit-item INDEX [n/ITEM_NAME] [p/ITEM_PRICE] [t/TAG]...` +
-e.g. `edit-item 2 n/Fries p/3`
-* *Find item* : `find-item KEYWORD [MORE_KEYWORDS]` +
-e.g. `find-item Cheese Burger`
-* *List items* : `list-items`
-* *Select item* : `select-items INDEX`
-e.g. `select-item 3`
-* *Filter menu* : `fiiter-menu t/TAG` +
-e.g. `filter-menu t/cheese`
-* *Sort menu* : `sort-menu`
-e.g. `sort-menu NAME`
-* *Give an item a discount* : `discount-item`
-e.g. `discount-item 2 d/20`
-* *Today's special* : `today-special`
-* *Export menu* : `export-menu`
-e.g. `export-menu fp/backup/ fn/menu.txt`
-* *Import menu* : `import-menu`
-e.g. `import-menu fp/backup/ fn/menu.txt`
-* *Add a reservation* : `add-reservation n/NAME p/PAX d/DATE t/TIME` +
-e.g. `add-reservation n/TAN p/4 d/21072018 t/1300`
-* *List reservations* : `list-reservations`
-* *Edit reservation* : `edit-reservation INDEX [n/NAME] [p/PAX] [d/DATE] [t/TIME]` +
-e.g. `edit-reservation 2 t/1700`
-* *Sort reservations* : `sort-reservations`
-* *Delete a reservation* : `delete-reservation INDEX` +
-e.g. `delete-reservations 2`
-* *Record sales volume of menu item* : `record-sales d/DATE n/ITEM_NAME q/QUANTITY SOLD p/ITEM_PRICE` +
-e.g. `record-sales d/25-09-2018 n/Fried Rice q/35 p/5.50`
-* *Display sales report for all / specific day* : `display-sales` or `display-sales DATE` +
-e.g. `display-sales` or `display-sales 25-09-2018`
-* *Delete sales record* : `delete-sales DATE ITEM_NAME` or `delete-sales ITEM_INDEX` +
-e.g. `delete-sales 10-02-2018 Fried Rice` or `delete-sales 2`
-* *Edit sales record* : `edit-sales DATE NAME [d/DATE] [n/ITEM_NAME] [q/QUANTITY SOLD] [p/ITEM_PRICE]` or `edit-sales
-INDEX [d/DATE] [n/ITEM_NAME] [q/QUANTITY SOLD] [p/ITEM_PRICE]` +
-e.g. `edit-sales 12-02-2018 Pasta q/37 p/6.50` or `edit-sales 3 n/Fried Omelet`
-* *Check sales history of menu item* : `check-sales ITEM_NAME` +
-e.g. `check-sales Fried Rice`
-* *Rank menu items according to profitability* : `rank-dish` +
-* *Rank dates according to profitability* : `rank-date`
+[width="100%",cols="10%,<45%,<45%",options="header",]
+|=======================================================================
+|Command |Format |Example
+|*Help* |`help` |`help`
+|*Add* |`add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]...` |`add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
+|*Clear* |`clear` |`clear`
+|*Delete* |`delete INDEX` |`delete 3`
+|*Edit* |`edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]...` |`edit 2 n/James Lee e/jameslee@example.com`
+|*Find* |`find KEYWORD [MORE_KEYWORDS]` |`find James Jake`
+|*List* |`list` |`list`
+|*Select* |`select INDEX` |`select 2`
+|*History* |`history` |`history`
+|*Undo* |`undo` |`undo`
+|*Redo* |`redo` |`redo`
+|*Login* |`login id/USERNAME pw/PASSWORD` |`login id/azhikai pw/1122qq`
+|*Logout* |`logout` |`logout`
+|*Create account* |`register id/USERNAME pw/PASSWORD` |`register id/azhikai pw/1122qq`
+|*Edit account* |`edit-acc id/USERNAME [nid/NEW_USERNAME] [pw/NEW_PASSWORD]` |`edit-acc id/azhikai nid/angzhikai`
+|*Delete account* |`deregister id/USERNAME` |`deregister id/azhikai`
+|*Add ingredient* |`add-ingredient n/INGREDIENT_NAME t/UNIT_TYPE p/PRICE_PER_UNIT m/MINIMUM` |`add-ingredient n/cod fish t/kilogram p/20 m/1`
+|*List ingredient* |`list-ingredients` |`list-ingredients`
+|*List ingredient with low stock count* |`list-ingredients-low` |`list-ingredients-low`
+|*Edit ingredient* |`edit-ingredient INDEX [n/INGREDIENT_NAME] [t/UNIT_TYPE] [p/PRICE_PER_UNIT] [m/MINIMUM]` or `edit-ingredient NAME [n/INGREDIENT_NAME] [t/UNIT_TYPE] [p/PRICE_PER_UNIT] [m/MINIMUM]` |`edit-ingredient 3 n/thin fries` or `edit-ingredient ketchup n/tomato ketchup`
+|*Delete ingredient* |`delete-ingredient INDEX` or `delete-ingredient NAME` |`delete-ingredient 1` or `delete-ingredient cod fish`
+|*Stock up* |`stockup n/INGREDIENT_NAME... u/NUMBER_OF_UNITS...` |`stockup n/cod fish u/5`
+|*Consume* |`consume n/INGREDIENT_NAME... u/NUMBER_OF_UNITS...` |`consume n/cod fish u/1`
+|*Remove dishes with low ingredients* |`remove-oos-dish` |`remove-oos-dish`
+|*History of stockup/consumption* |`history [purchase] [consumption]` |`history stockup`
+|*Add item* |`add-item n/ITEM_NAME p/ITEM_PRICE [t/TAG]...` |`add-item n/Burger Set p/3 t/set`
+|*Edit menu* |`edit-item INDEX [n/ITEM_NAME] [p/ITEM_PRICE] [t/TAG]...` |`edit-item 2 n/Fries p/3`
+|*Delete item* |`delete-item INDEX` |`delete-item 3`
+|*Select item* |`select-items INDEX` |`select-items 3`
+|*Find item* |`find-item KEYWORD [MORE_KEYWORDS]` |`find-item Cheese Burger`
+|*List items* |`list-items` |`list-items`
+|*Filter menu* |`filter-menu t/TAG` |`filter-menu t/cheese`
+|*Sort menu* |`sort-menu` |`sort-menu NAME`
+|*Discount item* |`discount-item INDEX d/PERCENTAGE` |`discount-item 2 d/20`
+|*Today's special* |`today-special` |`today-special`
+|*Export menu* |`export-menu fp/FILE_PATH fn/FILE_NAME` |`export-menu fp/backup/ fn/menu.txt`
+|*Import menu* |`import-menu fp/FILE_PATH fn/FILE_NAME` |`import-menu fp/backup/ fn/menu.txt`
+|*Add reservation* |`add-reservation n/NAME p/PAX d/DATE t/TIME` |`add-reservation n/TAN p/4 d/21072018 t/1300`
+|*Edit reservation* |`edit-reservation INDEX [n/NAME] [p/PAX] [d/DATE] [t/TIME]` |`edit-reservation 2 t/1700`
+|*Delete reservation* |`delete-reservation INDEX` |`delete-reservations 2`
+|*List reservation* |`list-reservations` |`list-reservations`
+|*Sort reservation* |`sort-reservations` |`sort-reservations`
+|*Record sales volume* |`record-sales d/DATE n/ITEM_NAME q/QUANTITY SOLD p/ITEM_PRICE` |`record-sales d/25-09-2018 n/Fried Rice q/35 p/5.50`
+|*Display sales record* |`display-sales` or `display-sales DATE` |`display-sales` or `display-sales 25-09-2018`
+|*Edit sales record* |`edit-sales DATE NAME [d/DATE] [n/ITEM_NAME] [q/QUANTITY SOLD] [p/ITEM_PRICE]` or `edit-sales INDEX [d/DATE] [n/ITEM_NAME] [q/QUANTITY SOLD] [p/ITEM_PRICE]` |`edit-sales 12-02-2018 Pasta q/37 p/6.50` or `edit-sales 3 n/Fried Omelet`
+|*Check sales history of menu item* |`check-sales ITEM_NAME` |`check-sales Fried Rice`
+|*Delete sales record* |`delete-sales DATE ITEM_NAME` or `delete-sales ITEM_INDEX` |`delete-sales 10-02-2018 Fried Rice` or `delete-sales 2`
+|*Rank by profitability* |`rank-dish` or `rank-date` | `TO BE CONFIRMED`
+|=======================================================================
 
 [appendix]
 == Glossary
