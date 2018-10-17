@@ -163,6 +163,9 @@ public class MainWindow extends UiPart<Stage> {
         itemListPanel = new ItemListPanel(logic.getFilteredItemList());
         recordListPanel = new RecordListPanel(logic.getFilteredRecordList());
 
+        // include this, else current systemtests all will fail
+        personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
+
         UsernameDisplay usernameDisplay = new UsernameDisplay();
         // Centralize the width
         usernameDisplay.getRoot().layoutXProperty().bind(usernameDisplayPlaceholder.widthProperty()
@@ -349,7 +352,7 @@ public class MainWindow extends UiPart<Stage> {
     @Subscribe
     private void handleLoginEvent(LoginEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
-        personListPanelPlaceholder.getChildren().add(itemListPanel.getRoot()); // Show menu by default
+        //personListPanelPlaceholder.getChildren().add(itemListPanel.getRoot()); // Show menu by default
         setButton(true);
     }
 
