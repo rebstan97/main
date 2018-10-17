@@ -38,6 +38,7 @@ import seedu.address.logic.commands.menu.SelectItemCommand;
 import seedu.address.logic.commands.menu.SortMenuCommand;
 import seedu.address.logic.commands.menu.TodaySpecialCommand;
 import seedu.address.logic.commands.reservation.AddReservationCommand;
+import seedu.address.logic.commands.reservation.DeleteReservationCommand;
 import seedu.address.logic.commands.reservation.EditReservationCommand;
 import seedu.address.logic.commands.sales.DeleteSalesCommand;
 import seedu.address.logic.commands.sales.DisplaySalesCommand;
@@ -57,6 +58,7 @@ import seedu.address.logic.parser.menu.FindItemCommandParser;
 import seedu.address.logic.parser.menu.SelectItemCommandParser;
 import seedu.address.logic.parser.menu.SortMenuCommandParser;
 import seedu.address.logic.parser.reservation.AddReservationCommandParser;
+import seedu.address.logic.parser.reservation.DeleteReservationCommandParser;
 import seedu.address.logic.parser.reservation.EditReservationCommandParser;
 import seedu.address.logic.parser.sales.DeleteSalesCommandParser;
 import seedu.address.logic.parser.sales.DisplaySalesCommandParser;
@@ -227,6 +229,10 @@ public class AddressBookParser {
         case EditReservationCommand.COMMAND_WORD:
         case EditReservationCommand.COMMAND_ALIAS:
             return new EditReservationCommandParser().parse(arguments);
+
+        case DeleteReservationCommand.COMMAND_WORD:
+        case DeleteReservationCommand.COMMAND_ALIAS:
+            return new DeleteReservationCommandParser().parse(arguments);
 
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
