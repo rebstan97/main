@@ -4,6 +4,7 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 
+import seedu.address.logic.commands.menu.SortMenuCommand.SortMethod;
 import seedu.address.model.accounts.Account;
 import seedu.address.model.ingredient.Ingredient;
 import seedu.address.model.menu.Item;
@@ -274,6 +275,11 @@ public interface Model {
      * Clears the item list and replaces with the provided new data for AddressBook.
      */
     void resetMenuData(ReadOnlyAddressBook newData);
+
+    /**
+     * Sort the item list by given sorting method.
+     */
+    void sortMenu(SortMethod sortMethod);
 
     /**
      * Returns an unmodifiable view of the filtered item list

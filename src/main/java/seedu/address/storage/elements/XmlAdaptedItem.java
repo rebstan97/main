@@ -58,9 +58,9 @@ public class XmlAdaptedItem {
      * @param source future changes to this will not affect the created XmlAdaptedItem
      */
     public XmlAdaptedItem(Item source) {
-        name = source.getName().fullName;
-        price = source.getPrice().value;
-        remark = source.getRemark().value;
+        name = source.getName().toString();
+        price = source.getPrice().toString();
+        remark = source.getRemark().toString();
         tagged = source.getTags().stream()
                 .map(XmlAdaptedTag::new)
                 .collect(Collectors.toList());

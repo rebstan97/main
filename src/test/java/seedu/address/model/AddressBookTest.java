@@ -11,6 +11,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_TEST;
 import static seedu.address.testutil.TypicalAddressBook.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalAddressBook.getTypicalAddressBookWithItemOnly;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.AMY;
 import static seedu.address.testutil.TypicalPersons.BOB;
@@ -39,6 +40,7 @@ import org.junit.rules.ExpectedException;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import seedu.address.logic.commands.menu.SortMenuCommand.SortMethod;
 import seedu.address.model.accounts.Account;
 import seedu.address.model.accounts.exceptions.DuplicateAccountException;
 import seedu.address.model.ingredient.Ingredient;
@@ -437,6 +439,35 @@ public class AddressBookTest {
     public void getReservationList_modifyList_throwsUnsupportedOperationException() {
         thrown.expect(UnsupportedOperationException.class);
         addressBook.getReservationList().remove(0);
+    }
+
+    @Test
+    public void resetMenuData_null_throwsNullPointerException() {
+        thrown.expect(NullPointerException.class);
+        addressBook.resetMenuData(null);
+    }
+
+    @Test
+    public void resetMenuData_withValidReadOnlyAddressBook_replacesMenuDataOnly() {
+        AddressBook newData = getTypicalAddressBookWithItemOnly();
+        addressBook.resetMenuData(newData);
+        assertEquals(newData, addressBook);
+    }
+
+    @Test
+    public void sortMenuByName_addressBookModified() {
+        AddressBook sortedByName = new AddressBookBuilder().withItem(BEEF_BURGER).withItem(APPLE_JUICE).build();
+        sortedByName.sortMenu(SortMethod.NAME);
+        addressBookWithPersons = new AddressBookBuilder().withItem(APPLE_JUICE).withItem(BEEF_BURGER).build();
+        assertEquals(sortedByName, addressBookWithPersons);
+    }
+
+    @Test
+    public void sortMenuByPrice_addressBookModified() {
+        AddressBook sortedByPrice = new AddressBookBuilder().withItem(BEEF_BURGER).withItem(APPLE_JUICE).build();
+        sortedByPrice.sortMenu(SortMethod.PRICE);
+        addressBookWithPersons = new AddressBookBuilder().withItem(APPLE_JUICE).withItem(BEEF_BURGER).build();
+        assertEquals(sortedByPrice, addressBookWithPersons);
     }
 
     @Test

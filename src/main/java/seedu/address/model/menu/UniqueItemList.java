@@ -3,6 +3,7 @@ package seedu.address.model.menu;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
 
@@ -93,6 +94,21 @@ public class UniqueItemList implements Iterable<Item> {
         }
 
         internalList.setAll(items);
+    }
+
+    /**
+     * Sorts the contents of this list by name in alphabetical order.
+     */
+    public void sortItemsByName() {
+        FXCollections.sort(internalList, (item, otherItem) -> item.getName().toString()
+                .compareToIgnoreCase(otherItem.getName().toString()));
+    }
+
+    /**
+     * Sorts the contents of this list by price in ascending order.
+     */
+    public void sortItemsByPrice() {
+        FXCollections.sort(internalList, Comparator.comparingDouble(item -> item.getPrice().getValue()));
     }
 
     /**
