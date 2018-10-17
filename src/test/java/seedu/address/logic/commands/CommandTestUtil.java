@@ -170,7 +170,7 @@ public class CommandTestUtil {
 
     /** For Reservation */
     public static final String VALID_RESERVATION_NAME_ANDREW = "Andrew";
-    public static final String VALID_RESERVATION_NAME_BILLY = "Billy";
+    public static final String VALID_RESERVATION_NAME_BILLY = "Billy Bong";
     public static final String VALID_RESERVATION_PAX_ANDREW = "2";
     public static final String VALID_RESERVATION_PAX_BILLY = "4";
     public static final String VALID_RESERVATION_DATETIME_ANDREW = "2018-12-03T12:00:00";
