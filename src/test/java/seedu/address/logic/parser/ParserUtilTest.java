@@ -314,4 +314,37 @@ public class ParserUtilTest {
         assertEquals(expectedMin, ParserUtil.parseMinimumUnit(minWithWhitespace));
     }
 
+    @Test
+    public void parseIndexOrName_null_throwsNullPointerException() {
+        Assert.assertThrows(NullPointerException.class, () -> ParserUtil.parseIndexOrIngredientName(null));
+    }
+
+    @Test
+    public void parseIndexOrName_invalidIndexValue_throwsParseException() {
+        Assert.assertThrows(ParseException.class, () -> ParserUtil.parseIndexOrIngredientName(
+                Long.toString(Integer.MAX_VALUE + 1)));
+    }
+
+    @Test
+    public void parseIndexOrName_invalidNameValue_throwsParseException() {
+        Assert.assertThrows(ParseException.class, () -> ParserUtil.parseIndexOrIngredientName("Chicken "
+                + "Thigh+"));
+    }
+
+    @Test
+    public void parseIndexOrName_validIndexValue_returnsIndex() throws Exception {
+        assertEquals(INDEX_FIRST, ParserUtil.parseIndexOrIngredientName("1"));
+        assertEquals(INDEX_FIRST, ParserUtil.parseIndexOrIngredientName("    1    "));
+    }
+
+    @Test
+    public void parseIndexOrName_validValue_returnsTrimmedMin() throws Exception {
+        String validName = VALID_INGREDIENT_NAME;
+        IngredientName expectedName = new IngredientName(VALID_INGREDIENT_NAME);
+        assertEquals(expectedName, ParserUtil.parseIndexOrIngredientName(validName));
+        String nameWithWhitespace = WHITESPACE + VALID_INGREDIENT_NAME + WHITESPACE;
+        expectedName = new IngredientName(VALID_INGREDIENT_NAME);
+        assertEquals(expectedName, ParserUtil.parseIndexOrIngredientName(nameWithWhitespace));
+    }
+
 }

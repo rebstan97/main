@@ -24,9 +24,9 @@ import seedu.address.model.ingredient.Ingredient;
 
 /**
  * Contains integration tests (interaction with the Model, UndoCommand and RedoCommand) and unit tests for {@code
- * DeleteIngredientCommand}.
+ * DeleteIngredientByIndexCommand}.
  */
-public class DeleteIngredientCommandTest {
+public class DeleteIngredientByIndexCommandTest {
 
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
     private CommandHistory commandHistory = new CommandHistory();
@@ -34,9 +34,9 @@ public class DeleteIngredientCommandTest {
     @Test
     public void execute_validIndexUnfilteredList_success() {
         Ingredient ingredientToDelete = model.getFilteredIngredientList().get(INDEX_FIRST.getZeroBased());
-        DeleteIngredientCommand deleteCommand = new DeleteIngredientCommand(INDEX_FIRST);
+        DeleteIngredientByIndexCommand deleteCommand = new DeleteIngredientByIndexCommand(INDEX_FIRST);
 
-        String expectedMessage = String.format(DeleteIngredientCommand.MESSAGE_DELETE_INGREDIENT_SUCCESS,
+        String expectedMessage = String.format(DeleteIngredientByIndexCommand.MESSAGE_DELETE_INGREDIENT_SUCCESS,
                 ingredientToDelete);
 
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
@@ -49,7 +49,7 @@ public class DeleteIngredientCommandTest {
     @Test
     public void execute_invalidIndexUnfilteredList_throwsCommandException() {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredIngredientList().size() + 1);
-        DeleteIngredientCommand deleteCommand = new DeleteIngredientCommand(outOfBoundIndex);
+        DeleteIngredientByIndexCommand deleteCommand = new DeleteIngredientByIndexCommand(outOfBoundIndex);
 
         assertCommandFailure(deleteCommand, model, commandHistory,
                 Messages.MESSAGE_INVALID_INGREDIENT_DISPLAYED_INDEX);
@@ -60,9 +60,9 @@ public class DeleteIngredientCommandTest {
         showIngredientAtIndex(model, INDEX_FIRST);
 
         Ingredient ingredientToDelete = model.getFilteredIngredientList().get(INDEX_FIRST.getZeroBased());
-        DeleteIngredientCommand deleteCommand = new DeleteIngredientCommand(INDEX_FIRST);
+        DeleteIngredientByIndexCommand deleteCommand = new DeleteIngredientByIndexCommand(INDEX_FIRST);
 
-        String expectedMessage = String.format(DeleteIngredientCommand.MESSAGE_DELETE_INGREDIENT_SUCCESS,
+        String expectedMessage = String.format(DeleteIngredientByIndexCommand.MESSAGE_DELETE_INGREDIENT_SUCCESS,
                 ingredientToDelete);
 
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
@@ -81,7 +81,7 @@ public class DeleteIngredientCommandTest {
         // ensures that outOfBoundIndex is still in bounds of address book list
         assertTrue(outOfBoundIndex.getZeroBased() < model.getAddressBook().getIngredientList().size());
 
-        DeleteIngredientCommand deleteCommand = new DeleteIngredientCommand(outOfBoundIndex);
+        DeleteIngredientByIndexCommand deleteCommand = new DeleteIngredientByIndexCommand(outOfBoundIndex);
 
         assertCommandFailure(deleteCommand, model, commandHistory,
                 Messages.MESSAGE_INVALID_INGREDIENT_DISPLAYED_INDEX);
@@ -90,7 +90,7 @@ public class DeleteIngredientCommandTest {
     @Test
     public void executeUndoRedo_validIndexUnfilteredList_success() throws Exception {
         Ingredient ingredientToDelete = model.getFilteredIngredientList().get(INDEX_FIRST.getZeroBased());
-        DeleteIngredientCommand deleteCommand = new DeleteIngredientCommand(INDEX_FIRST);
+        DeleteIngredientByIndexCommand deleteCommand = new DeleteIngredientByIndexCommand(INDEX_FIRST);
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         expectedModel.deleteIngredient(ingredientToDelete);
         expectedModel.commitAddressBook();
@@ -110,7 +110,7 @@ public class DeleteIngredientCommandTest {
     @Test
     public void executeUndoRedo_invalidIndexUnfilteredList_failure() {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredIngredientList().size() + 1);
-        DeleteIngredientCommand deleteCommand = new DeleteIngredientCommand(outOfBoundIndex);
+        DeleteIngredientByIndexCommand deleteCommand = new DeleteIngredientByIndexCommand(outOfBoundIndex);
 
         // execution failed -> address book state not added into model
         assertCommandFailure(deleteCommand, model, commandHistory, Messages.MESSAGE_INVALID_INGREDIENT_DISPLAYED_INDEX);
@@ -128,7 +128,7 @@ public class DeleteIngredientCommandTest {
      */
     @Test
     public void executeUndoRedo_validIndexFilteredList_sameIngredientDeleted() throws Exception {
-        DeleteIngredientCommand deleteCommand = new DeleteIngredientCommand(INDEX_FIRST);
+        DeleteIngredientByIndexCommand deleteCommand = new DeleteIngredientByIndexCommand(INDEX_FIRST);
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
 
         showIngredientAtIndex(model, INDEX_SECOND);
@@ -152,14 +152,14 @@ public class DeleteIngredientCommandTest {
 
     @Test
     public void equals() {
-        DeleteIngredientCommand deleteFirstCommand = new DeleteIngredientCommand(INDEX_FIRST);
-        DeleteIngredientCommand deleteSecondCommand = new DeleteIngredientCommand(INDEX_SECOND);
+        DeleteIngredientByIndexCommand deleteFirstCommand = new DeleteIngredientByIndexCommand(INDEX_FIRST);
+        DeleteIngredientByIndexCommand deleteSecondCommand = new DeleteIngredientByIndexCommand(INDEX_SECOND);
 
         // same object -> returns true
         assertTrue(deleteFirstCommand.equals(deleteFirstCommand));
 
         // same values -> returns true
-        DeleteIngredientCommand deleteFirstCommandCopy = new DeleteIngredientCommand(INDEX_FIRST);
+        DeleteIngredientByIndexCommand deleteFirstCommandCopy = new DeleteIngredientByIndexCommand(INDEX_FIRST);
         assertTrue(deleteFirstCommand.equals(deleteFirstCommandCopy));
 
         // different types -> returns false

@@ -1,9 +1,11 @@
 package seedu.address.logic.parser.ingredients;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.parser.ParserUtil.MESSAGE_NOT_INDEX_OR_NAME;
 
 import seedu.address.commons.core.index.Index;
-import seedu.address.logic.commands.CommandResult;
+import seedu.address.logic.commands.ingredients.DeleteIngredientByIndexCommand;
+import seedu.address.logic.commands.ingredients.DeleteIngredientByNameCommand;
 import seedu.address.logic.commands.ingredients.DeleteIngredientCommand;
 import seedu.address.logic.parser.Parser;
 import seedu.address.logic.parser.ParserUtil;
@@ -22,23 +24,22 @@ public class DeleteIngredientCommandParser implements Parser<DeleteIngredientCom
      */
     public DeleteIngredientCommand parse(String args) throws ParseException {
 
-        if (args.isEmpty()) {
+        if (args.trim().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                     DeleteIngredientCommand.MESSAGE_USAGE));
         }
 
         Object indexOrName = ParserUtil.parseIndexOrIngredientName(args);
-        DeleteIngredientCommand deleteCommand = new DeleteIngredientCommand();
 
         if (indexOrName instanceof Index) {
-            deleteCommand = new DeleteIngredientCommand((Index) indexOrName);
+            return new DeleteIngredientByIndexCommand((Index) indexOrName);
         }
 
         if (indexOrName instanceof IngredientName) {
-            deleteCommand = new DeleteIngredientCommand((IngredientName) indexOrName);
+            return new DeleteIngredientByNameCommand((IngredientName) indexOrName);
         }
 
-        return deleteCommand;
+        throw new ParseException(MESSAGE_NOT_INDEX_OR_NAME);
     }
 
 }
