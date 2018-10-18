@@ -22,6 +22,14 @@ public class Account {
         this.password = password;
     }
 
+    /**
+     * Only username is required.
+     */
+    public Account(Username username) {
+        requireAllNonNull(username);
+        this.username = username;
+    }
+
     public Username getUsername() {
         return username;
     }

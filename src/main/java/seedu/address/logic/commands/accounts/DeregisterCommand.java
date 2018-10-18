@@ -42,7 +42,9 @@ public class DeregisterCommand extends Command {
             throw new CommandException(MESSAGE_USERNAME_NOT_FOUND);
         }
 
-        model.removeAccount(account);
+        Account retrievedAccount = model.getAccount(account);
+
+        model.removeAccount(retrievedAccount);
         model.commitAddressBook();
         return new CommandResult(String.format(MESSAGE_SUCCESS, account));
     }
@@ -51,6 +53,6 @@ public class DeregisterCommand extends Command {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof DeregisterCommand // instanceof handles nulls
-                && account.equals(((DeregisterCommand) other).account));
+                    && account.equals(((DeregisterCommand) other).account));
     }
 }
