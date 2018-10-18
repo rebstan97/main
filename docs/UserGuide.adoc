@@ -519,7 +519,7 @@ Format: `select-item INDEX`
 
 Examples:
 
-* `list` +
+* `list-items` +
 `select-item 2` +
 Selects the 2nd item in the menu.
 * `find Burger` +
