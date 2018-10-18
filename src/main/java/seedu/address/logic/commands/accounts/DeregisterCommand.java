@@ -53,6 +53,6 @@ public class DeregisterCommand extends Command {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof DeregisterCommand // instanceof handles nulls
-                    && account.equals(((DeregisterCommand) other).account));
+                    && account.getUsername().equals(((DeregisterCommand) other).account.getUsername()));
     }
 }
