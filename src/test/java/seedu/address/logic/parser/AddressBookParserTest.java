@@ -6,8 +6,10 @@ import static org.junit.Assert.assertTrue;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DATE_RECORD_ONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ID;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_REMARK;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST;
+import static seedu.address.testutil.accounts.TypicalAccounts.DEMO_ONE;
 
 import java.util.Arrays;
 import java.util.List;
@@ -31,6 +33,7 @@ import seedu.address.logic.commands.RedoCommand;
 import seedu.address.logic.commands.RemarkCommand;
 import seedu.address.logic.commands.SelectCommand;
 import seedu.address.logic.commands.UndoCommand;
+import seedu.address.logic.commands.accounts.DeregisterCommand;
 import seedu.address.logic.commands.accounts.LoginCommand;
 import seedu.address.logic.commands.accounts.LogoutCommand;
 import seedu.address.logic.commands.accounts.RegisterCommand;
@@ -57,7 +60,6 @@ import seedu.address.logic.commands.sales.DisplaySalesCommand;
 import seedu.address.logic.commands.sales.EditSalesCommand;
 import seedu.address.logic.commands.sales.EditSalesCommand.EditRecordDescriptor;
 import seedu.address.logic.commands.sales.RecordSalesCommand;
-
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.accounts.Account;
 import seedu.address.model.ingredient.Ingredient;
@@ -271,10 +273,27 @@ public class AddressBookParserTest {
     }
 
     @Test
-    public void parseCommand_createAccount() throws ParseException {
+    public void parseCommand_register() throws ParseException {
         Account account = new AccountBuilder().build();
         RegisterCommand command = (RegisterCommand) parser.parseCommand(AccountUtil.getCreateCommand(account));
         assertEquals(new RegisterCommand(account), command);
+
+        // alias test
+        command = (RegisterCommand) parser.parseCommand(AccountUtil.getCreateCommand(account));
+        assertEquals(new RegisterCommand(account), command);
+    }
+
+    @Test
+    public void parseCommand_deregister() throws ParseException {
+        Account account = new Account(DEMO_ONE.getUsername());
+        DeregisterCommand command = (DeregisterCommand) parser.parseCommand(DeregisterCommand.COMMAND_WORD
+                + " " + PREFIX_ID + account.getUsername().toString());
+        assertEquals(new DeregisterCommand(account), command);
+
+        // alias test
+        command = (DeregisterCommand) parser.parseCommand(DeregisterCommand.COMMAND_ALIAS
+                + " " + PREFIX_ID + account.getUsername().toString());
+        assertEquals(new DeregisterCommand(account), command);
     }
 
     @Test
