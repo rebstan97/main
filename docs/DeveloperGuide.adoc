@@ -339,6 +339,48 @@ image::UndoRedoActivityDiagram.png[width="650"]
 ** Cons: Requires dealing with commands that have already been undone: We must remember to skip these commands. Violates Single Responsibility Principle and Separation of Concerns as `HistoryManager` now needs to do two different things.
 // end::undoredo[]
 
+// tag::deleteingredient[]
+===  Delete Ingredient feature
+==== Current Implementation
+
+The delete ingredient mechanism is facilitated by `DeleteIngredientCommand`. It is implemented as an abstract class
+with the following abstract methods:
+
+* `DeleteIngredientCommand#execute()` – Removes a specified ingredient from the list
+* `DeleteIngredientCommand#equals()` – Checks if two `DeleteIngredientCommand` instances have the same attributes
+
+`DeleteIngredientByIndexCommand` and `DeleteIngredientByNameCommand` extends `DeleteIngredientCommand` and implement
+their own behaviour for these methods.
+
+The following sequence diagrams illustrate how the delete operation works.
+
+* Diagram 1: When user enters `delete-ingredient 1`
+
+image::DeleteIngByIndexSequenceDiagram.png[width="800"]
+
+Diagram 2: When user enters `delete-ingredient apple`
+
+image::DeleteIngByNameSequenceDiagram.png[width="800"]
+
+==== Design Considerations
+
+===== Aspect: Implementation of delete ingredient command
+
+* **Alternative 1 (current choice):** Separate classes to handle deleting by index and deleting by name.
+** Pros:
+*** Allows different attributes and method implementation for each class.
+*** Complies to the Single Responsibility Principle.
+** Cons:
+*** Tight coupling between `DeleteIngredientCommand` and the inheriting classes
+* **Alternative 2:** Single class to handle deleting by both index and name.
+** Pros:
+*** Less coupling since the methods related to the delete ingredient command are confined to a single class.
+** Cons:
+*** Two attributes are required, but only one has a value while the other has to be set to null. This makes the equals() method difficult to implement.
+*** Violates the Single Responsibility Principle
+
+// end::deleteingredient[]
+
 // tag::dataencryption[]
 === [Proposed] Data Encryption
 
