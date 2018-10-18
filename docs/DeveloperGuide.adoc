@@ -835,9 +835,9 @@ Steps 2a1-2a2 are repeated until an ingredient name which does not exist is ente
 Use case resumes at step 3.
 
 [none]
-* 2b. The user enters an invalid command or invalid command format.
+* 2b. The user enters an invalid command format.
 [none]
-** 2b1. App returns a message telling user that the command or command format is invalid.
+** 2b1. App returns a message telling user that the command format is invalid.
 ** 2b2. User requests to add ingredient again.
 +
 Steps 2b1-2b2 are repeated until a valid command format is entered.
@@ -884,9 +884,9 @@ Steps 3b1-3b2 are repeated until an existing ingredient name is entered.
 Use case resumes at step 4.
 
 [none]
-* 3c. The user enters an invalid command or invalid command format.
+* 3c. The user enters an invalid format.
 [none]
-** 3c1. App returns a message telling user that the command or command format is invalid.
+** 3c1. App returns a message telling user that the command format is invalid.
 ** 3c2. User requests to add ingredient again.
 +
 Steps 3c1-3c2 are repeated until a valid command format is entered.
