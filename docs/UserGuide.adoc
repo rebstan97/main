@@ -214,7 +214,7 @@ Format: `history`
 
 [NOTE]
 ====
-Pressing the kbd:[&uarr;] and kbd:[&darr;] arrows will display the previous and next input respectively in the command box.
+Pressing the kbd:[&uarr;] and kbd:[&darr;] arrows will display the previous and next input respectively in the command box
 ====
 
 // tag::undoredo[]
@@ -225,7 +225,7 @@ Format: `undo`
 
 [NOTE]
 ====
-Undoable commands: those commands that modify the address book's content (`add`, `delete`, `edit` and `clear`).
+Undoable commands: those commands that modify the address book's content (`add`, `delete`, `edit` and `clear`)
 ====
 
 Examples:
@@ -306,10 +306,10 @@ Examples:
 * `register id/azhikai pw/p@55w0rd`
 * `reg id/azhikai pw/p@55w0rd`
 
-=== Editing user account: `edit-acc` or `ea`
+=== Editing user account: `edit-account` or `ea`
 
 Edits an existing user account. +
-Format: `edit-acc id/USERNAME [nid/NEW_USERNAME] [pw/NEW_PASSWORD]`
+Format: `edit-account id/USERNAME [nid/NEW_USERNAME] [pw/NEW_PASSWORD]`
 
 ****
 * The account's data will remain intact if none of the optional fields are provided.
@@ -332,6 +332,16 @@ Examples:
 
 * `deregister id/azhikai`
 * `dereg id/azhikai`
+
+=== List user accounts: `list-accounts` or `la`
+
+List all user accounts. +
+Format: `list-accounts`
+
+[IMPORTANT]
+====
+Password is masked by default and should never be shown
+====
 
 === User roles `[coming in v2.0]`
 With user role, each user will only be able to execute certain commands, other than the administrator and/or
