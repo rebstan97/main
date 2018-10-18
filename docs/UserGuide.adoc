@@ -679,7 +679,7 @@ Examples:
 * `edit-reservation 2 dt/2018-12-31T18:00:00` +
 Edits the time of the 2nd reservation in the list to `31st Dec 2018, 1800` hrs.
 
-* `edit-reservation 6 n/ONG p/4`  +
+* `edit-reservation 6 n/ONG px/4`  +
 Edits the name and pax of the 6th reservation to `ONG` and `4` respectively.
 
 === Sorting reservations list: `sort-reservations` or `sr`
@@ -855,8 +855,8 @@ contains the data of your previous *MeNUS* folder.
 |*Today's special* |`today-special` |`today-special`
 |*Export menu* |`export-menu fp/FILE_PATH fn/FILE_NAME` |`export-menu fp/backup/ fn/menu.txt`
 |*Import menu* |`import-menu fp/FILE_PATH fn/FILE_NAME` |`import-menu fp/backup/ fn/menu.txt`
-|*Add reservation* |`add-reservation n/NAME p/PAX d/DATE t/TIME` |`add-reservation n/TAN p/4 d/21072018 t/1300`
-|*Edit reservation* |`edit-reservation INDEX [n/NAME] [p/PAX] [d/DATE] [t/TIME]` |`edit-reservation 2 t/1700`
+|*Add reservation* |`add-reservation n/NAME px/PAX dt/DATETIME` |`add-reservation n/TAN px/4 dt/2018-07-21:10:00:00`
+|*Edit reservation* |`edit-reservation INDEX [n/NAME] [px/PAX] [dt/DATETIME]` |`edit-reservation 2 px/2`
 |*Delete reservation* |`delete-reservation INDEX` |`delete-reservations 2`
 |*List reservation* |`list-reservations` |`list-reservations`
 |*Sort reservation* |`sort-reservations` |`sort-reservations`
