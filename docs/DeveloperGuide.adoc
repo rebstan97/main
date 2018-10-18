@@ -342,15 +342,35 @@ image::UndoRedoActivityDiagram.png[width="650"]
 
 // tag::menu[]
 === Menu Management feature
-The menu management feature extends `MeNuS` with a menu, stored internally as an `items`.
-It implements the following operations:
+Menu management feature extends `MeNuS` with a menu and provides the users with the ability to add items to the
+menu, edit items and remove items from the menu.
 
-* `UniqueItemList#add(Item toAdd)` -- Adds an item to the list. The item must not already exist in the list.
-* `UniqueItemList#setItem(Item target, Item editedItem)` -- Replaces the target item with the editedItem. Target item
- must be in the list and editItem must not be the same as another existing item in the list.
-* `UniqueItemList#remove(Item toRemove)` -- Removes the equivalent item from the list. The item must exist in the list.
-* `UniqueItemList#sortItemsByName()` -- Sorts the contents of this list by name in alphabetical order.
-* `UniqueItemList#sortItemsByPrice()` -- Sorts the contents of this list by price in ascending order.
+==== Current Implementation
+The menu is stored internally as `items`, which is an `UniqueItemList` object that contains a list of `Item` object.
+Each `Item` object consists of `Name` and `Price`.
+The menu management feature implements the following operations:
+
+* `add-item` command -- Adds an item to the menu. The item must not already exist in the menu.
+* `edit-item` command -- Replaces the target item with the editedItem. Target item
+ must be in the menu and editedItem must not be the same as another existing item in the menu.
+* `delete-item` command -- Removes the equivalent item from the menu. The item must exist in the menu.
+* `list-items` command -- Lists all the items in the menu.
+* `select-item` command -- Selects an item in the menu and loads the page of the selected item.
+* `sort-menu` -- Sorts the menu by name or price. The user must specify the sorting method.
+* `find-item` command -- Finds items whose names contain any of the given keywords.
+* `filter-menu` command -- Finds items whose tags contain any of the given keywords.
+* `today-special` command -- Finds items whose tags contain the DAY_OF_THE_WEEK.
+
+==== `add-item` Command
+The `add-item` command is facilitated by `AddItemCommand` and `AddItemCommandParser`. `add-item` command takes in
+user input for `Name`, `Price` and `Tag`(optional). `AddItemCommandParser` will parse the user input and checks if
+the input is valid. If the input is not valid, it will throw a `ParseException`. If the input is valid, it will
+constructs an `Item` object and create `AddItemCommand` object.
+
+The `AddItemCommand` will indirectly call the `add(Item toAdd)` method of `UniqueItemList` and the adds the item.
+After it adds the item, it will save the current state for undo/redo. 
+
+
 // end::menu[]
 
 // tag::dataencryption[]
