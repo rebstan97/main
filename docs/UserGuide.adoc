@@ -55,7 +55,7 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 === Menus
 _To be completed by Yi Can_
 
-=== Inventory
+=== Ingredients
 _To be completed by Rebecca_
 
 === Sales
@@ -331,7 +331,7 @@ Examples:
 With user role, each user will only be able to execute certain commands, other than the administrator and/or
 restaurant owner who is able to execute all commands.
 
-=== Adding an ingredient: `add-ingredient`
+=== Adding an ingredient: `add-ingredient` or `add-ing`
 
 Adds a new ingredient to the ingredient list. +
 Format: `add-ingredient n/INGREDIENT_NAME t/UNIT_TYPE p/PRICE_PER_UNIT m/MINIMUM`
@@ -344,17 +344,17 @@ Examples:
 
 * `add-ingredient n/cod fish t/kilogram p/20 m/1`
 
-=== Listing all ingredients : `list-ingredients`
+=== Listing all ingredients : `list-ingredients` or `list-ing`
 
 Shows a list of all ingredients in the ingredient list. +
 Format: `list-ingredients`
 
-=== Listing ingredients with low stock count: `list-ingredients-low`
+=== Listing ingredients with low stock count: `low-stock`
 
 Shows a list of ingredients that are low in stock count. +
-Format: `list-ingredients-low`
+Format: `low-stock`
 
-=== Removing an ingredient: `delete-ingredient`
+=== Removing an ingredient: `delete-ingredient` or `delete-ing`
 
 Deletes the specified ingredient from the ingredient list. +
 Format: `delete-ingredient INDEX` or `delete-ingredient NAME`
@@ -377,7 +377,7 @@ Deletes the 1st ingredient in the ingredient list.
 `list-ingredients` +
 Deletes the ingredient `cod fish` from the ingredient list.
 
-=== Editing an ingredient: `edit-ingredient`
+=== Editing an ingredient: `edit-ingredient` or `edit-ing`
 
 Edits an ingredient in the ingredient list. +
 Format: `edit-ingredient INDEX [n/INGREDIENT_NAME] [t/UNIT_TYPE] [p/PRICE_PER_UNIT] [m/MINIMUM]` or `edit-ingredient NAME [n/INGREDIENT_NAME] [t/UNIT_TYPE] [p/PRICE_PER_UNIT] [m/MINIMUM]`
