@@ -18,22 +18,22 @@ public class TypicalReservations {
     public static final Reservation BILLY = new ReservationBuilder().withName("Billy")
             .withPax("4")
             .withDateTime("2018-12-05T18:00:00").build();
-    public static final Reservation CARL = new ReservationBuilder().withName("Carl Kurz")
+    public static final Reservation CARELL = new ReservationBuilder().withName("Carell")
             .withPax("1")
             .withDateTime("2018-10-03T15:00:00").build();
-    public static final Reservation DANIEL = new ReservationBuilder().withName("Daniel Meier")
+    public static final Reservation DANNY = new ReservationBuilder().withName("Danny Phantom")
             .withPax("3")
-            .withDateTime("2018-10-04T12:00:00")
+            .withDateTime("2018-09-13T12:00:00")
             .withTags("driving").build();
-    public static final Reservation ELLE = new ReservationBuilder().withName("Elle Meyer")
+    public static final Reservation ELSA = new ReservationBuilder().withName("Elsa")
             .withPax("2")
-            .withDateTime("2018-10-04T13:00:00").build();
-    public static final Reservation FIONA = new ReservationBuilder().withName("Fiona Kunz")
+            .withDateTime("2018-10-31T13:00:00").build();
+    public static final Reservation FROPPY = new ReservationBuilder().withName("Froppy")
             .withPax("8")
-            .withDateTime("2018-10-05T18:00:00").build();
-    public static final Reservation GEORGE = new ReservationBuilder().withName("George Best")
+            .withDateTime("2018-10-30T18:00:00").build();
+    public static final Reservation GUILE = new ReservationBuilder().withName("Guile")
             .withPax("2")
-            .withDateTime("2018-10-05T19:00:00").build();
+            .withDateTime("2018-10-23T19:00:00").build();
 
     public static final String KEYWORD_MATCHING_MEIER = "Meier"; // A keyword that matches MEIER
 
@@ -51,6 +51,6 @@ public class TypicalReservations {
     }
 
     public static List<Reservation> getTypicalReservations() {
-        return new ArrayList<>(Arrays.asList(ANDREW, BILLY, CARL, DANIEL, ELLE, FIONA, GEORGE));
+        return new ArrayList<>(Arrays.asList(ANDREW, BILLY, CARELL, DANNY, ELSA, FROPPY, GUILE));
     }
 }
