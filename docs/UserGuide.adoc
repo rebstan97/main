@@ -17,8 +17,7 @@ endif::[]
 By: `Team CS2103-AY1819S1-F10-4`      Since: `Sep 2018`      Licence: `MIT`
 
 == Introduction
-link:{repoURL}[MeNUS] empowers you and your employees in improving the Management(M) and its efficiency(e) of your
-restaurants in NUS.
+link:{repoURL}[MeNUS] empowers you to improve the Management(M) and efficiency(e) of your restaurants in NUS.
 
 As long as you feel like your restaurants are using too many overcomplicated and expensive systems,
 link:{repoURL}[MeNUS] is here for you!
@@ -26,14 +25,22 @@ link:{repoURL}[MeNUS] is here for you!
 
 Introducing link:{repoURL}[MeNUS], a revolutionary restaurant management desktop application that is *optimized for
 users who prefer to work with a Command Line Interface (CLI) while still having
-the benefits of a Graphical User Interface (GUI)*. If you can type fast, MeNUS allows you to manage all aspects of
-your restaurants from a single application -- staff, menu, inventory, sales and bookings management!
+the benefits of a Graphical User Interface (GUI)*. If you can type fast, MeNUS allows you to manage aspects of your
+eatery -- menu, ingredient, sales and reservations management -- all from a single location !
 
 Let's get started!
 
 == Quick Start
 
 .  Ensure you have Java version `9` or later installed in your Computer.
+
+[NOTE]
+====
+* If you are unsure which Java version is installed, you may refer to this link:https://www.java
+.com/en/download/help/version_manual.xml[link].
+* You may install the current version of Java link:https://www.oracle.com/technetwork/java/javase/downloads/index.html[here].
+====
+
 .  Download the latest `menus.jar` link:https://github.com/CS2103-AY1819S1-F10-4/main/releases[here].
 .  Copy the file to the folder you want to use as the home folder.
 .  Double-click the file to start the app. The GUI should appear in a few seconds.
@@ -53,45 +60,45 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 
 [[Components]]
 == Components
-*MeNUS* consists of five main components: menus, inventory, sales and bookings management.
+*MeNUS* consists of five main components: account, menu, ingredient, sales and reservations management.
 
 === Accounts
 * You can create accounts for your employees to manage the system on your behalf.
 
 === Menus
-_To be completed by Yi Can_
+* You can manage the menu by adding, editing or remove items from the menu.
 
 === Ingredients
-_To be completed by Rebecca_
+* You can keep track of the ingredient availability in your restaurant.
 
 === Sales
-_To be completed by Kai Jun_
+* You can record sales volume of an item and edit/delete past sales records. You can also generate and display the
+sales report for a specific day.
 
-=== Bookings
-_To be completed by Ming Xian_
-
+=== Reservations
+* You can keep track of customer reservations on the system.
 
 [[Features]]
 == Key Features
 === Convenience
-It is an ultimate All-In-One application that will provide you with the utmost convenience to manage your
+MeNUS is an ultimate All-In-One application that will provide you with the utmost convenience you need to manage your
 restaurants in NUS.
 
-* Export data to `.xml` (default) or Excel file `[coming in v2.0]`.
+* Exporting data to `.xml` (default) or Excel file `[coming in v2.0]`.
 
 === Security
 Security is key to a business's success. *MeNUS* ensures the security of your restaurant's data by:
 
-* Encrypting all restaurant data using AES-265. `[coming in v2.0]`
+* Encrypting all restaurant data using AES-256. `[coming in v2.0]`
 * Securing account passwords using bcrypt.
-* User needs to be authenticated before they can run any commands.
-* Login attempts, both success and failure are logged.
+* Authenticating users before they can run any commands.
+* Logging both successful and failed login attempts.
 
 === Efficiency
 Time is money. *MeNUS* ensures that the application will:
 
-* Load within 5 seconds.
-* Execute command within split of a second and updating the GUI almost instantaneously.
+* Loading within 5 seconds.
+* Executing commands within split of a second and updating the GUI almost instantaneously.
 
 [[Commands]]
 == Commands
@@ -535,7 +542,7 @@ Format: `select-item INDEX`
 
 Examples:
 
-* `list` +
+* `list-items` +
 `select-item 2` +
 Selects the 2nd item in the menu.
 * `find Burger` +
@@ -631,7 +638,7 @@ Discounts the 1st item in the results of the `find` command.
 
 === Today's specials : `today-special` or `ts`
 
-Lists the items that have been tagged with the particular day in the menu. +
+Lists the items that have been tagged with `DAY_OF_THE_WEEK` in the menu. +
 Format: `today-special`
 
 Examples:
@@ -660,29 +667,32 @@ Examples:
 * `import-menu f/test/ n/menu.txt` +
 Import the menu.txt from test folder to replace current menu.
 
-=== Adding a reservation: `add-reservation`
+=== Support for multiple menus `[coming in v2.0]`
+User will be able to manage multiple menus without the need of exporting and importing for different version of the
+current menu.
+
+=== Adding a reservation: `add-reservation` or `ar`
 
 Adds a new reservation to the reservations list. +
-Format: `add-reservation n/NAME p/PAX d/DATE t/TIME`
+Format: `add-reservation n/NAME px/PAX dt/DATETIME`
 
 ****
-* Date is entered in DDMMYYYY format.
-* Time is entered in Military Time.
+* DateTime is entered in yyyy-mm-dd**T**hh:mm:ss format.
 ****
 
 Examples:
 
-* `add-reservation n/TAN p/4 d/21072018 t/1300`
+* `add-reservation n/TAN px/4 dt/2018-07-21T10:00:00`
 
-=== Listing all reservations : `list-reservations`
+=== Listing all reservations : `list-reservations` or `lr`
 
 Shows a list of all reservations in the reservations list. +
 Format: `list-reservations`
 
-=== Editing a reservation: `edit-reservation`
+=== Editing a reservation: `edit-reservation` or `er`
 
 Edits an reservation in the reservation list. +
-Format: `edit-reservation INDEX [n/NAME] [p/PAX] [d/DATE] [t/TIME]`
+Format: `edit-reservation INDEX [n/NAME] [px/PAX] [dt/DATETIME]`
 
 ****
 * Edits the reservation at the specified `INDEX`. The index refers to the index number shown in the
@@ -693,18 +703,18 @@ displayed reservations list. The index *must be a positive integer* 1, 2, 3, ...
 
 Examples:
 
-* `edit-reservation 2 t/1700` +
-Edits the time of the 2nd reservation in the list to `1700` hrs.
+* `edit-reservation 2 dt/2018-12-31T18:00:00` +
+Edits the time of the 2nd reservation in the list to `31st Dec 2018, 1800` hrs.
 
-* `edit-reservation 6 n/ONG p/4`  +
+* `edit-reservation 6 n/ONG px/4`  +
 Edits the name and pax of the 6th reservation to `ONG` and `4` respectively.
 
-=== Sorting reservations list: `sort-reservations`
+=== Sorting reservations list: `sort-reservations` or `sr`
 
 Sorts the reservations list by Date/Time. +
 Format: `sort-reservations`
 
-=== Deleting a reservation: `delete-reservation`
+=== Deleting a reservation: `delete-reservation` or `dr`
 
 Deletes the specified reservation from the reservations list. +
 Format: `delete-reservation INDEX`
@@ -722,107 +732,92 @@ Examples:
 `list-ingredients` +
 Deletes the 2nd reservation in the reservations list.
 
-=== Recording daily sales volume of a menu item: `record-sales`
+=== Recording sales volume of an item: `record-sales` or `rs`
 
-Records the quantity of a menu item sold within the specified day into the sales book. +
+Records the quantity of an item sold within a specific day into the sales list. +
 Format: `record-sales d/DATE n/ITEM_NAME q/QUANTITY SOLD p/ITEM_PRICE`
 
 ****
 * DATE must be written in the DD-MM-YYYY format.
-* Both DATE and ITEM_NAME cannot be same as another record in the sales book.
+* DATE must exist in the calendar.
+* Both DATE and ITEM_NAME cannot be same as another record in the sales list.
 ****
 
 Examples:
 
 * `record-sales d/25-09-2018 n/Fried Rice q/35 p/5.50`
 
-=== Display sales report: `display-sales`
+=== Display sales report: `display-sales` or `dis`
 
-Displays the sales report for all days. +
-Format: `display-sales` +
-OR +
-Displays the sales report for the specified day. +
+Generate and display the sales report for a specific day. +
 Format: `display-sales DATE`
 
 ****
 * DATE must be written in the DD-MM-YYYY format.
+* DATE must exist in the calendar.
 ****
 
 Examples:
 
-* `display-sales` +
-Displays the sales report for all days. +
 * `display-sales 25-09-2018` +
 Displays the sales report dated 25-09-2018.
 
 
-=== Deleting a sales record: `delete-sales`
+=== Deleting a sales record: `delete-sales` or `des`
 
-Deletes the sales record with the specified date and item name. +
-Format: `delete-sales DATE ITEM_NAME` / `delete-sales ITEM_INDEX`
+Deletes the sales record identified by the index, or by the date and item name. +
+Format: `delete-sales ITEM_INDEX` / `delete-sales DATE ITEM_NAME`
 
 ****
 * Deletes the record at the specified `ITEM_INDEX`.
-* The item index refers to the index number shown in the sales book.
+* The item index refers to the index number shown in the sales list.
 * The index *must be a positive integer* 1, 2, 3, ...
 * Alternatively, deletes the sales record with the specified `DATE` and `ITEM_NAME`.
 ****
 
 Examples:
 
-* `display-sales` +
-`delete-sales 2` +
-`display-sales` +
-Deletes the 2nd record from the sales book.
+* `delete-sales 2` +
+Deletes the 2nd record from the sales list.
 
 * `delete-sales 10-02-2018 Fried Rice` +
-`display-sales` +
-Deletes the sales record for `Fried Rice` dated 10-02-2018 from the sales book.
+Deletes the sales record for `Fried Rice` dated 10-02-2018 from the sales list.
 
 
-=== Editing a sales record: `edit-sales`
+=== Editing a sales record: `edit-sales` or `es`
 
-Edits the sales record with the specified date and item name. +
-Format: `edit-sales DATE NAME [n/ITEM_NAME] [q/QUANTITY SOLD] [p/ITEM_PRICE]` / `edit-sales INDEX [n/ITEM_NAME]
-[q/QUANTITY SOLD] [p/ITEM_PRICE]`
+Edits the sales record identified by the index, or by the date and item name. +
+Format: `edit-sales ITEM_INDEX [d/DATE] [n/ITEM_NAME] [q/QUANTITY SOLD] [p/ITEM_PRICE]`/ `edit-sales DATE
+ITEM_NAME [d/DATE] [n/ITEM_NAME] [q/QUANTITY SOLD] [p/ITEM_PRICE]`
 
 ****
-* Edits the record at the specified `INDEX`. The index refers to the index number shown in the sales book.
+* Edits the record at the specified `INDEX`. The index refers to the index number shown in the sales list.
 * The index *must be a positive integer* 1, 2, 3, ...
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
-* Alternatively, edits the sales record with the specified `DATE` and `NAME`.
+* Alternatively, edits the record with the specified `DATE` and `ITEM_NAME`.
 ****
 
 Examples:
 
+* `edit-sales 3 n/Fried Omelet`  +
+Edits the item name of the 3rd record to be "Fried Omelet".
+
 * `edit-sales 23-06-2018 Fried Rice n/Fried Rice with Shrimps` +
-In the sales record of "Fried Rice" dated 23-06-2018, edits its name to be "Fried Rice with Shrimps".
+Edits the item name of the record "23-06-2018, Fried Rice" to be "Fried Rice with Shrimps".
 
 * `edit-sales 12-02-2018 Pasta q/37 p/6.50`  +
-In the sales record of "Pasta" dated 12-02-2018, edits its quantity sold and price to be 37 and 6.50
-respectively.
+Edits the quantity sold and price of the record "12-02-2018, Pasta" to be 37 and 6.50 respectively.
 
-* `edit-sales 3 n/Fried Omelet`  +
-In the 3rd record in the sales book, edits the menu item's name to be "Fried Omelet".
 
-=== Checking sales history of a menu item: `check-sales`
+=== Ranking items according to total revenue: `rank-item` or `ri`
 
-Displays the sales history of a menu item and the total revenue it has accumulated. +
-Format: `check-sales ITEM_NAME` +
+Ranks the items based on their total revenue accumulated in past sales records. +
+Format: `rank-item`
 
-Examples:
+=== Ranking dates according to total revenue: `rank-date` or `rd`
 
-* `check-sales Fried Rice`
-
-=== Ranking menu items according to profitability: `rank-dish`
-
-Ranks the menu items based on their total revenue accumulated in past sales records in descending order. +
-Format: `rank-dish`
-
-=== Ranking dates according to profitability: `rank-date`
-
-Ranks the dates based on their revenue accumulated in past sales records in descending order. +
+Ranks the dates based on their total revenue for that day. +
 Format: `rank-date`
 
 == FAQ
@@ -872,17 +867,17 @@ contains the data of your previous *MeNUS* folder.
 |*Today's special* |`today-special` |`today-special`
 |*Export menu* |`export-menu fp/FILE_PATH fn/FILE_NAME` |`export-menu fp/backup/ fn/menu.txt`
 |*Import menu* |`import-menu fp/FILE_PATH fn/FILE_NAME` |`import-menu fp/backup/ fn/menu.txt`
-|*Add reservation* |`add-reservation n/NAME p/PAX d/DATE t/TIME` |`add-reservation n/TAN p/4 d/21072018 t/1300`
-|*Edit reservation* |`edit-reservation INDEX [n/NAME] [p/PAX] [d/DATE] [t/TIME]` |`edit-reservation 2 t/1700`
+|*Add reservation* |`add-reservation n/NAME px/PAX dt/DATETIME` |`add-reservation n/TAN px/4 dt/2018-07-21:10:00:00`
+|*Edit reservation* |`edit-reservation INDEX [n/NAME] [px/PAX] [dt/DATETIME]` |`edit-reservation 2 px/2`
 |*Delete reservation* |`delete-reservation INDEX` |`delete-reservations 2`
 |*List reservation* |`list-reservations` |`list-reservations`
 |*Sort reservation* |`sort-reservations` |`sort-reservations`
 |*Record sales volume* |`record-sales d/DATE n/ITEM_NAME q/QUANTITY SOLD p/ITEM_PRICE` |`record-sales d/25-09-2018 n/Fried Rice q/35 p/5.50`
-|*Display sales record* |`display-sales` or `display-sales DATE` |`display-sales` or `display-sales 25-09-2018`
-|*Edit sales record* |`edit-sales DATE NAME [d/DATE] [n/ITEM_NAME] [q/QUANTITY SOLD] [p/ITEM_PRICE]` or `edit-sales INDEX [d/DATE] [n/ITEM_NAME] [q/QUANTITY SOLD] [p/ITEM_PRICE]` |`edit-sales 12-02-2018 Pasta q/37 p/6.50` or `edit-sales 3 n/Fried Omelet`
-|*Check sales history of menu item* |`check-sales ITEM_NAME` |`check-sales Fried Rice`
-|*Delete sales record* |`delete-sales DATE ITEM_NAME` or `delete-sales ITEM_INDEX` |`delete-sales 10-02-2018 Fried Rice` or `delete-sales 2`
-|*Rank by profitability* |`rank-dish` or `rank-date` | `TO BE CONFIRMED`
+|*Display sales report* |`display-sales DATE` |`display-sales 25-09-2018`
+|*Edit sales record* |`edit-sales ITEM_INDEX [d/DATE] [n/ITEM_NAME] [q/QUANTITY SOLD] [p/ITEM_PRICE]` or `edit-sales DATE ITEM_NAME [d/DATE] [n/ITEM_NAME] [q/QUANTITY SOLD] [p/ITEM_PRICE]` |`edit-sales 3 n/Fried Omelet` or `edit-sales 12-02-2018 Pasta q/37 p/6.50`
+|*Delete sales record* |`delete-sales ITEM_INDEX` or `delete-sales DATE ITEM_NAME` |`delete-sales 2` or `delete-sales  10-02-2018 Fried Rice`
+|*Rank items by total revenue* |`rank-item` |`rank-item`
+|*Rank dates by total revenue* |`rank-date` | `rank-date`
 |=======================================================================
 
 [appendix]
