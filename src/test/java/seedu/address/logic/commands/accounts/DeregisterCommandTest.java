@@ -16,7 +16,7 @@ import seedu.address.model.ModelManager;
 import seedu.address.model.accounts.Account;
 import seedu.address.testutil.accounts.AccountBuilder;
 
-public class RegisterCommandTest {
+public class DeregisterCommandTest {
 
     private static final CommandHistory EMPTY_COMMAND_HISTORY = new CommandHistory();
 
@@ -27,27 +27,24 @@ public class RegisterCommandTest {
     private Model model = new ModelManager();
 
     @Test
-    public void executeSuccess() throws CommandException {
+    public void execute_accountExists_Success() throws CommandException {
         Account validAccount = new AccountBuilder(DEMO_ADMIN).build();
-        CommandResult commandResult = new RegisterCommand(validAccount).execute(model, commandHistory);
+        CommandResult registerCommandResult = new RegisterCommand(validAccount).execute(model, commandHistory);
 
-        assertEquals(String.format(RegisterCommand.MESSAGE_SUCCESS, validAccount), commandResult.feedbackToUser);
+        assertEquals(String.format(RegisterCommand.MESSAGE_SUCCESS, validAccount), registerCommandResult.feedbackToUser);
+        Assert.assertEquals(EMPTY_COMMAND_HISTORY, commandHistory);
+
+        CommandResult deregisterCommandResult = new DeregisterCommand(validAccount).execute(model, commandHistory);
+
+        assertEquals(String.format(DeregisterCommand.MESSAGE_SUCCESS, validAccount), deregisterCommandResult.feedbackToUser);
         Assert.assertEquals(EMPTY_COMMAND_HISTORY, commandHistory);
     }
 
     @Test
-    public void execute_duplicateUsername_throwsCommandException() throws CommandException {
+    public void execute_accountNotExists_throwCommandException() throws CommandException {
         thrown.expect(CommandException.class);
-        thrown.expectMessage(RegisterCommand.MESSAGE_DUPLICATE_USERNAME);
-        Account validAccount = new AccountBuilder(DEMO_ADMIN).build();
-        new RegisterCommand(validAccount).execute(model, commandHistory);
-        new RegisterCommand(validAccount).execute(model, commandHistory);
-    }
-
-    @Test
-    public void execute_accountExists_throwsCommandException() throws CommandException {
-        thrown.expect(CommandException.class);
-        Account invalidAccount = new AccountBuilder().build();
-        new LoginCommand(invalidAccount).execute(model, commandHistory);
+        thrown.expectMessage(DeregisterCommand.MESSAGE_USERNAME_NOT_FOUND);
+        Account invalidAccount = new AccountBuilder().withUsername("nonexistingusernametest").build();
+        new DeregisterCommand(invalidAccount).execute(model, commandHistory);
     }
 }
