@@ -17,14 +17,18 @@ endif::[]
 By: `Team CS2103-AY1819S1-F10-4`      Since: `Sep 2018`      Licence: `MIT`
 
 == Introduction
-link:{repoURL}[MeNUS] empowers you to improve the Management(M) and efficiency(e) of your
-restaurants in NUS.
+link:{repoURL}[MeNUS] empowers you to improve the Management(M) and efficiency(e) of your restaurants in NUS.
 
-MeNUS is designed for restaurant owners who prefer to use a desktop application to manage their restaurants. More
-importantly,
-MeNUS is *optimized for users who prefer to work with a Command Line Interface (CLI) while still having the benefits
-of a Graphical User Interface (GUI)*. If you can type fast, MeNUS allows you to manage aspects of your eatery
--- menu, ingredient, sales and reservations management -- all from a single location !
+As long as you feel like your restaurants are using too many overcomplicated and expensive systems,
+link:{repoURL}[MeNUS] is here for you!
+
+
+Introducing link:{repoURL}[MeNUS], a revolutionary restaurant management desktop application that is *optimized for
+users who prefer to work with a Command Line Interface (CLI) while still having
+the benefits of a Graphical User Interface (GUI)*. If you can type fast, MeNUS allows you to manage aspects of your
+eatery -- menu, ingredient, sales and reservations management -- all from a single location !
+
+Let's get started!
 
 == Quick Start
 
@@ -46,7 +50,7 @@ image::Ui.png[width="790"]
 .  Type the command in the command box and press kbd:[Enter] to execute it. +
 e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 .  Some example commands you can try:
-
+* * `login id/root pw/root` : logs into the root account
 * *`list`* : lists all contacts
 * **`add`**`n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : adds a contact named `John Doe` to the Address Book.
 * **`delete`**`3` : deletes the 3rd contact shown in the current list
@@ -217,7 +221,7 @@ Format: `history`
 
 [NOTE]
 ====
-Pressing the kbd:[&uarr;] and kbd:[&darr;] arrows will display the previous and next input respectively in the command box.
+Pressing the kbd:[&uarr;] and kbd:[&darr;] arrows will display the previous and next input respectively in the command box
 ====
 
 // tag::undoredo[]
@@ -228,7 +232,7 @@ Format: `undo`
 
 [NOTE]
 ====
-Undoable commands: those commands that modify the address book's content (`add`, `delete`, `edit` and `clear`).
+Undoable commands: those commands that modify the address book's content (`add`, `delete`, `edit` and `clear`)
 ====
 
 Examples:
@@ -309,10 +313,10 @@ Examples:
 * `register id/azhikai pw/p@55w0rd`
 * `reg id/azhikai pw/p@55w0rd`
 
-=== Editing user account: `edit-acc` or `ea`
+=== Editing user account: `edit-account` or `ea`
 
 Edits an existing user account. +
-Format: `edit-acc id/USERNAME [nid/NEW_USERNAME] [pw/NEW_PASSWORD]`
+Format: `edit-account id/USERNAME [nid/NEW_USERNAME] [pw/NEW_PASSWORD]`
 
 ****
 * The account's data will remain intact if none of the optional fields are provided.
@@ -335,6 +339,16 @@ Examples:
 
 * `deregister id/azhikai`
 * `dereg id/azhikai`
+
+=== List user accounts: `list-accounts` or `la`
+
+List all user accounts. +
+Format: `list-accounts`
+
+[IMPORTANT]
+====
+Password is masked by default and should never be shown
+====
 
 === User roles `[coming in v2.0]`
 With user role, each user will only be able to execute certain commands, other than the administrator and/or
