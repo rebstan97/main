@@ -399,6 +399,43 @@ image::UserSessionActivityDiagram.png[width="650"]
 ** Pros: More user can login and manage the systems.
 ** Cons: More memory usage to track each user session.
 
+// tag::deleteingredient[]
+===  Delete Ingredient feature
+==== Current Implementation
+
+The delete ingredient mechanism is facilitated by `DeleteIngredientCommand`. It is implemented as an abstract class
+with the following abstract methods:
+
+* `DeleteIngredientCommand#execute()` – Removes a specified ingredient from the list
+* `DeleteIngredientCommand#equals()` – Checks if two `DeleteIngredientCommand` instances have the same attributes
+
+`DeleteIngredientByIndexCommand` and `DeleteIngredientByNameCommand` extends `DeleteIngredientCommand` and implement
+their own behaviour for these methods.
+
+The following sequence diagrams illustrate how the delete operation works.
+
+* Diagram 1: When user enters `delete-ingredient 1`
+
+image::DeleteIngByIndexSequenceDiagram.png[width="1000"]
+
+* Diagram 2: When user enters `delete-ingredient apple`
+
+image::DeleteIngByNameSequenceDiagram.png[width="1000"]
+
+==== Design Considerations
+
+===== Aspect: Implementation of delete ingredient command
+
+* **Alternative 1 (current choice):** Separate classes to handle deleting by index and deleting by name.
+** Pros: Allows different attributes and method implementation for each class.
+** Cons: Tight coupling between `DeleteIngredientCommand` and the inheriting classes
+* **Alternative 2:** Single class to handle deleting by both index and name.
+** Pros: Less coupling since the methods related to the delete ingredient command are confined to a single class.
+** Cons: Two attributes are required, but only one has a value while the other has to be set to null. This makes the
+`equals()` method difficult to implement.
+
+// end::deleteingredient[]
+
 // tag::dataencryption[]
 === [Proposed] Data Encryption
 
@@ -852,7 +889,17 @@ Use case ends.
 ** 2a1. App returns a message telling user the ingredient name already exists.
 ** 2a2. User requests to add ingredient again.
 +
-Steps 2a1-2a2 are repeated until an ingredient name which does not exist is used.
+Steps 2a1-2a2 are repeated until an ingredient name which does not exist is entered.
++
+Use case resumes at step 3.
+
+[none]
+* 2b. The user enters an invalid command or invalid command format.
+[none]
+** 2b1. App returns a message telling user that the command or command format is invalid.
+** 2b2. User requests to add ingredient again.
++
+Steps 2b1-2b2 are repeated until an ingredient name which does not exist is used.
 +
 Use case resumes at step 3.
 
@@ -863,7 +910,7 @@ Use case resumes at step 3.
 
 1.  User requests to list ingredients.
 2.  App shows a list of ingredients.
-3.  User requests to delete a specific ingredient in the list.
+3.  User requests to delete a specific ingredient by its index in the ingredient list, or the ingredient name.
 4.  App deletes the ingredient.
 +
 Use case ends.
@@ -875,8 +922,8 @@ Use case ends.
 +
 Use case ends.
 
+[none]
 * 3a. The given index is invalid.
-+
 [none]
 ** 3a1. App returns a message telling user the index is invalid.
 ** 3a2. User requests to delete ingredient again.
@@ -884,6 +931,26 @@ Use case ends.
 Steps 3a1-3a2 are repeated until a valid index is entered.
 +
 Use case resumes at step 3.
+
+[none]
+* 3b. The ingredient name is invalid.
+[none]
+** 3b1. App returns a message telling user that the ingredient name entered is invalid.
+** 3b2. User requests to delete ingredient again.
++
+Steps 3b1-3b2 are repeated until a valid ingredient name is entered.
++
+Use case resumes at step 4.
+
+[none]
+* 3c. The ingredient name does not exist.
+[none]
+** 3c1. App returns a message telling user that the ingredient cannot be not found.
+** 3c2. User requests to delete ingredient again.
++
+Steps 3c1-3c2 are repeated until an existing ingredient name is entered.
++
+Use case resumes at step 4.
 
 [discrete]
 === Use case: UC203 - Edit ingredient
