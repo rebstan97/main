@@ -357,11 +357,11 @@ The following sequence diagrams illustrate how the delete operation works.
 
 * Diagram 1: When user enters `delete-ingredient 1`
 
-image::DeleteIngByIndexSequenceDiagram.png[width="1000"]
+image::DeleteIngredientByIndexSequenceDiagram.png[width="1000"]
 
 * Diagram 2: When user enters `delete-ingredient apple`
 
-image::DeleteIngByNameSequenceDiagram.png[width="1000"]
+image::DeleteIngredientByNameSequenceDiagram.png[width="1000"]
 
 ==== Design Considerations
 
@@ -974,12 +974,12 @@ Steps 2a1-2a2 are repeated until an ingredient name which does not exist is ente
 Use case resumes at step 3.
 
 [none]
-* 2b. The user enters an invalid command or invalid command format.
+* 2b. The user enters an invalid command format.
 [none]
-** 2b1. App returns a message telling user that the command or command format is invalid.
+** 2b1. App returns a message telling user that the command format is invalid.
 ** 2b2. User requests to add ingredient again.
 +
-Steps 2b1-2b2 are repeated until an ingredient name which does not exist is used.
+Steps 2b1-2b2 are repeated until a valid command format is entered.
 +
 Use case resumes at step 3.
 
@@ -1003,32 +1003,32 @@ Use case ends.
 Use case ends.
 
 [none]
-* 3a. The given index is invalid.
+* 3a. The given index or name is invalid.
 [none]
-** 3a1. App returns a message telling user the index is invalid.
+** 3a1. App returns a message telling user the index or name entered is invalid.
 ** 3a2. User requests to delete ingredient again.
 +
-Steps 3a1-3a2 are repeated until a valid index is entered.
-+
-Use case resumes at step 3.
-
-[none]
-* 3b. The ingredient name is invalid.
-[none]
-** 3b1. App returns a message telling user that the ingredient name entered is invalid.
-** 3b2. User requests to delete ingredient again.
-+
-Steps 3b1-3b2 are repeated until a valid ingredient name is entered.
+Steps 3a1-3a2 are repeated until a valid index or name is entered.
 +
 Use case resumes at step 4.
 
 [none]
-* 3c. The ingredient name does not exist.
+* 3b. The ingredient name does not exist.
 [none]
-** 3c1. App returns a message telling user that the ingredient cannot be not found.
-** 3c2. User requests to delete ingredient again.
+** 3b1. App returns a message telling user that the ingredient cannot be found.
+** 3b2. User requests to delete ingredient again.
 +
-Steps 3c1-3c2 are repeated until an existing ingredient name is entered.
+Steps 3b1-3b2 are repeated until an existing ingredient name is entered.
++
+Use case resumes at step 4.
+
+[none]
+* 3c. The user enters an invalid format.
+[none]
+** 3c1. App returns a message telling user that the command format is invalid.
+** 3c2. User requests to add ingredient again.
++
+Steps 3c1-3c2 are repeated until a valid command format is entered.
 +
 Use case resumes at step 4.
 
