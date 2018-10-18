@@ -346,7 +346,7 @@ Menu management feature extends `MeNuS` with a menu and provides the users with 
 menu, edit items and remove items from the menu.
 
 ==== Current Implementation
-The menu is stored internally as `items`, which is an `UniqueItemList` object that contains a list of `Item` object.
+The menu is stored internally as `items`, which is a `UniqueItemList` object that contains a list of `Item` objects.
 The menu management feature implements the following operations:
 
 * `add-item` command -- Adds an item to the menu. The item must not already exist in the menu.
@@ -358,7 +358,7 @@ The menu management feature implements the following operations:
 * `sort-menu` -- Sorts the menu by name or price. The user must specify the sorting method.
 * `find-item` command -- Finds items whose names contain any of the given keywords.
 * `filter-menu` command -- Finds items whose tags contain any of the given keywords.
-* `today-special` command -- Finds items whose tags contain the DAY_OF_THE_WEEK.
+* `today-special` command -- Finds items whose tags contain the `DAY_OF_THE_WEEK`.
 
 Each `Item` object consists of `Name` and `Price`.
 [NOTE]
@@ -368,7 +368,8 @@ Each `Item` object consists of `Name` and `Price`.
 The `add-item` command is facilitated by `AddItemCommand` and `AddItemCommandParser`. The command takes in
 user input for `Name`, `Price` and `Tag`(optional).
 
-The `AddItemCommandParser` will parse the user input and checks if the input is valid and constructs an `Item` object.
+The `AddItemCommandParser` will parse the user input and checks if the input is valid.
+It will then construct an `Item` object.
 [NOTE]
 If the input is not valid, it will throw a `ParseException`.
 
@@ -377,7 +378,9 @@ After adding the item, it will save the current state for undo/redo.
 
 ==== `sort-menu` Command
 The `sort-menu` command is facilitated by `SortMenuCommand` and `SortMenuCommandParser`. The command takes in
-user input for the sorting method(Currently only sort by name or price).
+user input for the sorting method.
+[NOTE]
+Currently only sort by name or price.
 
 The `SortMenuCommandParser` will parse the user input and checks if the input is valid.
 [NOTE]
