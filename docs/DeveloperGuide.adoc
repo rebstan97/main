@@ -357,11 +357,11 @@ The following sequence diagrams illustrate how the delete operation works.
 
 * Diagram 1: When user enters `delete-ingredient 1`
 
-image::DeleteIngByIndexSequenceDiagram.png[width="1000"]
+image::DeleteIngredientByIndexSequenceDiagram.png[width="1000"]
 
 * Diagram 2: When user enters `delete-ingredient apple`
 
-image::DeleteIngByNameSequenceDiagram.png[width="1000"]
+image::DeleteIngredientByNameSequenceDiagram.png[width="1000"]
 
 ==== Design Considerations
 
