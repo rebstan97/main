@@ -1002,6 +1002,7 @@ Use case resumes at step 2.
 
 1.  User requests to add item to menu.
 2.  App adds the item to menu.
+3.  App returns a success message confirming the new item has been added.
 +
 Use case ends.
 
@@ -1011,7 +1012,7 @@ Use case ends.
 * 1a. Invalid argument given for the command.
 +
 [none]
-** 1a1. App shows an error message that ITEM_NAME or/and ITEM_PRICE are invalid.
+** 1a1. App shows an error message that item name or/and item price are invalid.
 +
 Use case restart from step 1.
 
@@ -1031,6 +1032,7 @@ Use case restart from step 1.
 2.  App shows a list of items in menu.
 3.  User requests to delete a specific item in the list.
 4.  App deletes the item.
+5.  App returns a success message confirming the specified item has been deleted.
 +
 Use case ends.
 
@@ -1046,7 +1048,7 @@ Use case ends.
 [none]
 ** 3a1. App shows an error message that the given index is invalid.
 +
-Use case resumes at step 2.
+Use case restart at step 3.
 
 [discrete]
 === Use case: UC303 - Edit item from menu
@@ -1057,6 +1059,7 @@ Use case resumes at step 2.
 2.  App shows a list of items in menu.
 3.  User requests to edit a specific item in the list.
 4.  App edits the item with updated values.
+5.  App returns a success message confirming the specified item has been edited.
 +
 Use case ends.
 
@@ -1072,14 +1075,14 @@ Use case ends.
 [none]
 ** 3a1. App shows an error message that the given index is invalid.
 +
-Use case resumes at step 2.
+Use case restart at step 3.
 
 * 3b. None of the optional fields are specified.
 +
 [none]
 ** 3b1. App shows an error message that none of the optional fields are specified.
 +
-Use case resumes at step 2.
+Use case restart at step 3.
 
 [discrete]
 === Use case: UC304 - Give an item a discount
@@ -1090,6 +1093,7 @@ Use case resumes at step 2.
 2.  App shows a list of items in menu.
 3.  User requests to give a specific item in the list a discount.
 4.  App give the item a discount.
+5.  App returns a success message confirming the specified item has been given a discount.
 +
 Use case ends.
 
@@ -1105,14 +1109,14 @@ Use case ends.
 [none]
 ** 3a1. App shows an error message that the given index is invalid.
 +
-Use case resumes at step 2.
+Use case restart at step 3.
 
 * 3b. The given percentage is invalid.
 +
 [none]
 ** 3b1. App shows an error message that the given percentage is invalid.
 +
-Use case resumes at step 2.
+Use case restart at step 3.
 
 [discrete]
 === Use case: UC305 - Export menu
@@ -1121,6 +1125,7 @@ Use case resumes at step 2.
 
 1.  User requests to export menu.
 2.  App export the menu.
+3.  App returns a success message confirming the menu has been exported.
 +
 Use case ends.
 
