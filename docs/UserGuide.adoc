@@ -53,17 +53,17 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 * You can create accounts for your employees to manage the system on your behalf.
 
 === Menus
-_To be completed by Yi Can_
+* You can manage the menu by adding, editing or remove items from the menu.
 
-=== Inventory
+=== Ingredients
 _To be completed by Rebecca_
 
 === Sales
 * You can record sales volume of an item and edit/delete past sales records. You can also generate and display the
 sales report for a specific day.
 
-=== Bookings
-_To be completed by Ming Xian_
+=== Reservations
+* You can keep track of customer reservations on the system.
 
 
 [[Features]]
@@ -332,7 +332,7 @@ Examples:
 With user role, each user will only be able to execute certain commands, other than the administrator and/or
 restaurant owner who is able to execute all commands.
 
-=== Adding an ingredient: `add-ingredient`
+=== Adding an ingredient: `add-ingredient` or `add-ing`
 
 Adds a new ingredient to the ingredient list. +
 Format: `add-ingredient n/INGREDIENT_NAME t/UNIT_TYPE p/PRICE_PER_UNIT m/MINIMUM`
@@ -345,17 +345,17 @@ Examples:
 
 * `add-ingredient n/cod fish t/kilogram p/20 m/1`
 
-=== Listing all ingredients : `list-ingredients`
+=== Listing all ingredients : `list-ingredients` or `list-ing`
 
 Shows a list of all ingredients in the ingredient list. +
 Format: `list-ingredients`
 
-=== Listing ingredients with low stock count: `list-ingredients-low`
+=== Listing ingredients with low stock count: `low-stock`
 
 Shows a list of ingredients that are low in stock count. +
-Format: `list-ingredients-low`
+Format: `low-stock`
 
-=== Removing an ingredient: `delete-ingredient`
+=== Removing an ingredient: `delete-ingredient` or `delete-ing`
 
 Deletes the specified ingredient from the ingredient list. +
 Format: `delete-ingredient INDEX` or `delete-ingredient NAME`
@@ -378,7 +378,7 @@ Deletes the 1st ingredient in the ingredient list.
 `list-ingredients` +
 Deletes the ingredient `cod fish` from the ingredient list.
 
-=== Editing an ingredient: `edit-ingredient`
+=== Editing an ingredient: `edit-ingredient` or `edit-ing`
 
 Edits an ingredient in the ingredient list. +
 Format: `edit-ingredient INDEX [n/INGREDIENT_NAME] [t/UNIT_TYPE] [p/PRICE_PER_UNIT] [m/MINIMUM]` or `edit-ingredient NAME [n/INGREDIENT_NAME] [t/UNIT_TYPE] [p/PRICE_PER_UNIT] [m/MINIMUM]`
@@ -520,7 +520,7 @@ Format: `select-item INDEX`
 
 Examples:
 
-* `list` +
+* `list-items` +
 `select-item 2` +
 Selects the 2nd item in the menu.
 * `find Burger` +
@@ -616,7 +616,7 @@ Discounts the 1st item in the results of the `find` command.
 
 === Today's specials : `today-special` or `ts`
 
-Lists the items that have been tagged with the particular day in the menu. +
+Lists the items that have been tagged with `DAY_OF_THE_WEEK` in the menu. +
 Format: `today-special`
 
 Examples:
@@ -645,29 +645,32 @@ Examples:
 * `import-menu f/test/ n/menu.txt` +
 Import the menu.txt from test folder to replace current menu.
 
-=== Adding a reservation: `add-reservation`
+=== Support for multiple menus `[coming in v2.0]`
+User will be able to manage multiple menus without the need of exporting and importing for different version of the
+current menu.
+
+=== Adding a reservation: `add-reservation` or `ar`
 
 Adds a new reservation to the reservations list. +
-Format: `add-reservation n/NAME p/PAX d/DATE t/TIME`
+Format: `add-reservation n/NAME px/PAX dt/DATETIME`
 
 ****
-* Date is entered in DDMMYYYY format.
-* Time is entered in Military Time.
+* DateTime is entered in yyyy-mm-dd**T**hh:mm:ss format.
 ****
 
 Examples:
 
-* `add-reservation n/TAN p/4 d/21072018 t/1300`
+* `add-reservation n/TAN px/4 dt/2018-07-21T10:00:00`
 
-=== Listing all reservations : `list-reservations`
+=== Listing all reservations : `list-reservations` or `lr`
 
 Shows a list of all reservations in the reservations list. +
 Format: `list-reservations`
 
-=== Editing a reservation: `edit-reservation`
+=== Editing a reservation: `edit-reservation` or `er`
 
 Edits an reservation in the reservation list. +
-Format: `edit-reservation INDEX [n/NAME] [p/PAX] [d/DATE] [t/TIME]`
+Format: `edit-reservation INDEX [n/NAME] [px/PAX] [dt/DATETIME]`
 
 ****
 * Edits the reservation at the specified `INDEX`. The index refers to the index number shown in the
@@ -678,18 +681,18 @@ displayed reservations list. The index *must be a positive integer* 1, 2, 3, ...
 
 Examples:
 
-* `edit-reservation 2 t/1700` +
-Edits the time of the 2nd reservation in the list to `1700` hrs.
+* `edit-reservation 2 dt/2018-12-31T18:00:00` +
+Edits the time of the 2nd reservation in the list to `31st Dec 2018, 1800` hrs.
 
-* `edit-reservation 6 n/ONG p/4`  +
+* `edit-reservation 6 n/ONG px/4`  +
 Edits the name and pax of the 6th reservation to `ONG` and `4` respectively.
 
-=== Sorting reservations list: `sort-reservations`
+=== Sorting reservations list: `sort-reservations` or `sr`
 
 Sorts the reservations list by Date/Time. +
 Format: `sort-reservations`
 
-=== Deleting a reservation: `delete-reservation`
+=== Deleting a reservation: `delete-reservation` or `dr`
 
 Deletes the specified reservation from the reservations list. +
 Format: `delete-reservation INDEX`
@@ -842,8 +845,8 @@ contains the data of your previous *MeNUS* folder.
 |*Today's special* |`today-special` |`today-special`
 |*Export menu* |`export-menu fp/FILE_PATH fn/FILE_NAME` |`export-menu fp/backup/ fn/menu.txt`
 |*Import menu* |`import-menu fp/FILE_PATH fn/FILE_NAME` |`import-menu fp/backup/ fn/menu.txt`
-|*Add reservation* |`add-reservation n/NAME p/PAX d/DATE t/TIME` |`add-reservation n/TAN p/4 d/21072018 t/1300`
-|*Edit reservation* |`edit-reservation INDEX [n/NAME] [p/PAX] [d/DATE] [t/TIME]` |`edit-reservation 2 t/1700`
+|*Add reservation* |`add-reservation n/NAME px/PAX dt/DATETIME` |`add-reservation n/TAN px/4 dt/2018-07-21:10:00:00`
+|*Edit reservation* |`edit-reservation INDEX [n/NAME] [px/PAX] [dt/DATETIME]` |`edit-reservation 2 px/2`
 |*Delete reservation* |`delete-reservation INDEX` |`delete-reservations 2`
 |*List reservation* |`list-reservations` |`list-reservations`
 |*Sort reservation* |`sort-reservations` |`sort-reservations`
