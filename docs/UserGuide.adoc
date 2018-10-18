@@ -32,8 +32,9 @@ of a Graphical User Interface (GUI)*. If you can type fast, MeNUS allows you to 
 
 [NOTE]
 ====
-* If you are unsure which Java version is installed, refer to this link:https://www.java.com/en/download/help/version_manual.xml[link].
-* You may install the current version of Java from link:https://www.oracle.com/technetwork/java/javase/downloads/index.html[here].
+* If you are unsure which Java version is installed, you may refer to this link:https://www.java
+.com/en/download/help/version_manual.xml[link].
+* You may install the current version of Java link:https://www.oracle.com/technetwork/java/javase/downloads/index.html[here].
 ====
 
 .  Download the latest `menus.jar` link:https://github.com/CS2103-AY1819S1-F10-4/main/releases[here].
