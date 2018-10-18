@@ -1079,15 +1079,21 @@ Use case ends.
 +
 [none]
 ** 1a1. App shows an error message that item name or/and item price are invalid.
+** 1a2. User requests to add item to menu again.
 +
-Use case restarts from step 1.
+Steps 1a1-1a2 are repeated until valid item name and valid item price are entered.
++
+Use case resumes at step 2.
 
 * 1b. The item name entered is already in the menu.
 +
 [none]
 ** 1b1. App shows an error message that the item name already exists.
+** 1b2. User requests to add item to menu again.
 +
-Use case restarts from step 1.
+Steps 1b1-1b2 are repeated until item name that does not exist in the menu is entered.
++
+Use case resumes at step 2.
 
 [discrete]
 === Use case: UC302 - Delete item from menu
@@ -1096,7 +1102,7 @@ Use case restarts from step 1.
 
 1.  User requests to list items.
 2.  App shows a list of items in menu.
-3.  User requests to delete a specific item in the list.
+3.  User requests to delete a specific item in menu.
 4.  App deletes the item.
 5.  App returns a success message confirming the specified item has been deleted.
 +
@@ -1113,8 +1119,11 @@ Use case ends.
 +
 [none]
 ** 3a1. App shows an error message that the given index is invalid.
+** 3a2. User requests to delete a specific item in menu again.
 +
-Use case resumes at step 2.
+Steps 3a1-3a2 are repeated until a valid index is entered.
++
+Use case resumes at step 4.
 
 [discrete]
 === Use case: UC303 - Edit item from menu
@@ -1140,15 +1149,21 @@ Use case ends.
 +
 [none]
 ** 3a1. App shows an error message that the given index is invalid.
+** 3a2. User requests to delete a specific item in menu again.
 +
-Use case resumes at step 2.
+Steps 3a1-3a2 are repeated until a valid index is entered.
++
+Use case resumes at step 4.
 
 * 3b. None of the optional fields are specified.
 +
 [none]
 ** 3b1. App shows an error message that none of the optional fields are specified.
+** 3b2. User requests to edit a specific item in menu again.
 +
-Use case resumes at step 2.
+Steps 3b1-3b2 are repeated until one of the optional fields is entered.
++
+Use case resumes at step 4.
 
 [discrete]
 === Use case: UC304 - Give an item a discount
@@ -1174,15 +1189,21 @@ Use case ends.
 +
 [none]
 ** 3a1. App shows an error message that the given index is invalid.
+** 3a2. User requests to give a specific item in the list a discount again.
 +
-Use case resumes at step 2.
+Steps 3a1-3a2 are repeated until a valid index is entered.
++
+Use case resumes at step 4.
 
 * 3b. The given percentage is invalid.
 +
 [none]
 ** 3b1. App shows an error message that the given percentage is invalid.
+** 3b2. User requests to give a specific item in the list a discount again.
 +
-Use case resumes at step 2.
+Steps 3b1-3b2 are repeated until a valid percentage is entered.
++
+Use case resumes at step 4.
 
 [discrete]
 === Use case: UC305 - Export menu
@@ -1202,8 +1223,11 @@ Use case ends.
 +
 [none]
 ** 1a1. App shows an error message that file path is invalid.
+** 1a2. User requests to export menu again.
 +
-Use case restarts from step 1.
+Steps 1a1-1a2 are repeated until invalid file path is entered.
++
+Use case resumes at step 2.
 
 [discrete]
 === Use case: UC401 - Add reservation
