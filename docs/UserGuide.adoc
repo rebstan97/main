@@ -706,15 +706,15 @@ Examples:
 `list-ingredients` +
 Deletes the 2nd reservation in the reservations list.
 
-=== Adding a sales record: `record-sales` or `rs`
+=== Recording sales volume of an item: `record-sales` or `rs`
 
-Records the quantity of an item sold within a specific day into the sales book. +
+Records the quantity of an item sold within a specific day into the sales list. +
 Format: `record-sales d/DATE n/ITEM_NAME q/QUANTITY SOLD p/ITEM_PRICE`
 
 ****
 * DATE must be written in the DD-MM-YYYY format.
 * DATE must exist in the calendar.
-* Both DATE and ITEM_NAME cannot be same as another record in the sales book.
+* Both DATE and ITEM_NAME cannot be same as another record in the sales list.
 ****
 
 Examples:
@@ -744,7 +744,7 @@ Format: `delete-sales ITEM_INDEX` / `delete-sales DATE ITEM_NAME`
 
 ****
 * Deletes the record at the specified `ITEM_INDEX`.
-* The item index refers to the index number shown in the sales book.
+* The item index refers to the index number shown in the sales list.
 * The index *must be a positive integer* 1, 2, 3, ...
 * Alternatively, deletes the sales record with the specified `DATE` and `ITEM_NAME`.
 ****
@@ -752,10 +752,10 @@ Format: `delete-sales ITEM_INDEX` / `delete-sales DATE ITEM_NAME`
 Examples:
 
 * `delete-sales 2` +
-Deletes the 2nd record from the sales book.
+Deletes the 2nd record from the sales list.
 
 * `delete-sales 10-02-2018 Fried Rice` +
-Deletes the sales record for `Fried Rice` dated 10-02-2018 from the sales book.
+Deletes the sales record for `Fried Rice` dated 10-02-2018 from the sales list.
 
 
 === Editing a sales record: `edit-sales` or `es`
@@ -765,7 +765,7 @@ Format: `edit-sales ITEM_INDEX [d/DATE] [n/ITEM_NAME] [q/QUANTITY SOLD] [p/ITEM_
 ITEM_NAME [d/DATE] [n/ITEM_NAME] [q/QUANTITY SOLD] [p/ITEM_PRICE]`
 
 ****
-* Edits the record at the specified `INDEX`. The index refers to the index number shown in the sales book.
+* Edits the record at the specified `INDEX`. The index refers to the index number shown in the sales list.
 * The index *must be a positive integer* 1, 2, 3, ...
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
@@ -846,7 +846,7 @@ contains the data of your previous *MeNUS* folder.
 |*Delete reservation* |`delete-reservation INDEX` |`delete-reservations 2`
 |*List reservation* |`list-reservations` |`list-reservations`
 |*Sort reservation* |`sort-reservations` |`sort-reservations`
-|*Add sales record* |`record-sales d/DATE n/ITEM_NAME q/QUANTITY SOLD p/ITEM_PRICE` |`record-sales d/25-09-2018 n/Fried Rice q/35 p/5.50`
+|*Record sales volume* |`record-sales d/DATE n/ITEM_NAME q/QUANTITY SOLD p/ITEM_PRICE` |`record-sales d/25-09-2018 n/Fried Rice q/35 p/5.50`
 |*Display sales report* |`display-sales DATE` |`display-sales 25-09-2018`
 |*Edit sales record* |`edit-sales ITEM_INDEX [d/DATE] [n/ITEM_NAME] [q/QUANTITY SOLD] [p/ITEM_PRICE]` or `edit-sales DATE ITEM_NAME [d/DATE] [n/ITEM_NAME] [q/QUANTITY SOLD] [p/ITEM_PRICE]` |`edit-sales 3 n/Fried Omelet` or `edit-sales 12-02-2018 Pasta q/37 p/6.50`
 |*Delete sales record* |`delete-sales ITEM_INDEX` or `delete-sales DATE ITEM_NAME` |`delete-sales 2` or `delete-sales  10-02-2018 Fried Rice`
