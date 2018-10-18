@@ -85,10 +85,7 @@ public class AccountTest {
         Account accountDemoOne = new Account(DEMO_ONE.getUsername());
         Account accountDemoTwo = new Account(DEMO_TWO.getUsername());
 
-        Account adminAccount = new AccountBuilder(DEMO_ADMIN).build();
         assertEquals(accountDemoOne.hashCode(), accountDemoOne.hashCode());
-
-        Account demoAccount = new AccountBuilder(DEMO_ONE).build();
         assertNotEquals(accountDemoOne.hashCode(), accountDemoTwo.hashCode());
     }
 }
