@@ -366,7 +366,7 @@ The following sequence diagram shows how the `register` command works:
 
 image::RegisterSequenceDiagram.png[width="800"]
 
-=== User Session feature
+=== User session feature
 ==== Current Implementation
 
 [NOTE]
