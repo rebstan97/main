@@ -830,7 +830,17 @@ Use case ends.
 ** 2a1. App returns a message telling user the ingredient name already exists.
 ** 2a2. User requests to add ingredient again.
 +
-Steps 2a1-2a2 are repeated until an ingredient name which does not exist is used.
+Steps 2a1-2a2 are repeated until an ingredient name which does not exist is entered.
++
+Use case resumes at step 3.
+
+[none]
+* 2b. The user enters an invalid command or invalid command format.
+[none]
+** 2b1. App returns a message telling user that the command or command format is invalid.
+** 2b2. User requests to add ingredient again.
++
+Steps 2b1-2b2 are repeated until an ingredient name which does not exist is used.
 +
 Use case resumes at step 3.
 
@@ -841,7 +851,7 @@ Use case resumes at step 3.
 
 1.  User requests to list ingredients.
 2.  App shows a list of ingredients.
-3.  User requests to delete a specific ingredient in the list.
+3.  User requests to delete a specific ingredient by its index in the ingredient list, or the ingredient name.
 4.  App deletes the ingredient.
 +
 Use case ends.
@@ -853,8 +863,8 @@ Use case ends.
 +
 Use case ends.
 
+[none]
 * 3a. The given index is invalid.
-+
 [none]
 ** 3a1. App returns a message telling user the index is invalid.
 ** 3a2. User requests to delete ingredient again.
@@ -862,6 +872,26 @@ Use case ends.
 Steps 3a1-3a2 are repeated until a valid index is entered.
 +
 Use case resumes at step 3.
+
+[none]
+* 3b. The ingredient name is invalid.
+[none]
+** 3b1. App returns a message telling user that the ingredient name entered is invalid.
+** 3b2. User requests to delete ingredient again.
++
+Steps 3b1-3b2 are repeated until a valid ingredient name is entered.
++
+Use case resumes at step 4.
+
+[none]
+* 3c. The ingredient name does not exist.
+[none]
+** 3c1. App returns a message telling user that the ingredient cannot be not found.
+** 3c2. User requests to delete ingredient again.
++
+Steps 3c1-3c2 are repeated until an existing ingredient name is entered.
++
+Use case resumes at step 4.
 
 [discrete]
 === Use case: UC203 - Edit ingredient
