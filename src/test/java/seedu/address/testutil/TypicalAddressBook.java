@@ -4,6 +4,7 @@ import static seedu.address.testutil.TypicalPersons.getTypicalPersons;
 import static seedu.address.testutil.accounts.TypicalAccounts.getTypicalAccounts;
 import static seedu.address.testutil.ingredients.TypicalIngredients.getTypicalIngredients;
 import static seedu.address.testutil.menu.TypicalItems.getTypicalItems;
+import static seedu.address.testutil.reservation.TypicalReservations.getTypicalReservations;
 import static seedu.address.testutil.salesrecords.TypicalRecords.getTypicalRecords;
 
 import seedu.address.model.AddressBook;
@@ -11,6 +12,7 @@ import seedu.address.model.accounts.Account;
 import seedu.address.model.ingredient.Ingredient;
 import seedu.address.model.menu.Item;
 import seedu.address.model.person.Person;
+import seedu.address.model.reservation.Reservation;
 import seedu.address.model.salesrecord.SalesRecord;
 
 /**
@@ -37,6 +39,9 @@ public class TypicalAddressBook {
         }
         for (Item item : getTypicalItems()) {
             ab.addItem(item);
+        }
+        for (Reservation reservation : getTypicalReservations()) {
+            ab.addReservation(reservation);
         }
         return ab;
     }
@@ -92,6 +97,17 @@ public class TypicalAddressBook {
         AddressBook ab = new AddressBook();
         for (Item item : getTypicalItems()) {
             ab.addItem(item);
+        }
+        return ab;
+    }
+
+    /**
+     * Returns an {@code AddressBook} with {@code Reservation} objects only.
+     */
+    public static AddressBook getTypicalAddressBookWithReservationsOnly() {
+        AddressBook ab = new AddressBook();
+        for (Reservation reservation : getTypicalReservations()) {
+            ab.addReservation(reservation);
         }
         return ab;
     }

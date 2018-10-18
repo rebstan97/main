@@ -15,6 +15,8 @@ import seedu.address.commons.events.model.AddressBookChangedEvent;
 import seedu.address.logic.commands.menu.SortMenuCommand.SortMethod;
 import seedu.address.model.accounts.Account;
 import seedu.address.model.ingredient.Ingredient;
+import seedu.address.model.ingredient.IngredientName;
+import seedu.address.model.ingredient.exceptions.IngredientNotFoundException;
 import seedu.address.model.menu.Item;
 import seedu.address.model.person.Person;
 import seedu.address.model.reservation.Reservation;
@@ -240,7 +242,12 @@ public class ModelManager extends ComponentManager implements Model {
     public void addIngredient(Ingredient ingredient) {
         versionedAddressBook.addIngredient(ingredient);
         updateFilteredIngredientList(PREDICATE_SHOW_ALL_INGREDIENTS);
+        indicateAddressBookChanged();
+    }
 
+    @Override
+    public Ingredient findIngredient(IngredientName ingredientName) throws IngredientNotFoundException {
+        return versionedAddressBook.findIngredient(ingredientName);
     }
 
     @Override
@@ -391,7 +398,7 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public void addReservation(Reservation reservation) {
         versionedAddressBook.addReservation(reservation);
-        updateFilteredPersonList(PREDICATE_SHOW_ALL_RESERVATIONS);
+        updateFilteredReservationList(PREDICATE_SHOW_ALL_RESERVATIONS);
         indicateAddressBookChanged();
     }
 

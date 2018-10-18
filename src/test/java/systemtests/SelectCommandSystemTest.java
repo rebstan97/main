@@ -5,20 +5,33 @@ import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
 import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.address.logic.commands.SelectCommand.MESSAGE_SELECT_PERSON_SUCCESS;
+import static seedu.address.testutil.EventsUtil.postNow;
 import static seedu.address.testutil.TestUtil.getLastIndex;
 import static seedu.address.testutil.TestUtil.getMidIndex;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST;
 import static seedu.address.testutil.TypicalPersons.KEYWORD_MATCHING_MEIER;
 
+import org.junit.Before;
 import org.junit.Test;
 
 import seedu.address.commons.core.index.Index;
+import seedu.address.commons.events.ui.LoginEvent;
 import seedu.address.logic.commands.RedoCommand;
 import seedu.address.logic.commands.SelectCommand;
 import seedu.address.logic.commands.UndoCommand;
 import seedu.address.model.Model;
+import seedu.address.testutil.accounts.AccountBuilder;
 
 public class SelectCommandSystemTest extends AddressBookSystemTest {
+
+    private Model model;
+
+    @Before
+    public void prepare() {
+        model = getModel();
+        postNow(new LoginEvent(new AccountBuilder().build()));
+    }
+
     @Test
     public void select() {
         /* ------------------------ Perform select operations on the shown unfiltered list -------------------------- */
@@ -30,7 +43,7 @@ public class SelectCommandSystemTest extends AddressBookSystemTest {
         assertCommandSuccess(command, INDEX_FIRST);
 
         /* Case: select the last card in the person list -> selected */
-        Index personCount = getLastIndex(getModel());
+        Index personCount = getLastIndex(model);
         command = SelectCommand.COMMAND_WORD + " " + personCount.getOneBased();
         assertCommandSuccess(command, personCount);
 
@@ -45,7 +58,7 @@ public class SelectCommandSystemTest extends AddressBookSystemTest {
         assertCommandFailure(command, expectedResultMessage);
 
         /* Case: select the middle card in the person list -> selected */
-        Index middleIndex = getMidIndex(getModel());
+        Index middleIndex = getMidIndex(model);
         command = SelectCommand.COMMAND_WORD + " " + middleIndex.getOneBased();
         assertCommandSuccess(command, middleIndex);
 
@@ -58,12 +71,12 @@ public class SelectCommandSystemTest extends AddressBookSystemTest {
          * -> rejected
          */
         showPersonsWithName(KEYWORD_MATCHING_MEIER);
-        int invalidIndex = getModel().getAddressBook().getPersonList().size();
+        int invalidIndex = model.getAddressBook().getPersonList().size();
         assertCommandFailure(SelectCommand.COMMAND_WORD + " " + invalidIndex, MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
 
         /* Case: filtered person list, select index within bounds of address book and person list -> selected */
         Index validIndex = Index.fromOneBased(1);
-        assertTrue(validIndex.getZeroBased() < getModel().getFilteredPersonList().size());
+        assertTrue(validIndex.getZeroBased() < model.getFilteredPersonList().size());
         command = SelectCommand.COMMAND_WORD + " " + validIndex.getOneBased();
         assertCommandSuccess(command, validIndex);
 
@@ -78,7 +91,7 @@ public class SelectCommandSystemTest extends AddressBookSystemTest {
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, SelectCommand.MESSAGE_USAGE));
 
         /* Case: invalid index (size + 1) -> rejected */
-        invalidIndex = getModel().getFilteredPersonList().size() + 1;
+        invalidIndex = model.getFilteredPersonList().size() + 1;
         assertCommandFailure(SelectCommand.COMMAND_WORD + " " + invalidIndex, MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
 
         /* Case: invalid arguments (alphabets) -> rejected */

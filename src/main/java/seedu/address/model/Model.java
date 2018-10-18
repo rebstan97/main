@@ -7,6 +7,7 @@ import javafx.collections.ObservableList;
 import seedu.address.logic.commands.menu.SortMenuCommand.SortMethod;
 import seedu.address.model.accounts.Account;
 import seedu.address.model.ingredient.Ingredient;
+import seedu.address.model.ingredient.IngredientName;
 import seedu.address.model.menu.Item;
 import seedu.address.model.person.Person;
 import seedu.address.model.reservation.Reservation;
@@ -27,7 +28,7 @@ public interface Model {
     Predicate<Account> PREDICATE_SHOW_ALL_ACCOUNTS = unused -> true;
     Predicate<Ingredient> PREDICATE_SHOW_ALL_INGREDIENTS = unused -> true;
     Predicate<Item> PREDICATE_SHOW_ALL_ITEMS = unused -> true;
-    Predicate<Person> PREDICATE_SHOW_ALL_RESERVATIONS = unused -> true;
+    Predicate<Reservation> PREDICATE_SHOW_ALL_RESERVATIONS = unused -> true;
     Predicate<SalesRecord> PREDICATE_SHOW_ALL_RECORDS = unused -> true;
 
     /**
@@ -226,6 +227,12 @@ public interface Model {
      * Adds the given ingredient. {@code ingredient} must not already exist in the address book.
      */
     void addIngredient(Ingredient ingredient);
+
+    /**
+     * Finds the ingredient with the given ingredient name. The ingredient with {@code IngredientName} must already
+     * exist in the address book.
+     */
+    Ingredient findIngredient(IngredientName ingredientName);
 
     /**
      * Replaces the given ingredient {@code target} with {@code editedIngredient}. {@code target} must exist in

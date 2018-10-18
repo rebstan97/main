@@ -35,6 +35,8 @@ import seedu.address.logic.commands.accounts.LoginCommand;
 import seedu.address.logic.commands.accounts.LogoutCommand;
 import seedu.address.logic.commands.accounts.RegisterCommand;
 import seedu.address.logic.commands.ingredients.AddIngredientCommand;
+import seedu.address.logic.commands.ingredients.DeleteIngredientByIndexCommand;
+import seedu.address.logic.commands.ingredients.DeleteIngredientByNameCommand;
 import seedu.address.logic.commands.ingredients.DeleteIngredientCommand;
 import seedu.address.logic.commands.ingredients.EditIngredientCommand;
 import seedu.address.logic.commands.ingredients.EditIngredientCommand.EditIngredientDescriptor;
@@ -59,6 +61,7 @@ import seedu.address.logic.commands.sales.RecordSalesCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.accounts.Account;
 import seedu.address.model.ingredient.Ingredient;
+import seedu.address.model.ingredient.IngredientName;
 import seedu.address.model.menu.Item;
 import seedu.address.model.menu.TagContainsKeywordsPredicate;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
@@ -324,10 +327,16 @@ public class AddressBookParserTest {
     public void parseCommand_deleteIngredient() throws Exception {
         DeleteIngredientCommand command = (DeleteIngredientCommand) parser.parseCommand(
                 DeleteIngredientCommand.COMMAND_WORD + " " + INDEX_FIRST.getOneBased());
-        assertEquals(new DeleteIngredientCommand(INDEX_FIRST), command);
+        assertEquals(new DeleteIngredientByIndexCommand(INDEX_FIRST), command);
         command = (DeleteIngredientCommand) parser.parseCommand(
                 DeleteIngredientCommand.COMMAND_ALIAS + " " + INDEX_FIRST.getOneBased());
-        assertEquals(new DeleteIngredientCommand(INDEX_FIRST), command);
+        assertEquals(new DeleteIngredientByIndexCommand(INDEX_FIRST), command);
+        command = (DeleteIngredientCommand) parser.parseCommand(
+                DeleteIngredientCommand.COMMAND_WORD + " " + "Chicken Thigh");
+        assertEquals(new DeleteIngredientByNameCommand(new IngredientName("Chicken Thigh")), command);
+        command = (DeleteIngredientCommand) parser.parseCommand(
+                DeleteIngredientCommand.COMMAND_ALIAS + " " + "Chicken Thigh");
+        assertEquals(new DeleteIngredientByNameCommand(new IngredientName("Chicken Thigh")), command);
     }
 
     @Test
