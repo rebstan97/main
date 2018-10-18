@@ -53,7 +53,7 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 * You can create accounts for your employees to manage the system on your behalf.
 
 === Menus
-_To be completed by Yi Can_
+* You can manage the menu by adding, editing or remove items from the menu.
 
 === Ingredients
 _To be completed by Rebecca_
@@ -519,7 +519,7 @@ Format: `select-item INDEX`
 
 Examples:
 
-* `list` +
+* `list-items` +
 `select-item 2` +
 Selects the 2nd item in the menu.
 * `find Burger` +
@@ -615,7 +615,7 @@ Discounts the 1st item in the results of the `find` command.
 
 === Today's specials : `today-special` or `ts`
 
-Lists the items that have been tagged with the particular day in the menu. +
+Lists the items that have been tagged with `DAY_OF_THE_WEEK` in the menu. +
 Format: `today-special`
 
 Examples:
@@ -643,6 +643,10 @@ Examples:
 
 * `import-menu f/test/ n/menu.txt` +
 Import the menu.txt from test folder to replace current menu.
+
+=== Support for multiple menus `[coming in v2.0]`
+User will be able to manage multiple menus without the need of exporting and importing for different version of the
+current menu.
 
 === Adding a reservation: `add-reservation` or `ar`
 

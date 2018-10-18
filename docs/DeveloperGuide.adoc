@@ -374,8 +374,82 @@ image::DeleteIngredientByNameSequenceDiagram.png[width="1000"]
 ** Pros: Less coupling since the methods related to the delete ingredient command are confined to a single class.
 ** Cons: Two attributes are required, but only one has a value while the other has to be set to null. This makes the
 `equals()` method difficult to implement.
-
 // end::deleteingredient[]
+
+// tag::menu[]
+=== Menu Management feature
+Menu management feature extends `MeNuS` with a menu and provides the users with the ability to add items to the
+menu, edit items and remove items from the menu.
+
+==== Current Implementation
+The menu is stored internally as `items`, which is a `UniqueItemList` object that contains a list of `Item` objects.
+The menu management feature implements the following operations:
+
+* `add-item` command -- Adds an item to the menu. The item must not already exist in the menu.
+* `edit-item` command -- Replaces the target item with the editedItem. Target item
+ must be in the menu and editedItem must not be the same as another existing item in the menu.
+* `delete-item` command -- Removes the equivalent item from the menu. The item must exist in the menu.
+* `list-items` command -- Lists all the items in the menu.
+* `select-item` command -- Selects an item in the menu and loads the page of the selected item.
+* `sort-menu` -- Sorts the menu by name or price. The user must specify the sorting method.
+* `find-item` command -- Finds items whose names contain any of the given keywords.
+* `filter-menu` command -- Finds items whose tags contain any of the given keywords.
+* `today-special` command -- Finds items whose tags contain the `DAY_OF_THE_WEEK`.
+
+Each `Item` object consists of `Name` and `Price`.
+[NOTE]
+`Name` is a separate class from the `Name` used by `Person`, but is functionally the same.
+
+==== `add-item` Command
+The `add-item` command is facilitated by `AddItemCommand` and `AddItemCommandParser`. The command takes in
+user input for `Name`, `Price` and `Tag`(optional).
+
+The `AddItemCommandParser` will parse the user input and checks if the input is valid.
+It will then construct an `Item` object.
+[NOTE]
+If the input is not valid, it will throw a `ParseException`.
+
+The `AddItemCommand` will indirectly call the `UniqueItemList#add(Item toAdd)` and the adds the item.
+After adding the item, it will save the current state for undo/redo.
+
+==== `sort-menu` Command
+The `sort-menu` command is facilitated by `SortMenuCommand` and `SortMenuCommandParser`. The command takes in
+user input for the sorting method.
+[NOTE]
+Currently only sort by name or price.
+
+The `SortMenuCommandParser` will parse the user input and checks if the input is valid.
+[NOTE]
+If the input is not valid, it will throw a `ParseException`.
+
+The `SortMenuCommand` will indirectly call the `UniqueItemList#sortItemsByName()` or
+`UniqueItemList#sortItemsByPrice()` and the sorts the menu.
+After sorting the menu, it will save the current state for undo/redo.
+
+==== `filter-menu` Command
+The `filter-menu` command is facilitated by `FilterMenuCommand` and `FilterMenuCommandParser`. The command takes in
+user input for the keywords.
+
+The `FilterMenuCommandParser` will parse the user input and checks if the input is valid and constructs an
+`TagContainsKeywordsPredicate` object.
+[NOTE]
+If the input is not valid, it will throw a `ParseException`.
+
+The `FilterMenuCommand` will directly call the `ModelManager#updateFilteredItemList(Predicate<Item> predicate)` and
+set the predicate for `ModelManger#filteredItems`.
+
+==== Design Considerations
+
+===== Aspect: How `Price` is parsed
+
+* **Alternative 1 (current choice):** `Price` is parsed without the currency symbol.
+** Pros: Easy to implement.
+** Cons: Only able to display `Price` with `$` with 2 decimal place.
+* **Alternative 2:** Allow users to enter the currency symbol
+** Pros: Able to display the different currencies.
+** Cons: Harder to parse as currencies have different decimal places. Additional checks need to be implemented
+to check if the currency symbol and price entered are valid.
+// end::menu[]
 
 //tag::reservations[]
 === Reservations feature
@@ -440,8 +514,6 @@ manipulation.
 * **Alternative 2:** Use `Natty` library for `DateTime` parsing
 ** Pros: Natty uses natural language parsing, so the user can enter the `Date` and `Time` fields in their preferred
 format.
-
-
 //end::reservations[]
 
 // tag::dataencryption[]
@@ -1061,6 +1133,7 @@ Use case resumes at step 2.
 
 1.  User requests to add item to menu.
 2.  App adds the item to menu.
+3.  App returns a success message confirming the new item has been added.
 +
 Use case ends.
 
@@ -1070,16 +1143,22 @@ Use case ends.
 * 1a. Invalid argument given for the command.
 +
 [none]
-** 1a1. App shows an error message that ITEM_NAME or/and ITEM_PRICE are invalid.
+** 1a1. App shows an error message that item name or/and item price are invalid.
+** 1a2. User requests to add item to menu again.
 +
-Use case restart from step 1.
+Steps 1a1-1a2 are repeated until valid item name and valid item price are entered.
++
+Use case resumes at step 2.
 
 * 1b. The item name entered is already in the menu.
 +
 [none]
 ** 1b1. App shows an error message that the item name already exists.
+** 1b2. User requests to add item to menu again.
 +
-Use case restart from step 1.
+Steps 1b1-1b2 are repeated until item name that does not exist in the menu is entered.
++
+Use case resumes at step 2.
 
 [discrete]
 === Use case: UC302 - Delete item from menu
@@ -1088,8 +1167,9 @@ Use case restart from step 1.
 
 1.  User requests to list items.
 2.  App shows a list of items in menu.
-3.  User requests to delete a specific item in the list.
+3.  User requests to delete a specific item in menu.
 4.  App deletes the item.
+5.  App returns a success message confirming the specified item has been deleted.
 +
 Use case ends.
 
@@ -1104,8 +1184,11 @@ Use case ends.
 +
 [none]
 ** 3a1. App shows an error message that the given index is invalid.
+** 3a2. User requests to delete a specific item in menu again.
 +
-Use case resumes at step 2.
+Steps 3a1-3a2 are repeated until a valid index is entered.
++
+Use case resumes at step 4.
 
 [discrete]
 === Use case: UC303 - Edit item from menu
@@ -1116,6 +1199,7 @@ Use case resumes at step 2.
 2.  App shows a list of items in menu.
 3.  User requests to edit a specific item in the list.
 4.  App edits the item with updated values.
+5.  App returns a success message confirming the specified item has been edited.
 +
 Use case ends.
 
@@ -1130,15 +1214,21 @@ Use case ends.
 +
 [none]
 ** 3a1. App shows an error message that the given index is invalid.
+** 3a2. User requests to delete a specific item in menu again.
 +
-Use case resumes at step 2.
+Steps 3a1-3a2 are repeated until a valid index is entered.
++
+Use case resumes at step 4.
 
 * 3b. None of the optional fields are specified.
 +
 [none]
 ** 3b1. App shows an error message that none of the optional fields are specified.
+** 3b2. User requests to edit a specific item in menu again.
 +
-Use case resumes at step 2.
+Steps 3b1-3b2 are repeated until one of the optional fields is entered.
++
+Use case resumes at step 4.
 
 [discrete]
 === Use case: UC304 - Give an item a discount
@@ -1149,6 +1239,7 @@ Use case resumes at step 2.
 2.  App shows a list of items in menu.
 3.  User requests to give a specific item in the list a discount.
 4.  App give the item a discount.
+5.  App returns a success message confirming the specified item has been given a discount.
 +
 Use case ends.
 
@@ -1163,15 +1254,21 @@ Use case ends.
 +
 [none]
 ** 3a1. App shows an error message that the given index is invalid.
+** 3a2. User requests to give a specific item in the list a discount again.
 +
-Use case resumes at step 2.
+Steps 3a1-3a2 are repeated until a valid index is entered.
++
+Use case resumes at step 4.
 
 * 3b. The given percentage is invalid.
 +
 [none]
 ** 3b1. App shows an error message that the given percentage is invalid.
+** 3b2. User requests to give a specific item in the list a discount again.
 +
-Use case resumes at step 2.
+Steps 3b1-3b2 are repeated until a valid percentage is entered.
++
+Use case resumes at step 4.
 
 [discrete]
 === Use case: UC305 - Export menu
@@ -1180,6 +1277,7 @@ Use case resumes at step 2.
 
 1.  User requests to export menu.
 2.  App export the menu.
+3.  App returns a success message confirming the menu has been exported.
 +
 Use case ends.
 
@@ -1190,8 +1288,11 @@ Use case ends.
 +
 [none]
 ** 1a1. App shows an error message that file path is invalid.
+** 1a2. User requests to export menu again.
 +
-Use case restart from step 1.
+Steps 1a1-1a2 are repeated until invalid file path is entered.
++
+Use case resumes at step 2.
 
 [discrete]
 === Use case: UC401 - Add reservation
