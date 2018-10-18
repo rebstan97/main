@@ -61,8 +61,8 @@ _To be completed by Rebecca_
 === Sales
 _To be completed by Kai Jun_
 
-=== Bookings
-_To be completed by Ming Xian_
+=== Reservations
+* You can keep track of customer reservations on the system.
 
 
 [[Features]]
