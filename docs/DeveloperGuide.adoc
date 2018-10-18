@@ -356,28 +356,23 @@ The following sequence diagrams illustrate how the delete operation works.
 
 * Diagram 1: When user enters `delete-ingredient 1`
 
-image::DeleteIngByIndexSequenceDiagram.png[width="800"]
+image::DeleteIngByIndexSequenceDiagram.png[width="1000"]
 
-Diagram 2: When user enters `delete-ingredient apple`
+* Diagram 2: When user enters `delete-ingredient apple`
 
-image::DeleteIngByNameSequenceDiagram.png[width="800"]
+image::DeleteIngByNameSequenceDiagram.png[width="1000"]
 
 ==== Design Considerations
 
 ===== Aspect: Implementation of delete ingredient command
 
 * **Alternative 1 (current choice):** Separate classes to handle deleting by index and deleting by name.
-** Pros:
-*** Allows different attributes and method implementation for each class.
-*** Complies to the Single Responsibility Principle.
-** Cons:
-*** Tight coupling between `DeleteIngredientCommand` and the inheriting classes
+** Pros: Allows different attributes and method implementation for each class.
+** Cons: Tight coupling between `DeleteIngredientCommand` and the inheriting classes
 * **Alternative 2:** Single class to handle deleting by both index and name.
-** Pros:
-*** Less coupling since the methods related to the delete ingredient command are confined to a single class.
-** Cons:
-*** Two attributes are required, but only one has a value while the other has to be set to null. This makes the equals() method difficult to implement.
-*** Violates the Single Responsibility Principle
+** Pros: Less coupling since the methods related to the delete ingredient command are confined to a single class.
+** Cons: Two attributes are required, but only one has a value while the other has to be set to null. This makes the
+`equals()` method difficult to implement.
 
 // end::deleteingredient[]
 
