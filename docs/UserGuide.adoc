@@ -59,7 +59,8 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 _To be completed by Rebecca_
 
 === Sales
-_To be completed by Kai Jun_
+* You can record sales volume of an item and edit/delete past sales records. You can also generate and display the
+sales report for a specific day.
 
 === Reservations
 * You can keep track of customer reservations on the system.
@@ -709,107 +710,92 @@ Examples:
 `list-ingredients` +
 Deletes the 2nd reservation in the reservations list.
 
-=== Recording daily sales volume of a menu item: `record-sales`
+=== Recording sales volume of an item: `record-sales` or `rs`
 
-Records the quantity of a menu item sold within the specified day into the sales book. +
+Records the quantity of an item sold within a specific day into the sales list. +
 Format: `record-sales d/DATE n/ITEM_NAME q/QUANTITY SOLD p/ITEM_PRICE`
 
 ****
 * DATE must be written in the DD-MM-YYYY format.
-* Both DATE and ITEM_NAME cannot be same as another record in the sales book.
+* DATE must exist in the calendar.
+* Both DATE and ITEM_NAME cannot be same as another record in the sales list.
 ****
 
 Examples:
 
 * `record-sales d/25-09-2018 n/Fried Rice q/35 p/5.50`
 
-=== Display sales report: `display-sales`
+=== Display sales report: `display-sales` or `dis`
 
-Displays the sales report for all days. +
-Format: `display-sales` +
-OR +
-Displays the sales report for the specified day. +
+Generate and display the sales report for a specific day. +
 Format: `display-sales DATE`
 
 ****
 * DATE must be written in the DD-MM-YYYY format.
+* DATE must exist in the calendar.
 ****
 
 Examples:
 
-* `display-sales` +
-Displays the sales report for all days. +
 * `display-sales 25-09-2018` +
 Displays the sales report dated 25-09-2018.
 
 
-=== Deleting a sales record: `delete-sales`
+=== Deleting a sales record: `delete-sales` or `des`
 
-Deletes the sales record with the specified date and item name. +
-Format: `delete-sales DATE ITEM_NAME` / `delete-sales ITEM_INDEX`
+Deletes the sales record identified by the index, or by the date and item name. +
+Format: `delete-sales ITEM_INDEX` / `delete-sales DATE ITEM_NAME`
 
 ****
 * Deletes the record at the specified `ITEM_INDEX`.
-* The item index refers to the index number shown in the sales book.
+* The item index refers to the index number shown in the sales list.
 * The index *must be a positive integer* 1, 2, 3, ...
 * Alternatively, deletes the sales record with the specified `DATE` and `ITEM_NAME`.
 ****
 
 Examples:
 
-* `display-sales` +
-`delete-sales 2` +
-`display-sales` +
-Deletes the 2nd record from the sales book.
+* `delete-sales 2` +
+Deletes the 2nd record from the sales list.
 
 * `delete-sales 10-02-2018 Fried Rice` +
-`display-sales` +
-Deletes the sales record for `Fried Rice` dated 10-02-2018 from the sales book.
+Deletes the sales record for `Fried Rice` dated 10-02-2018 from the sales list.
 
 
-=== Editing a sales record: `edit-sales`
+=== Editing a sales record: `edit-sales` or `es`
 
-Edits the sales record with the specified date and item name. +
-Format: `edit-sales DATE NAME [n/ITEM_NAME] [q/QUANTITY SOLD] [p/ITEM_PRICE]` / `edit-sales INDEX [n/ITEM_NAME]
-[q/QUANTITY SOLD] [p/ITEM_PRICE]`
+Edits the sales record identified by the index, or by the date and item name. +
+Format: `edit-sales ITEM_INDEX [d/DATE] [n/ITEM_NAME] [q/QUANTITY SOLD] [p/ITEM_PRICE]`/ `edit-sales DATE
+ITEM_NAME [d/DATE] [n/ITEM_NAME] [q/QUANTITY SOLD] [p/ITEM_PRICE]`
 
 ****
-* Edits the record at the specified `INDEX`. The index refers to the index number shown in the sales book.
+* Edits the record at the specified `INDEX`. The index refers to the index number shown in the sales list.
 * The index *must be a positive integer* 1, 2, 3, ...
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
-* Alternatively, edits the sales record with the specified `DATE` and `NAME`.
+* Alternatively, edits the record with the specified `DATE` and `ITEM_NAME`.
 ****
 
 Examples:
 
+* `edit-sales 3 n/Fried Omelet`  +
+Edits the item name of the 3rd record to be "Fried Omelet".
+
 * `edit-sales 23-06-2018 Fried Rice n/Fried Rice with Shrimps` +
-In the sales record of "Fried Rice" dated 23-06-2018, edits its name to be "Fried Rice with Shrimps".
+Edits the item name of the record "23-06-2018, Fried Rice" to be "Fried Rice with Shrimps".
 
 * `edit-sales 12-02-2018 Pasta q/37 p/6.50`  +
-In the sales record of "Pasta" dated 12-02-2018, edits its quantity sold and price to be 37 and 6.50
-respectively.
+Edits the quantity sold and price of the record "12-02-2018, Pasta" to be 37 and 6.50 respectively.
 
-* `edit-sales 3 n/Fried Omelet`  +
-In the 3rd record in the sales book, edits the menu item's name to be "Fried Omelet".
 
-=== Checking sales history of a menu item: `check-sales`
+=== Ranking items according to total revenue: `rank-item` or `ri`
 
-Displays the sales history of a menu item and the total revenue it has accumulated. +
-Format: `check-sales ITEM_NAME` +
+Ranks the items based on their total revenue accumulated in past sales records. +
+Format: `rank-item`
 
-Examples:
+=== Ranking dates according to total revenue: `rank-date` or `rd`
 
-* `check-sales Fried Rice`
-
-=== Ranking menu items according to profitability: `rank-dish`
-
-Ranks the menu items based on their total revenue accumulated in past sales records in descending order. +
-Format: `rank-dish`
-
-=== Ranking dates according to profitability: `rank-date`
-
-Ranks the dates based on their revenue accumulated in past sales records in descending order. +
+Ranks the dates based on their total revenue for that day. +
 Format: `rank-date`
 
 == FAQ
@@ -865,11 +851,11 @@ contains the data of your previous *MeNUS* folder.
 |*List reservation* |`list-reservations` |`list-reservations`
 |*Sort reservation* |`sort-reservations` |`sort-reservations`
 |*Record sales volume* |`record-sales d/DATE n/ITEM_NAME q/QUANTITY SOLD p/ITEM_PRICE` |`record-sales d/25-09-2018 n/Fried Rice q/35 p/5.50`
-|*Display sales record* |`display-sales` or `display-sales DATE` |`display-sales` or `display-sales 25-09-2018`
-|*Edit sales record* |`edit-sales DATE NAME [d/DATE] [n/ITEM_NAME] [q/QUANTITY SOLD] [p/ITEM_PRICE]` or `edit-sales INDEX [d/DATE] [n/ITEM_NAME] [q/QUANTITY SOLD] [p/ITEM_PRICE]` |`edit-sales 12-02-2018 Pasta q/37 p/6.50` or `edit-sales 3 n/Fried Omelet`
-|*Check sales history of menu item* |`check-sales ITEM_NAME` |`check-sales Fried Rice`
-|*Delete sales record* |`delete-sales DATE ITEM_NAME` or `delete-sales ITEM_INDEX` |`delete-sales 10-02-2018 Fried Rice` or `delete-sales 2`
-|*Rank by profitability* |`rank-dish` or `rank-date` | `TO BE CONFIRMED`
+|*Display sales report* |`display-sales DATE` |`display-sales 25-09-2018`
+|*Edit sales record* |`edit-sales ITEM_INDEX [d/DATE] [n/ITEM_NAME] [q/QUANTITY SOLD] [p/ITEM_PRICE]` or `edit-sales DATE ITEM_NAME [d/DATE] [n/ITEM_NAME] [q/QUANTITY SOLD] [p/ITEM_PRICE]` |`edit-sales 3 n/Fried Omelet` or `edit-sales 12-02-2018 Pasta q/37 p/6.50`
+|*Delete sales record* |`delete-sales ITEM_INDEX` or `delete-sales DATE ITEM_NAME` |`delete-sales 2` or `delete-sales  10-02-2018 Fried Rice`
+|*Rank items by total revenue* |`rank-item` |`rank-item`
+|*Rank dates by total revenue* |`rank-date` | `rank-date`
 |=======================================================================
 
 [appendix]
