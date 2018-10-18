@@ -59,7 +59,8 @@ _To be completed by Yi Can_
 _To be completed by Rebecca_
 
 === Sales
-_To be completed by Kai Jun_
+* You can record sales volume of an item and edit/delete past sales records. You can also generate and display the
+sales report for a specific day.
 
 === Bookings
 _To be completed by Ming Xian_
