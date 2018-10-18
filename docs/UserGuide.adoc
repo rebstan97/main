@@ -846,12 +846,12 @@ contains the data of your previous *MeNUS* folder.
 |*Delete reservation* |`delete-reservation INDEX` |`delete-reservations 2`
 |*List reservation* |`list-reservations` |`list-reservations`
 |*Sort reservation* |`sort-reservations` |`sort-reservations`
-|*Record sales volume* |`record-sales d/DATE n/ITEM_NAME q/QUANTITY SOLD p/ITEM_PRICE` |`record-sales d/25-09-2018 n/Fried Rice q/35 p/5.50`
-|*Display sales record* |`display-sales` or `display-sales DATE` |`display-sales` or `display-sales 25-09-2018`
-|*Edit sales record* |`edit-sales DATE NAME [d/DATE] [n/ITEM_NAME] [q/QUANTITY SOLD] [p/ITEM_PRICE]` or `edit-sales INDEX [d/DATE] [n/ITEM_NAME] [q/QUANTITY SOLD] [p/ITEM_PRICE]` |`edit-sales 12-02-2018 Pasta q/37 p/6.50` or `edit-sales 3 n/Fried Omelet`
-|*Check sales history of menu item* |`check-sales ITEM_NAME` |`check-sales Fried Rice`
-|*Delete sales record* |`delete-sales DATE ITEM_NAME` or `delete-sales ITEM_INDEX` |`delete-sales 10-02-2018 Fried Rice` or `delete-sales 2`
-|*Rank by profitability* |`rank-dish` or `rank-date` | `TO BE CONFIRMED`
+|*Add sales record* |`record-sales d/DATE n/ITEM_NAME q/QUANTITY SOLD p/ITEM_PRICE` |`record-sales d/25-09-2018 n/Fried Rice q/35 p/5.50`
+|*Display sales report* |`display-sales DATE` |`display-sales 25-09-2018`
+|*Edit sales record* |`edit-sales ITEM_INDEX [d/DATE] [n/ITEM_NAME] [q/QUANTITY SOLD] [p/ITEM_PRICE]` or `edit-sales DATE ITEM_NAME [d/DATE] [n/ITEM_NAME] [q/QUANTITY SOLD] [p/ITEM_PRICE]` |`edit-sales 3 n/Fried Omelet` or `edit-sales 12-02-2018 Pasta q/37 p/6.50`
+|*Delete sales record* |`delete-sales ITEM_INDEX` or `delete-sales DATE ITEM_NAME` |`delete-sales 2` or `delete-sales  10-02-2018 Fried Rice`
+|*Rank items by total revenue* |`rank-item` |`rank-item`
+|*Rank dates by total revenue* |`rank-date` | `rank-date`
 |=======================================================================
 
 [appendix]
