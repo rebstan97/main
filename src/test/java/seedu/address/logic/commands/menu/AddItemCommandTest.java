@@ -23,6 +23,7 @@ import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.accounts.Account;
 import seedu.address.model.ingredient.Ingredient;
+import seedu.address.model.ingredient.IngredientName;
 import seedu.address.model.menu.Item;
 import seedu.address.model.person.Person;
 import seedu.address.model.reservation.Reservation;
@@ -328,6 +329,11 @@ public class AddItemCommandTest {
 
         @Override
         public void addIngredient(Ingredient ingredient) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public Ingredient findIngredient(IngredientName ingredientName) {
             throw new AssertionError("This method should not be called.");
         }
 

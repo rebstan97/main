@@ -31,6 +31,7 @@ import guitests.guihandles.MainWindowHandle;
 import guitests.guihandles.PersonListPanelHandle;
 import guitests.guihandles.ResultDisplayHandle;
 import guitests.guihandles.StatusBarFooterHandle;
+import guitests.guihandles.accounts.UsernameDisplayHandle;
 import seedu.address.MainApp;
 import seedu.address.TestApp;
 import seedu.address.commons.core.EventsCenter;
@@ -43,6 +44,7 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.ui.BrowserPanel;
 import seedu.address.ui.CommandBox;
+import seedu.address.ui.accounts.UsernameDisplay;
 
 /**
  * A system test class for AddressBook, which provides access to handles of GUI components and helper methods
@@ -121,6 +123,10 @@ public abstract class AddressBookSystemTest {
 
     public ResultDisplayHandle getResultDisplay() {
         return mainWindowHandle.getResultDisplay();
+    }
+
+    public UsernameDisplayHandle getUsernameDisplay() {
+        return mainWindowHandle.getUsernameDisplay();
     }
 
     /**
@@ -276,6 +282,7 @@ public abstract class AddressBookSystemTest {
     private void assertApplicationStartingStateIsCorrect() {
         assertEquals("", getCommandBox().getInput());
         assertEquals("", getResultDisplay().getText());
+        assertEquals(UsernameDisplay.ACCOUNT_STATUS_GUEST, getUsernameDisplay().getText()); // test?
         assertListMatching(getPersonListPanel(), getModel().getFilteredPersonList());
         assertEquals(MainApp.class.getResource(FXML_FILE_FOLDER + DEFAULT_PAGE), getBrowserPanel().getLoadedUrl());
         assertEquals(Paths.get(".").resolve(testApp.getStorageSaveLocation()).toString(),

@@ -4,37 +4,48 @@ import static org.junit.Assert.assertTrue;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
 import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.address.logic.commands.DeleteCommand.MESSAGE_DELETE_PERSON_SUCCESS;
+import static seedu.address.testutil.EventsUtil.postNow;
 import static seedu.address.testutil.TestUtil.getLastIndex;
 import static seedu.address.testutil.TestUtil.getMidIndex;
 import static seedu.address.testutil.TestUtil.getPerson;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST;
 import static seedu.address.testutil.TypicalPersons.KEYWORD_MATCHING_MEIER;
 
+import org.junit.Before;
 import org.junit.Test;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
+import seedu.address.commons.events.ui.LoginEvent;
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.RedoCommand;
 import seedu.address.logic.commands.UndoCommand;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
+import seedu.address.testutil.accounts.AccountBuilder;
 
 public class DeleteCommandSystemTest extends AddressBookSystemTest {
 
     private static final String MESSAGE_INVALID_DELETE_COMMAND_FORMAT =
             String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE);
 
+    private Model model;
+
+    @Before
+    public void prepare() {
+        model = getModel();
+        postNow(new LoginEvent(new AccountBuilder().build()));
+    }
+
     @Test
     public void delete() {
         /* ----------------- Performing delete operation while an unfiltered list is being shown -------------------- */
 
         /* Case: delete the first person in the list, command with leading spaces and trailing spaces -> deleted */
-        Model expectedModel = getModel();
         String command = "     " + DeleteCommand.COMMAND_WORD + "      " + INDEX_FIRST.getOneBased() + "       ";
-        Person deletedPerson = removePerson(expectedModel, INDEX_FIRST);
+        Person deletedPerson = removePerson(model, INDEX_FIRST);
         String expectedResultMessage = String.format(MESSAGE_DELETE_PERSON_SUCCESS, deletedPerson);
-        assertCommandSuccess(command, expectedModel, expectedResultMessage);
+        assertCommandSuccess(command, model, expectedResultMessage);
 
         /* Case: delete the last person in the list -> deleted */
         Model modelBeforeDeletingLast = getModel();
@@ -76,14 +87,14 @@ public class DeleteCommandSystemTest extends AddressBookSystemTest {
 
         /* Case: delete the selected person -> person list panel selects the person before the deleted person */
         showAllPersons();
-        expectedModel = getModel();
-        Index selectedIndex = getLastIndex(expectedModel);
+        model = getModel();
+        Index selectedIndex = getLastIndex(model);
         Index expectedIndex = Index.fromZeroBased(selectedIndex.getZeroBased() - 1);
         selectPerson(selectedIndex);
         command = DeleteCommand.COMMAND_WORD + " " + selectedIndex.getOneBased();
-        deletedPerson = removePerson(expectedModel, selectedIndex);
+        deletedPerson = removePerson(model, selectedIndex);
         expectedResultMessage = String.format(MESSAGE_DELETE_PERSON_SUCCESS, deletedPerson);
-        assertCommandSuccess(command, expectedModel, expectedResultMessage, expectedIndex);
+        assertCommandSuccess(command, model, expectedResultMessage, expectedIndex);
 
         /* --------------------------------- Performing invalid delete operation ------------------------------------ */
 
