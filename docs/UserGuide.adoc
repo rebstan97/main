@@ -17,17 +17,26 @@ endif::[]
 By: `Team CS2103-AY1819S1-F10-4`      Since: `Sep 2018`      Licence: `MIT`
 
 == Introduction
-link:{repoURL}[MeNUS] empowers you in improving the Management(M) and its efficiency(e) of your
+link:{repoURL}[MeNUS] empowers you to improve the Management(M) and efficiency(e) of your
 restaurants in NUS.
 
-MeNUS is for restaurant owners who prefer to use a desktop application to manage their restaurants. More importantly,
+MeNUS is designed for restaurant owners who prefer to use a desktop application to manage their restaurants. More
+importantly,
 MeNUS is *optimized for users who prefer to work with a Command Line Interface (CLI) while still having the benefits
-of a Graphical User Interface (GUI)*. If you can type fast, MeNUS allows you to manage all aspects of your eatery
-from a single location -- menu, inventory, sales and bookings management!
+of a Graphical User Interface (GUI)*. If you can type fast, MeNUS allows you to manage aspects of your eatery
+-- menu, ingredient, sales and reservations management -- all from a single location !
 
 == Quick Start
 
 .  Ensure you have Java version `9` or later installed in your Computer.
+
+[NOTE]
+====
+* If you are unsure which Java version is installed, you may refer to this link:https://www.java
+.com/en/download/help/version_manual.xml[link].
+* You may install the current version of Java link:https://www.oracle.com/technetwork/java/javase/downloads/index.html[here].
+====
+
 .  Download the latest `menus.jar` link:https://github.com/CS2103-AY1819S1-F10-4/main/releases[here].
 .  Copy the file to the folder you want to use as the home folder.
 .  Double-click the file to start the app. The GUI should appear in a few seconds.
@@ -47,7 +56,7 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 
 [[Components]]
 == Components
-*MeNUS* consists of five main components: menus, inventory, sales and bookings management.
+*MeNUS* consists of five main components: account, menu, ingredient, sales and reservations management.
 
 === Accounts
 * You can create accounts for your employees to manage the system on your behalf.
@@ -56,7 +65,7 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 * You can manage the menu by adding, editing or remove items from the menu.
 
 === Ingredients
-_To be completed by Rebecca_
+* You can keep track of the ingredient availability in your restaurant.
 
 === Sales
 * You can record sales volume of an item and edit/delete past sales records. You can also generate and display the
@@ -65,28 +74,27 @@ sales report for a specific day.
 === Reservations
 * You can keep track of customer reservations on the system.
 
-
 [[Features]]
 == Key Features
 === Convenience
-It is an ultimate All-In-One application that will provide you with the utmost convenience to manage your
+MeNUS is an ultimate All-In-One application that will provide you with the utmost convenience you need to manage your
 restaurants in NUS.
 
-* Export data to `.xml` (default) or Excel file `[coming in v2.0]`.
+* Exporting data to `.xml` (default) or Excel file `[coming in v2.0]`.
 
 === Security
 Security is key to a business's success. *MeNUS* ensures the security of your restaurant's data by:
 
-* Encrypting all restaurant data using AES-265. `[coming in v2.0]`
+* Encrypting all restaurant data using AES-256. `[coming in v2.0]`
 * Securing account passwords using bcrypt.
-* User needs to be authenticated before they can run any commands.
-* Login attempts, both success and failure are logged.
+* Authenticating users before they can run any commands.
+* Logging both successful and failed login attempts.
 
 === Efficiency
 Time is money. *MeNUS* ensures that the application will:
 
-* Load within 5 seconds.
-* Execute command within split of a second and updating the GUI almost instantaneously.
+* Loading within 5 seconds.
+* Executing commands within split of a second and updating the GUI almost instantaneously.
 
 [[Commands]]
 == Commands
