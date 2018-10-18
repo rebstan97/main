@@ -17,13 +17,19 @@ endif::[]
 By: `Team CS2103-AY1819S1-F10-4`      Since: `Sep 2018`      Licence: `MIT`
 
 == Introduction
-link:{repoURL}[MeNUS] empowers you in improving the Management(M) and its efficiency(e) of your
+link:{repoURL}[MeNUS] empowers you and your employees in improving the Management(M) and its efficiency(e) of your
 restaurants in NUS.
 
-MeNUS is for restaurant owners who prefer to use a desktop application to manage their restaurants. More importantly,
-MeNUS is *optimized for users who prefer to work with a Command Line Interface (CLI) while still having the benefits
-of a Graphical User Interface (GUI)*. If you can type fast, MeNUS allows you to manage all aspects of your eatery
-from a single location -- menu, inventory, sales and bookings management!
+As long as you feel like your restaurants are using too many overcomplicated and expensive systems,
+link:{repoURL}[MeNUS] is here for you!
+
+
+Introducing link:{repoURL}[MeNUS], a revolutionary restaurant management desktop application that is *optimized for
+users who prefer to work with a Command Line Interface (CLI) while still having
+the benefits of a Graphical User Interface (GUI)*. If you can type fast, MeNUS allows you to manage all aspects of
+your restaurants from a single application -- staff, menu, inventory, sales and bookings management!
+
+Let's get started!
 
 == Quick Start
 
@@ -37,7 +43,7 @@ image::Ui.png[width="790"]
 .  Type the command in the command box and press kbd:[Enter] to execute it. +
 e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 .  Some example commands you can try:
-
+* * `login id/root pw/root` : logs into the root account
 * *`list`* : lists all contacts
 * **`add`**`n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : adds a contact named `John Doe` to the Address Book.
 * **`delete`**`3` : deletes the 3rd contact shown in the current list
