@@ -706,7 +706,7 @@ Examples:
 `list-ingredients` +
 Deletes the 2nd reservation in the reservations list.
 
-=== Adding a sales record: `record-sales`
+=== Adding a sales record: `record-sales` or `rs`
 
 Records the quantity of an item sold within a specific day into the sales book. +
 Format: `record-sales d/DATE n/ITEM_NAME q/QUANTITY SOLD p/ITEM_PRICE`
@@ -721,7 +721,7 @@ Examples:
 
 * `record-sales d/25-09-2018 n/Fried Rice q/35 p/5.50`
 
-=== Display sales report: `display-sales`
+=== Display sales report: `display-sales` or `dis`
 
 Generate and display the sales report for a specific day. +
 Format: `display-sales DATE`
@@ -737,7 +737,7 @@ Examples:
 Displays the sales report dated 25-09-2018.
 
 
-=== Deleting a sales record: `delete-sales`
+=== Deleting a sales record: `delete-sales` or `des`
 
 Deletes the sales record identified by the index, or by the date and item name. +
 Format: `delete-sales ITEM_INDEX` / `delete-sales DATE ITEM_NAME`
@@ -758,7 +758,7 @@ Deletes the 2nd record from the sales book.
 Deletes the sales record for `Fried Rice` dated 10-02-2018 from the sales book.
 
 
-=== Editing a sales record: `edit-sales`
+=== Editing a sales record: `edit-sales` or `es`
 
 Edits the sales record identified by the index, or by the date and item name. +
 Format: `edit-sales ITEM_INDEX [d/DATE] [n/ITEM_NAME] [q/QUANTITY SOLD] [p/ITEM_PRICE]`/ `edit-sales DATE
@@ -784,12 +784,12 @@ Edits the item name of the record "23-06-2018, Fried Rice" to be "Fried Rice wit
 Edits the quantity sold and price of the record "12-02-2018, Pasta" to be 37 and 6.50 respectively.
 
 
-=== Ranking items according to total revenue: `rank-item`
+=== Ranking items according to total revenue: `rank-item` or `ri`
 
 Ranks the items based on their total revenue accumulated in past sales records. +
 Format: `rank-item`
 
-=== Ranking dates according to total revenue: `rank-date`
+=== Ranking dates according to total revenue: `rank-date` or `rd`
 
 Ranks the dates based on their total revenue for that day. +
 Format: `rank-date`
