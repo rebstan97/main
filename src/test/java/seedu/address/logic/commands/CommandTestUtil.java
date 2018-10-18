@@ -30,6 +30,7 @@ import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.commands.ingredients.EditIngredientCommand;
 import seedu.address.logic.commands.menu.EditItemCommand;
+import seedu.address.logic.commands.reservation.EditReservationCommand;
 import seedu.address.logic.commands.sales.EditSalesCommand;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
@@ -42,6 +43,7 @@ import seedu.address.model.salesrecord.SalesRecord;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 import seedu.address.testutil.ingredients.EditIngredientDescriptorBuilder;
 import seedu.address.testutil.menu.EditItemDescriptorBuilder;
+import seedu.address.testutil.reservation.EditReservationDescriptorBuilder;
 import seedu.address.testutil.salesrecords.EditRecordDescriptorBuilder;
 
 /**
@@ -168,7 +170,7 @@ public class CommandTestUtil {
 
     /** For Reservation */
     public static final String VALID_RESERVATION_NAME_ANDREW = "Andrew";
-    public static final String VALID_RESERVATION_NAME_BILLY = "Billy";
+    public static final String VALID_RESERVATION_NAME_BILLY = "Billy Bong";
     public static final String VALID_RESERVATION_PAX_ANDREW = "2";
     public static final String VALID_RESERVATION_PAX_BILLY = "4";
     public static final String VALID_RESERVATION_DATETIME_ANDREW = "2018-12-03T12:00:00";
@@ -205,6 +207,9 @@ public class CommandTestUtil {
     public static final EditIngredientCommand.EditIngredientDescriptor DESC_APPLE;
     public static final EditIngredientCommand.EditIngredientDescriptor DESC_BROCCOLI;
 
+    public static final EditReservationCommand.EditReservationDescriptor DESC_ANDREW;
+    public static final EditReservationCommand.EditReservationDescriptor DESC_BILLY;
+
     public static final EditSalesCommand.EditRecordDescriptor DESC_RECORD_ONE;
     public static final EditSalesCommand.EditRecordDescriptor DESC_RECORD_TWO;
 
@@ -229,12 +234,19 @@ public class CommandTestUtil {
                 new EditIngredientDescriptorBuilder().withName(VALID_NAME_BROCCOLI).withPrice(VALID_PRICE_BROCCOLI)
                 .withUnit(VALID_UNIT_BROCCOLI).build();
 
+        // Reservation Management
+        DESC_ANDREW = new EditReservationDescriptorBuilder().withName(VALID_RESERVATION_NAME_ANDREW)
+                .withPax(VALID_RESERVATION_PAX_ANDREW).withDateTime(VALID_RESERVATION_DATETIME_ANDREW).build();
+        DESC_BILLY = new EditReservationDescriptorBuilder().withName(VALID_RESERVATION_NAME_BILLY)
+                .withPax(VALID_RESERVATION_PAX_BILLY).withDateTime(VALID_RESERVATION_DATETIME_BILLY).build();
+
         // Sales Management
         DESC_RECORD_ONE = new EditRecordDescriptorBuilder().withDate(VALID_DATE_RECORD_ONE)
                 .withPrice(VALID_PRICE_RECORD_ONE).build();
         DESC_RECORD_TWO = new EditRecordDescriptorBuilder().withDate(VALID_DATE_RECORD_TWO)
                 .withName(VALID_ITEM_NAME_RECORD_TWO).withPrice(VALID_PRICE_RECORD_TWO)
                 .withQuantitySold(VALID_QUANTITY_SOLD_RECORD_TWO).build();
+
     }
 
     /**
