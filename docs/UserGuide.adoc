@@ -32,8 +32,9 @@ of a Graphical User Interface (GUI)*. If you can type fast, MeNUS allows you to 
 
 [NOTE]
 ====
-* If you are unsure which Java version is installed, refer to this link:https://www.java.com/en/download/help/version_manual.xml[link].
-* You may install the current version of Java from link:https://www.oracle.com/technetwork/java/javase/downloads/index.html[here].
+* If you are unsure which Java version is installed, you may refer to this link:https://www.java
+.com/en/download/help/version_manual.xml[link].
+* You may install the current version of Java link:https://www.oracle.com/technetwork/java/javase/downloads/index.html[here].
 ====
 
 .  Download the latest `menus.jar` link:https://github.com/CS2103-AY1819S1-F10-4/main/releases[here].
@@ -79,21 +80,21 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 MeNUS is an ultimate All-In-One application that will provide you with the utmost convenience you need to manage your
 restaurants in NUS.
 
-* Export data to `.xml` (default) or Excel file `[coming in v2.0]`.
+* Exporting data to `.xml` (default) or Excel file `[coming in v2.0]`.
 
 === Security
 Security is key to a business's success. *MeNUS* ensures the security of your restaurant's data by:
 
 * Encrypting all restaurant data using AES-256. `[coming in v2.0]`
 * Securing account passwords using bcrypt.
-* User needs to be authenticated before they can run any commands.
-* Both successful and failed login attempts are logged.
+* Authenticating users before they can run any commands.
+* Logging both successful and failed login attempts.
 
 === Efficiency
 Time is money. *MeNUS* ensures that the application will:
 
-* Load within 5 seconds.
-* Execute command within split of a second and update the GUI almost instantaneously.
+* Loading within 5 seconds.
+* Executing commands within split of a second and updating the GUI almost instantaneously.
 
 [[Commands]]
 == Commands
