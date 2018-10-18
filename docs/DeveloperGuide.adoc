@@ -340,8 +340,17 @@ image::UndoRedoActivityDiagram.png[width="650"]
 ** Cons: Requires dealing with commands that have already been undone: We must remember to skip these commands. Violates Single Responsibility Principle and Separation of Concerns as `HistoryManager` now needs to do two different things.
 // end::undoredo[]
 
+=== User Account feature
+==== Current Implementation
+
+// TBC
+
 === User Session feature
 ==== Current Implementation
+
+[NOTE]
+If a private command is executed when a session is not set, it won't be processed. The only commands that can
+be executed without a session being set are `help`, `login` and `exit`.
 
 The user session is facilitated by `UserSession` which stores the authentication state of the application.
 This is triggered by raising a `Login` and `Logout` event upon executing either the `Command#LoginCommand()` or
