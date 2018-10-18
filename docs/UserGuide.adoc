@@ -24,7 +24,7 @@ MeNUS is designed for restaurant owners who prefer to use a desktop application 
 importantly,
 MeNUS is *optimized for users who prefer to work with a Command Line Interface (CLI) while still having the benefits
 of a Graphical User Interface (GUI)*. If you can type fast, MeNUS allows you to manage aspects of your eatery
--- menu, ingredient, sales and booking management -- all from a single location !
+-- menu, ingredient, sales and reservations management -- all from a single location !
 
 == Quick Start
 
@@ -56,7 +56,7 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 
 [[Components]]
 == Components
-*MeNUS* consists of five main components: account, menu, ingredient, sales and booking management.
+*MeNUS* consists of five main components: account, menu, ingredient, sales and reservations management.
 
 === Accounts
 * You can create accounts for your employees to manage the system on your behalf.
