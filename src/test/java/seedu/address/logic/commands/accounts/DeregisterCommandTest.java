@@ -31,12 +31,14 @@ public class DeregisterCommandTest {
         Account validAccount = new AccountBuilder(DEMO_ADMIN).build();
         CommandResult registerCommandResult = new RegisterCommand(validAccount).execute(model, commandHistory);
 
-        assertEquals(String.format(RegisterCommand.MESSAGE_SUCCESS, validAccount), registerCommandResult.feedbackToUser);
+        assertEquals(String.format(RegisterCommand.MESSAGE_SUCCESS, validAccount),
+                registerCommandResult.feedbackToUser);
         Assert.assertEquals(EMPTY_COMMAND_HISTORY, commandHistory);
 
         CommandResult deregisterCommandResult = new DeregisterCommand(validAccount).execute(model, commandHistory);
 
-        assertEquals(String.format(DeregisterCommand.MESSAGE_SUCCESS, validAccount), deregisterCommandResult.feedbackToUser);
+        assertEquals(String.format(DeregisterCommand.MESSAGE_SUCCESS, validAccount),
+                deregisterCommandResult.feedbackToUser);
         Assert.assertEquals(EMPTY_COMMAND_HISTORY, commandHistory);
     }
 
