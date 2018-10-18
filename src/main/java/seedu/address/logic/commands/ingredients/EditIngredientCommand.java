@@ -10,8 +10,10 @@ import static seedu.address.model.Model.PREDICATE_SHOW_ALL_INGREDIENTS;
 import java.util.List;
 import java.util.Optional;
 
+import seedu.address.commons.core.EventsCenter;
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
+import seedu.address.commons.events.ui.DisplayIngredientListRequestEvent;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.Command;
@@ -83,6 +85,7 @@ public class EditIngredientCommand extends Command {
         model.updateIngredient(ingredientToEdit, editedIngredient);
         model.updateFilteredIngredientList(PREDICATE_SHOW_ALL_INGREDIENTS);
         model.commitAddressBook();
+        EventsCenter.getInstance().post(new DisplayIngredientListRequestEvent());
         return new CommandResult(String.format(MESSAGE_EDIT_INGREDIENT_SUCCESS, editedIngredient));
     }
 

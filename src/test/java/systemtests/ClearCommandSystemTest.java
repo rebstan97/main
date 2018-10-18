@@ -1,23 +1,33 @@
 package systemtests;
 
 import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
+import static seedu.address.testutil.EventsUtil.postNow;
 import static seedu.address.testutil.TypicalPersons.KEYWORD_MATCHING_MEIER;
 
+import org.junit.Before;
 import org.junit.Test;
 
 import seedu.address.commons.core.index.Index;
+import seedu.address.commons.events.ui.LoginEvent;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.RedoCommand;
 import seedu.address.logic.commands.UndoCommand;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
+import seedu.address.testutil.accounts.AccountBuilder;
 
 public class ClearCommandSystemTest extends AddressBookSystemTest {
 
+    private Model model;
+
+    @Before
+    public void prepare() {
+        model = getModel();
+        postNow(new LoginEvent(new AccountBuilder().build()));
+    }
+
     @Test
     public void clear() {
-        final Model defaultModel = getModel();
-
         /* Case: clear non-empty address book, command with leading spaces and trailing alphanumeric characters and
          * spaces -> cleared
          */
@@ -27,7 +37,7 @@ public class ClearCommandSystemTest extends AddressBookSystemTest {
         /* Case: undo clearing address book -> original address book restored */
         String command = UndoCommand.COMMAND_WORD;
         String expectedResultMessage = UndoCommand.MESSAGE_SUCCESS;
-        assertCommandSuccess(command, expectedResultMessage, defaultModel);
+        assertCommandSuccess(command, expectedResultMessage, model);
         assertSelectedCardUnchanged();
 
         /* Case: redo clearing address book -> cleared */

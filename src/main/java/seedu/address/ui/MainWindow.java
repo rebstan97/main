@@ -7,7 +7,9 @@ import com.google.common.eventbus.Subscribe;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.MenuItem;
+import javafx.scene.control.SplitPane;
 import javafx.scene.control.TextInputControl;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
@@ -16,9 +18,12 @@ import javafx.stage.Stage;
 import seedu.address.commons.core.Config;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.commons.events.ui.DisplayIngredientListRequestEvent;
 import seedu.address.commons.events.ui.DisplayItemListRequestEvent;
 import seedu.address.commons.events.ui.DisplaySalesReportEvent;
 import seedu.address.commons.events.ui.ExitAppRequestEvent;
+import seedu.address.commons.events.ui.LoginEvent;
+import seedu.address.commons.events.ui.LogoutEvent;
 import seedu.address.commons.events.ui.ShowHelpRequestEvent;
 import seedu.address.logic.Logic;
 import seedu.address.model.UserPrefs;
@@ -43,13 +48,16 @@ public class MainWindow extends UiPart<Stage> {
     // Independent Ui parts residing in this Ui container
     private BrowserPanel browserPanel;
     private PersonListPanel personListPanel;
+    private RecordListPanel recordListPanel; // Panels stack on top of each other, only one visible at a time
     private IngredientListPanel ingredientListPanel;
-    private RecordListPanel recordListPanel;
 
     private Config config;
     private UserPrefs prefs;
     private HelpWindow helpWindow;
     private ItemListPanel itemListPanel;
+
+    @FXML
+    private SplitPane splitPane;
 
     @FXML
     private StackPane browserPlaceholder;
@@ -64,16 +72,28 @@ public class MainWindow extends UiPart<Stage> {
     private Pane usernameDisplayPlaceholder;
 
     @FXML
-    private StackPane personListPanelPlaceholder;
-
-    //@FXML
-    //private StackPane ingredientListPanelPlaceholder;
+    private StackPane personListPanelPlaceholder; //rename to ModelListPanelPlaceholder
 
     @FXML
     private StackPane resultDisplayPlaceholder;
 
     @FXML
     private StackPane statusbarPlaceholder;
+
+    @FXML
+    private ImageView switchToAccountButton;
+
+    @FXML
+    private ImageView switchToMenuButton;
+
+    @FXML
+    private ImageView switchToSalesButton;
+
+    @FXML
+    private ImageView switchToIngredientButton;
+
+    @FXML
+    private ImageView switchToReservationButton;
 
     public MainWindow(Stage primaryStage, Config config, UserPrefs prefs, Logic logic) {
         super(FXML, primaryStage);
@@ -140,12 +160,6 @@ public class MainWindow extends UiPart<Stage> {
         browserPanel = new BrowserPanel();
         browserPlaceholder.getChildren().add(browserPanel.getRoot());
 
-        personListPanel = new PersonListPanel(logic.getFilteredPersonList());
-        personListPanelPlaceholder.getChildren().add(personListPanel.getRoot()); // Show address book
-
-        //ingredientListPanel = new IngredientListPanel(logic.getFilteredIngredientList());
-        //ingredientListPanelPlaceholder.getChildren().add(ingredientListPanel.getRoot());
-
         ResultDisplay resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
 
@@ -165,6 +179,9 @@ public class MainWindow extends UiPart<Stage> {
 
         CommandBox commandBox = new CommandBox(logic);
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
+
+        personListPanel = new PersonListPanel(logic.getFilteredPersonList());
+        personListPanelPlaceholder.getChildren().add(personListPanel.getRoot()); // Show address book
     }
 
     void hide() {
@@ -200,8 +217,14 @@ public class MainWindow extends UiPart<Stage> {
      */
     @FXML
     public void handleSwitchToAccount() {
-        // TODO: Some might require raising/posting event, for example, if you call the list method, so it
-        // should raise an event and automatically update the UI
+        //ingredientListPanel = new IngredientListPanel(logic.getFilteredIngredientList());
+        //ingredientListPanelPlaceholder.getChildren().add(ingredientListPanel.getRoot());
+
+        // Proposed changes: e.g.
+        // userListPanel = new UserListPanel(logic.getFilteredAccountList());
+        // dataListPanelPlaceholder.getChildren().add(userListPanel.getRoot());
+        // Then when you want it cleared when switch to another option, do
+        // dataListPanelPlaceholder.getChildren().clear(); follow by repeating the top.
     }
 
     /**
@@ -209,6 +232,7 @@ public class MainWindow extends UiPart<Stage> {
      */
     @FXML
     public void handleSwitchToMenu() {
+        personListPanelPlaceholder.getChildren().clear();
         itemListPanel = new ItemListPanel(logic.getFilteredItemList());
         personListPanelPlaceholder.getChildren().add(itemListPanel.getRoot());
     }
@@ -218,7 +242,7 @@ public class MainWindow extends UiPart<Stage> {
      */
     @FXML
     public void handleSwitchToSales() {
-        // Panels stack on top of each other, only one visible at a time
+        personListPanelPlaceholder.getChildren().clear();
         recordListPanel = new RecordListPanel(logic.getFilteredRecordList());
         personListPanelPlaceholder.getChildren().add(recordListPanel.getRoot());
     }
@@ -228,8 +252,9 @@ public class MainWindow extends UiPart<Stage> {
      */
     @FXML
     public void handleSwitchToIngredient() {
-        // TODO: Some might require raising/posting event, for example, if you call the list method, so it
-        // should raise an event and automatically update the UI
+        personListPanelPlaceholder.getChildren().clear();
+        ingredientListPanel = new IngredientListPanel(logic.getFilteredIngredientList());
+        personListPanelPlaceholder.getChildren().add(ingredientListPanel.getRoot());
     }
 
     /**
@@ -237,8 +262,14 @@ public class MainWindow extends UiPart<Stage> {
      */
     @FXML
     public void handleSwitchToReservation() {
-        // TODO: Some might require raising/posting event, for example, if you call the list method, so it
-        // should raise an event and automatically update the UI
+        //ingredientListPanel = new IngredientListPanel(logic.getFilteredIngredientList());
+        //ingredientListPanelPlaceholder.getChildren().add(ingredientListPanel.getRoot());
+
+        // Proposed changes: e.g.
+        // userListPanel = new UserListPanel(logic.getFilteredAccountList());
+        // dataListPanelPlaceholder.getChildren().add(userListPanel.getRoot());
+        // Then when you want it cleared when switch to another option, do
+        // dataListPanelPlaceholder.getChildren().clear(); follow by repeating the top.
     }
 
     /**
@@ -277,6 +308,8 @@ public class MainWindow extends UiPart<Stage> {
         return recordListPanel;
     }
 
+    public IngredientListPanel getIngredientListPanel() { return ingredientListPanel; }
+
     void releaseResources() {
         browserPanel.freeResources();
     }
@@ -294,10 +327,28 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     @Subscribe
+    private void handleDisplayIngredientListEvent(DisplayIngredientListRequestEvent event) {
+        logger.info(LogsCenter.getEventHandlingLogMessage(event));
+        handleSwitchToIngredient();
+    }
+
+    @Subscribe
     private void handleDisplaySalesReportEvent(DisplaySalesReportEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
         handleSwitchToSales();
         SalesReportWindow salesReportWindow = new SalesReportWindow(event.getSalesReportToDisplay());
         salesReportWindow.show();
+    }
+
+    @Subscribe
+    private void handleLoginEvent(LoginEvent event) {
+        logger.info(LogsCenter.getEventHandlingLogMessage(event));
+        // If we show menu here, it will mess with systemtests. So it must be fixed together
+        //personListPanelPlaceholder.getChildren().add(itemListPanel.getRoot()); // Show menu by default
+    }
+
+    @Subscribe
+    private void handleLogoutEvent(LogoutEvent event) {
+        logger.info(LogsCenter.getEventHandlingLogMessage(event));
     }
 }

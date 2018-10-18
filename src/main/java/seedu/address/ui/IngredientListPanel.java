@@ -16,11 +16,11 @@ import seedu.address.commons.events.ui.JumpToListRequestEvent;
 import seedu.address.model.ingredient.Ingredient;
 
 /**
- * Panel containing the list of persons.
+ * Panel containing the list of ingredients.
  */
 public class IngredientListPanel extends UiPart<Region> {
     private static final String FXML = "IngredientListPanel.fxml";
-    private final Logger logger = LogsCenter.getLogger(PersonListPanel.class);
+    private final Logger logger = LogsCenter.getLogger(IngredientListPanel.class);
 
     @FXML
     private ListView<Ingredient> ingredientListView;
@@ -48,7 +48,7 @@ public class IngredientListPanel extends UiPart<Region> {
     }
 
     /**
-     * Scrolls to the {@code PersonCard} at the {@code index} and selects it.
+     * Scrolls to the {@code IngredientCard} at the {@code index} and selects it.
      */
     private void scrollTo(int index) {
         Platform.runLater(() -> {
