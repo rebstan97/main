@@ -27,7 +27,7 @@ public class DeregisterCommandTest {
     private Model model = new ModelManager();
 
     @Test
-    public void execute_accountExists_Success() throws CommandException {
+    public void execute_accountExists_success() throws CommandException {
         Account validAccount = new AccountBuilder(DEMO_ADMIN).build();
         CommandResult registerCommandResult = new RegisterCommand(validAccount).execute(model, commandHistory);
 
