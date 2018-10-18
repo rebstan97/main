@@ -6,6 +6,7 @@ import static seedu.address.model.Model.PREDICATE_SHOW_ALL_INGREDIENTS;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_ITEMS;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_RECORDS;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_RESERVATIONS;
 
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -35,6 +36,7 @@ public class UndoCommand extends Command {
         model.updateFilteredItemList(PREDICATE_SHOW_ALL_ITEMS);
         model.updateFilteredAccountList(PREDICATE_SHOW_ALL_ACCOUNTS);
         model.updateFilteredRecordList(PREDICATE_SHOW_ALL_RECORDS);
+        model.updateFilteredReservationList(PREDICATE_SHOW_ALL_RESERVATIONS);
         return new CommandResult(MESSAGE_SUCCESS);
     }
 }

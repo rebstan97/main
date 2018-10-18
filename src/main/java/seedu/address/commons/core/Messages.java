@@ -24,4 +24,9 @@ public class Messages {
 
     // Sales Management
     public static final String MESSAGE_INVALID_RECORD_DISPLAYED_INDEX = "The sales record index provided is invalid.";
+
+    // Reservation Management
+    public static final String MESSAGE_INVALID_RESERVATION_DISPLAYED_INDEX = "The reservation index provided is "
+            + "invalid";
+
 }
