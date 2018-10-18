@@ -1080,14 +1080,14 @@ Use case ends.
 [none]
 ** 1a1. App shows an error message that item name or/and item price are invalid.
 +
-Use case restart from step 1.
+Use case restarts from step 1.
 
 * 1b. The item name entered is already in the menu.
 +
 [none]
 ** 1b1. App shows an error message that the item name already exists.
 +
-Use case restart from step 1.
+Use case restarts from step 1.
 
 [discrete]
 === Use case: UC302 - Delete item from menu
@@ -1114,7 +1114,7 @@ Use case ends.
 [none]
 ** 3a1. App shows an error message that the given index is invalid.
 +
-Use case restart at step 3.
+Use case resumes at step 2.
 
 [discrete]
 === Use case: UC303 - Edit item from menu
@@ -1141,14 +1141,14 @@ Use case ends.
 [none]
 ** 3a1. App shows an error message that the given index is invalid.
 +
-Use case restart at step 3.
+Use case resumes at step 2.
 
 * 3b. None of the optional fields are specified.
 +
 [none]
 ** 3b1. App shows an error message that none of the optional fields are specified.
 +
-Use case restart at step 3.
+Use case resumes at step 2.
 
 [discrete]
 === Use case: UC304 - Give an item a discount
@@ -1175,14 +1175,14 @@ Use case ends.
 [none]
 ** 3a1. App shows an error message that the given index is invalid.
 +
-Use case restart at step 3.
+Use case resumes at step 2.
 
 * 3b. The given percentage is invalid.
 +
 [none]
 ** 3b1. App shows an error message that the given percentage is invalid.
 +
-Use case restart at step 3.
+Use case resumes at step 2.
 
 [discrete]
 === Use case: UC305 - Export menu
@@ -1203,7 +1203,7 @@ Use case ends.
 [none]
 ** 1a1. App shows an error message that file path is invalid.
 +
-Use case restart from step 1.
+Use case restarts from step 1.
 
 [discrete]
 === Use case: UC401 - Add reservation
