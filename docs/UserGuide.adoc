@@ -615,7 +615,7 @@ Discounts the 1st item in the results of the `find` command.
 
 === Today's specials : `today-special` or `ts`
 
-Lists the items that have been tagged with the particular day in the menu. +
+Lists the items that have been tagged with DAY_OF_THE_WEEK in the menu. +
 Format: `today-special`
 
 Examples:
