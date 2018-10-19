@@ -1,9 +1,8 @@
 package seedu.address.logic.commands.accounts;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.Assert.assertEquals;
 import static seedu.address.testutil.accounts.TypicalAccounts.DEMO_ADMIN;
 
-import org.junit.Assert;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
@@ -33,13 +32,13 @@ public class DeregisterCommandTest {
 
         assertEquals(String.format(RegisterCommand.MESSAGE_SUCCESS, validAccount),
                 registerCommandResult.feedbackToUser);
-        Assert.assertEquals(EMPTY_COMMAND_HISTORY, commandHistory);
+        assertEquals(EMPTY_COMMAND_HISTORY, commandHistory);
 
         CommandResult deregisterCommandResult = new DeregisterCommand(validAccount).execute(model, commandHistory);
 
         assertEquals(String.format(DeregisterCommand.MESSAGE_SUCCESS, validAccount),
                 deregisterCommandResult.feedbackToUser);
-        Assert.assertEquals(EMPTY_COMMAND_HISTORY, commandHistory);
+        assertEquals(EMPTY_COMMAND_HISTORY, commandHistory);
     }
 
     @Test
