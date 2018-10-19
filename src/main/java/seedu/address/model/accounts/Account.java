@@ -22,6 +22,14 @@ public class Account {
         this.password = password;
     }
 
+    /**
+     * Only username is required.
+     */
+    public Account(Username username) {
+        requireAllNonNull(username);
+        this.username = username;
+    }
+
     public Username getUsername() {
         return username;
     }
@@ -63,6 +71,9 @@ public class Account {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
+        if (password == null) {
+            return Objects.hash(username);
+        }
         return Objects.hash(username, password);
     }
 

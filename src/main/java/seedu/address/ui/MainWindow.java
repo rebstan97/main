@@ -308,7 +308,9 @@ public class MainWindow extends UiPart<Stage> {
         return recordListPanel;
     }
 
-    public IngredientListPanel getIngredientListPanel() { return ingredientListPanel; }
+    public IngredientListPanel getIngredientListPanel() {
+        return ingredientListPanel;
+    }
 
     void releaseResources() {
         browserPanel.freeResources();

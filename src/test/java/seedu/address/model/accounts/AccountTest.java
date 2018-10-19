@@ -5,6 +5,7 @@ import static org.junit.Assert.assertNotEquals;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_USERNAME_DEMO_ONE;
 import static seedu.address.testutil.accounts.TypicalAccounts.DEMO_ADMIN;
 import static seedu.address.testutil.accounts.TypicalAccounts.DEMO_ONE;
+import static seedu.address.testutil.accounts.TypicalAccounts.DEMO_TWO;
 
 import org.junit.Rule;
 import org.junit.Test;
@@ -54,13 +55,37 @@ public class AccountTest {
     }
 
     @Test
+    public void account_usernameOnly_equals() {
+        Account accountDemoOne = new Account(DEMO_ONE.getUsername());
+        Account accountDemoTwo = new Account(DEMO_TWO.getUsername());
+
+        // same object -> returns true
+        assertEquals(accountDemoOne, accountDemoOne);
+
+        assertNotEquals(accountDemoOne, accountDemoTwo);
+
+        // null -> returns false
+        assertNotEquals(null, accountDemoOne);
+
+        // different type -> returns false
+        assertNotEquals(5, accountDemoOne);
+    }
+
+    @Test
     public void hash_code() {
         Account adminAccount = new AccountBuilder(DEMO_ADMIN).build();
-
         assertEquals(adminAccount.hashCode(), adminAccount.hashCode());
 
         Account demoAccount = new AccountBuilder(DEMO_ONE).build();
-
         assertNotEquals(adminAccount.hashCode(), demoAccount.hashCode());
+    }
+
+    @Test
+    public void hash_code_usernameOnly() {
+        Account accountDemoOne = new Account(DEMO_ONE.getUsername());
+        Account accountDemoTwo = new Account(DEMO_TWO.getUsername());
+
+        assertEquals(accountDemoOne.hashCode(), accountDemoOne.hashCode());
+        assertNotEquals(accountDemoOne.hashCode(), accountDemoTwo.hashCode());
     }
 }

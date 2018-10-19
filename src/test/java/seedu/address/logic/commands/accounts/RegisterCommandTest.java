@@ -36,7 +36,16 @@ public class RegisterCommandTest {
     }
 
     @Test
-    public void execute_accountExists() throws CommandException {
+    public void execute_duplicateUsername_throwsCommandException() throws CommandException {
+        thrown.expect(CommandException.class);
+        thrown.expectMessage(RegisterCommand.MESSAGE_DUPLICATE_USERNAME);
+        Account validAccount = new AccountBuilder(DEMO_ADMIN).build();
+        new RegisterCommand(validAccount).execute(model, commandHistory);
+        new RegisterCommand(validAccount).execute(model, commandHistory);
+    }
+
+    @Test
+    public void execute_accountExists_throwsCommandException() throws CommandException {
         thrown.expect(CommandException.class);
         Account invalidAccount = new AccountBuilder().build();
         new LoginCommand(invalidAccount).execute(model, commandHistory);
