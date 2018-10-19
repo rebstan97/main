@@ -617,7 +617,6 @@ manipulation.
 ** Pros: Natty uses natural language parsing, so the user can enter the `Date` and `Time` fields in their preferred
 format.
 //end::reservations[]
->>>>>>> master
 
 // tag::dataencryption[]
 === [Proposed] Data Encryption
@@ -1601,7 +1600,7 @@ Use case resumes at step 2.
 Steps 1e1-1e2 are repeated until a unique record is entered.
 +
 Use case resumes at step 2.
-+
+
 
 [discrete]
 === Use case: UC503 - Deleting sales record
