@@ -6,6 +6,9 @@ import java.util.stream.Collectors;
 
 import seedu.address.model.AddressBook;
 import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.accounts.Account;
+import seedu.address.model.accounts.Password;
+import seedu.address.model.accounts.Username;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
@@ -44,11 +47,17 @@ public class SampleDataUtil {
         };
     }
 
+    public static Account getRootAccount() {
+        return new Account(new Username("root"), new Password("1122qq"));
+    }
+
     public static ReadOnlyAddressBook getSampleAddressBook() {
         AddressBook sampleAb = new AddressBook();
         for (Person samplePerson : getSamplePersons()) {
             sampleAb.addPerson(samplePerson);
         }
+
+        sampleAb.addAccount(getRootAccount());
         return sampleAb;
     }
 

@@ -24,6 +24,7 @@ import seedu.address.model.salesrecord.Date;
 import seedu.address.model.salesrecord.SalesRecord;
 import seedu.address.model.salesrecord.SalesReport;
 import seedu.address.model.tag.Tag;
+import seedu.address.model.util.SampleDataUtil;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -64,7 +65,7 @@ public class ModelManager extends ComponentManager implements Model {
 
     @Override
     public void resetData(ReadOnlyAddressBook newData) {
-        versionedAddressBook.resetData(newData);
+        versionedAddressBook.resetData(SampleDataUtil.getSampleAddressBook());
         indicateAddressBookChanged();
     }
 
