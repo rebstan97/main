@@ -117,13 +117,13 @@ public class DeleteItemCommandTest {
     }
 
     /**
-     * 1. Deletes a {@code Person} from a filtered list. 2. Undo the deletion. 3. The unfiltered list should be shown
-     * now. Verify that the index of the previously deleted person in the unfiltered list is different from the index at
-     * the filtered list. 4. Redo the deletion. This ensures {@code RedoCommand} deletes the person object regardless of
+     * 1. Deletes a {@code Item} from a filtered list. 2. Undo the deletion. 3. The unfiltered list should be shown
+     * now. Verify that the index of the previously deleted item in the unfiltered list is different from the index at
+     * the filtered list. 4. Redo the deletion. This ensures {@code RedoCommand} deletes the item object regardless of
      * indexing.
      */
     @Test
-    public void executeUndoRedo_validIndexFilteredList_samePersonDeleted() throws Exception {
+    public void executeUndoRedo_validIndexFilteredList_sameItemDeleted() throws Exception {
         DeleteItemCommand deleteItemCommand = new DeleteItemCommand(INDEX_FIRST);
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
 
