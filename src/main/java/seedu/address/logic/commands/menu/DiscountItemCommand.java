@@ -89,7 +89,7 @@ public class DiscountItemCommand extends Command {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof DiscountItemCommand // instanceof handles nulls
-                && index.equals(((DiscountItemCommand) other).index) // state check
-                && percent == ((DiscountItemCommand) other).percent); // state check
+                    && index.equals(((DiscountItemCommand) other).index) // state check
+                    && percent == ((DiscountItemCommand) other).percent); // state check
     }
 }
