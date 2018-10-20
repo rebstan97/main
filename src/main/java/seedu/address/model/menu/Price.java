@@ -13,7 +13,9 @@ public class Price {
             "Price should only contain numbers, and it should be at most 2 decimal place";
     private static final String DECIMAL_PLACE_REGEX = "\\d{0,2}";
     public static final String PRICE_VALIDATION_REGEX = "\\d+" + ".?" + DECIMAL_PLACE_REGEX;
-    private final double value;
+    private static final double MAX_PERCENT = 100.0;
+    private double value;
+    private final double originalValue;
 
     /**
      * Constructs a {@code Price}.
@@ -24,6 +26,7 @@ public class Price {
         requireNonNull(price);
         checkArgument(isValidPrice(price), MESSAGE_PRICE_CONSTRAINTS);
         value = Double.parseDouble(price);
+        originalValue = value;
     }
 
     /**
@@ -35,6 +38,10 @@ public class Price {
 
     public double getValue() {
         return value;
+    }
+
+    public void setValue(double percent) {
+        value = originalValue * ((MAX_PERCENT - percent) / MAX_PERCENT);
     }
 
     @Override
