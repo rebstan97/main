@@ -1,6 +1,7 @@
 package seedu.address.logic.commands.menu;
 
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.menu.DiscountItemCommand.createDiscountedItem;
@@ -11,6 +12,7 @@ import static seedu.address.testutil.TypicalAddressBook.getTypicalAddressBook;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND;
 
+import org.junit.After;
 import org.junit.Test;
 
 import seedu.address.commons.core.Messages;
@@ -62,17 +64,16 @@ public class DiscountItemCommandTest {
         assertCommandFailure(discountItemCommand, model, commandHistory, Messages.MESSAGE_INVALID_ITEM_DISPLAYED_INDEX);
     }
 
-    /*
     @Test
     public void execute_validIndexFilteredList_success() {
         showItemAtIndex(model, INDEX_FIRST);
 
         Item itemToDiscount = model.getFilteredItemList().get(INDEX_FIRST.getZeroBased());
-        DiscountItemCommand discountItemCommand = new DiscountItemCommand(INDEX_FIRST, 30);
+        DiscountItemCommand discountItemCommand = new DiscountItemCommand(INDEX_FIRST, 75);
 
         //Single discount on 1 item
         Price newPrice = itemToDiscount.getPrice();
-        newPrice.setValue(30);
+        newPrice.setValue(75);
         Item discountedItem = createDiscountedItem(itemToDiscount, newPrice);
 
 
@@ -84,7 +85,7 @@ public class DiscountItemCommandTest {
         expectedModel.commitAddressBook();
 
         assertCommandSuccess(discountItemCommand, model, commandHistory, expectedMessage, expectedModel);
-    }*/
+    }
 
     @Test
     public void execute_invalidIndexFilteredList_throwsCommandException() {
@@ -99,7 +100,6 @@ public class DiscountItemCommandTest {
         assertCommandFailure(discountItemCommand, model, commandHistory, Messages.MESSAGE_INVALID_ITEM_DISPLAYED_INDEX);
     }
 
-    /*
     @Test
     public void executeUndoRedo_validIndexUnfilteredList_success() throws Exception {
         Item itemToDiscount = model.getFilteredItemList().get(INDEX_FIRST.getZeroBased());
@@ -125,7 +125,7 @@ public class DiscountItemCommandTest {
         // redo -> same first item deleted again
         expectedModel.redoAddressBook();
         assertCommandSuccess(new RedoCommand(), model, commandHistory, RedoCommand.MESSAGE_SUCCESS, expectedModel);
-    }*/
+    }
 
     @Test
     public void executeUndoRedo_invalidIndexUnfilteredList_failure() {
@@ -138,6 +138,62 @@ public class DiscountItemCommandTest {
         // single address book state in model -> undoCommand and redoCommand fail
         assertCommandFailure(new UndoCommand(), model, commandHistory, UndoCommand.MESSAGE_FAILURE);
         assertCommandFailure(new RedoCommand(), model, commandHistory, RedoCommand.MESSAGE_FAILURE);
+    }
+
+    /**
+     * 1. Discounts a {@code Item} from a filtered list. 2. Undo the discount. 3. The unfiltered list should be shown
+     * now. Verify that the index of the previously discounted item in the unfiltered list is different from the
+     * index at the filtered list. 4. Redo the discount. This ensures {@code RedoCommand} discounts the item object
+     * regardless of indexing.
+     */
+    @Test
+    public void executeUndoRedo_validIndexFilteredList_sameItemDiscounted() throws Exception {
+        DiscountItemCommand discountItemCommand = new DiscountItemCommand(INDEX_FIRST, 65);
+        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+
+        showItemAtIndex(model, INDEX_SECOND);
+        Item itemToDiscount = model.getFilteredItemList().get(INDEX_FIRST.getZeroBased());
+        Price newPrice = itemToDiscount.getPrice();
+        newPrice.setValue(65);
+        Item discountedItem = createDiscountedItem(itemToDiscount, newPrice);
+
+        expectedModel.updateItem(itemToDiscount, discountedItem);
+        expectedModel.updateFilteredItemList(PREDICATE_SHOW_ALL_ITEMS);
+        expectedModel.commitAddressBook();
+
+        // delete -> deletes second item in unfiltered item list / first item in filtered item list
+        discountItemCommand.execute(model, commandHistory);
+
+        // undo -> reverts addressbook back to previous state and filtered item list to show all items
+        expectedModel.undoAddressBook();
+        assertCommandSuccess(new UndoCommand(), model, commandHistory, UndoCommand.MESSAGE_SUCCESS, expectedModel);
+
+        assertNotEquals(itemToDiscount, model.getFilteredItemList().get(INDEX_FIRST.getZeroBased()));
+        // redo -> deletes same second item in unfiltered item list
+        expectedModel.redoAddressBook();
+        assertCommandSuccess(new RedoCommand(), model, commandHistory, RedoCommand.MESSAGE_SUCCESS, expectedModel);
+    }
+
+    @After
+    public void resetModel() {
+        //Reset price for the first two items
+        Item itemToDiscount = model.getFilteredItemList().get(INDEX_FIRST.getZeroBased());
+
+        Price newPrice = itemToDiscount.getPrice();
+        newPrice.setValue(0);
+        Item discountedItem = createDiscountedItem(itemToDiscount, newPrice);
+        model.updateItem(itemToDiscount, discountedItem);
+        model.updateFilteredItemList(PREDICATE_SHOW_ALL_ITEMS);
+        model.commitAddressBook();
+
+        itemToDiscount = model.getFilteredItemList().get(INDEX_SECOND.getZeroBased());
+
+        newPrice = itemToDiscount.getPrice();
+        newPrice.setValue(0);
+        discountedItem = createDiscountedItem(itemToDiscount, newPrice);
+        model.updateItem(itemToDiscount, discountedItem);
+        model.updateFilteredItemList(PREDICATE_SHOW_ALL_ITEMS);
+        model.commitAddressBook();
     }
 
     @Test
