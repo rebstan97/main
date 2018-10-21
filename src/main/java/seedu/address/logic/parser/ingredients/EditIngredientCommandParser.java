@@ -59,11 +59,11 @@ public class EditIngredientCommandParser implements Parser<EditIngredientCommand
         IngredientName name;
 
         if (indexOrName instanceof Index) {
-            index = (Index)indexOrName;
+            index = (Index) indexOrName;
             editCommand = new EditIngredientByIndexCommand(index, editIngredientDescriptor);
         }
         if (indexOrName instanceof IngredientName) {
-            name = (IngredientName)indexOrName;
+            name = (IngredientName) indexOrName;
             editCommand = new EditIngredientByNameCommand(name, editIngredientDescriptor);
         }
 

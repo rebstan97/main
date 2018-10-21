@@ -1,7 +1,6 @@
 package seedu.address.logic.parser.ingredients;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.ParserUtil.MESSAGE_NOT_INDEX_OR_NAME;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.ingredients.DeleteIngredientByIndexCommand;

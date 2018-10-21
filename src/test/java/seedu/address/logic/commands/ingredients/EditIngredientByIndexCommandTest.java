@@ -33,9 +33,9 @@ import seedu.address.testutil.ingredients.IngredientBuilder;
 
 /**
  * Contains integration tests (interaction with the Model, UndoCommand and RedoCommand) and unit tests for
- * EditIngredientCommand.
+ * EditIngredientByIndexCommand.
  */
-public class EditIngredientCommandTest {
+public class EditIngredientByIndexCommandTest {
 
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
     private CommandHistory commandHistory = new CommandHistory();
@@ -44,9 +44,10 @@ public class EditIngredientCommandTest {
     public void execute_allFieldsSpecifiedUnfilteredList_success() {
         Ingredient editedIngredient = new IngredientBuilder().build();
         EditIngredientDescriptor descriptor = new EditIngredientDescriptorBuilder(editedIngredient).build();
-        EditIngredientCommand editCommand = new EditIngredientCommand(INDEX_FIRST, descriptor);
+        EditIngredientByIndexCommand editCommand = new EditIngredientByIndexCommand(INDEX_FIRST, descriptor);
 
-        String expectedMessage = String.format(EditIngredientCommand.MESSAGE_EDIT_INGREDIENT_SUCCESS, editedIngredient);
+        String expectedMessage = String.format(EditIngredientByIndexCommand.MESSAGE_EDIT_INGREDIENT_SUCCESS,
+                editedIngredient);
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.updateIngredient(model.getFilteredIngredientList().get(0), editedIngredient);
@@ -66,9 +67,10 @@ public class EditIngredientCommandTest {
 
         EditIngredientDescriptor descriptor = new EditIngredientDescriptorBuilder().withName(VALID_NAME_BROCCOLI)
                 .withUnit(VALID_UNIT_BROCCOLI).withMinimum(VALID_MINIMUM_BROCCOLI).build();
-        EditIngredientCommand editCommand = new EditIngredientCommand(indexLastIngredient, descriptor);
+        EditIngredientByIndexCommand editCommand = new EditIngredientByIndexCommand(indexLastIngredient, descriptor);
 
-        String expectedMessage = String.format(EditIngredientCommand.MESSAGE_EDIT_INGREDIENT_SUCCESS, editedIngredient);
+        String expectedMessage = String.format(EditIngredientByIndexCommand.MESSAGE_EDIT_INGREDIENT_SUCCESS,
+                editedIngredient);
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.updateIngredient(lastIngredient, editedIngredient);
@@ -79,10 +81,12 @@ public class EditIngredientCommandTest {
 
     @Test
     public void execute_noFieldSpecifiedUnfilteredList_success() {
-        EditIngredientCommand editCommand = new EditIngredientCommand(INDEX_FIRST, new EditIngredientDescriptor());
+        EditIngredientByIndexCommand editCommand = new EditIngredientByIndexCommand(INDEX_FIRST,
+                new EditIngredientDescriptor());
         Ingredient editedIngredient = model.getFilteredIngredientList().get(INDEX_FIRST.getZeroBased());
 
-        String expectedMessage = String.format(EditIngredientCommand.MESSAGE_EDIT_INGREDIENT_SUCCESS, editedIngredient);
+        String expectedMessage = String.format(EditIngredientByIndexCommand.MESSAGE_EDIT_INGREDIENT_SUCCESS,
+                editedIngredient);
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.commitAddressBook();
@@ -97,10 +101,11 @@ public class EditIngredientCommandTest {
         Ingredient ingredientInFilteredList = model.getFilteredIngredientList().get(INDEX_FIRST.getZeroBased());
         Ingredient editedIngredient = new IngredientBuilder(ingredientInFilteredList)
                 .withName(VALID_NAME_BROCCOLI).build();
-        EditIngredientCommand editCommand = new EditIngredientCommand(INDEX_FIRST,
+        EditIngredientByIndexCommand editCommand = new EditIngredientByIndexCommand(INDEX_FIRST,
                 new EditIngredientDescriptorBuilder().withName(VALID_NAME_BROCCOLI).build());
 
-        String expectedMessage = String.format(EditIngredientCommand.MESSAGE_EDIT_INGREDIENT_SUCCESS, editedIngredient);
+        String expectedMessage = String.format(EditIngredientByIndexCommand.MESSAGE_EDIT_INGREDIENT_SUCCESS,
+                editedIngredient);
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.updateIngredient(model.getFilteredIngredientList().get(0), editedIngredient);
@@ -113,9 +118,10 @@ public class EditIngredientCommandTest {
     public void execute_duplicateIngredientUnfilteredList_failure() {
         Ingredient firstIngredient = model.getFilteredIngredientList().get(INDEX_FIRST.getZeroBased());
         EditIngredientDescriptor descriptor = new EditIngredientDescriptorBuilder(firstIngredient).build();
-        EditIngredientCommand editCommand = new EditIngredientCommand(INDEX_SECOND, descriptor);
+        EditIngredientByIndexCommand editCommand = new EditIngredientByIndexCommand(INDEX_SECOND, descriptor);
 
-        assertCommandFailure(editCommand, model, commandHistory, EditIngredientCommand.MESSAGE_DUPLICATE_INGREDIENT);
+        assertCommandFailure(editCommand, model, commandHistory,
+                EditIngredientByIndexCommand.MESSAGE_DUPLICATE_INGREDIENT);
     }
 
     @Test
@@ -124,10 +130,11 @@ public class EditIngredientCommandTest {
 
         // edit ingredient in filtered list into a duplicate in address book
         Ingredient ingredientInList = model.getAddressBook().getIngredientList().get(INDEX_SECOND.getZeroBased());
-        EditIngredientCommand editCommand = new EditIngredientCommand(INDEX_FIRST,
+        EditIngredientByIndexCommand editCommand = new EditIngredientByIndexCommand(INDEX_FIRST,
                 new EditIngredientDescriptorBuilder(ingredientInList).build());
 
-        assertCommandFailure(editCommand, model, commandHistory, EditIngredientCommand.MESSAGE_DUPLICATE_INGREDIENT);
+        assertCommandFailure(editCommand, model, commandHistory,
+                EditIngredientByIndexCommand.MESSAGE_DUPLICATE_INGREDIENT);
     }
 
     @Test
@@ -135,7 +142,7 @@ public class EditIngredientCommandTest {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredIngredientList().size() + 1);
         EditIngredientDescriptor descriptor = new EditIngredientDescriptorBuilder()
                 .withName(VALID_NAME_BROCCOLI).build();
-        EditIngredientCommand editCommand = new EditIngredientCommand(outOfBoundIndex, descriptor);
+        EditIngredientByIndexCommand editCommand = new EditIngredientByIndexCommand(outOfBoundIndex, descriptor);
 
         assertCommandFailure(editCommand, model, commandHistory, Messages.MESSAGE_INVALID_INGREDIENT_DISPLAYED_INDEX);
     }
@@ -150,7 +157,7 @@ public class EditIngredientCommandTest {
         // ensures that outOfBoundIndex is still in bounds of address book list
         assertTrue(outOfBoundIndex.getZeroBased() < model.getAddressBook().getIngredientList().size());
 
-        EditIngredientCommand editCommand = new EditIngredientCommand(outOfBoundIndex,
+        EditIngredientByIndexCommand editCommand = new EditIngredientByIndexCommand(outOfBoundIndex,
                 new EditIngredientDescriptorBuilder().withName(VALID_NAME_BROCCOLI).build());
 
         assertCommandFailure(editCommand, model, commandHistory, Messages.MESSAGE_INVALID_INGREDIENT_DISPLAYED_INDEX);
@@ -161,7 +168,7 @@ public class EditIngredientCommandTest {
         Ingredient editedIngredient = new IngredientBuilder().build();
         Ingredient ingredientToEdit = model.getFilteredIngredientList().get(INDEX_FIRST.getZeroBased());
         EditIngredientDescriptor descriptor = new EditIngredientDescriptorBuilder(editedIngredient).build();
-        EditIngredientCommand editCommand = new EditIngredientCommand(INDEX_FIRST, descriptor);
+        EditIngredientByIndexCommand editCommand = new EditIngredientByIndexCommand(INDEX_FIRST, descriptor);
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.updateIngredient(ingredientToEdit, editedIngredient);
         expectedModel.commitAddressBook();
@@ -183,7 +190,7 @@ public class EditIngredientCommandTest {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredIngredientList().size() + 1);
         EditIngredientDescriptor descriptor = new EditIngredientDescriptorBuilder()
                 .withName(VALID_NAME_BROCCOLI).build();
-        EditIngredientCommand editCommand = new EditIngredientCommand(outOfBoundIndex, descriptor);
+        EditIngredientByIndexCommand editCommand = new EditIngredientByIndexCommand(outOfBoundIndex, descriptor);
 
         // execution failed -> address book state not added into model
         assertCommandFailure(editCommand, model, commandHistory, Messages.MESSAGE_INVALID_INGREDIENT_DISPLAYED_INDEX);
@@ -203,7 +210,7 @@ public class EditIngredientCommandTest {
     public void executeUndoRedo_validIndexFilteredList_sameIngredientEdited() throws Exception {
         Ingredient editedIngredient = new IngredientBuilder().build();
         EditIngredientDescriptor descriptor = new EditIngredientDescriptorBuilder(editedIngredient).build();
-        EditIngredientCommand editCommand = new EditIngredientCommand(INDEX_FIRST, descriptor);
+        EditIngredientByIndexCommand editCommand = new EditIngredientByIndexCommand(INDEX_FIRST, descriptor);
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
 
         showIngredientAtIndex(model, INDEX_SECOND);
@@ -226,11 +233,12 @@ public class EditIngredientCommandTest {
 
     @Test
     public void equals() {
-        final EditIngredientCommand standardCommand = new EditIngredientCommand(INDEX_FIRST, DESC_APPLE);
+        final EditIngredientByIndexCommand standardCommand = new EditIngredientByIndexCommand(INDEX_FIRST, DESC_APPLE);
 
         // same values -> returns true
         EditIngredientDescriptor copyDescriptor = new EditIngredientDescriptor(DESC_APPLE);
-        EditIngredientCommand commandWithSameValues = new EditIngredientCommand(INDEX_FIRST, copyDescriptor);
+        EditIngredientByIndexCommand commandWithSameValues = new EditIngredientByIndexCommand(
+                INDEX_FIRST, copyDescriptor);
         assertTrue(standardCommand.equals(commandWithSameValues));
 
         // same object -> returns true
@@ -243,10 +251,10 @@ public class EditIngredientCommandTest {
         assertFalse(standardCommand.equals(new ListIngredientsCommand()));
 
         // different index -> returns false
-        assertFalse(standardCommand.equals(new EditIngredientCommand(INDEX_SECOND, DESC_APPLE)));
+        assertFalse(standardCommand.equals(new EditIngredientByIndexCommand(INDEX_SECOND, DESC_APPLE)));
 
         // different descriptor -> returns false
-        assertFalse(standardCommand.equals(new EditIngredientCommand(INDEX_FIRST, DESC_BROCCOLI)));
+        assertFalse(standardCommand.equals(new EditIngredientByIndexCommand(INDEX_FIRST, DESC_BROCCOLI)));
     }
 
 }
