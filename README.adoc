@@ -18,11 +18,8 @@ endif::[]
 
 * This is a desktop menu application. It has a GUI but most of the user interactions happen using a CLI (Command Line
 Interface) which is oriented for typist user.
-* It is a Java sample application intended for https://github.com/orgs/CS2103-AY1819S1-F10-4/people[students]
-learning Software Engineering in https://nus-cs2103-ay1819s1.github.io/cs2103-website/[CS2103T] at the http://www.nus.edu.sg/[National University of Singapore] (NUS).
-* The target user group is F&B owners who operate one or more eatery in NUS. This application aims to improve
-the
-effectiveness and efficiency of managing their eatery' menus.
+* The target user group is F&B owners who operate one or more restaurants in NUS. This application aims to improve
+the effectiveness and efficiency of managing their restaurants.
 
 == Site Map
 
