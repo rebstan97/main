@@ -11,14 +11,9 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.events.ui.NewResultAvailableEvent;
 import seedu.address.logic.ListElementPointer;
 import seedu.address.logic.Logic;
-import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
-import seedu.address.logic.commands.accounts.LoginCommand;
-import seedu.address.logic.commands.accounts.RegisterCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.logic.parser.CliSyntax;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.accounts.Password;
 
 /**
  * The UI component that is responsible for receiving user command inputs.

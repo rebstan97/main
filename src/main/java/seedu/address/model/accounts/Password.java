@@ -8,7 +8,6 @@ import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 
 import at.favre.lib.crypto.bcrypt.BCrypt;
-import seedu.address.logic.parser.CliSyntax;
 
 /**
  * Represents an account password. Guarantees: immutable; is valid as declared in {@link #isValidPassword(String)}

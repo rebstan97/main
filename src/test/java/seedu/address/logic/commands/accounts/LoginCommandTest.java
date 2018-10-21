@@ -69,7 +69,7 @@ public class LoginCommandTest {
     public void execute_invalidPassword() throws CommandException {
         thrown.expect(CommandException.class);
         thrown.expectMessage(LoginCommand.MESSAGE_WRONG_PASSWORD);
-        
+
         Account invalidAccount = new AccountBuilder().withPassword("1122qq!@#123").build();
         new LoginCommand(invalidAccount).execute(model, commandHistory);
     }
