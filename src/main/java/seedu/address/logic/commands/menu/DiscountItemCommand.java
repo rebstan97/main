@@ -62,9 +62,7 @@ public class DiscountItemCommand extends Command {
         }
 
         Item itemToDiscount = lastShownList.get(index.getZeroBased());
-        Price newPrice = itemToDiscount.getPrice();
-        newPrice.setValue(percent);
-        Item discountedItem = createDiscountedItem(itemToDiscount, newPrice);
+        Item discountedItem = createDiscountedItem(itemToDiscount, percent);
 
         model.updateItem(itemToDiscount, discountedItem);
         model.updateFilteredItemList(PREDICATE_SHOW_ALL_ITEMS);
@@ -77,10 +75,11 @@ public class DiscountItemCommand extends Command {
      * Creates and returns a {@code Item} with the details of {@code itemToEdit}
      * edited with {@code editItemDescriptor}.
      */
-    public static Item createDiscountedItem(Item itemToEdit, Price newPrice) {
+    public static Item createDiscountedItem(Item itemToEdit, double percent) {
         assert itemToEdit != null;
-
-        Price updatedPrice = newPrice;
+        double originalValue = itemToEdit.getPrice().getOriginalValue();
+        Price updatedPrice = new Price(String.format("%.2f", originalValue));
+        updatedPrice.setValue(percent);
 
         return new Item(itemToEdit.getName(), updatedPrice, itemToEdit.getRemark(), itemToEdit.getTags());
     }
