@@ -147,6 +147,15 @@ public class CommandTestUtil {
     public static final String INGREDIENT_MINIMUM_DESC_BROCCOLI = " " + PREFIX_INGREDIENT_MINIMUM
             + VALID_MINIMUM_BROCCOLI;
 
+    public static final String INVALID_INGREDIENT_NAME_DESC = " " + PREFIX_INGREDIENT_NAME + "Chicken&"; // '&' not
+    // allowed in ingredient names
+    public static final String INVALID_INGREDIENT_UNIT_DESC = " " + PREFIX_INGREDIENT_UNIT + "kilogram+"; // '+' not
+    // allowed in ingredient units
+    public static final String INVALID_INGREDIENT_PRICE_DESC = " " + PREFIX_INGREDIENT_PRICE + "2.000"; // 3 decimal
+    // places not allowed for ingredient prices
+    public static final String INVALID_INGREDIENT_MINIMUM_DESC = " " + PREFIX_INGREDIENT_MINIMUM + "2.0"; // decimal
+    // place not allowed for ingredient minimums
+
     /** For menu */
     public static final String VALID_ITEM_NAME_BURGER = "Burger";
     public static final String VALID_ITEM_NAME_FRIES = "Cheese Fries";
