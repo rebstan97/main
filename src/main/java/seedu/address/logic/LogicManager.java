@@ -12,8 +12,10 @@ import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.accounts.LoginCommand;
+import seedu.address.logic.commands.accounts.RegisterCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.AddressBookParser;
+import seedu.address.logic.parser.CliSyntax;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
 import seedu.address.model.accounts.Account;
@@ -49,7 +51,15 @@ public class LogicManager extends ComponentManager implements Logic {
 
     @Override
     public CommandResult execute(String commandText) throws CommandException, ParseException {
-        logger.info("----------------[USER COMMAND][" + commandText + "]");
+        String modifiedCommandText = commandText;
+        if (modifiedCommandText.contains(LoginCommand.COMMAND_WORD) || modifiedCommandText
+                .contains(RegisterCommand.COMMAND_WORD) || modifiedCommandText
+                .contains(RegisterCommand.COMMAND_ALIAS)) {
+            String[] splitFromPassword = modifiedCommandText.split(CliSyntax.PREFIX_PASSWORD.getPrefix());
+            modifiedCommandText = splitFromPassword[0] + CliSyntax.PREFIX_PASSWORD + "*****";
+        }
+
+        logger.info("----------------[USER COMMAND][" + modifiedCommandText + "]");
 
         try {
             Command command = addressBookParser.parseCommand(commandText);

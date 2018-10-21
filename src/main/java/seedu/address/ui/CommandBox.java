@@ -12,7 +12,10 @@ import seedu.address.commons.events.ui.NewResultAvailableEvent;
 import seedu.address.logic.ListElementPointer;
 import seedu.address.logic.Logic;
 import seedu.address.logic.commands.CommandResult;
+import seedu.address.logic.commands.accounts.LoginCommand;
+import seedu.address.logic.commands.accounts.RegisterCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.parser.CliSyntax;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
@@ -113,7 +116,14 @@ public class CommandBox extends UiPart<Region> {
             initHistory();
             // handle command failure
             setStyleToIndicateCommandFailure();
-            logger.info("Invalid command: " + commandTextField.getText());
+            String modifiedCommandText = commandTextField.getText();
+            if (modifiedCommandText.contains(LoginCommand.COMMAND_WORD) || modifiedCommandText
+                    .contains(RegisterCommand.COMMAND_WORD) || modifiedCommandText
+                    .contains(RegisterCommand.COMMAND_ALIAS)) {
+                String[] splitFromPassword = modifiedCommandText.split(CliSyntax.PREFIX_PASSWORD.getPrefix());
+                modifiedCommandText = splitFromPassword[0] + CliSyntax.PREFIX_PASSWORD + "*****";
+            }
+            logger.info("Invalid command: " + modifiedCommandText);
             raise(new NewResultAvailableEvent(e.getMessage()));
         }
     }
