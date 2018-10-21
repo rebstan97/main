@@ -10,8 +10,10 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BROCCOLI;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_UNIT_BROCCOLI;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.address.logic.parser.ParserUtil.MESSAGE_NOT_INDEX_OR_NAME;
 import static seedu.address.testutil.TypicalAddressBook.getTypicalAddressBook;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST;
+import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND;
 
 import org.junit.Test;
 
@@ -43,14 +45,14 @@ public class EditIngredientByNameCommandTest {
     public void execute_allFieldsSpecified_success() {
         Ingredient editedIngredient = new IngredientBuilder().build();
         EditIngredientDescriptor descriptor = new EditIngredientDescriptorBuilder(editedIngredient).build();
-        EditIngredientByNameCommand editCommand = new EditIngredientByNameCommand(
-                new IngredientName(VALID_NAME_BROCCOLI), descriptor);
+        IngredientName ingredientToEdit = model.getFilteredIngredientList().get(INDEX_FIRST.getZeroBased()).getName();
+        EditIngredientByNameCommand editCommand = new EditIngredientByNameCommand(ingredientToEdit, descriptor);
 
         String expectedMessage = String.format(EditIngredientByNameCommand.MESSAGE_EDIT_INGREDIENT_SUCCESS,
                 editedIngredient);
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
-        expectedModel.updateIngredient(model.findIngredient(new IngredientName(VALID_NAME_BROCCOLI)), editedIngredient);
+        expectedModel.updateIngredient(model.findIngredient(ingredientToEdit), editedIngredient);
         expectedModel.commitAddressBook();
 
         assertCommandSuccess(editCommand, model, commandHistory, expectedMessage, expectedModel);
@@ -81,9 +83,10 @@ public class EditIngredientByNameCommandTest {
 
     @Test
     public void execute_noFieldSpecified_success() {
-        EditIngredientByNameCommand editCommand = new EditIngredientByNameCommand(new IngredientName(VALID_NAME_APPLE),
+        IngredientName ingredientToEdit = model.getFilteredIngredientList().get(INDEX_SECOND.getZeroBased()).getName();
+        EditIngredientByNameCommand editCommand = new EditIngredientByNameCommand(ingredientToEdit,
                 new EditIngredientDescriptor());
-        Ingredient editedIngredient = model.findIngredient(new IngredientName(VALID_NAME_APPLE));
+        Ingredient editedIngredient = model.findIngredient(ingredientToEdit);
 
         String expectedMessage = String.format(EditIngredientByNameCommand.MESSAGE_EDIT_INGREDIENT_SUCCESS,
                 editedIngredient);
@@ -97,11 +100,12 @@ public class EditIngredientByNameCommandTest {
 
 
     @Test
-    public void execute_duplicateIngredientUnfilteredList_failure() {
+    public void execute_duplicateIngredient_failure() {
         Ingredient firstIngredient = model.getFilteredIngredientList().get(INDEX_FIRST.getZeroBased());
+        IngredientName ingredientToEdit = model.getFilteredIngredientList().get(INDEX_SECOND.getZeroBased()).getName();
         EditIngredientDescriptor descriptor = new EditIngredientDescriptorBuilder(firstIngredient).build();
         EditIngredientByNameCommand editCommand = new EditIngredientByNameCommand(
-                firstIngredient.getName(), descriptor);
+                ingredientToEdit, descriptor);
 
         assertCommandFailure(editCommand, model, commandHistory,
                 EditIngredientByNameCommand.MESSAGE_DUPLICATE_INGREDIENT);
@@ -109,17 +113,17 @@ public class EditIngredientByNameCommandTest {
 
 
     @Test
-    public void execute_invalidIngredientNameUnfilteredList_failure() {
-        IngredientName invalidName = new IngredientName("Chicken Thigh+");
+    public void execute_invalidIngredientName_failure() {
+        IngredientName invalidName = new IngredientName("Chicken Thigh");
         EditIngredientDescriptor descriptor = new EditIngredientDescriptorBuilder()
                 .withName(VALID_NAME_BROCCOLI).build();
         EditIngredientByNameCommand editCommand = new EditIngredientByNameCommand(invalidName, descriptor);
 
-        assertCommandFailure(editCommand, model, commandHistory, Messages.MESSAGE_INVALID_INGREDIENT_DISPLAYED_INDEX);
+        assertCommandFailure(editCommand, model, commandHistory, Messages.MESSAGE_INGREDIENT_NAME_NOT_FOUND);
     }
 
     @Test
-    public void executeUndoRedo_validNameUnfilteredList_success() throws Exception {
+    public void executeUndoRedo_validName_success() throws Exception {
         Ingredient editedIngredient = new IngredientBuilder().build();
         Ingredient ingredientToEdit = model.getFilteredIngredientList().get(INDEX_FIRST.getZeroBased());
         EditIngredientDescriptor descriptor = new EditIngredientDescriptorBuilder(editedIngredient).build();
@@ -142,14 +146,14 @@ public class EditIngredientByNameCommandTest {
     }
 
     @Test
-    public void executeUndoRedo_invalidNameUnfilteredList_failure() {
-        IngredientName invalidName = new IngredientName("Chicken Thigh+");
+    public void executeUndoRedo_invalidName_failure() {
+        IngredientName invalidName = new IngredientName("Chicken Thigh");
         EditIngredientDescriptor descriptor = new EditIngredientDescriptorBuilder()
                 .withName(VALID_NAME_BROCCOLI).build();
         EditIngredientByNameCommand editCommand = new EditIngredientByNameCommand(invalidName, descriptor);
 
         // execution failed -> address book state not added into model
-        assertCommandFailure(editCommand, model, commandHistory, Messages.MESSAGE_INVALID_INGREDIENT_DISPLAYED_INDEX);
+        assertCommandFailure(editCommand, model, commandHistory, Messages.MESSAGE_INGREDIENT_NAME_NOT_FOUND);
 
         // single address book state in model -> undoCommand and redoCommand fail
         assertCommandFailure(new UndoCommand(), model, commandHistory, UndoCommand.MESSAGE_FAILURE);
