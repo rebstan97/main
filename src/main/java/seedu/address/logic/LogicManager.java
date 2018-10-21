@@ -1,5 +1,7 @@
 package seedu.address.logic;
 
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PASSWORD;
+
 import java.util.logging.Logger;
 
 import javafx.collections.ObservableList;
@@ -19,6 +21,7 @@ import seedu.address.logic.parser.CliSyntax;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
 import seedu.address.model.accounts.Account;
+import seedu.address.model.accounts.Password;
 import seedu.address.model.ingredient.Ingredient;
 import seedu.address.model.menu.Item;
 import seedu.address.model.person.Person;
@@ -51,18 +54,15 @@ public class LogicManager extends ComponentManager implements Logic {
 
     @Override
     public CommandResult execute(String commandText) throws CommandException, ParseException {
-        String modifiedCommandText = commandText;
-        if (modifiedCommandText.contains(LoginCommand.COMMAND_WORD) || modifiedCommandText
-                .contains(RegisterCommand.COMMAND_WORD) || modifiedCommandText
-                .contains(RegisterCommand.COMMAND_ALIAS)) {
-            String[] splitFromPassword = modifiedCommandText.split(CliSyntax.PREFIX_PASSWORD.getPrefix());
-            modifiedCommandText = splitFromPassword[0] + CliSyntax.PREFIX_PASSWORD + "*****";
+        String commandTextToLog = commandText;
+        if (commandText.contains(PREFIX_PASSWORD.getPrefix())) {
+            commandTextToLog = Password.maskPassword(commandText);
         }
-
-        logger.info("----------------[USER COMMAND][" + modifiedCommandText + "]");
+        logger.info("----------------[USER COMMAND][" + commandTextToLog + "]");
 
         try {
             Command command = addressBookParser.parseCommand(commandText);
+
             if (!isPublicCommand(command) && !UserSession.isAuthenticated()) {
                 throw new CommandException(Messages.MESSAGE_COMMAND_FORBIDDEN);
             }
