@@ -11,12 +11,14 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.events.ui.NewResultAvailableEvent;
 import seedu.address.logic.ListElementPointer;
 import seedu.address.logic.Logic;
+import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.accounts.LoginCommand;
 import seedu.address.logic.commands.accounts.RegisterCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.CliSyntax;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.accounts.Password;
 
 /**
  * The UI component that is responsible for receiving user command inputs.
@@ -64,8 +66,8 @@ public class CommandBox extends UiPart<Region> {
     }
 
     /**
-     * Updates the text field with the previous input in {@code historySnapshot},
-     * if there exists a previous input in {@code historySnapshot}
+     * Updates the text field with the previous input in {@code historySnapshot}, if there exists a previous input in
+     * {@code historySnapshot}
      */
     private void navigateToPreviousInput() {
         assert historySnapshot != null;
@@ -77,8 +79,8 @@ public class CommandBox extends UiPart<Region> {
     }
 
     /**
-     * Updates the text field with the next input in {@code historySnapshot},
-     * if there exists a next input in {@code historySnapshot}
+     * Updates the text field with the next input in {@code historySnapshot}, if there exists a next input in {@code
+     * historySnapshot}
      */
     private void navigateToNextInput() {
         assert historySnapshot != null;
@@ -90,8 +92,7 @@ public class CommandBox extends UiPart<Region> {
     }
 
     /**
-     * Sets {@code CommandBox}'s text field with {@code text} and
-     * positions the caret to the end of the {@code text}.
+     * Sets {@code CommandBox}'s text field with {@code text} and positions the caret to the end of the {@code text}.
      */
     private void replaceText(String text) {
         commandTextField.setText(text);
@@ -116,14 +117,7 @@ public class CommandBox extends UiPart<Region> {
             initHistory();
             // handle command failure
             setStyleToIndicateCommandFailure();
-            String modifiedCommandText = commandTextField.getText();
-            if (modifiedCommandText.contains(LoginCommand.COMMAND_WORD) || modifiedCommandText
-                    .contains(RegisterCommand.COMMAND_WORD) || modifiedCommandText
-                    .contains(RegisterCommand.COMMAND_ALIAS)) {
-                String[] splitFromPassword = modifiedCommandText.split(CliSyntax.PREFIX_PASSWORD.getPrefix());
-                modifiedCommandText = splitFromPassword[0] + CliSyntax.PREFIX_PASSWORD + "*****";
-            }
-            logger.info("Invalid command: " + modifiedCommandText);
+            logger.info("Exception: " + e.getMessage());
             raise(new NewResultAvailableEvent(e.getMessage()));
         }
     }
