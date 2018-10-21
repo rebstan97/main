@@ -25,8 +25,20 @@ public class Price {
     public Price(String price) {
         requireNonNull(price);
         checkArgument(isValidPrice(price), MESSAGE_PRICE_CONSTRAINTS);
+        originalValue = Double.parseDouble(price);
         value = Double.parseDouble(price);
-        originalValue = value;
+    }
+
+    /**
+     * Constructs a {@code Price}.
+     *
+     * @param price A valid price.
+     */
+    public Price(String price, String originalPrice) {
+        requireNonNull(price);
+        checkArgument(isValidPrice(price), MESSAGE_PRICE_CONSTRAINTS);
+        originalValue = Double.parseDouble(originalPrice);
+        value = Double.parseDouble(price);
     }
 
     /**
@@ -38,6 +50,10 @@ public class Price {
 
     public double getValue() {
         return value;
+    }
+
+    public double getOriginalValue() {
+        return originalValue;
     }
 
     public void setValue(double percent) {
