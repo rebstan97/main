@@ -51,6 +51,16 @@ public class IngredientName {
                 && fullName.equals(((IngredientName) other).fullName)); // state check
     }
 
+    /**
+     * Returns true if this {@code IngredientName} has the same string value {@fullName} ignoring case compared to
+     * {@code other}.
+     */
+    public boolean equalsIgnoreCase(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof IngredientName // instanceof handles nulls
+                && fullName.equalsIgnoreCase(((IngredientName) other).fullName)); // state check
+    }
+
     @Override
     public int hashCode() {
         return fullName.hashCode();
