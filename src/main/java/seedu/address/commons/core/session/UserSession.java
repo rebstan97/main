@@ -26,7 +26,6 @@ public class UserSession {
     public static void login(Account account) {
         isAuthenticated = true;
         username = account.getUsername();
-        logger.info("Successfully logged in as \"" + username.toString() + "\".");
     }
 
     /**
@@ -35,7 +34,6 @@ public class UserSession {
     public static void logout() {
         if (isAuthenticated) {
             isAuthenticated = false;
-            logger.info("Successfully logged out from \"" + username.toString() + "\".");
             username = null;
         }
     }
