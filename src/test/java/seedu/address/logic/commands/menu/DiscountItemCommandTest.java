@@ -12,7 +12,6 @@ import static seedu.address.testutil.TypicalAddressBook.getTypicalAddressBook;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND;
 
-import org.junit.After;
 import org.junit.Test;
 
 import seedu.address.commons.core.Messages;
@@ -24,7 +23,6 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.menu.Item;
-import seedu.address.model.menu.Price;
 
 /**
  * Contains integration tests (interaction with the Model, UndoCommand and RedoCommand) and unit tests for {@code
@@ -42,10 +40,7 @@ public class DiscountItemCommandTest {
 
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
 
-        //Single discount on 1 item
-        Price newPrice = itemToDiscount.getPrice();
-        newPrice.setValue(20);
-        Item discountedItem = createDiscountedItem(itemToDiscount, newPrice);
+        Item discountedItem = createDiscountedItem(itemToDiscount, 20);
 
         String expectedMessage = String.format(DiscountItemCommand.MESSAGE_DISCOUNT_ITEM_SUCCESS, discountedItem);
 
@@ -71,11 +66,7 @@ public class DiscountItemCommandTest {
         Item itemToDiscount = model.getFilteredItemList().get(INDEX_FIRST.getZeroBased());
         DiscountItemCommand discountItemCommand = new DiscountItemCommand(INDEX_FIRST, 75);
 
-        //Single discount on 1 item
-        Price newPrice = itemToDiscount.getPrice();
-        newPrice.setValue(75);
-        Item discountedItem = createDiscountedItem(itemToDiscount, newPrice);
-
+        Item discountedItem = createDiscountedItem(itemToDiscount, 75);
 
         String expectedMessage = String.format(DiscountItemCommand.MESSAGE_DISCOUNT_ITEM_SUCCESS, discountedItem);
 
@@ -106,10 +97,7 @@ public class DiscountItemCommandTest {
         DiscountItemCommand discountItemCommand = new DiscountItemCommand(INDEX_FIRST, 20);
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
 
-        Price newPrice = itemToDiscount.getPrice();
-        newPrice.setValue(20);
-        Item discountedItem = createDiscountedItem(itemToDiscount, newPrice);
-
+        Item discountedItem = createDiscountedItem(itemToDiscount, 20);
 
         expectedModel.updateItem(itemToDiscount, discountedItem);
         expectedModel.updateFilteredItemList(PREDICATE_SHOW_ALL_ITEMS);
@@ -153,9 +141,7 @@ public class DiscountItemCommandTest {
 
         showItemAtIndex(model, INDEX_SECOND);
         Item itemToDiscount = model.getFilteredItemList().get(INDEX_FIRST.getZeroBased());
-        Price newPrice = itemToDiscount.getPrice();
-        newPrice.setValue(65);
-        Item discountedItem = createDiscountedItem(itemToDiscount, newPrice);
+        Item discountedItem = createDiscountedItem(itemToDiscount, 65);
 
         expectedModel.updateItem(itemToDiscount, discountedItem);
         expectedModel.updateFilteredItemList(PREDICATE_SHOW_ALL_ITEMS);
@@ -172,28 +158,6 @@ public class DiscountItemCommandTest {
         // redo -> deletes same second item in unfiltered item list
         expectedModel.redoAddressBook();
         assertCommandSuccess(new RedoCommand(), model, commandHistory, RedoCommand.MESSAGE_SUCCESS, expectedModel);
-    }
-
-    @After
-    public void resetModel() {
-        //Reset price for the first two items
-        Item itemToDiscount = model.getFilteredItemList().get(INDEX_FIRST.getZeroBased());
-
-        Price newPrice = itemToDiscount.getPrice();
-        newPrice.setValue(0);
-        Item discountedItem = createDiscountedItem(itemToDiscount, newPrice);
-        model.updateItem(itemToDiscount, discountedItem);
-        model.updateFilteredItemList(PREDICATE_SHOW_ALL_ITEMS);
-        model.commitAddressBook();
-
-        itemToDiscount = model.getFilteredItemList().get(INDEX_SECOND.getZeroBased());
-
-        newPrice = itemToDiscount.getPrice();
-        newPrice.setValue(0);
-        discountedItem = createDiscountedItem(itemToDiscount, newPrice);
-        model.updateItem(itemToDiscount, discountedItem);
-        model.updateFilteredItemList(PREDICATE_SHOW_ALL_ITEMS);
-        model.commitAddressBook();
     }
 
     @Test
