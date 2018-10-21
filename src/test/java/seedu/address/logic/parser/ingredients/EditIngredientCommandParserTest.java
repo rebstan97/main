@@ -68,7 +68,7 @@ public class EditIngredientCommandParserTest {
     }
 
     @Test
-    public void parse_invalidValue_withIndex_failure() {
+    public void parse_indexWithInvalidValue_failure() {
         assertParseFailure(parser, "1" + INVALID_INGREDIENT_NAME_DESC,
                 IngredientName.MESSAGE_NAME_CONSTRAINTS); // invalid name
         assertParseFailure(parser, "1" + INVALID_INGREDIENT_UNIT_DESC,
@@ -93,7 +93,7 @@ public class EditIngredientCommandParserTest {
     }
 
     @Test
-    public void parse_invalidValue_withName_failure() {
+    public void parse_nameWithInvalidValue_failure() {
         assertParseFailure(parser, VALID_NAME_BROCCOLI + INVALID_INGREDIENT_NAME_DESC,
                 IngredientName.MESSAGE_NAME_CONSTRAINTS); // invalid name
         assertParseFailure(parser, VALID_NAME_BROCCOLI + INVALID_INGREDIENT_UNIT_DESC,
@@ -118,7 +118,7 @@ public class EditIngredientCommandParserTest {
     }
 
     @Test
-    public void parse_index_allFieldsSpecified_success() {
+    public void parse_indexWithAllFieldsSpecified_success() {
         Index targetIndex = INDEX_SECOND;
         String userInput = targetIndex.getOneBased() + INGREDIENT_UNIT_DESC_BROCCOLI + INGREDIENT_PRICE_DESC_APPLE
                 + INGREDIENT_MINIMUM_DESC_BROCCOLI + INGREDIENT_NAME_DESC_BROCCOLI;
@@ -131,7 +131,8 @@ public class EditIngredientCommandParserTest {
         assertParseSuccess(parser, userInput, expectedCommand);
     }
 
-    public void parse_name_allFieldsSpecified_success() {
+    @Test
+    public void parse_nameWithAllFieldsSpecified_success() {
         IngredientName targetName = new IngredientName(VALID_NAME_APPLE);
         String userInput = VALID_NAME_APPLE + " " + INGREDIENT_UNIT_DESC_BROCCOLI + INGREDIENT_PRICE_DESC_APPLE
                 + INGREDIENT_MINIMUM_DESC_BROCCOLI + INGREDIENT_NAME_DESC_BROCCOLI;
@@ -145,7 +146,7 @@ public class EditIngredientCommandParserTest {
     }
 
     @Test
-    public void parse_index_someFieldsSpecified_success() {
+    public void parse_indexWithSomeFieldsSpecified_success() {
         Index targetIndex = INDEX_FIRST;
         String userInput = targetIndex.getOneBased() + INGREDIENT_UNIT_DESC_APPLE + INGREDIENT_PRICE_DESC_BROCCOLI;
 
@@ -157,7 +158,7 @@ public class EditIngredientCommandParserTest {
     }
 
     @Test
-    public void parse_name_someFieldsSpecified_success() {
+    public void parse_nameWithSomeFieldsSpecified_success() {
         IngredientName targetName = new IngredientName(VALID_NAME_APPLE);
         String userInput = VALID_NAME_APPLE + " " + INGREDIENT_UNIT_DESC_APPLE + INGREDIENT_PRICE_DESC_BROCCOLI;
 
@@ -169,7 +170,7 @@ public class EditIngredientCommandParserTest {
     }
 
     @Test
-    public void parse_index_oneFieldSpecified_success() {
+    public void parse_indexWithOneFieldSpecified_success() {
         // name
         Index targetIndex = INDEX_THIRD;
         String userInput = targetIndex.getOneBased() + INGREDIENT_NAME_DESC_APPLE;
@@ -198,7 +199,7 @@ public class EditIngredientCommandParserTest {
     }
 
     @Test
-    public void parse_name_oneFieldSpecified_success() {
+    public void parse_nameWithOneFieldSpecified_success() {
         // name
         IngredientName targetName = new IngredientName(VALID_NAME_BROCCOLI);
         String userInput = VALID_NAME_BROCCOLI + " " + INGREDIENT_NAME_DESC_APPLE;
@@ -230,7 +231,7 @@ public class EditIngredientCommandParserTest {
     }
 
     @Test
-    public void parse_index_multipleRepeatedFields_acceptsLast() {
+    public void parse_indexWithMultipleRepeatedFields_acceptsLast() {
         Index targetIndex = INDEX_FIRST;
         String userInput = targetIndex.getOneBased() + INGREDIENT_UNIT_DESC_APPLE + INGREDIENT_MINIMUM_DESC_APPLE
                 + INGREDIENT_PRICE_DESC_APPLE + INGREDIENT_UNIT_DESC_APPLE + INGREDIENT_MINIMUM_DESC_APPLE
@@ -247,7 +248,7 @@ public class EditIngredientCommandParserTest {
 
 
     @Test
-    public void parse_name_multipleRepeatedFields_acceptsLast() {
+    public void parse_nameWithMultipleRepeatedFields_acceptsLast() {
         IngredientName targetName = new IngredientName(VALID_NAME_APPLE);
         String userInput = VALID_NAME_APPLE + " " + INGREDIENT_UNIT_DESC_APPLE + INGREDIENT_MINIMUM_DESC_APPLE
                 + INGREDIENT_PRICE_DESC_APPLE + INGREDIENT_UNIT_DESC_APPLE + INGREDIENT_MINIMUM_DESC_APPLE
@@ -263,7 +264,7 @@ public class EditIngredientCommandParserTest {
     }
 
     @Test
-    public void parse_index_invalidValueFollowedByValidValue_success() {
+    public void parse_indexWithInvalidValueFollowedByValidValue_success() {
         // no other valid values specified
         Index targetIndex = INDEX_FIRST;
         String userInput = targetIndex.getOneBased() + INVALID_INGREDIENT_UNIT_DESC + INGREDIENT_UNIT_DESC_BROCCOLI;
@@ -282,7 +283,7 @@ public class EditIngredientCommandParserTest {
     }
 
     @Test
-    public void parse_name_invalidValueFollowedByValidValue_success() {
+    public void parse_nameWithInvalidValueFollowedByValidValue_success() {
         // no other valid values specified
         IngredientName targetName = new IngredientName(VALID_NAME_APPLE);
         String userInput = VALID_NAME_APPLE + INVALID_INGREDIENT_UNIT_DESC + INGREDIENT_UNIT_DESC_BROCCOLI;
