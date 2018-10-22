@@ -25,10 +25,12 @@ import seedu.address.commons.events.ui.ExitAppRequestEvent;
 import seedu.address.commons.events.ui.LoginEvent;
 import seedu.address.commons.events.ui.LogoutEvent;
 import seedu.address.commons.events.ui.ShowHelpRequestEvent;
+import seedu.address.commons.events.ui.reservation.DisplayReservationListRequestEvent;
 import seedu.address.logic.Logic;
 import seedu.address.model.UserPrefs;
 import seedu.address.ui.accounts.UsernameDisplay;
 import seedu.address.ui.menu.ItemListPanel;
+import seedu.address.ui.reservation.ReservationListPanel;
 import seedu.address.ui.sales.RecordListPanel;
 import seedu.address.ui.sales.SalesReportWindow;
 
@@ -50,11 +52,12 @@ public class MainWindow extends UiPart<Stage> {
     private PersonListPanel personListPanel;
     private RecordListPanel recordListPanel; // Panels stack on top of each other, only one visible at a time
     private IngredientListPanel ingredientListPanel;
+    private ItemListPanel itemListPanel;
+    private ReservationListPanel reservationListPanel;
 
     private Config config;
     private UserPrefs prefs;
     private HelpWindow helpWindow;
-    private ItemListPanel itemListPanel;
 
     @FXML
     private SplitPane splitPane;
@@ -270,6 +273,9 @@ public class MainWindow extends UiPart<Stage> {
         // dataListPanelPlaceholder.getChildren().add(userListPanel.getRoot());
         // Then when you want it cleared when switch to another option, do
         // dataListPanelPlaceholder.getChildren().clear(); follow by repeating the top.
+        personListPanelPlaceholder.getChildren().clear();
+        reservationListPanel = new ReservationListPanel(logic.getFilteredReservationList());
+        personListPanelPlaceholder.getChildren().add(reservationListPanel.getRoot());
     }
 
     /**
@@ -312,6 +318,10 @@ public class MainWindow extends UiPart<Stage> {
         return ingredientListPanel;
     }
 
+    public ReservationListPanel getReservationListPanel() {
+        return reservationListPanel;
+    }
+
     void releaseResources() {
         browserPanel.freeResources();
     }
@@ -340,6 +350,12 @@ public class MainWindow extends UiPart<Stage> {
         handleSwitchToSales();
         SalesReportWindow salesReportWindow = new SalesReportWindow(event.getSalesReportToDisplay());
         salesReportWindow.show();
+    }
+
+    @Subscribe
+    private void handleDisplayReservationEvent(DisplayReservationListRequestEvent event) {
+        logger.info(LogsCenter.getEventHandlingLogMessage(event));
+        handleSwitchToReservation();
     }
 
     @Subscribe
