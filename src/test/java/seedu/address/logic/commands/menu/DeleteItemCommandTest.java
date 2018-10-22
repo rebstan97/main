@@ -24,7 +24,7 @@ import seedu.address.model.menu.Item;
 
 /**
  * Contains integration tests (interaction with the Model, UndoCommand and RedoCommand) and unit tests for {@code
- * DeleteCommand}.
+ * DeleteItemCommand}.
  */
 public class DeleteItemCommandTest {
 

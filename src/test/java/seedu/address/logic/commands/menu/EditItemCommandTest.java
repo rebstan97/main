@@ -32,7 +32,8 @@ import seedu.address.testutil.menu.EditItemDescriptorBuilder;
 import seedu.address.testutil.menu.ItemBuilder;
 
 /**
- * Contains integration tests (interaction with the Model, UndoCommand and RedoCommand) and unit tests for EditCommand.
+ * Contains integration tests (interaction with the Model, UndoCommand and RedoCommand) and unit tests for
+ * EditItemCommand.
  */
 public class EditItemCommandTest {
 
