@@ -265,14 +265,6 @@ public class MainWindow extends UiPart<Stage> {
      */
     @FXML
     public void handleSwitchToReservation() {
-        //ingredientListPanel = new IngredientListPanel(logic.getFilteredIngredientList());
-        //ingredientListPanelPlaceholder.getChildren().add(ingredientListPanel.getRoot());
-
-        // Proposed changes: e.g.
-        // userListPanel = new UserListPanel(logic.getFilteredAccountList());
-        // dataListPanelPlaceholder.getChildren().add(userListPanel.getRoot());
-        // Then when you want it cleared when switch to another option, do
-        // dataListPanelPlaceholder.getChildren().clear(); follow by repeating the top.
         personListPanelPlaceholder.getChildren().clear();
         reservationListPanel = new ReservationListPanel(logic.getFilteredReservationList());
         personListPanelPlaceholder.getChildren().add(reservationListPanel.getRoot());
