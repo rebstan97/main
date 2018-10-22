@@ -25,7 +25,7 @@ public class DeregisterCommand extends Command {
             + PREFIX_ID + "azhikai";
 
     public static final String MESSAGE_SUCCESS = "Account deregistered: %1$s";
-    public static final String MESSAGE_USERNAME_NOT_FOUND = "This username does not exists";
+    public static final String MESSAGE_USERNAME_NOT_FOUND = "This username does not exist";
 
     private final Account account;
 
