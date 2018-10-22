@@ -528,6 +528,10 @@ The `SortMenuCommand` will indirectly call the `UniqueItemList#sortItemsByName()
 `UniqueItemList#sortItemsByPrice()` and the sorts the menu.
 After sorting the menu, it will save the current state for undo/redo.
 
+The following activity diagram summarizes what happens when a user executes sort-menu command:
+
+image::SortMenuActivityDiagram.png[width="650"]
+
 ==== `filter-menu` Command
 The `filter-menu` command is facilitated by `FilterMenuCommand` and `FilterMenuCommandParser`. The command takes in
 user input for the keywords.
