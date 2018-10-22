@@ -125,6 +125,7 @@ public class XmlAdaptedItem {
         XmlAdaptedItem otherItem = (XmlAdaptedItem) other;
         return Objects.equals(name, otherItem.name)
                 && Objects.equals(price, otherItem.price)
+                && Objects.equals(originalPrice, otherItem.originalPrice)
                 && tagged.equals(otherItem.tagged);
     }
 }
