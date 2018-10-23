@@ -32,13 +32,12 @@ public class StockUpCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Stocks up an ingredient in the address book "
             + "Parameters: "
             + PREFIX_INGREDIENT_NAME + "NAME... "
-            + PREFIX_INGREDIENT_NUM + "NUM_OF_UNITS... "
+            + PREFIX_INGREDIENT_NUM + "NUM_OF_UNITS... \n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_INGREDIENT_NAME + "Cod Fish "
             + PREFIX_INGREDIENT_NUM + "20 ";
 
     public static final String MESSAGE_STOCKUP_INGREDIENT_SUCCESS = "New ingredient(s) stocked up: %1$s";
-    public static final String MESSAGE_DUPLICATE_INGREDIENT = "This ingredient already exists in the address book";
 
     private final List<ChangeStockDescriptor> stockDescriptorList;
 

@@ -1,11 +1,15 @@
 package seedu.address.logic.parser;
 
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
 import seedu.address.commons.core.pair.StringPair;
+import seedu.address.logic.commands.ingredients.StockUpCommand;
+import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
  * Tokenizes arguments string of the form: {@code preamble <prefix>value <prefix>value ...}<br>
@@ -41,7 +45,8 @@ public class ArgumentTokenizer {
      * @param secondPrefix  Another prefix to tokenize the arguments string with
      * @return              ArgumentPairMultimap object that maps integer indices to their argument pairs
      */
-    public static ArgumentPairMultimap tokenizeToPair(String argsString, Prefix firstPrefix, Prefix secondPrefix) {
+    public static ArgumentPairMultimap tokenizeToPair(
+            String argsString, Prefix firstPrefix, Prefix secondPrefix) throws ParseException{
         List<PrefixPosition> positions = findAllPrefixPositions(argsString, firstPrefix, secondPrefix);
         return extractArgumentsToPair(argsString, positions);
     }
@@ -137,7 +142,7 @@ public class ArgumentTokenizer {
      * @return                ArgumentPairMultimap object that maps indices to argument pairs
      */
     private static ArgumentPairMultimap extractArgumentsToPair(String argsString,
-            List<PrefixPosition> prefixPositions) {
+            List<PrefixPosition> prefixPositions) throws ParseException {
 
         // Sort by start position
         prefixPositions.sort((prefix1, prefix2) -> prefix1.getStartPosition() - prefix2.getStartPosition());
@@ -151,6 +156,13 @@ public class ArgumentTokenizer {
         StringPair argsPair;
         int index = 1;
         for (int i = 0; i < prefixPositions.size() - 1; i=i+2) {
+            // Check prefixes to see if they follow the format "/n ... /nu ... /n ... /nu ..."
+            String firstPrefix = prefixPositions.get(i).getPrefix().getPrefix();
+            String nextPrefix = prefixPositions.get(i+1).getPrefix().getPrefix();
+            if (!(firstPrefix.equals("n/") && nextPrefix.equals("nu/"))) {
+                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, StockUpCommand.MESSAGE_USAGE));
+            }
+
             // Extract and store prefixes and their arguments
             String firstArgValue = extractArgumentValue(argsString, prefixPositions.get(i), prefixPositions.get(i+1));
             String secondArgValue = extractArgumentValue(argsString, prefixPositions.get(i+1),
