@@ -6,10 +6,10 @@ import static seedu.address.testutil.TypicalAddressBook.getTypicalAddressBook;
 import org.junit.Test;
 
 import seedu.address.logic.CommandHistory;
-import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.util.SampleDataUtil;
 
 public class ClearCommandTest {
 
@@ -17,8 +17,9 @@ public class ClearCommandTest {
 
     @Test
     public void execute_emptyAddressBook_success() {
-        Model model = new ModelManager();
-        Model expectedModel = new ModelManager();
+        // An empty storage assumed to have the root account in it
+        Model model = new ModelManager(SampleDataUtil.getSampleAddressBook(), new UserPrefs());
+        Model expectedModel = new ModelManager(SampleDataUtil.getSampleAddressBook(), new UserPrefs());
         expectedModel.commitAddressBook();
 
         assertCommandSuccess(new ClearCommand(), model, commandHistory, ClearCommand.MESSAGE_SUCCESS, expectedModel);
@@ -28,10 +29,10 @@ public class ClearCommandTest {
     public void execute_nonEmptyAddressBook_success() {
         Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
         Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-        expectedModel.resetData(new AddressBook());
+        // Once reset, only has root account
+        expectedModel.resetData(SampleDataUtil.getSampleAddressBook());
         expectedModel.commitAddressBook();
 
         assertCommandSuccess(new ClearCommand(), model, commandHistory, ClearCommand.MESSAGE_SUCCESS, expectedModel);
     }
-
 }
