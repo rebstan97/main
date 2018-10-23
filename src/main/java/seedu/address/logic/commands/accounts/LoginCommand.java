@@ -30,7 +30,7 @@ public class LoginCommand extends Command {
             + PREFIX_ID + "azhikai "
             + PREFIX_PASSWORD + "1122qq";
 
-    public static final String MESSAGE_SUCCESS = "Successfully logged in to %s!";
+    public static final String MESSAGE_SUCCESS = "Successfully logged in to '%s'!";
     public static final String MESSAGE_ACCOUNT_NOT_FOUND = "The account does not exist.";
     public static final String MESSAGE_WRONG_PASSWORD = "The credential is invalid.";
     public static final String MESSAGE_ALREADY_AUTHENTICATED = "You are already logged in.";
