@@ -4,13 +4,21 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertTrue;
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.parser.ArgumentTokenizer.tokenizeToPair;
 
 import org.junit.Test;
+
+import seedu.address.commons.core.pair.StringPair;
+import seedu.address.logic.commands.ingredients.StockUpCommand;
+import seedu.address.logic.parser.exceptions.ParseException;
 
 public class ArgumentTokenizerTest {
 
     private final Prefix unknownPrefix = new Prefix("--u");
     private final Prefix pSlash = new Prefix("p/");
+    private final Prefix qSlash = new Prefix("q/");
+    private final Prefix rSlash = new Prefix("r/");
     private final Prefix dashT = new Prefix("-t");
     private final Prefix hatQ = new Prefix("^Q");
 
@@ -134,6 +142,106 @@ public class ArgumentTokenizerTest {
         assertArgumentAbsent(argMultimap, pSlash);
         assertArgumentPresent(argMultimap, dashT, "not joined^Qjoined");
         assertArgumentAbsent(argMultimap, hatQ);
+    }
+
+    @Test
+    public void tokenizeToPair_emptyArgsString_failure() {
+        String argsString = "  ";
+        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, StockUpCommand.MESSAGE_USAGE);
+        assertTokenizeToPairFailure(argsString, pSlash, qSlash, expectedMessage);
+    }
+
+    @Test
+    public void tokenizeToPair_noPrefixes_failure() {
+        String argsString = " Cod Fish 10";
+        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, StockUpCommand.MESSAGE_USAGE);
+        assertTokenizeToPairFailure(argsString, pSlash, qSlash, expectedMessage);
+    }
+
+    @Test
+    public void tokenizeToPair_missingPrefix_failure() {
+        String argsString = " p/Cod Fish 10";
+        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, StockUpCommand.MESSAGE_USAGE);
+        assertTokenizeToPairFailure(argsString, pSlash, qSlash, expectedMessage);
+
+        argsString = " Cod Fish q/10";
+        expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, StockUpCommand.MESSAGE_USAGE);
+        assertTokenizeToPairFailure(argsString, pSlash, qSlash, expectedMessage);
+    }
+
+    @Test
+    public void tokenizeToPair_missingPrefixMultiple_failure() {
+        String argsString = " p/Cod Fish q/10 p/Chicken Thigh 2";
+        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, StockUpCommand.MESSAGE_USAGE);
+        assertTokenizeToPairFailure(argsString, pSlash, qSlash, expectedMessage);
+
+        argsString = " Cod Fish q/10 p/Chicken Thigh q/2";
+        expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, StockUpCommand.MESSAGE_USAGE);
+        assertTokenizeToPairFailure(argsString, pSlash, qSlash, expectedMessage);
+    }
+
+    @Test
+    public void tokenizeToPair_prefixInvalidSequence_failure() {
+        String argsString = " q/10 p/Cod Fish";
+        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, StockUpCommand.MESSAGE_USAGE);
+        assertTokenizeToPairFailure(argsString, pSlash, qSlash, expectedMessage);
+
+        argsString = " q/10 p/Cod Fish q/2 p/Chicken Thigh";
+        expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, StockUpCommand.MESSAGE_USAGE);
+        assertTokenizeToPairFailure(argsString, pSlash, qSlash, expectedMessage);
+    }
+
+    @Test
+    public void tokenizeToPair_oneArgumentPair_success() {
+        String argsString = " p/Cod Fish q/10";
+        StringPair expectedArgPair = new StringPair("Cod Fish", "10");
+        assertTokenizeToPairSuccess(argsString, pSlash, qSlash, expectedArgPair);
+    }
+
+    @Test
+    public void tokenizeToPair_multipleArgumentPairs_success() {
+        String argsString = " p/Cod Fish q/10 p/Chicken Thigh q/5";
+        StringPair firstExpectedArgPair = new StringPair("Cod Fish", "10");
+        StringPair secondExpectedArgPair = new StringPair("Chicken Thigh", "5");
+        assertTokenizeToPairSuccess(argsString, pSlash, qSlash, firstExpectedArgPair, secondExpectedArgPair);
+
+        argsString = " p/Cod Fish q/10 p/Chicken Thigh q/5 p/Green Apple q/20";
+        firstExpectedArgPair = new StringPair("Cod Fish", "10");
+        secondExpectedArgPair = new StringPair("Chicken Thigh", "5");
+        StringPair thirdExpectedArgPair = new StringPair("Green Apple", "20");
+        assertTokenizeToPairSuccess(argsString, pSlash, qSlash, firstExpectedArgPair, secondExpectedArgPair,
+                thirdExpectedArgPair);
+    }
+
+    @Test
+    public void tokenizeToPair_duplicateArgumentPairs_success() {
+        String argsString = " p/Cod Fish q/10 p/Cod Fish q/10";
+        StringPair firstExpectedArgPair = new StringPair("Cod Fish", "10");
+        assertTokenizeToPairSuccess(argsString, pSlash, qSlash, firstExpectedArgPair, firstExpectedArgPair);
+    }
+
+    private void assertTokenizeToPairSuccess(String argsString, Prefix firstPrefix,
+            Prefix secondPrefix, StringPair... expectedArgPairs) {
+        try {
+            ArgumentPairMultimap actualMultimap = tokenizeToPair(argsString, firstPrefix, secondPrefix);
+            int index = 1;
+            while (actualMultimap.contains(index)) {
+                assertEquals(actualMultimap.getValue(index), expectedArgPairs[index-1]);
+                index++;
+            }
+        } catch (ParseException pe) {
+            throw new IllegalArgumentException("Invalid userInput.", pe);
+        }
+    }
+
+    private void assertTokenizeToPairFailure(String argsString, Prefix firstPrefix, Prefix secondPrefix,
+            String expectedMessage) {
+        try {
+            tokenizeToPair(argsString, firstPrefix, secondPrefix);
+            throw new AssertionError("The expected ParseException was not thrown.");
+        } catch (ParseException pe) {
+            assertEquals(expectedMessage, pe.getMessage());
+        }
     }
 
     @Test

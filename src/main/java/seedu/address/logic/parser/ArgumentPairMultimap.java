@@ -41,4 +41,13 @@ public class ArgumentPairMultimap {
         return argMultimap.containsKey(index);
     }
 
+    /**
+     * Returns true if this ArgumentPairMultimap equals {@code other}.
+     */
+    public boolean equals(Object other) {
+        return this == other
+                || (other instanceof ArgumentPairMultimap
+                    && this.argMultimap.equals(((ArgumentPairMultimap) other).argMultimap));
+    }
+
 }

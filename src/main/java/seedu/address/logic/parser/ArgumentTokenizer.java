@@ -48,7 +48,7 @@ public class ArgumentTokenizer {
     public static ArgumentPairMultimap tokenizeToPair(
             String argsString, Prefix firstPrefix, Prefix secondPrefix) throws ParseException{
         List<PrefixPosition> positions = findAllPrefixPositions(argsString, firstPrefix, secondPrefix);
-        return extractArgumentsToPair(argsString, positions);
+        return extractArgumentsToPair(argsString, positions, firstPrefix, secondPrefix);
     }
 
     /**
@@ -139,10 +139,17 @@ public class ArgumentTokenizer {
      *
      * @param argsString      Arguments string of the form: {@code <prefix>value <prefix>value ...}
      * @param prefixPositions Zero-based positions of all prefixes in {@code argsString}
+     * @throws ParseException If the prefixes are in the incorrect format
      * @return                ArgumentPairMultimap object that maps indices to argument pairs
      */
     private static ArgumentPairMultimap extractArgumentsToPair(String argsString,
-            List<PrefixPosition> prefixPositions) throws ParseException {
+            List<PrefixPosition> prefixPositions, Prefix expectedFirstPrefix,
+            Prefix expectedSecondPrefix) throws ParseException {
+
+        // No prefixes
+        if (prefixPositions.size() == 0) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, StockUpCommand.MESSAGE_USAGE));
+        }
 
         // Sort by start position
         prefixPositions.sort((prefix1, prefix2) -> prefix1.getStartPosition() - prefix2.getStartPosition());
@@ -156,10 +163,11 @@ public class ArgumentTokenizer {
         StringPair argsPair;
         int index = 1;
         for (int i = 0; i < prefixPositions.size() - 1; i=i+2) {
-            // Check prefixes to see if they follow the format "/n ... /nu ... /n ... /nu ..."
-            String firstPrefix = prefixPositions.get(i).getPrefix().getPrefix();
-            String nextPrefix = prefixPositions.get(i+1).getPrefix().getPrefix();
-            if (!(firstPrefix.equals("n/") && nextPrefix.equals("nu/"))) {
+            // Check prefixes to see if they follow the correct format
+            String firstPrefix = prefixPositions.get(i).getPrefix().toString();
+            String nextPrefix = prefixPositions.get(i+1).getPrefix().toString();
+            if (!(firstPrefix.equals(expectedFirstPrefix.toString())
+                    && nextPrefix.equals(expectedSecondPrefix.toString()))) {
                 throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, StockUpCommand.MESSAGE_USAGE));
             }
 
