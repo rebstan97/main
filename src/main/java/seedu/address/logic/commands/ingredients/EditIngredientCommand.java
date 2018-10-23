@@ -18,6 +18,7 @@ import seedu.address.model.ingredient.IngredientName;
 import seedu.address.model.ingredient.IngredientPrice;
 import seedu.address.model.ingredient.IngredientUnit;
 import seedu.address.model.ingredient.MinimumUnit;
+import seedu.address.model.ingredient.NumUnits;
 
 /**
  * Edits the details of an existing ingredient in the address book.
@@ -60,7 +61,10 @@ public abstract class EditIngredientCommand extends Command {
         IngredientPrice updatedPrice = editIngredientDescriptor.getPrice().orElse(ingredientToEdit.getPrice());
         MinimumUnit updatedMinUnit = editIngredientDescriptor.getMinimum().orElse(ingredientToEdit.getMinimum());
 
-        return new Ingredient(updatedName, updatedUnit, updatedPrice, updatedMinUnit, ingredientToEdit.getNumUnits());
+        NumUnits numToAdd = editIngredientDescriptor.getNumUnits().orElse(new NumUnits("0"));
+        NumUnits updatedNumUnits = ingredientToEdit.getNumUnits().add(numToAdd);
+
+        return new Ingredient(updatedName, updatedUnit, updatedPrice, updatedMinUnit, updatedNumUnits);
     }
 
     @Override
@@ -75,6 +79,7 @@ public abstract class EditIngredientCommand extends Command {
         private IngredientUnit unit;
         private IngredientPrice price;
         private MinimumUnit minimumUnit;
+        private NumUnits numUnits;
 
         public EditIngredientDescriptor() {}
 
@@ -86,13 +91,14 @@ public abstract class EditIngredientCommand extends Command {
             setUnit(toCopy.unit);
             setPrice(toCopy.price);
             setMinimum(toCopy.minimumUnit);
+            setNumUnits(toCopy.numUnits);
         }
 
         /**
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, unit, price, minimumUnit);
+            return CollectionUtil.isAnyNonNull(name, unit, price, minimumUnit, numUnits);
         }
 
         public void setName(IngredientName name) {
@@ -127,6 +133,14 @@ public abstract class EditIngredientCommand extends Command {
             return Optional.ofNullable(minimumUnit);
         }
 
+        public void setNumUnits(NumUnits numUnits) {
+            this.numUnits = numUnits;
+        }
+
+        public Optional<NumUnits> getNumUnits() {
+            return Optional.ofNullable(numUnits);
+        }
+
         @Override
         public boolean equals(Object other) {
             // short circuit if same object
@@ -145,7 +159,8 @@ public abstract class EditIngredientCommand extends Command {
             return getName().equals(e.getName())
                     && getUnit().equals(e.getUnit())
                     && getPrice().equals(e.getPrice())
-                    && getMinimum().equals(e.getMinimum());
+                    && getMinimum().equals(e.getMinimum())
+                    && getNumUnits().equals(e.getNumUnits());
         }
     }
 }

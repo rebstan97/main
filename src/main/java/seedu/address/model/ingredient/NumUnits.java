@@ -18,7 +18,7 @@ public class NumUnits {
      */
     public static final String NUMUNITS_VALIDATION_REGEX = "^\\d+$";
 
-    public final String numberOfUnits;
+    public String numberOfUnits;
 
     /**
      * Constructs a {@code NumUnits}.
@@ -41,6 +41,18 @@ public class NumUnits {
     @Override
     public String toString() {
         return numberOfUnits;
+    }
+
+    /**
+     * Adds the values of two {@code NumUnits} objects and updates the value of the current object to be this sum.
+     * @return The updated {@NumUnits} object
+     */
+    public NumUnits add(NumUnits toAdd) {
+        Integer currentNum = Integer.parseInt(numberOfUnits);
+        Integer numToAdd = Integer.parseInt(toAdd.toString());
+        Integer updatedNum = Integer.sum(currentNum, numToAdd);
+        numberOfUnits = updatedNum.toString();
+        return this;
     }
 
     @Override

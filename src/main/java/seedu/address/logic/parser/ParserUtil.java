@@ -15,6 +15,7 @@ import seedu.address.model.ingredient.IngredientName;
 import seedu.address.model.ingredient.IngredientPrice;
 import seedu.address.model.ingredient.IngredientUnit;
 import seedu.address.model.ingredient.MinimumUnit;
+import seedu.address.model.ingredient.NumUnits;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
@@ -297,5 +298,19 @@ public class ParserUtil {
             throw new ParseException(MinimumUnit.MESSAGE_MINIMUM_CONSTRAINTS);
         }
         return new MinimumUnit(trimmedMinimum);
+    }
+
+    /**
+     * Parses a {@code String numUnits} into a {@code NumUnits}. Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code NumUnit} is invalid.
+     */
+    public static NumUnits parseNumUnits(String numUnits) throws ParseException {
+        requireNonNull(numUnits);
+        String trimmedNumUnits = numUnits.trim();
+        if (!NumUnits.isValidNumUnits(trimmedNumUnits)) {
+            throw new ParseException(NumUnits.MESSAGE_NUMUNITS_CONSTRAINTS);
+        }
+        return new NumUnits(trimmedNumUnits);
     }
 }
