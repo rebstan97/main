@@ -37,7 +37,7 @@ public class StockUpCommand extends Command {
             + PREFIX_INGREDIENT_NAME + "Cod Fish "
             + PREFIX_INGREDIENT_NUM + "20 ";
 
-    public static final String MESSAGE_STOCKUP_INGREDIENT_SUCCESS = "New ingredient stocked up: %1$s";
+    public static final String MESSAGE_STOCKUP_INGREDIENT_SUCCESS = "New ingredient(s) stocked up: %1$s";
     public static final String MESSAGE_DUPLICATE_INGREDIENT = "This ingredient already exists in the address book";
 
     private final List<ChangeStockDescriptor> stockDescriptorList;
@@ -55,12 +55,13 @@ public class StockUpCommand extends Command {
         requireNonNull(model);
         Ingredient ingredientToStockUp;
         Ingredient stockedUpIngredient;
+        StringBuilder ingredientString = new StringBuilder("\n");
 
-//        for (int index=0; index < stockDescriptorList.size(); index++) {
+        for (int index=0; index < stockDescriptorList.size(); index++) {
 
             try {
-                IngredientName name = stockDescriptorList.get(0).getName();
-                NumUnits unitsToAdd = stockDescriptorList.get(0).getNumUnits();
+                IngredientName name = stockDescriptorList.get(index).getName();
+                NumUnits unitsToAdd = stockDescriptorList.get(index).getNumUnits();
                 ingredientToStockUp = model.findIngredient(name);
                 EditIngredientDescriptor editIngredientDescriptor = new EditIngredientDescriptor();
                 editIngredientDescriptor.setName(name);
@@ -72,11 +73,13 @@ public class StockUpCommand extends Command {
 
             model.updateIngredient(ingredientToStockUp, stockedUpIngredient);
             model.updateFilteredIngredientList(PREDICATE_SHOW_ALL_INGREDIENTS);
-            model.commitAddressBook();
-            EventsCenter.getInstance().post(new DisplayIngredientListRequestEvent());
+            ingredientString.append(stockedUpIngredient + "\n");
 
-//        }
-        return new CommandResult(String.format(MESSAGE_STOCKUP_INGREDIENT_SUCCESS, stockedUpIngredient));
+        }
+
+        model.commitAddressBook();
+        EventsCenter.getInstance().post(new DisplayIngredientListRequestEvent());
+        return new CommandResult(String.format(MESSAGE_STOCKUP_INGREDIENT_SUCCESS, ingredientString));
 
     }
 
