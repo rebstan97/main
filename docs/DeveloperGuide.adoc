@@ -370,16 +370,16 @@ image::RegisterSequenceDiagram.png[width="800"]
 ==== Current Implementation
 
 [NOTE]
-If a private command is executed when a session is not set, it won't be processed. The only commands that can
-be executed without a session being set are `help`, `login` and `exit`.
+If a privileged command is executed when a session is not set, an error will be shown. The only commands that can
+be executed without a session being set are `help`, `login` and `exit`. Any other commands are considered privileged
 
 The user session is facilitated by `UserSession` which stores the authentication state of the application.
 This is triggered by raising a `Login` and `Logout` event upon executing either the `Command#LoginCommand()` or
 `Command#LogoutCommand()`. +
 
-Additionally, it implements the following operations:
+Additionally, it implements the following static operations:
 
-* `UserSession#login()` -- Creates a login session.
+* `UserSession#login()` -- Set a login session.
 * `UserSession#logout()` -- Removes the existing login session.
 * `UserSession#isAuthenticated()` -- Checks if there is an existing login session.
 
@@ -392,13 +392,12 @@ image::UserSessionActivityDiagram.png[width="650"]
 ==== Design Considerations
 ===== Aspect: How user session is handled
 
-* **Alternative 1 (current choice):** Use a static flag.
+* **Alternative 1 (current choice):** Use static flags and methods.
 ** Pros: Easy to implement.
-** Cons: Can only support one user.
-* **Alternative 2:** Store a list of user sessions, allowing multiple login.
-** Pros: More user can login and manage the systems.
+** Cons: Can only support one user at any time. If another user wants to login, the current logged in user must log out.
+* **Alternative 2:** Store a list of user sessions to allow multiple login.
+** Pros: More user can login and manage the systems concurrently.
 ** Cons: More memory usage to track each user session.
-
 
 // tag::displaySales[]
 === Display sales report feature
