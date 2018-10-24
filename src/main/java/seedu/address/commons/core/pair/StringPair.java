@@ -1,8 +1,11 @@
 package seedu.address.commons.core.pair;
 
+/**
+ * Represents a pair of Strings.
+ */
 public class StringPair {
-    String firstString;
-    String secondString;
+    private String firstString;
+    private String secondString;
 
     /**
      * Constructs a StringPair object.

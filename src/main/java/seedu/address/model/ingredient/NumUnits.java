@@ -18,7 +18,7 @@ public class NumUnits {
      */
     public static final String NUMUNITS_VALIDATION_REGEX = "^\\d+$";
 
-    public String numberOfUnits;
+    private String numberOfUnits;
 
     /**
      * Constructs a {@code NumUnits}.

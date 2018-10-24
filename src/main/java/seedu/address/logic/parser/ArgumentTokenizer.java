@@ -46,7 +46,7 @@ public class ArgumentTokenizer {
      * @return              ArgumentPairMultimap object that maps integer indices to their argument pairs
      */
     public static ArgumentPairMultimap tokenizeToPair(
-            String argsString, Prefix firstPrefix, Prefix secondPrefix) throws ParseException{
+            String argsString, Prefix firstPrefix, Prefix secondPrefix) throws ParseException {
         List<PrefixPosition> positions = findAllPrefixPositions(argsString, firstPrefix, secondPrefix);
         return extractArgumentsToPair(argsString, positions, firstPrefix, secondPrefix);
     }
@@ -139,8 +139,8 @@ public class ArgumentTokenizer {
      *
      * @param argsString      Arguments string of the form: {@code <prefix>value <prefix>value ...}
      * @param prefixPositions Zero-based positions of all prefixes in {@code argsString}
-     * @throws ParseException If the prefixes are in the incorrect format
      * @return                ArgumentPairMultimap object that maps indices to argument pairs
+     * @throws ParseException If the prefixes are in the incorrect format
      */
     private static ArgumentPairMultimap extractArgumentsToPair(String argsString,
             List<PrefixPosition> prefixPositions, Prefix expectedFirstPrefix,
@@ -162,19 +162,19 @@ public class ArgumentTokenizer {
         ArgumentPairMultimap argMultimap = new ArgumentPairMultimap();
         StringPair argsPair;
         int index = 1;
-        for (int i = 0; i < prefixPositions.size() - 1; i=i+2) {
+        for (int i = 0; i < prefixPositions.size() - 1; i = i + 2) {
             // Check prefixes to see if they follow the correct format
             String firstPrefix = prefixPositions.get(i).getPrefix().toString();
-            String nextPrefix = prefixPositions.get(i+1).getPrefix().toString();
+            String nextPrefix = prefixPositions.get(i + 1).getPrefix().toString();
             if (!(firstPrefix.equals(expectedFirstPrefix.toString())
                     && nextPrefix.equals(expectedSecondPrefix.toString()))) {
                 throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, StockUpCommand.MESSAGE_USAGE));
             }
 
             // Extract and store prefixes and their arguments
-            String firstArgValue = extractArgumentValue(argsString, prefixPositions.get(i), prefixPositions.get(i+1));
-            String secondArgValue = extractArgumentValue(argsString, prefixPositions.get(i+1),
-                    prefixPositions.get(i+2));
+            String firstArgValue = extractArgumentValue(argsString, prefixPositions.get(i), prefixPositions.get(i + 1));
+            String secondArgValue = extractArgumentValue(argsString, prefixPositions.get(i + 1),
+                    prefixPositions.get(i + 2));
             argsPair = new StringPair(firstArgValue, secondArgValue);
             argMultimap.put(index, argsPair);
             index++;

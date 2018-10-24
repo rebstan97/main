@@ -56,7 +56,7 @@ public class StockUpCommand extends Command {
         Ingredient stockedUpIngredient;
         StringBuilder ingredientString = new StringBuilder();
 
-        for (int index=0; index < stockDescriptorList.size(); index++) {
+        for (int index = 0; index < stockDescriptorList.size(); index++) {
 
             try {
                 IngredientName name = stockDescriptorList.get(index).getName();
