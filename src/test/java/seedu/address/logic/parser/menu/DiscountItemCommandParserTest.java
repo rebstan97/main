@@ -72,7 +72,7 @@ public class DiscountItemCommandParserTest {
     }
 
     @Test
-    public void parse_validALLFollowedByInvalidPercent_failure() {
+    public void parse_validAllFollowedByInvalidPercent_failure() {
         String userInput = "ALL" + INVALID_ITEM_PERCENT_DESC;
         assertParseFailure(parser, userInput, DiscountItemCommandParser.MESSAGE_PERCENT_CONSTRAINTS);
     }
