@@ -32,7 +32,7 @@ public class StockUpCommandParserTest {
     public void parse_validArgumentPair_success() {
         List<ChangeStockDescriptor> descriptorList = new ArrayList<>();
         ChangeStockDescriptor descriptor =
-                new ChangeStockDescriptorBuilder().withName(VALID_NAME_APPLE) .withNumUnits(VALID_NUMUNITS_APPLE)
+                new ChangeStockDescriptorBuilder().withName(VALID_NAME_APPLE).withNumUnits(VALID_NUMUNITS_APPLE)
                 .build();
         descriptorList.add(descriptor);
         StockUpCommand expectedCommand = new StockUpCommand(descriptorList);
@@ -43,11 +43,11 @@ public class StockUpCommandParserTest {
     public void parse_validMultipleArgumentPairs_success() {
         List<ChangeStockDescriptor> descriptorList = new ArrayList<>();
         ChangeStockDescriptor descriptor =
-                new ChangeStockDescriptorBuilder().withName(VALID_NAME_APPLE) .withNumUnits(VALID_NUMUNITS_APPLE)
+                new ChangeStockDescriptorBuilder().withName(VALID_NAME_APPLE).withNumUnits(VALID_NUMUNITS_APPLE)
                         .build();
         descriptorList.add(descriptor);
         descriptor =
-                new ChangeStockDescriptorBuilder().withName(VALID_NAME_BROCCOLI) .withNumUnits(VALID_NUMUNITS_BROCCOLI)
+                new ChangeStockDescriptorBuilder().withName(VALID_NAME_BROCCOLI).withNumUnits(VALID_NUMUNITS_BROCCOLI)
                         .build();
         descriptorList.add(descriptor);
         StockUpCommand expectedCommand = new StockUpCommand(descriptorList);

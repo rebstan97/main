@@ -220,13 +220,16 @@ public class ArgumentTokenizerTest {
         assertTokenizeToPairSuccess(argsString, pSlash, qSlash, firstExpectedArgPair, firstExpectedArgPair);
     }
 
+    /**
+     * Asserts that {@code argsString} has been tokenised successfully into an argument pair based on the prefixes
+     */
     private void assertTokenizeToPairSuccess(String argsString, Prefix firstPrefix,
             Prefix secondPrefix, StringPair... expectedArgPairs) {
         try {
             ArgumentPairMultimap actualMultimap = tokenizeToPair(argsString, firstPrefix, secondPrefix);
             int index = 1;
             while (actualMultimap.contains(index)) {
-                assertEquals(actualMultimap.getValue(index), expectedArgPairs[index-1]);
+                assertEquals(actualMultimap.getValue(index), expectedArgPairs[index - 1]);
                 index++;
             }
         } catch (ParseException pe) {
@@ -234,6 +237,9 @@ public class ArgumentTokenizerTest {
         }
     }
 
+    /**
+     * Asserts that {@code argsString} has failed to tokenise into an argument pair based on the prefixes
+     */
     private void assertTokenizeToPairFailure(String argsString, Prefix firstPrefix, Prefix secondPrefix,
             String expectedMessage) {
         try {
