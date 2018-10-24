@@ -460,10 +460,12 @@ public class AddressBookParserTest {
     public void parseCommand_discountItem() throws Exception {
         DiscountItemCommand command = (DiscountItemCommand) parser.parseCommand(
                 DiscountItemCommand.COMMAND_WORD + " " + INDEX_FIRST.getOneBased() + ITEM_PERCENT_DESC);
-        assertEquals(new DiscountItemCommand(INDEX_FIRST, Double.parseDouble(VALID_ITEM_PERCENT)), command);
+        assertEquals(new DiscountItemCommand(INDEX_FIRST, INDEX_FIRST,
+                Double.parseDouble(VALID_ITEM_PERCENT), false), command);
         command = (DiscountItemCommand) parser.parseCommand(DiscountItemCommand.COMMAND_ALIAS
                 + " " + INDEX_FIRST.getOneBased() + ITEM_PERCENT_DESC);
-        assertEquals(new DiscountItemCommand(INDEX_FIRST, Double.parseDouble(VALID_ITEM_PERCENT)), command);
+        assertEquals(new DiscountItemCommand(INDEX_FIRST, INDEX_FIRST,
+                Double.parseDouble(VALID_ITEM_PERCENT), false), command);
     }
 
     @Test
