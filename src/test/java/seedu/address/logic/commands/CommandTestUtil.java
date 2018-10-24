@@ -16,6 +16,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_ITEM_PRICE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PASSWORD;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PAX;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PERCENT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PRICE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_QUANTITY_SOLD;
@@ -165,6 +166,7 @@ public class CommandTestUtil {
     public static final String VALID_ITEM_TAG_CHEESE = "cheese";
     public static final String VALID_ITEM_REMARK_BURGER = "Burger with beef patty.";
     public static final String VALID_ITEM_REMARK_FRIES = "Fries with cheese.";
+    public static final String VALID_ITEM_PERCENT = "20";
 
     public static final String ITEM_NAME_DESC_BURGER = " " + PREFIX_NAME + VALID_ITEM_NAME_BURGER;
     public static final String ITEM_NAME_DESC_FRIES = " " + PREFIX_NAME + VALID_ITEM_NAME_FRIES;
@@ -172,7 +174,9 @@ public class CommandTestUtil {
     public static final String ITEM_PRICE_DESC_FRIES = " " + PREFIX_PRICE + VALID_ITEM_PRICE_FRIES;
     public static final String ITEM_TAG_DESC_BURGER = " " + PREFIX_TAG + VALID_ITEM_TAG_BURGER;
     public static final String ITEM_TAG_DESC_CHEESE = " " + PREFIX_TAG + VALID_ITEM_TAG_CHEESE;
+    public static final String ITEM_PERCENT_DESC = " " + PREFIX_PERCENT + VALID_ITEM_PERCENT;
 
+    public static final String INVALID_ITEM_PERCENT_DESC = " " + PREFIX_PERCENT + "10000"; // at most 2 digits
     public static final String INVALID_ITEM_NAME_DESC = " " + PREFIX_NAME + "Fries&"; // '&' not allowed in names
     public static final String INVALID_PRICE_DESC = " " + PREFIX_PRICE + "9.000"; // 3 decimal places not allowed in
     // prices

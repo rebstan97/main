@@ -14,7 +14,7 @@ import java.util.List;
 import seedu.address.model.menu.Item;
 
 /**
- * A utility class containing a list of {@code Person} objects to be used in tests.
+ * A utility class containing a list of {@code Item} objects to be used in tests.
  */
 public class TypicalItems {
 
@@ -41,7 +41,7 @@ public class TypicalItems {
     public static final Item HAINANESE = new ItemBuilder().withName("Hainanese Chicken Rice").withPrice("2.50").build();
     public static final Item ICED_TEA = new ItemBuilder().withName("Iced Tea").withPrice("1.50").build();
 
-    // Manually added - Person's details found in {@code CommandTestUtil}
+    // Manually added - Item's details found in {@code CommandTestUtil}
     public static final Item BURGER = new ItemBuilder().withName(VALID_ITEM_NAME_BURGER)
             .withPrice(VALID_ITEM_PRICE_BURGER).build();
     public static final Item FRIES = new ItemBuilder().withName(VALID_ITEM_NAME_FRIES)

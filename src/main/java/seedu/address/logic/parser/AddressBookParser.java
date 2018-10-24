@@ -32,6 +32,7 @@ import seedu.address.logic.commands.ingredients.StockUpCommand;
 import seedu.address.logic.commands.menu.AddItemCommand;
 import seedu.address.logic.commands.menu.ClearMenuCommand;
 import seedu.address.logic.commands.menu.DeleteItemCommand;
+import seedu.address.logic.commands.menu.DiscountItemCommand;
 import seedu.address.logic.commands.menu.EditItemCommand;
 import seedu.address.logic.commands.menu.FilterMenuCommand;
 import seedu.address.logic.commands.menu.FindItemCommand;
@@ -56,6 +57,7 @@ import seedu.address.logic.parser.ingredients.EditIngredientCommandParser;
 import seedu.address.logic.parser.ingredients.StockUpCommandParser;
 import seedu.address.logic.parser.menu.AddItemCommandParser;
 import seedu.address.logic.parser.menu.DeleteItemCommandParser;
+import seedu.address.logic.parser.menu.DiscountItemCommandParser;
 import seedu.address.logic.parser.menu.EditItemCommandParser;
 import seedu.address.logic.parser.menu.FilterMenuCommandParser;
 import seedu.address.logic.parser.menu.FindItemCommandParser;
@@ -228,6 +230,10 @@ public class AddressBookParser {
         case TodaySpecialCommand.COMMAND_WORD:
         case TodaySpecialCommand.COMMAND_ALIAS:
             return new TodaySpecialCommand();
+
+        case DiscountItemCommand.COMMAND_WORD:
+        case DiscountItemCommand.COMMAND_ALIAS:
+            return new DiscountItemCommandParser().parse(arguments);
 
         case ClearMenuCommand.COMMAND_WORD:
         case ClearMenuCommand.COMMAND_ALIAS:
