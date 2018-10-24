@@ -67,11 +67,11 @@ public class LoginCommandTest {
 
     @Test
     public void execute_invalidPassword() throws CommandException {
-        Account invalidAccount = new AccountBuilder().withPassword("1122qq!@#123").build();
-        CommandResult commandResult = new LoginCommand(invalidAccount).execute(model, commandHistory);
+        thrown.expect(CommandException.class);
+        thrown.expectMessage(LoginCommand.MESSAGE_WRONG_PASSWORD);
 
-        assertEquals(LoginCommand.MESSAGE_WRONG_PASSWORD, commandResult.feedbackToUser);
-        assertEquals(EMPTY_COMMAND_HISTORY, commandHistory);
+        Account invalidAccount = new AccountBuilder().withPassword("1122qq!@#123").build();
+        new LoginCommand(invalidAccount).execute(model, commandHistory);
     }
 
     @Test
