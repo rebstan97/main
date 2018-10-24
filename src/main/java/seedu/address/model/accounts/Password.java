@@ -2,6 +2,7 @@ package seedu.address.model.accounts;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PASSWORD;
 
 import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
@@ -25,6 +26,8 @@ public class Password {
      * otherwise " " (a blank string) becomes a valid input.
      */
     private static final String PASSWORD_VALIDATION_REGEX = "[\\p{ASCII}&&[\\S]]{6,20}";
+
+    private static final String PASSWORD_MASK = "*****";
 
     private static final int MAX_SALT_LENGTH = 16;
 
@@ -73,6 +76,17 @@ public class Password {
      */
     public static boolean isHashed(String password) {
         return password.contains("$2a$06$") && password.length() > 20;
+    }
+
+    /**
+     * Mask the password in the command
+     *
+     * @param commandText the command that contains the password.
+     * @return the commandText with the masked password.
+     */
+    public static String maskPassword(String commandText) {
+        String[] splitCommandText = commandText.split(PREFIX_PASSWORD.getPrefix());
+        return splitCommandText[0] + PREFIX_PASSWORD + PASSWORD_MASK;
     }
 
     /**
