@@ -37,7 +37,7 @@ public class StockUpCommand extends Command {
             + PREFIX_INGREDIENT_NAME + "Cod Fish "
             + PREFIX_INGREDIENT_NUM + "20 ";
 
-    public static final String MESSAGE_STOCKUP_INGREDIENT_SUCCESS = "New ingredient(s) stocked up: %1$s";
+    public static final String MESSAGE_STOCKUP_INGREDIENT_SUCCESS = "Ingredient(s) stocked up: %1$s";
 
     private final List<ChangeStockDescriptor> stockDescriptorList;
 
@@ -54,7 +54,7 @@ public class StockUpCommand extends Command {
         requireNonNull(model);
         Ingredient ingredientToStockUp;
         Ingredient stockedUpIngredient;
-        StringBuilder ingredientString = new StringBuilder("\n");
+        StringBuilder ingredientString = new StringBuilder();
 
         for (int index=0; index < stockDescriptorList.size(); index++) {
 
@@ -72,14 +72,12 @@ public class StockUpCommand extends Command {
 
             model.updateIngredient(ingredientToStockUp, stockedUpIngredient);
             model.updateFilteredIngredientList(PREDICATE_SHOW_ALL_INGREDIENTS);
-            ingredientString.append(stockedUpIngredient + "\n");
-
+            ingredientString.append("\n" + stockedUpIngredient);
         }
 
         model.commitAddressBook();
         EventsCenter.getInstance().post(new DisplayIngredientListRequestEvent());
         return new CommandResult(String.format(MESSAGE_STOCKUP_INGREDIENT_SUCCESS, ingredientString));
-
     }
 
     @Override
@@ -95,6 +93,8 @@ public class StockUpCommand extends Command {
     public static class ChangeStockDescriptor {
         private IngredientName name;
         private NumUnits numUnits;
+
+        public ChangeStockDescriptor() {}
 
         public ChangeStockDescriptor(IngredientName name, NumUnits numUnits) {
             this.name = name;
