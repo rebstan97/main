@@ -57,7 +57,7 @@ public class XmlAdaptedIngredient {
         unit = source.getUnit().unitName;
         price = source.getPrice().pricePerUnit;
         minimum = source.getMinimum().minimumUnit;
-        numUnits = source.getNumUnits().numberOfUnits;
+        numUnits = source.getNumUnits().toString();
     }
 
     /**
