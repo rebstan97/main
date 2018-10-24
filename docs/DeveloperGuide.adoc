@@ -222,7 +222,7 @@ image::DeletePersonSdForLogic.png[width="800"]
 === Model component
 
 .Structure of the Model Component
-image::ModelClassDiagram.png[width="800"]
+image::ModelClassDiagramNew.png[width="800"]
 
 *API* : link:{repoURL}/src/main/java/seedu/address/model/Model.java[`Model.java`]
 
@@ -232,11 +232,6 @@ The `Model`,
 * stores the Address Book data.
 * exposes an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 * does not depend on any of the other three components.
-
-[NOTE]
-As a more OOP model, we can store a `Tag` list in `Address Book`, which `Person` can reference. This would allow `Address Book` to only require one `Tag` object per unique `Tag`, instead of each `Person` needing their own `Tag` object. An example of how such a model may look like is given below. +
- +
-image:ModelClassBetterOopDiagram.png[width="800"]
 
 [[Design-Storage]]
 === Storage component
@@ -300,6 +295,7 @@ If the `currentStatePointer` is at index 0, pointing to the initial address book
 
 The following sequence diagram shows how the undo operation works:
 
+.Structure of the Storage Component
 image::UndoRedoSequenceDiagram.png[width="800"]
 
 The `redo` command does the opposite -- it calls `Model#redoAddressBook()`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores the address book to that state.
@@ -369,8 +365,8 @@ The following sequence diagram shows how the `register` command works:
 [NOTE]
 The `deregister` command works the same way
 
+.Sequence diagram to illustrate component interactions for the `register` command
 image::RegisterSequenceDiagram.png[width="800"]
-_Figure 4.2.1.1: Sequence diagram to illustrate component interactions for the `register` command_
 
 [NOTE]
 We assume the user is already logged in
@@ -394,8 +390,8 @@ Step 5: The new account is added into the storage. Then, a `CommandResult` is ge
 
 The following sequence diagram shows how the `login` command works:
 
+.Sequence diagram to illustrate component interactions for the `login` command
 image::LoginSequenceDiagram.png[width="800"]
-_Figure 4.2.1.2: Sequence diagram to illustrate component interactions for the `login` command_
 
 [NOTE]
 We assume the user will enter the correct password. Otherwise, warning message will be shown to the user to re-enter
