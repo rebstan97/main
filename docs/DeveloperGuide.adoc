@@ -536,6 +536,8 @@ The following activity diagram summarizes what happens when a user executes sort
 
 image::SortMenuActivityDiagram.png[width="650"]
 
+The following sequence diagram shows how the `sort-menu` command works:
+
 ==== `filter-menu` Command
 The `filter-menu` command is facilitated by `FilterMenuCommand` and `FilterMenuCommandParser`. The command takes in
 user input for the keywords.
