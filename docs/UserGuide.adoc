@@ -464,7 +464,8 @@ Format: `history [stockup] [consumption]`
 * At least one of the optional fields must be provided.
 ****
 
-=== Adding an item to the menu: `add-item` or `ai`
+=== Menu Management
+==== Adding an item to the menu: `add-item` or `ai`
 
 Adds an item to the menu +
 Format: `add-item n/ITEM_NAME p/ITEM_PRICE [t/TAG]...`
@@ -477,14 +478,14 @@ Format: `add-item n/ITEM_NAME p/ITEM_PRICE [t/TAG]...`
 Examples:
 
 * `add-item n/Burger p/2`
-* `add-item n/Burger Set p/4.5 t/Set`
+* `ai n/Burger Set p/4.5 t/Set`
 
-=== Listing all items in the menu : `list-items` or 'li'
+==== Listing all items in the menu : `list-items` or 'li'
 
 Shows a list of all items in the menu. +
 Format: `list-items`
 
-=== Editing an item in the menu : `edit-item` or `ei`
+==== Editing an item in the menu : `edit-item` or `ei`
 
 Edits an existing item in the menu. +
 Format: `edit-item INDEX [n/ITEM_NAME] [p/ITEM_PRICE] [t/TAG]...` or `edit-item NAME [n/ITEM_NAME] [p/ITEM_PRICE]
@@ -504,10 +505,10 @@ Examples:
 
 * `edit-item 1 n/burger p/3` +
 Edits the name and price of the 1st item to be `burger` and `3` respectively.
-* `edit-item 2 p/4 t/` +
+* `ei 2 p/4 t/` +
 Edits the price of the 2nd item to be `4` and clears all existing tags.
 
-=== Deleting an item : `delete-item` or `di`
+==== Deleting an item : `delete-item` or `di`
 
 Deletes the specified item from the menu. +
 Format: `delete-item INDEX` or `delete-item NAME`
@@ -524,11 +525,11 @@ Examples:
 * `list-items` +
 `delete-item 2` +
 Deletes the 2nd item in the menu.
-* `find-item Cheese` +
-`delete-item 1` +
+* `fi Cheese` +
+`di 1` +
 Deletes the 1st item in the results of the `find` command.
 
-=== Selecting an item : `select-item` or `si`
+==== Selecting an item : `select-item` or `si`
 
 Selects the item identified by the index number used in the menu. +
 Format: `select-item INDEX`
@@ -544,11 +545,11 @@ Examples:
 * `list-items` +
 `select-item 2` +
 Selects the 2nd item in the menu.
-* `find Burger` +
-`select-item 1` +
+* `fi Burger` +
+`si 1` +
 Selects the 1st item in the results of the `find` command.
 
-=== Locating items by name: `find-item` or `fi`
+==== Locating items by name: `find-item` or `fi`
 
 Finds items whose names contain any of the given keywords. +
 Format: `find-item KEYWORD [MORE_KEYWORDS]`
@@ -566,10 +567,10 @@ Examples:
 
 * `find-item Burger` +
 Returns `burger` and `Cheese Burger`
-* `find-item Cheese Chocolate Fruit` +
+* `fi Cheese Chocolate Fruit` +
 Returns any item having names `Cheese`, `Chocolate`, or `Fruit`
 
-=== Filter menu by tag: `filter-menu` or `fm`
+==== Filter menu by tag: `filter-menu` or `fm`
 
 Finds items that contain the given tag in the menu. +
 Format: `filter-menu t/TAG`
@@ -586,10 +587,10 @@ Examples:
 
 * `filter-menu t/monday` +
 Returns any item that contains tag `monday`
-* `filter-menu t/set` +
+* `fm t/set` +
 Returns any item that contains tag `set`
 
-=== Sort menu : `sort-menu` or `sm`
+==== Sort menu : `sort-menu` or `sm`
 
 Sort the menu by name or price. +
 Format: `sort-menu [NAME] [PRICE]`
@@ -604,15 +605,15 @@ Examples:
 
 * `sort-menu NAME` +
 Sorts the menu by item name in alphabetical order.
-* `sort-menu PRICE` +
+* `sm PRICE` +
 Sorts the menu by item price in ascending order(lowest to highest).
 
-=== Clearing all entries : `clear-menu` or `cm`
+==== Clearing all entries : `clear-menu` or `cm`
 
 Clears all entries from the menu. +
 Format: `clear-menu`
 
-=== Giving a discount to an item : `discount-item` or `di`
+==== Giving a discount to an item : `discount-item` or `di`
 
 Gives the item identified by the index number used in the displayed item list a discount. +
 Format: `discount-item INDEX|ALL d/PERCENTAGE`
@@ -631,11 +632,11 @@ Examples:
 * `list-items` +
 `discount-item 2` +
 Discount the 2nd item in the menu.
-* `find-item Cheese` +
-`discount-item 1` +
+* `fi Cheese` +
+`di 1` +
 Discounts the 1st item in the results of the `find` command.
 
-=== Today's specials : `today-special` or `ts`
+==== Today's specials : `today-special` or `ts`
 
 Lists the items that have been tagged with `DAY_OF_THE_WEEK` in the menu. +
 Format: `today-special`
@@ -646,7 +647,7 @@ Examples:
 If today is Monday +
 List the items that have been tagged with `Monday` in the menu.
 
-=== Export menu : `export-menu` or `em`
+==== Export menu : `export-menu` or `em`
 
 Exports the menu to a particular file path. +
 Format: `export-menu fp/FILEPATH fn/FILENAME`
@@ -656,7 +657,7 @@ Examples:
 * `export-menu f/test/ n/menu.txt` +
 Export the menu to test folder with the file name `menu.txt`
 
-=== Import menu : `import-menu` or `im`
+==== Import menu : `import-menu` or `im`
 
 Imports an existing menu from specified file path to replace current menu. +
 Format: `import-menu fp/FILEPATH fn/FILENAME`
@@ -666,7 +667,7 @@ Examples:
 * `import-menu f/test/ n/menu.txt` +
 Import the menu.txt from test folder to replace current menu.
 
-=== Support for multiple menus `[coming in v2.0]`
+==== Support for multiple menus `[coming in v2.0]`
 User will be able to manage multiple menus without the need of exporting and importing for different version of the
 current menu.
 
