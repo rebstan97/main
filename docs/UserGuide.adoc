@@ -112,12 +112,13 @@ Time is money. *MeNUS* ensures that the application will:
 * Parameters can be in any order e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
 ====
 
-=== Viewing help : `help`
+=== General
+==== Viewing help : `help`
 
 Format: `help`
 
 // tag::undoredo[]
-=== Undoing previous command : `undo` or `u`
+==== Undoing previous command : `undo` or `u`
 
 Restores the address book to the state before the previous _undoable_ command was executed. +
 Format: `undo`
@@ -140,7 +141,7 @@ The `undo` command fails as there are no undoable commands executed previously.
 `undo` (reverses the `clear` command) +
 `undo` (reverses the `deregister id/root` command) +
 
-=== Redoing the previously undone command : `redo` or `r`
+==== Redoing the previously undone command : `redo` or `r`
 
 Reverses the most recent `undo` command. +
 Format: `redo`
@@ -163,22 +164,22 @@ The `redo` command fails as there are no `undo` commands executed previously.
 `redo` (reapplies the `clear` command) +
 // end::undoredo[]
 
-=== Clearing all entries : `clear` or `c`
+==== Clearing all entries : `clear` or `c`
 
 Clears all entries from the restaurant book. +
 Format: `clear`
 
-=== Exiting the program : `exit`
+==== Exiting the program : `exit`
 
 Exits the program. +
 Format: `exit`
 
-=== Saving the data
+==== Saving the data
 
 Restaurant book data are saved in the hard disk automatically after any command that changes the data. +
 There is no need to save manually.
 
-=== Accounts
+=== Accounts Management
 ==== Logging in: `login` or `li`
 
 Logs into an existing account. +
@@ -707,7 +708,8 @@ Format: `rank-item`
 Ranks the dates based on their total revenue for that day. +
 Format: `rank-date`
 
-=== User roles `[coming in v2.0]`
+=== Coming Soon!
+==== User roles `[coming in v2.0]`
 With user role, each user will only be able to execute certain commands, other than the administrator and/or
 restaurant owner who is able to execute all commands.
 
