@@ -16,7 +16,7 @@ import seedu.address.model.UserPrefs;
 import seedu.address.testutil.AddressBookBuilder;
 
 /**
- * Contains integration tests (interaction with the Model) for {@code FindItemCommand}.
+ * Contains integration tests (interaction with the Model) for {@code SortMenuCommand}.
  */
 public class SortMenuCommandTest {
     private AddressBook ab = new AddressBookBuilder().withItem(BEEF_BURGER).withItem(APPLE_JUICE).build();
