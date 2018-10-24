@@ -13,6 +13,7 @@ ifdef::env-github[]
 :note-caption: :information_source:
 endif::[]
 :repoURL: https://github.com/CS2103-AY1819S1-F10-4/main/tree/master
+:toclevels: 3
 
 By: `Team CS2103-AY1819S1-F10-4`      Since: `Sep 2018`      Licence: `MIT`
 
@@ -24,9 +25,9 @@ link:{repoURL}[MeNUS] is here for you!
 
 
 Introducing link:{repoURL}[MeNUS], a revolutionary restaurant management desktop application that is *optimized for
-users who prefer to work with a Command Line Interface (CLI) while still having
-the benefits of a Graphical User Interface (GUI)*. If you can type fast, MeNUS allows you to manage aspects of your
-eatery -- menu, ingredient, sales and reservations management -- all from a single location !
+users who prefer to work with a Command Line Interface (CLI) while still having the benefits of a Graphical User
+Interface (GUI)*. If you can type fast, link:{repoURL}[MeNUS] allows you to manage aspects of your restaurants -- staff accounts,
+menus, ingredient, sales and reservations management -- all from a single location !
 
 Let's get started!
 
@@ -115,114 +116,6 @@ Time is money. *MeNUS* ensures that the application will:
 
 Format: `help`
 
-=== Adding a person: `add` or `a`
-
-Adds a person to the address book +
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]...`
-
-[TIP]
-A person can have any number of tags (including 0)
-
-Examples:
-
-* `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
-* `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
-
-=== Listing all persons : `list` or `l`
-
-Shows a list of all persons in the address book. +
-Format: `list`
-
-=== Editing a person : `edit` or `e`
-
-Edits an existing person in the address book. +
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]...`
-
-****
-* Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index *must be a positive integer* 1, 2, 3, ...
-* At least one of the optional fields must be provided.
-* Existing values will be updated to the input values.
-* When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
-* You can remove all the person's tags by typing `t/` without specifying any tags after it.
-****
-
-Examples:
-
-* `edit 1 p/91234567 e/johndoe@example.com` +
-Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
-* `edit 2 n/Betsy Crower t/` +
-Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
-
-=== Locating persons by name: `find` or `f`
-
-Finds persons whose names contain any of the given keywords. +
-Format: `find KEYWORD [MORE_KEYWORDS]`
-
-****
-* The search is case insensitive. e.g `hans` will match `Hans`
-* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-* Only the name is searched.
-* Only full words will be matched e.g. `Han` will not match `Hans`
-* Persons matching at least one keyword will be returned (i.e. `OR` search). e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
-****
-
-Examples:
-
-* `find John` +
-Returns `john` and `John Doe`
-* `find Betsy Tim John` +
-Returns any person having names `Betsy`, `Tim`, or `John`
-
-=== Deleting a person : `delete` or `d`
-
-Deletes the specified person from the address book. +
-Format: `delete INDEX`
-
-****
-* Deletes the person at the specified `INDEX`.
-* The index refers to the index number shown in the displayed person list.
-* The index *must be a positive integer* 1, 2, 3, ...
-****
-
-Examples:
-
-* `list` +
-`delete 2` +
-Deletes the 2nd person in the address book.
-* `find Betsy` +
-`delete 1` +
-Deletes the 1st person in the results of the `find` command.
-
-=== Selecting a person : `select` or `s`
-
-Selects the person identified by the index number used in the displayed person list. +
-Format: `select INDEX`
-
-****
-* Selects the person and loads the Google search page the person at the specified `INDEX`.
-* The index refers to the index number shown in the displayed person list.
-* The index *must be a positive integer* `1, 2, 3, ...`
-****
-
-Examples:
-
-* `list` +
-`select 2` +
-Selects the 2nd person in the address book.
-* `find Betsy` +
-`select 1` +
-Selects the 1st person in the results of the `find` command.
-
-=== Listing entered commands : `history`
-
-Lists all the commands that you have entered in reverse chronological order. +
-Format: `history`
-
-[NOTE]
-====
-Pressing the kbd:[&uarr;] and kbd:[&darr;] arrows will display the previous and next input respectively in the command box
-====
-
 // tag::undoredo[]
 === Undoing previous command : `undo` or `u`
 
@@ -231,24 +124,21 @@ Format: `undo`
 
 [NOTE]
 ====
-Undoable commands: those commands that modify the address book's content (`add`, `delete`, `edit` and `clear`)
+Undoable commands: those commands that modify the restaurant book's contents
 ====
 
 Examples:
 
-* `delete 1` +
-`list` +
-`undo` (reverses the `delete 1` command) +
+* `register id/root pw/1122qq` +
+`undo` (reverses the `register id/root pw/1122qq command) +
 
-* `select 1` +
-`list` +
-`undo` +
+* `undo` +
 The `undo` command fails as there are no undoable commands executed previously.
 
-* `delete 1` +
+* `deregister id/root` +
 `clear` +
 `undo` (reverses the `clear` command) +
-`undo` (reverses the `delete 1` command) +
+`undo` (reverses the `deregister id/root` command) +
 
 === Redoing the previously undone command : `redo` or `r`
 
@@ -275,7 +165,7 @@ The `redo` command fails as there are no `undo` commands executed previously.
 
 === Clearing all entries : `clear` or `c`
 
-Clears all entries from the address book. +
+Clears all entries from the restaurant book. +
 Format: `clear`
 
 === Exiting the program : `exit`
@@ -285,10 +175,11 @@ Format: `exit`
 
 === Saving the data
 
-Address book data are saved in the hard disk automatically after any command that changes the data. +
+Restaurant book data are saved in the hard disk automatically after any command that changes the data. +
 There is no need to save manually.
 
-=== Logging in: `login`
+=== Accounts
+==== Logging in: `login` or `li`
 
 Logs into an existing account. +
 Format: `login id/USERNAME pw/PASSWORD` +
@@ -296,13 +187,14 @@ Format: `login id/USERNAME pw/PASSWORD` +
 Examples:
 
 * `login id/azhikai pw/p@55w0rd`
+* `li id/azhikai pw/p@55w0rd`
 
-=== Logging out: `logout`
+==== Logging out: `logout` or `lo`
 
 Logs out of the account. +
 Format: `logout`
 
-=== Creating user account: `register` or `reg`
+==== Creating user account: `register` or `reg`
 
 Creates a new user account. +
 Format: `register id/USERNAME pw/PASSWORD`
@@ -312,7 +204,7 @@ Examples:
 * `register id/azhikai pw/p@55w0rd`
 * `reg id/azhikai pw/p@55w0rd`
 
-=== Editing user account: `edit-account` or `ea`
+==== Editing user account: `edit-account` or `ea`
 
 Edits an existing user account. +
 Format: `edit-account id/USERNAME [nid/NEW_USERNAME] [pw/NEW_PASSWORD]`
@@ -329,7 +221,7 @@ Examples:
 * `ea id/azhikai nid/angzhikai`
 * `edit-acc id/azhikai nid/angzhikai pw/n3wp@55w0rd`
 
-=== Deleting user account: `deregister` or `dereg`
+==== Deleting user account: `deregister` or `dereg`
 
 Deletes an existing user account. +
 Format: `deregister id/USERNAME`
@@ -339,7 +231,7 @@ Examples:
 * `deregister id/azhikai`
 * `dereg id/azhikai`
 
-=== List user accounts: `list-accounts` or `la`
+==== List user accounts: `list-accounts` or `la`
 
 List all user accounts. +
 Format: `list-accounts`
@@ -348,10 +240,6 @@ Format: `list-accounts`
 ====
 Password is masked by default and should never be shown
 ====
-
-=== User roles `[coming in v2.0]`
-With user role, each user will only be able to execute certain commands, other than the administrator and/or
-restaurant owner who is able to execute all commands.
 
 === Adding an ingredient: `add-ingredient` or `add-ing`
 
@@ -819,6 +707,10 @@ Format: `rank-item`
 Ranks the dates based on their total revenue for that day. +
 Format: `rank-date`
 
+=== User roles `[coming in v2.0]`
+With user role, each user will only be able to execute certain commands, other than the administrator and/or
+restaurant owner who is able to execute all commands.
+
 == FAQ
 
 *Q: How do I transfer my data to another Computer?* +
@@ -828,21 +720,15 @@ contains the data of your previous *MeNUS* folder.
 == Command Summary
 [width="100%",cols="10%,<45%,<45%",options="header",]
 |=======================================================================
-|Command |Format |Example
+|COMMAND |FORMAT |EXAMPLE
 |*Help* |`help` |`help`
-|*Add* |`add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]...` |`add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
 |*Clear* |`clear` |`clear`
-|*Delete* |`delete INDEX` |`delete 3`
-|*Edit* |`edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]...` |`edit 2 n/James Lee e/jameslee@example.com`
-|*Find* |`find KEYWORD [MORE_KEYWORDS]` |`find James Jake`
-|*List* |`list` |`list`
-|*Select* |`select INDEX` |`select 2`
 |*History* |`history` |`history`
 |*Undo* |`undo` |`undo`
 |*Redo* |`redo` |`redo`
 |*Login* |`login id/USERNAME pw/PASSWORD` |`login id/azhikai pw/1122qq`
 |*Logout* |`logout` |`logout`
-|*Create account* |`register id/USERNAME pw/PASSWORD` |`register id/azhikai pw/1122qq`
+|*Create account* |`register/reg id/USERNAME pw/PASSWORD` |`register id/azhikai pw/1122qq`
 |*Edit account* |`edit-acc id/USERNAME [nid/NEW_USERNAME] [pw/NEW_PASSWORD]` |`edit-acc id/azhikai nid/angzhikai`
 |*Delete account* |`deregister id/USERNAME` |`deregister id/azhikai`
 |*Add ingredient* |`add-ingredient n/INGREDIENT_NAME t/UNIT_TYPE p/PRICE_PER_UNIT m/MINIMUM` |`add-ingredient n/cod fish t/kilogram p/20 m/1`
