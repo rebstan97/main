@@ -803,6 +803,11 @@ e.g. `seedu.address.logic.LogicManagerTest`
 * Reason: One of its dependencies, `HelpWindow.html` in `src/main/resources/docs` is missing.
 * Solution: Execute Gradle task `processResources`.
 
+**Problem: Test failed with `Missing newline at end of file`.**
+
+* Reason: A newline is missing in the file.
+* Solution: `File` > `Settings...` > `Editor` > `General` > `Ensure line feed at file end on Save`.
+
 == Dev Ops
 
 === Build Automation
