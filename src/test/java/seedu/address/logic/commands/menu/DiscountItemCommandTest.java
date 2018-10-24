@@ -67,7 +67,7 @@ public class DiscountItemCommandTest {
 
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
 
-        for (int i=INDEX_FIRST.getZeroBased(); i < INDEX_THIRD.getOneBased(); i++) {
+        for (int i = INDEX_FIRST.getZeroBased(); i < INDEX_THIRD.getOneBased(); i++) {
             Item itemToDiscount = model.getFilteredItemList().get(i);
             Item discountedItem = createDiscountedItem(itemToDiscount, 0);
 
@@ -86,7 +86,7 @@ public class DiscountItemCommandTest {
 
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
 
-        for (int i=0; i < 7; i++) {
+        for (int i = 0; i < 7; i++) {
             Item itemToDiscount = model.getFilteredItemList().get(i);
             Item discountedItem = createDiscountedItem(itemToDiscount, 20);
 

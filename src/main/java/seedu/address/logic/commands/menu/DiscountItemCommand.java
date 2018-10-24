@@ -43,20 +43,20 @@ public class DiscountItemCommand extends Command {
     private Index index;
     private Index endingIndex;
     private final double percent;
-    private final boolean isALL;
+    private final boolean isAll;
 
     /**
      * @param index of the item in the filtered item list to edit
      * @param percent the percent of the discount
      */
-    public DiscountItemCommand(Index index, Index endingIndex, double percent, boolean isALL) {
+    public DiscountItemCommand(Index index, Index endingIndex, double percent, boolean isAll) {
         requireNonNull(index);
         requireNonNull(percent);
 
         this.index = index;
         this.endingIndex = endingIndex;
         this.percent = percent;
-        this.isALL = isALL;
+        this.isAll = isAll;
     }
 
     @Override
@@ -64,7 +64,7 @@ public class DiscountItemCommand extends Command {
         requireNonNull(model);
         List<Item> lastShownList = model.getFilteredItemList();
 
-        if (isALL) {
+        if (isAll) {
             index = Index.fromZeroBased(0);
             endingIndex = Index.fromOneBased(lastShownList.size());
         }
@@ -75,7 +75,7 @@ public class DiscountItemCommand extends Command {
 
         int numOfItems = endingIndex.getOneBased() - index.getZeroBased();
 
-        for (int i=index.getZeroBased(); i < endingIndex.getOneBased(); i++) {
+        for (int i = index.getZeroBased(); i < endingIndex.getOneBased(); i++) {
             discountItem(model, Index.fromZeroBased(i), percent);
         }
 
@@ -123,7 +123,7 @@ public class DiscountItemCommand extends Command {
                 || (other instanceof DiscountItemCommand // instanceof handles nulls
                     && index.equals(((DiscountItemCommand) other).index) // state check
                     && endingIndex.equals(((DiscountItemCommand) other).endingIndex) // state check
-                    && isALL == ((DiscountItemCommand) other).isALL // state check
+                    && isAll == ((DiscountItemCommand) other).isAll // state check
                     && percent == ((DiscountItemCommand) other).percent); // state check
     }
 }

@@ -23,7 +23,7 @@ public class DiscountItemCommandParser implements Parser<DiscountItemCommand> {
     public static final String PERCENT_VALIDATION_REGEX = "\\d{0,2}";
     public static final String ALL_VALIDATION = "ALL";
 
-    private boolean isALL = false;
+    private boolean isAll = false;
 
     /**
      * Parses the given {@code String} of arguments in the context of the DiscountItemCommand
@@ -37,8 +37,8 @@ public class DiscountItemCommandParser implements Parser<DiscountItemCommand> {
         Index index = Index.fromZeroBased(0); //Dummy value
         if (StringUtil.isNonZeroUnsignedInteger(argMultimap.getPreamble())) {
             index = Index.fromOneBased(Integer.parseInt(argMultimap.getPreamble()));
-        } else if (isValidALL(argMultimap.getPreamble())) {
-            isALL = true;
+        } else if (isValidAll(argMultimap.getPreamble())) {
+            isAll = true;
         } else {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, DiscountItemCommand.MESSAGE_USAGE));
         }
@@ -55,7 +55,7 @@ public class DiscountItemCommandParser implements Parser<DiscountItemCommand> {
         Index endingIndex = index;
         if (argMultimap.getValue(PREFIX_ENDINGINDEX).isPresent()) {
             try {
-                 endingIndex = ParserUtil.parseIndex(argMultimap.getValue(PREFIX_ENDINGINDEX).get());
+                endingIndex = ParserUtil.parseIndex(argMultimap.getValue(PREFIX_ENDINGINDEX).get());
             } catch (ParseException pe) {
                 throw new ParseException(
                         String.format(MESSAGE_INVALID_COMMAND_FORMAT, DiscountItemCommand.MESSAGE_USAGE), pe);
@@ -67,7 +67,7 @@ public class DiscountItemCommandParser implements Parser<DiscountItemCommand> {
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, DiscountItemCommand.MESSAGE_USAGE));
         }
 
-        return new DiscountItemCommand(index, endingIndex, percent, isALL);
+        return new DiscountItemCommand(index, endingIndex, percent, isAll);
     }
 
     /**
@@ -78,9 +78,9 @@ public class DiscountItemCommandParser implements Parser<DiscountItemCommand> {
     }
 
     /**
-     * Returns true if a given string is equals to ALL.
+     * Returns true if a given string is equals to "ALL".
      */
-    private static boolean isValidALL(String test) {
+    private static boolean isValidAll(String test) {
         return test.toUpperCase().equals(ALL_VALIDATION);
     }
 
