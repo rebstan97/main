@@ -440,21 +440,18 @@ The following code snippet demonstrates how these methods are implemented:
 [source,java]
 ----
 /**
-* Stores this {@link Account} info as part of this session.
-*
-* @param account logged in for this session.
-*/
+ * Stores this {@link Account} info as part of this session.
+ *
+ * @param account logged in for this session.
+ */
 public static void login(Account account) {
     isAuthenticated = true;
     username = account.getUsername();
 }
-----
 
-[source,java]
-----
 /**
-* Logs out of this account which releases this session.
-*/
+ * Logs out of this account which releases this session.
+ */
 public static void logout() {
     if (isAuthenticated) {
         isAuthenticated = false;
