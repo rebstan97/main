@@ -18,7 +18,7 @@ import seedu.address.model.tag.Tag;
 import seedu.address.storage.XmlAdaptedTag;
 
 /**
- * JAXB-friendly version of the Person.
+ * JAXB-friendly version of the Item.
  */
 public class XmlAdaptedItem {
 
@@ -28,6 +28,8 @@ public class XmlAdaptedItem {
     private String name;
     @XmlElement(required = true)
     private String price;
+    @XmlElement(required = true)
+    private String originalPrice;
     @XmlElement(required = true)
     private String remark;
 
@@ -46,6 +48,7 @@ public class XmlAdaptedItem {
     public XmlAdaptedItem(String name, String price, String remark, List<XmlAdaptedTag> tagged) {
         this.name = name;
         this.price = price;
+        this.originalPrice = price;
         this.remark = remark;
         if (tagged != null) {
             this.tagged = new ArrayList<>(tagged);
@@ -60,6 +63,7 @@ public class XmlAdaptedItem {
     public XmlAdaptedItem(Item source) {
         name = source.getName().toString();
         price = source.getPrice().toString();
+        originalPrice = String.format("%.2f", source.getPrice().getOriginalValue());
         remark = source.getRemark().toString();
         tagged = source.getTags().stream()
                 .map(XmlAdaptedTag::new)
@@ -91,7 +95,13 @@ public class XmlAdaptedItem {
         if (!Price.isValidPrice(price)) {
             throw new IllegalValueException(Price.MESSAGE_PRICE_CONSTRAINTS);
         }
-        final Price modelPrice = new Price(price);
+        if (originalPrice == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Price.class.getSimpleName()));
+        }
+        if (!Price.isValidPrice(originalPrice)) {
+            throw new IllegalValueException(Price.MESSAGE_PRICE_CONSTRAINTS);
+        }
+        final Price modelPrice = new Price(price, originalPrice);
 
         if (remark == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Remark.class.getSimpleName()));
@@ -115,6 +125,7 @@ public class XmlAdaptedItem {
         XmlAdaptedItem otherItem = (XmlAdaptedItem) other;
         return Objects.equals(name, otherItem.name)
                 && Objects.equals(price, otherItem.price)
+                && Objects.equals(originalPrice, otherItem.originalPrice)
                 && tagged.equals(otherItem.tagged);
     }
 }
