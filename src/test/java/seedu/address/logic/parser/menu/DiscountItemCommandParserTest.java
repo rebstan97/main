@@ -99,7 +99,7 @@ public class DiscountItemCommandParserTest {
     }
 
     @Test
-    public void parse_validALLFollowedByValidPercent_success() {
+    public void parse_validAllFollowedByValidPercent_success() {
         String userInput = "ALL" + ITEM_PERCENT_DESC;
 
         DiscountItemCommand expectedCommand = new DiscountItemCommand(INDEX_FIRST, INDEX_FIRST,
