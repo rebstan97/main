@@ -113,13 +113,13 @@ Time is money. *MeNUS* ensures that the application will:
 === General
 ==== Viewing help : `help`
 
-Format: `help`
+Format: `help` or `h`
 
 // tag::undoredo[]
 ==== Undoing previous command : `undo` or `u`
 
 Restores the restaurant book to the state before the previous _undoable_ command was executed. +
-Format: `undo`
+Format: `undo` or `u`
 
 [NOTE]
 ====
@@ -142,7 +142,7 @@ The `undo` command fails as there are no undoable commands executed previously.
 ==== Redoing the previously undone command : `redo` or `r`
 
 Reverses the most recent `undo` command. +
-Format: `redo`
+Format: `redo` or `r`
 
 Examples:
 
@@ -165,7 +165,7 @@ The `redo` command fails as there are no `undo` commands executed previously.
 ==== Clearing all entries : `clear` or `c`
 
 Clears all entries from the restaurant book. +
-Format: `clear`
+Format: `clear` or `c`
 
 ==== Exiting the program : `exit`
 
@@ -181,7 +181,7 @@ There is no need to save manually.
 ==== Logging in: `login` or `li`
 
 Logs into an existing account. +
-Format: `login id/USERNAME pw/PASSWORD` +
+Format: `login id/USERNAME pw/PASSWORD` or `li id/USERNAME pw/PASSWORD` +
 
 Examples:
 
@@ -191,12 +191,12 @@ Examples:
 ==== Logging out: `logout` or `lo`
 
 Logs out of the account. +
-Format: `logout`
+Format: `logout` or `lo`
 
 ==== Creating user account: `register` or `reg`
 
 Creates a new user account. +
-Format: `register id/USERNAME pw/PASSWORD`
+Format: `register id/USERNAME pw/PASSWORD` or `reg id/USERNAME pw/PASSWORD`
 
 Examples:
 
@@ -206,7 +206,8 @@ Examples:
 ==== Editing user account: `edit-account` or `ea`
 
 Edits an existing user account. +
-Format: `edit-account id/USERNAME [nid/NEW_USERNAME] [pw/NEW_PASSWORD]`
+Format: `edit-account id/USERNAME [nid/NEW_USERNAME] [pw/NEW_PASSWORD]` or
+`ea id/USERNAME [nid/NEW_USERNAME] [pw/NEW_PASSWORD]`
 
 ****
 * The account's data will remain intact if none of the optional fields are provided.
@@ -223,7 +224,7 @@ Examples:
 ==== Deleting user account: `deregister` or `dereg`
 
 Deletes an existing user account. +
-Format: `deregister id/USERNAME`
+Format: `deregister id/USERNAME` or `dereg id/USERNAME`
 
 Examples:
 
@@ -233,7 +234,7 @@ Examples:
 ==== List user accounts: `list-accounts` or `la`
 
 List all user accounts. +
-Format: `list-accounts`
+Format: `list-accounts` or `la`
 
 [IMPORTANT]
 ====
@@ -707,9 +708,35 @@ Ranks the dates based on their total revenue for that day. +
 Format: `rank-date`
 
 === Coming Soon!
-==== User roles `[coming in v2.0]`
-With user role, each user will only be able to execute certain commands, other than the administrator and/or
-restaurant owner who is able to execute all commands.
+==== Creating user role `[coming in v2.0]`
+Creates a user role. User assigned with higher ranking role can execute more commands. +
+Format: `create-role r/RANK n/ROLE_NAME` or `cr r/RANK n/ROLE_NAME`
+
+Examples:
+
+* `create-role r/999 n/Owner`
+* `cr id/999 n/Owner`
+* `create-role r/2 n/Supervisor`
+* `create-role r/1 n/Employee`
+
+==== Editing user role `[coming in v2.0]`
+Edits an existing user role. +
+Format: `edit-role r/RANK [nr/NEW_RANK] [n/ROLE_NAME]` or `er r/RANK [nr/NEW_RANK] [n/ROLE_NAME]`
+
+Examples:
+
+* `edit-role r/999 n/Administrator`
+* `er id/999 n/Administrator`
+* `edit-role r/2 nr/3 n/Manager`
+
+==== Deleting user role `[coming in v2.0]`
+Deletes an existing user role. +
+Format: `delete-role r/RANK` or `dr r/RANK`
+
+Examples:
+
+* `delete-role r/999`
+* `dr id/999`
 
 == FAQ
 
