@@ -2,6 +2,8 @@ package seedu.address.ui.reservation;
 
 import java.util.logging.Logger;
 
+import com.google.common.eventbus.Subscribe;
+
 import javafx.application.Platform;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -9,6 +11,7 @@ import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.Region;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.commons.events.ui.JumpToListRequestEvent;
 import seedu.address.commons.events.ui.reservation.ReservationPanelSelectionChangedEvent;
 import seedu.address.model.reservation.Reservation;
 import seedu.address.ui.UiPart;
@@ -53,6 +56,12 @@ public class ReservationListPanel extends UiPart<Region> {
             reservationListView.scrollTo(index);
             reservationListView.getSelectionModel().clearAndSelect(index);
         });
+    }
+
+    @Subscribe
+    private void handleJumpToListRequestEvent(JumpToListRequestEvent event) {
+        logger.info(LogsCenter.getEventHandlingLogMessage(event));
+        scrollTo(event.targetIndex);
     }
 
     /**
