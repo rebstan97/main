@@ -1,5 +1,7 @@
 package seedu.address.logic;
 
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PASSWORD;
+
 import java.util.logging.Logger;
 
 import javafx.collections.ObservableList;
@@ -17,6 +19,7 @@ import seedu.address.logic.parser.AddressBookParser;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
 import seedu.address.model.accounts.Account;
+import seedu.address.model.accounts.Password;
 import seedu.address.model.ingredient.Ingredient;
 import seedu.address.model.menu.Item;
 import seedu.address.model.person.Person;
@@ -49,10 +52,15 @@ public class LogicManager extends ComponentManager implements Logic {
 
     @Override
     public CommandResult execute(String commandText) throws CommandException, ParseException {
-        logger.info("----------------[USER COMMAND][" + commandText + "]");
+        String commandTextToLog = commandText;
+        if (commandText.contains(PREFIX_PASSWORD.getPrefix())) {
+            commandTextToLog = Password.maskPassword(commandText);
+        }
+        logger.info("----------------[USER COMMAND][" + commandTextToLog + "]");
 
         try {
             Command command = addressBookParser.parseCommand(commandText);
+
             if (!isPublicCommand(command) && !UserSession.isAuthenticated()) {
                 throw new CommandException(Messages.MESSAGE_COMMAND_FORBIDDEN);
             }

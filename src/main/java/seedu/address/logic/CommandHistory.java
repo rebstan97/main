@@ -24,7 +24,6 @@ public class CommandHistory {
      */
     public void add(String userInput) {
         requireNonNull(userInput);
-        //TODO: Should not show the password here
         userInputHistory.add(userInput);
     }
 

@@ -61,8 +61,8 @@ public class CommandBox extends UiPart<Region> {
     }
 
     /**
-     * Updates the text field with the previous input in {@code historySnapshot},
-     * if there exists a previous input in {@code historySnapshot}
+     * Updates the text field with the previous input in {@code historySnapshot}, if there exists a previous input in
+     * {@code historySnapshot}
      */
     private void navigateToPreviousInput() {
         assert historySnapshot != null;
@@ -74,8 +74,8 @@ public class CommandBox extends UiPart<Region> {
     }
 
     /**
-     * Updates the text field with the next input in {@code historySnapshot},
-     * if there exists a next input in {@code historySnapshot}
+     * Updates the text field with the next input in {@code historySnapshot}, if there exists a next input in {@code
+     * historySnapshot}
      */
     private void navigateToNextInput() {
         assert historySnapshot != null;
@@ -87,8 +87,7 @@ public class CommandBox extends UiPart<Region> {
     }
 
     /**
-     * Sets {@code CommandBox}'s text field with {@code text} and
-     * positions the caret to the end of the {@code text}.
+     * Sets {@code CommandBox}'s text field with {@code text} and positions the caret to the end of the {@code text}.
      */
     private void replaceText(String text) {
         commandTextField.setText(text);
@@ -113,7 +112,7 @@ public class CommandBox extends UiPart<Region> {
             initHistory();
             // handle command failure
             setStyleToIndicateCommandFailure();
-            logger.info("Invalid command: " + commandTextField.getText());
+            logger.info("Exception: " + e.getMessage());
             raise(new NewResultAvailableEvent(e.getMessage()));
         }
     }

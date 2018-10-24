@@ -13,7 +13,9 @@ public class Price {
             "Price should only contain numbers, and it should be at most 2 decimal place";
     private static final String DECIMAL_PLACE_REGEX = "\\d{0,2}";
     public static final String PRICE_VALIDATION_REGEX = "\\d+" + ".?" + DECIMAL_PLACE_REGEX;
-    private final double value;
+    private static final double MAX_PERCENT = 100.0;
+    private double value;
+    private final double originalValue;
 
     /**
      * Constructs a {@code Price}.
@@ -23,6 +25,19 @@ public class Price {
     public Price(String price) {
         requireNonNull(price);
         checkArgument(isValidPrice(price), MESSAGE_PRICE_CONSTRAINTS);
+        originalValue = Double.parseDouble(price);
+        value = Double.parseDouble(price);
+    }
+
+    /**
+     * Constructs a {@code Price}.
+     *
+     * @param price A valid price.
+     */
+    public Price(String price, String originalPrice) {
+        requireNonNull(price);
+        checkArgument(isValidPrice(price), MESSAGE_PRICE_CONSTRAINTS);
+        originalValue = Double.parseDouble(originalPrice);
         value = Double.parseDouble(price);
     }
 
@@ -37,6 +52,14 @@ public class Price {
         return value;
     }
 
+    public double getOriginalValue() {
+        return originalValue;
+    }
+
+    public void setValue(double percent) {
+        value = originalValue * ((MAX_PERCENT - percent) / MAX_PERCENT);
+    }
+
     @Override
     public String toString() {
         //return valueInString;
@@ -47,7 +70,8 @@ public class Price {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof Price // instanceof handles nulls
-                    && value == ((Price) other).value); // state check
+                    && value == ((Price) other).value // state check
+                    && originalValue == ((Price) other).originalValue);
     }
 
     @Override

@@ -19,7 +19,7 @@ import seedu.address.model.menu.TagContainsKeywordsPredicate;
 import seedu.address.testutil.AddressBookBuilder;
 
 /**
- * Contains integration tests (interaction with the Model) for {@code FindItemCommand}.
+ * Contains integration tests (interaction with the Model) for {@code TodaySpecialCommand}.
  */
 public class TodaySpecialCommandTest {
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());

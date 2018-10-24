@@ -9,7 +9,7 @@ import seedu.address.logic.parser.Parser;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
- * Parses input arguments and creates a new FindItemCommand object
+ * Parses input arguments and creates a new SortMenuCommand object
  */
 public class SortMenuCommandParser implements Parser<SortMenuCommand> {
 

@@ -5,7 +5,9 @@ import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertTrue;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
+import static seedu.address.logic.commands.CommandTestUtil.ITEM_PERCENT_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DATE_RECORD_ONE;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_ITEM_PERCENT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ID;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_REMARK;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST;
@@ -47,6 +49,7 @@ import seedu.address.logic.commands.ingredients.ListIngredientsCommand;
 import seedu.address.logic.commands.menu.AddItemCommand;
 import seedu.address.logic.commands.menu.ClearMenuCommand;
 import seedu.address.logic.commands.menu.DeleteItemCommand;
+import seedu.address.logic.commands.menu.DiscountItemCommand;
 import seedu.address.logic.commands.menu.EditItemCommand;
 import seedu.address.logic.commands.menu.EditItemCommand.EditItemDescriptor;
 import seedu.address.logic.commands.menu.FilterMenuCommand;
@@ -451,6 +454,16 @@ public class AddressBookParserTest {
         assertTrue(parser.parseCommand(TodaySpecialCommand.COMMAND_ALIAS) instanceof TodaySpecialCommand);
         assertTrue(parser.parseCommand(TodaySpecialCommand.COMMAND_WORD + " 3") instanceof TodaySpecialCommand);
         assertTrue(parser.parseCommand(TodaySpecialCommand.COMMAND_ALIAS + " 3") instanceof TodaySpecialCommand);
+    }
+
+    @Test
+    public void parseCommand_discountItem() throws Exception {
+        DiscountItemCommand command = (DiscountItemCommand) parser.parseCommand(
+                DiscountItemCommand.COMMAND_WORD + " " + INDEX_FIRST.getOneBased() + ITEM_PERCENT_DESC);
+        assertEquals(new DiscountItemCommand(INDEX_FIRST, Double.parseDouble(VALID_ITEM_PERCENT)), command);
+        command = (DiscountItemCommand) parser.parseCommand(DiscountItemCommand.COMMAND_ALIAS
+                + " " + INDEX_FIRST.getOneBased() + ITEM_PERCENT_DESC);
+        assertEquals(new DiscountItemCommand(INDEX_FIRST, Double.parseDouble(VALID_ITEM_PERCENT)), command);
     }
 
     @Test

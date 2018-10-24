@@ -11,7 +11,7 @@ import seedu.address.model.menu.Price;
 import seedu.address.model.tag.Tag;
 
 /**
- * A utility class to help with building EditPersonDescriptor objects.
+ * A utility class to help with building EditItemDescriptor objects.
  */
 public class EditItemDescriptorBuilder {
 
@@ -36,7 +36,7 @@ public class EditItemDescriptorBuilder {
     }
 
     /**
-     * Sets the {@code Name} of the {@code EditPersonDescriptor} that we are building.
+     * Sets the {@code Name} of the {@code EditItemDescriptor} that we are building.
      */
     public EditItemDescriptorBuilder withName(String name) {
         descriptor.setName(new Name(name));

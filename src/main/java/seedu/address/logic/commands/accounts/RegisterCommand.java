@@ -27,8 +27,8 @@ public class RegisterCommand extends Command {
             + PREFIX_ID + "azhikai "
             + PREFIX_PASSWORD + "1122qq";
 
-    public static final String MESSAGE_SUCCESS = "New account registered: %1$s!";
-    public static final String MESSAGE_DUPLICATE_USERNAME = "This username already exists.";
+    public static final String MESSAGE_SUCCESS = "New account registered: %1$s";
+    public static final String MESSAGE_DUPLICATE_USERNAME = "This username already exists";
 
     private final Account account;
 

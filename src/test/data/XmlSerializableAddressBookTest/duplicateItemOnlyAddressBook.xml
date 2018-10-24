@@ -4,6 +4,7 @@
     <items>
         <name>Cheese Burger</name>
         <price>3</price>
+        <originalPrice>3</originalPrice>
         <remark></remark>
     </items>
 
@@ -11,6 +12,7 @@
     <items>
         <name>Cheese Burger</name>
         <price>3</price>
+        <originalPrice>3</originalPrice>
         <remark></remark>
     </items>
 
