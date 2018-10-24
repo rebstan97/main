@@ -50,11 +50,9 @@ image::Ui.png[width="790"]
 .  Type the command in the command box and press kbd:[Enter] to execute it. +
 e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 .  Some example commands you can try:
-* * `login id/root pw/root` : logs into the root account
-* *`list`* : lists all contacts
-* **`add`**`n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : adds a contact named `John Doe` to the Address Book.
-* **`delete`**`3` : deletes the 3rd contact shown in the current list
-* *`exit`* : exits the app
+* **`login`**`id/root pw/1122qq` : logs into the root account
+* **`add-item`**`n/Apple p/2.00 t/fruit` : Creates a new item in the menu
+* *`exit`* : exits the application
 
 .  Refer to <<Commands>> for details of each command.
 
@@ -120,7 +118,7 @@ Format: `help`
 // tag::undoredo[]
 ==== Undoing previous command : `undo` or `u`
 
-Restores the address book to the state before the previous _undoable_ command was executed. +
+Restores the restaurant book to the state before the previous _undoable_ command was executed. +
 Format: `undo`
 
 [NOTE]
