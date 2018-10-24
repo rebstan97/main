@@ -81,7 +81,7 @@ public class DiscountItemCommandParser implements Parser<DiscountItemCommand> {
      * Returns true if a given string is equals to "ALL".
      */
     private static boolean isValidAll(String test) {
-        return test.toUpperCase().equals(ALL_VALIDATION);
+        return test.equalsIgnoreCase(ALL_VALIDATION);
     }
 
 }
