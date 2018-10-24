@@ -616,12 +616,12 @@ Format: `clear-menu`
 ==== Giving a discount to an item : `discount-item` or `di`
 
 Gives the item identified by the index number used in the displayed item list a discount. +
-Format: `discount-item INDEX|ALL d/PERCENTAGE`
+Format: `discount-item INDEX dp/PERCENTAGE`
 
 ****
 * Gives the item at the specified `INDEX` a discount based on the percentage.
 * If the item is already on discount, it will update the new discounted price.
-* The index refers to the index number shown in the displayed person list.
+* The index refers to the index number shown in the displayed item list.
 * The index *must be a positive integer* `1, 2, 3, ...`
 * You can remove discount by typing `0` for the percentage.
 * You can give a discount to the whole menu by typing `ALL` instead of a specified `INDEX`.
@@ -630,11 +630,11 @@ Format: `discount-item INDEX|ALL d/PERCENTAGE`
 Examples:
 
 * `list-items` +
-`discount-item 2` +
-Discount the 2nd item in the menu.
+`discount-item 2 dp/20` +
+Give the 2nd item in the menu a 20% discount.
 * `fi Cheese` +
-`di 1` +
-Discounts the 1st item in the results of the `find` command.
+`di 1 dp/0` +
+Revert the 1st item in the results of the `find` command to original price.
 
 ==== Today's specials : `today-special` or `ts`
 
