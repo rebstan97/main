@@ -65,7 +65,7 @@ image::Ui.png[width="790"]
 .  Type the command in the command box and press kbd:[Enter] to execute it. +
 e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 .  Some example commands you can try:
-* **`login`**`id/root pw/1122qq` : logs into the root account
+* **`login`**`id/root pw/1122qq` : logs in to the root account
 * **`add-item`**`n/Apple p/2.00 t/fruit` : Creates a new item in the menu
 * *`exit`* : exits the application
 
