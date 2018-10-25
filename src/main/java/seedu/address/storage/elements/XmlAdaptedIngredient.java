@@ -53,11 +53,11 @@ public class XmlAdaptedIngredient {
      * @param source future changes to this will not affect the created XmlAdaptedIngredient
      */
     public XmlAdaptedIngredient(Ingredient source) {
-        name = source.getName().fullName;
-        unit = source.getUnit().unitName;
-        price = source.getPrice().pricePerUnit;
-        minimum = source.getMinimum().minimumUnit;
-        numUnits = source.getNumUnits().numberOfUnits;
+        name = source.getName().toString();
+        unit = source.getUnit().toString();
+        price = source.getPrice().toString();
+        minimum = source.getMinimum().toString();
+        numUnits = source.getNumUnits().toString();
     }
 
     /**

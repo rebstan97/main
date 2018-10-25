@@ -18,7 +18,7 @@ public class IngredientNameContainsKeywordsPredicate implements Predicate<Ingred
     @Override
     public boolean test(Ingredient ingredient) {
         return keywords.stream()
-                .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(ingredient.getName().fullName, keyword));
+                .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(ingredient.getName().toString(), keyword));
     }
 
     @Override

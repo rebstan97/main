@@ -26,10 +26,10 @@ public class IngredientUtil {
      */
     public static String getIngredientDetails(Ingredient ingredient) {
         StringBuilder sb = new StringBuilder();
-        sb.append(PREFIX_INGREDIENT_NAME + ingredient.getName().fullName + " ");
-        sb.append(PREFIX_INGREDIENT_UNIT + ingredient.getUnit().unitName + " ");
-        sb.append(PREFIX_INGREDIENT_PRICE + ingredient.getPrice().pricePerUnit + " ");
-        sb.append(PREFIX_INGREDIENT_MINIMUM + ingredient.getMinimum().minimumUnit + " ");
+        sb.append(PREFIX_INGREDIENT_NAME + ingredient.getName().toString() + " ");
+        sb.append(PREFIX_INGREDIENT_UNIT + ingredient.getUnit().toString() + " ");
+        sb.append(PREFIX_INGREDIENT_PRICE + ingredient.getPrice().toString() + " ");
+        sb.append(PREFIX_INGREDIENT_MINIMUM + ingredient.getMinimum().toString() + " ");
 
         return sb.toString();
     }
@@ -39,12 +39,12 @@ public class IngredientUtil {
      */
     public static String getEditIngredientDescriptorDetails(EditIngredientDescriptor descriptor) {
         StringBuilder sb = new StringBuilder();
-        descriptor.getName().ifPresent(name -> sb.append(PREFIX_INGREDIENT_NAME).append(name.fullName).append(" "));
-        descriptor.getUnit().ifPresent(unit -> sb.append(PREFIX_INGREDIENT_UNIT).append(unit.unitName).append(" "));
+        descriptor.getName().ifPresent(name -> sb.append(PREFIX_INGREDIENT_NAME).append(name.toString()).append(" "));
+        descriptor.getUnit().ifPresent(unit -> sb.append(PREFIX_INGREDIENT_UNIT).append(unit.toString()).append(" "));
         descriptor.getPrice().ifPresent(price -> sb.append(PREFIX_INGREDIENT_PRICE)
-                .append(price.pricePerUnit).append(" "));
+                .append(price.toString()).append(" "));
         descriptor.getMinimum().ifPresent(minimum -> sb.append(PREFIX_INGREDIENT_MINIMUM)
-                .append(minimum.minimumUnit).append(" "));
+                .append(minimum.toString()).append(" "));
         return sb.toString();
     }
 }

@@ -86,7 +86,7 @@ public class UniqueIngredientList implements Iterable<Ingredient> {
      */
     public Ingredient find(IngredientName ingredientName) throws IngredientNotFoundException {
         requireNonNull(ingredientName);
-        Predicate<Ingredient> predicate = ingredient -> ingredient.getName().equals(ingredientName);
+        Predicate<Ingredient> predicate = ingredient -> ingredient.getName().equalsIgnoreCase(ingredientName);
         if (!internalList.stream().anyMatch(predicate)) {
             throw new IngredientNotFoundException();
         }

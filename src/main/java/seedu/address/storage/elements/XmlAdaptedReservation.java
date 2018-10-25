@@ -55,7 +55,7 @@ public class XmlAdaptedReservation {
      * @param source future changes to this will not affect the created XmlAdaptedReservation
      */
     public XmlAdaptedReservation(Reservation source) {
-        name = source.getName().fullName;
+        name = source.getName().toString();
         pax = source.getPax().value;
         dateTime = source.getDateTime().toString();
         remark = source.getRemark().value;
