@@ -126,8 +126,8 @@ Time is money. *MeNUS* ensures that the application will:
 ====
 
 === General
-==== Viewing help : `help`
-
+==== Viewing help : `help` or `h`
+Opens up the help window. Very useful if you are a new user. +
 Format: `help` or `h`
 
 // tag::undoredo[]
@@ -182,15 +182,15 @@ The `redo` command fails as there are no `undo` commands executed previously.
 Clears all entries from the restaurant book. +
 Format: `clear` or `c`
 
+==== Saving the data
+
+Restaurant book data are saved in the hard disk automatically after any command that changes the data. No manual
+saving is required.
+
 ==== Exiting the program : `exit`
 
 Exits the program. +
 Format: `exit`
-
-==== Saving the data
-
-Restaurant book data are saved in the hard disk automatically after any command that changes the data. +
-There is no need to save manually.
 
 === Accounts Management
 ==== Logging in: `login` or `li`
