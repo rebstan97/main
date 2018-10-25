@@ -1,15 +1,19 @@
-= John Doe - Project Portfolio
+= Ang Zhi Kai - Project Portfolio
 :site-section: AboutUs
 :imagesDir: ../images
 :stylesDir: ../stylesheets
 
-== PROJECT: AddressBook - Level 4
+== PROJECT: MeNUS
 
 ---
 
 == Overview
 
-AddressBook - Level 4 is a desktop address book application used for teaching Software Engineering principles. The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java, and has about 10 kLoC.
+MeNUS is a restaurant management desktop application targeting restaurant owners in the National University
+of Singapore (NUS). It is built to help them better manage their restaurants, especially if it is running on complex,
+expensive and independent systems. Restaurant owners interact with MeNUS using a Command Line Interface
+(CLI). MeNUS also has a Graphical User Interface(GUI) created with JavaFX and it is written using Java 9 with
+approximately 30 KLOC.
 
 == Summary of contributions
 
@@ -26,28 +30,26 @@ AddressBook - Level 4 is a desktop address book application used for teaching So
 * *Other contributions*:
 
 ** Project management:
-*** Managed releases `v1.3` - `v1.5rc` (3 releases) on GitHub
+*** Managed releases `v1.1`, `v1.2`, `v1.2.1`, `v1.3` and `v1.4` (5 releases) on GitHub
 ** Enhancements to existing features:
 *** Updated the GUI color scheme (Pull requests https://github.com[#33], https://github.com[#34])
 *** Wrote additional tests for existing features to increase coverage from 88% to 92% (Pull requests https://github.com[#36], https://github.com[#38])
 ** Documentation:
 *** Did cosmetic tweaks to existing contents of the User Guide: https://github.com[#14]
 ** Community:
-*** PRs reviewed (with non-trivial review comments): https://github.com[#12], https://github.com[#32], https://github.com[#19], https://github.com[#42]
+*** Reviewed significant number of PRs (with non-trivial review comments): https://github.com[#12],
+https://github.com[#32],
+https://github.com[#19], https://github.com[#42]
 *** Contributed to forum discussions (examples:  https://github.com[1], https://github.com[2], https://github.com[3], https://github.com[4])
 *** Reported bugs and suggestions for other teams in the class (examples:  https://github.com[1], https://github.com[2], https://github.com[3])
-*** Some parts of the history feature I added was adopted by several other class mates (https://github.com[1], https://github.com[2])
 ** Tools:
-*** Integrated a third party library (Natty) to the project (https://github.com[#42])
-*** Integrated a new Github plugin (CircleCI) to the team repo
-
-_{you can add/remove categories in the list above}_
+*** Integrated a third party library (bcrypt) to the project (https://github.com/CS2103-AY1819S1-F10-4/main/pull/70[#70])
 
 == Contributions to the User Guide
 
-
 |===
-|_Given below are sections I contributed to the User Guide. They showcase my ability to write documentation targeting end-users._
+|_Given below are sections I contributed to the User Guide. They showcase my ability to write documentation targeting
+end-users with little or no technical knowledge._
 |===
 
 include::../UserGuide.adoc[tag=undoredo]
@@ -55,16 +57,10 @@ include::../UserGuide.adoc[tag=undoredo]
 == Contributions to the Developer Guide
 
 |===
-|_Given below are sections I contributed to the Developer Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project._
+|_Given below are sections I contributed to the Developer Guide. They showcase my ability to write technical
+documentation and the technical depth of my contributions to the project._
 |===
 
 include::../DeveloperGuide.adoc[tag=undoredo]
 
 include::../DeveloperGuide.adoc[tag=dataencryption]
-
-
-== PROJECT: PowerPointLabs
-
----
-
-_{Optionally, you may include other projects in your portfolio.}_
