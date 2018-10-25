@@ -7,7 +7,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 
 /**
- * Deletes an ingredient identified using its displayed index or name from the address book.
+ * Deletes an ingredient identified using its displayed index or name from the restaurant book.
  */
 public abstract class DeleteIngredientCommand extends Command {
 

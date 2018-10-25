@@ -32,7 +32,7 @@ public class StringPair {
     }
 
     /**
-     * Returns true if this StringPair has the same {@code firstString} and {@code secondString }values as {@code
+     * Returns true if this StringPair has the same {@code firstString} and {@code secondString} values as {@code
      * other}.
      */
     public boolean equals(Object other) {

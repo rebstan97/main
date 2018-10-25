@@ -16,7 +16,7 @@ import seedu.address.model.Model;
 import seedu.address.model.ingredient.Ingredient;
 
 /**
- * Edits the details of an existing ingredient in the address book.
+ * Edits the details of an existing ingredient in the restaurant book.
  */
 public class EditIngredientByIndexCommand extends EditIngredientCommand {
 
