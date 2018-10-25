@@ -198,7 +198,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      * Sorts the reservations list.
      */
     public void sortReservations() {
-            reservations.sortReservations();
+        reservations.sortReservations();
     }
 
     @Override
