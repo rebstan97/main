@@ -58,7 +58,7 @@ public class IngredientName {
     public boolean equalsIgnoreCase(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof IngredientName // instanceof handles nulls
-                && fullName.equalsIgnoreCase(((IngredientName) other).toString())); // state check
+                && fullName.equalsIgnoreCase(((IngredientName) other).fullName)); // state check
     }
 
     @Override

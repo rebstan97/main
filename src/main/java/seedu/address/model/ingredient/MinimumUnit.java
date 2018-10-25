@@ -48,7 +48,7 @@ public class MinimumUnit {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof MinimumUnit // instanceof handles nulls
-                && minimumUnit.equals(((MinimumUnit) other).toString())); // state check
+                && minimumUnit.equals(((MinimumUnit) other).minimumUnit)); // state check
     }
 
     @Override

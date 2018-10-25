@@ -49,7 +49,7 @@ public class IngredientUnit {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof IngredientUnit // instanceof handles nulls
-                    && unitName.equals(((IngredientUnit) other).toString())); // state check
+                    && unitName.equals(((IngredientUnit) other).unitName)); // state check
     }
 
     @Override
