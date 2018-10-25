@@ -11,6 +11,7 @@
 ifdef::env-github[]
 :tip-caption: :bulb:
 :note-caption: :information_source:
+:warning-caption: :warning:
 endif::[]
 :repoURL: https://github.com/CS2103-AY1819S1-F10-4/main/tree/master
 :toclevels: 3
@@ -20,8 +21,8 @@ By: `Team CS2103-AY1819S1-F10-4`      Since: `Sep 2018`      Licence: `M
 == Welcome to MeNUS
 link:{repoURL}[MeNUS] empowers you to improve the Management(M) and efficiency(e) of your restaurants in NUS.
 
-As long as you feel like your restaurants are using too many overcomplicated and expensive systems,
-link:{repoURL}[MeNUS] is here for you!
+As long as you feel like your restaurants are using too many complex and expensive systems,
+link:{repoURL}[MeNUS] is here to help you!
 
 
 Introducing link:{repoURL}[MeNUS], a revolutionary restaurant management desktop application that is *optimized for
