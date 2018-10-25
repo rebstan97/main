@@ -49,7 +49,7 @@ public class IngredientPrice {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof IngredientPrice // instanceof handles nulls
-                    && pricePerUnit.equals(((IngredientPrice) other).pricePerUnit)); // state check
+                    && pricePerUnit.equals(((IngredientPrice) other).toString())); // state check
     }
 
     @Override
