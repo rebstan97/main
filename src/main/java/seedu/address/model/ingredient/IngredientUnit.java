@@ -19,7 +19,7 @@ public class IngredientUnit {
      */
     public static final String UNIT_VALIDATION_REGEX = "[\\p{Alnum}[-]][\\p{Alnum}[-] ]*";
 
-    public final String unitName;
+    private final String unitName;
 
     /**
      * Constructs an {@code IngredientUnit}.
