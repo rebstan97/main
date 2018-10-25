@@ -32,7 +32,8 @@ public class RecipeItemCommandParser implements Parser<RecipeItemCommand> {
         try {
             index = ParserUtil.parseIndex(argMultimap.getPreamble());
         } catch (ParseException pe) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, RecipeItemCommand.MESSAGE_USAGE), pe);
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    RecipeItemCommand.MESSAGE_USAGE), pe);
         }
 
         String recipe = argMultimap.getValue(PREFIX_RECIPE).orElse("");
