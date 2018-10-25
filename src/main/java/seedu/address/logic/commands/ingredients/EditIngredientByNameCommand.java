@@ -15,7 +15,7 @@ import seedu.address.model.ingredient.IngredientName;
 import seedu.address.model.ingredient.exceptions.IngredientNotFoundException;
 
 /**
- * Edits the details of an existing ingredient in the address book.
+ * Edits the details of an existing ingredient in the restaurant book.
  */
 public class EditIngredientByNameCommand extends EditIngredientCommand {
 

@@ -21,7 +21,7 @@ import seedu.address.model.ingredient.MinimumUnit;
 import seedu.address.model.ingredient.NumUnits;
 
 /**
- * Edits the details of an existing ingredient in the address book.
+ * Edits the details of an existing ingredient in the restaurant book.
  */
 public abstract class EditIngredientCommand extends Command {
 
@@ -42,8 +42,8 @@ public abstract class EditIngredientCommand extends Command {
             + PREFIX_INGREDIENT_MINIMUM + "15";
 
     public static final String MESSAGE_EDIT_INGREDIENT_SUCCESS = "Edited Ingredient: %1$s";
-    public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
-    public static final String MESSAGE_DUPLICATE_INGREDIENT = "This ingredient already exists in the address book.";
+    public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided";
+    public static final String MESSAGE_DUPLICATE_INGREDIENT = "This ingredient already exists in the restaurant book";
 
     @Override
     public abstract CommandResult execute(Model model, CommandHistory history) throws CommandException;

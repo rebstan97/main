@@ -18,7 +18,7 @@ public class NumUnits {
      */
     public static final String NUMUNITS_VALIDATION_REGEX = "^\\d+$";
 
-    private String numberOfUnits;
+    private final String numberOfUnits;
 
     /**
      * Constructs a {@code NumUnits}.
@@ -51,8 +51,8 @@ public class NumUnits {
         Integer currentNum = Integer.parseInt(numberOfUnits);
         Integer numToAdd = Integer.parseInt(toAdd.toString());
         Integer updatedNum = Integer.sum(currentNum, numToAdd);
-        numberOfUnits = updatedNum.toString();
-        return this;
+        NumUnits newNumUnits = new NumUnits(updatedNum.toString());
+        return newNumUnits;
     }
 
     @Override

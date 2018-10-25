@@ -23,13 +23,13 @@ import seedu.address.model.ingredient.NumUnits;
 import seedu.address.model.ingredient.exceptions.IngredientNotFoundException;
 
 /**
- * Stocks up an ingredient in the address book.
+ * Stocks up an ingredient in the restaurant book.
  */
 public class StockUpCommand extends Command {
 
     public static final String COMMAND_WORD = "stockup";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Stocks up an ingredient in the address book "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Stocks up an ingredient in the restaurant book "
             + "Parameters: "
             + PREFIX_INGREDIENT_NAME + "NAME... "
             + PREFIX_INGREDIENT_NUM + "NUM_OF_UNITS... \n"
@@ -57,7 +57,6 @@ public class StockUpCommand extends Command {
         StringBuilder ingredientString = new StringBuilder();
 
         for (int index = 0; index < stockDescriptorList.size(); index++) {
-
             try {
                 IngredientName name = stockDescriptorList.get(index).getName();
                 NumUnits unitsToAdd = stockDescriptorList.get(index).getNumUnits();
@@ -84,7 +83,7 @@ public class StockUpCommand extends Command {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof StockUpCommand // instanceof handles nulls
-                && stockDescriptorList.equals(((StockUpCommand) other).stockDescriptorList));
+                    && stockDescriptorList.equals(((StockUpCommand) other).stockDescriptorList));
     }
 
     /**
