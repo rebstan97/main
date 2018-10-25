@@ -130,6 +130,14 @@ Time is money. *MeNUS* ensures that the application will:
 Opens up the help window. Very useful if you are a new user. +
 Format: `help` or `h`
 
+==== Listing entered commands : `history` or `hist`
+Lists all the commands that you have entered in reverse chronological order. +
+Format: `history` or `hist`
+[NOTE]
+====
+Pressing the kbd:[&uarr;] and kbd:[&darr;] arrows will display the previous and next input respectively in the command box
+====
+
 // tag::undoredo[]
 ==== Undoing previous command : `undo` or `u`
 
