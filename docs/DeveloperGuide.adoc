@@ -17,7 +17,7 @@ endif::[]
 
 By: `Team CS2103-AY1819S1-F10-4`      Since: `Sep 2018`      Licence: `MIT`
 
-== Introduction
+== Welcome to MeNUS
 This Developer Guide is written by the MeNUS v1.4 team for the benefits of future developers and maintainers of the
 application.
 
@@ -31,6 +31,20 @@ methodology.
 MeNUS is an open-source project, should any developers be interested, see the link:{repoURL}/docs/AboutUs.adoc[`Contact
 Us`] page
  for more information.
+
+=== Legends
+The following *3* legends will be used throughout the documentation which you may wish to pay attention to as it may
+contain important details:
+
+[NOTE]
+Just for your info, do not be alarmed!
+
+[TIP]
+Perhaps something can be done using another approach, but it is up to you to decide.
+
+[WARNING]
+Some things might go wrong if you are not careful, or did not follow the instructions correctly; strongly advised to
+read whatever is in this block.
 
 == Setting up
 
