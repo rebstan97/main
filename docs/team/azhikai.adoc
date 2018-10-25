@@ -9,28 +9,32 @@
 
 == Overview
 
-MeNUS is a restaurant management desktop application targeting restaurant owners in the National University
-of Singapore (NUS). It is built to help them better manage their restaurants, especially if it is running on complex,
-expensive and independent systems. Restaurant owners interact with MeNUS using a Command Line Interface
-(CLI). MeNUS also has a Graphical User Interface(GUI) created with JavaFX and it is written using Java 9 with
+*MeNUS* is a restaurant management desktop application targeting restaurant owners in the National University
+of Singapore (NUS). It is built to help them better manage their restaurants, especially if they are using complex,
+expensive and independent systems. +
+
+Restaurant owners interact with *MeNUS* using a Command Line Interface
+(CLI). *MeNUS* also has a Graphical User Interface(GUI) created with https://docs.oracle.com/javafx/2/[JavaFX] and it
+is written using https://www.oracle.com/technetwork/java/javase/downloads/java-archive-javase9-3934878.html[Java 9] with
 approximately 30 KLOC.
 
 == Summary of contributions
 
-* *Major enhancement*: added *the ability to undo/redo previous commands*
-** What it does: allows the user to undo all previous commands one at a time. Preceding undo commands can be reversed by using the redo command.
-** Justification: This feature improves the product significantly because a user can make mistakes in commands and the app should provide a convenient way to rectify them.
-** Highlights: This enhancement affects existing commands and commands to be added in future. It required an in-depth analysis of design alternatives. The implementation too was challenging as it required changes to existing commands.
-** Credits: _{mention here if you reused any code/ideas from elsewhere or if a third-party library is heavily used in the feature so that a reader can make a more accurate judgement of how much effort went into the feature}_
+* *Major enhancement*: Added the *user management* feature
+** *What it does*: Allows the restaurant owner to create account for each of his employee to manage the restaurants.
+** *Justification*: This feature improves the product significantly because a user can make mistakes in commands and the app should provide a convenient way to rectify them.
+** *Highlights*: This enhancement affects existing commands and commands to be added in future. It required an in-depth analysis of design alternatives. The implementation too was challenging as it required changes to existing commands.
+** *Credits*: Account password is hashed using `bcrypt`.
 
-* *Minor enhancement*: added a history command that allows the user to navigate to previous commands using up/down keys.
+* *Minor enhancement*: Added side navigation bar to access the different components of the application.
 
 * *Code contributed*: [https://github.com[Functional code]] [https://github.com[Test code]] _{give links to collated code files}_
 
 * *Other contributions*:
 
 ** Project management:
-*** Managed releases `v1.1`, `v1.2`, `v1.2.1`, `v1.3` and `v1.4` (5 releases) on GitHub
+*** Team lead of the project.
+*** Managed releases `v1.1`, `v1.2`, `v1.2.1`, `v1.3` and `v1.4` (5 releases) on GitHub.
 ** Enhancements to existing features:
 *** Updated the GUI color scheme (Pull requests https://github.com[#33], https://github.com[#34])
 *** Wrote additional tests for existing features to increase coverage from 88% to 92% (Pull requests https://github.com[#36], https://github.com[#38])
@@ -40,8 +44,12 @@ approximately 30 KLOC.
 *** Reviewed significant number of PRs (with non-trivial review comments): https://github.com[#12],
 https://github.com[#32],
 https://github.com[#19], https://github.com[#42]
-*** Contributed to forum discussions (examples:  https://github.com[1], https://github.com[2], https://github.com[3], https://github.com[4])
-*** Reported bugs and suggestions for other teams in the class (examples:  https://github.com[1], https://github.com[2], https://github.com[3])
+*** Contributed to forum discussions (https://github.com/nus-cs2103-AY1819S1/forum/issues/7[#7],
+https://github.com/nus-cs2103-AY1819S1/forum/issues/20[#20],
+https://github.com/nus-cs2103-AY1819S1/forum/issues/33[#33],
+https://github.com/nus-cs2103-AY1819S1/forum/issues/79[#79])
+*** Reported bugs and suggestions for other teams in the class (https://github.com[#1], https://github.com[#2],
+https://github.com[#3])
 ** Tools:
 *** Integrated a third party library (bcrypt) to the project (https://github.com/CS2103-AY1819S1-F10-4/main/pull/70[#70])
 
@@ -52,7 +60,7 @@ https://github.com[#19], https://github.com[#42]
 end-users with little or no technical knowledge._
 |===
 
-include::../UserGuide.adoc[tag=undoredo]
+include::../UserGuide.adoc[tag=accountmanagement]
 
 == Contributions to the Developer Guide
 
@@ -61,6 +69,4 @@ include::../UserGuide.adoc[tag=undoredo]
 documentation and the technical depth of my contributions to the project._
 |===
 
-include::../DeveloperGuide.adoc[tag=undoredo]
-
-include::../DeveloperGuide.adoc[tag=dataencryption]
+include::../DeveloperGuide.adoc[tag=useraccount]

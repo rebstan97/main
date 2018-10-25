@@ -47,6 +47,7 @@ read whatever is in this block.
 Let's get started!
 
 == Quick Start
+Follow this installation guide to get *MeNUS* up and running on your computer.
 
 .  Ensure you have Java version `9` or later installed in your Computer.
 
@@ -65,9 +66,10 @@ image::Ui.png[width="790"]
 .  Type the command in the command box and press kbd:[Enter] to execute it. +
 e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 .  Some example commands you can try:
-* **`login`**`id/root pw/1122qq` : logs in to the root account
+* **`help`** : Opens up the help page
+* **`login`**`id/root pw/1122qq` : Logs in to the root account
 * **`add-item`**`n/Apple p/2.00 t/fruit` : Creates a new item in the menu
-* *`exit`* : exits the application
+* *`exit`* : Exits the application
 
 .  Refer to <<Commands>> for details of each command.
 
@@ -94,8 +96,8 @@ sales report for a specific day.
 [[Features]]
 == Key Features
 === Convenience
-MeNUS is an ultimate All-In-One application that will provide you with the utmost convenience you need to manage your
-restaurants in NUS.
+*MeNUS* is an integrated application that will provide you with the utmost convenience and tools you will need to
+manage your restaurants in NUS.
 
 * Exporting data to `.xml` (default) or Excel file `[coming in v2.0]`.
 
@@ -115,7 +117,10 @@ Time is money. *MeNUS* ensures that the application will:
 
 [[Commands]]
 == Commands
+*MeNUS* is jam-packed with features and it may be daunting for new users. The subsequent sections of the user guide
+provides a step by step walk-through of all the commands *MeNUS* has to offer.
 
+Do read our short explanation about Command Format below so that the subsequent portions of this section will make sense to you.
 ====
 *Command Format*
 
@@ -126,6 +131,8 @@ Time is money. *MeNUS* ensures that the application will:
 ====
 
 === General
+The commands in this section does not tie to any of the 5 components.
+
 ==== Viewing help : `help` or `h`
 Opens up the help window. Very useful if you are a new user. +
 Format: `help` or `h`
@@ -200,6 +207,7 @@ saving is required.
 Exits the program. +
 Format: `exit` or `ex`
 
+// tag::accountmanagement[]
 === Accounts Management
 ==== Logging in: `login`
 
@@ -259,10 +267,11 @@ Examples:
 List all user accounts. +
 Format: `list-accounts` or `la`
 
-[IMPORTANT]
+[WARNING]
 ====
 Password is masked by default and should never be shown
 ====
+// end::accountmanagement[]
 
 === Adding an ingredient: `add-ingredient` or `add-ing`
 
@@ -730,7 +739,7 @@ Format: `rank-item`
 Ranks the dates based on their total revenue for that day. +
 Format: `rank-date`
 
-=== Coming Soon!
+=== Upcoming Features
 ==== Creating user role `[coming in v2.0]`
 Creates a user role. User assigned with higher ranking role can execute more commands. +
 Format: `create-role r/RANK n/ROLE_NAME` or `cr r/RANK n/ROLE_NAME`
@@ -761,11 +770,14 @@ Examples:
 * `delete-role r/999`
 * `dr id/999`
 
-== FAQ
+== Frequently Asked Questions (FAQ)
 
 *Q: How do I transfer my data to another Computer?* +
 *A*: Install the application in the other computer and overwrite the empty data file it creates with the file that
 contains the data of your previous *MeNUS* folder.
+
+*Q: Where do I find the latest release of the application?* +
+*A*: You can find all releases link:https://github.com/CS2103-AY1819S1-F10-4/main/releases[here].
 
 == Command Summary
 [width="100%",cols="10%,<45%,<45%",options="header",]
