@@ -8,6 +8,8 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_INGREDIENT_PRICE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_INGREDIENT_UNIT;
 
 import seedu.address.commons.core.index.Index;
+import seedu.address.logic.commands.ingredients.EditIngredientByIndexCommand;
+import seedu.address.logic.commands.ingredients.EditIngredientByNameCommand;
 import seedu.address.logic.commands.ingredients.EditIngredientCommand;
 import seedu.address.logic.commands.ingredients.EditIngredientCommand.EditIngredientDescriptor;
 import seedu.address.logic.parser.ArgumentMultimap;
@@ -15,6 +17,7 @@ import seedu.address.logic.parser.ArgumentTokenizer;
 import seedu.address.logic.parser.Parser;
 import seedu.address.logic.parser.ParserUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.ingredient.IngredientName;
 
 /**
  * Parses input arguments and creates a new EditCommand object
@@ -32,38 +35,73 @@ public class EditIngredientCommandParser implements Parser<EditIngredientCommand
                 ArgumentTokenizer.tokenize(args, PREFIX_INGREDIENT_NAME, PREFIX_INGREDIENT_UNIT,
                         PREFIX_INGREDIENT_PRICE, PREFIX_INGREDIENT_MINIMUM);
 
-        Index index;
+        String indexOrNameArg = argMultimap.getPreamble();
 
-        try {
-            index = ParserUtil.parseIndex(argMultimap.getPreamble());
-        } catch (ParseException pe) {
+        if (indexOrNameArg.trim().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                    EditIngredientCommand.MESSAGE_USAGE), pe);
+                    EditIngredientCommand.MESSAGE_USAGE));
         }
+
+        Object indexOrName = ParserUtil.parseIndexOrIngredientName(indexOrNameArg);
 
         EditIngredientDescriptor editIngredientDescriptor = new EditIngredientDescriptor();
-        if (argMultimap.getValue(PREFIX_INGREDIENT_NAME).isPresent()) {
-            editIngredientDescriptor.setName(
-                    ParserUtil.parseIngredientName(argMultimap.getValue(PREFIX_INGREDIENT_NAME).get()));
-        }
-        if (argMultimap.getValue(PREFIX_INGREDIENT_UNIT).isPresent()) {
-            editIngredientDescriptor.setUnit(
-                    ParserUtil.parseIngredientUnit(argMultimap.getValue(PREFIX_INGREDIENT_UNIT).get()));
-        }
-        if (argMultimap.getValue(PREFIX_INGREDIENT_PRICE).isPresent()) {
-            editIngredientDescriptor.setPrice(
-                    ParserUtil.parseIngredientPrice(argMultimap.getValue(PREFIX_INGREDIENT_PRICE).get()));
-        }
-        if (argMultimap.getValue(PREFIX_INGREDIENT_MINIMUM).isPresent()) {
-            editIngredientDescriptor.setMinimum(
-                    ParserUtil.parseMinimumUnit(argMultimap.getValue(PREFIX_INGREDIENT_MINIMUM).get()));
-        }
+        setNameDescriptor(argMultimap, editIngredientDescriptor);
+        setUnitDescriptor(argMultimap, editIngredientDescriptor);
+        setPriceDescriptor(argMultimap, editIngredientDescriptor);
+        setMinDescriptor(argMultimap, editIngredientDescriptor);
 
         if (!editIngredientDescriptor.isAnyFieldEdited()) {
             throw new ParseException(EditIngredientCommand.MESSAGE_NOT_EDITED);
         }
 
-        return new EditIngredientCommand(index, editIngredientDescriptor);
+        EditIngredientCommand editCommand = null;
+        Index index;
+        IngredientName name;
+
+        if (indexOrName instanceof Index) {
+            index = (Index) indexOrName;
+            editCommand = new EditIngredientByIndexCommand(index, editIngredientDescriptor);
+        }
+        if (indexOrName instanceof IngredientName) {
+            name = (IngredientName) indexOrName;
+            editCommand = new EditIngredientByNameCommand(name, editIngredientDescriptor);
+        }
+
+        return editCommand;
+    }
+
+    private void setMinDescriptor(ArgumentMultimap argMultimap, EditIngredientDescriptor editIngredientDescriptor)
+            throws ParseException {
+        if (argMultimap.getValue(PREFIX_INGREDIENT_MINIMUM).isPresent()) {
+            editIngredientDescriptor.setMinimum(
+                    ParserUtil.parseMinimumUnit(argMultimap.getValue(PREFIX_INGREDIENT_MINIMUM).get()));
+        }
+    }
+
+    private void setPriceDescriptor(ArgumentMultimap argMultimap, EditIngredientDescriptor editIngredientDescriptor)
+            throws ParseException {
+        setUnitDescriptor(argMultimap, editIngredientDescriptor);
+        if (argMultimap.getValue(PREFIX_INGREDIENT_PRICE).isPresent()) {
+            editIngredientDescriptor.setPrice(
+                    ParserUtil.parseIngredientPrice(argMultimap.getValue(PREFIX_INGREDIENT_PRICE).get()));
+        }
+    }
+
+    private void setUnitDescriptor(ArgumentMultimap argMultimap, EditIngredientDescriptor editIngredientDescriptor)
+            throws ParseException {
+        setNameDescriptor(argMultimap, editIngredientDescriptor);
+        if (argMultimap.getValue(PREFIX_INGREDIENT_UNIT).isPresent()) {
+            editIngredientDescriptor.setUnit(
+                    ParserUtil.parseIngredientUnit(argMultimap.getValue(PREFIX_INGREDIENT_UNIT).get()));
+        }
+    }
+
+    private void setNameDescriptor(ArgumentMultimap argMultimap, EditIngredientDescriptor editIngredientDescriptor)
+            throws ParseException {
+        if (argMultimap.getValue(PREFIX_INGREDIENT_NAME).isPresent()) {
+            editIngredientDescriptor.setName(
+                    ParserUtil.parseIngredientName(argMultimap.getValue(PREFIX_INGREDIENT_NAME).get()));
+        }
     }
 
 }

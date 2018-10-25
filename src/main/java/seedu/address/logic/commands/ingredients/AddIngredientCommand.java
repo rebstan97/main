@@ -16,7 +16,7 @@ import seedu.address.model.Model;
 import seedu.address.model.ingredient.Ingredient;
 
 /**
- * Adds an ingredient to the address book.
+ * Adds an ingredient to the restaurant book.
  */
 public class AddIngredientCommand extends Command {
 
@@ -24,7 +24,7 @@ public class AddIngredientCommand extends Command {
 
     public static final String COMMAND_ALIAS = "add-ing";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds an ingredient to the address book. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds an ingredient to the restaurant book. "
             + "Parameters: "
             + PREFIX_INGREDIENT_NAME + "NAME "
             + PREFIX_INGREDIENT_UNIT + "UNIT "
@@ -37,7 +37,7 @@ public class AddIngredientCommand extends Command {
             + PREFIX_INGREDIENT_MINIMUM + "5 ";
 
     public static final String MESSAGE_SUCCESS = "New ingredient added: %1$s";
-    public static final String MESSAGE_DUPLICATE_INGREDIENT = "This ingredient already exists in the address book";
+    public static final String MESSAGE_DUPLICATE_INGREDIENT = "This ingredient already exists in the restaurant book";
 
     private final Ingredient toAdd;
 
