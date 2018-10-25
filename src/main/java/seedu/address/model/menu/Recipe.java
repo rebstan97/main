@@ -12,11 +12,11 @@ public class Recipe {
     /**
      * Constructs a recipe.
      *
-     * @param remark A valid recipe.
+     * @param recipe A valid recipe.
      */
-    public Recipe(String remark) {
-        requireNonNull(remark);
-        value = remark;
+    public Recipe(String recipe) {
+        requireNonNull(recipe);
+        value = recipe;
     }
 
     @Override
