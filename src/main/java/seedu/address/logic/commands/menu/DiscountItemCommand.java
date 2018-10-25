@@ -81,7 +81,7 @@ public class DiscountItemCommand extends Command {
         Price updatedPrice = new Price(String.format("%.2f", originalValue));
         updatedPrice.setValue(percent);
 
-        return new Item(itemToEdit.getName(), updatedPrice, itemToEdit.getRemark(), itemToEdit.getTags());
+        return new Item(itemToEdit.getName(), updatedPrice, itemToEdit.getRecipe(), itemToEdit.getTags());
     }
 
     @Override

@@ -424,7 +424,7 @@ public class AddressBook implements ReadOnlyAddressBook {
             return;
         }
 
-        Item newItem = new Item(item.getName(), item.getPrice(), item.getRemark(), tags);
+        Item newItem = new Item(item.getName(), item.getPrice(), item.getRecipe(), tags);
         updateItem(item, newItem);
     }
 

@@ -18,7 +18,7 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.menu.Item;
 import seedu.address.model.menu.Name;
 import seedu.address.model.menu.Price;
-import seedu.address.model.menu.Remark;
+import seedu.address.model.menu.Recipe;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -42,10 +42,10 @@ public class AddItemCommandParser implements Parser<AddItemCommand> {
 
         Name name = ItemParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
         Price price = ItemParserUtil.parsePrice(argMultimap.getValue(PREFIX_PRICE).get());
-        Remark remark = new Remark("");
+        Recipe recipe = new Recipe("");
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
 
-        Item item = new Item(name, price, remark, tagList);
+        Item item = new Item(name, price, recipe, tagList);
 
         return new AddItemCommand(item);
     }

@@ -3,18 +3,18 @@ package seedu.address.model.menu;
 import static java.util.Objects.requireNonNull;
 
 /**
- * Represents an Item's remark in the menu.
+ * Represents an Item's recipe in the menu.
  * Guarantees: immutable; Always valid
  */
-public class Remark {
+public class Recipe {
     private final String value;
 
     /**
-     * Constructs a remark.
+     * Constructs a recipe.
      *
-     * @param remark A valid remark.
+     * @param remark A valid recipe.
      */
-    public Remark(String remark) {
+    public Recipe(String remark) {
         requireNonNull(remark);
         value = remark;
     }
@@ -27,8 +27,8 @@ public class Remark {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof Remark // instanceof handles nulls
-                    && value.equals(((Remark) other).value)); // state check
+                || (other instanceof Recipe // instanceof handles nulls
+                    && value.equals(((Recipe) other).value)); // state check
     }
 
     @Override
