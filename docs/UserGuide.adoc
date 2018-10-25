@@ -195,13 +195,13 @@ Format: `clear` or `c`
 Restaurant book data are saved in the hard disk automatically after any command that changes the data. No manual
 saving is required.
 
-==== Exiting the program : `exit`
+==== Exiting the program : `exit` or `ex`
 
 Exits the program. +
-Format: `exit`
+Format: `exit` or `ex`
 
 === Accounts Management
-==== Logging in: `login` or `li`
+==== Logging in: `login`
 
 Logs into an existing account. +
 Format: `login id/USERNAME pw/PASSWORD` or `li id/USERNAME pw/PASSWORD` +
@@ -211,7 +211,7 @@ Examples:
 * `login id/azhikai pw/p@55w0rd`
 * `li id/azhikai pw/p@55w0rd`
 
-==== Logging out: `logout` or `lo`
+==== Logging out: `logout`
 
 Logs out of the account. +
 Format: `logout` or `lo`
