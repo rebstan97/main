@@ -41,7 +41,7 @@ commands.
 *** Managed releases `v1.1`, `v1.2`, `v1.2.1`, `v1.3` and `v1.4` (5 releases) on GitHub.
 *** Configured deployment of static pages to GitHub Pages and Netlify.
 ** Enhancements to existing features:
-*** Wrote additional tests for existing features to increase coverage from 88% to 92% (Pull requests https://github.com[#36], https://github.com[#38])
+*** TBU
 ** Documentation:
 *** Morphed existing contents (UML and Sequence diagrams) of the User Guide and Developer Guide.
 ** Community:
