@@ -293,8 +293,6 @@ public class AddressBook implements ReadOnlyAddressBook {
      * Adds an account to the account record. The account must not already exist in the account record.
      */
     public void addAccount(Account account) {
-        //TODO: Move hashing into UniqueAccountList
-        account.getPassword().hash(account.getUsername().toString());
         accounts.add(account);
     }
 
@@ -304,8 +302,6 @@ public class AddressBook implements ReadOnlyAddressBook {
      * in the restaurant book.
      */
     public void updateAccount(Account target, Account editedAccount) {
-        //TODO: Move hashing into UniqueAccountList
-        editedAccount.getPassword().hash(editedAccount.getUsername().toString());
         accounts.update(target, editedAccount);
     }
 
