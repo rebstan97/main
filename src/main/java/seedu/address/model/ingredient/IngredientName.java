@@ -18,7 +18,7 @@ public class IngredientName {
      */
     public static final String NAME_VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum} ]*";
 
-    public final String fullName;
+    private final String fullName;
 
     /**
      * Constructs an {@code IngredientName}.
@@ -48,7 +48,17 @@ public class IngredientName {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof IngredientName // instanceof handles nulls
-                && fullName.equals(((IngredientName) other).fullName)); // state check
+                && fullName.equals(((IngredientName) other).toString())); // state check
+    }
+
+    /**
+     * Returns true if this {@code IngredientName} has the same string value {@fullName} ignoring case compared to
+     * {@code other}.
+     */
+    public boolean equalsIgnoreCase(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof IngredientName // instanceof handles nulls
+                && fullName.equalsIgnoreCase(((IngredientName) other).fullName)); // state check
     }
 
     @Override

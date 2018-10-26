@@ -43,6 +43,8 @@ import seedu.address.logic.commands.ingredients.AddIngredientCommand;
 import seedu.address.logic.commands.ingredients.DeleteIngredientByIndexCommand;
 import seedu.address.logic.commands.ingredients.DeleteIngredientByNameCommand;
 import seedu.address.logic.commands.ingredients.DeleteIngredientCommand;
+import seedu.address.logic.commands.ingredients.EditIngredientByIndexCommand;
+import seedu.address.logic.commands.ingredients.EditIngredientByNameCommand;
 import seedu.address.logic.commands.ingredients.EditIngredientCommand;
 import seedu.address.logic.commands.ingredients.EditIngredientCommand.EditIngredientDescriptor;
 import seedu.address.logic.commands.ingredients.ListIngredientsCommand;
@@ -365,15 +367,31 @@ public class AddressBookParserTest {
     public void parseCommand_editIngredient() throws Exception {
         Ingredient ingredient = new IngredientBuilder().build();
         EditIngredientDescriptor descriptor = new EditIngredientDescriptorBuilder(ingredient).build();
+
+        // full command name, edit by index
         EditIngredientCommand command =
-                (EditIngredientCommand) parser.parseCommand(
-                        EditIngredientCommand.COMMAND_WORD + " " + INDEX_FIRST.getOneBased()
+                (EditIngredientByIndexCommand) parser.parseCommand(
+                        EditIngredientByIndexCommand.COMMAND_WORD + " " + INDEX_FIRST.getOneBased()
                                 + " " + IngredientUtil.getEditIngredientDescriptorDetails(descriptor));
-        assertEquals(new EditIngredientCommand(INDEX_FIRST, descriptor), command);
-        command = (EditIngredientCommand) parser.parseCommand(
-                EditIngredientCommand.COMMAND_ALIAS + " " + INDEX_FIRST.getOneBased()
+        assertEquals(new EditIngredientByIndexCommand(INDEX_FIRST, descriptor), command);
+
+        // command alias, edit by index
+        command = (EditIngredientByIndexCommand) parser.parseCommand(
+                EditIngredientByIndexCommand.COMMAND_ALIAS + " " + INDEX_FIRST.getOneBased()
                         + " " + IngredientUtil.getEditIngredientDescriptorDetails(descriptor));
-        assertEquals(new EditIngredientCommand(INDEX_FIRST, descriptor), command);
+        assertEquals(new EditIngredientByIndexCommand(INDEX_FIRST, descriptor), command);
+
+        // full command name, edit by name
+        command = (EditIngredientByNameCommand) parser.parseCommand(
+                EditIngredientByNameCommand.COMMAND_WORD + " " + "Chicken Thigh"
+                                + " " + IngredientUtil.getEditIngredientDescriptorDetails(descriptor));
+        assertEquals(new EditIngredientByNameCommand(new IngredientName("Chicken Thigh"), descriptor), command);
+
+        // command alias, edit by name
+        command = (EditIngredientByNameCommand) parser.parseCommand(
+                EditIngredientByNameCommand.COMMAND_ALIAS + " " + "Chicken Thigh"
+                        + " " + IngredientUtil.getEditIngredientDescriptorDetails(descriptor));
+        assertEquals(new EditIngredientByNameCommand(new IngredientName("Chicken Thigh"), descriptor), command);
     }
 
     @Test
