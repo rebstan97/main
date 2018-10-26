@@ -411,6 +411,12 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
+    public void sortReservations() {
+        versionedAddressBook.sortReservations();
+        indicateAddressBookChanged();
+    }
+
+    @Override
     public void removeTagForReservation(Tag tag) {
         versionedAddressBook.removeTag(tag);
     }

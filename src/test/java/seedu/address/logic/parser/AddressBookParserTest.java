@@ -9,6 +9,7 @@ import static seedu.address.logic.commands.CommandTestUtil.ITEM_PERCENT_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DATE_RECORD_ONE;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ITEM_PERCENT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ID;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PASSWORD;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_REMARK;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST;
 import static seedu.address.testutil.accounts.TypicalAccounts.DEMO_ONE;
@@ -56,6 +57,7 @@ import seedu.address.logic.commands.menu.EditItemCommand;
 import seedu.address.logic.commands.menu.EditItemCommand.EditItemDescriptor;
 import seedu.address.logic.commands.menu.FilterMenuCommand;
 import seedu.address.logic.commands.menu.ListItemsCommand;
+import seedu.address.logic.commands.menu.RecipeItemCommand;
 import seedu.address.logic.commands.menu.SelectItemCommand;
 import seedu.address.logic.commands.menu.SortMenuCommand;
 import seedu.address.logic.commands.menu.SortMenuCommand.SortMethod;
@@ -70,6 +72,7 @@ import seedu.address.model.accounts.Account;
 import seedu.address.model.ingredient.Ingredient;
 import seedu.address.model.ingredient.IngredientName;
 import seedu.address.model.menu.Item;
+import seedu.address.model.menu.Recipe;
 import seedu.address.model.menu.TagContainsKeywordsPredicate;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
@@ -80,7 +83,6 @@ import seedu.address.testutil.EditPersonDescriptorBuilder;
 import seedu.address.testutil.PersonBuilder;
 import seedu.address.testutil.PersonUtil;
 import seedu.address.testutil.accounts.AccountBuilder;
-import seedu.address.testutil.accounts.AccountUtil;
 import seedu.address.testutil.ingredients.EditIngredientDescriptorBuilder;
 import seedu.address.testutil.ingredients.IngredientBuilder;
 import seedu.address.testutil.ingredients.IngredientUtil;
@@ -142,6 +144,8 @@ public class AddressBookParserTest {
     public void parseCommand_exit() throws Exception {
         assertTrue(parser.parseCommand(ExitCommand.COMMAND_WORD) instanceof ExitCommand);
         assertTrue(parser.parseCommand(ExitCommand.COMMAND_WORD + " 3") instanceof ExitCommand);
+        assertTrue(parser.parseCommand(ExitCommand.COMMAND_ALIAS) instanceof ExitCommand);
+        assertTrue(parser.parseCommand(ExitCommand.COMMAND_ALIAS + " 3") instanceof ExitCommand);
     }
 
     @Test
@@ -159,13 +163,16 @@ public class AddressBookParserTest {
     public void parseCommand_help() throws Exception {
         assertTrue(parser.parseCommand(HelpCommand.COMMAND_WORD) instanceof HelpCommand);
         assertTrue(parser.parseCommand(HelpCommand.COMMAND_WORD + " 3") instanceof HelpCommand);
+        assertTrue(parser.parseCommand(HelpCommand.COMMAND_ALIAS) instanceof HelpCommand);
+        assertTrue(parser.parseCommand(HelpCommand.COMMAND_ALIAS + " 3") instanceof HelpCommand);
     }
 
     @Test
     public void parseCommand_history() throws Exception {
         assertTrue(parser.parseCommand(HistoryCommand.COMMAND_WORD) instanceof HistoryCommand);
         assertTrue(parser.parseCommand(HistoryCommand.COMMAND_WORD + " 3") instanceof HistoryCommand);
-
+        assertTrue(parser.parseCommand(HistoryCommand.COMMAND_ALIAS) instanceof HistoryCommand);
+        assertTrue(parser.parseCommand(HistoryCommand.COMMAND_ALIAS + " 3") instanceof HistoryCommand);
         try {
             parser.parseCommand("histories");
             throw new AssertionError("The expected ParseException was not thrown.");
@@ -280,12 +287,14 @@ public class AddressBookParserTest {
     @Test
     public void parseCommand_register() throws ParseException {
         Account account = new AccountBuilder().build();
-        RegisterCommand command = (RegisterCommand) parser.parseCommand(AccountUtil.getCreateCommand(account));
+        RegisterCommand command = (RegisterCommand) parser.parseCommand(RegisterCommand.COMMAND_WORD + " "
+                + PREFIX_ID + account.getUsername().toString() + " "
+                + PREFIX_PASSWORD + account.getPassword().toString());
         assertEquals(new RegisterCommand(account), command);
-
-        // alias test
-        command = (RegisterCommand) parser.parseCommand(AccountUtil.getCreateCommand(account));
-        assertEquals(new RegisterCommand(account), command);
+        RegisterCommand commandAlias = (RegisterCommand) parser.parseCommand(RegisterCommand.COMMAND_ALIAS
+                + " " + PREFIX_ID + account.getUsername().toString() + " "
+                + PREFIX_PASSWORD + account.getPassword().toString());
+        assertEquals(new RegisterCommand(account), commandAlias);
     }
 
     @Test
@@ -294,17 +303,17 @@ public class AddressBookParserTest {
         DeregisterCommand command = (DeregisterCommand) parser.parseCommand(DeregisterCommand.COMMAND_WORD
                 + " " + PREFIX_ID + account.getUsername().toString());
         assertEquals(new DeregisterCommand(account), command);
-
-        // alias test
-        command = (DeregisterCommand) parser.parseCommand(DeregisterCommand.COMMAND_ALIAS
+        DeregisterCommand commandAlias = (DeregisterCommand) parser.parseCommand(DeregisterCommand.COMMAND_ALIAS
                 + " " + PREFIX_ID + account.getUsername().toString());
-        assertEquals(new DeregisterCommand(account), command);
+        assertEquals(new DeregisterCommand(account), commandAlias);
     }
 
     @Test
     public void parseCommand_login() throws ParseException {
         Account account = new AccountBuilder().build();
-        LoginCommand command = (LoginCommand) parser.parseCommand(AccountUtil.getLoginCommand(account));
+        LoginCommand command = (LoginCommand) parser.parseCommand(LoginCommand.COMMAND_WORD + " "
+                + PREFIX_ID + account.getUsername().toString() + " "
+                + PREFIX_PASSWORD + account.getPassword().toString());
         assertEquals(new LoginCommand(account), command);
     }
 
@@ -317,10 +326,12 @@ public class AddressBookParserTest {
     public void parseCommand_createAccount_notEquals() throws ParseException {
         Account accountOneCommand = new AccountBuilder().build();
         Account accountTwoCommand = new AccountBuilder().withUsername("demo1").withPassword("1122qq").build();
-        RegisterCommand commandOne = (RegisterCommand) parser
-                .parseCommand(AccountUtil.getCreateCommand(accountOneCommand));
-        RegisterCommand commandTwo = (RegisterCommand) parser
-                .parseCommand(AccountUtil.getCreateCommand(accountTwoCommand));
+        RegisterCommand commandOne = (RegisterCommand) parser.parseCommand(RegisterCommand.COMMAND_WORD + " "
+                + PREFIX_ID + accountOneCommand.getUsername().toString() + " "
+                + PREFIX_PASSWORD + accountOneCommand.getPassword().toString());
+        RegisterCommand commandTwo = (RegisterCommand) parser.parseCommand(RegisterCommand.COMMAND_WORD + " "
+                + PREFIX_ID + accountTwoCommand.getUsername().toString() + " "
+                + PREFIX_PASSWORD + accountTwoCommand.getPassword().toString());
         assertNotEquals(commandOne, commandTwo);
     }
 
@@ -445,6 +456,17 @@ public class AddressBookParserTest {
     }
 
     @Test
+    public void parseCommand_recipeItem() throws Exception {
+        final Recipe recipe = new Recipe("Some recipe.");
+        RecipeItemCommand command = (RecipeItemCommand) parser.parseCommand(RecipeItemCommand.COMMAND_WORD + " "
+                + INDEX_FIRST.getOneBased() + " " + PREFIX_REMARK + recipe.toString());
+        assertEquals(new RecipeItemCommand(INDEX_FIRST, recipe), command);
+        command = (RecipeItemCommand) parser.parseCommand(RecipeItemCommand.COMMAND_ALIAS + " "
+                + INDEX_FIRST.getOneBased() + " " + PREFIX_REMARK + recipe.toString());
+        assertEquals(new RecipeItemCommand(INDEX_FIRST, recipe), command);
+    }
+
+    @Test
     public void parseCommand_sortMenu() throws Exception {
         SortMenuCommand command = (SortMenuCommand) parser.parseCommand(
                 SortMenuCommand.COMMAND_WORD + " name");
@@ -478,10 +500,12 @@ public class AddressBookParserTest {
     public void parseCommand_discountItem() throws Exception {
         DiscountItemCommand command = (DiscountItemCommand) parser.parseCommand(
                 DiscountItemCommand.COMMAND_WORD + " " + INDEX_FIRST.getOneBased() + ITEM_PERCENT_DESC);
-        assertEquals(new DiscountItemCommand(INDEX_FIRST, Double.parseDouble(VALID_ITEM_PERCENT)), command);
+        assertEquals(new DiscountItemCommand(INDEX_FIRST, INDEX_FIRST,
+                Double.parseDouble(VALID_ITEM_PERCENT), false), command);
         command = (DiscountItemCommand) parser.parseCommand(DiscountItemCommand.COMMAND_ALIAS
                 + " " + INDEX_FIRST.getOneBased() + ITEM_PERCENT_DESC);
-        assertEquals(new DiscountItemCommand(INDEX_FIRST, Double.parseDouble(VALID_ITEM_PERCENT)), command);
+        assertEquals(new DiscountItemCommand(INDEX_FIRST, INDEX_FIRST,
+                Double.parseDouble(VALID_ITEM_PERCENT), false), command);
     }
 
     @Test
