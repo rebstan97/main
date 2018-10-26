@@ -52,7 +52,7 @@ public class LogoutCommandTest {
         assertEquals(EMPTY_COMMAND_HISTORY, commandHistory);
 
         assertFalse(UserSession.isAuthenticated());
-        assertNull(UserSession.getUsername());
+        assertNull(UserSession.getAccount());
     }
 
     @Test

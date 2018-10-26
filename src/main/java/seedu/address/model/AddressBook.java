@@ -289,7 +289,6 @@ public class AddressBook implements ReadOnlyAddressBook {
         return accounts.get(account);
     }
 
-
     /**
      * Adds an account to the account record. The account must not already exist in the account record.
      */
@@ -305,6 +304,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      * in the restaurant book.
      */
     public void updateAccount(Account target, Account editedAccount) {
+        //TODO: Move hashing into UniqueAccountList
         editedAccount.getPassword().hash(editedAccount.getUsername().toString());
         accounts.update(target, editedAccount);
     }
@@ -314,6 +314,11 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public void removeAccount(Account key) {
         accounts.remove(key);
+    }
+
+    @Override
+    public ObservableList<Account> getAccountList() {
+        return accounts.asUnmodifiableObservableList();
     }
 
     //// ingredient-level operations
@@ -364,11 +369,6 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public void removeIngredient(Ingredient key) {
         ingredients.remove(key);
-    }
-
-    @Override
-    public ObservableList<Account> getAccountList() {
-        return accounts.asUnmodifiableObservableList();
     }
 
     @Override

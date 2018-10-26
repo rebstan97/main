@@ -29,13 +29,13 @@ public class UserSessionTest {
     @Test
     public void session_isAuthenticated() {
         assertTrue(UserSession.isAuthenticated());
-        assertNotNull(UserSession.getUsername());
+        assertNotNull(UserSession.getAccount());
     }
 
     @Test
     public void session_isNotAuthenticated() {
         UserSession.logout();
         assertFalse(UserSession.isAuthenticated());
-        assertNull(UserSession.getUsername());
+        assertNull(UserSession.getAccount());
     }
 }

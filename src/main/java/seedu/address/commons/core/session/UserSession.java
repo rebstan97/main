@@ -1,8 +1,7 @@
 package seedu.address.commons.core.session;
 
+import seedu.address.commons.core.session.exception.SessionException;
 import seedu.address.model.accounts.Account;
-import seedu.address.model.accounts.Password;
-import seedu.address.model.accounts.Username;
 
 /**
  * Since this is a local desktop application which may or may not work with internet connection, we assume the
@@ -12,18 +11,20 @@ import seedu.address.model.accounts.Username;
 public class UserSession {
 
     private static boolean isAuthenticated = false;
-    private static Username username;
-    private static Password password;
+    private static Account account;
 
     /**
-     * Stores this {@link Account} info as part of this session.
+     * Stores this {@code Account} info as part of this session.
      *
-     * @param account logged in for this session.
+     * @param acc logged in for this session.
      */
-    public static void login(Account account) {
+    public static void login(Account acc) {
+        if (isAuthenticated) {
+            throw new SessionException();
+        }
+
         isAuthenticated = true;
-        username = account.getUsername();
-        password = account.getPassword();
+        account = acc;
     }
 
     /**
@@ -32,7 +33,17 @@ public class UserSession {
     public static void logout() {
         if (isAuthenticated) {
             isAuthenticated = false;
-            username = null;
+        }
+    }
+
+    /**
+     * Updates the session with the new account info, such as updating of account password.
+     *
+     * @param acc that has been updated.
+     */
+    public static void update(Account acc) {
+        if (isAuthenticated) {
+            account = acc;
         }
     }
 
@@ -46,20 +57,11 @@ public class UserSession {
     }
 
     /**
-     * Gets the username of the account that is logged in for this session.
+     * Gets the account that is logged in for this session.
      *
-     * @return a {@link Username} object.
+     * @return a {@code Account} object.
      */
-    public static Username getUsername() {
-        return username;
-    }
-
-    /**
-     * Gets the password of the account that is logged in for this session.
-     *
-     * @return a {@link Username} object.
-     */
-    public static Password getPassword() {
-        return password;
+    public static Account getAccount() {
+        return account;
     }
 }

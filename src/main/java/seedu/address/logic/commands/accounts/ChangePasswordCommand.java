@@ -1,12 +1,14 @@
 package seedu.address.logic.commands.accounts;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ID;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NEW_PASSWORD;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_ACCOUNTS;
 
 import java.util.Optional;
 
+import seedu.address.commons.core.EventsCenter;
+import seedu.address.commons.core.session.UserSession;
+import seedu.address.commons.events.storage.UpdateAccountEvent;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.Command;
@@ -25,31 +27,25 @@ public class ChangePasswordCommand extends Command {
     public static final String COMMAND_WORD = "change-password";
     public static final String COMMAND_ALIAS = "cp";
 
-    //TODO: Add support for admin to modify account by specifying username
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Change the password of an existing account. "
             + "Parameters: "
-            + PREFIX_ID + "USERNAME "
             + PREFIX_NEW_PASSWORD + "NEW_PASSWORD\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NEW_PASSWORD + "1122qq";
 
     public static final String MESSAGE_SUCCESS = "Successfully updated the account %s";
-    public static final String MESSAGE_ACCOUNT_NOT_FOUND = "The account does not exist";
+    public static final String MESSAGE_ACCOUNT_NOT_FOUND = "This account does not exist";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided";
-    public static final String MESSAGE_DUPLICATE_ACCOUNT = "This account already exists in the restaurant book";
+    public static final String MESSAGE_DUPLICATE_ACCOUNT = "This username is not available";
 
-    private final Account account;
     private final EditAccountDescriptor editAccountDescriptor;
 
     /**
-     * @param account of the staff in the filtered account list to edit.
      * @param editAccountDescriptor details to edit the account with.
      */
-    public ChangePasswordCommand(Account account, EditAccountDescriptor editAccountDescriptor) {
-        requireNonNull(account);
+    public ChangePasswordCommand(EditAccountDescriptor editAccountDescriptor) {
         requireNonNull(editAccountDescriptor);
 
-        this.account = account;
         this.editAccountDescriptor = new EditAccountDescriptor(editAccountDescriptor);
     }
 
@@ -57,11 +53,13 @@ public class ChangePasswordCommand extends Command {
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
 
-        if (!model.hasAccount(account)) {
+        // Session guarantees to have been set, thus an account exists in the session
+        Account accountToEdit = UserSession.getAccount();
+
+        if (!model.hasAccount(accountToEdit)) {
             throw new CommandException(MESSAGE_ACCOUNT_NOT_FOUND);
         }
 
-        Account accountToEdit = account;
         Account editedAccount = createEditedAccount(accountToEdit, editAccountDescriptor);
 
         if (!accountToEdit.isSameUsername(editedAccount) && model.hasAccount(editedAccount)) {
@@ -71,6 +69,8 @@ public class ChangePasswordCommand extends Command {
         model.updateAccount(accountToEdit, editedAccount);
         model.updateFilteredAccountList(PREDICATE_SHOW_ALL_ACCOUNTS);
         model.commitAddressBook();
+
+        EventsCenter.getInstance().post(new UpdateAccountEvent(editedAccount));
         return new CommandResult(String.format(MESSAGE_SUCCESS, editedAccount));
     }
 
@@ -90,8 +90,7 @@ public class ChangePasswordCommand extends Command {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof ChangePasswordCommand // instanceof handles nulls
-                && account.equals(((ChangePasswordCommand) other).account));
+                || other instanceof ChangePasswordCommand;
     }
 
     /**
