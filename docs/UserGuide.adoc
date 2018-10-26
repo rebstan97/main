@@ -18,6 +18,7 @@ endif::[]
 
 By: `Team CS2103-AY1819S1-F10-4`      Since: `Sep 2018`      Licence: `MIT`
 
+// tag::intro[]
 == Welcome to MeNUS
 link:{repoURL}[MeNUS] empowers you to improve the Management(M) and efficiency(e) of your restaurants in NUS.
 
@@ -45,6 +46,7 @@ Some things might go wrong if you are not careful, or did not follow the instruc
 read whatever is in this block.
 
 Let's get started!
+// end::intro[]
 
 == Quick Start
 Follow this installation guide to get *MeNUS* up and running on your computer.
