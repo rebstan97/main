@@ -137,6 +137,8 @@ public class CommandTestUtil {
     public static final String VALID_PRICE_BROCCOLI = "6.50";
     public static final String VALID_MINIMUM_APPLE = "3";
     public static final String VALID_MINIMUM_BROCCOLI = "5";
+    public static final String VALID_NUMUNITS_APPLE = "10";
+    public static final String VALID_NUMUNITS_BROCCOLI = "28";
 
     public static final String INGREDIENT_NAME_DESC_APPLE = " " + PREFIX_INGREDIENT_NAME + VALID_NAME_APPLE;
     public static final String INGREDIENT_NAME_DESC_BROCCOLI = " " + PREFIX_INGREDIENT_NAME + VALID_NAME_BROCCOLI;
@@ -147,6 +149,15 @@ public class CommandTestUtil {
     public static final String INGREDIENT_MINIMUM_DESC_APPLE = " " + PREFIX_INGREDIENT_MINIMUM + VALID_MINIMUM_APPLE;
     public static final String INGREDIENT_MINIMUM_DESC_BROCCOLI = " " + PREFIX_INGREDIENT_MINIMUM
             + VALID_MINIMUM_BROCCOLI;
+
+    public static final String INVALID_INGREDIENT_NAME_DESC = " " + PREFIX_INGREDIENT_NAME + "Chicken&"; // '&' not
+    // allowed in ingredient names
+    public static final String INVALID_INGREDIENT_UNIT_DESC = " " + PREFIX_INGREDIENT_UNIT + "kilogram+"; // '+' not
+    // allowed in ingredient units
+    public static final String INVALID_INGREDIENT_PRICE_DESC = " " + PREFIX_INGREDIENT_PRICE + "2.000"; // 3 decimal
+    // places not allowed for ingredient prices
+    public static final String INVALID_INGREDIENT_MINIMUM_DESC = " " + PREFIX_INGREDIENT_MINIMUM + "2.0"; // decimal
+    // place not allowed for ingredient minimums
 
     /** For menu */
     public static final String VALID_ITEM_NAME_BURGER = "Burger";
@@ -306,7 +317,7 @@ public class CommandTestUtil {
         assertTrue(targetIndex.getZeroBased() < model.getFilteredPersonList().size());
 
         Person person = model.getFilteredPersonList().get(targetIndex.getZeroBased());
-        final String[] splitName = person.getName().fullName.split("\\s+");
+        final String[] splitName = person.getName().toString().split("\\s+");
         model.updateFilteredPersonList(new NameContainsKeywordsPredicate(Arrays.asList(splitName[0])));
 
         assertEquals(1, model.getFilteredPersonList().size());
@@ -329,7 +340,7 @@ public class CommandTestUtil {
         assertTrue(targetIndex.getZeroBased() < model.getFilteredIngredientList().size());
 
         Ingredient ingredient = model.getFilteredIngredientList().get(targetIndex.getZeroBased());
-        final String[] splitIngredient = ingredient.getName().fullName.split("\\s+");
+        final String[] splitIngredient = ingredient.getName().toString().split("\\s+");
         model.updateFilteredIngredientList(
                 new IngredientNameContainsKeywordsPredicate(Arrays.asList(splitIngredient[0])));
 

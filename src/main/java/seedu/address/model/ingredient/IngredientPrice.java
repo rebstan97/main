@@ -19,7 +19,7 @@ public class IngredientPrice {
      */
     public static final String PRICE_VALIDATION_REGEX = "^\\d+(.\\d{1,2})?$";
 
-    public final String pricePerUnit;
+    private final String pricePerUnit;
 
     /**
      * Constructs an {@code IngredientPrice}.

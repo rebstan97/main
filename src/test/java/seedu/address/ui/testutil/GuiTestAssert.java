@@ -42,7 +42,7 @@ public class GuiTestAssert {
      * Asserts that {@code actualCard} displays the details of {@code expectedPerson}.
      */
     public static void assertCardDisplaysPerson(Person expectedPerson, PersonCardHandle actualCard) {
-        assertEquals(expectedPerson.getName().fullName, actualCard.getName());
+        assertEquals(expectedPerson.getName().toString(), actualCard.getName());
         assertEquals(expectedPerson.getPhone().value, actualCard.getPhone());
         assertEquals(expectedPerson.getEmail().value, actualCard.getEmail());
         assertEquals(expectedPerson.getAddress().value, actualCard.getAddress());
@@ -210,7 +210,7 @@ public class GuiTestAssert {
      */
     public static void assertCardDisplaysReservation(Reservation expectedReservation,
             ReservationCardHandle actualCard) {
-        assertEquals(expectedReservation.getName().fullName, actualCard.getName());
+        assertEquals(expectedReservation.getName().toString(), actualCard.getName());
         assertEquals(expectedReservation.getPax().value, actualCard.getPax());
         assertEquals(expectedReservation.getDateTime().toString(), actualCard.getDateTime());
         assertTagsEqualForReservation(expectedReservation, actualCard);
