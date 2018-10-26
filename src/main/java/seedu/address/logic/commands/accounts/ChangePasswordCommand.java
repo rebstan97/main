@@ -34,7 +34,6 @@ public class ChangePasswordCommand extends Command {
             + PREFIX_NEW_PASSWORD + "1122qq";
 
     public static final String MESSAGE_SUCCESS = "Successfully updated the account %s";
-    public static final String MESSAGE_ACCOUNT_NOT_FOUND = "This account does not exist";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided";
     public static final String MESSAGE_DUPLICATE_ACCOUNT = "This username is not available";
 
@@ -55,10 +54,6 @@ public class ChangePasswordCommand extends Command {
 
         // Session guarantees to have been set, thus an account exists in the session
         Account accountToEdit = UserSession.getAccount();
-
-        if (!model.hasAccount(accountToEdit)) {
-            throw new CommandException(MESSAGE_ACCOUNT_NOT_FOUND);
-        }
 
         Account editedAccount = createEditedAccount(accountToEdit, editAccountDescriptor);
 
