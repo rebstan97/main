@@ -99,6 +99,8 @@ public class UniqueIngredientList implements Iterable<Ingredient> {
     /**
      * Consumes the ingredients which are keys in HashMap {@code recipe} by decreasing the number of units of each
      * ingredient.
+     * @throws  IngredientNotFoundException if the ingredient does not exist in the list.
+     * @throws  IngredientNotEnoughException if the ingredient does not have sufficient units.
      */
     public void consume(HashMap<Ingredient, Integer> recipe) throws IngredientNotFoundException,
             IngredientNotEnoughException {
