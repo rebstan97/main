@@ -248,8 +248,14 @@ public interface Model {
     void updateIngredient(Ingredient target, Ingredient editedIngredient);
 
     /**
-     * Reduces the number of units of {@code Ingredient} by {@Integer}. The ingredient key of HashMap {@code recipe}
-     * must exist in the restaurant book.
+     * Stocks up a list of ingredients. For each ingredient, the number of units of {@code Ingredient} is increased by
+     * {@Integer}. The ingredient key of HashMap {@code recipe} must exist in the restaurant book.
+     */
+    void stockUpIngredients(HashMap<Ingredient, Integer> recipe);
+
+    /**
+     * Consumes a list of ingredients. For each ingredient, the number of units of {@code Ingredient} is decreased by
+     * {@Integer}. The ingredient key of HashMap {@code recipe} must exist in the restaurant book.
      */
     void consumeIngredients(HashMap<Ingredient, Integer> recipe);
 

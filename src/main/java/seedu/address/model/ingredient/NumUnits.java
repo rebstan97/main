@@ -55,7 +55,7 @@ public class NumUnits {
      * Increases the number of units by {@code toIncrease}.
      * @return A new {@code NumUnits} object with the updated value.
      */
-    public NumUnits add(Integer toIncrease) {
+    public NumUnits increase(Integer toIncrease) {
         Integer updatedNum = numberOfUnits + toIncrease;
         return new NumUnits(updatedNum.toString());
     }

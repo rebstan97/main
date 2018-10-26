@@ -97,6 +97,28 @@ public class UniqueIngredientList implements Iterable<Ingredient> {
     }
 
     /**
+     * Stocks up the ingredients which are keys in HashMap {@code recipe} by increasing the number of units of each
+     * ingredient.
+     * @throws  IngredientNotFoundException if the ingredient does not exist in the list.
+     */
+    public void stockUp(HashMap<Ingredient, Integer> recipe) throws IngredientNotFoundException {
+        requireNonNull(recipe);
+        for (HashMap.Entry<Ingredient, Integer> ingredientPair : recipe.entrySet()) {
+            Ingredient ingredient = ingredientPair.getKey();
+            Integer unitsToAdd = ingredientPair.getValue();
+
+            if (!internalList.contains(ingredient)) {
+                throw new IngredientNotFoundException();
+            }
+
+            NumUnits updatedNumUnits = ingredient.getNumUnits().increase(unitsToAdd);
+            Ingredient stockedUpIngredient = new Ingredient(ingredient.getName(), ingredient.getUnit(),
+                    ingredient.getPrice(), ingredient.getMinimum(), updatedNumUnits);
+            setIngredient(ingredient, stockedUpIngredient);
+        }
+    }
+
+    /**
      * Consumes the ingredients which are keys in HashMap {@code recipe} by decreasing the number of units of each
      * ingredient.
      * @throws  IngredientNotFoundException if the ingredient does not exist in the list.

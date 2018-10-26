@@ -260,6 +260,14 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
+    public void stockUpIngredients(HashMap<Ingredient, Integer> recipe) {
+        requireAllNonNull(recipe);
+
+        versionedAddressBook.stockUpIngredients(recipe);
+        indicateAddressBookChanged();
+    }
+
+    @Override
     public void consumeIngredients(HashMap<Ingredient, Integer> recipe) {
         requireAllNonNull(recipe);
 
