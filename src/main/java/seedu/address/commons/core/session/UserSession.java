@@ -1,6 +1,7 @@
 package seedu.address.commons.core.session;
 
 import seedu.address.model.accounts.Account;
+import seedu.address.model.accounts.Password;
 import seedu.address.model.accounts.Username;
 
 /**
@@ -12,6 +13,7 @@ public class UserSession {
 
     private static boolean isAuthenticated = false;
     private static Username username;
+    private static Password password;
 
     /**
      * Stores this {@link Account} info as part of this session.
@@ -21,6 +23,7 @@ public class UserSession {
     public static void login(Account account) {
         isAuthenticated = true;
         username = account.getUsername();
+        password = account.getPassword();
     }
 
     /**
@@ -43,11 +46,20 @@ public class UserSession {
     }
 
     /**
-     * Gets the username that is logged in for this session.
+     * Gets the username of the account that is logged in for this session.
      *
      * @return a {@link Username} object.
      */
     public static Username getUsername() {
         return username;
+    }
+
+    /**
+     * Gets the password of the account that is logged in for this session.
+     *
+     * @return a {@link Username} object.
+     */
+    public static Password getPassword() {
+        return password;
     }
 }

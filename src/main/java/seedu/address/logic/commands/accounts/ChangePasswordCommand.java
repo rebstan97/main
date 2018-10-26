@@ -18,15 +18,15 @@ import seedu.address.model.accounts.Password;
 import seedu.address.model.accounts.Username;
 
 /**
- * Edits an existing {@link Account}.
+ * Change the password an existing {@code Account}.
  */
-public class EditCommand extends Command {
+public class ChangePasswordCommand extends Command {
 
-    public static final String COMMAND_WORD = "edit-acc";
-    public static final String COMMAND_ALIAS = "ea";
+    public static final String COMMAND_WORD = "change-password";
+    public static final String COMMAND_ALIAS = "cp";
 
     //TODO: Add support for admin to modify account by specifying username
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits an existing account. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Change the password of an existing account. "
             + "Parameters: "
             + PREFIX_ID + "USERNAME "
             + PREFIX_NEW_PASSWORD + "NEW_PASSWORD\n"
@@ -45,7 +45,7 @@ public class EditCommand extends Command {
      * @param account of the staff in the filtered account list to edit.
      * @param editAccountDescriptor details to edit the account with.
      */
-    public EditCommand(Account account, EditAccountDescriptor editAccountDescriptor) {
+    public ChangePasswordCommand(Account account, EditAccountDescriptor editAccountDescriptor) {
         requireNonNull(account);
         requireNonNull(editAccountDescriptor);
 
@@ -90,8 +90,8 @@ public class EditCommand extends Command {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof EditCommand // instanceof handles nulls
-                && account.equals(((EditCommand) other).account));
+                || (other instanceof ChangePasswordCommand // instanceof handles nulls
+                && account.equals(((ChangePasswordCommand) other).account));
     }
 
     /**
