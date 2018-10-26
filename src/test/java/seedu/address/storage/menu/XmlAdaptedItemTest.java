@@ -24,7 +24,7 @@ public class XmlAdaptedItemTest {
 
     private static final String VALID_NAME = APPLE_JUICE.getName().toString();
     private static final String VALID_PRICE = APPLE_JUICE.getPrice().toString();
-    private static final String VALID_REMARK = APPLE_JUICE.getRemark().toString();
+    private static final String VALID_REMARK = APPLE_JUICE.getRecipe().toString();
     private static final List<XmlAdaptedTag> VALID_TAGS = APPLE_JUICE.getTags().stream()
             .map(XmlAdaptedTag::new)
             .collect(Collectors.toList());

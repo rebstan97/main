@@ -25,7 +25,7 @@ import seedu.address.model.Model;
 import seedu.address.model.menu.Item;
 import seedu.address.model.menu.Name;
 import seedu.address.model.menu.Price;
-import seedu.address.model.menu.Remark;
+import seedu.address.model.menu.Recipe;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -98,10 +98,10 @@ public class EditItemCommand extends Command {
 
         Name updatedName = editItemDescriptor.getName().orElse(itemToEdit.getName());
         Price updatedPrice = editItemDescriptor.getPrice().orElse(itemToEdit.getPrice());
-        Remark updatedRemark = itemToEdit.getRemark(); // edit command does not allow editing remarks
+        Recipe updatedRecipe = itemToEdit.getRecipe(); // edit command does not allow editing remarks
         Set<Tag> updatedTags = editItemDescriptor.getTags().orElse(itemToEdit.getTags());
 
-        return new Item(updatedName, updatedPrice, updatedRemark, updatedTags);
+        return new Item(updatedName, updatedPrice, updatedRecipe, updatedTags);
     }
 
     @Override

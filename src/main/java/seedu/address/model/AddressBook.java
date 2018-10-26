@@ -194,6 +194,13 @@ public class AddressBook implements ReadOnlyAddressBook {
         reservations.remove(key);
     }
 
+    /**
+     * Sorts the reservations list.
+     */
+    public void sortReservations() {
+        reservations.sortReservations();
+    }
+
     @Override
     public ObservableList<Reservation> getReservationList() {
         return reservations.asUnmodifiableObservableList();
@@ -424,7 +431,7 @@ public class AddressBook implements ReadOnlyAddressBook {
             return;
         }
 
-        Item newItem = new Item(item.getName(), item.getPrice(), item.getRemark(), tags);
+        Item newItem = new Item(item.getName(), item.getPrice(), item.getRecipe(), tags);
         updateItem(item, newItem);
     }
 
