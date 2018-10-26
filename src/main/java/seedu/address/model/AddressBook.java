@@ -194,6 +194,13 @@ public class AddressBook implements ReadOnlyAddressBook {
         reservations.remove(key);
     }
 
+    /**
+     * Sorts the reservations list.
+     */
+    public void sortReservations() {
+        reservations.sortReservations();
+    }
+
     @Override
     public ObservableList<Reservation> getReservationList() {
         return reservations.asUnmodifiableObservableList();

@@ -44,6 +44,9 @@ import seedu.address.logic.commands.menu.TodaySpecialCommand;
 import seedu.address.logic.commands.reservation.AddReservationCommand;
 import seedu.address.logic.commands.reservation.DeleteReservationCommand;
 import seedu.address.logic.commands.reservation.EditReservationCommand;
+import seedu.address.logic.commands.reservation.ListReservationsCommand;
+import seedu.address.logic.commands.reservation.SelectReservationCommand;
+import seedu.address.logic.commands.reservation.SortReservationsCommand;
 import seedu.address.logic.commands.sales.DeleteSalesCommand;
 import seedu.address.logic.commands.sales.DisplaySalesCommand;
 import seedu.address.logic.commands.sales.EditSalesCommand;
@@ -68,6 +71,7 @@ import seedu.address.logic.parser.menu.SortMenuCommandParser;
 import seedu.address.logic.parser.reservation.AddReservationCommandParser;
 import seedu.address.logic.parser.reservation.DeleteReservationCommandParser;
 import seedu.address.logic.parser.reservation.EditReservationCommandParser;
+import seedu.address.logic.parser.reservation.SelectReservationCommandParser;
 import seedu.address.logic.parser.sales.DeleteSalesCommandParser;
 import seedu.address.logic.parser.sales.DisplaySalesCommandParser;
 import seedu.address.logic.parser.sales.EditSalesCommandParser;
@@ -256,6 +260,18 @@ public class AddressBookParser {
         case DeleteReservationCommand.COMMAND_WORD:
         case DeleteReservationCommand.COMMAND_ALIAS:
             return new DeleteReservationCommandParser().parse(arguments);
+
+        case SelectReservationCommand.COMMAND_WORD:
+        case SelectReservationCommand.COMMAND_ALIAS:
+            return new SelectReservationCommandParser().parse(arguments);
+
+        case ListReservationsCommand.COMMAND_WORD:
+        case ListReservationsCommand.COMMAND_ALIAS:
+            return new ListReservationsCommand();
+
+        case SortReservationsCommand.COMMAND_WORD:
+        case SortReservationsCommand.COMMAND_ALIAS:
+            return new SortReservationsCommand();
 
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);

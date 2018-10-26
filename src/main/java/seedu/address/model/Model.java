@@ -158,6 +158,11 @@ public interface Model {
     void removeTagForReservation(Tag tag);
 
     /**
+     * Sort the reservations list.
+     */
+    void sortReservations();
+
+    /**
      * Returns an unmodifiable view of the filtered reservation list
      */
     ObservableList<Reservation> getFilteredReservationList();
