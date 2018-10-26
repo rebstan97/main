@@ -34,7 +34,6 @@ public class ChangePasswordCommand extends Command {
             + PREFIX_NEW_PASSWORD + "1122qq";
 
     public static final String MESSAGE_SUCCESS = "Successfully updated the account %s";
-    public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided";
     public static final String MESSAGE_DUPLICATE_ACCOUNT = "This username is not available";
 
     private final EditAccountDescriptor editAccountDescriptor;

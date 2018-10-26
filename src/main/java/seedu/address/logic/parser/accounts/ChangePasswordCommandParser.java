@@ -40,10 +40,6 @@ public class ChangePasswordCommandParser implements Parser<ChangePasswordCommand
                     .get()));
         }
 
-        if (!editAccountDescriptor.isAnyFieldEdited()) {
-            throw new ParseException(ChangePasswordCommand.MESSAGE_NOT_EDITED);
-        }
-
         return new ChangePasswordCommand(editAccountDescriptor);
     }
 }
