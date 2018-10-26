@@ -18,7 +18,7 @@ public class UserSession {
      * @param acc logged in for this session.
      */
     public static void login(Account acc) {
-        //TODO: Handle logging in when a session is already established
+        //TODO: Handle logging in when a session is already established.
         if (!isAuthenticated) {
             isAuthenticated = true;
             account = acc;

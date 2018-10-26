@@ -40,7 +40,6 @@ public class LogicManagerTest {
         EventsCenter.getInstance().post(new LoginEvent(new AccountBuilder().build()));
     }
 
-
     @Test
     public void execute_invalidCommandFormat_throwsParseException() {
         String invalidCommand = "uicfhmowqewca";
