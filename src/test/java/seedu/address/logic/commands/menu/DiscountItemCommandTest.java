@@ -11,6 +11,7 @@ import static seedu.address.model.Model.PREDICATE_SHOW_ALL_ITEMS;
 import static seedu.address.testutil.TypicalAddressBook.getTypicalAddressBook;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND;
+import static seedu.address.testutil.TypicalIndexes.INDEX_THIRD;
 
 import org.junit.Test;
 
@@ -36,13 +37,13 @@ public class DiscountItemCommandTest {
     @Test
     public void execute_validIndexUnfilteredList_success() {
         Item itemToDiscount = model.getFilteredItemList().get(INDEX_FIRST.getZeroBased());
-        DiscountItemCommand discountItemCommand = new DiscountItemCommand(INDEX_FIRST, 20);
+        DiscountItemCommand discountItemCommand = new DiscountItemCommand(INDEX_FIRST, INDEX_FIRST, 20, false);
 
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
 
         Item discountedItem = createDiscountedItem(itemToDiscount, 20);
 
-        String expectedMessage = String.format(DiscountItemCommand.MESSAGE_DISCOUNT_ITEM_SUCCESS, discountedItem);
+        String expectedMessage = String.format(DiscountItemCommand.MESSAGE_DISCOUNT_ITEM_SUCCESS, 1);
 
         expectedModel.updateItem(itemToDiscount, discountedItem);
         expectedModel.updateFilteredItemList(PREDICATE_SHOW_ALL_ITEMS);
@@ -54,9 +55,47 @@ public class DiscountItemCommandTest {
     @Test
     public void execute_invalidIndexUnfilteredList_throwsCommandException() {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredItemList().size() + 1);
-        DiscountItemCommand discountItemCommand = new DiscountItemCommand(outOfBoundIndex, 0);
+        DiscountItemCommand discountItemCommand = new DiscountItemCommand(outOfBoundIndex, outOfBoundIndex, 0, false);
 
         assertCommandFailure(discountItemCommand, model, commandHistory, Messages.MESSAGE_INVALID_ITEM_DISPLAYED_INDEX);
+    }
+
+    @Test
+    public void execute_validIndexUnfilteredListMultiple_success() {
+        DiscountItemCommand discountItemCommand = new DiscountItemCommand(INDEX_FIRST, INDEX_THIRD, 0, false);
+        String expectedMessage = String.format(DiscountItemCommand.MESSAGE_REVERT_ITEM_SUCCESS, 3);
+
+        ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+
+        for (int i = INDEX_FIRST.getZeroBased(); i < INDEX_THIRD.getOneBased(); i++) {
+            Item itemToDiscount = model.getFilteredItemList().get(i);
+            Item discountedItem = createDiscountedItem(itemToDiscount, 0);
+
+            expectedModel.updateItem(itemToDiscount, discountedItem);
+        }
+        expectedModel.updateFilteredItemList(PREDICATE_SHOW_ALL_ITEMS);
+        expectedModel.commitAddressBook();
+
+        assertCommandSuccess(discountItemCommand, model, commandHistory, expectedMessage, expectedModel);
+    }
+
+    @Test
+    public void execute_validIndexUnfilteredListAll_success() {
+        DiscountItemCommand discountItemCommand = new DiscountItemCommand(INDEX_FIRST, INDEX_FIRST, 20, true);
+        String expectedMessage = String.format(DiscountItemCommand.MESSAGE_DISCOUNT_ITEM_SUCCESS, 7);
+
+        ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+
+        for (int i = 0; i < 7; i++) {
+            Item itemToDiscount = model.getFilteredItemList().get(i);
+            Item discountedItem = createDiscountedItem(itemToDiscount, 20);
+
+            expectedModel.updateItem(itemToDiscount, discountedItem);
+        }
+        expectedModel.updateFilteredItemList(PREDICATE_SHOW_ALL_ITEMS);
+        expectedModel.commitAddressBook();
+
+        assertCommandSuccess(discountItemCommand, model, commandHistory, expectedMessage, expectedModel);
     }
 
     @Test
@@ -64,11 +103,11 @@ public class DiscountItemCommandTest {
         showItemAtIndex(model, INDEX_FIRST);
 
         Item itemToDiscount = model.getFilteredItemList().get(INDEX_FIRST.getZeroBased());
-        DiscountItemCommand discountItemCommand = new DiscountItemCommand(INDEX_FIRST, 75);
+        DiscountItemCommand discountItemCommand = new DiscountItemCommand(INDEX_FIRST, INDEX_FIRST, 75, false);
 
         Item discountedItem = createDiscountedItem(itemToDiscount, 75);
 
-        String expectedMessage = String.format(DiscountItemCommand.MESSAGE_DISCOUNT_ITEM_SUCCESS, discountedItem);
+        String expectedMessage = String.format(DiscountItemCommand.MESSAGE_DISCOUNT_ITEM_SUCCESS, 1);
 
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         expectedModel.updateItem(itemToDiscount, discountedItem);
@@ -86,7 +125,7 @@ public class DiscountItemCommandTest {
         // ensures that outOfBoundIndex is still in bounds of address book list
         assertTrue(outOfBoundIndex.getZeroBased() < model.getAddressBook().getItemList().size());
 
-        DiscountItemCommand discountItemCommand = new DiscountItemCommand(outOfBoundIndex, 0);
+        DiscountItemCommand discountItemCommand = new DiscountItemCommand(outOfBoundIndex, outOfBoundIndex, 0, false);
 
         assertCommandFailure(discountItemCommand, model, commandHistory, Messages.MESSAGE_INVALID_ITEM_DISPLAYED_INDEX);
     }
@@ -94,7 +133,7 @@ public class DiscountItemCommandTest {
     @Test
     public void executeUndoRedo_validIndexUnfilteredList_success() throws Exception {
         Item itemToDiscount = model.getFilteredItemList().get(INDEX_FIRST.getZeroBased());
-        DiscountItemCommand discountItemCommand = new DiscountItemCommand(INDEX_FIRST, 20);
+        DiscountItemCommand discountItemCommand = new DiscountItemCommand(INDEX_FIRST, INDEX_FIRST, 20, false);
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
 
         Item discountedItem = createDiscountedItem(itemToDiscount, 20);
@@ -118,7 +157,7 @@ public class DiscountItemCommandTest {
     @Test
     public void executeUndoRedo_invalidIndexUnfilteredList_failure() {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredItemList().size() + 1);
-        DiscountItemCommand discountItemCommand = new DiscountItemCommand(outOfBoundIndex, 0);
+        DiscountItemCommand discountItemCommand = new DiscountItemCommand(outOfBoundIndex, outOfBoundIndex, 0, false);
 
         // execution failed -> address book state not added into model
         assertCommandFailure(discountItemCommand, model, commandHistory, Messages.MESSAGE_INVALID_ITEM_DISPLAYED_INDEX);
@@ -136,7 +175,7 @@ public class DiscountItemCommandTest {
      */
     @Test
     public void executeUndoRedo_validIndexFilteredList_sameItemDiscounted() throws Exception {
-        DiscountItemCommand discountItemCommand = new DiscountItemCommand(INDEX_FIRST, 65);
+        DiscountItemCommand discountItemCommand = new DiscountItemCommand(INDEX_FIRST, INDEX_FIRST, 65, false);
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
 
         showItemAtIndex(model, INDEX_SECOND);
@@ -162,14 +201,14 @@ public class DiscountItemCommandTest {
 
     @Test
     public void equals() {
-        DiscountItemCommand discountFirstCommand = new DiscountItemCommand(INDEX_FIRST, 1);
-        DiscountItemCommand discountSecondCommand = new DiscountItemCommand(INDEX_SECOND, 2);
+        DiscountItemCommand discountFirstCommand = new DiscountItemCommand(INDEX_FIRST, INDEX_FIRST, 1, false);
+        DiscountItemCommand discountSecondCommand = new DiscountItemCommand(INDEX_SECOND, INDEX_SECOND, 2, false);
 
         // same object -> returns true
         assertTrue(discountFirstCommand.equals(discountFirstCommand));
 
         // same values -> returns true
-        DiscountItemCommand discountFirstCommandCopy = new DiscountItemCommand(INDEX_FIRST, 1);
+        DiscountItemCommand discountFirstCommandCopy = new DiscountItemCommand(INDEX_FIRST, INDEX_FIRST, 1, false);
         assertTrue(discountFirstCommand.equals(discountFirstCommandCopy));
 
         // different types -> returns false
