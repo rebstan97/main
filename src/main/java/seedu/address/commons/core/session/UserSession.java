@@ -1,6 +1,5 @@
 package seedu.address.commons.core.session;
 
-import seedu.address.commons.core.session.exception.SessionException;
 import seedu.address.model.accounts.Account;
 
 /**
@@ -19,21 +18,19 @@ public class UserSession {
      * @param acc logged in for this session.
      */
     public static void login(Account acc) {
-        if (isAuthenticated) {
-            throw new SessionException();
+        //TODO: Handle logging in when a session is already established
+        if (!isAuthenticated) {
+            isAuthenticated = true;
+            account = acc;
         }
-
-        isAuthenticated = true;
-        account = acc;
     }
 
     /**
      * Logs out of this account which releases this session.
      */
     public static void logout() {
-        if (isAuthenticated) {
-            isAuthenticated = false;
-        }
+        isAuthenticated = false;
+        account = null;
     }
 
     /**
