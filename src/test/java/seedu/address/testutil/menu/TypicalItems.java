@@ -35,7 +35,7 @@ public class TypicalItems {
     public static final Item FRUIT_CAKE = new ItemBuilder().withName("Fruit Cake").withPrice("2")
             .withTags("saturday").build();
     public static final Item GARLIC_BREAD = new ItemBuilder().withName("Garlic Bread").withPrice("1")
-            .withTags("sunday").withRemark("Consists of bread topped with garlic and olive oil").build();
+            .withTags("sunday").withRecipe("Bread topped with garlic and olive oil").build();
 
     // Manually added
     public static final Item HAINANESE = new ItemBuilder().withName("Hainanese Chicken Rice").withPrice("2.50").build();

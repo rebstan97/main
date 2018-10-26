@@ -13,7 +13,7 @@ import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.menu.Item;
 import seedu.address.model.menu.Name;
 import seedu.address.model.menu.Price;
-import seedu.address.model.menu.Remark;
+import seedu.address.model.menu.Recipe;
 import seedu.address.model.tag.Tag;
 import seedu.address.storage.XmlAdaptedTag;
 
@@ -31,7 +31,7 @@ public class XmlAdaptedItem {
     @XmlElement(required = true)
     private String originalPrice;
     @XmlElement(required = true)
-    private String remark;
+    private String recipe;
 
     @XmlElement
     private List<XmlAdaptedTag> tagged = new ArrayList<>();
@@ -45,11 +45,11 @@ public class XmlAdaptedItem {
     /**
      * Constructs an {@code XmlAdaptedItem} with the given item details.
      */
-    public XmlAdaptedItem(String name, String price, String remark, List<XmlAdaptedTag> tagged) {
+    public XmlAdaptedItem(String name, String price, String recipe, List<XmlAdaptedTag> tagged) {
         this.name = name;
         this.price = price;
         this.originalPrice = price;
-        this.remark = remark;
+        this.recipe = recipe;
         if (tagged != null) {
             this.tagged = new ArrayList<>(tagged);
         }
@@ -64,7 +64,7 @@ public class XmlAdaptedItem {
         name = source.getName().toString();
         price = source.getPrice().toString();
         originalPrice = String.format("%.2f", source.getPrice().getOriginalValue());
-        remark = source.getRemark().toString();
+        recipe = source.getRecipe().toString();
         tagged = source.getTags().stream()
                 .map(XmlAdaptedTag::new)
                 .collect(Collectors.toList());
@@ -103,13 +103,13 @@ public class XmlAdaptedItem {
         }
         final Price modelPrice = new Price(price, originalPrice);
 
-        if (remark == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Remark.class.getSimpleName()));
+        if (recipe == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Recipe.class.getSimpleName()));
         }
-        final Remark modelRemark = new Remark(remark);
+        final Recipe modelRecipe = new Recipe(recipe);
 
         final Set<Tag> modelTags = new HashSet<>(itemTags);
-        return new Item(modelName, modelPrice, modelRemark, modelTags);
+        return new Item(modelName, modelPrice, modelRecipe, modelTags);
     }
 
     @Override
