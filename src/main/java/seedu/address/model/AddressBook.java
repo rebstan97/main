@@ -2,6 +2,7 @@ package seedu.address.model;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
@@ -357,6 +358,16 @@ public class AddressBook implements ReadOnlyAddressBook {
         requireNonNull(editedIngredient);
 
         ingredients.setIngredient(target, editedIngredient);
+    }
+
+    /**
+     * Reduces the number of units of {@code Ingredient} by {@Integer}. The ingredient key of HashMap {@code recipe}
+     * must exist in the restaurant book.
+     */
+    public void consumeIngredients(HashMap<Ingredient, Integer> recipe) {
+        requireNonNull(recipe);
+
+        ingredients.consume(recipe);
     }
 
     /**

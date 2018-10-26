@@ -19,7 +19,7 @@ public class NumUnits {
      */
     public static final String NUMUNITS_VALIDATION_REGEX = "^\\d+$";
 
-    private final Integer numberOfUnits;
+    private Integer numberOfUnits;
 
     /**
      * Constructs a {@code NumUnits}.
@@ -39,20 +39,34 @@ public class NumUnits {
         return test.matches(NUMUNITS_VALIDATION_REGEX);
     }
 
+    /**
+     * Returns the value of {@code numberOfUnits}.
+     */
+    public Integer getNumberOfUnits() {
+        return numberOfUnits;
+    }
+
     @Override
     public String toString() {
         return numberOfUnits.toString();
     }
 
     /**
-     * Adds the values of two {@code NumUnits} objects and creates a new {@code NumUnits} object as the sum.
-     * @return The new {@NumUnits} object.
+     * Increases the number of units by {@code toIncrease}.
+     * @return A new {@code NumUnits} object with the updated value.
      */
-    public NumUnits add(NumUnits toAdd) {
-        Integer numToAdd = toAdd.numberOfUnits;
-        Integer updatedNum = Integer.sum(numberOfUnits, numToAdd);
-        NumUnits newNumUnits = new NumUnits(updatedNum.toString());
-        return newNumUnits;
+    public NumUnits add(Integer toIncrease) {
+        Integer updatedNum = numberOfUnits + toIncrease;
+        return new NumUnits(updatedNum.toString());
+    }
+
+    /**
+     * Decreases the number of units by {@code toDecrease}.
+     * @return A new {@code NumUnits} object with the updated value.
+     */
+    public NumUnits decrease(Integer toDecrease) {
+        Integer updatedNum = numberOfUnits - toDecrease;
+        return new NumUnits(updatedNum.toString());
     }
 
     @Override

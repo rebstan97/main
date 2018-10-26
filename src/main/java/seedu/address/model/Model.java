@@ -1,5 +1,6 @@
 package seedu.address.model;
 
+import java.util.HashMap;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
@@ -245,6 +246,12 @@ public interface Model {
      * existing ingredient in the address book.
      */
     void updateIngredient(Ingredient target, Ingredient editedIngredient);
+
+    /**
+     * Reduces the number of units of {@code Ingredient} by {@Integer}. The ingredient key of HashMap {@code recipe}
+     * must exist in the restaurant book.
+     */
+    void consumeIngredients(HashMap<Ingredient, Integer> recipe);
 
     /**
      * Returns an unmodifiable view of the filtered ingredient list
