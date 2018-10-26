@@ -311,6 +311,11 @@ public class AddReservationCommandTest {
         }
 
         @Override
+        public void sortReservations() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void removeTagForReservation(Tag tag) {
             throw new AssertionError("This method should not be called.");
         }

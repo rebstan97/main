@@ -5,7 +5,7 @@
         <name>Cheese Burger</name>
         <price>3</price>
         <originalPrice>3</originalPrice>
-        <remark></remark>
+        <recipe></recipe>
     </items>
 
     <!-- Item with same identity as Cheese Burger -->
@@ -13,7 +13,7 @@
         <name>Cheese Burger</name>
         <price>3</price>
         <originalPrice>3</originalPrice>
-        <remark></remark>
+        <recipe></recipe>
     </items>
 
 </addressbook>

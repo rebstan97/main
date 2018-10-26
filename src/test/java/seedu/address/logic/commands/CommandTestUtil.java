@@ -166,8 +166,7 @@ public class CommandTestUtil {
     public static final String VALID_ITEM_PRICE_FRIES = "2";
     public static final String VALID_ITEM_TAG_BURGER = "burger";
     public static final String VALID_ITEM_TAG_CHEESE = "cheese";
-    public static final String VALID_ITEM_REMARK_BURGER = "Burger with beef patty.";
-    public static final String VALID_ITEM_REMARK_FRIES = "Fries with cheese.";
+    public static final String VALID_ITEM_RECIPE_FRIES = "Deep fry potato and add cheese.";
     public static final String VALID_ITEM_PERCENT = "20";
 
     public static final String ITEM_NAME_DESC_BURGER = " " + PREFIX_NAME + VALID_ITEM_NAME_BURGER;

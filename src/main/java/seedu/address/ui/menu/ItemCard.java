@@ -47,7 +47,7 @@ public class ItemCard extends UiPart<Region> {
     @FXML
     private Label price;
     @FXML
-    private Label remark;
+    private Label recipe;
     @FXML
     private FlowPane tags;
 
@@ -57,7 +57,7 @@ public class ItemCard extends UiPart<Region> {
         id.setText(displayedIndex + ". ");
         name.setText(item.getName().toString());
         price.setText("$" + item.getPrice().toString());
-        remark.setText(item.getRemark().toString());
+        recipe.setText(item.getRecipe().toString());
         initTags(item);
     }
 
