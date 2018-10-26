@@ -28,6 +28,7 @@ public class CliSyntax {
     public static final Prefix PREFIX_INGREDIENT_UNIT = new Prefix("u/");
     public static final Prefix PREFIX_INGREDIENT_PRICE = new Prefix("p/");
     public static final Prefix PREFIX_INGREDIENT_MINIMUM = new Prefix("m/");
+    public static final Prefix PREFIX_INGREDIENT_NUM = new Prefix("nu/");
 
     /*Prefix definitions for menu management */
     public static final Prefix PREFIX_PRICE = new Prefix("p/");

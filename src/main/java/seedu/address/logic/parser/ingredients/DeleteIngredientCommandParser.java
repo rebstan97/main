@@ -1,7 +1,6 @@
 package seedu.address.logic.parser.ingredients;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.ParserUtil.MESSAGE_NOT_INDEX_OR_NAME;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.ingredients.DeleteIngredientByIndexCommand;
@@ -30,16 +29,15 @@ public class DeleteIngredientCommandParser implements Parser<DeleteIngredientCom
         }
 
         Object indexOrName = ParserUtil.parseIndexOrIngredientName(args);
-
+        DeleteIngredientCommand deleteCommand = null;
         if (indexOrName instanceof Index) {
-            return new DeleteIngredientByIndexCommand((Index) indexOrName);
+            deleteCommand = new DeleteIngredientByIndexCommand((Index) indexOrName);
         }
-
         if (indexOrName instanceof IngredientName) {
-            return new DeleteIngredientByNameCommand((IngredientName) indexOrName);
+            deleteCommand = new DeleteIngredientByNameCommand((IngredientName) indexOrName);
         }
 
-        throw new ParseException(MESSAGE_NOT_INDEX_OR_NAME);
+        return deleteCommand;
     }
 
 }
