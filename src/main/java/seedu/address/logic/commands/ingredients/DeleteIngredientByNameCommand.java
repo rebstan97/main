@@ -12,7 +12,7 @@ import seedu.address.model.ingredient.IngredientName;
 import seedu.address.model.ingredient.exceptions.IngredientNotFoundException;
 
 /**
- * Deletes an ingredient identified using its name from the address book.
+ * Deletes an ingredient identified using its name from the restaurant book.
  */
 public class DeleteIngredientByNameCommand extends DeleteIngredientCommand {
 

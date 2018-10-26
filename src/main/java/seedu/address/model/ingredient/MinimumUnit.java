@@ -19,7 +19,7 @@ public class MinimumUnit {
      */
     public static final String MINIMUM_VALIDATION_REGEX = "^\\d+$";
 
-    public final String minimumUnit;
+    private final String minimumUnit;
 
     /**
      * Constructs a {@code MinimumUnit}.
