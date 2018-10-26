@@ -40,9 +40,9 @@ public class IngredientCard extends UiPart<Region> {
         super(FXML);
         this.ingredient = ingredient;
         id.setText(displayedIndex + ". ");
-        name.setText(ingredient.getName().fullName);
-        price.setText("$" + ingredient.getPrice().pricePerUnit + " / " + ingredient.getUnit().unitName);
-        numUnits.setText(ingredient.getNumUnits().numberOfUnits + " " + ingredient.getUnit().unitName
+        name.setText(ingredient.getName().toString());
+        price.setText("$" + ingredient.getPrice().toString() + " / " + ingredient.getUnit().toString());
+        numUnits.setText(ingredient.getNumUnits().toString() + " " + ingredient.getUnit().toString()
                 + "(s) available");
     }
 

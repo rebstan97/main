@@ -47,7 +47,7 @@ public class BrowserPanel extends UiPart<Region> {
     }
 
     private void loadPersonPage(Person person) {
-        loadPage(SEARCH_PAGE_URL + person.getName().fullName);
+        loadPage(SEARCH_PAGE_URL + person.getName().toString());
     }
 
     // Menu Management

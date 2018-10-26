@@ -86,7 +86,7 @@ public class ReservationCardHandle extends NodeHandle<Node> {
      * Returns true if this handle contains {@code reservation}.
      */
     public boolean equals(Reservation reservation) {
-        return getName().equals(reservation.getName().fullName)
+        return getName().equals(reservation.getName().toString())
                 && getPax().equals(reservation.getPax().value)
                 && getDateTime().equals(reservation.getDateTime().toString())
                 && ImmutableMultiset.copyOf(getTags()).equals(ImmutableMultiset.copyOf(reservation.getTags().stream()
