@@ -22,7 +22,6 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.ingredient.Ingredient;
-import seedu.address.model.ingredient.IngredientName;
 import seedu.address.testutil.ingredients.ChangeStockDescriptorBuilder;
 import seedu.address.testutil.ingredients.IngredientBuilder;
 
