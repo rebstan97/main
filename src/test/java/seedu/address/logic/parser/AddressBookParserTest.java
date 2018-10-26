@@ -56,6 +56,7 @@ import seedu.address.logic.commands.menu.EditItemCommand;
 import seedu.address.logic.commands.menu.EditItemCommand.EditItemDescriptor;
 import seedu.address.logic.commands.menu.FilterMenuCommand;
 import seedu.address.logic.commands.menu.ListItemsCommand;
+import seedu.address.logic.commands.menu.RecipeItemCommand;
 import seedu.address.logic.commands.menu.SelectItemCommand;
 import seedu.address.logic.commands.menu.SortMenuCommand;
 import seedu.address.logic.commands.menu.SortMenuCommand.SortMethod;
@@ -70,6 +71,7 @@ import seedu.address.model.accounts.Account;
 import seedu.address.model.ingredient.Ingredient;
 import seedu.address.model.ingredient.IngredientName;
 import seedu.address.model.menu.Item;
+import seedu.address.model.menu.Recipe;
 import seedu.address.model.menu.TagContainsKeywordsPredicate;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
@@ -442,6 +444,17 @@ public class AddressBookParserTest {
         command = (SelectItemCommand) parser.parseCommand(
                 SelectItemCommand.COMMAND_ALIAS + " " + INDEX_FIRST.getOneBased());
         assertEquals(new SelectItemCommand(INDEX_FIRST), command);
+    }
+
+    @Test
+    public void parseCommand_recipeItem() throws Exception {
+        final Recipe recipe = new Recipe("Some recipe.");
+        RecipeItemCommand command = (RecipeItemCommand) parser.parseCommand(RecipeItemCommand.COMMAND_WORD + " "
+                + INDEX_FIRST.getOneBased() + " " + PREFIX_REMARK + recipe.toString());
+        assertEquals(new RecipeItemCommand(INDEX_FIRST, recipe), command);
+        command = (RecipeItemCommand) parser.parseCommand(RecipeItemCommand.COMMAND_ALIAS + " "
+                + INDEX_FIRST.getOneBased() + " " + PREFIX_REMARK + recipe.toString());
+        assertEquals(new RecipeItemCommand(INDEX_FIRST, recipe), command);
     }
 
     @Test

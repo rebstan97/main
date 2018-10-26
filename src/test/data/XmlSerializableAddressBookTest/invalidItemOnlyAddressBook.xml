@@ -4,6 +4,6 @@
     <items>
         <name>Some Name</name>
         <price isPrivate="false">5.0000</price>
-        <remark isPrivate="false">Some remarks</remark>
+        <recipe isPrivate="false">Some recipe</recipe>
     </items>
 </addressbook>
