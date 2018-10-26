@@ -1,5 +1,6 @@
 package seedu.address.model.ingredient;
 
+import static java.lang.Integer.parseInt;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
@@ -18,7 +19,7 @@ public class NumUnits {
      */
     public static final String NUMUNITS_VALIDATION_REGEX = "^\\d+$";
 
-    private final String numberOfUnits;
+    private final Integer numberOfUnits;
 
     /**
      * Constructs a {@code NumUnits}.
@@ -28,7 +29,7 @@ public class NumUnits {
     public NumUnits(String numUnits) {
         requireNonNull(numUnits);
         checkArgument(isValidNumUnits(numUnits), MESSAGE_NUMUNITS_CONSTRAINTS);
-        numberOfUnits = numUnits;
+        numberOfUnits = parseInt(numUnits);
     }
 
     /**
@@ -40,17 +41,16 @@ public class NumUnits {
 
     @Override
     public String toString() {
-        return numberOfUnits;
+        return numberOfUnits.toString();
     }
 
     /**
-     * Adds the values of two {@code NumUnits} objects and updates the value of the current object to be this sum.
-     * @return The updated {@NumUnits} object
+     * Adds the values of two {@code NumUnits} objects and creates a new {@code NumUnits} object as the sum.
+     * @return The new {@NumUnits} object.
      */
     public NumUnits add(NumUnits toAdd) {
-        Integer currentNum = Integer.parseInt(numberOfUnits);
-        Integer numToAdd = Integer.parseInt(toAdd.toString());
-        Integer updatedNum = Integer.sum(currentNum, numToAdd);
+        Integer numToAdd = toAdd.numberOfUnits;
+        Integer updatedNum = Integer.sum(numberOfUnits, numToAdd);
         NumUnits newNumUnits = new NumUnits(updatedNum.toString());
         return newNumUnits;
     }
