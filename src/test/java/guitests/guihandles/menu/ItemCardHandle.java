@@ -18,13 +18,13 @@ public class ItemCardHandle extends NodeHandle<Node> {
     private static final String ID_FIELD_ID = "#id";
     private static final String NAME_FIELD_ID = "#name";
     private static final String PRICE_FIELD_ID = "#price";
-    private static final String REMARK_FIELD_ID = "#remark";
+    private static final String RECIPE_FIELD_ID = "#recipe";
     private static final String TAGS_FIELD_ID = "#tags";
 
     private final Label idLabel;
     private final Label nameLabel;
     private final Label priceLabel;
-    private final Label remarkLabel;
+    private final Label recipeLabel;
     private final List<Label> tagLabels;
 
     public ItemCardHandle(Node cardNode) {
@@ -33,7 +33,7 @@ public class ItemCardHandle extends NodeHandle<Node> {
         idLabel = getChildNode(ID_FIELD_ID);
         nameLabel = getChildNode(NAME_FIELD_ID);
         priceLabel = getChildNode(PRICE_FIELD_ID);
-        remarkLabel = getChildNode(REMARK_FIELD_ID);
+        recipeLabel = getChildNode(RECIPE_FIELD_ID);
 
         Region tagsContainer = getChildNode(TAGS_FIELD_ID);
         tagLabels = tagsContainer
@@ -55,8 +55,8 @@ public class ItemCardHandle extends NodeHandle<Node> {
         return priceLabel.getText();
     }
 
-    public String getRemark() {
-        return remarkLabel.getText();
+    public String getRecipe() {
+        return recipeLabel.getText();
     }
 
     public List<String> getTags() {

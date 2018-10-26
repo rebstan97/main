@@ -3,6 +3,7 @@ package seedu.address.model.reservation;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
 
@@ -95,6 +96,13 @@ public class UniqueReservationList implements Iterable<Reservation> {
         }
 
         internalList.setAll(reservations);
+    }
+
+    /**
+     * Sorts this list by Date/Time in ascending order.
+     */
+    public void sortReservations() {
+        FXCollections.sort(internalList, Comparator.comparing(reservation -> reservation.getDateTime()));
     }
 
     /**

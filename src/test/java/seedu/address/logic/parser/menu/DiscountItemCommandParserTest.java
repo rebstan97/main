@@ -8,6 +8,7 @@ import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailur
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND;
+import static seedu.address.testutil.TypicalIndexes.INDEX_THIRD;
 
 import org.junit.Test;
 
@@ -22,13 +23,13 @@ public class DiscountItemCommandParserTest {
 
     @Test
     public void parse_missingParts_failure() {
-        // no index specified
+        // no index|ALL specified
         assertParseFailure(parser, ITEM_PERCENT_DESC, MESSAGE_INVALID_FORMAT);
 
         // no percent specified
         assertParseFailure(parser, "1", MESSAGE_INVALID_FORMAT);
 
-        // no index and no percent specified
+        // no index|ALL and no percent specified
         assertParseFailure(parser, "", MESSAGE_INVALID_FORMAT);
     }
 
@@ -37,8 +38,11 @@ public class DiscountItemCommandParserTest {
         // negative index
         assertParseFailure(parser, "-5" + ITEM_PERCENT_DESC, MESSAGE_INVALID_FORMAT);
 
-        // zero index
+        // zero starting index
         assertParseFailure(parser, "0" + ITEM_PERCENT_DESC, MESSAGE_INVALID_FORMAT);
+
+        // smaller ending index
+        assertParseFailure(parser, "3 ei/2" + ITEM_PERCENT_DESC, MESSAGE_INVALID_FORMAT);
 
         // invalid arguments being parsed as preamble
         assertParseFailure(parser, "1 some random string", MESSAGE_INVALID_FORMAT);
@@ -56,19 +60,50 @@ public class DiscountItemCommandParserTest {
 
     @Test
     public void parse_validIndexFollowedByInvalidPercent_failure() {
-        // no other valid values specified
+        // only starting index specified
         Index targetIndex = INDEX_FIRST;
         String userInput = targetIndex.getOneBased() + INVALID_ITEM_PERCENT_DESC;
+        assertParseFailure(parser, userInput, DiscountItemCommandParser.MESSAGE_PERCENT_CONSTRAINTS);
+
+        // both index specified
+        Index endingIndex = INDEX_SECOND;
+        userInput = targetIndex.getOneBased() + " ei/" + endingIndex.getOneBased() + INVALID_ITEM_PERCENT_DESC;
+        assertParseFailure(parser, userInput, DiscountItemCommandParser.MESSAGE_PERCENT_CONSTRAINTS);
+    }
+
+    @Test
+    public void parse_validAllFollowedByInvalidPercent_failure() {
+        String userInput = "ALL" + INVALID_ITEM_PERCENT_DESC;
         assertParseFailure(parser, userInput, DiscountItemCommandParser.MESSAGE_PERCENT_CONSTRAINTS);
     }
 
     @Test
     public void parse_validIndexFollowedByValidPercent_success() {
+        // Only starting index specified
         Index targetIndex = INDEX_SECOND;
         String userInput = targetIndex.getOneBased() + ITEM_PERCENT_DESC;
 
-        DiscountItemCommand expectedCommand = new DiscountItemCommand(targetIndex,
-                Double.parseDouble(VALID_ITEM_PERCENT));
+        DiscountItemCommand expectedCommand = new DiscountItemCommand(targetIndex, targetIndex,
+                Double.parseDouble(VALID_ITEM_PERCENT), false);
+
+        assertParseSuccess(parser, userInput, expectedCommand);
+
+        // both index specified
+        Index endingIndex = INDEX_THIRD;
+        userInput = targetIndex.getOneBased() + " ei/" + endingIndex.getOneBased() + ITEM_PERCENT_DESC;
+
+        expectedCommand = new DiscountItemCommand(targetIndex, endingIndex,
+                Double.parseDouble(VALID_ITEM_PERCENT), false);
+
+        assertParseSuccess(parser, userInput, expectedCommand);
+    }
+
+    @Test
+    public void parse_validAllFollowedByValidPercent_success() {
+        String userInput = "ALL" + ITEM_PERCENT_DESC;
+
+        DiscountItemCommand expectedCommand = new DiscountItemCommand(INDEX_FIRST, INDEX_FIRST,
+                Double.parseDouble(VALID_ITEM_PERCENT), true);
 
         assertParseSuccess(parser, userInput, expectedCommand);
     }

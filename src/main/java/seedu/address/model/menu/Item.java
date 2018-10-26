@@ -18,7 +18,7 @@ public class Item {
     // Identity fields
     private final Name name;
     private final Price price;
-    private final Remark remark;
+    private final Recipe recipe;
 
     // Data fields
     private final Set<Tag> tags = new HashSet<>();
@@ -26,11 +26,11 @@ public class Item {
     /**
      * Every field must be present and not null.
      */
-    public Item(Name name, Price price, Remark remark, Set<Tag> tags) {
+    public Item(Name name, Price price, Recipe recipe, Set<Tag> tags) {
         requireAllNonNull(name, price, tags);
         this.name = name;
         this.price = price;
-        this.remark = remark;
+        this.recipe = recipe;
         this.tags.addAll(tags);
     }
 
@@ -42,8 +42,8 @@ public class Item {
         return price;
     }
 
-    public Remark getRemark() {
-        return remark;
+    public Recipe getRecipe() {
+        return recipe;
     }
 
     /**

@@ -33,6 +33,8 @@ public class CliSyntax {
     /*Prefix definitions for menu management */
     public static final Prefix PREFIX_PRICE = new Prefix("p/");
     public static final Prefix PREFIX_PERCENT = new Prefix("dp/");
+    public static final Prefix PREFIX_RECIPE = new Prefix("r/");
+    public static final Prefix PREFIX_ENDINGINDEX = new Prefix("ei/");
 
     /*Prefix definitions for reservation management */
     public static final Prefix PREFIX_PAX = new Prefix("px/");

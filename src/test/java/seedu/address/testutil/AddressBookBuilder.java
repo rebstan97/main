@@ -4,6 +4,7 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.accounts.Account;
 import seedu.address.model.menu.Item;
 import seedu.address.model.person.Person;
+import seedu.address.model.reservation.Reservation;
 import seedu.address.model.salesrecord.SalesRecord;
 
 /**
@@ -52,6 +53,14 @@ public class AddressBookBuilder {
      */
     public AddressBookBuilder withItem(Item item) {
         addressBook.addItem(item);
+        return this;
+    }
+
+    /**
+     * Adds a new {@code Reservation} to the {@code AddressBook} that we are building.
+     */
+    public AddressBookBuilder withReservation(Reservation reservation) {
+        addressBook.addReservation(reservation);
         return this;
     }
 
