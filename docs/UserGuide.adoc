@@ -386,6 +386,7 @@ Format: `history [stockup] [consumption]`
 * At least one of the optional fields must be provided.
 ****
 
+// tag::menu[]
 === Menu Management
 ==== Adding an item to the menu: `add-item` or `ai`
 
@@ -573,6 +574,27 @@ Examples:
 If today is Monday +
 List the items that have been tagged with `Monday` in the menu.
 
+==== Add recipe to item : `recipe-item` or `ri`
+
+Adds recipe to the item identified by the index number used in the menu. +
+Format: `recipe-item INDEX r/RECIPE`
+
+****
+* Adds a recipe to the item at the specified `INDEX`.
+* If the item has a recipe already, it will update the recipe.
+* The index refers to the index number shown in the displayed item list.
+* The index *must be a positive integer* `1, 2, 3, ...`
+* You can remove recipe by typing `r/` without specifying any recipe after it..
+****
+
+Examples:
+
+* `recipe-item 1 r/Some Recipe` +
+Add/Update the recipe of the 1st item to be `Some Recipe`.
+* `fi Cheese` +
+`ri 1 r/Other Recipe` +
+Add/Update the recipe of the 1st item in the results of the `find` command to be `Other Recipe`.
+
 ==== Export menu : `export-menu` or `em`
 
 Exports the menu to a particular file path. +
@@ -596,6 +618,7 @@ Import the menu.txt from test folder to replace current menu.
 ==== Support for multiple menus `[coming in v2.0]`
 User will be able to manage multiple menus without the need of exporting and importing for different version of the
 current menu.
+// end::menu[]
 
 === Adding a reservation: `add-reservation` or `ar`
 
