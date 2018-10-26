@@ -36,6 +36,8 @@ import seedu.address.logic.commands.RedoCommand;
 import seedu.address.logic.commands.RemarkCommand;
 import seedu.address.logic.commands.SelectCommand;
 import seedu.address.logic.commands.UndoCommand;
+import seedu.address.logic.commands.accounts.ChangePasswordCommand;
+import seedu.address.logic.commands.accounts.ChangePasswordCommand.EditAccountDescriptor;
 import seedu.address.logic.commands.accounts.DeregisterCommand;
 import seedu.address.logic.commands.accounts.LoginCommand;
 import seedu.address.logic.commands.accounts.LogoutCommand;
@@ -83,6 +85,8 @@ import seedu.address.testutil.EditPersonDescriptorBuilder;
 import seedu.address.testutil.PersonBuilder;
 import seedu.address.testutil.PersonUtil;
 import seedu.address.testutil.accounts.AccountBuilder;
+import seedu.address.testutil.accounts.AccountUtil;
+import seedu.address.testutil.accounts.EditAccountDescriptorBuilder;
 import seedu.address.testutil.ingredients.EditIngredientDescriptorBuilder;
 import seedu.address.testutil.ingredients.IngredientBuilder;
 import seedu.address.testutil.ingredients.IngredientUtil;
@@ -323,6 +327,24 @@ public class AddressBookParserTest {
     }
 
     @Test
+    public void parseCommand_changePassword() throws ParseException {
+        Account account = new AccountBuilder().build();
+        EditAccountDescriptor descriptor = new EditAccountDescriptorBuilder(account).build();
+
+        ChangePasswordCommand command = (ChangePasswordCommand) parser
+                .parseCommand(ChangePasswordCommand.COMMAND_WORD + " "
+                        + AccountUtil.getEditAccountDescriptorDetails(descriptor));
+
+        assertEquals(new ChangePasswordCommand(descriptor), command);
+
+        ChangePasswordCommand commandAlias = (ChangePasswordCommand) parser
+                .parseCommand(ChangePasswordCommand.COMMAND_ALIAS + " "
+                        + AccountUtil.getEditAccountDescriptorDetails(descriptor));
+
+        assertEquals(new ChangePasswordCommand(descriptor), commandAlias);
+    }
+
+    @Test
     public void parseCommand_createAccount_notEquals() throws ParseException {
         Account accountOneCommand = new AccountBuilder().build();
         Account accountTwoCommand = new AccountBuilder().withUsername("demo1").withPassword("1122qq").build();
@@ -395,7 +417,7 @@ public class AddressBookParserTest {
         // full command name, edit by name
         command = (EditIngredientByNameCommand) parser.parseCommand(
                 EditIngredientByNameCommand.COMMAND_WORD + " " + "Chicken Thigh"
-                                + " " + IngredientUtil.getEditIngredientDescriptorDetails(descriptor));
+                        + " " + IngredientUtil.getEditIngredientDescriptorDetails(descriptor));
         assertEquals(new EditIngredientByNameCommand(new IngredientName("Chicken Thigh"), descriptor), command);
 
         // command alias, edit by name
