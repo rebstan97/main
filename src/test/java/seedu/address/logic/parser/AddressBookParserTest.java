@@ -62,6 +62,7 @@ import seedu.address.logic.commands.menu.SelectItemCommand;
 import seedu.address.logic.commands.menu.SortMenuCommand;
 import seedu.address.logic.commands.menu.SortMenuCommand.SortMethod;
 import seedu.address.logic.commands.menu.TodaySpecialCommand;
+import seedu.address.logic.commands.reservation.AddReservationCommand;
 import seedu.address.logic.commands.sales.DeleteSalesCommand;
 import seedu.address.logic.commands.sales.DisplaySalesCommand;
 import seedu.address.logic.commands.sales.EditSalesCommand;
@@ -77,6 +78,7 @@ import seedu.address.model.menu.TagContainsKeywordsPredicate;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Remark;
+import seedu.address.model.reservation.Reservation;
 import seedu.address.model.salesrecord.Date;
 import seedu.address.model.salesrecord.SalesRecord;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
@@ -89,6 +91,8 @@ import seedu.address.testutil.ingredients.IngredientUtil;
 import seedu.address.testutil.menu.EditItemDescriptorBuilder;
 import seedu.address.testutil.menu.ItemBuilder;
 import seedu.address.testutil.menu.ItemUtil;
+import seedu.address.testutil.reservation.ReservationBuilder;
+import seedu.address.testutil.reservation.ReservationUtil;
 import seedu.address.testutil.salesrecords.EditRecordDescriptorBuilder;
 import seedu.address.testutil.salesrecords.RecordBuilder;
 import seedu.address.testutil.salesrecords.RecordUtil;
@@ -514,5 +518,16 @@ public class AddressBookParserTest {
         assertTrue(parser.parseCommand(ClearMenuCommand.COMMAND_ALIAS) instanceof ClearMenuCommand);
         assertTrue(parser.parseCommand(ClearMenuCommand.COMMAND_WORD + " 3") instanceof ClearMenuCommand);
         assertTrue(parser.parseCommand(ClearMenuCommand.COMMAND_ALIAS + " 3") instanceof ClearMenuCommand);
+    }
+
+    @Test
+    public void parseCommand_addReservation() throws Exception {
+        Reservation reservation = new ReservationBuilder().build();
+        AddReservationCommand command =
+                (AddReservationCommand) parser.parseCommand(ReservationUtil.getAddReservationCommand(reservation));
+        assertEquals(new AddReservationCommand(reservation), command);
+        command = (AddReservationCommand) parser.parseCommand(AddReservationCommand.COMMAND_ALIAS
+                + " " + ReservationUtil.getReservationDetails(reservation));
+        assertEquals(new AddReservationCommand(reservation), command);
     }
 }
