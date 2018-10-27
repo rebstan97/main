@@ -29,6 +29,9 @@ public class ChangePasswordCommandParserTest {
 
         // no index and no field specified
         assertParseFailure(parser, "", MESSAGE_INVALID_FORMAT);
+
+        // empty space
+        assertParseFailure(parser, " ", MESSAGE_INVALID_FORMAT);
     }
 
     @Test

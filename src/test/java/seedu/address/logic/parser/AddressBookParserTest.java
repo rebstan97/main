@@ -342,6 +342,8 @@ public class AddressBookParserTest {
                         + AccountUtil.getEditAccountDescriptorDetails(descriptor));
 
         assertEquals(new ChangePasswordCommand(descriptor), commandAlias);
+
+        assertEquals(command, commandAlias);
     }
 
     @Test

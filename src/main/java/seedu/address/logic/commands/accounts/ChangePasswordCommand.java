@@ -76,7 +76,8 @@ public class ChangePasswordCommand extends Command {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || other instanceof ChangePasswordCommand;
+                || (other instanceof ChangePasswordCommand
+                    && editAccountDescriptor.equals(((ChangePasswordCommand) other).editAccountDescriptor));
     }
 
     /**
