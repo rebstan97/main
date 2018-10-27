@@ -28,7 +28,7 @@ import seedu.address.model.salesrecord.UniqueRecordList;
 import seedu.address.model.tag.Tag;
 
 /**
- * Wraps all data at the address-book level Duplicates are not allowed.
+ * Wraps all data at the restaurant book level. Duplicates are not allowed.
  */
 public class RestaurantBook implements ReadOnlyRestaurantBook {
 
@@ -290,22 +290,19 @@ public class RestaurantBook implements ReadOnlyRestaurantBook {
         return accounts.get(account);
     }
 
-
     /**
      * Adds an account to the account record. The account must not already exist in the account record.
      */
     public void addAccount(Account account) {
-        account.getPassword().hash(account.getUsername().toString());
         accounts.add(account);
     }
 
     /**
-     * Replaces the given person {@code target} in the list with {@code editedPerson}. {@code target} must exist in the
-     * restaurant book. The person identity of {@code editedPerson} must not be the same as another existing person in
-     * the restaurant book.
+     * Replaces the given account {@code target} in the list with {@code editedAccount}. {@code target} must exist in
+     * the restaurant book. The account identity of {@code editedAccount} must not be the same as another existing
+     * account in the restaurant book.
      */
     public void updateAccount(Account target, Account editedAccount) {
-        //TODO: Handle hashing of new password here as well
         accounts.update(target, editedAccount);
     }
 
@@ -314,6 +311,11 @@ public class RestaurantBook implements ReadOnlyRestaurantBook {
      */
     public void removeAccount(Account key) {
         accounts.remove(key);
+    }
+
+    @Override
+    public ObservableList<Account> getAccountList() {
+        return accounts.asUnmodifiableObservableList();
     }
 
     //// ingredient-level operations
@@ -365,11 +367,6 @@ public class RestaurantBook implements ReadOnlyRestaurantBook {
      */
     public void removeIngredient(Ingredient key) {
         ingredients.remove(key);
-    }
-
-    @Override
-    public ObservableList<Account> getAccountList() {
-        return accounts.asUnmodifiableObservableList();
     }
 
     @Override

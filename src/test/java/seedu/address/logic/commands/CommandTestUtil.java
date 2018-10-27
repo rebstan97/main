@@ -14,6 +14,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_INGREDIENT_UNIT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ITEM_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ITEM_PRICE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NEW_PASSWORD;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PASSWORD;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PAX;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PERCENT;
@@ -28,6 +29,7 @@ import java.util.List;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.CommandHistory;
+import seedu.address.logic.commands.accounts.ChangePasswordCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.commands.ingredients.EditIngredientCommand;
 import seedu.address.logic.commands.menu.EditItemCommand;
@@ -42,6 +44,7 @@ import seedu.address.model.person.Person;
 import seedu.address.model.salesrecord.ItemNameContainsKeywordsPredicate;
 import seedu.address.model.salesrecord.SalesRecord;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
+import seedu.address.testutil.accounts.EditAccountDescriptorBuilder;
 import seedu.address.testutil.ingredients.EditIngredientDescriptorBuilder;
 import seedu.address.testutil.menu.EditItemDescriptorBuilder;
 import seedu.address.testutil.reservation.EditReservationDescriptorBuilder;
@@ -83,7 +86,9 @@ public class CommandTestUtil {
     public static final String INVALID_ADDRESS_DESC = " " + PREFIX_ADDRESS; // empty string not allowed for addresses
     public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "hubby*"; // '*' not allowed in tags
 
-    /** For sales records */
+    /**
+     * For sales records
+     */
     public static final String VALID_DATE_RECORD_ONE = "28-02-2018";
     public static final String VALID_DATE_RECORD_TWO = "11-11-2011";
     public static final String VALID_DATE_RECORD_THREE = "25-12-2017";
@@ -114,7 +119,9 @@ public class CommandTestUtil {
     // integer only
     public static final String PREFIX_WITH_INVALID_PRICE = " " + PREFIX_ITEM_PRICE + "-2"; // negative price not allowed
 
-    /** For accounts */
+    /**
+     * For accounts
+     */
     public static final String VALID_USERNAME_DEMO_ONE = "demo1";
     public static final String VALID_USERNAME_DEMO_TWO = "demo2";
     public static final String VALID_USERNAME_DEMO_THREE = "demo3";
@@ -124,11 +131,15 @@ public class CommandTestUtil {
 
     public static final String PREFIX_WITH_VALID_USERNAME = " " + PREFIX_ID + VALID_USERNAME_DEMO_ONE;
     public static final String PREFIX_WITH_VALID_PASSWORD = " " + PREFIX_PASSWORD + VALID_PASSWORD_DEMO_ONE;
+    public static final String PREFIX_WITH_VALID_NEW_PASSWORD = " " + PREFIX_NEW_PASSWORD + VALID_PASSWORD_DEMO_ONE;
 
-    public static final String PREFIX_WITH_INVALID_USERNAME = " " + PREFIX_ID + "azhi kai"; // space not allowed
-    public static final String PREFIX_WITH_INVALID_PASSWORD = " " + PREFIX_PASSWORD + "11 22qq"; // space not allowed
+    public static final String PREFIX_WITH_INVALID_USERNAME = " " + PREFIX_ID + "azhi kai";
+    public static final String PREFIX_WITH_INVALID_PASSWORD = " " + PREFIX_PASSWORD + "11 22qq";
+    public static final String PREFIX_WITH_INVALID_NEW_PASSWORD = " " + PREFIX_NEW_PASSWORD + "11 22qqq";
 
-    /** For ingredients */
+    /**
+     * For ingredients
+     */
     public static final String VALID_NAME_APPLE = "Granny Smith Apple";
     public static final String VALID_NAME_BROCCOLI = "Australian Broccoli";
     public static final String VALID_UNIT_APPLE = "packet of 5";
@@ -159,7 +170,9 @@ public class CommandTestUtil {
     public static final String INVALID_INGREDIENT_MINIMUM_DESC = " " + PREFIX_INGREDIENT_MINIMUM + "2.0"; // decimal
     // place not allowed for ingredient minimums
 
-    /** For menu */
+    /**
+     * For menu
+     */
     public static final String VALID_ITEM_NAME_BURGER = "Burger";
     public static final String VALID_ITEM_NAME_FRIES = "Cheese Fries";
     public static final String VALID_ITEM_PRICE_BURGER = "2.50";
@@ -179,10 +192,11 @@ public class CommandTestUtil {
 
     public static final String INVALID_ITEM_PERCENT_DESC = " " + PREFIX_PERCENT + "10000"; // at most 2 digits
     public static final String INVALID_ITEM_NAME_DESC = " " + PREFIX_NAME + "Fries&"; // '&' not allowed in names
-    public static final String INVALID_PRICE_DESC = " " + PREFIX_PRICE + "9.000"; // 3 decimal places not allowed in
-    // prices
+    public static final String INVALID_PRICE_DESC = " " + PREFIX_PRICE + "9.000"; // 3 decimal places not allowed
 
-    /** For Reservation */
+    /**
+     * For Reservation
+     */
     public static final String VALID_RESERVATION_NAME_ANDREW = "Andrew";
     public static final String VALID_RESERVATION_NAME_BILLY = "Billy Bong";
     public static final String VALID_RESERVATION_PAX_ANDREW = "2";
@@ -215,6 +229,9 @@ public class CommandTestUtil {
     public static final EditCommand.EditPersonDescriptor DESC_AMY;
     public static final EditCommand.EditPersonDescriptor DESC_BOB;
 
+    public static final ChangePasswordCommand.EditAccountDescriptor DESC_DEMO_ONE;
+    public static final ChangePasswordCommand.EditAccountDescriptor DESC_DEMO_TWO;
+
     public static final EditItemCommand.EditItemDescriptor DESC_BURGER;
     public static final EditItemCommand.EditItemDescriptor DESC_FRIES;
 
@@ -235,18 +252,22 @@ public class CommandTestUtil {
                 .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB)
                 .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
 
+        // Account Management
+        DESC_DEMO_ONE = new EditAccountDescriptorBuilder().withPassword(VALID_PASSWORD_DEMO_ONE).build();
+        DESC_DEMO_TWO = new EditAccountDescriptorBuilder().withPassword(VALID_PASSWORD_DEMO_TWO).build();
+
         // Menu Management
         DESC_BURGER = new EditItemDescriptorBuilder().withName(VALID_ITEM_NAME_BURGER)
                 .withPrice(VALID_ITEM_PRICE_BURGER).build();
         DESC_FRIES = new EditItemDescriptorBuilder().withName(VALID_ITEM_NAME_FRIES).withPrice(VALID_ITEM_PRICE_FRIES)
-                        .withTags(VALID_ITEM_TAG_CHEESE).build();
+                .withTags(VALID_ITEM_TAG_CHEESE).build();
 
         // Ingredient Management
         DESC_APPLE = new EditIngredientDescriptorBuilder().withName(VALID_NAME_APPLE)
                 .withPrice(VALID_PRICE_APPLE).build();
         DESC_BROCCOLI =
                 new EditIngredientDescriptorBuilder().withName(VALID_NAME_BROCCOLI).withPrice(VALID_PRICE_BROCCOLI)
-                .withUnit(VALID_UNIT_BROCCOLI).build();
+                        .withUnit(VALID_UNIT_BROCCOLI).build();
 
         // Reservation Management
         DESC_ANDREW = new EditReservationDescriptorBuilder().withName(VALID_RESERVATION_NAME_ANDREW)

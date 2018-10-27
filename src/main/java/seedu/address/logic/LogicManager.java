@@ -64,6 +64,7 @@ public class LogicManager extends ComponentManager implements Logic {
             if (!isPublicCommand(command) && !UserSession.isAuthenticated()) {
                 throw new CommandException(Messages.MESSAGE_COMMAND_FORBIDDEN);
             }
+
             return command.execute(model, history);
         } finally {
             history.add(commandText);

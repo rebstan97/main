@@ -1,8 +1,12 @@
 package seedu.address.logic.parser;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ID;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PASSWORD;
 import static seedu.address.logic.parser.ParserUtil.MESSAGE_INVALID_INDEX;
+import static seedu.address.logic.parser.ParserUtil.arePrefixesPresent;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST;
 
 import java.util.Arrays;
@@ -27,6 +31,7 @@ import seedu.address.model.tag.Tag;
 import seedu.address.testutil.Assert;
 
 public class ParserUtilTest {
+
     private static final String INVALID_NAME = "R@chel";
     private static final String INVALID_PHONE = "+651234";
     private static final String INVALID_ADDRESS = " ";
@@ -49,6 +54,9 @@ public class ParserUtilTest {
     private static final String VALID_INGREDIENT_UNIT = "5-kilogram bag";
     private static final String VALID_INGREDIENT_PRICE = "9.90";
     private static final String VALID_INGREDIENT_MINIMUM = "10";
+
+    private static final String VALID_USERNAME = "azhikai";
+    private static final String VALID_PASSWORD = "1122qq";
 
     private static final String WHITESPACE = " \t\r\n";
 
@@ -346,4 +354,17 @@ public class ParserUtilTest {
         assertEquals(expectedName, ParserUtil.parseIndexOrIngredientName(nameWithWhitespace));
     }
 
+    @Test
+    public void parse_prefixPresent() {
+        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(" " + PREFIX_ID + VALID_USERNAME
+                + " " + PREFIX_PASSWORD + VALID_PASSWORD, PREFIX_ID, PREFIX_PASSWORD);
+        assertTrue(arePrefixesPresent(argMultimap, PREFIX_ID, PREFIX_PASSWORD));
+    }
+
+    @Test
+    public void parse_prefixAbsent() {
+        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(" " + PREFIX_ID + VALID_USERNAME,
+                PREFIX_ID, PREFIX_PASSWORD);
+        assertFalse(arePrefixesPresent(argMultimap, PREFIX_ID, PREFIX_PASSWORD));
+    }
 }

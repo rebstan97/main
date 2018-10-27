@@ -50,7 +50,7 @@ public class LogicManagerTest {
     @Test
     public void execute_privateCommandsWhileLoggedOut_throwsCommandException() {
         Account account = new AccountBuilder().build();
-        EventsCenter.getInstance().post(new LogoutEvent());
+        EventsCenter.getInstance().post(new LogoutEvent()); // logout before executing
         assertCommandException(RegisterCommand.COMMAND_WORD + " "
                         + PREFIX_ID + account.getUsername().toString() + " "
                         + PREFIX_PASSWORD + account.getPassword().toString(),

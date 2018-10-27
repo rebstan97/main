@@ -20,6 +20,7 @@ import seedu.address.logic.commands.RedoCommand;
 import seedu.address.logic.commands.RemarkCommand;
 import seedu.address.logic.commands.SelectCommand;
 import seedu.address.logic.commands.UndoCommand;
+import seedu.address.logic.commands.accounts.ChangePasswordCommand;
 import seedu.address.logic.commands.accounts.DeregisterCommand;
 import seedu.address.logic.commands.accounts.LoginCommand;
 import seedu.address.logic.commands.accounts.LogoutCommand;
@@ -51,6 +52,7 @@ import seedu.address.logic.commands.sales.DeleteSalesCommand;
 import seedu.address.logic.commands.sales.DisplaySalesCommand;
 import seedu.address.logic.commands.sales.EditSalesCommand;
 import seedu.address.logic.commands.sales.RecordSalesCommand;
+import seedu.address.logic.parser.accounts.ChangePasswordCommandParser;
 import seedu.address.logic.parser.accounts.DeregisterCommandParser;
 import seedu.address.logic.parser.accounts.LoginCommandParser;
 import seedu.address.logic.parser.accounts.RegisterCommandParser;
@@ -178,6 +180,10 @@ public class RestaurantBookParser {
         case DeregisterCommand.COMMAND_WORD:
         case DeregisterCommand.COMMAND_ALIAS:
             return new DeregisterCommandParser().parse(arguments);
+
+        case ChangePasswordCommand.COMMAND_WORD:
+        case ChangePasswordCommand.COMMAND_ALIAS:
+            return new ChangePasswordCommandParser().parse(arguments);
 
         case LoginCommand.COMMAND_WORD:
             return new LoginCommandParser().parse(arguments);
