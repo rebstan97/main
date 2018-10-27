@@ -1,6 +1,5 @@
 package seedu.address.logic.commands.accounts;
 
-import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalAddressBook.getTypicalAddressBook;
 
@@ -82,27 +81,5 @@ public class ChangePasswordCommandTest {
         expectedModel.commitAddressBook();
 
         assertCommandSuccess(changePasswordCommand, model, commandHistory, expectedMessage, expectedModel);
-    }
-
-    @Test
-    public void execute_duplicateAccountUnfilteredList_failure() {
-        Account secondAccount = model.getFilteredAccountList().get(1);
-        EditAccountDescriptor descriptor = new EditAccountDescriptorBuilder(secondAccount).build();
-        // Logged in to 1st acc, attempt update 1st acc to 2nd acc
-        ChangePasswordCommand changePasswordCommand = new ChangePasswordCommand(descriptor);
-
-        assertCommandFailure(changePasswordCommand, model, commandHistory,
-                ChangePasswordCommand.MESSAGE_DUPLICATE_ACCOUNT);
-    }
-
-    @Test
-    public void execute_duplicateAccountFilteredList_failure() {
-        // edit person in filtered list into a duplicate in address book
-        Account accountInList = model.getAddressBook().getAccountList().get(1);
-        ChangePasswordCommand changePasswordCommand = new ChangePasswordCommand(
-                new EditAccountDescriptorBuilder(accountInList).build());
-
-        assertCommandFailure(changePasswordCommand, model, commandHistory,
-                ChangePasswordCommand.MESSAGE_DUPLICATE_ACCOUNT);
     }
 }

@@ -17,7 +17,6 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.accounts.Account;
 import seedu.address.model.accounts.Password;
-import seedu.address.model.accounts.Username;
 
 /**
  * Change the password an existing {@code Account}.
@@ -34,7 +33,6 @@ public class ChangePasswordCommand extends Command {
             + PREFIX_NEW_PASSWORD + "1122qq";
 
     public static final String MESSAGE_SUCCESS = "Successfully updated the account %s";
-    public static final String MESSAGE_DUPLICATE_ACCOUNT = "This username is not available";
 
     private final EditAccountDescriptor editAccountDescriptor;
 
@@ -53,12 +51,7 @@ public class ChangePasswordCommand extends Command {
 
         // Session guarantees to have been set, thus an account exists in the session
         Account accountToEdit = UserSession.getAccount();
-
         Account editedAccount = createEditedAccount(accountToEdit, editAccountDescriptor);
-
-        if (!accountToEdit.isSameUsername(editedAccount) && model.hasAccount(editedAccount)) {
-            throw new CommandException(MESSAGE_DUPLICATE_ACCOUNT);
-        }
 
         model.updateAccount(accountToEdit, editedAccount);
         model.updateFilteredAccountList(PREDICATE_SHOW_ALL_ACCOUNTS);
@@ -75,10 +68,9 @@ public class ChangePasswordCommand extends Command {
     private static Account createEditedAccount(Account accountToEdit, EditAccountDescriptor editAccountDescriptor) {
         assert accountToEdit != null;
 
-        Username updatedUsername = editAccountDescriptor.getUsername().orElse(accountToEdit.getUsername());
         Password updatedPassword = editAccountDescriptor.getPassword().orElse(accountToEdit.getPassword());
 
-        return new Account(updatedUsername, updatedPassword);
+        return new Account(accountToEdit.getUsername(), updatedPassword);
     }
 
     @Override
@@ -88,12 +80,11 @@ public class ChangePasswordCommand extends Command {
     }
 
     /**
-     * Stores the details to edit the person with. Each non-empty field value will replace the corresponding field value
-     * of the person.
+     * Stores the details to edit the account with. Each non-empty field value will replace the corresponding field
+     * value of the account.
      */
     public static class EditAccountDescriptor {
 
-        private Username username;
         private Password password;
 
         public EditAccountDescriptor() {}
@@ -102,7 +93,6 @@ public class ChangePasswordCommand extends Command {
          * Copy constructor.
          */
         public EditAccountDescriptor(EditAccountDescriptor toCopy) {
-            setUsername(toCopy.username);
             setPassword(toCopy.password);
         }
 
@@ -110,15 +100,7 @@ public class ChangePasswordCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(username, password);
-        }
-
-        public void setUsername(Username username) {
-            this.username = username;
-        }
-
-        public Optional<Username> getUsername() {
-            return Optional.ofNullable(username);
+            return CollectionUtil.isAnyNonNull(password);
         }
 
         public void setPassword(Password password) {
@@ -144,8 +126,7 @@ public class ChangePasswordCommand extends Command {
             // state check
             EditAccountDescriptor e = (EditAccountDescriptor) other;
 
-            return getUsername().equals(e.getUsername())
-                    && getPassword().equals(e.getPassword());
+            return getPassword().equals(e.getPassword());
         }
     }
 }
