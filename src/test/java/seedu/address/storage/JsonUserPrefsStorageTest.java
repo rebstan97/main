@@ -63,6 +63,7 @@ public class JsonUserPrefsStorageTest {
     public void readUserPrefs_fileInOrder_successfullyRead() throws DataConversionException {
         UserPrefs expected = getTypicalUserPrefs();
         UserPrefs actual = readUserPrefs("TypicalUserPref.json").get();
+        System.out.println(expected + " and " + actual);
         assertEquals(expected, actual);
     }
 
@@ -83,7 +84,7 @@ public class JsonUserPrefsStorageTest {
     private UserPrefs getTypicalUserPrefs() {
         UserPrefs userPrefs = new UserPrefs();
         userPrefs.setGuiSettings(1000, 500, 300, 100);
-        userPrefs.setAddressBookFilePath(Paths.get("addressbook.xml"));
+        userPrefs.setRestaurantBookFilePath(Paths.get("restaurantbook.xml"));
         return userPrefs;
     }
 
@@ -149,7 +150,7 @@ public class JsonUserPrefsStorageTest {
         assertNotEquals(1, expected);
 
         // change the addressbook file path
-        expected.setAddressBookFilePath(Paths.get("data", "elsewhere.xml"));
+        expected.setRestaurantBookFilePath(Paths.get("data", "elsewhere.xml"));
         assertNotEquals(expected, actual);
         assertNotEquals(expected.hashCode(), actual.hashCode());
     }
