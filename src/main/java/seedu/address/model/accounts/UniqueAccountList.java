@@ -42,6 +42,7 @@ public class UniqueAccountList implements Iterable<Account> {
         if (contains(toAdd)) {
             throw new DuplicateAccountException();
         }
+        toAdd.getPassword().hash(toAdd.getUsername().toString());
         internalList.add(toAdd);
     }
 
@@ -73,6 +74,7 @@ public class UniqueAccountList implements Iterable<Account> {
             throw new DuplicateAccountException();
         }
 
+        editedAccount.getPassword().hash(editedAccount.getUsername().toString());
         internalList.set(index, editedAccount);
     }
 
