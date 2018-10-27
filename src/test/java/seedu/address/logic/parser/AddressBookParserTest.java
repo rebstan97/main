@@ -63,6 +63,12 @@ import seedu.address.logic.commands.menu.SortMenuCommand;
 import seedu.address.logic.commands.menu.SortMenuCommand.SortMethod;
 import seedu.address.logic.commands.menu.TodaySpecialCommand;
 import seedu.address.logic.commands.reservation.AddReservationCommand;
+import seedu.address.logic.commands.reservation.DeleteReservationCommand;
+import seedu.address.logic.commands.reservation.EditReservationCommand;
+import seedu.address.logic.commands.reservation.EditReservationCommand.EditReservationDescriptor;
+import seedu.address.logic.commands.reservation.ListReservationsCommand;
+import seedu.address.logic.commands.reservation.SelectReservationCommand;
+import seedu.address.logic.commands.reservation.SortReservationsCommand;
 import seedu.address.logic.commands.sales.DeleteSalesCommand;
 import seedu.address.logic.commands.sales.DisplaySalesCommand;
 import seedu.address.logic.commands.sales.EditSalesCommand;
@@ -91,6 +97,7 @@ import seedu.address.testutil.ingredients.IngredientUtil;
 import seedu.address.testutil.menu.EditItemDescriptorBuilder;
 import seedu.address.testutil.menu.ItemBuilder;
 import seedu.address.testutil.menu.ItemUtil;
+import seedu.address.testutil.reservation.EditReservationDescriptorBuilder;
 import seedu.address.testutil.reservation.ReservationBuilder;
 import seedu.address.testutil.reservation.ReservationUtil;
 import seedu.address.testutil.salesrecords.EditRecordDescriptorBuilder;
@@ -529,5 +536,50 @@ public class AddressBookParserTest {
         command = (AddReservationCommand) parser.parseCommand(AddReservationCommand.COMMAND_ALIAS
                 + " " + ReservationUtil.getReservationDetails(reservation));
         assertEquals(new AddReservationCommand(reservation), command);
+    }
+
+    @Test
+    public void parseCommand_editReservation() throws Exception {
+        Reservation reservation = new ReservationBuilder().build();
+        EditReservationDescriptor descriptor = new EditReservationDescriptorBuilder(reservation).build();
+        EditReservationCommand command;
+        command = (EditReservationCommand) parser.parseCommand(EditReservationCommand.COMMAND_WORD + " "
+                + INDEX_FIRST.getOneBased() + " " + ReservationUtil.getEditReservationDescriptorDetails(descriptor));
+        assertEquals(new EditReservationCommand(INDEX_FIRST, descriptor), command);
+        command = (EditReservationCommand) parser.parseCommand(EditReservationCommand.COMMAND_ALIAS + " "
+                + INDEX_FIRST.getOneBased() + " " + ReservationUtil.getEditReservationDescriptorDetails(descriptor));
+        assertEquals(new EditReservationCommand(INDEX_FIRST, descriptor), command);
+    }
+
+    @Test
+    public void parseCommand_deleteReservation() throws Exception {
+        DeleteReservationCommand command = (DeleteReservationCommand) parser.parseCommand(
+                DeleteReservationCommand.COMMAND_WORD + " " + INDEX_FIRST.getOneBased());
+        assertEquals(new DeleteReservationCommand(INDEX_FIRST), command);
+        command = (DeleteReservationCommand) parser.parseCommand(DeleteReservationCommand.COMMAND_ALIAS
+                + " " + INDEX_FIRST.getOneBased());
+        assertEquals(new DeleteReservationCommand(INDEX_FIRST), command);
+    }
+
+    @Test
+    public void parseCommand_selectReservation() throws Exception {
+        SelectReservationCommand command = (SelectReservationCommand) parser.parseCommand(
+                SelectReservationCommand.COMMAND_WORD + " " + INDEX_FIRST.getOneBased());
+        assertEquals(new SelectReservationCommand(INDEX_FIRST), command);
+        command = (SelectReservationCommand) parser.parseCommand(
+                SelectReservationCommand.COMMAND_ALIAS + " " + INDEX_FIRST.getOneBased());
+        assertEquals(new SelectReservationCommand(INDEX_FIRST), command);
+    }
+
+    @Test
+    public void parseCommand_listReservations() throws Exception {
+        assertTrue(parser.parseCommand(ListReservationsCommand.COMMAND_WORD) instanceof ListReservationsCommand);
+        assertTrue(parser.parseCommand(ListReservationsCommand.COMMAND_ALIAS) instanceof ListReservationsCommand);
+    }
+
+    @Test
+    public void parseCommand_sortReservations() throws Exception {
+        assertTrue(parser.parseCommand(SortReservationsCommand.COMMAND_WORD) instanceof SortReservationsCommand);
+        assertTrue(parser.parseCommand(SortReservationsCommand.COMMAND_ALIAS) instanceof SortReservationsCommand);
     }
 }
