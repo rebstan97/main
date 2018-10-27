@@ -11,8 +11,8 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
+import seedu.address.model.RestaurantBook;
 import seedu.address.model.menu.Item;
 import seedu.address.model.menu.NameContainsKeywordsPredicate;
 
@@ -32,7 +32,7 @@ public class MenuCommandTestUtil {
             String expectedMessage) {
         // we are unable to defensively copy the model for comparison later, so we can
         // only do so by copying its components.
-        AddressBook expectedAddressBook = new AddressBook(actualModel.getAddressBook());
+        RestaurantBook expectedRestaurantBook = new RestaurantBook(actualModel.getAddressBook());
         List<Item> expectedFilteredList = new ArrayList<>(actualModel.getFilteredItemList());
 
         CommandHistory expectedCommandHistory = new CommandHistory(actualCommandHistory);
@@ -42,7 +42,7 @@ public class MenuCommandTestUtil {
             throw new AssertionError("The expected CommandException was not thrown.");
         } catch (CommandException e) {
             assertEquals(expectedMessage, e.getMessage());
-            assertEquals(expectedAddressBook, actualModel.getAddressBook());
+            assertEquals(expectedRestaurantBook, actualModel.getAddressBook());
             assertEquals(expectedFilteredList, actualModel.getFilteredItemList());
             assertEquals(expectedCommandHistory, actualCommandHistory);
         }

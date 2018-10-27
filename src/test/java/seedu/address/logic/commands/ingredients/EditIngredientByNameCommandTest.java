@@ -22,9 +22,9 @@ import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.RedoCommand;
 import seedu.address.logic.commands.UndoCommand;
 import seedu.address.logic.commands.ingredients.EditIngredientCommand.EditIngredientDescriptor;
-import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
+import seedu.address.model.RestaurantBook;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.ingredient.Ingredient;
 import seedu.address.model.ingredient.IngredientName;
@@ -50,7 +50,7 @@ public class EditIngredientByNameCommandTest {
         String expectedMessage = String.format(EditIngredientByNameCommand.MESSAGE_EDIT_INGREDIENT_SUCCESS,
                 editedIngredient);
 
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(new RestaurantBook(model.getAddressBook()), new UserPrefs());
         expectedModel.updateIngredient(model.findIngredient(ingredientToEdit), editedIngredient);
         expectedModel.commitAddressBook();
 
@@ -73,7 +73,7 @@ public class EditIngredientByNameCommandTest {
         String expectedMessage = String.format(EditIngredientByNameCommand.MESSAGE_EDIT_INGREDIENT_SUCCESS,
                 editedIngredient);
 
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(new RestaurantBook(model.getAddressBook()), new UserPrefs());
         expectedModel.updateIngredient(lastIngredient, editedIngredient);
         expectedModel.commitAddressBook();
 
@@ -90,7 +90,7 @@ public class EditIngredientByNameCommandTest {
         String expectedMessage = String.format(EditIngredientByNameCommand.MESSAGE_EDIT_INGREDIENT_SUCCESS,
                 editedIngredient);
 
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(new RestaurantBook(model.getAddressBook()), new UserPrefs());
         expectedModel.commitAddressBook();
 
         assertCommandSuccess(editCommand, model, commandHistory, expectedMessage, expectedModel);
@@ -128,7 +128,7 @@ public class EditIngredientByNameCommandTest {
         EditIngredientDescriptor descriptor = new EditIngredientDescriptorBuilder(editedIngredient).build();
         EditIngredientByNameCommand editCommand = new EditIngredientByNameCommand(
                 ingredientToEdit.getName(), descriptor);
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(new RestaurantBook(model.getAddressBook()), new UserPrefs());
         expectedModel.updateIngredient(ingredientToEdit, editedIngredient);
         expectedModel.commitAddressBook();
 

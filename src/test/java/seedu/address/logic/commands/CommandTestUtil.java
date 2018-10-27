@@ -33,8 +33,8 @@ import seedu.address.logic.commands.ingredients.EditIngredientCommand;
 import seedu.address.logic.commands.menu.EditItemCommand;
 import seedu.address.logic.commands.reservation.EditReservationCommand;
 import seedu.address.logic.commands.sales.EditSalesCommand;
-import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
+import seedu.address.model.RestaurantBook;
 import seedu.address.model.ingredient.Ingredient;
 import seedu.address.model.ingredient.IngredientNameContainsKeywordsPredicate;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
@@ -293,7 +293,7 @@ public class CommandTestUtil {
             String expectedMessage) {
         // we are unable to defensively copy the model for comparison later, so we can
         // only do so by copying its components.
-        AddressBook expectedAddressBook = new AddressBook(actualModel.getAddressBook());
+        RestaurantBook expectedRestaurantBook = new RestaurantBook(actualModel.getAddressBook());
         List<Person> expectedFilteredList = new ArrayList<>(actualModel.getFilteredPersonList());
 
         CommandHistory expectedCommandHistory = new CommandHistory(actualCommandHistory);
@@ -303,7 +303,7 @@ public class CommandTestUtil {
             throw new AssertionError("The expected CommandException was not thrown.");
         } catch (CommandException e) {
             assertEquals(expectedMessage, e.getMessage());
-            assertEquals(expectedAddressBook, actualModel.getAddressBook());
+            assertEquals(expectedRestaurantBook, actualModel.getAddressBook());
             assertEquals(expectedFilteredList, actualModel.getFilteredPersonList());
             assertEquals(expectedCommandHistory, actualCommandHistory);
         }

@@ -11,9 +11,9 @@ import java.util.Collections;
 import org.junit.Test;
 
 import seedu.address.logic.CommandHistory;
-import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
+import seedu.address.model.RestaurantBook;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.menu.TagContainsKeywordsPredicate;
 import seedu.address.testutil.AddressBookBuilder;
@@ -37,7 +37,7 @@ public class TodaySpecialCommandTest {
 
     @Test
     public void execute_noItemFound() {
-        AddressBook ab = new AddressBookBuilder().build();
+        RestaurantBook ab = new AddressBookBuilder().build();
         model = new ModelManager(ab, new UserPrefs());
         expectedModel = new ModelManager(ab, new UserPrefs());
         String expectedMessage = String.format(MESSAGE_ITEMS_LISTED_OVERVIEW, 0);

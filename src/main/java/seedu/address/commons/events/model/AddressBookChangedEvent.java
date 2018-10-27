@@ -1,16 +1,16 @@
 package seedu.address.commons.events.model;
 
 import seedu.address.commons.events.BaseEvent;
-import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.ReadOnlyRestaurantBook;
 
 /**
- * Indicates the AddressBook in the model has changed
+ * Indicates the RestaurantBook in the model has changed
  */
 public class AddressBookChangedEvent extends BaseEvent {
 
-    public final ReadOnlyAddressBook data;
+    public final ReadOnlyRestaurantBook data;
 
-    public AddressBookChangedEvent(ReadOnlyAddressBook data) {
+    public AddressBookChangedEvent(ReadOnlyRestaurantBook data) {
         this.data = data;
     }
 

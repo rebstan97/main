@@ -7,8 +7,8 @@ import seedu.address.commons.events.ui.DisplayItemListRequestEvent;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
-import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
+import seedu.address.model.RestaurantBook;
 
 /**
  * Clears the menu.
@@ -23,7 +23,7 @@ public class ClearMenuCommand extends Command {
     @Override
     public CommandResult execute(Model model, CommandHistory history) {
         requireNonNull(model);
-        model.resetMenuData(new AddressBook());
+        model.resetMenuData(new RestaurantBook());
         model.commitAddressBook();
         EventsCenter.getInstance().post(new DisplayItemListRequestEvent());
         return new CommandResult(MESSAGE_SUCCESS);

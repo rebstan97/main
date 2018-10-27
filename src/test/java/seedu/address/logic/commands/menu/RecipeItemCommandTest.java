@@ -17,9 +17,9 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.RedoCommand;
 import seedu.address.logic.commands.UndoCommand;
-import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
+import seedu.address.model.RestaurantBook;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.menu.Item;
 import seedu.address.model.menu.Recipe;
@@ -45,7 +45,7 @@ public class RecipeItemCommandTest {
 
         String expectedMessage = String.format(RecipeItemCommand.MESSAGE_DELETE_REMARK_SUCCESS, editedItem);
 
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(new RestaurantBook(model.getAddressBook()), new UserPrefs());
         expectedModel.updateItem(firstItem, editedItem);
         expectedModel.commitAddressBook();
 
@@ -65,7 +65,7 @@ public class RecipeItemCommandTest {
 
         String expectedMessage = String.format(RecipeItemCommand.MESSAGE_ADD_REMARK_SUCCESS, editedItem);
 
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(new RestaurantBook(model.getAddressBook()), new UserPrefs());
         expectedModel.updateItem(firstItem, editedItem);
         expectedModel.commitAddressBook();
 

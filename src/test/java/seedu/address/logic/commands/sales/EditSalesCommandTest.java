@@ -26,9 +26,9 @@ import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.RedoCommand;
 import seedu.address.logic.commands.UndoCommand;
 import seedu.address.logic.commands.sales.EditSalesCommand.EditRecordDescriptor;
-import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
+import seedu.address.model.RestaurantBook;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.salesrecord.SalesRecord;
 import seedu.address.testutil.salesrecords.EditRecordDescriptorBuilder;
@@ -51,7 +51,7 @@ public class EditSalesCommandTest {
 
         String expectedMessage = String.format(EditSalesCommand.MESSAGE_EDIT_RECORD_SUCCESS, editedRecord);
 
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(new RestaurantBook(model.getAddressBook()), new UserPrefs());
         expectedModel.updateRecord(model.getFilteredRecordList().get(0), editedRecord);
         expectedModel.commitAddressBook();
 
@@ -78,7 +78,7 @@ public class EditSalesCommandTest {
 
         String expectedMessage = String.format(EditSalesCommand.MESSAGE_EDIT_RECORD_SUCCESS, editedRecord);
 
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(new RestaurantBook(model.getAddressBook()), new UserPrefs());
         expectedModel.updateRecord(lastRecord, editedRecord);
         expectedModel.commitAddressBook();
 
@@ -92,7 +92,7 @@ public class EditSalesCommandTest {
 
         String expectedMessage = String.format(EditSalesCommand.MESSAGE_EDIT_RECORD_SUCCESS, editedRecord);
 
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(new RestaurantBook(model.getAddressBook()), new UserPrefs());
         expectedModel.commitAddressBook();
 
         assertCommandSuccess(editSalesCommand, model, commandHistory, expectedMessage, expectedModel);
@@ -109,7 +109,7 @@ public class EditSalesCommandTest {
 
         String expectedMessage = String.format(EditSalesCommand.MESSAGE_EDIT_RECORD_SUCCESS, editedRecord);
 
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(new RestaurantBook(model.getAddressBook()), new UserPrefs());
         expectedModel.updateRecord(model.getFilteredRecordList().get(0), editedRecord);
         expectedModel.commitAddressBook();
 
@@ -169,7 +169,7 @@ public class EditSalesCommandTest {
         SalesRecord recordToEdit = model.getFilteredRecordList().get(INDEX_FIRST.getZeroBased());
         EditRecordDescriptor descriptor = new EditRecordDescriptorBuilder(editedRecord).build();
         EditSalesCommand editSalesCommand = new EditSalesCommand(INDEX_FIRST, descriptor);
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(new RestaurantBook(model.getAddressBook()), new UserPrefs());
         expectedModel.updateRecord(recordToEdit, editedRecord);
         expectedModel.commitAddressBook();
 
@@ -212,7 +212,7 @@ public class EditSalesCommandTest {
         SalesRecord editedRecord = new RecordBuilder().withDate(VALID_DATE_RECORD_TWO).build();
         EditRecordDescriptor descriptor = new EditRecordDescriptorBuilder(editedRecord).build();
         EditSalesCommand editSalesCommand = new EditSalesCommand(INDEX_FIRST, descriptor);
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(new RestaurantBook(model.getAddressBook()), new UserPrefs());
 
         showRecordAtIndex(model, INDEX_SECOND);
         SalesRecord recordToEdit = model.getFilteredRecordList().get(INDEX_FIRST.getZeroBased());

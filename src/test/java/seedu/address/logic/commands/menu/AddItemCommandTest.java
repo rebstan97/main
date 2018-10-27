@@ -18,9 +18,9 @@ import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.commands.menu.SortMenuCommand.SortMethod;
-import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
-import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.ReadOnlyRestaurantBook;
+import seedu.address.model.RestaurantBook;
 import seedu.address.model.accounts.Account;
 import seedu.address.model.ingredient.Ingredient;
 import seedu.address.model.ingredient.IngredientName;
@@ -106,12 +106,12 @@ public class AddItemCommandTest {
         }
 
         @Override
-        public void resetData(ReadOnlyAddressBook newData) {
+        public void resetData(ReadOnlyRestaurantBook newData) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public ReadOnlyAddressBook getAddressBook() {
+        public ReadOnlyRestaurantBook getAddressBook() {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -282,7 +282,7 @@ public class AddItemCommandTest {
         }
 
         @Override
-        public void resetMenuData(ReadOnlyAddressBook newData) {
+        public void resetMenuData(ReadOnlyRestaurantBook newData) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -406,8 +406,8 @@ public class AddItemCommandTest {
         }
 
         @Override
-        public ReadOnlyAddressBook getAddressBook() {
-            return new AddressBook();
+        public ReadOnlyRestaurantBook getAddressBook() {
+            return new RestaurantBook();
         }
 
         public ArrayList<Item> getItemsAdded() {

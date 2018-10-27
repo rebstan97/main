@@ -7,7 +7,7 @@ import static seedu.address.testutil.menu.TypicalItems.getTypicalItems;
 import static seedu.address.testutil.reservation.TypicalReservations.getTypicalReservations;
 import static seedu.address.testutil.salesrecords.TypicalRecords.getTypicalRecords;
 
-import seedu.address.model.AddressBook;
+import seedu.address.model.RestaurantBook;
 import seedu.address.model.accounts.Account;
 import seedu.address.model.ingredient.Ingredient;
 import seedu.address.model.menu.Item;
@@ -16,15 +16,15 @@ import seedu.address.model.reservation.Reservation;
 import seedu.address.model.salesrecord.SalesRecord;
 
 /**
- * A utility class containing a list of all possible types of an {@code AddressBook} objects to be used in tests.
+ * A utility class containing a list of all possible types of an {@code RestaurantBook} objects to be used in tests.
  */
 public class TypicalAddressBook {
 
     /**
-     * Returns an {@code AddressBook} with all the typical objects it can possibly represent.
+     * Returns an {@code RestaurantBook} with all the typical objects it can possibly represent.
      */
-    public static AddressBook getTypicalAddressBook() {
-        AddressBook ab = new AddressBook();
+    public static RestaurantBook getTypicalAddressBook() {
+        RestaurantBook ab = new RestaurantBook();
         for (Person person : getTypicalPersons()) {
             ab.addPerson(person);
         }
@@ -47,10 +47,10 @@ public class TypicalAddressBook {
     }
 
     /**
-     * Returns an {@code AddressBook} with {@code Person} objects only.
+     * Returns an {@code RestaurantBook} with {@code Person} objects only.
      */
-    public static AddressBook getTypicalAddressBookWithPersonOnly() {
-        AddressBook ab = new AddressBook();
+    public static RestaurantBook getTypicalAddressBookWithPersonOnly() {
+        RestaurantBook ab = new RestaurantBook();
         for (Person person : getTypicalPersons()) {
             ab.addPerson(person);
         }
@@ -58,10 +58,10 @@ public class TypicalAddressBook {
     }
 
     /**
-     * Returns an {@code AddressBook} with {@code SalesRecord} objects only.
+     * Returns an {@code RestaurantBook} with {@code SalesRecord} objects only.
      */
-    public static AddressBook getTypicalAddressBookWithRecordOnly() {
-        AddressBook ab = new AddressBook();
+    public static RestaurantBook getTypicalAddressBookWithRecordOnly() {
+        RestaurantBook ab = new RestaurantBook();
         for (SalesRecord record : getTypicalRecords()) {
             ab.addRecord(record);
         }
@@ -69,10 +69,10 @@ public class TypicalAddressBook {
     }
 
     /**
-     * Returns an {@code AddressBook} with {@code Account} objects only.
+     * Returns an {@code RestaurantBook} with {@code Account} objects only.
      */
-    public static AddressBook getTypicalAddressBookWithAccountsOnly() {
-        AddressBook ab = new AddressBook();
+    public static RestaurantBook getTypicalAddressBookWithAccountsOnly() {
+        RestaurantBook ab = new RestaurantBook();
         for (Account account : getTypicalAccounts()) {
             ab.addAccount(account);
         }
@@ -80,10 +80,10 @@ public class TypicalAddressBook {
     }
 
     /**
-     * Returns an {@code AddressBook} with {@code Ingredient} objects only.
+     * Returns an {@code RestaurantBook} with {@code Ingredient} objects only.
      */
-    public static AddressBook getTypicalAddressBookWithIngredientsOnly() {
-        AddressBook ab = new AddressBook();
+    public static RestaurantBook getTypicalAddressBookWithIngredientsOnly() {
+        RestaurantBook ab = new RestaurantBook();
         for (Ingredient ingredient : getTypicalIngredients()) {
             ab.addIngredient(ingredient);
         }
@@ -91,10 +91,10 @@ public class TypicalAddressBook {
     }
 
     /**
-     * Returns an {@code AddressBook} with {@code Item} objects only.
+     * Returns an {@code RestaurantBook} with {@code Item} objects only.
      */
-    public static AddressBook getTypicalAddressBookWithItemOnly() {
-        AddressBook ab = new AddressBook();
+    public static RestaurantBook getTypicalAddressBookWithItemOnly() {
+        RestaurantBook ab = new RestaurantBook();
         for (Item item : getTypicalItems()) {
             ab.addItem(item);
         }
@@ -102,10 +102,10 @@ public class TypicalAddressBook {
     }
 
     /**
-     * Returns an {@code AddressBook} with {@code Reservation} objects only.
+     * Returns an {@code RestaurantBook} with {@code Reservation} objects only.
      */
-    public static AddressBook getTypicalAddressBookWithReservationsOnly() {
-        AddressBook ab = new AddressBook();
+    public static RestaurantBook getTypicalAddressBookWithReservationsOnly() {
+        RestaurantBook ab = new RestaurantBook();
         for (Reservation reservation : getTypicalReservations()) {
             ab.addReservation(reservation);
         }

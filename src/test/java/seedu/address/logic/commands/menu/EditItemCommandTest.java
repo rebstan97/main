@@ -23,9 +23,9 @@ import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.RedoCommand;
 import seedu.address.logic.commands.UndoCommand;
 import seedu.address.logic.commands.menu.EditItemCommand.EditItemDescriptor;
-import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
+import seedu.address.model.RestaurantBook;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.menu.Item;
 import seedu.address.testutil.menu.EditItemDescriptorBuilder;
@@ -48,7 +48,7 @@ public class EditItemCommandTest {
 
         String expectedMessage = String.format(EditItemCommand.MESSAGE_EDIT_ITEM_SUCCESS, editedItem);
 
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(new RestaurantBook(model.getAddressBook()), new UserPrefs());
         expectedModel.updateItem(model.getFilteredItemList().get(0), editedItem);
         expectedModel.commitAddressBook();
 
@@ -70,7 +70,7 @@ public class EditItemCommandTest {
 
         String expectedMessage = String.format(EditItemCommand.MESSAGE_EDIT_ITEM_SUCCESS, editedItem);
 
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(new RestaurantBook(model.getAddressBook()), new UserPrefs());
         expectedModel.updateItem(lastItem, editedItem);
         expectedModel.commitAddressBook();
 
@@ -84,7 +84,7 @@ public class EditItemCommandTest {
 
         String expectedMessage = String.format(EditItemCommand.MESSAGE_EDIT_ITEM_SUCCESS, editedItem);
 
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(new RestaurantBook(model.getAddressBook()), new UserPrefs());
         expectedModel.commitAddressBook();
 
         assertCommandSuccess(editItemCommand, model, commandHistory, expectedMessage, expectedModel);
@@ -101,7 +101,7 @@ public class EditItemCommandTest {
 
         String expectedMessage = String.format(EditItemCommand.MESSAGE_EDIT_ITEM_SUCCESS, editedItem);
 
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(new RestaurantBook(model.getAddressBook()), new UserPrefs());
         expectedModel.updateItem(model.getFilteredItemList().get(0), editedItem);
         expectedModel.commitAddressBook();
 
@@ -160,7 +160,7 @@ public class EditItemCommandTest {
         Item itemToEdit = model.getFilteredItemList().get(INDEX_FIRST.getZeroBased());
         EditItemDescriptor descriptor = new EditItemDescriptorBuilder(editedItem).build();
         EditItemCommand editItemCommand = new EditItemCommand(INDEX_FIRST, descriptor);
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(new RestaurantBook(model.getAddressBook()), new UserPrefs());
         expectedModel.updateItem(itemToEdit, editedItem);
         expectedModel.commitAddressBook();
 
@@ -201,7 +201,7 @@ public class EditItemCommandTest {
         Item editedItem = new ItemBuilder().build();
         EditItemDescriptor descriptor = new EditItemDescriptorBuilder(editedItem).build();
         EditItemCommand editItemCommand = new EditItemCommand(INDEX_FIRST, descriptor);
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(new RestaurantBook(model.getAddressBook()), new UserPrefs());
 
         showItemAtIndex(model, INDEX_SECOND);
         Item itemToEdit = model.getFilteredItemList().get(INDEX_FIRST.getZeroBased());

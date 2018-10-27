@@ -6,9 +6,9 @@ import static seedu.address.testutil.TypicalAddressBook.getTypicalAddressBook;
 import org.junit.Test;
 
 import seedu.address.logic.CommandHistory;
-import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
+import seedu.address.model.RestaurantBook;
 import seedu.address.model.UserPrefs;
 
 public class ClearMenuCommandTest {
@@ -29,7 +29,7 @@ public class ClearMenuCommandTest {
     public void execute_nonEmptyMenu_success() {
         Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
         Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-        expectedModel.resetMenuData(new AddressBook());
+        expectedModel.resetMenuData(new RestaurantBook());
         expectedModel.commitAddressBook();
 
         assertCommandSuccess(new ClearMenuCommand(), model, commandHistory, ClearMenuCommand.MESSAGE_SUCCESS,

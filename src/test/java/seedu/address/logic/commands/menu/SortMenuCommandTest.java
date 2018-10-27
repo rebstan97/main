@@ -9,9 +9,9 @@ import org.junit.Test;
 
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.menu.SortMenuCommand.SortMethod;
-import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
+import seedu.address.model.RestaurantBook;
 import seedu.address.model.UserPrefs;
 import seedu.address.testutil.AddressBookBuilder;
 
@@ -19,7 +19,7 @@ import seedu.address.testutil.AddressBookBuilder;
  * Contains integration tests (interaction with the Model) for {@code SortMenuCommand}.
  */
 public class SortMenuCommandTest {
-    private AddressBook ab = new AddressBookBuilder().withItem(BEEF_BURGER).withItem(APPLE_JUICE).build();
+    private RestaurantBook ab = new AddressBookBuilder().withItem(BEEF_BURGER).withItem(APPLE_JUICE).build();
     private Model model = new ModelManager(ab, new UserPrefs());
     private Model expectedModel = new ModelManager(ab, new UserPrefs());
     private CommandHistory commandHistory = new CommandHistory();

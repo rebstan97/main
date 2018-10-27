@@ -32,7 +32,7 @@ public class ModelManager extends ComponentManager implements Model {
 
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
-    private final VersionedAddressBook versionedAddressBook;
+    private final VersionedRestaurantBook versionedAddressBook;
     private final FilteredList<Person> filteredPersons;
     private final FilteredList<Reservation> filteredReservations;
     private final FilteredList<SalesRecord> filteredRecords;
@@ -41,15 +41,15 @@ public class ModelManager extends ComponentManager implements Model {
     private final FilteredList<Item> filteredItems;
 
     /**
-     * Initializes a ModelManager with the given addressBook and userPrefs.
+     * Initializes a ModelManager with the given {@code restaurantBook} and {@code userPrefs}.
      */
-    public ModelManager(ReadOnlyAddressBook addressBook, UserPrefs userPrefs) {
+    public ModelManager(ReadOnlyRestaurantBook restaurantBook, UserPrefs userPrefs) {
         super();
-        requireAllNonNull(addressBook, userPrefs);
+        requireAllNonNull(restaurantBook, userPrefs);
 
-        logger.fine("Initializing with restaurant book: " + addressBook + " and user prefs " + userPrefs);
+        logger.fine("Initializing with restaurant book: " + restaurantBook + " and user prefs " + userPrefs);
 
-        versionedAddressBook = new VersionedAddressBook(addressBook);
+        versionedAddressBook = new VersionedRestaurantBook(restaurantBook);
         filteredPersons = new FilteredList<>(versionedAddressBook.getPersonList());
         filteredReservations = new FilteredList<>(versionedAddressBook.getReservationList());
         filteredRecords = new FilteredList<>(versionedAddressBook.getRecordList());
@@ -59,17 +59,17 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     public ModelManager() {
-        this(new AddressBook(), new UserPrefs());
+        this(new RestaurantBook(), new UserPrefs());
     }
 
     @Override
-    public void resetData(ReadOnlyAddressBook newData) {
+    public void resetData(ReadOnlyRestaurantBook newData) {
         versionedAddressBook.resetData(newData);
         indicateAddressBookChanged();
     }
 
     @Override
-    public ReadOnlyAddressBook getAddressBook() {
+    public ReadOnlyRestaurantBook getAddressBook() {
         return versionedAddressBook;
     }
 
@@ -153,7 +153,8 @@ public class ModelManager extends ComponentManager implements Model {
         indicateAddressBookChanged();
     }
 
-    /** Returns the sales report of the specified date.
+    /**
+     * Returns the sales report of the specified date.
      *
      * @param date Date of sales report to get
      * @return A SalesReport of the specified date
@@ -306,7 +307,7 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
-    public void resetMenuData(ReadOnlyAddressBook newData) {
+    public void resetMenuData(ReadOnlyRestaurantBook newData) {
         versionedAddressBook.resetMenuData(newData);
         indicateAddressBookChanged();
     }
@@ -424,8 +425,8 @@ public class ModelManager extends ComponentManager implements Model {
     //=========== Filtered Reservation List Accessors =============================================================
 
     /**
-     * Returns an unmodifiable view of the list of {@code Reservation} backed by the internal list of
-     * {@code versionedAddressBook}
+     * Returns an unmodifiable view of the list of {@code Reservation} backed by the internal list of {@code
+     * versionedAddressBook}
      */
     @Override
     public ObservableList<Reservation> getFilteredReservationList() {

@@ -8,17 +8,17 @@ import java.nio.file.Path;
 
 import org.junit.Test;
 
-import seedu.address.model.AddressBook;
-import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.ReadOnlyRestaurantBook;
+import seedu.address.model.RestaurantBook;
 import seedu.address.model.util.SampleDataUtil;
 import seedu.address.testutil.TestUtil;
 
-public class SampleDataTest extends AddressBookSystemTest {
+public class SampleDataTest extends RestaurantBookSystemTest {
     /**
      * Returns null to force test app to load data of the file in {@code getDataFileLocation()}.
      */
     @Override
-    protected AddressBook getInitialData() {
+    protected RestaurantBook getInitialData() {
         return null;
     }
 
@@ -45,7 +45,7 @@ public class SampleDataTest extends AddressBookSystemTest {
 
     @Test
     public void addressBook_dataFileDoesNotExist_loadDataWithRoot() {
-        ReadOnlyAddressBook expectedRestaurantBook = SampleDataUtil.getSampleAddressBook();
+        ReadOnlyRestaurantBook expectedRestaurantBook = SampleDataUtil.getSampleAddressBook();
         assertEquals(expectedRestaurantBook, getModel().getAddressBook());
     }
 }

@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import seedu.address.model.AddressBook;
+import seedu.address.model.RestaurantBook;
 import seedu.address.model.reservation.Reservation;
 
 /**
@@ -40,10 +40,10 @@ public class TypicalReservations {
     private TypicalReservations() {} // prevents instantiation
 
     /**
-     * Returns an {@code AddressBook} with all the typical reservations.
+     * Returns an {@code RestaurantBook} with all the typical reservations.
      */
-    public static AddressBook getTypicalAddressBook() {
-        AddressBook ab = new AddressBook();
+    public static RestaurantBook getTypicalAddressBook() {
+        RestaurantBook ab = new RestaurantBook();
         for (Reservation reservation : getTypicalReservations()) {
             ab.addReservation(reservation);
         }

@@ -8,9 +8,9 @@ import static seedu.address.testutil.reservation.TypicalReservations.BILLY;
 import org.junit.Test;
 
 import seedu.address.logic.CommandHistory;
-import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
+import seedu.address.model.RestaurantBook;
 import seedu.address.model.UserPrefs;
 import seedu.address.testutil.AddressBookBuilder;
 
@@ -18,7 +18,7 @@ import seedu.address.testutil.AddressBookBuilder;
  * Contains integration tests (interaction with the Model) for {@code SortReservationsCommand}.
  */
 public class SortReservationsCommandTest {
-    private AddressBook ab = new AddressBookBuilder().withReservation(BILLY).withReservation(ANDREW).build();
+    private RestaurantBook ab = new AddressBookBuilder().withReservation(BILLY).withReservation(ANDREW).build();
     private Model model = new ModelManager(ab, new UserPrefs());
     private Model expectedModel = new ModelManager(ab, new UserPrefs());
     private CommandHistory commandHistory = new CommandHistory();

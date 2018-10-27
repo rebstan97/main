@@ -23,9 +23,9 @@ import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.RedoCommand;
 import seedu.address.logic.commands.UndoCommand;
 import seedu.address.logic.commands.ingredients.EditIngredientCommand.EditIngredientDescriptor;
-import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
+import seedu.address.model.RestaurantBook;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.ingredient.Ingredient;
 import seedu.address.testutil.ingredients.EditIngredientDescriptorBuilder;
@@ -49,7 +49,7 @@ public class EditIngredientByIndexCommandTest {
         String expectedMessage = String.format(EditIngredientByIndexCommand.MESSAGE_EDIT_INGREDIENT_SUCCESS,
                 editedIngredient);
 
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(new RestaurantBook(model.getAddressBook()), new UserPrefs());
         expectedModel.updateIngredient(model.getFilteredIngredientList().get(0), editedIngredient);
         expectedModel.commitAddressBook();
 
@@ -72,7 +72,7 @@ public class EditIngredientByIndexCommandTest {
         String expectedMessage = String.format(EditIngredientByIndexCommand.MESSAGE_EDIT_INGREDIENT_SUCCESS,
                 editedIngredient);
 
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(new RestaurantBook(model.getAddressBook()), new UserPrefs());
         expectedModel.updateIngredient(lastIngredient, editedIngredient);
         expectedModel.commitAddressBook();
 
@@ -88,7 +88,7 @@ public class EditIngredientByIndexCommandTest {
         String expectedMessage = String.format(EditIngredientByIndexCommand.MESSAGE_EDIT_INGREDIENT_SUCCESS,
                 editedIngredient);
 
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(new RestaurantBook(model.getAddressBook()), new UserPrefs());
         expectedModel.commitAddressBook();
 
         assertCommandSuccess(editCommand, model, commandHistory, expectedMessage, expectedModel);
@@ -107,7 +107,7 @@ public class EditIngredientByIndexCommandTest {
         String expectedMessage = String.format(EditIngredientByIndexCommand.MESSAGE_EDIT_INGREDIENT_SUCCESS,
                 editedIngredient);
 
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(new RestaurantBook(model.getAddressBook()), new UserPrefs());
         expectedModel.updateIngredient(model.getFilteredIngredientList().get(0), editedIngredient);
         expectedModel.commitAddressBook();
 
@@ -169,7 +169,7 @@ public class EditIngredientByIndexCommandTest {
         Ingredient ingredientToEdit = model.getFilteredIngredientList().get(INDEX_FIRST.getZeroBased());
         EditIngredientDescriptor descriptor = new EditIngredientDescriptorBuilder(editedIngredient).build();
         EditIngredientByIndexCommand editCommand = new EditIngredientByIndexCommand(INDEX_FIRST, descriptor);
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(new RestaurantBook(model.getAddressBook()), new UserPrefs());
         expectedModel.updateIngredient(ingredientToEdit, editedIngredient);
         expectedModel.commitAddressBook();
 
@@ -211,7 +211,7 @@ public class EditIngredientByIndexCommandTest {
         Ingredient editedIngredient = new IngredientBuilder().build();
         EditIngredientDescriptor descriptor = new EditIngredientDescriptorBuilder(editedIngredient).build();
         EditIngredientByIndexCommand editCommand = new EditIngredientByIndexCommand(INDEX_FIRST, descriptor);
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(new RestaurantBook(model.getAddressBook()), new UserPrefs());
 
         showIngredientAtIndex(model, INDEX_SECOND);
         Ingredient ingredientToEdit = model.getFilteredIngredientList().get(INDEX_FIRST.getZeroBased());

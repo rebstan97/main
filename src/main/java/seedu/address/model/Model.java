@@ -3,7 +3,6 @@ package seedu.address.model;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
-
 import seedu.address.logic.commands.menu.SortMenuCommand.SortMethod;
 import seedu.address.model.accounts.Account;
 import seedu.address.model.ingredient.Ingredient;
@@ -32,14 +31,14 @@ public interface Model {
     Predicate<SalesRecord> PREDICATE_SHOW_ALL_RECORDS = unused -> true;
 
     /**
-     * Clears existing backing model and replaces with the provided new data for AddressBook.
+     * Clears existing backing model and replaces with the provided new data for RestaurantBook.
      */
-    void resetData(ReadOnlyAddressBook newData);
+    void resetData(ReadOnlyRestaurantBook newData);
 
     /**
-     * Returns the AddressBook
+     * Returns the RestaurantBook
      */
-    ReadOnlyAddressBook getAddressBook();
+    ReadOnlyRestaurantBook getAddressBook();
 
     //=========== API for Persons =============================================================
 
@@ -289,9 +288,9 @@ public interface Model {
     void removeTagForMenu(Tag tag);
 
     /**
-     * Clears the item list and replaces with the provided new data for AddressBook.
+     * Clears the item list and replaces with the provided new data for RestaurantBook.
      */
-    void resetMenuData(ReadOnlyAddressBook newData);
+    void resetMenuData(ReadOnlyRestaurantBook newData);
 
     /**
      * Sort the item list by given sorting method.

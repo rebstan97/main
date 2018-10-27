@@ -56,7 +56,7 @@ public class ModelManagerTest {
     public ExpectedException thrown = ExpectedException.none();
 
     private ModelManager modelManager = new ModelManager();
-    private AddressBook addressBookWithPersons = null;
+    private RestaurantBook restaurantBookWithPersons = null;
 
     @Test
     public void hasPerson_nullPerson_throwsNullPointerException() {
@@ -101,30 +101,30 @@ public class ModelManagerTest {
 
     @Test
     public void removeTag_noSuchTag_addressBookUnmodified() {
-        addressBookWithPersons = new AddressBookBuilder().withPerson(AMY).withPerson(BOB).build();
+        restaurantBookWithPersons = new AddressBookBuilder().withPerson(AMY).withPerson(BOB).build();
         UserPrefs userPrefs = new UserPrefs();
 
-        ModelManager unmodifiedModelManager = new ModelManager(addressBookWithPersons, userPrefs);
+        ModelManager unmodifiedModelManager = new ModelManager(restaurantBookWithPersons, userPrefs);
         unmodifiedModelManager.removeTag(new Tag(VALID_TAG_TEST));
 
-        ModelManager expectedModelManager = new ModelManager(addressBookWithPersons, userPrefs);
+        ModelManager expectedModelManager = new ModelManager(restaurantBookWithPersons, userPrefs);
 
         assertEquals(unmodifiedModelManager, expectedModelManager);
     }
 
     @Test
     public void removeTag_fromAllPersons_addressBookModified() {
-        addressBookWithPersons = new AddressBookBuilder().withPerson(AMY).withPerson(BOB).build();
+        restaurantBookWithPersons = new AddressBookBuilder().withPerson(AMY).withPerson(BOB).build();
         UserPrefs userPrefs = new UserPrefs();
 
-        ModelManager modifiedModelManager = new ModelManager(addressBookWithPersons, userPrefs);
+        ModelManager modifiedModelManager = new ModelManager(restaurantBookWithPersons, userPrefs);
         modifiedModelManager.removeTag(new Tag(VALID_TAG_FRIEND));
 
         Person amyWithoutTags = new PersonBuilder(AMY).withTags().build();
         Person bobWithoutFriendTag = new PersonBuilder(BOB).withTags(VALID_TAG_HUSBAND).build();
 
-        ModelManager expectedModelManager = new ModelManager(addressBookWithPersons, userPrefs);
-        // Cannot init a new AddressBook due to difference in addressBookStateList
+        ModelManager expectedModelManager = new ModelManager(restaurantBookWithPersons, userPrefs);
+        // Cannot init a new RestaurantBook due to difference in addressBookStateList
         expectedModelManager.updatePerson(AMY, amyWithoutTags);
         expectedModelManager.updatePerson(BOB, bobWithoutFriendTag);
 
@@ -133,15 +133,15 @@ public class ModelManagerTest {
 
     @Test
     public void removeTag_fromOnePerson_addressBookModified() {
-        addressBookWithPersons = new AddressBookBuilder().withPerson(AMY).withPerson(DYLAN).build();
+        restaurantBookWithPersons = new AddressBookBuilder().withPerson(AMY).withPerson(DYLAN).build();
         UserPrefs userPrefs = new UserPrefs();
 
-        ModelManager modifiedModelManager = new ModelManager(addressBookWithPersons, userPrefs);
+        ModelManager modifiedModelManager = new ModelManager(restaurantBookWithPersons, userPrefs);
         modifiedModelManager.removeTag(new Tag(VALID_TAG_FRIEND));
 
         Person amyWithoutTags = new PersonBuilder(AMY).withTags().build();
 
-        ModelManager expectedModelManager = new ModelManager(addressBookWithPersons, userPrefs);
+        ModelManager expectedModelManager = new ModelManager(restaurantBookWithPersons, userPrefs);
         expectedModelManager.updatePerson(AMY, amyWithoutTags);
 
         assertEquals(modifiedModelManager, expectedModelManager);
@@ -297,29 +297,29 @@ public class ModelManagerTest {
 
     @Test
     public void removeTagForMenu_noSuchTag_addressBookUnmodified() {
-        addressBookWithPersons = new AddressBookBuilder().withItem(APPLE_JUICE).withItem(BURGER).build();
+        restaurantBookWithPersons = new AddressBookBuilder().withItem(APPLE_JUICE).withItem(BURGER).build();
 
-        ModelManager unmodifiedModelManager = new ModelManager(addressBookWithPersons, new UserPrefs());
+        ModelManager unmodifiedModelManager = new ModelManager(restaurantBookWithPersons, new UserPrefs());
         unmodifiedModelManager.removeTagForMenu(new Tag(VALID_TAG_TEST));
 
-        ModelManager expectedModelManager = new ModelManager(addressBookWithPersons, new UserPrefs());
+        ModelManager expectedModelManager = new ModelManager(restaurantBookWithPersons, new UserPrefs());
 
         assertEquals(unmodifiedModelManager, expectedModelManager);
     }
 
     @Test
     public void removeTagForMenu_fromAllItems_addressBookModified() {
-        addressBookWithPersons = new AddressBookBuilder().withItem(CHEESE_BURGER).withItem(FRIES).build();
+        restaurantBookWithPersons = new AddressBookBuilder().withItem(CHEESE_BURGER).withItem(FRIES).build();
         UserPrefs userPrefs = new UserPrefs();
 
-        ModelManager modifiedModelManager = new ModelManager(addressBookWithPersons, userPrefs);
+        ModelManager modifiedModelManager = new ModelManager(restaurantBookWithPersons, userPrefs);
         modifiedModelManager.removeTagForMenu(new Tag(VALID_ITEM_TAG_CHEESE));
 
         Item cheeseWithoutCheeseTags = new ItemBuilder(CHEESE_BURGER).withTags(VALID_ITEM_TAG_BURGER).build();
         Item friesWithoutTags = new ItemBuilder(FRIES).withTags().build();
 
-        ModelManager expectedModelManager = new ModelManager(addressBookWithPersons, userPrefs);
-        // Cannot init a new AddressBook due to difference in addressBookStateList
+        ModelManager expectedModelManager = new ModelManager(restaurantBookWithPersons, userPrefs);
+        // Cannot init a new RestaurantBook due to difference in addressBookStateList
         expectedModelManager.updateItem(CHEESE_BURGER, cheeseWithoutCheeseTags);
         expectedModelManager.updateItem(FRIES, friesWithoutTags);
 
@@ -328,14 +328,14 @@ public class ModelManagerTest {
 
     @Test
     public void removeTagForMenu_fromOneItem_addressBookModified() {
-        addressBookWithPersons = new AddressBookBuilder().withItem(FRIES).withItem(BURGER).build();
+        restaurantBookWithPersons = new AddressBookBuilder().withItem(FRIES).withItem(BURGER).build();
 
-        ModelManager modifiedModelManager = new ModelManager(addressBookWithPersons, new UserPrefs());
+        ModelManager modifiedModelManager = new ModelManager(restaurantBookWithPersons, new UserPrefs());
         modifiedModelManager.removeTagForMenu(new Tag(VALID_ITEM_TAG_CHEESE));
 
         Item friesWithoutTags = new ItemBuilder(FRIES).withTags().build();
 
-        ModelManager expectedModelManager = new ModelManager(addressBookWithPersons, new UserPrefs());
+        ModelManager expectedModelManager = new ModelManager(restaurantBookWithPersons, new UserPrefs());
         expectedModelManager.updateItem(FRIES, friesWithoutTags);
 
         assertEquals(modifiedModelManager, expectedModelManager);
@@ -343,7 +343,7 @@ public class ModelManagerTest {
 
     @Test
     public void equals() {
-        AddressBook addressBook = new AddressBookBuilder()
+        RestaurantBook restaurantBook = new AddressBookBuilder()
                 .withPerson(ALICE)
                 .withPerson(BENSON)
                 .withRecord(RECORD_ONE)
@@ -351,12 +351,12 @@ public class ModelManagerTest {
                 .withAccount(DEMO_ONE)
                 .withAccount(DEMO_TWO)
                 .build();
-        AddressBook differentAddressBook = new AddressBook();
+        RestaurantBook differentRestaurantBook = new RestaurantBook();
         UserPrefs userPrefs = new UserPrefs();
 
         // same values -> returns true
-        modelManager = new ModelManager(addressBook, userPrefs);
-        ModelManager modelManagerCopy = new ModelManager(addressBook, userPrefs);
+        modelManager = new ModelManager(restaurantBook, userPrefs);
+        ModelManager modelManagerCopy = new ModelManager(restaurantBook, userPrefs);
         assertTrue(modelManager.equals(modelManagerCopy));
 
         // same object -> returns true
@@ -368,13 +368,13 @@ public class ModelManagerTest {
         // different types -> returns false
         assertFalse(modelManager.equals(5));
 
-        // different addressBook -> returns false
-        assertFalse(modelManager.equals(new ModelManager(differentAddressBook, userPrefs)));
+        // different restaurantBook -> returns false
+        assertFalse(modelManager.equals(new ModelManager(differentRestaurantBook, userPrefs)));
 
         // different filteredList -> returns false
         String[] keywords = ALICE.getName().toString().split("\\s+");
         modelManager.updateFilteredPersonList(new NameContainsKeywordsPredicate(Arrays.asList(keywords)));
-        assertFalse(modelManager.equals(new ModelManager(addressBook, userPrefs)));
+        assertFalse(modelManager.equals(new ModelManager(restaurantBook, userPrefs)));
 
         // resets modelManager to initial state for upcoming tests
         modelManager.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
@@ -386,6 +386,6 @@ public class ModelManagerTest {
         // different userPrefs -> returns true
         UserPrefs differentUserPrefs = new UserPrefs();
         differentUserPrefs.setRestaurantBookFilePath(Paths.get("differentFilePath"));
-        assertTrue(modelManager.equals(new ModelManager(addressBook, differentUserPrefs)));
+        assertTrue(modelManager.equals(new ModelManager(restaurantBook, differentUserPrefs)));
     }
 }
