@@ -130,7 +130,7 @@ public class EditReservationCommandTest {
     public void execute_duplicateReservationFilteredList_failure() {
         showReservationAtIndex(model, INDEX_FIRST);
 
-        // edit reservation in filtered list into a duplicate in address book
+        // edit reservation in filtered list into a duplicate in restaurant book
         Reservation reservationInList = model.getAddressBook().getReservationList().get(INDEX_SECOND.getZeroBased());
         EditReservationCommand editReservationCommand = new EditReservationCommand(INDEX_FIRST,
                 new EditReservationDescriptorBuilder(reservationInList).build());
@@ -151,13 +151,13 @@ public class EditReservationCommandTest {
     }
 
     /**
-     * Edit filtered list where index is larger than size of filtered list, but smaller than size of address book
+     * Edit filtered list where index is larger than size of filtered list, but smaller than size of restaurant book
      */
     @Test
     public void execute_invalidReservationIndexFilteredList_failure() {
         showReservationAtIndex(model, INDEX_FIRST);
         Index outOfBoundIndex = INDEX_SECOND;
-        // ensures that outOfBoundIndex is still in bounds of address book list
+        // ensures that outOfBoundIndex is still in bounds of restaurant book list
         assertTrue(outOfBoundIndex.getZeroBased() < model.getAddressBook().getReservationList().size());
 
         EditReservationCommand editReservationCommand = new EditReservationCommand(outOfBoundIndex,
@@ -196,11 +196,11 @@ public class EditReservationCommandTest {
                 .withName(VALID_RESERVATION_NAME_BILLY).build();
         EditReservationCommand editReservationCommand = new EditReservationCommand(outOfBoundIndex, descriptor);
 
-        // execution failed -> address book state not added into model
+        // execution failed -> restaurant book state not added into model
         assertCommandFailure(editReservationCommand, model, commandHistory,
                 Messages.MESSAGE_INVALID_RESERVATION_DISPLAYED_INDEX);
 
-        // single address book state in model -> undoCommand and redoCommand fail
+        // single restaurant book state in model -> undoCommand and redoCommand fail
         assertCommandFailure(new UndoCommand(), model, commandHistory, UndoCommand.MESSAGE_FAILURE);
         assertCommandFailure(new RedoCommand(), model, commandHistory, RedoCommand.MESSAGE_FAILURE);
     }

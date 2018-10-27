@@ -9,7 +9,7 @@ import seedu.address.model.reservation.Reservation;
 import seedu.address.model.salesrecord.SalesRecord;
 
 /**
- * Unmodifiable view of an address book
+ * Unmodifiable view of an restaurant book
  */
 public interface ReadOnlyAddressBook {
 

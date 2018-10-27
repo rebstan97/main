@@ -3,7 +3,7 @@ package seedu.address.model.reservation;
 import static java.util.Objects.requireNonNull;
 
 /**
- * Represents a Reservation's remark in the address book.
+ * Represents a Reservation's remark in the restaurant book.
  * Guarantees: immutable; is valid as declared in {@link #isValidRemark(String)}
  */
 public class Remark {

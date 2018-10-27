@@ -25,7 +25,7 @@ import seedu.address.model.salesrecord.QuantitySold;
 import seedu.address.model.salesrecord.SalesRecord;
 
 /**
- * Edits the details of an existing sales record in the address book.
+ * Edits the details of an existing sales record in the restaurant book.
  */
 public class EditSalesCommand extends Command {
 
@@ -47,7 +47,7 @@ public class EditSalesCommand extends Command {
 
     public static final String MESSAGE_EDIT_RECORD_SUCCESS = "Edited record: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
-    public static final String MESSAGE_DUPLICATE_RECORD = "This record already exists in the address book.";
+    public static final String MESSAGE_DUPLICATE_RECORD = "This record already exists in the restaurant book.";
 
     private final Index index;
     private final EditRecordDescriptor editRecordDescriptor;

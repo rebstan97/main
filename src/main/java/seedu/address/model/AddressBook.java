@@ -92,7 +92,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     //// person-level operations
 
     /**
-     * Returns true if a person with the same identity as {@code person} exists in the address book.
+     * Returns true if a person with the same identity as {@code person} exists in the restaurant book.
      */
     public boolean hasPerson(Person person) {
         requireNonNull(person);
@@ -100,7 +100,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Adds a person to the address book. The person must not already exist in the address book.
+     * Adds a person to the restaurant book. The person must not already exist in the restaurant book.
      */
     public void addPerson(Person p) {
         persons.add(p);
@@ -108,8 +108,8 @@ public class AddressBook implements ReadOnlyAddressBook {
 
     /**
      * Replaces the given person {@code target} in the list with {@code editedPerson}. {@code target} must exist in the
-     * address book. The person identity of {@code editedPerson} must not be the same as another existing person in the
-     * address book.
+     * restaurant book. The person identity of {@code editedPerson} must not be the same as another existing person in
+     * the restaurant book.
      */
     public void updatePerson(Person target, Person editedPerson) {
         requireNonNull(editedPerson);
@@ -118,7 +118,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Removes {@code key} from this {@code AddressBook}. {@code key} must exist in the address book.
+     * Removes {@code key} from this {@code AddressBook}. {@code key} must exist in the restaurant book.
      */
     public void removePerson(Person key) {
         persons.remove(key);
@@ -162,7 +162,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Returns true if a reservation with the same identity as {@code reservation} exists in the address book.
+     * Returns true if a reservation with the same identity as {@code reservation} exists in the restaurant book.
      */
     public boolean hasReservation(Reservation reservation) {
         requireNonNull(reservation);
@@ -170,7 +170,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Adds a reservation to the address book. The reservation must not already exist in the address book.
+     * Adds a reservation to the restaurant book. The reservation must not already exist in the restaurant book.
      */
     public void addReservation(Reservation r) {
         reservations.add(r);
@@ -178,8 +178,8 @@ public class AddressBook implements ReadOnlyAddressBook {
 
     /**
      * Replaces the given reservation {@code target} in the list with {@code editedReservation}. {@code target} must
-     * exist in the address book. The person identity of {@code editedReservation} must not be the same as
-     * another existing person in the address book.
+     * exist in the restaurant book. The person identity of {@code editedReservation} must not be the same as another
+     * existing person in the restaurant book.
      */
     public void updateReservation(Reservation target, Reservation editedReservation) {
         requireNonNull(editedReservation);
@@ -188,7 +188,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Removes {@code key} from this {@code AddressBook}. {@code key} must exist in the address book.
+     * Removes {@code key} from this {@code AddressBook}. {@code key} must exist in the restaurant book.
      */
     public void removeReservation(Reservation key) {
         reservations.remove(key);
@@ -231,7 +231,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Adds a record to the address book. The record must not already exist in the sales book.
+     * Adds a record to the restaurant book. The record must not already exist in the sales book.
      */
     public void addRecord(SalesRecord r) {
         records.add(r);
@@ -276,7 +276,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Returns true if a person with the same identity as {@code person} exists in the address book.
+     * Returns true if a person with the same identity as {@code person} exists in the restaurant book.
      */
     public boolean hasAccount(Account account) {
         return accounts.contains(account);
@@ -301,8 +301,8 @@ public class AddressBook implements ReadOnlyAddressBook {
 
     /**
      * Replaces the given person {@code target} in the list with {@code editedPerson}. {@code target} must exist in the
-     * address book. The person identity of {@code editedPerson} must not be the same as another existing person in the
-     * address book.
+     * restaurant book. The person identity of {@code editedPerson} must not be the same as another existing person in
+     * the restaurant book.
      */
     public void updateAccount(Account target, Account editedAccount) {
         //TODO: Handle hashing of new password here as well
@@ -310,7 +310,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Removes {@code key} from this {@code AddressBook}. {@code key} must exist in the address book.
+     * Removes {@code key} from this {@code AddressBook}. {@code key} must exist in the restaurant book.
      */
     public void removeAccount(Account key) {
         accounts.remove(key);
@@ -319,30 +319,30 @@ public class AddressBook implements ReadOnlyAddressBook {
     //// ingredient-level operations
 
     /**
-     * Replaces the contents of the ingredient list with {@code ingredients}. {@code ingredients} must not
-     * contain duplicate ingredients.
+     * Replaces the contents of the ingredient list with {@code ingredients}. {@code ingredients} must not contain
+     * duplicate ingredients.
      */
     public void setIngredients(List<Ingredient> ingredients) {
         this.ingredients.setIngredients(ingredients);
     }
 
     /**
-     * Returns true if an ingredient with the same identity as {@code ingredient} exists in the address book.
+     * Returns true if an ingredient with the same identity as {@code ingredient} exists in the restaurant book.
      */
     public boolean hasIngredient(Ingredient ingredient) {
         return ingredients.contains(ingredient);
     }
 
     /**
-     * Finds an ingredient in the address book with the name {@code IngredientName}. The ingredient must already
-     * exist in the address book.
+     * Finds an ingredient in the restaurant book with the name {@code IngredientName}. The ingredient must already
+     * exist in the restaurant book.
      */
     public Ingredient findIngredient(IngredientName name) throws IngredientNotFoundException {
         return ingredients.find(name);
     }
 
     /**
-     * Adds an ingredient to the address book. The ingredient must not already exist in the address book.
+     * Adds an ingredient to the restaurant book. The ingredient must not already exist in the restaurant book.
      */
     public void addIngredient(Ingredient i) {
         ingredients.add(i);
@@ -350,8 +350,8 @@ public class AddressBook implements ReadOnlyAddressBook {
 
     /**
      * Replaces the given ingredient {@code target} in the list with {@code editedIngredients}. {@code target} must
-     * exist in the address book. The ingredient identity of {@code editedIngredient} must not be the same as
-     * another existing ingredient in the address book.
+     * exist in the restaurant book. The ingredient identity of {@code editedIngredient} must not be the same as another
+     * existing ingredient in the restaurant book.
      */
     public void updateIngredient(Ingredient target, Ingredient editedIngredient) {
         requireNonNull(editedIngredient);
@@ -360,7 +360,8 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Removes ingredient with {@code key} from this {@code AddressBook}. {@code key} must exist in the address book.
+     * Removes ingredient with {@code key} from this {@code AddressBook}. {@code key} must exist in the restaurant
+     * book.
      */
     public void removeIngredient(Ingredient key) {
         ingredients.remove(key);

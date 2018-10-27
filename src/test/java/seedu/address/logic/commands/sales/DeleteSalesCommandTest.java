@@ -76,7 +76,7 @@ public class DeleteSalesCommandTest {
         showRecordAtIndex(model, INDEX_FIRST);
 
         Index outOfBoundIndex = INDEX_SECOND;
-        // ensures that outOfBoundIndex is still in bounds of address book list
+        // ensures that outOfBoundIndex is still in bounds of restaurant book list
         assertTrue(outOfBoundIndex.getZeroBased() < model.getAddressBook().getRecordList().size());
 
         DeleteSalesCommand deleteSalesCommand = new DeleteSalesCommand(outOfBoundIndex);
@@ -110,11 +110,11 @@ public class DeleteSalesCommandTest {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredRecordList().size() + 1);
         DeleteSalesCommand deleteSalesCommand = new DeleteSalesCommand(outOfBoundIndex);
 
-        // execution failed -> address book state not added into model
+        // execution failed -> restaurant book state not added into model
         assertCommandFailure(deleteSalesCommand, model, commandHistory,
                 Messages.MESSAGE_INVALID_RECORD_DISPLAYED_INDEX);
 
-        // single address book state in model -> undoCommand and redoCommand fail
+        // single restaurant book state in model -> undoCommand and redoCommand fail
         assertCommandFailure(new UndoCommand(), model, commandHistory, UndoCommand.MESSAGE_FAILURE);
         assertCommandFailure(new RedoCommand(), model, commandHistory, RedoCommand.MESSAGE_FAILURE);
     }

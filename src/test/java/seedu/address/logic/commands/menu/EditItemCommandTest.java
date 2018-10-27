@@ -139,13 +139,13 @@ public class EditItemCommandTest {
     }
 
     /**
-     * Edit filtered list where index is larger than size of filtered list, but smaller than size of address book
+     * Edit filtered list where index is larger than size of filtered list, but smaller than size of restaurant book
      */
     @Test
     public void execute_invalidItemIndexFilteredList_failure() {
         showItemAtIndex(model, INDEX_FIRST);
         Index outOfBoundIndex = INDEX_SECOND;
-        // ensures that outOfBoundIndex is still in bounds of address book list
+        // ensures that outOfBoundIndex is still in bounds of restaurant book list
         assertTrue(outOfBoundIndex.getZeroBased() < model.getAddressBook().getItemList().size());
 
         EditItemCommand editItemCommand = new EditItemCommand(outOfBoundIndex,
@@ -182,10 +182,10 @@ public class EditItemCommandTest {
         EditItemDescriptor descriptor = new EditItemDescriptorBuilder().withName(VALID_ITEM_NAME_FRIES).build();
         EditItemCommand editItemCommand = new EditItemCommand(outOfBoundIndex, descriptor);
 
-        // execution failed -> address book state not added into model
+        // execution failed -> restaurant book state not added into model
         assertCommandFailure(editItemCommand, model, commandHistory, Messages.MESSAGE_INVALID_ITEM_DISPLAYED_INDEX);
 
-        // single address book state in model -> undoCommand and redoCommand fail
+        // single restaurant book state in model -> undoCommand and redoCommand fail
         assertCommandFailure(new UndoCommand(), model, commandHistory, UndoCommand.MESSAGE_FAILURE);
         assertCommandFailure(new RedoCommand(), model, commandHistory, RedoCommand.MESSAGE_FAILURE);
     }

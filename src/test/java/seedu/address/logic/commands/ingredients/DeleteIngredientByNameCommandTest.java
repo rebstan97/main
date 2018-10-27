@@ -77,10 +77,10 @@ public class DeleteIngredientByNameCommandTest {
         IngredientName nameNotFound = new IngredientName("Chicken Thigh");
         DeleteIngredientByNameCommand deleteCommand = new DeleteIngredientByNameCommand(nameNotFound);
 
-        // execution failed -> address book state not added into model
+        // execution failed -> restaurant book state not added into model
         assertCommandFailure(deleteCommand, model, commandHistory, Messages.MESSAGE_INGREDIENT_NAME_NOT_FOUND);
 
-        // single address book state in model -> undoCommand and redoCommand fail
+        // single restaurant book state in model -> undoCommand and redoCommand fail
         assertCommandFailure(new UndoCommand(), model, commandHistory, UndoCommand.MESSAGE_FAILURE);
         assertCommandFailure(new RedoCommand(), model, commandHistory, RedoCommand.MESSAGE_FAILURE);
     }

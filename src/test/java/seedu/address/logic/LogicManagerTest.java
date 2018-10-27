@@ -52,8 +52,8 @@ public class LogicManagerTest {
         Account account = new AccountBuilder().build();
         EventsCenter.getInstance().post(new LogoutEvent());
         assertCommandException(RegisterCommand.COMMAND_WORD + " "
-                + PREFIX_ID + account.getUsername().toString() + " "
-                + PREFIX_PASSWORD + account.getPassword().toString(),
+                        + PREFIX_ID + account.getUsername().toString() + " "
+                        + PREFIX_PASSWORD + account.getPassword().toString(),
                 Messages.MESSAGE_COMMAND_FORBIDDEN);
     }
 
@@ -142,8 +142,8 @@ public class LogicManagerTest {
     /**
      * Executes the command, confirms that the result message is correct and that the expected exception is thrown, and
      * also confirms that the following two parts of the LogicManager object's state are as expected:<br> - the internal
-     * model manager data are same as those in the {@code expectedModel} <br> - {@code expectedModel}'s address book was
-     * saved to the storage file.
+     * model manager data are same as those in the {@code expectedModel} <br> - {@code expectedModel}'s restaurant book
+     * was saved to the storage file.
      */
     private void assertCommandBehavior(Class<?> expectedException, String inputCommand,
             String expectedMessage, Model expectedModel) {

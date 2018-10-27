@@ -14,7 +14,7 @@ import seedu.address.model.Model;
 import seedu.address.model.salesrecord.SalesRecord;
 
 /**
- * Deletes a sales record identified using its displayed index from the address book.
+ * Deletes a sales record identified using its displayed index from the restaurant book.
  */
 public class DeleteSalesCommand extends Command {
 

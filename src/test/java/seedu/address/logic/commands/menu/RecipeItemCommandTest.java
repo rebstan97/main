@@ -88,7 +88,7 @@ public class RecipeItemCommandTest {
         showItemAtIndex(model, INDEX_FIRST);
         Index outOfBoundIndex = INDEX_SECOND;
 
-        // ensures that outOfBoundIndex is still in bounds of address book list
+        // ensures that outOfBoundIndex is still in bounds of restaurant book list
         assertTrue(outOfBoundIndex.getZeroBased() < model.getAddressBook().getPersonList().size());
 
         RecipeItemCommand recipeItemCommand = new RecipeItemCommand(outOfBoundIndex,

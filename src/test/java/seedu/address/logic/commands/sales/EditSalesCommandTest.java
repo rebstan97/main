@@ -129,7 +129,7 @@ public class EditSalesCommandTest {
     public void execute_duplicateRecordFilteredList_failure() {
         showRecordAtIndex(model, INDEX_FIRST);
 
-        // edit record in filtered list into a duplicate in address book
+        // edit record in filtered list into a duplicate in restaurant book
         SalesRecord recordInList = model.getAddressBook().getRecordList().get(INDEX_SECOND.getZeroBased());
         EditSalesCommand editSalesCommand = new EditSalesCommand(INDEX_FIRST,
                 new EditRecordDescriptorBuilder(recordInList).build());
@@ -148,13 +148,13 @@ public class EditSalesCommandTest {
     }
 
     /**
-     * Edit filtered list where index is larger than size of filtered list, but smaller than size of address book
+     * Edit filtered list where index is larger than size of filtered list, but smaller than size of restaurant book
      */
     @Test
     public void execute_invalidRecordIndexFilteredList_failure() {
         showRecordAtIndex(model, INDEX_FIRST);
         Index outOfBoundIndex = INDEX_SECOND;
-        // ensures that outOfBoundIndex is still in bounds of address book list
+        // ensures that outOfBoundIndex is still in bounds of restaurant book list
         assertTrue(outOfBoundIndex.getZeroBased() < model.getAddressBook().getRecordList().size());
 
         EditSalesCommand editSalesCommand = new EditSalesCommand(outOfBoundIndex,
@@ -192,10 +192,10 @@ public class EditSalesCommandTest {
                 .withName(VALID_ITEM_NAME_RECORD_TWO).build();
         EditSalesCommand editSalesCommand = new EditSalesCommand(outOfBoundIndex, descriptor);
 
-        // execution failed -> address book state not added into model
+        // execution failed -> restaurant book state not added into model
         assertCommandFailure(editSalesCommand, model, commandHistory, Messages.MESSAGE_INVALID_RECORD_DISPLAYED_INDEX);
 
-        // single address book state in model -> undoCommand and redoCommand fail
+        // single restaurant book state in model -> undoCommand and redoCommand fail
         assertCommandFailure(new UndoCommand(), model, commandHistory, UndoCommand.MESSAGE_FAILURE);
         assertCommandFailure(new RedoCommand(), model, commandHistory, RedoCommand.MESSAGE_FAILURE);
     }

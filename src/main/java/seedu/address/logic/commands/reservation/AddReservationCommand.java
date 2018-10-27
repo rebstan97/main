@@ -14,7 +14,7 @@ import seedu.address.model.Model;
 import seedu.address.model.reservation.Reservation;
 
 /**
- * Adds a reservation to the address book.
+ * Adds a reservation to the restaurant book.
  */
 public class AddReservationCommand extends Command {
 
@@ -22,7 +22,7 @@ public class AddReservationCommand extends Command {
 
     public static final String COMMAND_ALIAS = "ar";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a reservation to the address book. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a reservation to the restaurant book. "
             + "Parameters: "
             + PREFIX_NAME + "NAME "
             + PREFIX_PAX + "PAX "
@@ -35,7 +35,7 @@ public class AddReservationCommand extends Command {
             + PREFIX_TAG + "Driving";
 
     public static final String MESSAGE_SUCCESS = "New reservation added: %1$s";
-    public static final String MESSAGE_DUPLICATE_RESERVATION = "This reservation already exists in the address book";
+    public static final String MESSAGE_DUPLICATE_RESERVATION = "This reservation already exists in the restaurant book";
 
     private final Reservation toAdd;
 
