@@ -96,7 +96,7 @@ public class DeleteSalesCommandTest {
         // delete -> first record deleted
         deleteSalesCommand.execute(model, commandHistory);
 
-        // undo -> reverts addressbook back to previous state and filtered record list to show all records
+        // undo -> reverts restaurantbook back to previous state and filtered record list to show all records
         expectedModel.undoRestaurantBook();
         assertCommandSuccess(new UndoCommand(), model, commandHistory, UndoCommand.MESSAGE_SUCCESS, expectedModel);
 
@@ -138,7 +138,7 @@ public class DeleteSalesCommandTest {
         // delete -> deletes second record in unfiltered record list / first record in filtered record list
         deleteSalesCommand.execute(model, commandHistory);
 
-        // undo -> reverts addressbook back to previous state and filtered record list to show all records
+        // undo -> reverts restaurantbook back to previous state and filtered record list to show all records
         expectedModel.undoRestaurantBook();
         assertCommandSuccess(new UndoCommand(), model, commandHistory, UndoCommand.MESSAGE_SUCCESS, expectedModel);
 

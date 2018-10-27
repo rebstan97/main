@@ -70,7 +70,7 @@ public class TestApp extends MainApp {
     /**
      * Returns a defensive copy of the restaurant book data stored inside the storage file.
      */
-    public RestaurantBook readStorageAddressBook() {
+    public RestaurantBook readStorageRestaurantBook() {
         try {
             return new RestaurantBook(storage.readRestaurantBook().get());
         } catch (DataConversionException dce) {

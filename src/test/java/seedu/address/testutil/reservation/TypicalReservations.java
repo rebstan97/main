@@ -42,12 +42,12 @@ public class TypicalReservations {
     /**
      * Returns an {@code RestaurantBook} with all the typical reservations.
      */
-    public static RestaurantBook getTypicalAddressBook() {
-        RestaurantBook ab = new RestaurantBook();
+    public static RestaurantBook getTypicalRestaurantBookWithReservationsOnly() {
+        RestaurantBook restaurantBook = new RestaurantBook();
         for (Reservation reservation : getTypicalReservations()) {
-            ab.addReservation(reservation);
+            restaurantBook.addReservation(reservation);
         }
-        return ab;
+        return restaurantBook;
     }
 
     public static List<Reservation> getTypicalReservations() {

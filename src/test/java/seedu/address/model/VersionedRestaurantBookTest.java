@@ -274,15 +274,15 @@ public class VersionedRestaurantBookTest {
     }
 
     /**
-     * Creates and returns a {@code VersionedRestaurantBook} with the {@code addressBookStates} added into it, and the
-     * {@code VersionedRestaurantBook#currentStatePointer} at the end of list.
+     * Creates and returns a {@code VersionedRestaurantBook} with the {@code restaurantBookStates} added into it, and
+     * the {@code VersionedRestaurantBook#currentStatePointer} at the end of list.
      */
-    private VersionedRestaurantBook prepareRestaurantBookList(ReadOnlyRestaurantBook... addressBookStates) {
-        assertFalse(addressBookStates.length == 0);
+    private VersionedRestaurantBook prepareRestaurantBookList(ReadOnlyRestaurantBook... restaurantBookStates) {
+        assertFalse(restaurantBookStates.length == 0);
 
-        VersionedRestaurantBook versionedRestaurantBook = new VersionedRestaurantBook(addressBookStates[0]);
-        for (int i = 1; i < addressBookStates.length; i++) {
-            versionedRestaurantBook.resetData(addressBookStates[i]);
+        VersionedRestaurantBook versionedRestaurantBook = new VersionedRestaurantBook(restaurantBookStates[0]);
+        for (int i = 1; i < restaurantBookStates.length; i++) {
+            versionedRestaurantBook.resetData(restaurantBookStates[i]);
             versionedRestaurantBook.commit();
         }
 

@@ -65,12 +65,12 @@ public class ModelManagerTest {
     }
 
     @Test
-    public void hasPerson_personNotInAddressBook_returnsFalse() {
+    public void hasPerson_personNotInRestaurantBook_returnsFalse() {
         assertFalse(modelManager.hasPerson(ALICE));
     }
 
     @Test
-    public void hasPerson_personInAddressBook_returnsTrue() {
+    public void hasPerson_personInRestaurantBook_returnsTrue() {
         modelManager.addPerson(ALICE);
         assertTrue(modelManager.hasPerson(ALICE));
     }
@@ -100,7 +100,7 @@ public class ModelManagerTest {
     }
 
     @Test
-    public void removeTag_noSuchTag_addressBookUnmodified() {
+    public void removeTag_noSuchTag_restaurantBookUnmodified() {
         restaurantBookWithPersons = new RestaurantBookBuilder().withPerson(AMY).withPerson(BOB).build();
         UserPrefs userPrefs = new UserPrefs();
 
@@ -113,7 +113,7 @@ public class ModelManagerTest {
     }
 
     @Test
-    public void removeTag_fromAllPersons_addressBookModified() {
+    public void removeTag_fromAllPersons_restaurantBookModified() {
         restaurantBookWithPersons = new RestaurantBookBuilder().withPerson(AMY).withPerson(BOB).build();
         UserPrefs userPrefs = new UserPrefs();
 
@@ -124,7 +124,7 @@ public class ModelManagerTest {
         Person bobWithoutFriendTag = new PersonBuilder(BOB).withTags(VALID_TAG_HUSBAND).build();
 
         ModelManager expectedModelManager = new ModelManager(restaurantBookWithPersons, userPrefs);
-        // Cannot init a new RestaurantBook due to difference in addressBookStateList
+        // Cannot init a new RestaurantBook due to difference in restaurantBookStateList
         expectedModelManager.updatePerson(AMY, amyWithoutTags);
         expectedModelManager.updatePerson(BOB, bobWithoutFriendTag);
 
@@ -132,7 +132,7 @@ public class ModelManagerTest {
     }
 
     @Test
-    public void removeTag_fromOnePerson_addressBookModified() {
+    public void removeTag_fromOnePerson_restaurantBookModified() {
         restaurantBookWithPersons = new RestaurantBookBuilder().withPerson(AMY).withPerson(DYLAN).build();
         UserPrefs userPrefs = new UserPrefs();
 
@@ -259,12 +259,12 @@ public class ModelManagerTest {
     }
 
     @Test
-    public void hasItem_itemNotInAddressBook_returnsFalse() {
+    public void hasItem_itemNotInRestaurantBook_returnsFalse() {
         assertFalse(modelManager.hasItem(APPLE_JUICE));
     }
 
     @Test
-    public void hasItem_itemInAddressBook_returnsTrue() {
+    public void hasItem_itemInRestaurantBook_returnsTrue() {
         modelManager.addItem(APPLE_JUICE);
         assertTrue(modelManager.hasItem(APPLE_JUICE));
     }
@@ -296,7 +296,7 @@ public class ModelManagerTest {
     }
 
     @Test
-    public void removeTagForMenu_noSuchTag_addressBookUnmodified() {
+    public void removeTagForMenu_noSuchTag_restaurantBookUnmodified() {
         restaurantBookWithPersons = new RestaurantBookBuilder().withItem(APPLE_JUICE).withItem(BURGER).build();
 
         ModelManager unmodifiedModelManager = new ModelManager(restaurantBookWithPersons, new UserPrefs());
@@ -308,7 +308,7 @@ public class ModelManagerTest {
     }
 
     @Test
-    public void removeTagForMenu_fromAllItems_addressBookModified() {
+    public void removeTagForMenu_fromAllItems_restaurantBookModified() {
         restaurantBookWithPersons = new RestaurantBookBuilder().withItem(CHEESE_BURGER).withItem(FRIES).build();
         UserPrefs userPrefs = new UserPrefs();
 
@@ -319,7 +319,7 @@ public class ModelManagerTest {
         Item friesWithoutTags = new ItemBuilder(FRIES).withTags().build();
 
         ModelManager expectedModelManager = new ModelManager(restaurantBookWithPersons, userPrefs);
-        // Cannot init a new RestaurantBook due to difference in addressBookStateList
+        // Cannot init a new RestaurantBook due to difference in restaurantBookStateList
         expectedModelManager.updateItem(CHEESE_BURGER, cheeseWithoutCheeseTags);
         expectedModelManager.updateItem(FRIES, friesWithoutTags);
 
@@ -327,7 +327,7 @@ public class ModelManagerTest {
     }
 
     @Test
-    public void removeTagForMenu_fromOneItem_addressBookModified() {
+    public void removeTagForMenu_fromOneItem_restaurantBookModified() {
         restaurantBookWithPersons = new RestaurantBookBuilder().withItem(FRIES).withItem(BURGER).build();
 
         ModelManager modifiedModelManager = new ModelManager(restaurantBookWithPersons, new UserPrefs());

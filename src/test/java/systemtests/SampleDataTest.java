@@ -14,6 +14,7 @@ import seedu.address.model.util.SampleDataUtil;
 import seedu.address.testutil.TestUtil;
 
 public class SampleDataTest extends RestaurantBookSystemTest {
+
     /**
      * Returns null to force test app to load data of the file in {@code getDataFileLocation()}.
      */
@@ -44,7 +45,7 @@ public class SampleDataTest extends RestaurantBookSystemTest {
     }
 
     @Test
-    public void addressBook_dataFileDoesNotExist_loadDataWithRoot() {
+    public void restaurantBook_dataFileDoesNotExist_loadDataWithRoot() {
         ReadOnlyRestaurantBook expectedRestaurantBook = SampleDataUtil.getSampleRestaurantBook();
         assertEquals(expectedRestaurantBook, getModel().getRestaurantBook());
     }

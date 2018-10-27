@@ -16,7 +16,7 @@ public class ClearCommandTest {
     private CommandHistory commandHistory = new CommandHistory();
 
     @Test
-    public void execute_emptyAddressBook_success() {
+    public void execute_emptyRestaurantBook_success() {
         // An empty storage assumed to have the root account in it
         Model model = new ModelManager(SampleDataUtil.getSampleRestaurantBook(), new UserPrefs());
         Model expectedModel = new ModelManager(SampleDataUtil.getSampleRestaurantBook(), new UserPrefs());
@@ -26,7 +26,7 @@ public class ClearCommandTest {
     }
 
     @Test
-    public void execute_nonEmptyAddressBook_success() {
+    public void execute_nonEmptyRestaurantBook_success() {
         Model model = new ModelManager(getTypicalRestaurantBook(), new UserPrefs());
         Model expectedModel = new ModelManager(getTypicalRestaurantBook(), new UserPrefs());
         // Once reset, only has root account

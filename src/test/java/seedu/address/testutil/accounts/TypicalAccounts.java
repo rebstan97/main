@@ -14,7 +14,7 @@ import java.util.List;
 import seedu.address.model.accounts.Account;
 
 /**
- * A utility class containing a list of {@code Person} objects to be used in tests.
+ * A utility class containing a list of {@code Account} objects to be used in tests.
  */
 public class TypicalAccounts {
 

@@ -82,9 +82,9 @@ public class PersonListPanelTest extends GuiUnitTest {
      */
     private ObservableList<Person> createBackingList(int personCount) throws Exception {
         Path xmlFile = createXmlFileWithPersons(personCount);
-        XmlSerializableRestaurantBook xmlAddressBook =
+        XmlSerializableRestaurantBook xmlRestaurantBook =
                 XmlUtil.getDataFromFile(xmlFile, XmlSerializableRestaurantBook.class);
-        return FXCollections.observableArrayList(xmlAddressBook.toModelType().getPersonList());
+        return FXCollections.observableArrayList(xmlRestaurantBook.toModelType().getPersonList());
     }
 
     /**

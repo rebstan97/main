@@ -149,7 +149,7 @@ public class JsonUserPrefsStorageTest {
         // not the same type
         assertNotEquals(1, expected);
 
-        // change the addressbook file path
+        // change the restaurantbook file path
         expected.setRestaurantBookFilePath(Paths.get("data", "elsewhere.xml"));
         assertNotEquals(expected, actual);
         assertNotEquals(expected.hashCode(), actual.hashCode());

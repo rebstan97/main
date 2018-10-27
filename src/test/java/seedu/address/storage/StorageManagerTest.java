@@ -32,9 +32,9 @@ public class StorageManagerTest {
 
     @Before
     public void setUp() {
-        XmlRestaurantBookStorage addressBookStorage = new XmlRestaurantBookStorage(getTempFilePath("ab"));
+        XmlRestaurantBookStorage restaurantBookStorage = new XmlRestaurantBookStorage(getTempFilePath("ab"));
         JsonUserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(getTempFilePath("prefs"));
-        storageManager = new StorageManager(addressBookStorage, userPrefsStorage);
+        storageManager = new StorageManager(restaurantBookStorage, userPrefsStorage);
     }
 
     private Path getTempFilePath(String fileName) {
@@ -57,7 +57,7 @@ public class StorageManagerTest {
     }
 
     @Test
-    public void addressBookReadSave() throws Exception {
+    public void restaurantBookReadSave() throws Exception {
         /*
          * Note: This is an integration test that verifies the StorageManager is properly wired to the
          * {@link XmlRestaurantBookStorage} class.
@@ -70,7 +70,7 @@ public class StorageManagerTest {
     }
 
     @Test
-    public void addressBookReadBackup() throws Exception {
+    public void restaurantBookReadBackup() throws Exception {
         RestaurantBook original = getTypicalRestaurantBook();
         storageManager.backupRestaurantBook(original);
         ReadOnlyRestaurantBook retrieved = storageManager.readRestaurantBook(Paths.get(getTempFilePath("ab")
@@ -79,12 +79,12 @@ public class StorageManagerTest {
     }
 
     @Test
-    public void getAddressBookFilePath() {
+    public void getRestaurantBookFilePath() {
         assertNotNull(storageManager.getRestaurantBookFilePath());
     }
 
     @Test
-    public void handleAddressBookChangedEvent_exceptionThrown_eventRaised() {
+    public void handleRestaurantBookChangedEvent_exceptionThrown_eventRaised() {
         // Create a StorageManager while injecting a stub that throws an exception when the save method is called
         Storage storage = new StorageManager(new XmlRestaurantBookStorageExceptionThrowingStub(Paths.get("dummy")),
                 new JsonUserPrefsStorage(Paths.get("dummy")));

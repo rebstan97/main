@@ -185,7 +185,7 @@ public abstract class RestaurantBookSystemTest {
             Model expectedModel) {
         assertEquals(expectedCommandInput, getCommandBox().getInput());
         assertEquals(expectedResultMessage, getResultDisplay().getText());
-        assertEquals(new RestaurantBook(expectedModel.getRestaurantBook()), testApp.readStorageAddressBook());
+        assertEquals(new RestaurantBook(expectedModel.getRestaurantBook()), testApp.readStorageRestaurantBook());
         assertListMatching(getPersonListPanel(), expectedModel.getFilteredPersonList());
     }
 

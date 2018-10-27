@@ -107,7 +107,7 @@ public class RemarkCommandTest {
         // remark -> first person remark changed
         remarkCommand.execute(model, commandHistory);
 
-        // undo -> reverts addressbook back to previous state and filtered person list to show all persons
+        // undo -> reverts restaurantbook back to previous state and filtered person list to show all persons
         expectedModel.undoRestaurantBook();
         assertCommandSuccess(new UndoCommand(), model, commandHistory, UndoCommand.MESSAGE_SUCCESS, expectedModel);
 

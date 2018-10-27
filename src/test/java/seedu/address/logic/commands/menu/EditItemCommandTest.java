@@ -167,7 +167,7 @@ public class EditItemCommandTest {
         // edit -> first item edited
         editItemCommand.execute(model, commandHistory);
 
-        // undo -> reverts addressbook back to previous state and filtered item list to show all items
+        // undo -> reverts restaurantbook back to previous state and filtered item list to show all items
         expectedModel.undoRestaurantBook();
         assertCommandSuccess(new UndoCommand(), model, commandHistory, UndoCommand.MESSAGE_SUCCESS, expectedModel);
 
@@ -211,7 +211,7 @@ public class EditItemCommandTest {
         // edit -> edits second item in unfiltered item list / first item in filtered item list
         editItemCommand.execute(model, commandHistory);
 
-        // undo -> reverts addressbook back to previous state and filtered item list to show all items
+        // undo -> reverts restaurantbook back to previous state and filtered item list to show all items
         expectedModel.undoRestaurantBook();
         assertCommandSuccess(new UndoCommand(), model, commandHistory, UndoCommand.MESSAGE_SUCCESS, expectedModel);
 

@@ -176,7 +176,7 @@ public class EditIngredientByIndexCommandTest {
         // edit -> first ingredient edited
         editCommand.execute(model, commandHistory);
 
-        // undo -> reverts addressbook back to previous state and filtered ingredient list to show all ingredients
+        // undo -> reverts restaurant back to previous state and filtered ingredient list to show all ingredients
         expectedModel.undoRestaurantBook();
         assertCommandSuccess(new UndoCommand(), model, commandHistory, UndoCommand.MESSAGE_SUCCESS, expectedModel);
 
@@ -221,7 +221,7 @@ public class EditIngredientByIndexCommandTest {
         // edit -> edits second ingredient in unfiltered ingredient list / first ingredient in filtered ingredient list
         editCommand.execute(model, commandHistory);
 
-        // undo -> reverts addressbook back to previous state and filtered ingredient list to show all ingredients
+        // undo -> reverts restaurant back to previous state and filtered ingredient list to show all ingredients
         expectedModel.undoRestaurantBook();
         assertCommandSuccess(new UndoCommand(), model, commandHistory, UndoCommand.MESSAGE_SUCCESS, expectedModel);
 

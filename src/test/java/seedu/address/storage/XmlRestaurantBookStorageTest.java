@@ -108,12 +108,12 @@ public class XmlRestaurantBookStorageTest {
     }
 
     /**
-     * Saves {@code addressBook} at the specified {@code filePath}.
+     * Saves {@code restaurantBook} at the specified {@code filePath}.
      */
-    private void saveRestaurantBook(ReadOnlyRestaurantBook addressBook, String filePath) {
+    private void saveRestaurantBook(ReadOnlyRestaurantBook restaurantBook, String filePath) {
         try {
             new XmlRestaurantBookStorage(Paths.get(filePath))
-                    .saveRestaurantBook(addressBook, addToTestDataPathIfNotNull(filePath));
+                    .saveRestaurantBook(restaurantBook, addToTestDataPathIfNotNull(filePath));
         } catch (IOException ioe) {
             throw new AssertionError("There should not be an error writing to the file.", ioe);
         }
@@ -138,12 +138,12 @@ public class XmlRestaurantBookStorageTest {
     }
 
     /**
-     * Backup {@code addressBook} at the specified {@code filePath}.
+     * Backup {@code restaurantBook} at the specified {@code filePath}.
      */
-    private void backupRestaurantBook(ReadOnlyRestaurantBook addressBook, String filePath) {
+    private void backupRestaurantBook(ReadOnlyRestaurantBook restaurantBook, String filePath) {
         try {
             new XmlRestaurantBookStorage(Paths.get(filePath))
-                    .backupRestaurantBook(addressBook);
+                    .backupRestaurantBook(restaurantBook);
         } catch (IOException ioe) {
             throw new AssertionError("There should not be an error writing to the file.", ioe);
         }

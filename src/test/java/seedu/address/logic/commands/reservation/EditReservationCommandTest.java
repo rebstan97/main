@@ -180,7 +180,7 @@ public class EditReservationCommandTest {
         // edit -> first reservation edited
         editReservationCommand.execute(model, commandHistory);
 
-        // undo -> reverts addressbook back to previous state and filtered reservation list to show all reservations
+        // undo -> reverts restaurantbook back to previous state and filtered reservation list to show all reservations
         expectedModel.undoRestaurantBook();
         assertCommandSuccess(new UndoCommand(), model, commandHistory, UndoCommand.MESSAGE_SUCCESS, expectedModel);
 
@@ -226,7 +226,7 @@ public class EditReservationCommandTest {
         // edit -> edits second reservation in unfiltered list / first reservation in filtered list
         editReservationCommand.execute(model, commandHistory);
 
-        // undo -> reverts addressbook back to previous state and filtered reservation list to show all reservations
+        // undo -> reverts restaurantbook back to previous state and filtered reservation list to show all reservations
         expectedModel.undoRestaurantBook();
         assertCommandSuccess(new UndoCommand(), model, commandHistory, UndoCommand.MESSAGE_SUCCESS, expectedModel);
 
