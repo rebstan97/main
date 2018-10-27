@@ -45,7 +45,8 @@ public class ReservationUtil {
         StringBuilder sb = new StringBuilder();
         descriptor.getName().ifPresent(name -> sb.append(PREFIX_NAME).append(name.toString()).append(" "));
         descriptor.getPax().ifPresent(pax -> sb.append(PREFIX_PAX).append(pax.toString()).append(" "));
-        descriptor.getDateTime().ifPresent(dateTime -> sb.append(PREFIX_PAX).append(dateTime.toString()).append(" "));
+        descriptor.getDateTime().ifPresent(dateTime -> sb.append(PREFIX_DATETIME).append(dateTime.toString())
+                .append(" "));
         if (descriptor.getTags().isPresent()) {
             Set<Tag> tags = descriptor.getTags().get();
             if (tags.isEmpty()) {
