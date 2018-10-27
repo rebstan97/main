@@ -29,6 +29,7 @@ import java.util.List;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.CommandHistory;
+import seedu.address.logic.commands.accounts.ChangePasswordCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.commands.ingredients.EditIngredientCommand;
 import seedu.address.logic.commands.menu.EditItemCommand;
@@ -43,6 +44,7 @@ import seedu.address.model.person.Person;
 import seedu.address.model.salesrecord.ItemNameContainsKeywordsPredicate;
 import seedu.address.model.salesrecord.SalesRecord;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
+import seedu.address.testutil.accounts.EditAccountDescriptorBuilder;
 import seedu.address.testutil.ingredients.EditIngredientDescriptorBuilder;
 import seedu.address.testutil.menu.EditItemDescriptorBuilder;
 import seedu.address.testutil.reservation.EditReservationDescriptorBuilder;
@@ -228,6 +230,9 @@ public class CommandTestUtil {
     public static final EditCommand.EditPersonDescriptor DESC_AMY;
     public static final EditCommand.EditPersonDescriptor DESC_BOB;
 
+    public static final ChangePasswordCommand.EditAccountDescriptor DESC_DEMO_ONE;
+    public static final ChangePasswordCommand.EditAccountDescriptor DESC_DEMO_TWO;
+
     public static final EditItemCommand.EditItemDescriptor DESC_BURGER;
     public static final EditItemCommand.EditItemDescriptor DESC_FRIES;
 
@@ -247,6 +252,10 @@ public class CommandTestUtil {
         DESC_BOB = new EditPersonDescriptorBuilder().withName(VALID_NAME_BOB)
                 .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB)
                 .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).build();
+
+        // Account Management
+        DESC_DEMO_ONE = new EditAccountDescriptorBuilder().withPassword(VALID_PASSWORD_DEMO_ONE).build();
+        DESC_DEMO_TWO = new EditAccountDescriptorBuilder().withPassword(VALID_PASSWORD_DEMO_TWO).build();
 
         // Menu Management
         DESC_BURGER = new EditItemDescriptorBuilder().withName(VALID_ITEM_NAME_BURGER)
