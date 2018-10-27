@@ -6,11 +6,14 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_ITEM_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ITEM_PRICE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_QUANTITY_SOLD;
 
+import java.util.HashMap;
+
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.ingredient.Ingredient;
 import seedu.address.model.salesrecord.SalesRecord;
 
 /**
@@ -38,7 +41,7 @@ public class RecordSalesCommand extends Command {
     public static final String MESSAGE_DUPLICATE_SALES_RECORD = "Sales record of \"%1$s\" already exists on the same "
             + "date.";
 
-    private final SalesRecord toAdd;
+    private SalesRecord toAdd;
 
     /**
      * @param salesRecord to be appended to the sales book
@@ -56,6 +59,18 @@ public class RecordSalesCommand extends Command {
             throw new CommandException(String.format(MESSAGE_DUPLICATE_SALES_RECORD, toAdd.getName()));
         }
 
+        String item = toAdd.getName().toString();
+        int quantitySold = toAdd.getQuantitySold().getValue();
+
+        // retrieve the ingredients and their corresponding quantity used to make one unit of "item"
+        HashMap<Ingredient, Integer> ingredientsUsed = model.getRequiredIngredients(item);
+        // compute the total ingredients used after factoring quantity sold
+        ingredientsUsed.replaceAll((ingredient, quantityUsed) -> quantityUsed * quantitySold);
+        // update ingredient list
+        model.consumeIngredients(ingredientsUsed);
+        // saves the ingredientsUsed in the SalesRecord
+        toAdd = toAdd.setIngredientsUsed(ingredientsUsed);
+
         model.addRecord(toAdd);
         model.commitAddressBook();
         return new CommandResult(String.format(MESSAGE_RECORD_SALES_SUCCESS, toAdd));
@@ -68,3 +83,19 @@ public class RecordSalesCommand extends Command {
                     && toAdd.equals(((RecordSalesCommand) other).toAdd));
     }
 }
+
+
+// exceptions: RequiredIngredientsNotFoundException, ItemNotFoundException, IngredientNotFoundException,
+// IngredientNotEnoughException
+
+// save ingredientsUsed into storage
+
+// show ingredientsUsed in UI browser panel
+
+// edit-sales update ingredientsUsed
+
+// API for edit ingredientUsed if ingredient name changes
+
+// update UGDG -> remove delete/edit by name and date
+
+// merge and update using search "to be updated once merged"

@@ -4,9 +4,11 @@ import static java.util.Objects.requireNonNull;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BROCCOLI;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.function.Predicate;
 
 import org.junit.Rule;
@@ -31,6 +33,7 @@ import seedu.address.model.salesrecord.Date;
 import seedu.address.model.salesrecord.SalesRecord;
 import seedu.address.model.salesrecord.SalesReport;
 import seedu.address.model.tag.Tag;
+import seedu.address.testutil.ingredients.IngredientBuilder;
 import seedu.address.testutil.salesrecords.RecordBuilder;
 
 public class RecordSalesCommandTest {
@@ -364,6 +367,20 @@ public class RecordSalesCommandTest {
         public void commitAddressBook() {
             throw new AssertionError("This method should not be called.");
         }
+
+
+
+
+        // to be updated once merged
+        @Override
+        public HashMap<Ingredient, Integer> getRequiredIngredients(String test) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void consumeIngredients(HashMap<Ingredient, Integer> a) {
+            throw new AssertionError("This method should not be called.");
+        }
     }
 
     /**
@@ -386,7 +403,7 @@ public class RecordSalesCommandTest {
     }
 
     /**
-     * A Model stub that always accept the person being added.
+     * A Model stub that always accept the record being added.
      */
     private class ModelStubAcceptingRecordAdded extends ModelStub {
 
@@ -412,6 +429,24 @@ public class RecordSalesCommandTest {
         @Override
         public ReadOnlyAddressBook getAddressBook() {
             return new AddressBook();
+        }
+
+
+
+        // to be updated once merged
+        @Override
+        public HashMap<Ingredient, Integer> getRequiredIngredients(String test) {
+            Ingredient ingredientOne = new IngredientBuilder().build();
+            Ingredient ingredientTwo = new IngredientBuilder().withName(VALID_NAME_BROCCOLI).build();
+            HashMap<Ingredient, Integer> requiredIngredients = new HashMap<>();
+            requiredIngredients.put(ingredientOne, 10);
+            requiredIngredients.put(ingredientTwo, 20);
+            return requiredIngredients;
+        }
+
+        @Override
+        public void consumeIngredients(HashMap<Ingredient, Integer> a) {
+            // called by {@code RecordSalesCommand#execute()}
         }
     }
 }

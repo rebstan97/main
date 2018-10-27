@@ -7,6 +7,7 @@ import static org.junit.Assert.assertTrue;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.function.Predicate;
 
 import org.junit.Rule;
@@ -361,6 +362,16 @@ public class AddCommandTest {
             throw new AssertionError("This method should not be called.");
         }
 
+        // to be updated once merged
+        @Override
+        public HashMap<Ingredient, Integer> getRequiredIngredients(String test) {
+            return null;
+        }
+
+        @Override
+        public void consumeIngredients(HashMap<Ingredient, Integer> a) {
+
+        }
     }
 
     /**

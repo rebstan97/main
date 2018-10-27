@@ -1,5 +1,6 @@
 package seedu.address.model;
 
+import java.util.HashMap;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
@@ -336,5 +337,12 @@ public interface Model {
      * Saves the current address book state for undo/redo.
      */
     void commitAddressBook();
+
+
+
+    // to be updated once merged
+    HashMap<Ingredient, Integer> getRequiredIngredients(String test);
+
+    void consumeIngredients(HashMap<Ingredient, Integer> a);
 
 }

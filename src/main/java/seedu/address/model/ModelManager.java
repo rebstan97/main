@@ -3,6 +3,7 @@ package seedu.address.model;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.HashMap;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
@@ -16,6 +17,10 @@ import seedu.address.logic.commands.menu.SortMenuCommand.SortMethod;
 import seedu.address.model.accounts.Account;
 import seedu.address.model.ingredient.Ingredient;
 import seedu.address.model.ingredient.IngredientName;
+import seedu.address.model.ingredient.IngredientPrice;
+import seedu.address.model.ingredient.IngredientUnit;
+import seedu.address.model.ingredient.MinimumUnit;
+import seedu.address.model.ingredient.NumUnits;
 import seedu.address.model.ingredient.exceptions.IngredientNotFoundException;
 import seedu.address.model.menu.Item;
 import seedu.address.model.person.Person;
@@ -438,4 +443,18 @@ public class ModelManager extends ComponentManager implements Model {
         filteredReservations.setPredicate(predicate);
     }
 
+
+
+
+
+    // to be updated once merged
+    @Override
+    public HashMap<Ingredient, Integer> getRequiredIngredients(String test) {
+        HashMap<Ingredient, Integer> h = new HashMap<>();
+        h.put(new Ingredient(new IngredientName("a"), new IngredientUnit("kilogram"), new IngredientPrice("2"),
+                new MinimumUnit("2"), new NumUnits("2")),1);
+        return h;
+    }
+    @Override
+    public void consumeIngredients(HashMap<Ingredient, Integer> a) {}
 }
