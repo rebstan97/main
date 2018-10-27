@@ -65,7 +65,7 @@ public class SelectReservationCommandTest {
 
         Index outOfBoundsIndex = INDEX_SECOND;
         // ensures that outOfBoundIndex is still in bounds of restaurant book list
-        assertTrue(outOfBoundsIndex.getZeroBased() < model.getAddressBook().getReservationList().size());
+        assertTrue(outOfBoundsIndex.getZeroBased() < model.getRestaurantBook().getReservationList().size());
 
         assertExecutionFailure(outOfBoundsIndex, Messages.MESSAGE_INVALID_RESERVATION_DISPLAYED_INDEX);
     }

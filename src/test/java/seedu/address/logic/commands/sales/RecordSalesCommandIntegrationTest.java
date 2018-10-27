@@ -33,9 +33,9 @@ public class RecordSalesCommandIntegrationTest {
     public void execute_newRecord_success() {
         SalesRecord validRecord = new RecordBuilder(RECORD_ONE).withDate(VALID_DATE_RECORD_TWO).build();
 
-        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        Model expectedModel = new ModelManager(model.getRestaurantBook(), new UserPrefs());
         expectedModel.addRecord(validRecord);
-        expectedModel.commitAddressBook();
+        expectedModel.commitRestaurantBook();
 
         assertCommandSuccess(new RecordSalesCommand(validRecord), model, commandHistory,
                 String.format(RecordSalesCommand.MESSAGE_RECORD_SALES_SUCCESS, validRecord), expectedModel);
@@ -43,7 +43,7 @@ public class RecordSalesCommandIntegrationTest {
 
     @Test
     public void execute_duplicateRecord_throwsCommandException() {
-        SalesRecord recordInList = model.getAddressBook().getRecordList().get(0);
+        SalesRecord recordInList = model.getRestaurantBook().getRecordList().get(0);
         assertCommandFailure(new RecordSalesCommand(recordInList), model, commandHistory,
                 String.format(RecordSalesCommand.MESSAGE_DUPLICATE_SALES_RECORD, recordInList.getName()));
     }

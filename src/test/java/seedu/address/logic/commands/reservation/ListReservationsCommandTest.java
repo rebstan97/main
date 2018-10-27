@@ -25,7 +25,7 @@ public class ListReservationsCommandTest {
     @Before
     public void setUp() {
         model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-        expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        expectedModel = new ModelManager(model.getRestaurantBook(), new UserPrefs());
     }
 
     @Test

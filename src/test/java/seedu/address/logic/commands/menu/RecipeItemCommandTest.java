@@ -45,9 +45,9 @@ public class RecipeItemCommandTest {
 
         String expectedMessage = String.format(RecipeItemCommand.MESSAGE_DELETE_REMARK_SUCCESS, editedItem);
 
-        Model expectedModel = new ModelManager(new RestaurantBook(model.getAddressBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(new RestaurantBook(model.getRestaurantBook()), new UserPrefs());
         expectedModel.updateItem(firstItem, editedItem);
-        expectedModel.commitAddressBook();
+        expectedModel.commitRestaurantBook();
 
         assertCommandSuccess(recipeItemCommand, model, commandHistory, expectedMessage, expectedModel);
     }
@@ -65,9 +65,9 @@ public class RecipeItemCommandTest {
 
         String expectedMessage = String.format(RecipeItemCommand.MESSAGE_ADD_REMARK_SUCCESS, editedItem);
 
-        Model expectedModel = new ModelManager(new RestaurantBook(model.getAddressBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(new RestaurantBook(model.getRestaurantBook()), new UserPrefs());
         expectedModel.updateItem(firstItem, editedItem);
-        expectedModel.commitAddressBook();
+        expectedModel.commitRestaurantBook();
 
         assertCommandSuccess(recipeItemCommand, model, commandHistory, expectedMessage, expectedModel);
     }
@@ -89,7 +89,7 @@ public class RecipeItemCommandTest {
         Index outOfBoundIndex = INDEX_SECOND;
 
         // ensures that outOfBoundIndex is still in bounds of restaurant book list
-        assertTrue(outOfBoundIndex.getZeroBased() < model.getAddressBook().getPersonList().size());
+        assertTrue(outOfBoundIndex.getZeroBased() < model.getRestaurantBook().getPersonList().size());
 
         RecipeItemCommand recipeItemCommand = new RecipeItemCommand(outOfBoundIndex,
                 new Recipe(VALID_ITEM_RECIPE_FRIES));
@@ -103,19 +103,19 @@ public class RecipeItemCommandTest {
 
         RecipeItemCommand recipeItemCommand = new RecipeItemCommand(INDEX_FIRST, new Recipe(RECIPE_STUB));
 
-        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        Model expectedModel = new ModelManager(model.getRestaurantBook(), new UserPrefs());
         expectedModel.updateItem(itemToModify, modifiedItem);
-        expectedModel.commitAddressBook();
+        expectedModel.commitRestaurantBook();
 
         // recipe -> first item recipe changed
         recipeItemCommand.execute(model, commandHistory);
 
         // undo -> reverts restaurant book back to previous state and filtered item list to show all items
-        expectedModel.undoAddressBook();
+        expectedModel.undoRestaurantBook();
         assertCommandSuccess(new UndoCommand(), model, commandHistory, UndoCommand.MESSAGE_SUCCESS, expectedModel);
 
         // redo -> same first item modified again
-        expectedModel.redoAddressBook();
+        expectedModel.redoRestaurantBook();
         assertCommandSuccess(new RedoCommand(), model, commandHistory, RedoCommand.MESSAGE_SUCCESS, expectedModel);
     }
 

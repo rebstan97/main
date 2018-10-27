@@ -33,7 +33,7 @@ public class DeleteIngredientByIndexCommand extends DeleteIngredientCommand {
 
         Ingredient ingredientToDelete = lastShownList.get(targetIndex.getZeroBased());
         model.deleteIngredient(ingredientToDelete);
-        model.commitAddressBook();
+        model.commitRestaurantBook();
         EventsCenter.getInstance().post(new DisplayIngredientListRequestEvent());
         return new CommandResult(String.format(MESSAGE_DELETE_INGREDIENT_SUCCESS, ingredientToDelete));
     }

@@ -8,14 +8,14 @@ import java.util.List;
  */
 public class VersionedRestaurantBook extends RestaurantBook {
 
-    private final List<ReadOnlyRestaurantBook> addressBookStateList;
+    private final List<ReadOnlyRestaurantBook> restaurantBookStateList;
     private int currentStatePointer;
 
     public VersionedRestaurantBook(ReadOnlyRestaurantBook initialState) {
         super(initialState);
 
-        addressBookStateList = new ArrayList<>();
-        addressBookStateList.add(new RestaurantBook(initialState));
+        restaurantBookStateList = new ArrayList<>();
+        restaurantBookStateList.add(new RestaurantBook(initialState));
         currentStatePointer = 0;
     }
 
@@ -25,12 +25,12 @@ public class VersionedRestaurantBook extends RestaurantBook {
      */
     public void commit() {
         removeStatesAfterCurrentPointer();
-        addressBookStateList.add(new RestaurantBook(this));
+        restaurantBookStateList.add(new RestaurantBook(this));
         currentStatePointer++;
     }
 
     private void removeStatesAfterCurrentPointer() {
-        addressBookStateList.subList(currentStatePointer + 1, addressBookStateList.size()).clear();
+        restaurantBookStateList.subList(currentStatePointer + 1, restaurantBookStateList.size()).clear();
     }
 
     /**
@@ -41,7 +41,7 @@ public class VersionedRestaurantBook extends RestaurantBook {
             throw new NoUndoableStateException();
         }
         currentStatePointer--;
-        resetData(addressBookStateList.get(currentStatePointer));
+        resetData(restaurantBookStateList.get(currentStatePointer));
     }
 
     /**
@@ -52,7 +52,7 @@ public class VersionedRestaurantBook extends RestaurantBook {
             throw new NoRedoableStateException();
         }
         currentStatePointer++;
-        resetData(addressBookStateList.get(currentStatePointer));
+        resetData(restaurantBookStateList.get(currentStatePointer));
     }
 
     /**
@@ -66,7 +66,7 @@ public class VersionedRestaurantBook extends RestaurantBook {
      * Returns true if {@code redo()} has restaurant book states to redo.
      */
     public boolean canRedo() {
-        return currentStatePointer < addressBookStateList.size() - 1;
+        return currentStatePointer < restaurantBookStateList.size() - 1;
     }
 
     @Override
@@ -81,12 +81,12 @@ public class VersionedRestaurantBook extends RestaurantBook {
             return false;
         }
 
-        VersionedRestaurantBook otherVersionedAddressBook = (VersionedRestaurantBook) other;
+        VersionedRestaurantBook otherVersionedRestaurantBook = (VersionedRestaurantBook) other;
 
         // state check
-        return super.equals(otherVersionedAddressBook)
-                && addressBookStateList.equals(otherVersionedAddressBook.addressBookStateList)
-                && currentStatePointer == otherVersionedAddressBook.currentStatePointer;
+        return super.equals(otherVersionedRestaurantBook)
+                && restaurantBookStateList.equals(otherVersionedRestaurantBook.restaurantBookStateList)
+                && currentStatePointer == otherVersionedRestaurantBook.currentStatePointer;
     }
 
     /**
@@ -94,7 +94,7 @@ public class VersionedRestaurantBook extends RestaurantBook {
      */
     public static class NoUndoableStateException extends RuntimeException {
         private NoUndoableStateException() {
-            super("Current state pointer at start of addressBookState list, unable to undo.");
+            super("Current state pointer at start of restaurantBookState list, unable to undo.");
         }
     }
 
@@ -103,7 +103,7 @@ public class VersionedRestaurantBook extends RestaurantBook {
      */
     public static class NoRedoableStateException extends RuntimeException {
         private NoRedoableStateException() {
-            super("Current state pointer at end of addressBookState list, unable to redo.");
+            super("Current state pointer at end of restaurantBookState list, unable to redo.");
         }
     }
 }

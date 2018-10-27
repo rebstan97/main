@@ -9,7 +9,7 @@ import com.google.common.eventbus.Subscribe;
 
 import seedu.address.commons.core.ComponentManager;
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.commons.events.model.AddressBookChangedEvent;
+import seedu.address.commons.events.model.RestaurantBookChangedEvent;
 import seedu.address.commons.events.storage.DataSavingExceptionEvent;
 import seedu.address.commons.exceptions.DataConversionException;
 import seedu.address.model.ReadOnlyRestaurantBook;
@@ -50,43 +50,44 @@ public class StorageManager extends ComponentManager implements Storage {
     // ================ RestaurantBook methods ==============================
 
     @Override
-    public Path getAddressBookFilePath() {
-        return restaurantBookStorage.getAddressBookFilePath();
+    public Path getRestaurantBookFilePath() {
+        return restaurantBookStorage.getRestaurantBookFilePath();
     }
 
     @Override
-    public Optional<ReadOnlyRestaurantBook> readAddressBook() throws DataConversionException, IOException {
-        return readAddressBook(restaurantBookStorage.getAddressBookFilePath());
+    public Optional<ReadOnlyRestaurantBook> readRestaurantBook() throws DataConversionException, IOException {
+        return readRestaurantBook(restaurantBookStorage.getRestaurantBookFilePath());
     }
 
     @Override
-    public Optional<ReadOnlyRestaurantBook> readAddressBook(Path filePath) throws DataConversionException, IOException {
+    public Optional<ReadOnlyRestaurantBook> readRestaurantBook(Path filePath)
+            throws DataConversionException, IOException {
         logger.fine("Attempting to read data from file: " + filePath);
-        return restaurantBookStorage.readAddressBook(filePath);
+        return restaurantBookStorage.readRestaurantBook(filePath);
     }
 
     @Override
-    public void saveAddressBook(ReadOnlyRestaurantBook addressBook) throws IOException {
-        saveAddressBook(addressBook, restaurantBookStorage.getAddressBookFilePath());
+    public void saveRestaurantBook(ReadOnlyRestaurantBook restaurantBook) throws IOException {
+        saveRestaurantBook(restaurantBook, restaurantBookStorage.getRestaurantBookFilePath());
     }
 
     @Override
-    public void saveAddressBook(ReadOnlyRestaurantBook addressBook, Path filePath) throws IOException {
+    public void saveRestaurantBook(ReadOnlyRestaurantBook restaurantBook, Path filePath) throws IOException {
         logger.fine("Attempting to write to data file: " + filePath);
-        restaurantBookStorage.saveAddressBook(addressBook, filePath);
+        restaurantBookStorage.saveRestaurantBook(restaurantBook, filePath);
     }
 
     @Override
-    public void backupAddressBook(ReadOnlyRestaurantBook addressBook) throws IOException {
-        restaurantBookStorage.backupAddressBook(addressBook);
+    public void backupRestaurantBook(ReadOnlyRestaurantBook restaurantBook) throws IOException {
+        restaurantBookStorage.backupRestaurantBook(restaurantBook);
     }
 
     @Override
     @Subscribe
-    public void handleAddressBookChangedEvent(AddressBookChangedEvent event) {
+    public void handleRestaurantBookChangedEvent(RestaurantBookChangedEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event, "Local data changed, saving to file"));
         try {
-            saveAddressBook(event.data);
+            saveRestaurantBook(event.data);
         } catch (IOException e) {
             raise(new DataSavingExceptionEvent(e));
         }

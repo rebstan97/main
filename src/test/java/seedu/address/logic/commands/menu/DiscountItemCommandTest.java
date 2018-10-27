@@ -39,7 +39,7 @@ public class DiscountItemCommandTest {
         Item itemToDiscount = model.getFilteredItemList().get(INDEX_FIRST.getZeroBased());
         DiscountItemCommand discountItemCommand = new DiscountItemCommand(INDEX_FIRST, INDEX_FIRST, 20, false);
 
-        ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        ModelManager expectedModel = new ModelManager(model.getRestaurantBook(), new UserPrefs());
 
         Item discountedItem = createDiscountedItem(itemToDiscount, 20);
 
@@ -47,7 +47,7 @@ public class DiscountItemCommandTest {
 
         expectedModel.updateItem(itemToDiscount, discountedItem);
         expectedModel.updateFilteredItemList(PREDICATE_SHOW_ALL_ITEMS);
-        expectedModel.commitAddressBook();
+        expectedModel.commitRestaurantBook();
 
         assertCommandSuccess(discountItemCommand, model, commandHistory, expectedMessage, expectedModel);
     }
@@ -65,7 +65,7 @@ public class DiscountItemCommandTest {
         DiscountItemCommand discountItemCommand = new DiscountItemCommand(INDEX_FIRST, INDEX_THIRD, 0, false);
         String expectedMessage = String.format(DiscountItemCommand.MESSAGE_REVERT_ITEM_SUCCESS, 3);
 
-        ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        ModelManager expectedModel = new ModelManager(model.getRestaurantBook(), new UserPrefs());
 
         for (int i = INDEX_FIRST.getZeroBased(); i < INDEX_THIRD.getOneBased(); i++) {
             Item itemToDiscount = model.getFilteredItemList().get(i);
@@ -74,7 +74,7 @@ public class DiscountItemCommandTest {
             expectedModel.updateItem(itemToDiscount, discountedItem);
         }
         expectedModel.updateFilteredItemList(PREDICATE_SHOW_ALL_ITEMS);
-        expectedModel.commitAddressBook();
+        expectedModel.commitRestaurantBook();
 
         assertCommandSuccess(discountItemCommand, model, commandHistory, expectedMessage, expectedModel);
     }
@@ -84,7 +84,7 @@ public class DiscountItemCommandTest {
         DiscountItemCommand discountItemCommand = new DiscountItemCommand(INDEX_FIRST, INDEX_FIRST, 20, true);
         String expectedMessage = String.format(DiscountItemCommand.MESSAGE_DISCOUNT_ITEM_SUCCESS, 7);
 
-        ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        ModelManager expectedModel = new ModelManager(model.getRestaurantBook(), new UserPrefs());
 
         for (int i = 0; i < 7; i++) {
             Item itemToDiscount = model.getFilteredItemList().get(i);
@@ -93,7 +93,7 @@ public class DiscountItemCommandTest {
             expectedModel.updateItem(itemToDiscount, discountedItem);
         }
         expectedModel.updateFilteredItemList(PREDICATE_SHOW_ALL_ITEMS);
-        expectedModel.commitAddressBook();
+        expectedModel.commitRestaurantBook();
 
         assertCommandSuccess(discountItemCommand, model, commandHistory, expectedMessage, expectedModel);
     }
@@ -109,10 +109,10 @@ public class DiscountItemCommandTest {
 
         String expectedMessage = String.format(DiscountItemCommand.MESSAGE_DISCOUNT_ITEM_SUCCESS, 1);
 
-        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        Model expectedModel = new ModelManager(model.getRestaurantBook(), new UserPrefs());
         expectedModel.updateItem(itemToDiscount, discountedItem);
         expectedModel.updateFilteredItemList(PREDICATE_SHOW_ALL_ITEMS);
-        expectedModel.commitAddressBook();
+        expectedModel.commitRestaurantBook();
 
         assertCommandSuccess(discountItemCommand, model, commandHistory, expectedMessage, expectedModel);
     }
@@ -123,7 +123,7 @@ public class DiscountItemCommandTest {
 
         Index outOfBoundIndex = INDEX_SECOND;
         // ensures that outOfBoundIndex is still in bounds of restaurant book list
-        assertTrue(outOfBoundIndex.getZeroBased() < model.getAddressBook().getItemList().size());
+        assertTrue(outOfBoundIndex.getZeroBased() < model.getRestaurantBook().getItemList().size());
 
         DiscountItemCommand discountItemCommand = new DiscountItemCommand(outOfBoundIndex, outOfBoundIndex, 0, false);
 
@@ -134,23 +134,23 @@ public class DiscountItemCommandTest {
     public void executeUndoRedo_validIndexUnfilteredList_success() throws Exception {
         Item itemToDiscount = model.getFilteredItemList().get(INDEX_FIRST.getZeroBased());
         DiscountItemCommand discountItemCommand = new DiscountItemCommand(INDEX_FIRST, INDEX_FIRST, 20, false);
-        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        Model expectedModel = new ModelManager(model.getRestaurantBook(), new UserPrefs());
 
         Item discountedItem = createDiscountedItem(itemToDiscount, 20);
 
         expectedModel.updateItem(itemToDiscount, discountedItem);
         expectedModel.updateFilteredItemList(PREDICATE_SHOW_ALL_ITEMS);
-        expectedModel.commitAddressBook();
+        expectedModel.commitRestaurantBook();
 
         // delete -> first item deleted
         discountItemCommand.execute(model, commandHistory);
 
         // undo -> reverts addressbook back to previous state and filtered item list to show all items
-        expectedModel.undoAddressBook();
+        expectedModel.undoRestaurantBook();
         assertCommandSuccess(new UndoCommand(), model, commandHistory, UndoCommand.MESSAGE_SUCCESS, expectedModel);
 
         // redo -> same first item deleted again
-        expectedModel.redoAddressBook();
+        expectedModel.redoRestaurantBook();
         assertCommandSuccess(new RedoCommand(), model, commandHistory, RedoCommand.MESSAGE_SUCCESS, expectedModel);
     }
 
@@ -176,7 +176,7 @@ public class DiscountItemCommandTest {
     @Test
     public void executeUndoRedo_validIndexFilteredList_sameItemDiscounted() throws Exception {
         DiscountItemCommand discountItemCommand = new DiscountItemCommand(INDEX_FIRST, INDEX_FIRST, 65, false);
-        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        Model expectedModel = new ModelManager(model.getRestaurantBook(), new UserPrefs());
 
         showItemAtIndex(model, INDEX_SECOND);
         Item itemToDiscount = model.getFilteredItemList().get(INDEX_FIRST.getZeroBased());
@@ -184,18 +184,18 @@ public class DiscountItemCommandTest {
 
         expectedModel.updateItem(itemToDiscount, discountedItem);
         expectedModel.updateFilteredItemList(PREDICATE_SHOW_ALL_ITEMS);
-        expectedModel.commitAddressBook();
+        expectedModel.commitRestaurantBook();
 
         // delete -> deletes second item in unfiltered item list / first item in filtered item list
         discountItemCommand.execute(model, commandHistory);
 
         // undo -> reverts addressbook back to previous state and filtered item list to show all items
-        expectedModel.undoAddressBook();
+        expectedModel.undoRestaurantBook();
         assertCommandSuccess(new UndoCommand(), model, commandHistory, UndoCommand.MESSAGE_SUCCESS, expectedModel);
 
         assertNotEquals(itemToDiscount, model.getFilteredItemList().get(INDEX_FIRST.getZeroBased()));
         // redo -> deletes same second item in unfiltered item list
-        expectedModel.redoAddressBook();
+        expectedModel.redoRestaurantBook();
         assertCommandSuccess(new RedoCommand(), model, commandHistory, RedoCommand.MESSAGE_SUCCESS, expectedModel);
     }
 

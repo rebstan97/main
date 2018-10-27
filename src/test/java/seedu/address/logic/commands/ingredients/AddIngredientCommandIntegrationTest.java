@@ -31,9 +31,9 @@ public class AddIngredientCommandIntegrationTest {
     public void execute_newIngredient_success() {
         Ingredient validIngredient = new IngredientBuilder().build();
 
-        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        Model expectedModel = new ModelManager(model.getRestaurantBook(), new UserPrefs());
         expectedModel.addIngredient(validIngredient);
-        expectedModel.commitAddressBook();
+        expectedModel.commitRestaurantBook();
 
         assertCommandSuccess(new AddIngredientCommand(validIngredient), model, commandHistory,
                 String.format(AddIngredientCommand.MESSAGE_SUCCESS, validIngredient), expectedModel);
@@ -41,7 +41,7 @@ public class AddIngredientCommandIntegrationTest {
 
     @Test
     public void execute_duplicateIngredient_throwsCommandException() {
-        Ingredient ingredientInList = model.getAddressBook().getIngredientList().get(0);
+        Ingredient ingredientInList = model.getRestaurantBook().getIngredientList().get(0);
         assertCommandFailure(new AddIngredientCommand(ingredientInList), model, commandHistory,
                 AddIngredientCommand.MESSAGE_DUPLICATE_INGREDIENT);
     }

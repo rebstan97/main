@@ -62,7 +62,7 @@ public class RecipeItemCommand extends Command {
 
         model.updateItem(itemToEdit, editedItem);
         model.updateFilteredItemList(PREDICATE_SHOW_ALL_ITEMS);
-        model.commitAddressBook();
+        model.commitRestaurantBook();
 
         return new CommandResult(generateSuccessMessage(editedItem));
     }

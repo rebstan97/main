@@ -45,7 +45,7 @@ public class SampleDataTest extends RestaurantBookSystemTest {
 
     @Test
     public void addressBook_dataFileDoesNotExist_loadDataWithRoot() {
-        ReadOnlyRestaurantBook expectedRestaurantBook = SampleDataUtil.getSampleAddressBook();
-        assertEquals(expectedRestaurantBook, getModel().getAddressBook());
+        ReadOnlyRestaurantBook expectedRestaurantBook = SampleDataUtil.getSampleRestaurantBook();
+        assertEquals(expectedRestaurantBook, getModel().getRestaurantBook());
     }
 }

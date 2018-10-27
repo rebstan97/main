@@ -19,7 +19,7 @@ public class ClearMenuCommandTest {
     public void execute_emptyMenu_success() {
         Model model = new ModelManager();
         Model expectedModel = new ModelManager();
-        expectedModel.commitAddressBook();
+        expectedModel.commitRestaurantBook();
 
         assertCommandSuccess(new ClearMenuCommand(), model, commandHistory, ClearMenuCommand.MESSAGE_SUCCESS,
                 expectedModel);
@@ -30,7 +30,7 @@ public class ClearMenuCommandTest {
         Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
         Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
         expectedModel.resetMenuData(new RestaurantBook());
-        expectedModel.commitAddressBook();
+        expectedModel.commitRestaurantBook();
 
         assertCommandSuccess(new ClearMenuCommand(), model, commandHistory, ClearMenuCommand.MESSAGE_SUCCESS,
                 expectedModel);

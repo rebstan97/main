@@ -30,7 +30,7 @@ public class SortMenuCommandTest {
         String expectedMessage = String.format(MESSAGE_SORTED, sortMethod.name());
         SortMenuCommand command = new SortMenuCommand(sortMethod);
         expectedModel.sortMenu(sortMethod);
-        expectedModel.commitAddressBook();
+        expectedModel.commitRestaurantBook();
         assertCommandSuccess(command, model, commandHistory, expectedMessage, expectedModel);
     }
 
@@ -40,7 +40,7 @@ public class SortMenuCommandTest {
         String expectedMessage = String.format(MESSAGE_SORTED, sortMethod.name());
         SortMenuCommand command = new SortMenuCommand(sortMethod);
         expectedModel.sortMenu(sortMethod);
-        expectedModel.commitAddressBook();
+        expectedModel.commitRestaurantBook();
         assertCommandSuccess(command, model, commandHistory, expectedMessage, expectedModel);
     }
 }

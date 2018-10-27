@@ -45,7 +45,7 @@ public class SortMenuCommand extends Command {
         requireNonNull(model);
         model.sortMenu(sortMethod);
         model.updateFilteredItemList(PREDICATE_SHOW_ALL_ITEMS);
-        model.commitAddressBook();
+        model.commitRestaurantBook();
         EventsCenter.getInstance().post(new DisplayItemListRequestEvent());
         return new CommandResult(String.format(MESSAGE_SORTED, sortMethod.name()));
     }

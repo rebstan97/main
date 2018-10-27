@@ -164,7 +164,7 @@ public class ModelManagerTest {
     @Test
     public void getRecordList_modifyList_throwsUnsupportedOperationException() {
         thrown.expect(UnsupportedOperationException.class);
-        modelManager.getAddressBook().getRecordList().remove(0);
+        modelManager.getRestaurantBook().getRecordList().remove(0);
     }
     @Test
     public void deleteRecord_recordNotInSalesBook_throwsRecordsNotFoundException() {
@@ -217,7 +217,7 @@ public class ModelManagerTest {
     @Test
     public void getAccountList_modifyList_throwsUnsupportedOperationException() {
         thrown.expect(UnsupportedOperationException.class);
-        modelManager.getAddressBook().getAccountList().remove(0);
+        modelManager.getRestaurantBook().getAccountList().remove(0);
     }
 
     @Test

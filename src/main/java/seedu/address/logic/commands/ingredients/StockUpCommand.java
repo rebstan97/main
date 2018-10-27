@@ -74,7 +74,7 @@ public class StockUpCommand extends Command {
             ingredientString.append("\n" + stockedUpIngredient);
         }
 
-        model.commitAddressBook();
+        model.commitRestaurantBook();
         EventsCenter.getInstance().post(new DisplayIngredientListRequestEvent());
         return new CommandResult(String.format(MESSAGE_STOCKUP_INGREDIENT_SUCCESS, ingredientString));
     }

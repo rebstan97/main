@@ -72,7 +72,7 @@ public class TestApp extends MainApp {
      */
     public RestaurantBook readStorageAddressBook() {
         try {
-            return new RestaurantBook(storage.readAddressBook().get());
+            return new RestaurantBook(storage.readRestaurantBook().get());
         } catch (DataConversionException dce) {
             throw new AssertionError("Data is not in the RestaurantBook format.", dce);
         } catch (IOException ioe) {
@@ -84,14 +84,14 @@ public class TestApp extends MainApp {
      * Returns the file path of the storage file.
      */
     public Path getStorageSaveLocation() {
-        return storage.getAddressBookFilePath();
+        return storage.getRestaurantBookFilePath();
     }
 
     /**
      * Returns a defensive copy of the model.
      */
     public Model getModel() {
-        Model copy = new ModelManager(model.getAddressBook(), new UserPrefs());
+        Model copy = new ModelManager(model.getRestaurantBook(), new UserPrefs());
         ModelHelper.setFilteredList(copy, model.getFilteredPersonList());
         return copy;
     }

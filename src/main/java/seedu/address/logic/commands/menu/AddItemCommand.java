@@ -55,7 +55,7 @@ public class AddItemCommand extends Command {
         }
 
         model.addItem(toAdd);
-        model.commitAddressBook();
+        model.commitRestaurantBook();
         EventsCenter.getInstance().post(new DisplayItemListRequestEvent());
         return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
     }

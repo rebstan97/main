@@ -36,9 +36,9 @@ public class DeleteIngredientByNameCommandTest {
         String expectedMessage = String.format(DeleteIngredientByNameCommand.MESSAGE_DELETE_INGREDIENT_SUCCESS,
                 ingredientToDelete);
 
-        ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        ModelManager expectedModel = new ModelManager(model.getRestaurantBook(), new UserPrefs());
         expectedModel.deleteIngredient(ingredientToDelete);
-        expectedModel.commitAddressBook();
+        expectedModel.commitRestaurantBook();
 
         assertCommandSuccess(deleteCommand, model, commandHistory, expectedMessage, expectedModel);
     }
@@ -56,19 +56,19 @@ public class DeleteIngredientByNameCommandTest {
         Ingredient ingredientToDelete = model.findIngredient(new IngredientName("Chinese Cabbage"));
         DeleteIngredientByNameCommand deleteCommand = new DeleteIngredientByNameCommand(new IngredientName("Chinese "
                 + "Cabbage"));
-        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        Model expectedModel = new ModelManager(model.getRestaurantBook(), new UserPrefs());
         expectedModel.deleteIngredient(ingredientToDelete);
-        expectedModel.commitAddressBook();
+        expectedModel.commitRestaurantBook();
 
         // delete -> first ingredient deleted
         deleteCommand.execute(model, commandHistory);
 
         // undo -> reverts addressbook back to previous state and filtered ingredient list to show all ingredients
-        expectedModel.undoAddressBook();
+        expectedModel.undoRestaurantBook();
         assertCommandSuccess(new UndoCommand(), model, commandHistory, UndoCommand.MESSAGE_SUCCESS, expectedModel);
 
         // redo -> same first ingredient deleted again
-        expectedModel.redoAddressBook();
+        expectedModel.redoRestaurantBook();
         assertCommandSuccess(new RedoCommand(), model, commandHistory, RedoCommand.MESSAGE_SUCCESS, expectedModel);
     }
 

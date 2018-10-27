@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.nio.file.Path;
 import java.util.Optional;
 
-import seedu.address.commons.events.model.AddressBookChangedEvent;
+import seedu.address.commons.events.model.RestaurantBookChangedEvent;
 import seedu.address.commons.events.storage.DataSavingExceptionEvent;
 import seedu.address.commons.exceptions.DataConversionException;
 import seedu.address.model.ReadOnlyRestaurantBook;
@@ -26,17 +26,17 @@ public interface Storage extends RestaurantBookStorage, UserPrefsStorage {
     // ================ RestaurantBook methods ==============================
 
     @Override
-    Path getAddressBookFilePath();
+    Path getRestaurantBookFilePath();
 
     @Override
-    Optional<ReadOnlyRestaurantBook> readAddressBook() throws DataConversionException, IOException;
+    Optional<ReadOnlyRestaurantBook> readRestaurantBook() throws DataConversionException, IOException;
 
     @Override
-    void saveAddressBook(ReadOnlyRestaurantBook addressBook) throws IOException;
+    void saveRestaurantBook(ReadOnlyRestaurantBook restaurantBook) throws IOException;
 
     /**
-     * Saves the current version of the Address Book to the hard disk. Creates the data file if it is missing. Raises
+     * Saves the current version of the Restaurant Book to the hard disk. Creates the data file if it is missing. Raises
      * {@link DataSavingExceptionEvent} if there was an error during saving.
      */
-    void handleAddressBookChangedEvent(AddressBookChangedEvent abce);
+    void handleRestaurantBookChangedEvent(RestaurantBookChangedEvent rbce);
 }

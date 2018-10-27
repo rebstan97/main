@@ -39,9 +39,9 @@ public class DeleteReservationCommandTest {
         String expectedMessage = String.format(DeleteReservationCommand.MESSAGE_DELETE_RESERVATION_SUCCESS,
                 reservationToDelete);
 
-        ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        ModelManager expectedModel = new ModelManager(model.getRestaurantBook(), new UserPrefs());
         expectedModel.deleteReservation(reservationToDelete);
-        expectedModel.commitAddressBook();
+        expectedModel.commitRestaurantBook();
 
         assertCommandSuccess(deleteCommand, model, commandHistory, expectedMessage, expectedModel);
     }
@@ -65,9 +65,9 @@ public class DeleteReservationCommandTest {
         String expectedMessage = String.format(DeleteReservationCommand.MESSAGE_DELETE_RESERVATION_SUCCESS,
                 reservationToDelete);
 
-        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        Model expectedModel = new ModelManager(model.getRestaurantBook(), new UserPrefs());
         expectedModel.deleteReservation(reservationToDelete);
-        expectedModel.commitAddressBook();
+        expectedModel.commitRestaurantBook();
         showNoReservation(expectedModel);
 
         assertCommandSuccess(deleteCommand, model, commandHistory, expectedMessage, expectedModel);
@@ -79,7 +79,7 @@ public class DeleteReservationCommandTest {
 
         Index outOfBoundIndex = INDEX_SECOND;
         // ensures that outOfBoundIndex is still in bounds of restaurant book list
-        assertTrue(outOfBoundIndex.getZeroBased() < model.getAddressBook().getReservationList().size());
+        assertTrue(outOfBoundIndex.getZeroBased() < model.getRestaurantBook().getReservationList().size());
 
         DeleteReservationCommand deleteCommand = new DeleteReservationCommand(outOfBoundIndex);
 
@@ -91,19 +91,19 @@ public class DeleteReservationCommandTest {
     public void executeUndoRedo_validIndexUnfilteredList_success() throws Exception {
         Reservation reservationToDelete = model.getFilteredReservationList().get(INDEX_FIRST.getZeroBased());
         DeleteReservationCommand deleteCommand = new DeleteReservationCommand(INDEX_FIRST);
-        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        Model expectedModel = new ModelManager(model.getRestaurantBook(), new UserPrefs());
         expectedModel.deleteReservation(reservationToDelete);
-        expectedModel.commitAddressBook();
+        expectedModel.commitRestaurantBook();
 
         // delete -> first reservation deleted
         deleteCommand.execute(model, commandHistory);
 
         // undo -> reverts addressbook back to previous state and filtered reservation list to show all reservations
-        expectedModel.undoAddressBook();
+        expectedModel.undoRestaurantBook();
         assertCommandSuccess(new UndoCommand(), model, commandHistory, UndoCommand.MESSAGE_SUCCESS, expectedModel);
 
         // redo -> same first reservation deleted again
-        expectedModel.redoAddressBook();
+        expectedModel.redoRestaurantBook();
         assertCommandSuccess(new RedoCommand(), model, commandHistory, RedoCommand.MESSAGE_SUCCESS, expectedModel);
     }
 
@@ -130,23 +130,23 @@ public class DeleteReservationCommandTest {
     @Test
     public void executeUndoRedo_validIndexFilteredList_sameReservationDeleted() throws Exception {
         DeleteReservationCommand deleteReservationCommand = new DeleteReservationCommand(INDEX_FIRST);
-        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        Model expectedModel = new ModelManager(model.getRestaurantBook(), new UserPrefs());
 
         showReservationAtIndex(model, INDEX_SECOND);
         Reservation reservationToDelete = model.getFilteredReservationList().get(INDEX_FIRST.getZeroBased());
         expectedModel.deleteReservation(reservationToDelete);
-        expectedModel.commitAddressBook();
+        expectedModel.commitRestaurantBook();
 
         // delete -> deletes second reservation in unfiltered list / first reservation in filtered list
         deleteReservationCommand.execute(model, commandHistory);
 
         // undo -> reverts addressbook back to previous state and filtered reservation list to show all reservations
-        expectedModel.undoAddressBook();
+        expectedModel.undoRestaurantBook();
         assertCommandSuccess(new UndoCommand(), model, commandHistory, UndoCommand.MESSAGE_SUCCESS, expectedModel);
 
         assertNotEquals(reservationToDelete, model.getFilteredReservationList().get(INDEX_FIRST.getZeroBased()));
         // redo -> deletes same second reservation in unfiltered reservation list
-        expectedModel.redoAddressBook();
+        expectedModel.redoRestaurantBook();
         assertCommandSuccess(new RedoCommand(), model, commandHistory, RedoCommand.MESSAGE_SUCCESS, expectedModel);
     }
 

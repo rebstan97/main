@@ -38,9 +38,9 @@ public class DeleteItemCommandTest {
 
         String expectedMessage = String.format(DeleteItemCommand.MESSAGE_DELETE_ITEM_SUCCESS, itemToDelete);
 
-        ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        ModelManager expectedModel = new ModelManager(model.getRestaurantBook(), new UserPrefs());
         expectedModel.deleteItem(itemToDelete);
-        expectedModel.commitAddressBook();
+        expectedModel.commitRestaurantBook();
 
         assertCommandSuccess(deleteItemCommand, model, commandHistory, expectedMessage, expectedModel);
     }
@@ -62,9 +62,9 @@ public class DeleteItemCommandTest {
 
         String expectedMessage = String.format(DeleteItemCommand.MESSAGE_DELETE_ITEM_SUCCESS, itemToDelete);
 
-        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        Model expectedModel = new ModelManager(model.getRestaurantBook(), new UserPrefs());
         expectedModel.deleteItem(itemToDelete);
-        expectedModel.commitAddressBook();
+        expectedModel.commitRestaurantBook();
         showNoItem(expectedModel);
 
         assertCommandSuccess(deleteItemCommand, model, commandHistory, expectedMessage, expectedModel);
@@ -76,7 +76,7 @@ public class DeleteItemCommandTest {
 
         Index outOfBoundIndex = INDEX_SECOND;
         // ensures that outOfBoundIndex is still in bounds of restaurant book list
-        assertTrue(outOfBoundIndex.getZeroBased() < model.getAddressBook().getItemList().size());
+        assertTrue(outOfBoundIndex.getZeroBased() < model.getRestaurantBook().getItemList().size());
 
         DeleteItemCommand deleteItemCommand = new DeleteItemCommand(outOfBoundIndex);
 
@@ -87,19 +87,19 @@ public class DeleteItemCommandTest {
     public void executeUndoRedo_validIndexUnfilteredList_success() throws Exception {
         Item itemToDelete = model.getFilteredItemList().get(INDEX_FIRST.getZeroBased());
         DeleteItemCommand deleteItemCommand = new DeleteItemCommand(INDEX_FIRST);
-        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        Model expectedModel = new ModelManager(model.getRestaurantBook(), new UserPrefs());
         expectedModel.deleteItem(itemToDelete);
-        expectedModel.commitAddressBook();
+        expectedModel.commitRestaurantBook();
 
         // delete -> first item deleted
         deleteItemCommand.execute(model, commandHistory);
 
         // undo -> reverts addressbook back to previous state and filtered item list to show all items
-        expectedModel.undoAddressBook();
+        expectedModel.undoRestaurantBook();
         assertCommandSuccess(new UndoCommand(), model, commandHistory, UndoCommand.MESSAGE_SUCCESS, expectedModel);
 
         // redo -> same first item deleted again
-        expectedModel.redoAddressBook();
+        expectedModel.redoRestaurantBook();
         assertCommandSuccess(new RedoCommand(), model, commandHistory, RedoCommand.MESSAGE_SUCCESS, expectedModel);
     }
 
@@ -125,23 +125,23 @@ public class DeleteItemCommandTest {
     @Test
     public void executeUndoRedo_validIndexFilteredList_sameItemDeleted() throws Exception {
         DeleteItemCommand deleteItemCommand = new DeleteItemCommand(INDEX_FIRST);
-        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        Model expectedModel = new ModelManager(model.getRestaurantBook(), new UserPrefs());
 
         showItemAtIndex(model, INDEX_SECOND);
         Item itemToDelete = model.getFilteredItemList().get(INDEX_FIRST.getZeroBased());
         expectedModel.deleteItem(itemToDelete);
-        expectedModel.commitAddressBook();
+        expectedModel.commitRestaurantBook();
 
         // delete -> deletes second item in unfiltered item list / first item in filtered item list
         deleteItemCommand.execute(model, commandHistory);
 
         // undo -> reverts addressbook back to previous state and filtered item list to show all items
-        expectedModel.undoAddressBook();
+        expectedModel.undoRestaurantBook();
         assertCommandSuccess(new UndoCommand(), model, commandHistory, UndoCommand.MESSAGE_SUCCESS, expectedModel);
 
         assertNotEquals(itemToDelete, model.getFilteredItemList().get(INDEX_FIRST.getZeroBased()));
         // redo -> deletes same second item in unfiltered item list
-        expectedModel.redoAddressBook();
+        expectedModel.redoRestaurantBook();
         assertCommandSuccess(new RedoCommand(), model, commandHistory, RedoCommand.MESSAGE_SUCCESS, expectedModel);
     }
 

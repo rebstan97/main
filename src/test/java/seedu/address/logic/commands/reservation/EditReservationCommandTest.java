@@ -50,9 +50,9 @@ public class EditReservationCommandTest {
         String expectedMessage = String.format(EditReservationCommand.MESSAGE_EDIT_RESERVATION_SUCCESS,
                 editedReservation);
 
-        Model expectedModel = new ModelManager(new RestaurantBook(model.getAddressBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(new RestaurantBook(model.getRestaurantBook()), new UserPrefs());
         expectedModel.updateReservation(model.getFilteredReservationList().get(0), editedReservation);
-        expectedModel.commitAddressBook();
+        expectedModel.commitRestaurantBook();
 
         assertCommandSuccess(editReservationCommand, model, commandHistory, expectedMessage, expectedModel);
     }
@@ -74,9 +74,9 @@ public class EditReservationCommandTest {
         String expectedMessage = String.format(EditReservationCommand.MESSAGE_EDIT_RESERVATION_SUCCESS,
                 editedReservation);
 
-        Model expectedModel = new ModelManager(new RestaurantBook(model.getAddressBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(new RestaurantBook(model.getRestaurantBook()), new UserPrefs());
         expectedModel.updateReservation(lastReservation, editedReservation);
-        expectedModel.commitAddressBook();
+        expectedModel.commitRestaurantBook();
 
         assertCommandSuccess(editReservationCommand, model, commandHistory, expectedMessage, expectedModel);
     }
@@ -90,8 +90,8 @@ public class EditReservationCommandTest {
         String expectedMessage = String.format(EditReservationCommand.MESSAGE_EDIT_RESERVATION_SUCCESS,
                 editedReservation);
 
-        Model expectedModel = new ModelManager(new RestaurantBook(model.getAddressBook()), new UserPrefs());
-        expectedModel.commitAddressBook();
+        Model expectedModel = new ModelManager(new RestaurantBook(model.getRestaurantBook()), new UserPrefs());
+        expectedModel.commitRestaurantBook();
 
         assertCommandSuccess(editReservationCommand, model, commandHistory, expectedMessage, expectedModel);
     }
@@ -109,9 +109,9 @@ public class EditReservationCommandTest {
         String expectedMessage = String.format(EditReservationCommand.MESSAGE_EDIT_RESERVATION_SUCCESS,
                 editedReservation);
 
-        Model expectedModel = new ModelManager(new RestaurantBook(model.getAddressBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(new RestaurantBook(model.getRestaurantBook()), new UserPrefs());
         expectedModel.updateReservation(model.getFilteredReservationList().get(0), editedReservation);
-        expectedModel.commitAddressBook();
+        expectedModel.commitRestaurantBook();
 
         assertCommandSuccess(editReservationCommand, model, commandHistory, expectedMessage, expectedModel);
     }
@@ -131,7 +131,7 @@ public class EditReservationCommandTest {
         showReservationAtIndex(model, INDEX_FIRST);
 
         // edit reservation in filtered list into a duplicate in restaurant book
-        Reservation reservationInList = model.getAddressBook().getReservationList().get(INDEX_SECOND.getZeroBased());
+        Reservation reservationInList = model.getRestaurantBook().getReservationList().get(INDEX_SECOND.getZeroBased());
         EditReservationCommand editReservationCommand = new EditReservationCommand(INDEX_FIRST,
                 new EditReservationDescriptorBuilder(reservationInList).build());
 
@@ -158,7 +158,7 @@ public class EditReservationCommandTest {
         showReservationAtIndex(model, INDEX_FIRST);
         Index outOfBoundIndex = INDEX_SECOND;
         // ensures that outOfBoundIndex is still in bounds of restaurant book list
-        assertTrue(outOfBoundIndex.getZeroBased() < model.getAddressBook().getReservationList().size());
+        assertTrue(outOfBoundIndex.getZeroBased() < model.getRestaurantBook().getReservationList().size());
 
         EditReservationCommand editReservationCommand = new EditReservationCommand(outOfBoundIndex,
                 new EditReservationDescriptorBuilder().withName(VALID_RESERVATION_NAME_BILLY).build());
@@ -173,19 +173,19 @@ public class EditReservationCommandTest {
         Reservation reservationToEdit = model.getFilteredReservationList().get(INDEX_FIRST.getZeroBased());
         EditReservationDescriptor descriptor = new EditReservationDescriptorBuilder(editedReservation).build();
         EditReservationCommand editReservationCommand = new EditReservationCommand(INDEX_FIRST, descriptor);
-        Model expectedModel = new ModelManager(new RestaurantBook(model.getAddressBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(new RestaurantBook(model.getRestaurantBook()), new UserPrefs());
         expectedModel.updateReservation(reservationToEdit, editedReservation);
-        expectedModel.commitAddressBook();
+        expectedModel.commitRestaurantBook();
 
         // edit -> first reservation edited
         editReservationCommand.execute(model, commandHistory);
 
         // undo -> reverts addressbook back to previous state and filtered reservation list to show all reservations
-        expectedModel.undoAddressBook();
+        expectedModel.undoRestaurantBook();
         assertCommandSuccess(new UndoCommand(), model, commandHistory, UndoCommand.MESSAGE_SUCCESS, expectedModel);
 
         // redo -> same first reservation edited again
-        expectedModel.redoAddressBook();
+        expectedModel.redoRestaurantBook();
         assertCommandSuccess(new RedoCommand(), model, commandHistory, RedoCommand.MESSAGE_SUCCESS, expectedModel);
     }
 
@@ -216,23 +216,23 @@ public class EditReservationCommandTest {
         Reservation editedReservation = new ReservationBuilder().build();
         EditReservationDescriptor descriptor = new EditReservationDescriptorBuilder(editedReservation).build();
         EditReservationCommand editReservationCommand = new EditReservationCommand(INDEX_FIRST, descriptor);
-        Model expectedModel = new ModelManager(new RestaurantBook(model.getAddressBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(new RestaurantBook(model.getRestaurantBook()), new UserPrefs());
 
         showReservationAtIndex(model, INDEX_SECOND);
         Reservation reservationToEdit = model.getFilteredReservationList().get(INDEX_FIRST.getZeroBased());
         expectedModel.updateReservation(reservationToEdit, editedReservation);
-        expectedModel.commitAddressBook();
+        expectedModel.commitRestaurantBook();
 
         // edit -> edits second reservation in unfiltered list / first reservation in filtered list
         editReservationCommand.execute(model, commandHistory);
 
         // undo -> reverts addressbook back to previous state and filtered reservation list to show all reservations
-        expectedModel.undoAddressBook();
+        expectedModel.undoRestaurantBook();
         assertCommandSuccess(new UndoCommand(), model, commandHistory, UndoCommand.MESSAGE_SUCCESS, expectedModel);
 
         assertNotEquals(model.getFilteredReservationList().get(INDEX_FIRST.getZeroBased()), reservationToEdit);
         // redo -> edits same second reservation in unfiltered reservation list
-        expectedModel.redoAddressBook();
+        expectedModel.redoRestaurantBook();
         assertCommandSuccess(new RedoCommand(), model, commandHistory, RedoCommand.MESSAGE_SUCCESS, expectedModel);
     }
 

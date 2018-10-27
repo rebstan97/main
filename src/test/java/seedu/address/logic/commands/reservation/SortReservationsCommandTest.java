@@ -28,7 +28,7 @@ public class SortReservationsCommandTest {
         String expectedMessage = String.format(MESSAGE_SORTED);
         SortReservationsCommand command = new SortReservationsCommand();
         expectedModel.sortReservations();
-        expectedModel.commitAddressBook();
+        expectedModel.commitRestaurantBook();
         assertCommandSuccess(command, model, commandHistory, expectedMessage, expectedModel);
     }
 }

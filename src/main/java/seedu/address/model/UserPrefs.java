@@ -34,8 +34,8 @@ public class UserPrefs {
         return restaurantBookFilePath;
     }
 
-    public void setRestaurantBookFilePath(Path addressBookFilePath) {
-        this.restaurantBookFilePath = addressBookFilePath;
+    public void setRestaurantBookFilePath(Path restaurantBookFilePath) {
+        this.restaurantBookFilePath = restaurantBookFilePath;
     }
 
     @Override

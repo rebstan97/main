@@ -14,7 +14,7 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.TemporaryFolder;
 
-import seedu.address.commons.events.model.AddressBookChangedEvent;
+import seedu.address.commons.events.model.RestaurantBookChangedEvent;
 import seedu.address.commons.events.storage.DataSavingExceptionEvent;
 import seedu.address.model.ReadOnlyRestaurantBook;
 import seedu.address.model.RestaurantBook;
@@ -64,23 +64,23 @@ public class StorageManagerTest {
          * More extensive testing of UserPref saving/reading is done in {@link XmlRestaurantBookStorageTest} class.
          */
         RestaurantBook original = getTypicalAddressBook();
-        storageManager.saveAddressBook(original);
-        ReadOnlyRestaurantBook retrieved = storageManager.readAddressBook().get();
+        storageManager.saveRestaurantBook(original);
+        ReadOnlyRestaurantBook retrieved = storageManager.readRestaurantBook().get();
         assertEquals(original, new RestaurantBook(retrieved));
     }
 
     @Test
     public void addressBookReadBackup() throws Exception {
         RestaurantBook original = getTypicalAddressBook();
-        storageManager.backupAddressBook(original);
-        ReadOnlyRestaurantBook retrieved = storageManager.readAddressBook(Paths.get(getTempFilePath("ab")
+        storageManager.backupRestaurantBook(original);
+        ReadOnlyRestaurantBook retrieved = storageManager.readRestaurantBook(Paths.get(getTempFilePath("ab")
                 .toString() + ".backup")).get();
         assertEquals(original, new RestaurantBook(retrieved));
     }
 
     @Test
     public void getAddressBookFilePath() {
-        assertNotNull(storageManager.getAddressBookFilePath());
+        assertNotNull(storageManager.getRestaurantBookFilePath());
     }
 
     @Test
@@ -88,7 +88,7 @@ public class StorageManagerTest {
         // Create a StorageManager while injecting a stub that throws an exception when the save method is called
         Storage storage = new StorageManager(new XmlRestaurantBookStorageExceptionThrowingStub(Paths.get("dummy")),
                 new JsonUserPrefsStorage(Paths.get("dummy")));
-        storage.handleAddressBookChangedEvent(new AddressBookChangedEvent(new RestaurantBook()));
+        storage.handleRestaurantBookChangedEvent(new RestaurantBookChangedEvent(new RestaurantBook()));
         assertTrue(eventsCollectorRule.eventsCollector.getMostRecent() instanceof DataSavingExceptionEvent);
     }
 
@@ -103,7 +103,7 @@ public class StorageManagerTest {
         }
 
         @Override
-        public void saveAddressBook(ReadOnlyRestaurantBook addressBook, Path filePath) throws IOException {
+        public void saveRestaurantBook(ReadOnlyRestaurantBook restaurantBook, Path filePath) throws IOException {
             throw new IOException("dummy exception");
         }
     }

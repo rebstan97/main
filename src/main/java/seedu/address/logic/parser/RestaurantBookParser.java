@@ -80,7 +80,7 @@ import seedu.address.logic.parser.sales.RecordSalesCommandParser;
 /**
  * Parses user input.
  */
-public class AddressBookParser {
+public class RestaurantBookParser {
 
     /**
      * Used for initial separation of command word and args.

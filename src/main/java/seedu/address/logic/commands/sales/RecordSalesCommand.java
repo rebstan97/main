@@ -57,7 +57,7 @@ public class RecordSalesCommand extends Command {
         }
 
         model.addRecord(toAdd);
-        model.commitAddressBook();
+        model.commitRestaurantBook();
         return new CommandResult(String.format(MESSAGE_RECORD_SALES_SUCCESS, toAdd));
     }
 

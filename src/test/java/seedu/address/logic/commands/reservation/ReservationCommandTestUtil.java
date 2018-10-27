@@ -32,7 +32,7 @@ public class ReservationCommandTestUtil {
             String expectedMessage) {
         // we are unable to defensively copy the model for comparison later, so we can
         // only do so by copying its components.
-        RestaurantBook expectedRestaurantBook = new RestaurantBook(actualModel.getAddressBook());
+        RestaurantBook expectedRestaurantBook = new RestaurantBook(actualModel.getRestaurantBook());
         List<Reservation> expectedFilteredList = new ArrayList<>(actualModel.getFilteredReservationList());
 
         CommandHistory expectedCommandHistory = new CommandHistory(actualCommandHistory);
@@ -42,7 +42,7 @@ public class ReservationCommandTestUtil {
             throw new AssertionError("The expected CommandException was not thrown.");
         } catch (CommandException e) {
             assertEquals(expectedMessage, e.getMessage());
-            assertEquals(expectedRestaurantBook, actualModel.getAddressBook());
+            assertEquals(expectedRestaurantBook, actualModel.getRestaurantBook());
             assertEquals(expectedFilteredList, actualModel.getFilteredReservationList());
             assertEquals(expectedCommandHistory, actualCommandHistory);
         }

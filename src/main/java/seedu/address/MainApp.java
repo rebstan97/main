@@ -83,24 +83,24 @@ public class MainApp extends Application {
      * or an empty restaurant book will be used instead if errors occur when reading {@code storage}'s restaurant book.
      */
     private Model initModelManager(Storage storage, UserPrefs userPrefs) {
-        Optional<ReadOnlyRestaurantBook> addressBookOptional;
-        ReadOnlyRestaurantBook initialAddressBookData;
+        Optional<ReadOnlyRestaurantBook> restaurantBookOptional;
+        ReadOnlyRestaurantBook initialRestaurantBookData;
 
         try {
-            addressBookOptional = storage.readAddressBook();
-            if (!addressBookOptional.isPresent()) {
+            restaurantBookOptional = storage.readRestaurantBook();
+            if (!restaurantBookOptional.isPresent()) {
                 logger.info("Data file not found. Will be starting with a sample RestaurantBook");
             }
-            initialAddressBookData = addressBookOptional.orElseGet(SampleDataUtil::getSampleAddressBook);
+            initialRestaurantBookData = restaurantBookOptional.orElseGet(SampleDataUtil::getSampleRestaurantBook);
         } catch (DataConversionException e) {
             logger.warning("Data file not in the correct format. Will be starting with an empty RestaurantBook");
-            initialAddressBookData = new RestaurantBook();
+            initialRestaurantBookData = new RestaurantBook();
         } catch (IOException e) {
             logger.warning("Problem while reading from the file. Will be starting with an empty RestaurantBook");
-            initialAddressBookData = new RestaurantBook();
+            initialRestaurantBookData = new RestaurantBook();
         }
 
-        return new ModelManager(initialAddressBookData, userPrefs);
+        return new ModelManager(initialRestaurantBookData, userPrefs);
     }
 
     private void initLogging(Config config) {

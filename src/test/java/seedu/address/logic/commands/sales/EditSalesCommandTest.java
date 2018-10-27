@@ -51,9 +51,9 @@ public class EditSalesCommandTest {
 
         String expectedMessage = String.format(EditSalesCommand.MESSAGE_EDIT_RECORD_SUCCESS, editedRecord);
 
-        Model expectedModel = new ModelManager(new RestaurantBook(model.getAddressBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(new RestaurantBook(model.getRestaurantBook()), new UserPrefs());
         expectedModel.updateRecord(model.getFilteredRecordList().get(0), editedRecord);
-        expectedModel.commitAddressBook();
+        expectedModel.commitRestaurantBook();
 
         assertCommandSuccess(editSalesCommand, model, commandHistory, expectedMessage, expectedModel);
     }
@@ -78,9 +78,9 @@ public class EditSalesCommandTest {
 
         String expectedMessage = String.format(EditSalesCommand.MESSAGE_EDIT_RECORD_SUCCESS, editedRecord);
 
-        Model expectedModel = new ModelManager(new RestaurantBook(model.getAddressBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(new RestaurantBook(model.getRestaurantBook()), new UserPrefs());
         expectedModel.updateRecord(lastRecord, editedRecord);
-        expectedModel.commitAddressBook();
+        expectedModel.commitRestaurantBook();
 
         assertCommandSuccess(editSalesCommand, model, commandHistory, expectedMessage, expectedModel);
     }
@@ -92,8 +92,8 @@ public class EditSalesCommandTest {
 
         String expectedMessage = String.format(EditSalesCommand.MESSAGE_EDIT_RECORD_SUCCESS, editedRecord);
 
-        Model expectedModel = new ModelManager(new RestaurantBook(model.getAddressBook()), new UserPrefs());
-        expectedModel.commitAddressBook();
+        Model expectedModel = new ModelManager(new RestaurantBook(model.getRestaurantBook()), new UserPrefs());
+        expectedModel.commitRestaurantBook();
 
         assertCommandSuccess(editSalesCommand, model, commandHistory, expectedMessage, expectedModel);
     }
@@ -109,9 +109,9 @@ public class EditSalesCommandTest {
 
         String expectedMessage = String.format(EditSalesCommand.MESSAGE_EDIT_RECORD_SUCCESS, editedRecord);
 
-        Model expectedModel = new ModelManager(new RestaurantBook(model.getAddressBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(new RestaurantBook(model.getRestaurantBook()), new UserPrefs());
         expectedModel.updateRecord(model.getFilteredRecordList().get(0), editedRecord);
-        expectedModel.commitAddressBook();
+        expectedModel.commitRestaurantBook();
 
         assertCommandSuccess(editSalesCommand, model, commandHistory, expectedMessage, expectedModel);
     }
@@ -130,7 +130,7 @@ public class EditSalesCommandTest {
         showRecordAtIndex(model, INDEX_FIRST);
 
         // edit record in filtered list into a duplicate in restaurant book
-        SalesRecord recordInList = model.getAddressBook().getRecordList().get(INDEX_SECOND.getZeroBased());
+        SalesRecord recordInList = model.getRestaurantBook().getRecordList().get(INDEX_SECOND.getZeroBased());
         EditSalesCommand editSalesCommand = new EditSalesCommand(INDEX_FIRST,
                 new EditRecordDescriptorBuilder(recordInList).build());
 
@@ -155,7 +155,7 @@ public class EditSalesCommandTest {
         showRecordAtIndex(model, INDEX_FIRST);
         Index outOfBoundIndex = INDEX_SECOND;
         // ensures that outOfBoundIndex is still in bounds of restaurant book list
-        assertTrue(outOfBoundIndex.getZeroBased() < model.getAddressBook().getRecordList().size());
+        assertTrue(outOfBoundIndex.getZeroBased() < model.getRestaurantBook().getRecordList().size());
 
         EditSalesCommand editSalesCommand = new EditSalesCommand(outOfBoundIndex,
                 new EditRecordDescriptorBuilder().withName(VALID_ITEM_NAME_RECORD_TWO).build());
@@ -169,19 +169,19 @@ public class EditSalesCommandTest {
         SalesRecord recordToEdit = model.getFilteredRecordList().get(INDEX_FIRST.getZeroBased());
         EditRecordDescriptor descriptor = new EditRecordDescriptorBuilder(editedRecord).build();
         EditSalesCommand editSalesCommand = new EditSalesCommand(INDEX_FIRST, descriptor);
-        Model expectedModel = new ModelManager(new RestaurantBook(model.getAddressBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(new RestaurantBook(model.getRestaurantBook()), new UserPrefs());
         expectedModel.updateRecord(recordToEdit, editedRecord);
-        expectedModel.commitAddressBook();
+        expectedModel.commitRestaurantBook();
 
         // edit -> first record edited
         editSalesCommand.execute(model, commandHistory);
 
         // undo -> reverts addressbook back to previous state and filtered sales record list to show all records
-        expectedModel.undoAddressBook();
+        expectedModel.undoRestaurantBook();
         assertCommandSuccess(new UndoCommand(), model, commandHistory, UndoCommand.MESSAGE_SUCCESS, expectedModel);
 
         // redo -> same first record edited again
-        expectedModel.redoAddressBook();
+        expectedModel.redoRestaurantBook();
         assertCommandSuccess(new RedoCommand(), model, commandHistory, RedoCommand.MESSAGE_SUCCESS, expectedModel);
     }
 
@@ -212,23 +212,23 @@ public class EditSalesCommandTest {
         SalesRecord editedRecord = new RecordBuilder().withDate(VALID_DATE_RECORD_TWO).build();
         EditRecordDescriptor descriptor = new EditRecordDescriptorBuilder(editedRecord).build();
         EditSalesCommand editSalesCommand = new EditSalesCommand(INDEX_FIRST, descriptor);
-        Model expectedModel = new ModelManager(new RestaurantBook(model.getAddressBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(new RestaurantBook(model.getRestaurantBook()), new UserPrefs());
 
         showRecordAtIndex(model, INDEX_SECOND);
         SalesRecord recordToEdit = model.getFilteredRecordList().get(INDEX_FIRST.getZeroBased());
         expectedModel.updateRecord(recordToEdit, editedRecord);
-        expectedModel.commitAddressBook();
+        expectedModel.commitRestaurantBook();
 
         // edit -> edits second record in unfiltered record list / first record in filtered record list
         editSalesCommand.execute(model, commandHistory);
 
         // undo -> reverts addressbook back to previous state and filtered record list to show all records
-        expectedModel.undoAddressBook();
+        expectedModel.undoRestaurantBook();
         assertCommandSuccess(new UndoCommand(), model, commandHistory, UndoCommand.MESSAGE_SUCCESS, expectedModel);
 
         assertNotEquals(model.getFilteredRecordList().get(INDEX_FIRST.getZeroBased()), recordToEdit);
         // redo -> edits same second record in unfiltered record list
-        expectedModel.redoAddressBook();
+        expectedModel.redoRestaurantBook();
         assertCommandSuccess(new RedoCommand(), model, commandHistory, RedoCommand.MESSAGE_SUCCESS, expectedModel);
     }
 

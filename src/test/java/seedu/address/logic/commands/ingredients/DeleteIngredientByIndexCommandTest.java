@@ -39,9 +39,9 @@ public class DeleteIngredientByIndexCommandTest {
         String expectedMessage = String.format(DeleteIngredientByIndexCommand.MESSAGE_DELETE_INGREDIENT_SUCCESS,
                 ingredientToDelete);
 
-        ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        ModelManager expectedModel = new ModelManager(model.getRestaurantBook(), new UserPrefs());
         expectedModel.deleteIngredient(ingredientToDelete);
-        expectedModel.commitAddressBook();
+        expectedModel.commitRestaurantBook();
 
         assertCommandSuccess(deleteCommand, model, commandHistory, expectedMessage, expectedModel);
     }
@@ -65,9 +65,9 @@ public class DeleteIngredientByIndexCommandTest {
         String expectedMessage = String.format(DeleteIngredientByIndexCommand.MESSAGE_DELETE_INGREDIENT_SUCCESS,
                 ingredientToDelete);
 
-        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        Model expectedModel = new ModelManager(model.getRestaurantBook(), new UserPrefs());
         expectedModel.deleteIngredient(ingredientToDelete);
-        expectedModel.commitAddressBook();
+        expectedModel.commitRestaurantBook();
         showNoIngredient(expectedModel);
 
         assertCommandSuccess(deleteCommand, model, commandHistory, expectedMessage, expectedModel);
@@ -79,7 +79,7 @@ public class DeleteIngredientByIndexCommandTest {
 
         Index outOfBoundIndex = INDEX_SECOND;
         // ensures that outOfBoundIndex is still in bounds of restaurant book list
-        assertTrue(outOfBoundIndex.getZeroBased() < model.getAddressBook().getIngredientList().size());
+        assertTrue(outOfBoundIndex.getZeroBased() < model.getRestaurantBook().getIngredientList().size());
 
         DeleteIngredientByIndexCommand deleteCommand = new DeleteIngredientByIndexCommand(outOfBoundIndex);
 
@@ -91,19 +91,19 @@ public class DeleteIngredientByIndexCommandTest {
     public void executeUndoRedo_validIndexUnfilteredList_success() throws Exception {
         Ingredient ingredientToDelete = model.getFilteredIngredientList().get(INDEX_FIRST.getZeroBased());
         DeleteIngredientByIndexCommand deleteCommand = new DeleteIngredientByIndexCommand(INDEX_FIRST);
-        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        Model expectedModel = new ModelManager(model.getRestaurantBook(), new UserPrefs());
         expectedModel.deleteIngredient(ingredientToDelete);
-        expectedModel.commitAddressBook();
+        expectedModel.commitRestaurantBook();
 
         // delete -> first ingredient deleted
         deleteCommand.execute(model, commandHistory);
 
         // undo -> reverts addressbook back to previous state and filtered ingredient list to show all ingredients
-        expectedModel.undoAddressBook();
+        expectedModel.undoRestaurantBook();
         assertCommandSuccess(new UndoCommand(), model, commandHistory, UndoCommand.MESSAGE_SUCCESS, expectedModel);
 
         // redo -> same first ingredient deleted again
-        expectedModel.redoAddressBook();
+        expectedModel.redoRestaurantBook();
         assertCommandSuccess(new RedoCommand(), model, commandHistory, RedoCommand.MESSAGE_SUCCESS, expectedModel);
     }
 
@@ -129,24 +129,24 @@ public class DeleteIngredientByIndexCommandTest {
     @Test
     public void executeUndoRedo_validIndexFilteredList_sameIngredientDeleted() throws Exception {
         DeleteIngredientByIndexCommand deleteCommand = new DeleteIngredientByIndexCommand(INDEX_FIRST);
-        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        Model expectedModel = new ModelManager(model.getRestaurantBook(), new UserPrefs());
 
         showIngredientAtIndex(model, INDEX_SECOND);
         Ingredient ingredientToDelete = model.getFilteredIngredientList().get(INDEX_FIRST.getZeroBased());
         expectedModel.deleteIngredient(ingredientToDelete);
-        expectedModel.commitAddressBook();
+        expectedModel.commitRestaurantBook();
 
         // delete -> deletes second ingredient in unfiltered ingredient list / first ingredient in filtered ingredient
         // list
         deleteCommand.execute(model, commandHistory);
 
         // undo -> reverts addressbook back to previous state and filtered ingredient list to show all ingredients
-        expectedModel.undoAddressBook();
+        expectedModel.undoRestaurantBook();
         assertCommandSuccess(new UndoCommand(), model, commandHistory, UndoCommand.MESSAGE_SUCCESS, expectedModel);
 
         assertNotEquals(ingredientToDelete, model.getFilteredIngredientList().get(INDEX_FIRST.getZeroBased()));
         // redo -> deletes same second ingredient in unfiltered ingredient list
-        expectedModel.redoAddressBook();
+        expectedModel.redoRestaurantBook();
         assertCommandSuccess(new RedoCommand(), model, commandHistory, RedoCommand.MESSAGE_SUCCESS, expectedModel);
     }
 

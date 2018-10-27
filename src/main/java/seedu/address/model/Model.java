@@ -38,7 +38,7 @@ public interface Model {
     /**
      * Returns the RestaurantBook
      */
-    ReadOnlyRestaurantBook getAddressBook();
+    ReadOnlyRestaurantBook getRestaurantBook();
 
     //=========== API for Persons =============================================================
 
@@ -58,9 +58,9 @@ public interface Model {
     void addPerson(Person person);
 
     /**
-     * Replaces the given person {@code target} with {@code editedPerson}. {@code target} must exist in the address
-     * book. The person identity of {@code editedPerson} must not be the same as another existing person in the address
-     * book.
+     * Replaces the given person {@code target} with {@code editedPerson}. {@code target} must exist in the restaurant
+     * book. The person identity of {@code editedPerson} must not be the same as another existing person in the
+     * restaurant book.
      *
      * @param target person to be updated.
      * @param editedPerson updated person.
@@ -76,7 +76,7 @@ public interface Model {
 
     /**
      * Returns an unmodifiable view of the list of {@code Person} backed by the internal list of {@code
-     * versionedAddressBook}
+     * versionedRestaurantBook}
      */
     ObservableList<Person> getFilteredPersonList();
 
@@ -110,7 +110,9 @@ public interface Model {
      */
     void updateRecord(SalesRecord target, SalesRecord editedRecord);
 
-    /** Returns the sales report of the specified date. */
+    /**
+     * Returns the sales report of the specified date.
+     */
     SalesReport getSalesReport(Date date);
 
     /**
@@ -143,9 +145,9 @@ public interface Model {
     void addReservation(Reservation reservation);
 
     /**
-     * Replaces the given reservation {@code target} with {@code editedPerson}. {@code target} must exist in the address
-     * book. The reservation identity of {@code editedReservation} must not be the same as another existing reservation
-     * in the restaurant book.
+     * Replaces the given reservation {@code target} with {@code editedPerson}. {@code target} must exist in the
+     * restaurant book. The reservation identity of {@code editedReservation} must not be the same as another existing
+     * reservation in the restaurant book.
      */
     void updateReservation(Reservation target, Reservation editedReservation);
 
@@ -202,9 +204,9 @@ public interface Model {
     void removeAccount(Account account);
 
     /**
-     * Replaces the given person {@code target} with {@code editedPerson}. {@code target} must exist in the address
-     * book. The person identity of {@code editedPerson} must not be the same as another existing person in the address
-     * book.
+     * Replaces the given person {@code target} with {@code editedPerson}. {@code target} must exist in the restaurant
+     * book. The person identity of {@code editedPerson} must not be the same as another existing person in the
+     * restaurant book.
      *
      * @param target account to be updated.
      * @param editedAccount updated account.
@@ -239,9 +241,9 @@ public interface Model {
     Ingredient findIngredient(IngredientName ingredientName);
 
     /**
-     * Replaces the given ingredient {@code target} with {@code editedIngredient}. {@code target} must exist in
-     * the restaurant book. The ingredient identity of {@code editedIngredient} must not be the same as another
-     * existing ingredient in the restaurant book.
+     * Replaces the given ingredient {@code target} with {@code editedIngredient}. {@code target} must exist in the
+     * restaurant book. The ingredient identity of {@code editedIngredient} must not be the same as another existing
+     * ingredient in the restaurant book.
      */
     void updateIngredient(Ingredient target, Ingredient editedIngredient);
 
@@ -314,26 +316,25 @@ public interface Model {
     /**
      * Returns true if the model has previous restaurant book states to restore.
      */
-    boolean canUndoAddressBook();
+    boolean canUndoRestaurantBook();
 
     /**
      * Returns true if the model has undone restaurant book states to restore.
      */
-    boolean canRedoAddressBook();
+    boolean canRedoRestaurantBook();
 
     /**
      * Restores the model's restaurant book to its previous state.
      */
-    void undoAddressBook();
+    void undoRestaurantBook();
 
     /**
      * Restores the model's restaurant book to its previously undone state.
      */
-    void redoAddressBook();
+    void redoRestaurantBook();
 
     /**
      * Saves the current restaurant book state for undo/redo.
      */
-    void commitAddressBook();
-
+    void commitRestaurantBook();
 }

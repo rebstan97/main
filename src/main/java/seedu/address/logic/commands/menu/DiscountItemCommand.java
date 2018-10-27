@@ -80,7 +80,7 @@ public class DiscountItemCommand extends Command {
         }
 
         model.updateFilteredItemList(PREDICATE_SHOW_ALL_ITEMS);
-        model.commitAddressBook();
+        model.commitRestaurantBook();
         EventsCenter.getInstance().post(new DisplayItemListRequestEvent());
         String message = MESSAGE_DISCOUNT_ITEM_SUCCESS;
         if (percent == 0) {

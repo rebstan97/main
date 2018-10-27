@@ -26,11 +26,11 @@ public class UndoCommand extends Command {
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
 
-        if (!model.canUndoAddressBook()) {
+        if (!model.canUndoRestaurantBook()) {
             throw new CommandException(MESSAGE_FAILURE);
         }
 
-        model.undoAddressBook();
+        model.undoRestaurantBook();
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         model.updateFilteredIngredientList(PREDICATE_SHOW_ALL_INGREDIENTS);
         model.updateFilteredItemList(PREDICATE_SHOW_ALL_ITEMS);

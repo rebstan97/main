@@ -71,7 +71,7 @@ public class SelectCommandSystemTest extends RestaurantBookSystemTest {
          * -> rejected
          */
         showPersonsWithName(KEYWORD_MATCHING_MEIER);
-        int invalidIndex = model.getAddressBook().getPersonList().size();
+        int invalidIndex = model.getRestaurantBook().getPersonList().size();
         assertCommandFailure(SelectCommand.COMMAND_WORD + " " + invalidIndex, MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
 
         /* Case: filtered person list, select index within bounds of restaurant book and person list -> selected */

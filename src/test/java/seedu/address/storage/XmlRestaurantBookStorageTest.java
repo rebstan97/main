@@ -22,6 +22,7 @@ import seedu.address.model.ReadOnlyRestaurantBook;
 import seedu.address.model.RestaurantBook;
 
 public class XmlRestaurantBookStorageTest {
+
     private static final Path TEST_DATA_FOLDER = Paths.get("src", "test", "data", "XmlRestaurantBookStorageTest");
 
     @Rule
@@ -37,7 +38,8 @@ public class XmlRestaurantBookStorageTest {
     }
 
     private java.util.Optional<ReadOnlyRestaurantBook> readAddressBook(String filePath) throws Exception {
-        return new XmlRestaurantBookStorage(Paths.get(filePath)).readAddressBook(addToTestDataPathIfNotNull(filePath));
+        return new XmlRestaurantBookStorage(Paths.get(filePath))
+                .readRestaurantBook(addToTestDataPathIfNotNull(filePath));
     }
 
     private Path addToTestDataPathIfNotNull(String prefsFileInTestDataFolder) {
@@ -81,21 +83,21 @@ public class XmlRestaurantBookStorageTest {
         XmlRestaurantBookStorage xmlAddressBookStorage = new XmlRestaurantBookStorage(filePath);
 
         //Save in new file and read back
-        xmlAddressBookStorage.saveAddressBook(original, filePath);
-        ReadOnlyRestaurantBook readBack = xmlAddressBookStorage.readAddressBook(filePath).get();
+        xmlAddressBookStorage.saveRestaurantBook(original, filePath);
+        ReadOnlyRestaurantBook readBack = xmlAddressBookStorage.readRestaurantBook(filePath).get();
         assertEquals(original, new RestaurantBook(readBack));
 
         //Modify data, overwrite exiting file, and read back
         original.addPerson(HOON);
         original.removePerson(ALICE);
-        xmlAddressBookStorage.saveAddressBook(original, filePath);
-        readBack = xmlAddressBookStorage.readAddressBook(filePath).get();
+        xmlAddressBookStorage.saveRestaurantBook(original, filePath);
+        readBack = xmlAddressBookStorage.readRestaurantBook(filePath).get();
         assertEquals(original, new RestaurantBook(readBack));
 
         //Save and read without specifying file path
         original.addPerson(IDA);
-        xmlAddressBookStorage.saveAddressBook(original); //file path not specified
-        readBack = xmlAddressBookStorage.readAddressBook().get(); //file path not specified
+        xmlAddressBookStorage.saveRestaurantBook(original); //file path not specified
+        readBack = xmlAddressBookStorage.readRestaurantBook().get(); //file path not specified
         assertEquals(original, new RestaurantBook(readBack));
     }
 
@@ -111,7 +113,7 @@ public class XmlRestaurantBookStorageTest {
     private void saveAddressBook(ReadOnlyRestaurantBook addressBook, String filePath) {
         try {
             new XmlRestaurantBookStorage(Paths.get(filePath))
-                    .saveAddressBook(addressBook, addToTestDataPathIfNotNull(filePath));
+                    .saveRestaurantBook(addressBook, addToTestDataPathIfNotNull(filePath));
         } catch (IOException ioe) {
             throw new AssertionError("There should not be an error writing to the file.", ioe);
         }
@@ -141,7 +143,7 @@ public class XmlRestaurantBookStorageTest {
     private void backupAddressBook(ReadOnlyRestaurantBook addressBook, String filePath) {
         try {
             new XmlRestaurantBookStorage(Paths.get(filePath))
-                    .backupAddressBook(addressBook);
+                    .backupRestaurantBook(addressBook);
         } catch (IOException ioe) {
             throw new AssertionError("There should not be an error writing to the file.", ioe);
         }
@@ -155,15 +157,15 @@ public class XmlRestaurantBookStorageTest {
         Path path = Paths.get(filePath.toString() + ".backup");
 
         //Backup in a temporary storage and read back
-        xmlAddressBookStorage.backupAddressBook(original);
-        ReadOnlyRestaurantBook readBack = xmlAddressBookStorage.readAddressBook(path).get();
+        xmlAddressBookStorage.backupRestaurantBook(original);
+        ReadOnlyRestaurantBook readBack = xmlAddressBookStorage.readRestaurantBook(path).get();
         assertEquals(original, new RestaurantBook(readBack));
 
         //Modify data, overwrite exiting backup file, and read back
         original.addPerson(DYLAN);
         original.removePerson(ALICE);
-        xmlAddressBookStorage.backupAddressBook(original);
-        readBack = xmlAddressBookStorage.readAddressBook(path).get();
+        xmlAddressBookStorage.backupRestaurantBook(original);
+        readBack = xmlAddressBookStorage.readRestaurantBook(path).get();
         assertEquals(original, new RestaurantBook(readBack));
     }
 }

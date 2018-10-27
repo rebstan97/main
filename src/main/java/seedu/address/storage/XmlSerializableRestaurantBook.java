@@ -100,7 +100,7 @@ public class XmlSerializableRestaurantBook {
     }
 
     /**
-     * Converts this addressbook's person list into the model's {@code RestaurantBook} object.
+     * Converts this restaurantbook's person list into the model's {@code RestaurantBook} object.
      *
      * @throws IllegalValueException if there were any data constraints violated or duplicates in the {@code
      *         XmlAdaptedPerson}.
@@ -116,7 +116,7 @@ public class XmlSerializableRestaurantBook {
     }
 
     /**
-     * Converts this addressbook's record list into the model's {@code RestaurantBook} object.
+     * Converts this restaurantbook's record list into the model's {@code RestaurantBook} object.
      *
      * @throws IllegalValueException if there were any data constraints violated or duplicates in the {@code
      *         XmlAdaptedRecord}.

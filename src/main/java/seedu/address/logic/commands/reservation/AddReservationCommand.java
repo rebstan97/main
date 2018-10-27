@@ -56,7 +56,7 @@ public class AddReservationCommand extends Command {
         }
 
         model.addReservation(toAdd);
-        model.commitAddressBook();
+        model.commitRestaurantBook();
         return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
     }
 

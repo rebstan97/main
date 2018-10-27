@@ -26,7 +26,7 @@ public class SortReservationsCommand extends Command {
         requireNonNull(model);
         model.sortReservations();
         model.updateFilteredReservationList(PREDICATE_SHOW_ALL_RESERVATIONS);
-        model.commitAddressBook();
+        model.commitRestaurantBook();
         EventsCenter.getInstance().post(new DisplayReservationListRequestEvent());
         return new CommandResult(String.format(MESSAGE_SORTED));
     }

@@ -50,9 +50,9 @@ public class EditIngredientByNameCommandTest {
         String expectedMessage = String.format(EditIngredientByNameCommand.MESSAGE_EDIT_INGREDIENT_SUCCESS,
                 editedIngredient);
 
-        Model expectedModel = new ModelManager(new RestaurantBook(model.getAddressBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(new RestaurantBook(model.getRestaurantBook()), new UserPrefs());
         expectedModel.updateIngredient(model.findIngredient(ingredientToEdit), editedIngredient);
-        expectedModel.commitAddressBook();
+        expectedModel.commitRestaurantBook();
 
         assertCommandSuccess(editCommand, model, commandHistory, expectedMessage, expectedModel);
     }
@@ -73,9 +73,9 @@ public class EditIngredientByNameCommandTest {
         String expectedMessage = String.format(EditIngredientByNameCommand.MESSAGE_EDIT_INGREDIENT_SUCCESS,
                 editedIngredient);
 
-        Model expectedModel = new ModelManager(new RestaurantBook(model.getAddressBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(new RestaurantBook(model.getRestaurantBook()), new UserPrefs());
         expectedModel.updateIngredient(lastIngredient, editedIngredient);
-        expectedModel.commitAddressBook();
+        expectedModel.commitRestaurantBook();
 
         assertCommandSuccess(editCommand, model, commandHistory, expectedMessage, expectedModel);
     }
@@ -90,8 +90,8 @@ public class EditIngredientByNameCommandTest {
         String expectedMessage = String.format(EditIngredientByNameCommand.MESSAGE_EDIT_INGREDIENT_SUCCESS,
                 editedIngredient);
 
-        Model expectedModel = new ModelManager(new RestaurantBook(model.getAddressBook()), new UserPrefs());
-        expectedModel.commitAddressBook();
+        Model expectedModel = new ModelManager(new RestaurantBook(model.getRestaurantBook()), new UserPrefs());
+        expectedModel.commitRestaurantBook();
 
         assertCommandSuccess(editCommand, model, commandHistory, expectedMessage, expectedModel);
     }
@@ -128,19 +128,19 @@ public class EditIngredientByNameCommandTest {
         EditIngredientDescriptor descriptor = new EditIngredientDescriptorBuilder(editedIngredient).build();
         EditIngredientByNameCommand editCommand = new EditIngredientByNameCommand(
                 ingredientToEdit.getName(), descriptor);
-        Model expectedModel = new ModelManager(new RestaurantBook(model.getAddressBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(new RestaurantBook(model.getRestaurantBook()), new UserPrefs());
         expectedModel.updateIngredient(ingredientToEdit, editedIngredient);
-        expectedModel.commitAddressBook();
+        expectedModel.commitRestaurantBook();
 
         // edit -> first ingredient edited
         editCommand.execute(model, commandHistory);
 
         // undo -> reverts addressbook back to previous state and filtered ingredient list to show all ingredients
-        expectedModel.undoAddressBook();
+        expectedModel.undoRestaurantBook();
         assertCommandSuccess(new UndoCommand(), model, commandHistory, UndoCommand.MESSAGE_SUCCESS, expectedModel);
 
         // redo -> same first ingredient edited again
-        expectedModel.redoAddressBook();
+        expectedModel.redoRestaurantBook();
         assertCommandSuccess(new RedoCommand(), model, commandHistory, RedoCommand.MESSAGE_SUCCESS, expectedModel);
     }
 

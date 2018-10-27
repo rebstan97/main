@@ -20,10 +20,10 @@ public class SampleDataUtil {
         return new Account(new Username("root"), new Password("1122qq"));
     }
 
-    public static ReadOnlyRestaurantBook getSampleAddressBook() {
-        RestaurantBook sampleAb = new RestaurantBook();
-        sampleAb.addAccount(getRootAccount());
-        return sampleAb;
+    public static ReadOnlyRestaurantBook getSampleRestaurantBook() {
+        RestaurantBook defaultRestaurantBook = new RestaurantBook();
+        defaultRestaurantBook.addAccount(getRootAccount());
+        return defaultRestaurantBook;
     }
 
     /**

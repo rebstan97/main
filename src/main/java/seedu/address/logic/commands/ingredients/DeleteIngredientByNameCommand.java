@@ -27,7 +27,7 @@ public class DeleteIngredientByNameCommand extends DeleteIngredientCommand {
         try {
             Ingredient ingredientToDelete = model.findIngredient(targetName);
             model.deleteIngredient(ingredientToDelete);
-            model.commitAddressBook();
+            model.commitRestaurantBook();
             EventsCenter.getInstance().post(new DisplayIngredientListRequestEvent());
             return new CommandResult(String.format(MESSAGE_DELETE_INGREDIENT_SUCCESS, ingredientToDelete));
         } catch (IngredientNotFoundException e) {

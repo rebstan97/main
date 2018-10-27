@@ -58,7 +58,7 @@ public class AddIngredientCommand extends Command {
         }
 
         model.addIngredient(toAdd);
-        model.commitAddressBook();
+        model.commitRestaurantBook();
         EventsCenter.getInstance().post(new DisplayIngredientListRequestEvent());
         return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
     }

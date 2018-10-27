@@ -82,7 +82,7 @@ public class EditSalesCommand extends Command {
 
         model.updateRecord(recordToEdit, editedRecord);
         model.updateFilteredRecordList(PREDICATE_SHOW_ALL_RECORDS);
-        model.commitAddressBook();
+        model.commitRestaurantBook();
         return new CommandResult(String.format(MESSAGE_EDIT_RECORD_SUCCESS, editedRecord));
     }
 

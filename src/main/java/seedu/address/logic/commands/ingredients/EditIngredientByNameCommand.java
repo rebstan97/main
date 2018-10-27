@@ -53,7 +53,7 @@ public class EditIngredientByNameCommand extends EditIngredientCommand {
 
         model.updateIngredient(ingredientToEdit, editedIngredient);
         model.updateFilteredIngredientList(PREDICATE_SHOW_ALL_INGREDIENTS);
-        model.commitAddressBook();
+        model.commitRestaurantBook();
         EventsCenter.getInstance().post(new DisplayIngredientListRequestEvent());
         return new CommandResult(String.format(MESSAGE_EDIT_INGREDIENT_SUCCESS, editedIngredient));
     }

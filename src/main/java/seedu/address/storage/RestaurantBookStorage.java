@@ -16,38 +16,40 @@ public interface RestaurantBookStorage {
     /**
      * Returns the file path of the data file.
      */
-    Path getAddressBookFilePath();
+    Path getRestaurantBookFilePath();
 
     /**
-     * Returns RestaurantBook data as a {@link ReadOnlyRestaurantBook}.
-     *   Returns {@code Optional.empty()} if storage file is not found.
+     * Returns RestaurantBook data as a {@link ReadOnlyRestaurantBook}. Returns {@code Optional.empty()} if storage file
+     * is not found.
+     *
      * @throws DataConversionException if the data in storage is not in the expected format.
      * @throws IOException if there was any problem when reading from the storage.
      */
-    Optional<ReadOnlyRestaurantBook> readAddressBook() throws DataConversionException, IOException;
+    Optional<ReadOnlyRestaurantBook> readRestaurantBook() throws DataConversionException, IOException;
 
     /**
-     * @see #getAddressBookFilePath()
+     * @see #getRestaurantBookFilePath()
      */
-    Optional<ReadOnlyRestaurantBook> readAddressBook(Path filePath) throws DataConversionException, IOException;
+    Optional<ReadOnlyRestaurantBook> readRestaurantBook(Path filePath) throws DataConversionException, IOException;
 
     /**
      * Saves the given {@link ReadOnlyRestaurantBook} to the storage.
-     * @param addressBook cannot be null.
+     *
+     * @param restaurantBook cannot be null.
      * @throws IOException if there was any problem writing to the file.
      */
-    void saveAddressBook(ReadOnlyRestaurantBook addressBook) throws IOException;
+    void saveRestaurantBook(ReadOnlyRestaurantBook restaurantBook) throws IOException;
 
     /**
-     * @see #saveAddressBook(ReadOnlyRestaurantBook)
+     * @see #saveRestaurantBook(ReadOnlyRestaurantBook)
      */
-    void saveAddressBook(ReadOnlyRestaurantBook addressBook, Path filePath) throws IOException;
+    void saveRestaurantBook(ReadOnlyRestaurantBook restaurantBook, Path filePath) throws IOException;
 
     /**
      * Backup the given {@link ReadOnlyRestaurantBook} to a temporary local backup file.
-     * @param addressBook cannot be null.
+     *
+     * @param restaurantBook cannot be null.
      * @throws IOException if there was any problem writing to the file.
      */
-    void backupAddressBook(ReadOnlyRestaurantBook addressBook) throws IOException;
-
+    void backupRestaurantBook(ReadOnlyRestaurantBook restaurantBook) throws IOException;
 }

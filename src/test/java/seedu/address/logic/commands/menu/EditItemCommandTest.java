@@ -48,9 +48,9 @@ public class EditItemCommandTest {
 
         String expectedMessage = String.format(EditItemCommand.MESSAGE_EDIT_ITEM_SUCCESS, editedItem);
 
-        Model expectedModel = new ModelManager(new RestaurantBook(model.getAddressBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(new RestaurantBook(model.getRestaurantBook()), new UserPrefs());
         expectedModel.updateItem(model.getFilteredItemList().get(0), editedItem);
-        expectedModel.commitAddressBook();
+        expectedModel.commitRestaurantBook();
 
         assertCommandSuccess(editItemCommand, model, commandHistory, expectedMessage, expectedModel);
     }
@@ -70,9 +70,9 @@ public class EditItemCommandTest {
 
         String expectedMessage = String.format(EditItemCommand.MESSAGE_EDIT_ITEM_SUCCESS, editedItem);
 
-        Model expectedModel = new ModelManager(new RestaurantBook(model.getAddressBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(new RestaurantBook(model.getRestaurantBook()), new UserPrefs());
         expectedModel.updateItem(lastItem, editedItem);
-        expectedModel.commitAddressBook();
+        expectedModel.commitRestaurantBook();
 
         assertCommandSuccess(editItemCommand, model, commandHistory, expectedMessage, expectedModel);
     }
@@ -84,8 +84,8 @@ public class EditItemCommandTest {
 
         String expectedMessage = String.format(EditItemCommand.MESSAGE_EDIT_ITEM_SUCCESS, editedItem);
 
-        Model expectedModel = new ModelManager(new RestaurantBook(model.getAddressBook()), new UserPrefs());
-        expectedModel.commitAddressBook();
+        Model expectedModel = new ModelManager(new RestaurantBook(model.getRestaurantBook()), new UserPrefs());
+        expectedModel.commitRestaurantBook();
 
         assertCommandSuccess(editItemCommand, model, commandHistory, expectedMessage, expectedModel);
     }
@@ -101,9 +101,9 @@ public class EditItemCommandTest {
 
         String expectedMessage = String.format(EditItemCommand.MESSAGE_EDIT_ITEM_SUCCESS, editedItem);
 
-        Model expectedModel = new ModelManager(new RestaurantBook(model.getAddressBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(new RestaurantBook(model.getRestaurantBook()), new UserPrefs());
         expectedModel.updateItem(model.getFilteredItemList().get(0), editedItem);
-        expectedModel.commitAddressBook();
+        expectedModel.commitRestaurantBook();
 
         assertCommandSuccess(editItemCommand, model, commandHistory, expectedMessage, expectedModel);
     }
@@ -122,7 +122,7 @@ public class EditItemCommandTest {
         showItemAtIndex(model, INDEX_FIRST);
 
         // edit item in filtered list into a duplicate in menu
-        Item itemInList = model.getAddressBook().getItemList().get(INDEX_SECOND.getZeroBased());
+        Item itemInList = model.getRestaurantBook().getItemList().get(INDEX_SECOND.getZeroBased());
         EditItemCommand editItemCommand = new EditItemCommand(INDEX_FIRST,
                 new EditItemDescriptorBuilder(itemInList).build());
 
@@ -146,7 +146,7 @@ public class EditItemCommandTest {
         showItemAtIndex(model, INDEX_FIRST);
         Index outOfBoundIndex = INDEX_SECOND;
         // ensures that outOfBoundIndex is still in bounds of restaurant book list
-        assertTrue(outOfBoundIndex.getZeroBased() < model.getAddressBook().getItemList().size());
+        assertTrue(outOfBoundIndex.getZeroBased() < model.getRestaurantBook().getItemList().size());
 
         EditItemCommand editItemCommand = new EditItemCommand(outOfBoundIndex,
                 new EditItemDescriptorBuilder().withName(VALID_ITEM_NAME_FRIES).build());
@@ -160,19 +160,19 @@ public class EditItemCommandTest {
         Item itemToEdit = model.getFilteredItemList().get(INDEX_FIRST.getZeroBased());
         EditItemDescriptor descriptor = new EditItemDescriptorBuilder(editedItem).build();
         EditItemCommand editItemCommand = new EditItemCommand(INDEX_FIRST, descriptor);
-        Model expectedModel = new ModelManager(new RestaurantBook(model.getAddressBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(new RestaurantBook(model.getRestaurantBook()), new UserPrefs());
         expectedModel.updateItem(itemToEdit, editedItem);
-        expectedModel.commitAddressBook();
+        expectedModel.commitRestaurantBook();
 
         // edit -> first item edited
         editItemCommand.execute(model, commandHistory);
 
         // undo -> reverts addressbook back to previous state and filtered item list to show all items
-        expectedModel.undoAddressBook();
+        expectedModel.undoRestaurantBook();
         assertCommandSuccess(new UndoCommand(), model, commandHistory, UndoCommand.MESSAGE_SUCCESS, expectedModel);
 
         // redo -> same first item edited again
-        expectedModel.redoAddressBook();
+        expectedModel.redoRestaurantBook();
         assertCommandSuccess(new RedoCommand(), model, commandHistory, RedoCommand.MESSAGE_SUCCESS, expectedModel);
     }
 
@@ -201,23 +201,23 @@ public class EditItemCommandTest {
         Item editedItem = new ItemBuilder().build();
         EditItemDescriptor descriptor = new EditItemDescriptorBuilder(editedItem).build();
         EditItemCommand editItemCommand = new EditItemCommand(INDEX_FIRST, descriptor);
-        Model expectedModel = new ModelManager(new RestaurantBook(model.getAddressBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(new RestaurantBook(model.getRestaurantBook()), new UserPrefs());
 
         showItemAtIndex(model, INDEX_SECOND);
         Item itemToEdit = model.getFilteredItemList().get(INDEX_FIRST.getZeroBased());
         expectedModel.updateItem(itemToEdit, editedItem);
-        expectedModel.commitAddressBook();
+        expectedModel.commitRestaurantBook();
 
         // edit -> edits second item in unfiltered item list / first item in filtered item list
         editItemCommand.execute(model, commandHistory);
 
         // undo -> reverts addressbook back to previous state and filtered item list to show all items
-        expectedModel.undoAddressBook();
+        expectedModel.undoRestaurantBook();
         assertCommandSuccess(new UndoCommand(), model, commandHistory, UndoCommand.MESSAGE_SUCCESS, expectedModel);
 
         assertNotEquals(model.getFilteredItemList().get(INDEX_FIRST.getZeroBased()), itemToEdit);
         // redo -> edits same second item in unfiltered item list
-        expectedModel.redoAddressBook();
+        expectedModel.redoRestaurantBook();
         assertCommandSuccess(new RedoCommand(), model, commandHistory, RedoCommand.MESSAGE_SUCCESS, expectedModel);
     }
 

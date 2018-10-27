@@ -11,7 +11,7 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.ComponentManager;
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.commons.events.model.AddressBookChangedEvent;
+import seedu.address.commons.events.model.RestaurantBookChangedEvent;
 import seedu.address.logic.commands.menu.SortMenuCommand.SortMethod;
 import seedu.address.model.accounts.Account;
 import seedu.address.model.ingredient.Ingredient;
@@ -32,7 +32,7 @@ public class ModelManager extends ComponentManager implements Model {
 
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
-    private final VersionedRestaurantBook versionedAddressBook;
+    private final VersionedRestaurantBook versionedRestaurantBook;
     private final FilteredList<Person> filteredPersons;
     private final FilteredList<Reservation> filteredReservations;
     private final FilteredList<SalesRecord> filteredRecords;
@@ -49,13 +49,13 @@ public class ModelManager extends ComponentManager implements Model {
 
         logger.fine("Initializing with restaurant book: " + restaurantBook + " and user prefs " + userPrefs);
 
-        versionedAddressBook = new VersionedRestaurantBook(restaurantBook);
-        filteredPersons = new FilteredList<>(versionedAddressBook.getPersonList());
-        filteredReservations = new FilteredList<>(versionedAddressBook.getReservationList());
-        filteredRecords = new FilteredList<>(versionedAddressBook.getRecordList());
-        filteredAccounts = new FilteredList<>(versionedAddressBook.getAccountList());
-        filteredIngredients = new FilteredList<>(versionedAddressBook.getIngredientList());
-        filteredItems = new FilteredList<>(versionedAddressBook.getItemList());
+        versionedRestaurantBook = new VersionedRestaurantBook(restaurantBook);
+        filteredPersons = new FilteredList<>(versionedRestaurantBook.getPersonList());
+        filteredReservations = new FilteredList<>(versionedRestaurantBook.getReservationList());
+        filteredRecords = new FilteredList<>(versionedRestaurantBook.getRecordList());
+        filteredAccounts = new FilteredList<>(versionedRestaurantBook.getAccountList());
+        filteredIngredients = new FilteredList<>(versionedRestaurantBook.getIngredientList());
+        filteredItems = new FilteredList<>(versionedRestaurantBook.getItemList());
     }
 
     public ModelManager() {
@@ -64,52 +64,52 @@ public class ModelManager extends ComponentManager implements Model {
 
     @Override
     public void resetData(ReadOnlyRestaurantBook newData) {
-        versionedAddressBook.resetData(newData);
-        indicateAddressBookChanged();
+        versionedRestaurantBook.resetData(newData);
+        indicateRestaurantBookChanged();
     }
 
     @Override
-    public ReadOnlyRestaurantBook getAddressBook() {
-        return versionedAddressBook;
+    public ReadOnlyRestaurantBook getRestaurantBook() {
+        return versionedRestaurantBook;
     }
 
     /**
      * Raises an event to indicate the model has changed
      */
-    private void indicateAddressBookChanged() {
-        raise(new AddressBookChangedEvent(versionedAddressBook));
+    private void indicateRestaurantBookChanged() {
+        raise(new RestaurantBookChangedEvent(versionedRestaurantBook));
     }
 
     @Override
     public boolean hasPerson(Person person) {
         requireNonNull(person);
-        return versionedAddressBook.hasPerson(person);
+        return versionedRestaurantBook.hasPerson(person);
     }
 
     @Override
     public void deletePerson(Person target) {
-        versionedAddressBook.removePerson(target);
-        indicateAddressBookChanged();
+        versionedRestaurantBook.removePerson(target);
+        indicateRestaurantBookChanged();
     }
 
     @Override
     public void addPerson(Person person) {
-        versionedAddressBook.addPerson(person);
+        versionedRestaurantBook.addPerson(person);
         updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-        indicateAddressBookChanged();
+        indicateRestaurantBookChanged();
     }
 
     @Override
     public void updatePerson(Person target, Person editedPerson) {
         requireAllNonNull(target, editedPerson);
 
-        versionedAddressBook.updatePerson(target, editedPerson);
-        indicateAddressBookChanged();
+        versionedRestaurantBook.updatePerson(target, editedPerson);
+        indicateRestaurantBookChanged();
     }
 
     @Override
     public void removeTag(Tag tag) {
-        versionedAddressBook.removeTag(tag);
+        versionedRestaurantBook.removeTag(tag);
     }
 
     //=========== Filtered Person List Accessors =============================================================
@@ -130,27 +130,27 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public boolean hasRecord(SalesRecord record) {
         requireNonNull(record);
-        return versionedAddressBook.hasRecord(record);
+        return versionedRestaurantBook.hasRecord(record);
     }
 
     @Override
     public void deleteRecord(SalesRecord target) {
-        versionedAddressBook.removeRecord(target);
-        indicateAddressBookChanged();
+        versionedRestaurantBook.removeRecord(target);
+        indicateRestaurantBookChanged();
     }
 
     @Override
     public void addRecord(SalesRecord record) {
-        versionedAddressBook.addRecord(record);
+        versionedRestaurantBook.addRecord(record);
         updateFilteredRecordList(PREDICATE_SHOW_ALL_RECORDS);
-        indicateAddressBookChanged();
+        indicateRestaurantBookChanged();
     }
 
     @Override
     public void updateRecord(SalesRecord target, SalesRecord editedRecord) {
         requireAllNonNull(target, editedRecord);
-        versionedAddressBook.updateRecord(target, editedRecord);
-        indicateAddressBookChanged();
+        versionedRestaurantBook.updateRecord(target, editedRecord);
+        indicateRestaurantBookChanged();
     }
 
     /**
@@ -162,7 +162,7 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public SalesReport getSalesReport(Date date) {
         requireNonNull(date);
-        return versionedAddressBook.getSalesReport(date);
+        return versionedRestaurantBook.getSalesReport(date);
     }
 
     //=========== Filtered Sales Record List Accessors =============================================================
@@ -170,7 +170,7 @@ public class ModelManager extends ComponentManager implements Model {
 
     /**
      * Returns an unmodifiable view of the list of {@code SalesRecord} backed by the internal list of {@code
-     * versionedAddressBook}
+     * versionedRestaurantBook}
      */
     @Override
     public ObservableList<SalesRecord> getFilteredRecordList() {
@@ -187,30 +187,30 @@ public class ModelManager extends ComponentManager implements Model {
 
     @Override
     public void addAccount(Account account) {
-        versionedAddressBook.addAccount(account);
-        indicateAddressBookChanged();
+        versionedRestaurantBook.addAccount(account);
+        indicateRestaurantBookChanged();
     }
 
     @Override
     public Account getAccount(Account account) {
-        return versionedAddressBook.getAccount(account);
+        return versionedRestaurantBook.getAccount(account);
     }
 
     @Override
     public boolean hasAccount(Account account) {
-        return versionedAddressBook.hasAccount(account);
+        return versionedRestaurantBook.hasAccount(account);
     }
 
     @Override
     public void removeAccount(Account account) {
-        versionedAddressBook.removeAccount(account);
-        indicateAddressBookChanged();
+        versionedRestaurantBook.removeAccount(account);
+        indicateRestaurantBookChanged();
     }
 
     @Override
     public void updateAccount(Account target, Account editedAccount) {
-        versionedAddressBook.updateAccount(target, editedAccount);
-        indicateAddressBookChanged();
+        versionedRestaurantBook.updateAccount(target, editedAccount);
+        indicateRestaurantBookChanged();
     }
 
     //=========== Filtered Account List Accessors =============================================================
@@ -231,32 +231,32 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public boolean hasIngredient(Ingredient ingredient) {
         requireNonNull(ingredient);
-        return versionedAddressBook.hasIngredient(ingredient);
+        return versionedRestaurantBook.hasIngredient(ingredient);
     }
 
     @Override
     public void deleteIngredient(Ingredient target) {
-        versionedAddressBook.removeIngredient(target);
+        versionedRestaurantBook.removeIngredient(target);
     }
 
     @Override
     public void addIngredient(Ingredient ingredient) {
-        versionedAddressBook.addIngredient(ingredient);
+        versionedRestaurantBook.addIngredient(ingredient);
         updateFilteredIngredientList(PREDICATE_SHOW_ALL_INGREDIENTS);
-        indicateAddressBookChanged();
+        indicateRestaurantBookChanged();
     }
 
     @Override
     public Ingredient findIngredient(IngredientName ingredientName) throws IngredientNotFoundException {
-        return versionedAddressBook.findIngredient(ingredientName);
+        return versionedRestaurantBook.findIngredient(ingredientName);
     }
 
     @Override
     public void updateIngredient(Ingredient target, Ingredient editedIngredient) {
         requireAllNonNull(target, editedIngredient);
 
-        versionedAddressBook.updateIngredient(target, editedIngredient);
-        indicateAddressBookChanged();
+        versionedRestaurantBook.updateIngredient(target, editedIngredient);
+        indicateRestaurantBookChanged();
     }
 
     //=========== Filtered Ingredient List Accessors =============================================================
@@ -277,45 +277,45 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public boolean hasItem(Item item) {
         requireNonNull(item);
-        return versionedAddressBook.hasItem(item);
+        return versionedRestaurantBook.hasItem(item);
     }
 
     @Override
     public void deleteItem(Item target) {
-        versionedAddressBook.removeItem(target);
-        indicateAddressBookChanged();
+        versionedRestaurantBook.removeItem(target);
+        indicateRestaurantBookChanged();
     }
 
     @Override
     public void addItem(Item item) {
-        versionedAddressBook.addItem(item);
+        versionedRestaurantBook.addItem(item);
         updateFilteredItemList(PREDICATE_SHOW_ALL_ITEMS);
-        indicateAddressBookChanged();
+        indicateRestaurantBookChanged();
     }
 
     @Override
     public void updateItem(Item target, Item editedItem) {
         requireAllNonNull(target, editedItem);
 
-        versionedAddressBook.updateItem(target, editedItem);
-        indicateAddressBookChanged();
+        versionedRestaurantBook.updateItem(target, editedItem);
+        indicateRestaurantBookChanged();
     }
 
     @Override
     public void removeTagForMenu(Tag tag) {
-        versionedAddressBook.removeTagForMenu(tag);
+        versionedRestaurantBook.removeTagForMenu(tag);
     }
 
     @Override
     public void resetMenuData(ReadOnlyRestaurantBook newData) {
-        versionedAddressBook.resetMenuData(newData);
-        indicateAddressBookChanged();
+        versionedRestaurantBook.resetMenuData(newData);
+        indicateRestaurantBookChanged();
     }
 
     @Override
     public void sortMenu(SortMethod sortMethod) {
-        versionedAddressBook.sortMenu(sortMethod);
-        indicateAddressBookChanged();
+        versionedRestaurantBook.sortMenu(sortMethod);
+        indicateRestaurantBookChanged();
     }
 
     //=========== Filtered Item List Accessors ==============================================================
@@ -334,30 +334,30 @@ public class ModelManager extends ComponentManager implements Model {
     //=========== Undo/Redo =================================================================================
 
     @Override
-    public boolean canUndoAddressBook() {
-        return versionedAddressBook.canUndo();
+    public boolean canUndoRestaurantBook() {
+        return versionedRestaurantBook.canUndo();
     }
 
     @Override
-    public boolean canRedoAddressBook() {
-        return versionedAddressBook.canRedo();
+    public boolean canRedoRestaurantBook() {
+        return versionedRestaurantBook.canRedo();
     }
 
     @Override
-    public void undoAddressBook() {
-        versionedAddressBook.undo();
-        indicateAddressBookChanged();
+    public void undoRestaurantBook() {
+        versionedRestaurantBook.undo();
+        indicateRestaurantBookChanged();
     }
 
     @Override
-    public void redoAddressBook() {
-        versionedAddressBook.redo();
-        indicateAddressBookChanged();
+    public void redoRestaurantBook() {
+        versionedRestaurantBook.redo();
+        indicateRestaurantBookChanged();
     }
 
     @Override
-    public void commitAddressBook() {
-        versionedAddressBook.commit();
+    public void commitRestaurantBook() {
+        versionedRestaurantBook.commit();
     }
 
     @Override
@@ -373,7 +373,7 @@ public class ModelManager extends ComponentManager implements Model {
 
         // state check
         ModelManager other = (ModelManager) obj;
-        return versionedAddressBook.equals(other.versionedAddressBook)
+        return versionedRestaurantBook.equals(other.versionedRestaurantBook)
                 && filteredPersons.equals(other.filteredPersons)
                 && filteredAccounts.equals(other.filteredAccounts)
                 && filteredIngredients.equals(other.filteredIngredients)
@@ -387,46 +387,46 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public boolean hasReservation(Reservation reservation) {
         requireNonNull(reservation);
-        return versionedAddressBook.hasReservation(reservation);
+        return versionedRestaurantBook.hasReservation(reservation);
     }
 
     @Override
     public void deleteReservation(Reservation target) {
-        versionedAddressBook.removeReservation(target);
-        indicateAddressBookChanged();
+        versionedRestaurantBook.removeReservation(target);
+        indicateRestaurantBookChanged();
     }
 
     @Override
     public void addReservation(Reservation reservation) {
-        versionedAddressBook.addReservation(reservation);
+        versionedRestaurantBook.addReservation(reservation);
         updateFilteredReservationList(PREDICATE_SHOW_ALL_RESERVATIONS);
-        indicateAddressBookChanged();
+        indicateRestaurantBookChanged();
     }
 
     @Override
     public void updateReservation(Reservation target, Reservation editedReservation) {
         requireAllNonNull(target, editedReservation);
 
-        versionedAddressBook.updateReservation(target, editedReservation);
-        indicateAddressBookChanged();
+        versionedRestaurantBook.updateReservation(target, editedReservation);
+        indicateRestaurantBookChanged();
     }
 
     @Override
     public void sortReservations() {
-        versionedAddressBook.sortReservations();
-        indicateAddressBookChanged();
+        versionedRestaurantBook.sortReservations();
+        indicateRestaurantBookChanged();
     }
 
     @Override
     public void removeTagForReservation(Tag tag) {
-        versionedAddressBook.removeTag(tag);
+        versionedRestaurantBook.removeTag(tag);
     }
 
     //=========== Filtered Reservation List Accessors =============================================================
 
     /**
      * Returns an unmodifiable view of the list of {@code Reservation} backed by the internal list of {@code
-     * versionedAddressBook}
+     * versionedRestaurantBook}
      */
     @Override
     public ObservableList<Reservation> getFilteredReservationList() {

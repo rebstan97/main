@@ -46,7 +46,7 @@ public class DeleteReservationCommand extends Command {
 
         Reservation reservationToDelete = lastShownList.get(targetIndex.getZeroBased());
         model.deleteReservation(reservationToDelete);
-        model.commitAddressBook();
+        model.commitRestaurantBook();
         return new CommandResult(String.format(MESSAGE_DELETE_RESERVATION_SUCCESS, reservationToDelete));
     }
 

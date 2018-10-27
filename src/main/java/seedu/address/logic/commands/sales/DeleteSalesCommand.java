@@ -46,7 +46,7 @@ public class DeleteSalesCommand extends Command {
 
         SalesRecord recordToDelete = lastShownList.get(targetIndex.getZeroBased());
         model.deleteRecord(recordToDelete);
-        model.commitAddressBook();
+        model.commitRestaurantBook();
         return new CommandResult(String.format(MESSAGE_DELETE_SALES_SUCCESS, recordToDelete));
     }
     @Override

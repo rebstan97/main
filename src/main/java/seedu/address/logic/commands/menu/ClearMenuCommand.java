@@ -24,7 +24,7 @@ public class ClearMenuCommand extends Command {
     public CommandResult execute(Model model, CommandHistory history) {
         requireNonNull(model);
         model.resetMenuData(new RestaurantBook());
-        model.commitAddressBook();
+        model.commitRestaurantBook();
         EventsCenter.getInstance().post(new DisplayItemListRequestEvent());
         return new CommandResult(MESSAGE_SUCCESS);
     }

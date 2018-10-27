@@ -44,9 +44,9 @@ public class RemarkCommandTest {
 
         String expectedMessage = String.format(RemarkCommand.MESSAGE_DELETE_REMARK_SUCCESS, editedPerson);
 
-        Model expectedModel = new ModelManager(new RestaurantBook(model.getAddressBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(new RestaurantBook(model.getRestaurantBook()), new UserPrefs());
         expectedModel.updatePerson(firstPerson, editedPerson);
-        expectedModel.commitAddressBook();
+        expectedModel.commitRestaurantBook();
 
         assertCommandSuccess(remarkCommand, model, commandHistory, expectedMessage, expectedModel);
     }
@@ -63,9 +63,9 @@ public class RemarkCommandTest {
 
         String expectedMessage = String.format(RemarkCommand.MESSAGE_ADD_REMARK_SUCCESS, editedPerson);
 
-        Model expectedModel = new ModelManager(new RestaurantBook(model.getAddressBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(new RestaurantBook(model.getRestaurantBook()), new UserPrefs());
         expectedModel.updatePerson(firstPerson, editedPerson);
-        expectedModel.commitAddressBook();
+        expectedModel.commitRestaurantBook();
 
         assertCommandSuccess(remarkCommand, model, commandHistory, expectedMessage, expectedModel);
     }
@@ -87,7 +87,7 @@ public class RemarkCommandTest {
         Index outOfBoundIndex = INDEX_SECOND;
 
         // ensures that outOfBoundIndex is still in bounds of restaurant book list
-        assertTrue(outOfBoundIndex.getZeroBased() < model.getAddressBook().getPersonList().size());
+        assertTrue(outOfBoundIndex.getZeroBased() < model.getRestaurantBook().getPersonList().size());
 
         RemarkCommand remarkCommand = new RemarkCommand(outOfBoundIndex, new Remark(VALID_REMARK_BOB));
         assertCommandFailure(remarkCommand, model, commandHistory, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
@@ -100,19 +100,19 @@ public class RemarkCommandTest {
 
         RemarkCommand remarkCommand = new RemarkCommand(INDEX_FIRST, new Remark(REMARK_STUB));
 
-        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        Model expectedModel = new ModelManager(model.getRestaurantBook(), new UserPrefs());
         expectedModel.updatePerson(personToModify, modifiedPerson);
-        expectedModel.commitAddressBook();
+        expectedModel.commitRestaurantBook();
 
         // remark -> first person remark changed
         remarkCommand.execute(model, commandHistory);
 
         // undo -> reverts addressbook back to previous state and filtered person list to show all persons
-        expectedModel.undoAddressBook();
+        expectedModel.undoRestaurantBook();
         assertCommandSuccess(new UndoCommand(), model, commandHistory, UndoCommand.MESSAGE_SUCCESS, expectedModel);
 
         // redo -> same first person modified again
-        expectedModel.redoAddressBook();
+        expectedModel.redoRestaurantBook();
         assertCommandSuccess(new RedoCommand(), model, commandHistory, RedoCommand.MESSAGE_SUCCESS, expectedModel);
     }
 

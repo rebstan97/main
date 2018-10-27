@@ -31,22 +31,23 @@ public class XmlRestaurantBookStorage implements RestaurantBookStorage {
         this.backupFilePath = Paths.get(filePath.toString() + ".backup");
     }
 
-    public Path getAddressBookFilePath() {
+    public Path getRestaurantBookFilePath() {
         return filePath;
     }
 
     @Override
-    public Optional<ReadOnlyRestaurantBook> readAddressBook() throws DataConversionException, IOException {
-        return readAddressBook(filePath);
+    public Optional<ReadOnlyRestaurantBook> readRestaurantBook() throws DataConversionException, IOException {
+        return readRestaurantBook(filePath);
     }
 
     /**
-     * Similar to {@link #readAddressBook()}
+     * Similar to {@link #readRestaurantBook()}
+     *
      * @param filePath location of the data. Cannot be null
      * @throws DataConversionException if the file is not in the correct format.
      */
-    public Optional<ReadOnlyRestaurantBook> readAddressBook(Path filePath) throws DataConversionException,
-                                                                                 FileNotFoundException {
+    public Optional<ReadOnlyRestaurantBook> readRestaurantBook(Path filePath) throws DataConversionException,
+            FileNotFoundException {
         requireNonNull(filePath);
 
         if (!Files.exists(filePath)) {
@@ -54,9 +55,9 @@ public class XmlRestaurantBookStorage implements RestaurantBookStorage {
             return Optional.empty();
         }
 
-        XmlSerializableRestaurantBook xmlAddressBook = XmlFileStorage.loadDataFromSaveFile(filePath);
+        XmlSerializableRestaurantBook xmlRestaurantBook = XmlFileStorage.loadDataFromSaveFile(filePath);
         try {
-            return Optional.of(xmlAddressBook.toModelType());
+            return Optional.of(xmlRestaurantBook.toModelType());
         } catch (IllegalValueException ive) {
             logger.info("Illegal values found in " + filePath + ": " + ive.getMessage());
             throw new DataConversionException(ive);
@@ -64,27 +65,28 @@ public class XmlRestaurantBookStorage implements RestaurantBookStorage {
     }
 
     @Override
-    public void saveAddressBook(ReadOnlyRestaurantBook addressBook) throws IOException {
-        saveAddressBook(addressBook, filePath);
+    public void saveRestaurantBook(ReadOnlyRestaurantBook restaurantBook) throws IOException {
+        saveRestaurantBook(restaurantBook, filePath);
     }
 
     /**
-     * Similar to {@link #saveAddressBook(ReadOnlyRestaurantBook)}
+     * Similar to {@link #saveRestaurantBook(ReadOnlyRestaurantBook)}
+     *
      * @param filePath location of the data. Cannot be null
      */
-    public void saveAddressBook(ReadOnlyRestaurantBook addressBook, Path filePath) throws IOException {
-        requireNonNull(addressBook);
+    public void saveRestaurantBook(ReadOnlyRestaurantBook restaurantBook, Path filePath) throws IOException {
+        requireNonNull(restaurantBook);
         requireNonNull(filePath);
 
         FileUtil.createIfMissing(filePath);
-        XmlFileStorage.saveDataToFile(filePath, new XmlSerializableRestaurantBook(addressBook));
+        XmlFileStorage.saveDataToFile(filePath, new XmlSerializableRestaurantBook(restaurantBook));
     }
 
     /**
-     * Similar to {@link #saveAddressBook(ReadOnlyRestaurantBook, Path)}
+     * Similar to {@link #saveRestaurantBook(ReadOnlyRestaurantBook, Path)}
      */
     @Override
-    public void backupAddressBook(ReadOnlyRestaurantBook addressBook) throws IOException {
-        saveAddressBook(addressBook, backupFilePath);
+    public void backupRestaurantBook(ReadOnlyRestaurantBook restaurantBook) throws IOException {
+        saveRestaurantBook(restaurantBook, backupFilePath);
     }
 }

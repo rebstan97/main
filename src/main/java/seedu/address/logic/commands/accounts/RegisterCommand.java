@@ -46,7 +46,7 @@ public class RegisterCommand extends Command {
         }
 
         model.addAccount(account);
-        model.commitAddressBook();
+        model.commitRestaurantBook();
         return new CommandResult(String.format(MESSAGE_SUCCESS, account));
     }
 

@@ -18,9 +18,9 @@ public class ClearCommandTest {
     @Test
     public void execute_emptyAddressBook_success() {
         // An empty storage assumed to have the root account in it
-        Model model = new ModelManager(SampleDataUtil.getSampleAddressBook(), new UserPrefs());
-        Model expectedModel = new ModelManager(SampleDataUtil.getSampleAddressBook(), new UserPrefs());
-        expectedModel.commitAddressBook();
+        Model model = new ModelManager(SampleDataUtil.getSampleRestaurantBook(), new UserPrefs());
+        Model expectedModel = new ModelManager(SampleDataUtil.getSampleRestaurantBook(), new UserPrefs());
+        expectedModel.commitRestaurantBook();
 
         assertCommandSuccess(new ClearCommand(), model, commandHistory, ClearCommand.MESSAGE_SUCCESS, expectedModel);
     }
@@ -30,8 +30,8 @@ public class ClearCommandTest {
         Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
         Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
         // Once reset, only has root account
-        expectedModel.resetData(SampleDataUtil.getSampleAddressBook());
-        expectedModel.commitAddressBook();
+        expectedModel.resetData(SampleDataUtil.getSampleRestaurantBook());
+        expectedModel.commitRestaurantBook();
 
         assertCommandSuccess(new ClearCommand(), model, commandHistory, ClearCommand.MESSAGE_SUCCESS, expectedModel);
     }

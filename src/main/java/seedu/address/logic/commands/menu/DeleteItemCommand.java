@@ -48,7 +48,7 @@ public class DeleteItemCommand extends Command {
 
         Item itemToDelete = lastShownList.get(targetIndex.getZeroBased());
         model.deleteItem(itemToDelete);
-        model.commitAddressBook();
+        model.commitRestaurantBook();
         EventsCenter.getInstance().post(new DisplayItemListRequestEvent());
         return new CommandResult(String.format(MESSAGE_DELETE_ITEM_SUCCESS, itemToDelete));
     }

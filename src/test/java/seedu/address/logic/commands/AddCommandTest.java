@@ -110,7 +110,7 @@ public class AddCommandTest {
         }
 
         @Override
-        public ReadOnlyRestaurantBook getAddressBook() {
+        public ReadOnlyRestaurantBook getRestaurantBook() {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -145,27 +145,27 @@ public class AddCommandTest {
         }
 
         @Override
-        public boolean canUndoAddressBook() {
+        public boolean canUndoRestaurantBook() {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public boolean canRedoAddressBook() {
+        public boolean canRedoRestaurantBook() {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void undoAddressBook() {
+        public void undoRestaurantBook() {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void redoAddressBook() {
+        public void redoRestaurantBook() {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void commitAddressBook() {
+        public void commitRestaurantBook() {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -402,12 +402,12 @@ public class AddCommandTest {
         }
 
         @Override
-        public void commitAddressBook() {
+        public void commitRestaurantBook() {
             // called by {@code AddCommand#execute()}
         }
 
         @Override
-        public ReadOnlyRestaurantBook getAddressBook() {
+        public ReadOnlyRestaurantBook getRestaurantBook() {
             return new RestaurantBook();
         }
     }

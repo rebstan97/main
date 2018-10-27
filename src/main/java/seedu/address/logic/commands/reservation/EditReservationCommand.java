@@ -85,7 +85,7 @@ public class EditReservationCommand extends Command {
 
         model.updateReservation(reservationToEdit, editedReservation);
         model.updateFilteredReservationList(PREDICATE_SHOW_ALL_RESERVATIONS);
-        model.commitAddressBook();
+        model.commitRestaurantBook();
         return new CommandResult(String.format(MESSAGE_EDIT_RESERVATION_SUCCESS, editedReservation));
     }
 

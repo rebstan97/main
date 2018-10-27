@@ -45,7 +45,7 @@ public class DeregisterCommand extends Command {
         Account retrievedAccount = model.getAccount(account);
 
         model.removeAccount(retrievedAccount);
-        model.commitAddressBook();
+        model.commitRestaurantBook();
         return new CommandResult(String.format(MESSAGE_SUCCESS, account));
     }
 

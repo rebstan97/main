@@ -65,7 +65,7 @@ public class SelectItemCommandTest {
 
         Index outOfBoundsIndex = INDEX_SECOND;
         // ensures that outOfBoundIndex is still in bounds of restaurant book list
-        assertTrue(outOfBoundsIndex.getZeroBased() < model.getAddressBook().getItemList().size());
+        assertTrue(outOfBoundsIndex.getZeroBased() < model.getRestaurantBook().getItemList().size());
 
         assertExecutionFailure(outOfBoundsIndex, Messages.MESSAGE_INVALID_ITEM_DISPLAYED_INDEX);
     }
