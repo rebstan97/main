@@ -29,8 +29,6 @@ in-depth analysis of design alternatives. The implementation too was challenging
 
 * *Minor enhancement*:
 
-* *Code contributed*: [https://github.com[Functional code]] [https://github.com[Test code]] _{give links to collated code files}_
-
 * *Other contributions*:
 
 ** Project management:
@@ -52,7 +50,6 @@ in-depth analysis of design alternatives. The implementation too was challenging
 _{you can add/remove categories in the list above}_
 
 == Contributions to the User Guide
-
 
 |===
 |_Given below are sections I contributed to the User Guide. They showcase my ability to write documentation targeting end-users._
