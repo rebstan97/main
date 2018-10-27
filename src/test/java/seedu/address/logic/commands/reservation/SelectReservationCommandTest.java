@@ -6,10 +6,10 @@ import static org.junit.Assert.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.reservation.ReservationCommandTestUtil.showReservationAtIndex;
-import static seedu.address.testutil.TypicalAddressBook.getTypicalAddressBook;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND;
 import static seedu.address.testutil.TypicalIndexes.INDEX_THIRD;
+import static seedu.address.testutil.TypicalRestaurantBook.getTypicalRestaurantBook;
 
 import org.junit.Rule;
 import org.junit.Test;
@@ -30,8 +30,8 @@ public class SelectReservationCommandTest {
     @Rule
     public final EventsCollectorRule eventsCollectorRule = new EventsCollectorRule();
 
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-    private Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private Model model = new ModelManager(getTypicalRestaurantBook(), new UserPrefs());
+    private Model expectedModel = new ModelManager(getTypicalRestaurantBook(), new UserPrefs());
     private CommandHistory commandHistory = new CommandHistory();
 
     @Test

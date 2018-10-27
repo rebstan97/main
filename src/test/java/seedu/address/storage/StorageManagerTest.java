@@ -3,7 +3,7 @@ package seedu.address.storage;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
-import static seedu.address.testutil.TypicalAddressBook.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalRestaurantBook.getTypicalRestaurantBook;
 
 import java.io.IOException;
 import java.nio.file.Path;
@@ -63,7 +63,7 @@ public class StorageManagerTest {
          * {@link XmlRestaurantBookStorage} class.
          * More extensive testing of UserPref saving/reading is done in {@link XmlRestaurantBookStorageTest} class.
          */
-        RestaurantBook original = getTypicalAddressBook();
+        RestaurantBook original = getTypicalRestaurantBook();
         storageManager.saveRestaurantBook(original);
         ReadOnlyRestaurantBook retrieved = storageManager.readRestaurantBook().get();
         assertEquals(original, new RestaurantBook(retrieved));
@@ -71,7 +71,7 @@ public class StorageManagerTest {
 
     @Test
     public void addressBookReadBackup() throws Exception {
-        RestaurantBook original = getTypicalAddressBook();
+        RestaurantBook original = getTypicalRestaurantBook();
         storageManager.backupRestaurantBook(original);
         ReadOnlyRestaurantBook retrieved = storageManager.readRestaurantBook(Paths.get(getTempFilePath("ab")
                 .toString() + ".backup")).get();

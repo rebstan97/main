@@ -7,9 +7,9 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_REMARK_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showPersonAtIndex;
-import static seedu.address.testutil.TypicalAddressBook.getTypicalAddressBook;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND;
+import static seedu.address.testutil.TypicalRestaurantBook.getTypicalRestaurantBook;
 
 import org.junit.Test;
 
@@ -31,7 +31,7 @@ public class RemarkCommandTest {
 
     private static final String REMARK_STUB = "Some remark";
 
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private Model model = new ModelManager(getTypicalRestaurantBook(), new UserPrefs());
     private CommandHistory commandHistory = new CommandHistory();
 
     @Test

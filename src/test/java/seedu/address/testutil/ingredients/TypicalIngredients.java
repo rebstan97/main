@@ -71,7 +71,7 @@ public class TypicalIngredients {
     /**
      * Returns an {@code RestaurantBook} with all the typical ingredients.
      */
-    public static RestaurantBook getTypicalAddressBookWithIngredientsOnly() {
+    public static RestaurantBook getTypicalRestaurantBookWithIngredientsOnly() {
         RestaurantBook ab = new RestaurantBook();
         for (Ingredient ingredient : getTypicalIngredients()) {
             ab.addIngredient(ingredient);

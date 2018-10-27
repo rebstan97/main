@@ -2,11 +2,11 @@ package seedu.address.storage;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
-import static seedu.address.testutil.TypicalAddressBook.getTypicalAddressBook;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.DYLAN;
 import static seedu.address.testutil.TypicalPersons.HOON;
 import static seedu.address.testutil.TypicalPersons.IDA;
+import static seedu.address.testutil.TypicalRestaurantBook.getTypicalRestaurantBook;
 
 import java.io.IOException;
 import java.nio.file.Path;
@@ -32,12 +32,12 @@ public class XmlRestaurantBookStorageTest {
     public TemporaryFolder testFolder = new TemporaryFolder();
 
     @Test
-    public void readAddressBook_nullFilePath_throwsNullPointerException() throws Exception {
+    public void readRestaurantBook_nullFilePath_throwsNullPointerException() throws Exception {
         thrown.expect(NullPointerException.class);
-        readAddressBook(null);
+        readRestaurantBook(null);
     }
 
-    private java.util.Optional<ReadOnlyRestaurantBook> readAddressBook(String filePath) throws Exception {
+    private java.util.Optional<ReadOnlyRestaurantBook> readRestaurantBook(String filePath) throws Exception {
         return new XmlRestaurantBookStorage(Paths.get(filePath))
                 .readRestaurantBook(addToTestDataPathIfNotNull(filePath));
     }
@@ -50,14 +50,14 @@ public class XmlRestaurantBookStorageTest {
 
     @Test
     public void read_missingFile_emptyResult() throws Exception {
-        assertFalse(readAddressBook("NonExistentFile.xml").isPresent());
+        assertFalse(readRestaurantBook("NonExistentFile.xml").isPresent());
     }
 
     @Test
     public void read_notXmlFormat_exceptionThrown() throws Exception {
 
         thrown.expect(DataConversionException.class);
-        readAddressBook("NotXmlFormatAddressBook.xml");
+        readRestaurantBook("NotXmlFormatRestaurantBook.xml");
 
         /* IMPORTANT: Any code below an exception-throwing line (like the one above) will be ignored.
          * That means you should not have more than one exception test in one method
@@ -65,52 +65,52 @@ public class XmlRestaurantBookStorageTest {
     }
 
     @Test
-    public void readAddressBook_invalidPersonAddressBook_throwDataConversionException() throws Exception {
+    public void readRestaurantBook_invalidPersonRestaurantBook_throwDataConversionException() throws Exception {
         thrown.expect(DataConversionException.class);
-        readAddressBook("invalidPersonAddressBook.xml");
+        readRestaurantBook("invalidPersonRestaurantBook.xml");
     }
 
     @Test
-    public void readAddressBook_invalidAndValidPersonAddressBook_throwDataConversionException() throws Exception {
+    public void readRestaurantBook_invalidAndValidPersonRestaurantBook_throwDataConversionException() throws Exception {
         thrown.expect(DataConversionException.class);
-        readAddressBook("invalidAndValidPersonAddressBook.xml");
+        readRestaurantBook("invalidAndValidPersonRestaurantBook.xml");
     }
 
     @Test
-    public void readAndSaveAddressBook_allInOrder_success() throws Exception {
-        Path filePath = testFolder.getRoot().toPath().resolve("TempAddressBook.xml");
-        RestaurantBook original = getTypicalAddressBook();
-        XmlRestaurantBookStorage xmlAddressBookStorage = new XmlRestaurantBookStorage(filePath);
+    public void readAndSaveRestaurantBook_allInOrder_success() throws Exception {
+        Path filePath = testFolder.getRoot().toPath().resolve("TempRestaurantBook.xml");
+        RestaurantBook original = getTypicalRestaurantBook();
+        XmlRestaurantBookStorage xmlRestaurantBookStorage = new XmlRestaurantBookStorage(filePath);
 
         //Save in new file and read back
-        xmlAddressBookStorage.saveRestaurantBook(original, filePath);
-        ReadOnlyRestaurantBook readBack = xmlAddressBookStorage.readRestaurantBook(filePath).get();
+        xmlRestaurantBookStorage.saveRestaurantBook(original, filePath);
+        ReadOnlyRestaurantBook readBack = xmlRestaurantBookStorage.readRestaurantBook(filePath).get();
         assertEquals(original, new RestaurantBook(readBack));
 
         //Modify data, overwrite exiting file, and read back
         original.addPerson(HOON);
         original.removePerson(ALICE);
-        xmlAddressBookStorage.saveRestaurantBook(original, filePath);
-        readBack = xmlAddressBookStorage.readRestaurantBook(filePath).get();
+        xmlRestaurantBookStorage.saveRestaurantBook(original, filePath);
+        readBack = xmlRestaurantBookStorage.readRestaurantBook(filePath).get();
         assertEquals(original, new RestaurantBook(readBack));
 
         //Save and read without specifying file path
         original.addPerson(IDA);
-        xmlAddressBookStorage.saveRestaurantBook(original); //file path not specified
-        readBack = xmlAddressBookStorage.readRestaurantBook().get(); //file path not specified
+        xmlRestaurantBookStorage.saveRestaurantBook(original); //file path not specified
+        readBack = xmlRestaurantBookStorage.readRestaurantBook().get(); //file path not specified
         assertEquals(original, new RestaurantBook(readBack));
     }
 
     @Test
-    public void saveAddressBook_nullAddressBook_throwsNullPointerException() {
+    public void saveRestaurantBook_nullRestaurantBook_throwsNullPointerException() {
         thrown.expect(NullPointerException.class);
-        saveAddressBook(null, "SomeFile.xml");
+        saveRestaurantBook(null, "SomeFile.xml");
     }
 
     /**
      * Saves {@code addressBook} at the specified {@code filePath}.
      */
-    private void saveAddressBook(ReadOnlyRestaurantBook addressBook, String filePath) {
+    private void saveRestaurantBook(ReadOnlyRestaurantBook addressBook, String filePath) {
         try {
             new XmlRestaurantBookStorage(Paths.get(filePath))
                     .saveRestaurantBook(addressBook, addToTestDataPathIfNotNull(filePath));
@@ -120,27 +120,27 @@ public class XmlRestaurantBookStorageTest {
     }
 
     @Test
-    public void saveAddressBook_nullFilePath_throwsNullPointerException() {
+    public void saveRestaurantBook_nullFilePath_throwsNullPointerException() {
         thrown.expect(NullPointerException.class);
-        saveAddressBook(new RestaurantBook(), null);
+        saveRestaurantBook(new RestaurantBook(), null);
     }
 
     @Test
-    public void backupAddressBook_nullAddressBook_throwsNullPointerException() {
+    public void backupRestaurantBook_nullRestaurantBook_throwsNullPointerException() {
         thrown.expect(NullPointerException.class);
-        backupAddressBook(null, "SomeFile.xml");
+        backupRestaurantBook(null, "SomeFile.xml");
     }
 
     @Test
-    public void backupAddressBook_nullFilePath_throwsNullPointerException() {
+    public void backupRestaurantBook_nullFilePath_throwsNullPointerException() {
         thrown.expect(NullPointerException.class);
-        backupAddressBook(new RestaurantBook(), null);
+        backupRestaurantBook(new RestaurantBook(), null);
     }
 
     /**
      * Backup {@code addressBook} at the specified {@code filePath}.
      */
-    private void backupAddressBook(ReadOnlyRestaurantBook addressBook, String filePath) {
+    private void backupRestaurantBook(ReadOnlyRestaurantBook addressBook, String filePath) {
         try {
             new XmlRestaurantBookStorage(Paths.get(filePath))
                     .backupRestaurantBook(addressBook);
@@ -150,22 +150,22 @@ public class XmlRestaurantBookStorageTest {
     }
 
     @Test
-    public void readAndBackupAddressBook_allInOrder_success() throws Exception {
-        Path filePath = testFolder.getRoot().toPath().resolve("TempAddressBook.xml");
-        RestaurantBook original = getTypicalAddressBook();
-        XmlRestaurantBookStorage xmlAddressBookStorage = new XmlRestaurantBookStorage(filePath);
+    public void readAndBackupRestaurantBook_allInOrder_success() throws Exception {
+        Path filePath = testFolder.getRoot().toPath().resolve("TempRestaurantBook.xml");
+        RestaurantBook original = getTypicalRestaurantBook();
+        XmlRestaurantBookStorage xmlRestaurantBookStorage = new XmlRestaurantBookStorage(filePath);
         Path path = Paths.get(filePath.toString() + ".backup");
 
         //Backup in a temporary storage and read back
-        xmlAddressBookStorage.backupRestaurantBook(original);
-        ReadOnlyRestaurantBook readBack = xmlAddressBookStorage.readRestaurantBook(path).get();
+        xmlRestaurantBookStorage.backupRestaurantBook(original);
+        ReadOnlyRestaurantBook readBack = xmlRestaurantBookStorage.readRestaurantBook(path).get();
         assertEquals(original, new RestaurantBook(readBack));
 
         //Modify data, overwrite exiting backup file, and read back
         original.addPerson(DYLAN);
         original.removePerson(ALICE);
-        xmlAddressBookStorage.backupRestaurantBook(original);
-        readBack = xmlAddressBookStorage.readRestaurantBook(path).get();
+        xmlRestaurantBookStorage.backupRestaurantBook(original);
+        readBack = xmlRestaurantBookStorage.readRestaurantBook(path).get();
         assertEquals(original, new RestaurantBook(readBack));
     }
 }

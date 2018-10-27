@@ -10,14 +10,16 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_RESERVATION_PAX
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_TEST;
-import static seedu.address.testutil.TypicalAddressBook.getTypicalAddressBook;
-import static seedu.address.testutil.TypicalAddressBook.getTypicalAddressBookWithItemOnly;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.AMY;
 import static seedu.address.testutil.TypicalPersons.BOB;
 import static seedu.address.testutil.TypicalPersons.DYLAN;
+import static seedu.address.testutil.TypicalRestaurantBook.getTypicalRestaurantBook;
+import static seedu.address.testutil.TypicalRestaurantBook.getTypicalRestaurantBookWithItemOnly;
 import static seedu.address.testutil.accounts.TypicalAccounts.DEMO_ADMIN;
 import static seedu.address.testutil.accounts.TypicalAccounts.DEMO_ONE;
+import static seedu.address.testutil.ingredients.TypicalIngredients.AVOCADO;
+import static seedu.address.testutil.ingredients.TypicalIngredients.BEANS;
 import static seedu.address.testutil.menu.TypicalItems.APPLE_JUICE;
 import static seedu.address.testutil.menu.TypicalItems.BEEF_BURGER;
 import static seedu.address.testutil.menu.TypicalItems.BURGER;
@@ -53,8 +55,8 @@ import seedu.address.model.reservation.exceptions.DuplicateReservationException;
 import seedu.address.model.salesrecord.SalesRecord;
 import seedu.address.model.salesrecord.exceptions.DuplicateRecordException;
 import seedu.address.model.tag.Tag;
-import seedu.address.testutil.AddressBookBuilder;
 import seedu.address.testutil.PersonBuilder;
+import seedu.address.testutil.RestaurantBookBuilder;
 import seedu.address.testutil.accounts.AccountBuilder;
 import seedu.address.testutil.menu.ItemBuilder;
 import seedu.address.testutil.reservation.ReservationBuilder;
@@ -80,8 +82,8 @@ public class RestaurantBookTest {
     }
 
     @Test
-    public void resetData_withValidReadOnlyAddressBook_replacesData() {
-        RestaurantBook newData = getTypicalAddressBook();
+    public void resetData_withValidReadOnlyRestaurantBook_replacesData() {
+        RestaurantBook newData = getTypicalRestaurantBook();
         restaurantBook.resetData(newData);
         assertEquals(newData, restaurantBook);
     }
@@ -98,8 +100,9 @@ public class RestaurantBookTest {
         List<Item> newItems = Arrays.asList(APPLE_JUICE);
         List<Reservation> newReservations = Arrays.asList(ANDREW);
         List<SalesRecord> newRecords = Arrays.asList(RECORD_DEFAULT, RECORD_ONE);
+        List<Ingredient> newIngredients = Arrays.asList(AVOCADO, BEANS);
         RestaurantBookStub newData = new RestaurantBookStub(newPersons, newAccounts, newItems, newReservations,
-                newRecords);
+                newRecords, newIngredients);
 
         thrown.expect(DuplicatePersonException.class);
         restaurantBook.resetData(newData);
@@ -112,18 +115,18 @@ public class RestaurantBookTest {
     }
 
     @Test
-    public void hasPerson_personNotInAddressBook_returnsFalse() {
+    public void hasPerson_personNotInRestaurantBook_returnsFalse() {
         assertFalse(restaurantBook.hasPerson(ALICE));
     }
 
     @Test
-    public void hasPerson_personInAddressBook_returnsTrue() {
+    public void hasPerson_personInRestaurantBook_returnsTrue() {
         restaurantBook.addPerson(ALICE);
         assertTrue(restaurantBook.hasPerson(ALICE));
     }
 
     @Test
-    public void hasPerson_personWithSameIdentityFieldsInAddressBook_returnsTrue() {
+    public void hasPerson_personWithSameIdentityFieldsInRestaurantBook_returnsTrue() {
         restaurantBook.addPerson(ALICE);
         Person editedAlice = new PersonBuilder(ALICE)
                 .withAddress(VALID_ADDRESS_BOB)
@@ -139,26 +142,26 @@ public class RestaurantBookTest {
     }
 
     @Test
-    public void removeTag_noSuchTag_addressBookUnmodified() {
-        restaurantBookWithPersons = new AddressBookBuilder().withPerson(AMY).withPerson(BOB).build();
+    public void removeTag_noSuchTag_restaurantBookUnmodified() {
+        restaurantBookWithPersons = new RestaurantBookBuilder().withPerson(AMY).withPerson(BOB).build();
 
         restaurantBookWithPersons.removeTag(new Tag(VALID_TAG_TEST));
 
-        RestaurantBook expectedRestaurantBook = new AddressBookBuilder().withPerson(AMY).withPerson(BOB).build();
+        RestaurantBook expectedRestaurantBook = new RestaurantBookBuilder().withPerson(AMY).withPerson(BOB).build();
 
         assertEquals(restaurantBookWithPersons, expectedRestaurantBook);
     }
 
     @Test
-    public void removeTag_fromAllPersons_addressBookModified() {
-        restaurantBookWithPersons = new AddressBookBuilder().withPerson(AMY).withPerson(BOB).build();
+    public void removeTag_fromAllPersons_restaurantBookModified() {
+        restaurantBookWithPersons = new RestaurantBookBuilder().withPerson(AMY).withPerson(BOB).build();
 
         restaurantBookWithPersons.removeTag(new Tag(VALID_TAG_FRIEND));
 
         Person amyWithoutTags = new PersonBuilder(AMY).withTags().build();
         Person bobWithoutFriendTag = new PersonBuilder(BOB).withTags(VALID_TAG_HUSBAND).build();
 
-        RestaurantBook expectedRestaurantBook = new AddressBookBuilder().withPerson(amyWithoutTags)
+        RestaurantBook expectedRestaurantBook = new RestaurantBookBuilder().withPerson(amyWithoutTags)
                 .withPerson(bobWithoutFriendTag)
                 .build();
 
@@ -166,8 +169,8 @@ public class RestaurantBookTest {
     }
 
     @Test
-    public void removeTag_fromOnePerson_addressBookModified() {
-        restaurantBookWithPersons = new AddressBookBuilder()
+    public void removeTag_fromOnePerson_restaurantBookModified() {
+        restaurantBookWithPersons = new RestaurantBookBuilder()
                 .withPerson(AMY)
                 .withPerson(DYLAN)
                 .build();
@@ -176,7 +179,7 @@ public class RestaurantBookTest {
 
         Person amyWithoutTags = new PersonBuilder(AMY).withTags().build();
 
-        RestaurantBook expectedRestaurantBook = new AddressBookBuilder().withPerson(amyWithoutTags)
+        RestaurantBook expectedRestaurantBook = new RestaurantBookBuilder().withPerson(amyWithoutTags)
                 .withPerson(DYLAN)
                 .build();
 
@@ -195,8 +198,9 @@ public class RestaurantBookTest {
         List<Item> newItems = Arrays.asList(APPLE_JUICE);
         List<Reservation> newReservations = Arrays.asList(ANDREW);
         List<SalesRecord> newRecords = Arrays.asList(RECORD_DEFAULT, record);
+        List<Ingredient> newIngredients = Arrays.asList(AVOCADO, BEANS);
         RestaurantBookStub newData = new RestaurantBookStub(newPersons, newAccounts, newItems, newReservations,
-                newRecords);
+                newRecords, newIngredients);
 
         thrown.expect(DuplicateRecordException.class);
         restaurantBook.resetData(newData);
@@ -209,18 +213,18 @@ public class RestaurantBookTest {
     }
 
     @Test
-    public void hasRecord_recordNotInAddressBook_returnsFalse() {
+    public void hasRecord_recordNotInRestaurantBook_returnsFalse() {
         assertFalse(restaurantBook.hasRecord(RECORD_DEFAULT));
     }
 
     @Test
-    public void hasRecord_recordInAddressBook_returnsTrue() {
+    public void hasRecord_recordInRestaurantBook_returnsTrue() {
         restaurantBook.addRecord(RECORD_DEFAULT);
         assertTrue(restaurantBook.hasRecord(RECORD_DEFAULT));
     }
 
     @Test
-    public void hasRecord_recordWithSameDateDifferentNameInAddressBook_returnsTrue() {
+    public void hasRecord_recordWithSameDateDifferentNameInRestaurantBook_returnsTrue() {
         restaurantBook.addRecord(RECORD_DEFAULT);
         SalesRecord record = new RecordBuilder(RECORD_TWO)
                 .withDate(RECORD_DEFAULT.getDate().toString())
@@ -230,7 +234,7 @@ public class RestaurantBookTest {
     }
 
     @Test
-    public void hasRecord_recordWithDifferentDateSameNameInAddressBook_returnsTrue() {
+    public void hasRecord_recordWithDifferentDateSameNameInRestaurantBook_returnsTrue() {
         restaurantBook.addRecord(RECORD_DEFAULT);
         SalesRecord record = new RecordBuilder(RECORD_ONE)
                 .withName(RECORD_DEFAULT.getName().toString())
@@ -240,7 +244,7 @@ public class RestaurantBookTest {
     }
 
     @Test
-    public void hasRecord_recordWithSameQuantitySoldSamePriceInAddressBook_returnsTrue() {
+    public void hasRecord_recordWithSameQuantitySoldSamePriceInRestaurantBook_returnsTrue() {
         restaurantBook.addRecord(RECORD_DEFAULT);
         SalesRecord record = new RecordBuilder(RECORD_THREE)
                 .withQuantitySold(RECORD_DEFAULT.getQuantitySold().toString())
@@ -273,8 +277,9 @@ public class RestaurantBookTest {
         List<Item> newItems = Arrays.asList(APPLE_JUICE);
         List<Reservation> newReservations = Arrays.asList(ANDREW);
         List<SalesRecord> newRecords = Arrays.asList(RECORD_DEFAULT, RECORD_ONE);
+        List<Ingredient> newIngredients = Arrays.asList(AVOCADO, BEANS);
         RestaurantBookStub newData = new RestaurantBookStub(newPersons, newAccounts, newItems, newReservations,
-                newRecords);
+                newRecords, newIngredients);
 
         thrown.expect(DuplicateAccountException.class);
         restaurantBook.resetData(newData);
@@ -287,18 +292,18 @@ public class RestaurantBookTest {
     }
 
     @Test
-    public void hasAccount_accountNotInAddressBook_returnsFalse() {
+    public void hasAccount_accountNotInRestaurantBook_returnsFalse() {
         assertFalse(restaurantBook.hasAccount(DEMO_ADMIN));
     }
 
     @Test
-    public void hasAccount_accountInAddressBook_returnsTrue() {
+    public void hasAccount_accountInRestaurantBook_returnsTrue() {
         restaurantBook.addAccount(DEMO_ADMIN);
         assertTrue(restaurantBook.hasAccount(DEMO_ADMIN));
     }
 
     @Test
-    public void hasAccount_accountWithSamePasswordInAddressBook_returnsTrue() {
+    public void hasAccount_accountWithSamePasswordInRestaurantBook_returnsTrue() {
         // same raw password, but with different username.
         restaurantBook.addAccount(DEMO_ADMIN);
         Account account = new AccountBuilder(DEMO_ONE)
@@ -324,8 +329,9 @@ public class RestaurantBookTest {
         List<Item> newItems = Arrays.asList(APPLE_JUICE, editedApple);
         List<Reservation> newReservations = Arrays.asList(ANDREW);
         List<SalesRecord> newRecords = Arrays.asList(RECORD_DEFAULT, RECORD_ONE);
+        List<Ingredient> newIngredients = Arrays.asList(AVOCADO, BEANS);
         RestaurantBookStub newData = new RestaurantBookStub(newPersons, newAccounts, newItems, newReservations,
-                newRecords);
+                newRecords, newIngredients);
 
         thrown.expect(DuplicateItemException.class);
         restaurantBook.resetData(newData);
@@ -338,18 +344,18 @@ public class RestaurantBookTest {
     }
 
     @Test
-    public void hasItem_itemNotInAddressBook_returnsFalse() {
+    public void hasItem_itemNotInRestaurantBook_returnsFalse() {
         assertFalse(restaurantBook.hasItem(APPLE_JUICE));
     }
 
     @Test
-    public void hasItem_itemInAddressBook_returnsTrue() {
+    public void hasItem_itemInRestaurantBook_returnsTrue() {
         restaurantBook.addItem(APPLE_JUICE);
         assertTrue(restaurantBook.hasItem(APPLE_JUICE));
     }
 
     @Test
-    public void hasItem_itemWithSameIdentityFieldsInAddressBook_returnsTrue() {
+    public void hasItem_itemWithSameIdentityFieldsInRestaurantBook_returnsTrue() {
         restaurantBook.addItem(APPLE_JUICE);
         Item editedApple = new ItemBuilder(APPLE_JUICE).withTags(VALID_ITEM_TAG_CHEESE).build();
         assertTrue(restaurantBook.hasItem(editedApple));
@@ -362,26 +368,27 @@ public class RestaurantBookTest {
     }
 
     @Test
-    public void removeTagForMenu_noSuchTag_addressBookUnmodified() {
-        restaurantBookWithPersons = new AddressBookBuilder().withItem(BEEF_BURGER).withItem(BURGER).build();
+    public void removeTagForMenu_noSuchTag_restaurantBookUnmodified() {
+        restaurantBookWithPersons = new RestaurantBookBuilder().withItem(BEEF_BURGER).withItem(BURGER).build();
 
         restaurantBookWithPersons.removeTagForMenu(new Tag(VALID_ITEM_TAG_CHEESE));
 
-        RestaurantBook expectedRestaurantBook = new AddressBookBuilder().withItem(BEEF_BURGER).withItem(BURGER).build();
+        RestaurantBook expectedRestaurantBook = new RestaurantBookBuilder().withItem(BEEF_BURGER).withItem(BURGER)
+                .build();
 
         assertEquals(restaurantBookWithPersons, expectedRestaurantBook);
     }
 
     @Test
-    public void removeTagForMenu_fromAllItems_addressBookModified() {
-        restaurantBookWithPersons = new AddressBookBuilder().withItem(CHEESE_BURGER).withItem(FRIES).build();
+    public void removeTagForMenu_fromAllItems_restaurantBookModified() {
+        restaurantBookWithPersons = new RestaurantBookBuilder().withItem(CHEESE_BURGER).withItem(FRIES).build();
 
         restaurantBookWithPersons.removeTagForMenu(new Tag(VALID_ITEM_TAG_CHEESE));
 
         Item cheeseWithoutCheeseTags = new ItemBuilder(CHEESE_BURGER).withTags(VALID_ITEM_TAG_BURGER).build();
         Item friesWithoutTags = new ItemBuilder(FRIES).withTags().build();
 
-        RestaurantBook expectedRestaurantBook = new AddressBookBuilder().withItem(cheeseWithoutCheeseTags)
+        RestaurantBook expectedRestaurantBook = new RestaurantBookBuilder().withItem(cheeseWithoutCheeseTags)
                 .withItem(friesWithoutTags)
                 .build();
 
@@ -389,14 +396,14 @@ public class RestaurantBookTest {
     }
 
     @Test
-    public void removeTagForMenu_fromOneItem_addressBookModified() {
-        restaurantBookWithPersons = new AddressBookBuilder().withItem(FRIES).withItem(BURGER).build();
+    public void removeTagForMenu_fromOneItem_restaurantBookModified() {
+        restaurantBookWithPersons = new RestaurantBookBuilder().withItem(FRIES).withItem(BURGER).build();
 
         restaurantBookWithPersons.removeTagForMenu(new Tag(VALID_ITEM_TAG_CHEESE));
 
         Item friesWithoutTags = new ItemBuilder(FRIES).withTags().build();
 
-        RestaurantBook expectedRestaurantBook = new AddressBookBuilder().withItem(friesWithoutTags)
+        RestaurantBook expectedRestaurantBook = new RestaurantBookBuilder().withItem(friesWithoutTags)
                 .withItem(BURGER)
                 .build();
 
@@ -415,8 +422,9 @@ public class RestaurantBookTest {
         List<Item> newItems = Arrays.asList(APPLE_JUICE);
         List<Reservation> newReservations = Arrays.asList(ANDREW, editedAndrew);
         List<SalesRecord> newRecords = Arrays.asList(RECORD_DEFAULT, RECORD_ONE);
+        List<Ingredient> newIngredients = Arrays.asList(AVOCADO, BEANS);
         RestaurantBookStub newData = new RestaurantBookStub(newPersons, newAccounts, newItems, newReservations,
-                newRecords);
+                newRecords, newIngredients);
 
         thrown.expect(DuplicateReservationException.class);
         restaurantBook.resetData(newData);
@@ -429,18 +437,18 @@ public class RestaurantBookTest {
     }
 
     @Test
-    public void hasReservation_reservationNotInAddressBook_returnsFalse() {
+    public void hasReservation_reservationNotInRestaurantBook_returnsFalse() {
         assertFalse(restaurantBook.hasReservation(ANDREW));
     }
 
     @Test
-    public void hasReservation_reservationInAddressBook_returnsTrue() {
+    public void hasReservation_reservationInRestaurantBook_returnsTrue() {
         restaurantBook.addReservation(ANDREW);
         assertTrue(restaurantBook.hasReservation(ANDREW));
     }
 
     @Test
-    public void hasReservation_reservationWithSameIdentityFieldsInAddressBook_returnsTrue() {
+    public void hasReservation_reservationWithSameIdentityFieldsInRestaurantBook_returnsTrue() {
         restaurantBook.addReservation(ANDREW);
         Reservation editedAndrew = new ReservationBuilder(ANDREW)
                 .withPax(VALID_RESERVATION_PAX_BILLY)
@@ -461,36 +469,36 @@ public class RestaurantBookTest {
     }
 
     @Test
-    public void resetMenuData_withValidReadOnlyAddressBook_replacesMenuDataOnly() {
-        RestaurantBook newData = getTypicalAddressBookWithItemOnly();
+    public void resetMenuData_withValidReadOnlyRestaurantBook_replacesMenuDataOnly() {
+        RestaurantBook newData = getTypicalRestaurantBookWithItemOnly();
         restaurantBook.resetMenuData(newData);
         assertEquals(newData, restaurantBook);
     }
 
     @Test
-    public void sortMenuByName_addressBookModified() {
-        RestaurantBook sortedByName = new AddressBookBuilder().withItem(BEEF_BURGER).withItem(APPLE_JUICE).build();
+    public void sortMenuByName_restaurantBookModified() {
+        RestaurantBook sortedByName = new RestaurantBookBuilder().withItem(BEEF_BURGER).withItem(APPLE_JUICE).build();
         sortedByName.sortMenu(SortMethod.NAME);
-        restaurantBookWithPersons = new AddressBookBuilder().withItem(APPLE_JUICE).withItem(BEEF_BURGER).build();
+        restaurantBookWithPersons = new RestaurantBookBuilder().withItem(APPLE_JUICE).withItem(BEEF_BURGER).build();
         assertEquals(sortedByName, restaurantBookWithPersons);
     }
 
     @Test
-    public void sortMenuByPrice_addressBookModified() {
-        RestaurantBook sortedByPrice = new AddressBookBuilder().withItem(BEEF_BURGER).withItem(APPLE_JUICE).build();
+    public void sortMenuByPrice_restaurantBookModified() {
+        RestaurantBook sortedByPrice = new RestaurantBookBuilder().withItem(BEEF_BURGER).withItem(APPLE_JUICE).build();
         sortedByPrice.sortMenu(SortMethod.PRICE);
-        restaurantBookWithPersons = new AddressBookBuilder().withItem(APPLE_JUICE).withItem(BEEF_BURGER).build();
+        restaurantBookWithPersons = new RestaurantBookBuilder().withItem(APPLE_JUICE).withItem(BEEF_BURGER).build();
         assertEquals(sortedByPrice, restaurantBookWithPersons);
     }
 
     @Test
     public void equals() {
-        restaurantBookWithPersons = new AddressBookBuilder().withPerson(AMY).withPerson(DYLAN).build();
+        restaurantBookWithPersons = new RestaurantBookBuilder().withPerson(AMY).withPerson(DYLAN).build();
         // same object
         assertTrue(restaurantBookWithPersons.equals(restaurantBookWithPersons));
         restaurantBookWithPersons.removeTag(new Tag(VALID_TAG_FRIEND));
         Person amyWithoutTags = new PersonBuilder(AMY).withTags().build();
-        RestaurantBook expectedRestaurantBook = new AddressBookBuilder().withPerson(amyWithoutTags)
+        RestaurantBook expectedRestaurantBook = new RestaurantBookBuilder().withPerson(amyWithoutTags)
                 .withPerson(DYLAN)
                 .build();
         assertTrue(restaurantBookWithPersons.equals(expectedRestaurantBook));
@@ -512,7 +520,8 @@ public class RestaurantBookTest {
         private final ObservableList<SalesRecord> records = FXCollections.observableArrayList();
 
         RestaurantBookStub(Collection<Person> persons, Collection<Account> accounts, Collection<Item> items,
-                Collection<Reservation> reservations, Collection<SalesRecord> records) {
+                Collection<Reservation> reservations, Collection<SalesRecord> records,
+                Collection<Ingredient> ingredients) {
             this.persons.setAll(persons);
             this.accounts.setAll(accounts);
             this.ingredients.setAll(ingredients);
@@ -551,5 +560,4 @@ public class RestaurantBookTest {
             return items;
         }
     }
-
 }

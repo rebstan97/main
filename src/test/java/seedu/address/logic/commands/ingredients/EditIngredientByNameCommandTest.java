@@ -10,9 +10,9 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BROCCOLI;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_UNIT_BROCCOLI;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.testutil.TypicalAddressBook.getTypicalAddressBook;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND;
+import static seedu.address.testutil.TypicalRestaurantBook.getTypicalRestaurantBook;
 
 import org.junit.Test;
 
@@ -37,7 +37,7 @@ import seedu.address.testutil.ingredients.IngredientBuilder;
  */
 public class EditIngredientByNameCommandTest {
 
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private Model model = new ModelManager(getTypicalRestaurantBook(), new UserPrefs());
     private CommandHistory commandHistory = new CommandHistory();
 
     @Test

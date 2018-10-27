@@ -19,8 +19,8 @@ import seedu.address.model.RestaurantBook;
 import seedu.address.storage.XmlAdaptedPerson;
 import seedu.address.storage.XmlAdaptedTag;
 import seedu.address.storage.XmlSerializableRestaurantBook;
-import seedu.address.testutil.AddressBookBuilder;
 import seedu.address.testutil.PersonBuilder;
+import seedu.address.testutil.RestaurantBookBuilder;
 import seedu.address.testutil.TestUtil;
 
 public class XmlUtilTest {
@@ -32,7 +32,7 @@ public class XmlUtilTest {
     private static final Path MISSING_PERSON_FIELD_FILE = TEST_DATA_FOLDER.resolve("missingPersonField.xml");
     private static final Path INVALID_PERSON_FIELD_FILE = TEST_DATA_FOLDER.resolve("invalidPersonField.xml");
     private static final Path VALID_PERSON_FILE = TEST_DATA_FOLDER.resolve("validPerson.xml");
-    private static final Path TEMP_FILE = TestUtil.getFilePathInSandboxFolder("tempAddressBook.xml");
+    private static final Path TEMP_FILE = TestUtil.getFilePathInSandboxFolder("tempRestaurantBook.xml");
 
     private static final String INVALID_PHONE = "9482asf424";
 
@@ -132,7 +132,7 @@ public class XmlUtilTest {
                 .getDataFromFile(TEMP_FILE, XmlSerializableRestaurantBook.class);
         assertEquals(dataToWrite, dataFromFile);
 
-        AddressBookBuilder builder = new AddressBookBuilder(new RestaurantBook());
+        RestaurantBookBuilder builder = new RestaurantBookBuilder(new RestaurantBook());
         dataToWrite = new XmlSerializableRestaurantBook(
                 builder.withPerson(new PersonBuilder().build()).build());
 

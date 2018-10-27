@@ -44,8 +44,8 @@ import seedu.address.model.person.Person;
 import seedu.address.model.salesrecord.SalesRecord;
 import seedu.address.model.salesrecord.exceptions.SalesRecordNotFoundException;
 import seedu.address.model.tag.Tag;
-import seedu.address.testutil.AddressBookBuilder;
 import seedu.address.testutil.PersonBuilder;
+import seedu.address.testutil.RestaurantBookBuilder;
 import seedu.address.testutil.accounts.AccountBuilder;
 import seedu.address.testutil.menu.ItemBuilder;
 import seedu.address.testutil.salesrecords.RecordBuilder;
@@ -101,7 +101,7 @@ public class ModelManagerTest {
 
     @Test
     public void removeTag_noSuchTag_addressBookUnmodified() {
-        restaurantBookWithPersons = new AddressBookBuilder().withPerson(AMY).withPerson(BOB).build();
+        restaurantBookWithPersons = new RestaurantBookBuilder().withPerson(AMY).withPerson(BOB).build();
         UserPrefs userPrefs = new UserPrefs();
 
         ModelManager unmodifiedModelManager = new ModelManager(restaurantBookWithPersons, userPrefs);
@@ -114,7 +114,7 @@ public class ModelManagerTest {
 
     @Test
     public void removeTag_fromAllPersons_addressBookModified() {
-        restaurantBookWithPersons = new AddressBookBuilder().withPerson(AMY).withPerson(BOB).build();
+        restaurantBookWithPersons = new RestaurantBookBuilder().withPerson(AMY).withPerson(BOB).build();
         UserPrefs userPrefs = new UserPrefs();
 
         ModelManager modifiedModelManager = new ModelManager(restaurantBookWithPersons, userPrefs);
@@ -133,7 +133,7 @@ public class ModelManagerTest {
 
     @Test
     public void removeTag_fromOnePerson_addressBookModified() {
-        restaurantBookWithPersons = new AddressBookBuilder().withPerson(AMY).withPerson(DYLAN).build();
+        restaurantBookWithPersons = new RestaurantBookBuilder().withPerson(AMY).withPerson(DYLAN).build();
         UserPrefs userPrefs = new UserPrefs();
 
         ModelManager modifiedModelManager = new ModelManager(restaurantBookWithPersons, userPrefs);
@@ -297,7 +297,7 @@ public class ModelManagerTest {
 
     @Test
     public void removeTagForMenu_noSuchTag_addressBookUnmodified() {
-        restaurantBookWithPersons = new AddressBookBuilder().withItem(APPLE_JUICE).withItem(BURGER).build();
+        restaurantBookWithPersons = new RestaurantBookBuilder().withItem(APPLE_JUICE).withItem(BURGER).build();
 
         ModelManager unmodifiedModelManager = new ModelManager(restaurantBookWithPersons, new UserPrefs());
         unmodifiedModelManager.removeTagForMenu(new Tag(VALID_TAG_TEST));
@@ -309,7 +309,7 @@ public class ModelManagerTest {
 
     @Test
     public void removeTagForMenu_fromAllItems_addressBookModified() {
-        restaurantBookWithPersons = new AddressBookBuilder().withItem(CHEESE_BURGER).withItem(FRIES).build();
+        restaurantBookWithPersons = new RestaurantBookBuilder().withItem(CHEESE_BURGER).withItem(FRIES).build();
         UserPrefs userPrefs = new UserPrefs();
 
         ModelManager modifiedModelManager = new ModelManager(restaurantBookWithPersons, userPrefs);
@@ -328,7 +328,7 @@ public class ModelManagerTest {
 
     @Test
     public void removeTagForMenu_fromOneItem_addressBookModified() {
-        restaurantBookWithPersons = new AddressBookBuilder().withItem(FRIES).withItem(BURGER).build();
+        restaurantBookWithPersons = new RestaurantBookBuilder().withItem(FRIES).withItem(BURGER).build();
 
         ModelManager modifiedModelManager = new ModelManager(restaurantBookWithPersons, new UserPrefs());
         modifiedModelManager.removeTagForMenu(new Tag(VALID_ITEM_TAG_CHEESE));
@@ -343,7 +343,7 @@ public class ModelManagerTest {
 
     @Test
     public void equals() {
-        RestaurantBook restaurantBook = new AddressBookBuilder()
+        RestaurantBook restaurantBook = new RestaurantBookBuilder()
                 .withPerson(ALICE)
                 .withPerson(BENSON)
                 .withRecord(RECORD_ONE)

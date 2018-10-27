@@ -6,9 +6,9 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_ITEM_RECIPE_FRI
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.menu.MenuCommandTestUtil.showItemAtIndex;
-import static seedu.address.testutil.TypicalAddressBook.getTypicalAddressBook;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND;
+import static seedu.address.testutil.TypicalRestaurantBook.getTypicalRestaurantBook;
 
 import org.junit.Test;
 
@@ -32,7 +32,7 @@ public class RecipeItemCommandTest {
 
     private static final String RECIPE_STUB = "Some recipe";
 
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private Model model = new ModelManager(getTypicalRestaurantBook(), new UserPrefs());
     private CommandHistory commandHistory = new CommandHistory();
 
     @Test

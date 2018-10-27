@@ -3,8 +3,8 @@ package seedu.address.storage;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
-import static seedu.address.testutil.TypicalAddressBook.getTypicalAddressBook;
-import static seedu.address.testutil.TypicalAddressBook.getTypicalAddressBookWithItemOnly;
+import static seedu.address.testutil.TypicalRestaurantBook.getTypicalRestaurantBook;
+import static seedu.address.testutil.TypicalRestaurantBook.getTypicalRestaurantBookWithItemOnly;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -24,29 +24,38 @@ public class XmlSerializableRestaurantBookTest {
     private static final Path TEST_DATA_FOLDER = Paths.get("src", "test", "data",
             "XmlSerializableRestaurantBookTest");
 
-    private static final Path TYPICAL_PERSONS_FILE = TEST_DATA_FOLDER.resolve("typicalAddressBook.xml");
-    private static final Path INVALID_PERSON_FILE = TEST_DATA_FOLDER.resolve("invalidPersonOnlyAddressBook.xml");
-    private static final Path DUPLICATE_PERSON_FILE = TEST_DATA_FOLDER.resolve("duplicatePersonOnlyAddressBook.xml");
-    private static final Path INVALID_RECORD_FILE = TEST_DATA_FOLDER.resolve("invalidRecordAddressBook.xml");
-    private static final Path DUPLICATE_RECORD_FILE = TEST_DATA_FOLDER.resolve("duplicateRecordAddressBook.xml");
-    private static final Path INVALID_ACCOUNT_FILE = TEST_DATA_FOLDER.resolve("invalidAccountOnlyAddressBook.xml");
-    private static final Path DUPLICATE_ACCOUNT_FILE = TEST_DATA_FOLDER.resolve("duplicateAccountOnlyAddressBook.xml");
-    private static final Path TYPICAL_INGREDIENTS_FILE = TEST_DATA_FOLDER.resolve("typicalIngredientsOnlyAddressBook"
+    // Account Management
+    private static final Path TYPICAL_PERSONS_FILE = TEST_DATA_FOLDER.resolve("typicalRestaurantBook.xml");
+    private static final Path INVALID_PERSON_FILE = TEST_DATA_FOLDER.resolve("invalidPersonOnlyRestaurantBook.xml");
+    private static final Path DUPLICATE_PERSON_FILE = TEST_DATA_FOLDER.resolve("duplicatePersonOnlyRestaurantBook.xml");
+    private static final Path INVALID_ACCOUNT_FILE = TEST_DATA_FOLDER.resolve("invalidAccountOnlyRestaurantBook.xml");
+    private static final Path DUPLICATE_ACCOUNT_FILE = TEST_DATA_FOLDER
+            .resolve("duplicateAccountOnlyRestaurantBook.xml");
+
+    // Sales Management
+    private static final Path INVALID_RECORD_FILE = TEST_DATA_FOLDER.resolve("invalidRecordRestaurantBook.xml");
+    private static final Path DUPLICATE_RECORD_FILE = TEST_DATA_FOLDER.resolve("duplicateRecordRestaurantBook.xml");
+
+    // Ingredient Management
+    private static final Path TYPICAL_INGREDIENTS_FILE = TEST_DATA_FOLDER.resolve("typicalIngredientsOnlyRestaurantBook"
             + ".xml");
-    private static final Path INVALID_INGREDIENT_FILE = TEST_DATA_FOLDER.resolve("invalidIngredientOnlyAddressBook"
+    private static final Path INVALID_INGREDIENT_FILE = TEST_DATA_FOLDER.resolve("invalidIngredientOnlyRestaurantBook"
             + ".xml");
-    private static final Path DUPLICATE_INGREDIENT_FILE = TEST_DATA_FOLDER.resolve("duplicateIngredientOnlyAddressBook"
-            + ".xml");
-    private static final Path TYPICAL_DUPLICATE_FILE = TEST_DATA_FOLDER.resolve("typicalDuplicateAddressBook.xml");
+    private static final Path DUPLICATE_INGREDIENT_FILE = TEST_DATA_FOLDER
+            .resolve("duplicateIngredientOnlyRestaurantBook"
+                    + ".xml");
+    private static final Path TYPICAL_DUPLICATE_FILE = TEST_DATA_FOLDER.resolve("duplicateAccountRestaurantBook.xml");
+
     // Menu Management
-    private static final Path TYPICAL_ITEMS_FILE = TEST_DATA_FOLDER.resolve("typicalItemsOnlyAddressBook.xml");
-    private static final Path INVALID_ITEM_FILE = TEST_DATA_FOLDER.resolve("invalidItemOnlyAddressBook.xml");
-    private static final Path DUPLICATE_ITEM_FILE = TEST_DATA_FOLDER.resolve("duplicateItemOnlyAddressBook.xml");
+    private static final Path TYPICAL_ITEMS_FILE = TEST_DATA_FOLDER.resolve("typicalItemsOnlyRestaurantBook.xml");
+    private static final Path INVALID_ITEM_FILE = TEST_DATA_FOLDER.resolve("invalidItemOnlyRestaurantBook.xml");
+    private static final Path DUPLICATE_ITEM_FILE = TEST_DATA_FOLDER.resolve("duplicateItemOnlyRestaurantBook.xml");
+
     // Reservation Management
     private static final Path INVALID_RESERVATION_FILE = TEST_DATA_FOLDER.resolve(
-            "invalidReservationOnlyAddressBook.xml");
+            "invalidReservationOnlyRestaurantBook.xml");
     private static final Path DUPLICATE_RESERVATION_FILE = TEST_DATA_FOLDER.resolve(
-            "duplicateReservationOnlyAddressBook.xml");
+            "duplicateReservationOnlyRestaurantBook.xml");
 
     @Rule
     public ExpectedException thrown = ExpectedException.none();
@@ -57,7 +66,7 @@ public class XmlSerializableRestaurantBookTest {
     public void toModelType_typicalPersonsFile_success() throws Exception {
         dataFromFile = XmlUtil.getDataFromFile(TYPICAL_PERSONS_FILE, XmlSerializableRestaurantBook.class);
         RestaurantBook restaurantBookFromFile = dataFromFile.toModelType();
-        RestaurantBook typicalPersonsRestaurantBook = getTypicalAddressBook();
+        RestaurantBook typicalPersonsRestaurantBook = getTypicalRestaurantBook();
         assertEquals(restaurantBookFromFile, typicalPersonsRestaurantBook);
     }
 
@@ -111,7 +120,8 @@ public class XmlSerializableRestaurantBookTest {
         XmlSerializableRestaurantBook dataFromFile = XmlUtil.getDataFromFile(TYPICAL_INGREDIENTS_FILE,
                 XmlSerializableRestaurantBook.class);
         RestaurantBook restaurantBookFromFile = dataFromFile.toModelType();
-        RestaurantBook typicalIngredientsRestaurantBook = TypicalIngredients.getTypicalAddressBookWithIngredientsOnly();
+        RestaurantBook typicalIngredientsRestaurantBook = TypicalIngredients
+                .getTypicalRestaurantBookWithIngredientsOnly();
         assertEquals(restaurantBookFromFile, typicalIngredientsRestaurantBook);
     }
 
@@ -131,7 +141,7 @@ public class XmlSerializableRestaurantBookTest {
     }
 
     @Test
-    public void toModelType_duplicateAccountInTypicalAddressBook_throwsIllegalValueException() throws Exception {
+    public void toModelType_duplicateAccountInTypicalRestaurantBook_throwsIllegalValueException() throws Exception {
         dataFromFile = XmlUtil.getDataFromFile(TYPICAL_DUPLICATE_FILE, XmlSerializableRestaurantBook.class);
         thrown.expect(IllegalValueException.class);
         thrown.expectMessage(XmlSerializableRestaurantBook.MESSAGE_DUPLICATE_ACCOUNT);
@@ -144,7 +154,7 @@ public class XmlSerializableRestaurantBookTest {
         XmlSerializableRestaurantBook dataFromFile = XmlUtil.getDataFromFile(TYPICAL_ITEMS_FILE,
                 XmlSerializableRestaurantBook.class);
         RestaurantBook restaurantBookFromFile = dataFromFile.toModelType();
-        RestaurantBook typicalItemsRestaurantBook = getTypicalAddressBookWithItemOnly();
+        RestaurantBook typicalItemsRestaurantBook = getTypicalRestaurantBookWithItemOnly();
         assertEquals(restaurantBookFromFile, typicalItemsRestaurantBook);
     }
 

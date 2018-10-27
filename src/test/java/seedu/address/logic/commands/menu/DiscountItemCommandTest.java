@@ -8,10 +8,10 @@ import static seedu.address.logic.commands.menu.DiscountItemCommand.createDiscou
 import static seedu.address.logic.commands.menu.MenuCommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.menu.MenuCommandTestUtil.showItemAtIndex;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_ITEMS;
-import static seedu.address.testutil.TypicalAddressBook.getTypicalAddressBook;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND;
 import static seedu.address.testutil.TypicalIndexes.INDEX_THIRD;
+import static seedu.address.testutil.TypicalRestaurantBook.getTypicalRestaurantBook;
 
 import org.junit.Test;
 
@@ -31,7 +31,7 @@ import seedu.address.model.menu.Item;
  */
 public class DiscountItemCommandTest {
 
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private Model model = new ModelManager(getTypicalRestaurantBook(), new UserPrefs());
     private CommandHistory commandHistory = new CommandHistory();
 
     @Test

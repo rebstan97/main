@@ -5,7 +5,7 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static seedu.address.commons.core.Messages.MESSAGE_ITEMS_LISTED_OVERVIEW;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.testutil.TypicalAddressBook.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalRestaurantBook.getTypicalRestaurantBook;
 import static seedu.address.testutil.menu.TypicalItems.APPLE_JUICE;
 import static seedu.address.testutil.menu.TypicalItems.CHOCO_CAKE;
 
@@ -24,8 +24,8 @@ import seedu.address.model.menu.TagContainsKeywordsPredicate;
  * Contains integration tests (interaction with the Model) for {@code FilterMenuCommand}.
  */
 public class FilterMenuCommandTest {
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-    private Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private Model model = new ModelManager(getTypicalRestaurantBook(), new UserPrefs());
+    private Model expectedModel = new ModelManager(getTypicalRestaurantBook(), new UserPrefs());
     private CommandHistory commandHistory = new CommandHistory();
 
     @Test

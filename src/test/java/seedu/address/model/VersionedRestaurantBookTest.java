@@ -14,286 +14,287 @@ import java.util.List;
 
 import org.junit.Test;
 
-import seedu.address.testutil.AddressBookBuilder;
+import seedu.address.testutil.RestaurantBookBuilder;
 
 public class VersionedRestaurantBookTest {
 
-    private final ReadOnlyRestaurantBook addressBookWithAmy = new AddressBookBuilder().withPerson(AMY).build();
-    private final ReadOnlyRestaurantBook addressBookWithBob = new AddressBookBuilder().withPerson(BOB).build();
-    private final ReadOnlyRestaurantBook addressBookWithCarl = new AddressBookBuilder().withPerson(CARL).build();
-    private final ReadOnlyRestaurantBook emptyAddressBook = new AddressBookBuilder().build();
+    private final ReadOnlyRestaurantBook restaurantBookWithAmy = new RestaurantBookBuilder().withPerson(AMY).build();
+    private final ReadOnlyRestaurantBook restaurantBookWithBob = new RestaurantBookBuilder().withPerson(BOB).build();
+    private final ReadOnlyRestaurantBook restaurantBookWithCarl = new RestaurantBookBuilder().withPerson(CARL).build();
+    private final ReadOnlyRestaurantBook emptyRestaurantBook = new RestaurantBookBuilder().build();
 
     @Test
-    public void commit_singleAddressBook_noStatesRemovedCurrentStateSaved() {
-        VersionedRestaurantBook versionedAddressBook = prepareAddressBookList(emptyAddressBook);
+    public void commit_singleRestaurantBook_noStatesRemovedCurrentStateSaved() {
+        VersionedRestaurantBook versionedRestaurantBook = prepareRestaurantBookList(emptyRestaurantBook);
 
-        versionedAddressBook.commit();
-        assertAddressBookListStatus(versionedAddressBook,
-                Collections.singletonList(emptyAddressBook),
-                emptyAddressBook,
+        versionedRestaurantBook.commit();
+        assertRestaurantBookListStatus(versionedRestaurantBook,
+                Collections.singletonList(emptyRestaurantBook),
+                emptyRestaurantBook,
                 Collections.emptyList());
     }
 
     @Test
-    public void commit_multipleAddressBookPointerAtEndOfStateList_noStatesRemovedCurrentStateSaved() {
-        VersionedRestaurantBook versionedAddressBook = prepareAddressBookList(
-                emptyAddressBook, addressBookWithAmy, addressBookWithBob);
+    public void commit_multipleRestaurantBookPointerAtEndOfStateList_noStatesRemovedCurrentStateSaved() {
+        VersionedRestaurantBook versionedRestaurantBook = prepareRestaurantBookList(
+                emptyRestaurantBook, restaurantBookWithAmy, restaurantBookWithBob);
 
-        versionedAddressBook.commit();
-        assertAddressBookListStatus(versionedAddressBook,
-                Arrays.asList(emptyAddressBook, addressBookWithAmy, addressBookWithBob),
-                addressBookWithBob,
+        versionedRestaurantBook.commit();
+        assertRestaurantBookListStatus(versionedRestaurantBook,
+                Arrays.asList(emptyRestaurantBook, restaurantBookWithAmy, restaurantBookWithBob),
+                restaurantBookWithBob,
                 Collections.emptyList());
     }
 
     @Test
-    public void commit_multipleAddressBookPointerNotAtEndOfStateList_statesAfterPointerRemovedCurrentStateSaved() {
-        VersionedRestaurantBook versionedAddressBook = prepareAddressBookList(
-                emptyAddressBook, addressBookWithAmy, addressBookWithBob);
-        shiftCurrentStatePointerLeftwards(versionedAddressBook, 2);
+    public void commit_multipleRestaurantBookPointerNotAtEndOfStateList_statesAfterPointerRemovedCurrentStateSaved() {
+        VersionedRestaurantBook versionedRestaurantBook = prepareRestaurantBookList(
+                emptyRestaurantBook, restaurantBookWithAmy, restaurantBookWithBob);
+        shiftCurrentStatePointerLeftwards(versionedRestaurantBook, 2);
 
-        versionedAddressBook.commit();
-        assertAddressBookListStatus(versionedAddressBook,
-                Collections.singletonList(emptyAddressBook),
-                emptyAddressBook,
+        versionedRestaurantBook.commit();
+        assertRestaurantBookListStatus(versionedRestaurantBook,
+                Collections.singletonList(emptyRestaurantBook),
+                emptyRestaurantBook,
                 Collections.emptyList());
     }
 
     @Test
-    public void canUndo_multipleAddressBookPointerAtEndOfStateList_returnsTrue() {
-        VersionedRestaurantBook versionedAddressBook = prepareAddressBookList(
-                emptyAddressBook, addressBookWithAmy, addressBookWithBob);
+    public void canUndo_multipleRestaurantBookPointerAtEndOfStateList_returnsTrue() {
+        VersionedRestaurantBook versionedRestaurantBook = prepareRestaurantBookList(
+                emptyRestaurantBook, restaurantBookWithAmy, restaurantBookWithBob);
 
-        assertTrue(versionedAddressBook.canUndo());
+        assertTrue(versionedRestaurantBook.canUndo());
     }
 
     @Test
-    public void canUndo_multipleAddressBookPointerAtStartOfStateList_returnsTrue() {
-        VersionedRestaurantBook versionedAddressBook = prepareAddressBookList(
-                emptyAddressBook, addressBookWithAmy, addressBookWithBob);
-        shiftCurrentStatePointerLeftwards(versionedAddressBook, 1);
+    public void canUndo_multipleRestaurantBookPointerAtStartOfStateList_returnsTrue() {
+        VersionedRestaurantBook versionedRestaurantBook = prepareRestaurantBookList(
+                emptyRestaurantBook, restaurantBookWithAmy, restaurantBookWithBob);
+        shiftCurrentStatePointerLeftwards(versionedRestaurantBook, 1);
 
-        assertTrue(versionedAddressBook.canUndo());
+        assertTrue(versionedRestaurantBook.canUndo());
     }
 
     @Test
-    public void canUndo_singleAddressBook_returnsFalse() {
-        VersionedRestaurantBook versionedAddressBook = prepareAddressBookList(emptyAddressBook);
+    public void canUndo_singleRestaurantBook_returnsFalse() {
+        VersionedRestaurantBook versionedRestaurantBook = prepareRestaurantBookList(emptyRestaurantBook);
 
-        assertFalse(versionedAddressBook.canUndo());
+        assertFalse(versionedRestaurantBook.canUndo());
     }
 
     @Test
-    public void canUndo_multipleAddressBookPointerAtStartOfStateList_returnsFalse() {
-        VersionedRestaurantBook versionedAddressBook = prepareAddressBookList(
-                emptyAddressBook, addressBookWithAmy, addressBookWithBob);
-        shiftCurrentStatePointerLeftwards(versionedAddressBook, 2);
+    public void canUndo_multipleRestaurantBookPointerAtStartOfStateList_returnsFalse() {
+        VersionedRestaurantBook versionedRestaurantBook = prepareRestaurantBookList(
+                emptyRestaurantBook, restaurantBookWithAmy, restaurantBookWithBob);
+        shiftCurrentStatePointerLeftwards(versionedRestaurantBook, 2);
 
-        assertFalse(versionedAddressBook.canUndo());
+        assertFalse(versionedRestaurantBook.canUndo());
     }
 
     @Test
-    public void canRedo_multipleAddressBookPointerNotAtEndOfStateList_returnsTrue() {
-        VersionedRestaurantBook versionedAddressBook = prepareAddressBookList(
-                emptyAddressBook, addressBookWithAmy, addressBookWithBob);
-        shiftCurrentStatePointerLeftwards(versionedAddressBook, 1);
+    public void canRedo_multipleRestaurantBookPointerNotAtEndOfStateList_returnsTrue() {
+        VersionedRestaurantBook versionedRestaurantBook = prepareRestaurantBookList(
+                emptyRestaurantBook, restaurantBookWithAmy, restaurantBookWithBob);
+        shiftCurrentStatePointerLeftwards(versionedRestaurantBook, 1);
 
-        assertTrue(versionedAddressBook.canRedo());
+        assertTrue(versionedRestaurantBook.canRedo());
     }
 
     @Test
-    public void canRedo_multipleAddressBookPointerAtStartOfStateList_returnsTrue() {
-        VersionedRestaurantBook versionedAddressBook = prepareAddressBookList(
-                emptyAddressBook, addressBookWithAmy, addressBookWithBob);
-        shiftCurrentStatePointerLeftwards(versionedAddressBook, 2);
+    public void canRedo_multipleRestaurantBookPointerAtStartOfStateList_returnsTrue() {
+        VersionedRestaurantBook versionedRestaurantBook = prepareRestaurantBookList(
+                emptyRestaurantBook, restaurantBookWithAmy, restaurantBookWithBob);
+        shiftCurrentStatePointerLeftwards(versionedRestaurantBook, 2);
 
-        assertTrue(versionedAddressBook.canRedo());
+        assertTrue(versionedRestaurantBook.canRedo());
     }
 
     @Test
-    public void canRedo_singleAddressBook_returnsFalse() {
-        VersionedRestaurantBook versionedAddressBook = prepareAddressBookList(emptyAddressBook);
+    public void canRedo_singleRestaurantBook_returnsFalse() {
+        VersionedRestaurantBook versionedRestaurantBook = prepareRestaurantBookList(emptyRestaurantBook);
 
-        assertFalse(versionedAddressBook.canRedo());
+        assertFalse(versionedRestaurantBook.canRedo());
     }
 
     @Test
-    public void canRedo_multipleAddressBookPointerAtEndOfStateList_returnsFalse() {
-        VersionedRestaurantBook versionedAddressBook = prepareAddressBookList(
-                emptyAddressBook, addressBookWithAmy, addressBookWithBob);
+    public void canRedo_multipleRestaurantBookPointerAtEndOfStateList_returnsFalse() {
+        VersionedRestaurantBook versionedRestaurantBook = prepareRestaurantBookList(
+                emptyRestaurantBook, restaurantBookWithAmy, restaurantBookWithBob);
 
-        assertFalse(versionedAddressBook.canRedo());
+        assertFalse(versionedRestaurantBook.canRedo());
     }
 
     @Test
-    public void undo_multipleAddressBookPointerAtEndOfStateList_success() {
-        VersionedRestaurantBook versionedAddressBook = prepareAddressBookList(
-                emptyAddressBook, addressBookWithAmy, addressBookWithBob);
+    public void undo_multipleRestaurantBookPointerAtEndOfStateList_success() {
+        VersionedRestaurantBook versionedRestaurantBook = prepareRestaurantBookList(
+                emptyRestaurantBook, restaurantBookWithAmy, restaurantBookWithBob);
 
-        versionedAddressBook.undo();
-        assertAddressBookListStatus(versionedAddressBook,
-                Collections.singletonList(emptyAddressBook),
-                addressBookWithAmy,
-                Collections.singletonList(addressBookWithBob));
+        versionedRestaurantBook.undo();
+        assertRestaurantBookListStatus(versionedRestaurantBook,
+                Collections.singletonList(emptyRestaurantBook),
+                restaurantBookWithAmy,
+                Collections.singletonList(restaurantBookWithBob));
     }
 
     @Test
-    public void undo_multipleAddressBookPointerNotAtStartOfStateList_success() {
-        VersionedRestaurantBook versionedAddressBook = prepareAddressBookList(
-                emptyAddressBook, addressBookWithAmy, addressBookWithBob);
-        shiftCurrentStatePointerLeftwards(versionedAddressBook, 1);
+    public void undo_multipleRestaurantBookPointerNotAtStartOfStateList_success() {
+        VersionedRestaurantBook versionedRestaurantBook = prepareRestaurantBookList(
+                emptyRestaurantBook, restaurantBookWithAmy, restaurantBookWithBob);
+        shiftCurrentStatePointerLeftwards(versionedRestaurantBook, 1);
 
-        versionedAddressBook.undo();
-        assertAddressBookListStatus(versionedAddressBook,
+        versionedRestaurantBook.undo();
+        assertRestaurantBookListStatus(versionedRestaurantBook,
                 Collections.emptyList(),
-                emptyAddressBook,
-                Arrays.asList(addressBookWithAmy, addressBookWithBob));
+                emptyRestaurantBook,
+                Arrays.asList(restaurantBookWithAmy, restaurantBookWithBob));
     }
 
     @Test
-    public void undo_singleAddressBook_throwsNoUndoableStateException() {
-        VersionedRestaurantBook versionedAddressBook = prepareAddressBookList(emptyAddressBook);
+    public void undo_singleRestaurantBook_throwsNoUndoableStateException() {
+        VersionedRestaurantBook versionedRestaurantBook = prepareRestaurantBookList(emptyRestaurantBook);
 
-        assertThrows(VersionedRestaurantBook.NoUndoableStateException.class, versionedAddressBook::undo);
+        assertThrows(VersionedRestaurantBook.NoUndoableStateException.class, versionedRestaurantBook::undo);
     }
 
     @Test
-    public void undo_multipleAddressBookPointerAtStartOfStateList_throwsNoUndoableStateException() {
-        VersionedRestaurantBook versionedAddressBook = prepareAddressBookList(
-                emptyAddressBook, addressBookWithAmy, addressBookWithBob);
-        shiftCurrentStatePointerLeftwards(versionedAddressBook, 2);
+    public void undo_multipleRestaurantBookPointerAtStartOfStateList_throwsNoUndoableStateException() {
+        VersionedRestaurantBook versionedRestaurantBook = prepareRestaurantBookList(
+                emptyRestaurantBook, restaurantBookWithAmy, restaurantBookWithBob);
+        shiftCurrentStatePointerLeftwards(versionedRestaurantBook, 2);
 
-        assertThrows(VersionedRestaurantBook.NoUndoableStateException.class, versionedAddressBook::undo);
+        assertThrows(VersionedRestaurantBook.NoUndoableStateException.class, versionedRestaurantBook::undo);
     }
 
     @Test
-    public void redo_multipleAddressBookPointerNotAtEndOfStateList_success() {
-        VersionedRestaurantBook versionedAddressBook = prepareAddressBookList(
-                emptyAddressBook, addressBookWithAmy, addressBookWithBob);
-        shiftCurrentStatePointerLeftwards(versionedAddressBook, 1);
+    public void redo_multipleRestaurantBookPointerNotAtEndOfStateList_success() {
+        VersionedRestaurantBook versionedRestaurantBook = prepareRestaurantBookList(
+                emptyRestaurantBook, restaurantBookWithAmy, restaurantBookWithBob);
+        shiftCurrentStatePointerLeftwards(versionedRestaurantBook, 1);
 
-        versionedAddressBook.redo();
-        assertAddressBookListStatus(versionedAddressBook,
-                Arrays.asList(emptyAddressBook, addressBookWithAmy),
-                addressBookWithBob,
+        versionedRestaurantBook.redo();
+        assertRestaurantBookListStatus(versionedRestaurantBook,
+                Arrays.asList(emptyRestaurantBook, restaurantBookWithAmy),
+                restaurantBookWithBob,
                 Collections.emptyList());
     }
 
     @Test
-    public void redo_multipleAddressBookPointerAtStartOfStateList_success() {
-        VersionedRestaurantBook versionedAddressBook = prepareAddressBookList(
-                emptyAddressBook, addressBookWithAmy, addressBookWithBob);
-        shiftCurrentStatePointerLeftwards(versionedAddressBook, 2);
+    public void redo_multipleRestaurantBookPointerAtStartOfStateList_success() {
+        VersionedRestaurantBook versionedRestaurantBook = prepareRestaurantBookList(
+                emptyRestaurantBook, restaurantBookWithAmy, restaurantBookWithBob);
+        shiftCurrentStatePointerLeftwards(versionedRestaurantBook, 2);
 
-        versionedAddressBook.redo();
-        assertAddressBookListStatus(versionedAddressBook,
-                Collections.singletonList(emptyAddressBook),
-                addressBookWithAmy,
-                Collections.singletonList(addressBookWithBob));
+        versionedRestaurantBook.redo();
+        assertRestaurantBookListStatus(versionedRestaurantBook,
+                Collections.singletonList(emptyRestaurantBook),
+                restaurantBookWithAmy,
+                Collections.singletonList(restaurantBookWithBob));
     }
 
     @Test
-    public void redo_singleAddressBook_throwsNoRedoableStateException() {
-        VersionedRestaurantBook versionedAddressBook = prepareAddressBookList(emptyAddressBook);
+    public void redo_singleRestaurantBook_throwsNoRedoableStateException() {
+        VersionedRestaurantBook versionedRestaurantBook = prepareRestaurantBookList(emptyRestaurantBook);
 
-        assertThrows(VersionedRestaurantBook.NoRedoableStateException.class, versionedAddressBook::redo);
+        assertThrows(VersionedRestaurantBook.NoRedoableStateException.class, versionedRestaurantBook::redo);
     }
 
     @Test
-    public void redo_multipleAddressBookPointerAtEndOfStateList_throwsNoRedoableStateException() {
-        VersionedRestaurantBook versionedAddressBook = prepareAddressBookList(
-                emptyAddressBook, addressBookWithAmy, addressBookWithBob);
+    public void redo_multipleRestaurantBookPointerAtEndOfStateList_throwsNoRedoableStateException() {
+        VersionedRestaurantBook versionedRestaurantBook = prepareRestaurantBookList(
+                emptyRestaurantBook, restaurantBookWithAmy, restaurantBookWithBob);
 
-        assertThrows(VersionedRestaurantBook.NoRedoableStateException.class, versionedAddressBook::redo);
+        assertThrows(VersionedRestaurantBook.NoRedoableStateException.class, versionedRestaurantBook::redo);
     }
 
     @Test
     public void equals() {
-        VersionedRestaurantBook versionedAddressBook = prepareAddressBookList(addressBookWithAmy, addressBookWithBob);
+        VersionedRestaurantBook versionedRestaurantBook = prepareRestaurantBookList(restaurantBookWithAmy,
+                restaurantBookWithBob);
 
         // same values -> returns true
-        VersionedRestaurantBook copy = prepareAddressBookList(addressBookWithAmy, addressBookWithBob);
-        assertTrue(versionedAddressBook.equals(copy));
+        VersionedRestaurantBook copy = prepareRestaurantBookList(restaurantBookWithAmy, restaurantBookWithBob);
+        assertTrue(versionedRestaurantBook.equals(copy));
 
         // same object -> returns true
-        assertTrue(versionedAddressBook.equals(versionedAddressBook));
+        assertTrue(versionedRestaurantBook.equals(versionedRestaurantBook));
 
         // null -> returns false
-        assertFalse(versionedAddressBook.equals(null));
+        assertFalse(versionedRestaurantBook.equals(null));
 
         // different types -> returns false
-        assertFalse(versionedAddressBook.equals(1));
+        assertFalse(versionedRestaurantBook.equals(1));
 
         // different state list -> returns false
-        VersionedRestaurantBook differentAddressBookList = prepareAddressBookList(addressBookWithBob,
-                addressBookWithCarl);
-        assertFalse(versionedAddressBook.equals(differentAddressBookList));
+        VersionedRestaurantBook differentRestaurantBookList = prepareRestaurantBookList(restaurantBookWithBob,
+                restaurantBookWithCarl);
+        assertFalse(versionedRestaurantBook.equals(differentRestaurantBookList));
 
         // different current pointer index -> returns false
-        VersionedRestaurantBook differentCurrentStatePointer = prepareAddressBookList(
-                addressBookWithAmy, addressBookWithBob);
-        shiftCurrentStatePointerLeftwards(versionedAddressBook, 1);
-        assertFalse(versionedAddressBook.equals(differentCurrentStatePointer));
+        VersionedRestaurantBook differentCurrentStatePointer = prepareRestaurantBookList(
+                restaurantBookWithAmy, restaurantBookWithBob);
+        shiftCurrentStatePointerLeftwards(versionedRestaurantBook, 1);
+        assertFalse(versionedRestaurantBook.equals(differentCurrentStatePointer));
     }
 
     /**
-     * Asserts that {@code versionedAddressBook} is currently pointing at {@code expectedCurrentState}, states before
-     * {@code versionedAddressBook#currentStatePointer} is equal to {@code expectedStatesBeforePointer}, and states
-     * after {@code versionedAddressBook#currentStatePointer} is equal to {@code expectedStatesAfterPointer}.
+     * Asserts that {@code versionedRestaurantBook} is currently pointing at {@code expectedCurrentState}, states before
+     * {@code versionedRestaurantBook#currentStatePointer} is equal to {@code expectedStatesBeforePointer}, and states
+     * after {@code versionedRestaurantBook#currentStatePointer} is equal to {@code expectedStatesAfterPointer}.
      */
-    private void assertAddressBookListStatus(VersionedRestaurantBook versionedAddressBook,
+    private void assertRestaurantBookListStatus(VersionedRestaurantBook versionedRestaurantBook,
             List<ReadOnlyRestaurantBook> expectedStatesBeforePointer,
             ReadOnlyRestaurantBook expectedCurrentState,
             List<ReadOnlyRestaurantBook> expectedStatesAfterPointer) {
         // check state currently pointing at is correct
-        assertEquals(new RestaurantBook(versionedAddressBook), expectedCurrentState);
+        assertEquals(new RestaurantBook(versionedRestaurantBook), expectedCurrentState);
 
         // shift pointer to start of state list
-        while (versionedAddressBook.canUndo()) {
-            versionedAddressBook.undo();
+        while (versionedRestaurantBook.canUndo()) {
+            versionedRestaurantBook.undo();
         }
 
         // check states before pointer are correct
-        for (ReadOnlyRestaurantBook expectedAddressBook : expectedStatesBeforePointer) {
-            assertEquals(expectedAddressBook, new RestaurantBook(versionedAddressBook));
-            versionedAddressBook.redo();
+        for (ReadOnlyRestaurantBook expectedRestaurantBook : expectedStatesBeforePointer) {
+            assertEquals(expectedRestaurantBook, new RestaurantBook(versionedRestaurantBook));
+            versionedRestaurantBook.redo();
         }
 
         // check states after pointer are correct
-        for (ReadOnlyRestaurantBook expectedAddressBook : expectedStatesAfterPointer) {
-            versionedAddressBook.redo();
-            assertEquals(expectedAddressBook, new RestaurantBook(versionedAddressBook));
+        for (ReadOnlyRestaurantBook expectedRestaurantBook : expectedStatesAfterPointer) {
+            versionedRestaurantBook.redo();
+            assertEquals(expectedRestaurantBook, new RestaurantBook(versionedRestaurantBook));
         }
 
         // check that there are no more states after pointer
-        assertFalse(versionedAddressBook.canRedo());
+        assertFalse(versionedRestaurantBook.canRedo());
 
         // revert pointer to original position
-        expectedStatesAfterPointer.forEach(unused -> versionedAddressBook.undo());
+        expectedStatesAfterPointer.forEach(unused -> versionedRestaurantBook.undo());
     }
 
     /**
      * Creates and returns a {@code VersionedRestaurantBook} with the {@code addressBookStates} added into it, and the
      * {@code VersionedRestaurantBook#currentStatePointer} at the end of list.
      */
-    private VersionedRestaurantBook prepareAddressBookList(ReadOnlyRestaurantBook... addressBookStates) {
+    private VersionedRestaurantBook prepareRestaurantBookList(ReadOnlyRestaurantBook... addressBookStates) {
         assertFalse(addressBookStates.length == 0);
 
-        VersionedRestaurantBook versionedAddressBook = new VersionedRestaurantBook(addressBookStates[0]);
+        VersionedRestaurantBook versionedRestaurantBook = new VersionedRestaurantBook(addressBookStates[0]);
         for (int i = 1; i < addressBookStates.length; i++) {
-            versionedAddressBook.resetData(addressBookStates[i]);
-            versionedAddressBook.commit();
+            versionedRestaurantBook.resetData(addressBookStates[i]);
+            versionedRestaurantBook.commit();
         }
 
-        return versionedAddressBook;
+        return versionedRestaurantBook;
     }
 
     /**
-     * Shifts the {@code versionedAddressBook#currentStatePointer} by {@code count} to the left of its list.
+     * Shifts the {@code versionedRestaurantBook#currentStatePointer} by {@code count} to the left of its list.
      */
-    private void shiftCurrentStatePointerLeftwards(VersionedRestaurantBook versionedAddressBook, int count) {
+    private void shiftCurrentStatePointerLeftwards(VersionedRestaurantBook versionedRestaurantBook, int count) {
         for (int i = 0; i < count; i++) {
-            versionedAddressBook.undo();
+            versionedRestaurantBook.undo();
         }
     }
 }
