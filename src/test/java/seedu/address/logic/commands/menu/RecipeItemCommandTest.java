@@ -43,7 +43,7 @@ public class RecipeItemCommandTest {
         RecipeItemCommand recipeItemCommand = new RecipeItemCommand(INDEX_FIRST,
                 new Recipe(editedItem.getRecipe().toString()));
 
-        String expectedMessage = String.format(RecipeItemCommand.MESSAGE_DELETE_REMARK_SUCCESS, editedItem);
+        String expectedMessage = String.format(RecipeItemCommand.MESSAGE_DELETE_RECIPE_SUCCESS, editedItem);
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.updateItem(firstItem, editedItem);
@@ -63,7 +63,7 @@ public class RecipeItemCommandTest {
         RecipeItemCommand recipeItemCommand = new RecipeItemCommand(INDEX_FIRST,
                 new Recipe(editedItem.getRecipe().toString()));
 
-        String expectedMessage = String.format(RecipeItemCommand.MESSAGE_ADD_REMARK_SUCCESS, editedItem);
+        String expectedMessage = String.format(RecipeItemCommand.MESSAGE_ADD_RECIPE_SUCCESS, editedItem);
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.updateItem(firstItem, editedItem);
