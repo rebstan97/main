@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
@@ -17,12 +18,11 @@ import seedu.address.logic.commands.menu.SortMenuCommand.SortMethod;
 import seedu.address.model.accounts.Account;
 import seedu.address.model.ingredient.Ingredient;
 import seedu.address.model.ingredient.IngredientName;
-import seedu.address.model.ingredient.IngredientPrice;
-import seedu.address.model.ingredient.IngredientUnit;
-import seedu.address.model.ingredient.MinimumUnit;
-import seedu.address.model.ingredient.NumUnits;
 import seedu.address.model.ingredient.exceptions.IngredientNotFoundException;
 import seedu.address.model.menu.Item;
+import seedu.address.model.menu.Name;
+import seedu.address.model.menu.Price;
+import seedu.address.model.menu.Recipe;
 import seedu.address.model.person.Person;
 import seedu.address.model.reservation.Reservation;
 import seedu.address.model.salesrecord.Date;
@@ -449,12 +449,19 @@ public class ModelManager extends ComponentManager implements Model {
 
     // to be updated once merged
     @Override
-    public HashMap<Ingredient, Integer> getRequiredIngredients(String test) {
-        HashMap<Ingredient, Integer> h = new HashMap<>();
-        h.put(new Ingredient(new IngredientName("a"), new IngredientUnit("kilogram"), new IngredientPrice("2"),
-                new MinimumUnit("2"), new NumUnits("2")),1);
+    public Item findItem(Name name) {
+        return new Item(name, new Price("2"), new Recipe("Pour water"), new HashSet<>());
+    }
+
+    @Override
+    public HashMap<IngredientName, Integer> getRequiredIngredients(Item item) {
+        HashMap<IngredientName, Integer> h = new HashMap<>();
+        h.put(new IngredientName("Carrot"), 1);
+        h.put(new IngredientName("Onion"), 2);
+        h.put(new IngredientName("Apple"), 3);
+        h.put(new IngredientName("Garlicloging"), 4);
         return h;
     }
     @Override
-    public void consumeIngredients(HashMap<Ingredient, Integer> a) {}
+    public void consumeIngredients(HashMap<IngredientName, Integer> a) {}
 }

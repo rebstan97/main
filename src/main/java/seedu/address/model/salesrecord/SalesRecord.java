@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.Objects;
 
 import seedu.address.model.ingredient.Ingredient;
+import seedu.address.model.ingredient.IngredientName;
 
 /**
  * Represents a sales record in the sales book.
@@ -21,7 +22,7 @@ public class SalesRecord {
     private final QuantitySold quantitySold;
     private final Price price;
     private final double revenue;
-    private final HashMap<Ingredient, Integer> ingredientsUsed;
+    private final HashMap<IngredientName, Integer> ingredientsUsed;
 
     /**
      * Every field must be present and not null.
@@ -31,7 +32,7 @@ public class SalesRecord {
     }
 
     private SalesRecord(Date date, ItemName name, QuantitySold quantitySold, Price price, double revenue,
-            HashMap<Ingredient, Integer> ingredientsUsed) {
+            HashMap<IngredientName, Integer> ingredientsUsed) {
         this.date = date;
         this.name = name;
         this.quantitySold = quantitySold;
@@ -60,7 +61,7 @@ public class SalesRecord {
         return revenue;
     }
 
-    public HashMap<Ingredient, Integer> getIngredientsUsed() {
+    public HashMap<IngredientName, Integer> getIngredientsUsed() {
         return ingredientsUsed;
     }
 
@@ -69,7 +70,7 @@ public class SalesRecord {
      * This is to ensure immutability.
      * @param ingredientsUsed The ingredients and their corresponding quantity used.
      */
-    public SalesRecord setIngredientsUsed(HashMap<Ingredient, Integer> ingredientsUsed) {
+    public SalesRecord setIngredientsUsed(HashMap<IngredientName, Integer> ingredientsUsed) {
         return new SalesRecord(this.date, this.name, this.quantitySold, this.price, this.revenue, ingredientsUsed);
     }
 

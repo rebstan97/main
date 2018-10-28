@@ -26,6 +26,7 @@ import seedu.address.model.accounts.Account;
 import seedu.address.model.ingredient.Ingredient;
 import seedu.address.model.ingredient.IngredientName;
 import seedu.address.model.menu.Item;
+import seedu.address.model.menu.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.reservation.Reservation;
 import seedu.address.model.salesrecord.Date;
@@ -371,12 +372,15 @@ public class AddReservationCommandTest {
 
         // to be updated once merged
         @Override
-        public HashMap<Ingredient, Integer> getRequiredIngredients(String test) {
+        public Item findItem(Name name){return null;}
+
+        @Override
+        public HashMap<IngredientName, Integer> getRequiredIngredients(Item item) {
             return null;
         }
 
         @Override
-        public void consumeIngredients(HashMap<Ingredient, Integer> a) {
+        public void consumeIngredients(HashMap<IngredientName, Integer> a) {
 
         }
     }

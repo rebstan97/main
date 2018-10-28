@@ -8,6 +8,8 @@ import static seedu.address.testutil.salesrecords.TypicalRecords.RECORD_DEFAULT;
 import static seedu.address.testutil.salesrecords.TypicalRecords.RECORD_ONE;
 import static seedu.address.testutil.salesrecords.TypicalRecords.RECORD_TWO;
 
+import java.util.HashMap;
+
 import org.junit.Test;
 
 import seedu.address.commons.exceptions.IllegalValueException;

@@ -10,6 +10,7 @@ import seedu.address.model.accounts.Account;
 import seedu.address.model.ingredient.Ingredient;
 import seedu.address.model.ingredient.IngredientName;
 import seedu.address.model.menu.Item;
+import seedu.address.model.menu.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.reservation.Reservation;
 import seedu.address.model.salesrecord.Date;
@@ -341,8 +342,10 @@ public interface Model {
 
 
     // to be updated once merged
-    HashMap<Ingredient, Integer> getRequiredIngredients(String test);
+    Item findItem(Name name);
 
-    void consumeIngredients(HashMap<Ingredient, Integer> a);
+    HashMap<IngredientName, Integer> getRequiredIngredients(Item item);
+
+    void consumeIngredients(HashMap<IngredientName, Integer> a);
 
 }

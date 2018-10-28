@@ -1,10 +1,13 @@
 package seedu.address.storage.elements;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
 
 import javax.xml.bind.annotation.XmlElement;
 
 import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.model.ingredient.IngredientName;
 import seedu.address.model.salesrecord.Date;
 import seedu.address.model.salesrecord.ItemName;
 import seedu.address.model.salesrecord.Price;
@@ -25,6 +28,8 @@ public class XmlAdaptedRecord {
     private String quantitySold;
     @XmlElement(required = true)
     private String price;
+    @XmlElement(required = true)
+    private HashMap<String, String> ingredientsUsed;
 
     /**
      * Constructs an XmlAdaptedRecord.
@@ -40,6 +45,7 @@ public class XmlAdaptedRecord {
         this.itemName = itemName;
         this.quantitySold = quantitySold;
         this.price = price;
+        this.ingredientsUsed = new HashMap<>();
     }
 
     /**
@@ -52,6 +58,13 @@ public class XmlAdaptedRecord {
         itemName = source.getName().toString();
         quantitySold = String.valueOf(source.getQuantitySold().toString());
         price = String.valueOf(source.getPrice().toString());
+        ingredientsUsed = new HashMap<>();
+
+        for (Map.Entry<IngredientName, Integer> entry : source.getIngredientsUsed().entrySet()) {
+            IngredientName ingredient = entry.getKey();
+            Integer quantityUsed = entry.getValue();
+            ingredientsUsed.put(ingredient.toString(), quantityUsed.toString());
+        }
     }
 
     /**
@@ -64,7 +77,9 @@ public class XmlAdaptedRecord {
         final ItemName modelName = nameToModelType();
         final QuantitySold modelQuantitySold = quantitySoldToModelType();
         final Price modelPrice = priceToModelType();
-        return new SalesRecord(modelDate, modelName, modelQuantitySold, modelPrice);
+        final HashMap<IngredientName, Integer> modelIngredientUsed = ingredientUsedToModelType();
+        return new SalesRecord(modelDate, modelName, modelQuantitySold, modelPrice)
+                .setIngredientsUsed(modelIngredientUsed);
     }
 
     /**
@@ -129,6 +144,41 @@ public class XmlAdaptedRecord {
         return new Price(price);
     }
 
+    /**
+     * Converts this HashMap<String, String> into the model's HashMap<IngredientName, Integer>.
+     *
+     * @throws IllegalValueException if there were any data constraints violated in the Ingredient
+     */
+    private HashMap<IngredientName, Integer> ingredientUsedToModelType() throws IllegalValueException {
+        HashMap<IngredientName, Integer> modelIngredientUsed = new HashMap<>();
+
+        for (Map.Entry<String, String> entry : ingredientsUsed.entrySet()) {
+            String ingredientName = entry.getKey();
+            String quantityUsed = entry.getValue();
+
+            validateName(ingredientName);
+            IngredientName modelName = new IngredientName(ingredientName);
+
+            modelIngredientUsed.put(modelName, Integer.parseInt(quantityUsed));
+        }
+        return modelIngredientUsed;
+    }
+
+    /**
+     * Checks if ingredient name is valid.
+     *
+     * @throws IllegalValueException if {@code ingredientName} is null or invalid
+     */
+    private void validateName(String ingredientName) throws IllegalValueException {
+        if (ingredientName == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    IngredientName.class.getSimpleName()));
+        }
+        if (!IngredientName.isValidName(ingredientName)) {
+            throw new IllegalValueException(IngredientName.MESSAGE_NAME_CONSTRAINTS);
+        }
+    }
+
     @Override
     public boolean equals(Object other) {
         if (other == this) {
@@ -143,6 +193,7 @@ public class XmlAdaptedRecord {
         return Objects.equals(date, otherRecord.date)
                 && Objects.equals(itemName, otherRecord.itemName)
                 && Objects.equals(quantitySold, otherRecord.quantitySold)
-                && Objects.equals(price, otherRecord.price);
+                && Objects.equals(price, otherRecord.price)
+                && Objects.equals(ingredientsUsed, otherRecord.ingredientsUsed);
     }
 }
