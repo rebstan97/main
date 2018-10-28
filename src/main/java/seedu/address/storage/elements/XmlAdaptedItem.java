@@ -128,8 +128,14 @@ public class XmlAdaptedItem {
         }
         Map<IngredientName, Integer> modelRequiredIngredients = new HashMap<>();
         for (Map.Entry<String, String> entry : requiredIngredients.entrySet()) {
+            if (!IngredientName.isValidName(entry.getKey())) {
+                throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, REQUIRED_INGREDIENT));
+            }
             IngredientName ingredientName = new IngredientName(entry.getKey());
             Integer num = Integer.parseInt(entry.getValue());
+            if (num <= 0) {
+                throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, REQUIRED_INGREDIENT));
+            }
             modelRequiredIngredients.put(ingredientName, num);
         }
 
