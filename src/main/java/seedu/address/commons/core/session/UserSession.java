@@ -1,7 +1,6 @@
 package seedu.address.commons.core.session;
 
 import seedu.address.model.accounts.Account;
-import seedu.address.model.accounts.Username;
 
 /**
  * Since this is a local desktop application which may or may not work with internet connection, we assume the
@@ -11,25 +10,37 @@ import seedu.address.model.accounts.Username;
 public class UserSession {
 
     private static boolean isAuthenticated = false;
-    private static Username username;
+    private static Account account;
 
     /**
-     * Stores this {@link Account} info as part of this session.
+     * Stores this {@code Account} info as part of this session.
      *
-     * @param account logged in for this session.
+     * @param acc logged in for this session.
      */
-    public static void login(Account account) {
-        isAuthenticated = true;
-        username = account.getUsername();
+    public static void login(Account acc) {
+        //TODO: Handle logging in when a session is already established.
+        if (!isAuthenticated) {
+            isAuthenticated = true;
+            account = acc;
+        }
     }
 
     /**
      * Logs out of this account which releases this session.
      */
     public static void logout() {
+        isAuthenticated = false;
+        account = null;
+    }
+
+    /**
+     * Updates the session with the new account info, such as updating of account password.
+     *
+     * @param acc that has been updated.
+     */
+    public static void update(Account acc) {
         if (isAuthenticated) {
-            isAuthenticated = false;
-            username = null;
+            account = acc;
         }
     }
 
@@ -43,11 +54,11 @@ public class UserSession {
     }
 
     /**
-     * Gets the username that is logged in for this session.
+     * Gets the account that is logged in for this session.
      *
-     * @return a {@link Username} object.
+     * @return a {@code Account} object.
      */
-    public static Username getUsername() {
-        return username;
+    public static Account getAccount() {
+        return account;
     }
 }
