@@ -22,6 +22,7 @@ public class CliSyntax {
     /*Prefix definitions for user accounts */
     public static final Prefix PREFIX_ID = new Prefix("id/");
     public static final Prefix PREFIX_PASSWORD = new Prefix("pw/");
+    public static final Prefix PREFIX_NEW_PASSWORD = new Prefix("npw/");
 
     /* Prefix definitions for ingredient */
     public static final Prefix PREFIX_INGREDIENT_NAME = new Prefix("n/");

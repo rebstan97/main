@@ -39,7 +39,6 @@ public class Password {
      * @param password A valid password.
      */
     public Password(String password) {
-        // maybe should not hash here since we create new account obj ...?
         requireNonNull(password);
         checkArgument(isValidPassword(password), MESSAGE_PASSWORD_CONSTRAINT);
         this.password = password;

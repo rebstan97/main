@@ -52,7 +52,7 @@ public class LoginCommandTest {
 
         // Since logged in, session will be set
         assertTrue(UserSession.isAuthenticated());
-        assertNotNull(UserSession.getUsername());
+        assertNotNull(UserSession.getAccount());
     }
 
     @Test
