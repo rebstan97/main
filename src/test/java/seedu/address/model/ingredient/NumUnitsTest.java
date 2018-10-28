@@ -2,6 +2,7 @@ package seedu.address.model.ingredient;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.Test;
 
@@ -18,6 +19,32 @@ public class NumUnitsTest {
     public void constructor_invalidNumUnits_throwsIllegalArgumentException() {
         String invalidNumUnits = "";
         Assert.assertThrows(IllegalArgumentException.class, () -> new NumUnits(invalidNumUnits));
+    }
+
+    @Test
+    public void increase_null_throwsNullPointerException() {
+        NumUnits numUnits = new NumUnits("1");
+        Assert.assertThrows(NullPointerException.class, () -> numUnits.increase(null));
+    }
+
+    @Test
+    public void increase_validInteger_returnsTrue() {
+        NumUnits currentNumUnits = new NumUnits("10");
+        NumUnits expectedNumUnits = new NumUnits("22");
+        assertEquals(expectedNumUnits, currentNumUnits.increase(12));
+    }
+
+    @Test
+    public void decrease_null_throwsNullPointerException() {
+        NumUnits numUnits = new NumUnits("1");
+        Assert.assertThrows(NullPointerException.class, () -> numUnits.decrease(null));
+    }
+
+    @Test
+    public void decrease_validInteger_returnsTrue() {
+        NumUnits currentNumUnits = new NumUnits("22");
+        NumUnits expectedNumUnits = new NumUnits("10");
+        assertEquals(expectedNumUnits, currentNumUnits.decrease(12));
     }
 
     @Test

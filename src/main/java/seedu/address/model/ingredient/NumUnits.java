@@ -56,6 +56,7 @@ public class NumUnits {
      * @return A new {@code NumUnits} object with the updated value.
      */
     public NumUnits increase(Integer toIncrease) {
+        requireNonNull(toIncrease);
         Integer updatedNum = numberOfUnits + toIncrease;
         return new NumUnits(updatedNum.toString());
     }
@@ -65,6 +66,8 @@ public class NumUnits {
      * @return A new {@code NumUnits} object with the updated value.
      */
     public NumUnits decrease(Integer toDecrease) {
+        requireNonNull(toDecrease);
+        assert(toDecrease <= numberOfUnits);
         Integer updatedNum = numberOfUnits - toDecrease;
         return new NumUnits(updatedNum.toString());
     }
