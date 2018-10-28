@@ -38,17 +38,4 @@ public class SampleDataUtil {
                 .map(Tag::new)
                 .collect(Collectors.toSet());
     }
-
-    /**
-     * Returns a map containing the list of stringpair given.
-     */
-    public static Map<IngredientName, Integer> getRequiredIngredientsMap(StringPair ... stringPairs) {
-        Map<IngredientName, Integer> requiredIngredients = new HashMap<>();
-        for (StringPair stringPair : stringPairs) {
-            IngredientName ingredientName = new IngredientName(stringPair.getFirstString());
-            Integer num = Integer.parseInt(stringPair.getSecondString());
-            requiredIngredients.put(ingredientName, num);
-        }
-        return requiredIngredients;
-    }
 }

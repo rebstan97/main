@@ -57,7 +57,7 @@ public class ItemBuilder {
     }
 
     /**
-     * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code Person} that we are building.
+     * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code Item} that we are building.
      */
     public ItemBuilder withTags(String ... tags) {
         this.tags = SampleDataUtil.getTagSet(tags);
@@ -81,10 +81,10 @@ public class ItemBuilder {
     }
 
     /**
-     * Parses the requiredIngredients into a {@code Set<Tag>} and set it to the {@code Person} that we are building.
+     * Sets the requiredIngredients of the {@code Item} that we are building..
      */
-    public ItemBuilder withRequiredIngredients(StringPair ... requiredIngredients) {
-        this.requiredIngredients = SampleDataUtil.getRequiredIngredientsMap(requiredIngredients);
+    public ItemBuilder withRequiredIngredients(Map<IngredientName, Integer> requiredIngredients) {
+        this.requiredIngredients = requiredIngredients;
         return this;
     }
 
