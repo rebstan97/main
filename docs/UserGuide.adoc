@@ -236,23 +236,15 @@ Examples:
 * `register id/azhikai pw/p@55w0rd`
 * `reg id/azhikai pw/p@55w0rd`
 
-==== Editing user account: `edit-account` or `ea`
+==== Changing user password: `change-password` or `cp`
 
-Edits an existing user account. +
-Format: `edit-account id/USERNAME [nid/NEW_USERNAME] [pw/NEW_PASSWORD]` or
-`ea id/USERNAME [nid/NEW_USERNAME] [pw/NEW_PASSWORD]`
-
-****
-* The account's data will remain intact if none of the optional fields are provided.
-****
+Edits the password of the current logged in user account. +
+Format: `change-password npw/NEW_PASSWORD` or `cp npw/NEW_PASSWORD`
 
 Examples:
 
-* `edit-acc id/azhikai`
-** Nothing happens in this case.
-* `edit-acc id/azhikai nid/angzhikai`
-* `ea id/azhikai nid/angzhikai`
-* `edit-acc id/azhikai nid/angzhikai pw/n3wp@55w0rd`
+* `change-password npw/1122qq`
+* `cp npw/1122qq`
 
 ==== Deleting user account: `deregister` or `dereg`
 

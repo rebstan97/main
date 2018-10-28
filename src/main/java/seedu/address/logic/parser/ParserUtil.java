@@ -5,6 +5,7 @@ import static java.util.Objects.requireNonNull;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.stream.Stream;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
@@ -222,8 +223,7 @@ public class ParserUtil {
     //================ Ingredients Parser Util ===================================================
 
     /**
-     * Parses a {@code String name} into an {@code IngredientName}. Leading and trailing whitespaces
-     * will be trimmed.
+     * Parses a {@code String name} into an {@code IngredientName}. Leading and trailing whitespaces will be trimmed.
      *
      * @throws ParseException if the given {@code name} is invalid.
      */
@@ -312,5 +312,13 @@ public class ParserUtil {
             throw new ParseException(NumUnits.MESSAGE_NUMUNITS_CONSTRAINTS);
         }
         return new NumUnits(trimmedNumUnits);
+    }
+
+    /**
+     * Returns true if none of the prefixes contains empty {@code Optional} values in the given {@code
+     * ArgumentMultimap}.
+     */
+    public static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
+        return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
     }
 }

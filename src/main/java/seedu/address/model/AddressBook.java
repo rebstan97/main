@@ -28,7 +28,7 @@ import seedu.address.model.salesrecord.UniqueRecordList;
 import seedu.address.model.tag.Tag;
 
 /**
- * Wraps all data at the address-book level Duplicates are not allowed (by .isSamePerson comparison)
+ * Wraps all data at the restaurant book level. Duplicates are not allowed.
  */
 public class AddressBook implements ReadOnlyAddressBook {
 
@@ -178,8 +178,8 @@ public class AddressBook implements ReadOnlyAddressBook {
 
     /**
      * Replaces the given reservation {@code target} in the list with {@code editedReservation}. {@code target} must
-     * exist in the address book. The person identity of {@code editedReservation} must not be the same as
-     * another existing person in the address book.
+     * exist in the address book. The person identity of {@code editedReservation} must not be the same as another
+     * existing person in the address book.
      */
     public void updateReservation(Reservation target, Reservation editedReservation) {
         requireNonNull(editedReservation);
@@ -290,37 +290,39 @@ public class AddressBook implements ReadOnlyAddressBook {
         return accounts.get(account);
     }
 
-
     /**
      * Adds an account to the account record. The account must not already exist in the account record.
      */
     public void addAccount(Account account) {
-        account.getPassword().hash(account.getUsername().toString());
         accounts.add(account);
     }
 
     /**
-     * Replaces the given person {@code target} in the list with {@code editedPerson}. {@code target} must exist in the
-     * address book. The person identity of {@code editedPerson} must not be the same as another existing person in the
-     * address book.
+     * Replaces the given person {@code target} in the list with {@code editedAccount}. {@code target} must exist in the
+     * restaurant book. The account identity of {@code editedAccount} must not be the same as another existing account
+     * in the restaurant book.
      */
     public void updateAccount(Account target, Account editedAccount) {
-        //TODO: Handle hashing of new password here as well
         accounts.update(target, editedAccount);
     }
 
     /**
-     * Removes {@code key} from this {@code AddressBook}. {@code key} must exist in the address book.
+     * Removes {@code key} from this {@code RestaurantBook}. {@code key} must exist in the restaurant book.
      */
     public void removeAccount(Account key) {
         accounts.remove(key);
     }
 
+    @Override
+    public ObservableList<Account> getAccountList() {
+        return accounts.asUnmodifiableObservableList();
+    }
+
     //// ingredient-level operations
 
     /**
-     * Replaces the contents of the ingredient list with {@code ingredients}. {@code ingredients} must not
-     * contain duplicate ingredients.
+     * Replaces the contents of the ingredient list with {@code ingredients}. {@code ingredients} must not contain
+     * duplicate ingredients.
      */
     public void setIngredients(List<Ingredient> ingredients) {
         this.ingredients.setIngredients(ingredients);
@@ -334,8 +336,8 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Finds an ingredient in the address book with the name {@code IngredientName}. The ingredient must already
-     * exist in the address book.
+     * Finds an ingredient in the address book with the name {@code IngredientName}. The ingredient must already exist
+     * in the address book.
      */
     public Ingredient findIngredient(IngredientName name) throws IngredientNotFoundException {
         return ingredients.find(name);
@@ -350,8 +352,8 @@ public class AddressBook implements ReadOnlyAddressBook {
 
     /**
      * Replaces the given ingredient {@code target} in the list with {@code editedIngredients}. {@code target} must
-     * exist in the address book. The ingredient identity of {@code editedIngredient} must not be the same as
-     * another existing ingredient in the address book.
+     * exist in the address book. The ingredient identity of {@code editedIngredient} must not be the same as another
+     * existing ingredient in the address book.
      */
     public void updateIngredient(Ingredient target, Ingredient editedIngredient) {
         requireNonNull(editedIngredient);
@@ -364,11 +366,6 @@ public class AddressBook implements ReadOnlyAddressBook {
      */
     public void removeIngredient(Ingredient key) {
         ingredients.remove(key);
-    }
-
-    @Override
-    public ObservableList<Account> getAccountList() {
-        return accounts.asUnmodifiableObservableList();
     }
 
     @Override

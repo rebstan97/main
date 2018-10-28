@@ -63,8 +63,8 @@ public class LoginCommand extends Command {
             throw new CommandException(MESSAGE_WRONG_PASSWORD);
         }
 
-        EventsCenter.getInstance().post(new LoginEvent(toLogin));
-        return new CommandResult(String.format(MESSAGE_SUCCESS, toLogin));
+        EventsCenter.getInstance().post(new LoginEvent(retrievedAccount));
+        return new CommandResult(String.format(MESSAGE_SUCCESS, retrievedAccount));
     }
 
     @Override
