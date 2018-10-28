@@ -13,13 +13,11 @@ import java.util.stream.Collectors;
 import org.junit.Test;
 
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.ingredient.IngredientName;
 import seedu.address.model.menu.Name;
 import seedu.address.model.menu.Price;
 import seedu.address.storage.XmlAdaptedTag;
 import seedu.address.storage.elements.XmlAdaptedItem;
 import seedu.address.testutil.Assert;
-import seedu.address.testutil.menu.TypicalItems;
 
 public class XmlAdaptedItemTest {
     private static final String INVALID_NAME = "F@ies";
