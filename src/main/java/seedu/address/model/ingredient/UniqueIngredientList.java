@@ -100,15 +100,13 @@ public class UniqueIngredientList implements Iterable<Ingredient> {
      * ingredient.
      * @throws  IngredientNotFoundException if the ingredient does not exist in the list.
      */
-    public void stockUp(HashMap<Ingredient, Integer> recipe) throws IngredientNotFoundException {
+    public void stockUp(HashMap<IngredientName, Integer> recipe) throws IngredientNotFoundException {
         requireNonNull(recipe);
-        for (HashMap.Entry<Ingredient, Integer> ingredientPair : recipe.entrySet()) {
-            Ingredient ingredient = ingredientPair.getKey();
+        for (HashMap.Entry<IngredientName, Integer> ingredientPair : recipe.entrySet()) {
+            IngredientName name = ingredientPair.getKey();
             Integer unitsToAdd = ingredientPair.getValue();
 
-            if (!internalList.contains(ingredient)) {
-                throw new IngredientNotFoundException();
-            }
+            Ingredient ingredient = find(name);
 
             NumUnits updatedNumUnits = ingredient.getNumUnits().increase(unitsToAdd);
             Ingredient stockedUpIngredient = new Ingredient(ingredient.getName(), ingredient.getUnit(),
@@ -123,16 +121,15 @@ public class UniqueIngredientList implements Iterable<Ingredient> {
      * @throws  IngredientNotFoundException if the ingredient does not exist in the list.
      * @throws  IngredientNotEnoughException if the ingredient does not have sufficient units.
      */
-    public void consume(HashMap<Ingredient, Integer> recipe) throws IngredientNotFoundException,
+    public void consume(HashMap<IngredientName, Integer> recipe) throws IngredientNotFoundException,
             IngredientNotEnoughException {
         requireNonNull(recipe);
-        for (HashMap.Entry<Ingredient, Integer> ingredientPair : recipe.entrySet()) {
-            Ingredient ingredient = ingredientPair.getKey();
+        for (HashMap.Entry<IngredientName, Integer> ingredientPair : recipe.entrySet()) {
+            IngredientName name = ingredientPair.getKey();
             Integer unitsToConsume = ingredientPair.getValue();
 
-            if (!internalList.contains(ingredient)) {
-                throw new IngredientNotFoundException();
-            }
+            Ingredient ingredient = find(name);
+
             if (ingredient.getNumUnits().getNumberOfUnits() < unitsToConsume) {
                 throw new IngredientNotEnoughException();
             }

@@ -366,7 +366,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      * Increases the number of units of {@code Ingredient} by {@Integer}. The ingredient key of HashMap {@code recipe}
      * must exist in the restaurant book.
      */
-    public void stockUpIngredients(HashMap<Ingredient, Integer> recipe) {
+    public void stockUpIngredients(HashMap<IngredientName, Integer> recipe) {
         requireNonNull(recipe);
 
         ingredients.stockUp(recipe);
@@ -376,7 +376,7 @@ public class AddressBook implements ReadOnlyAddressBook {
      * Reduces the number of units of {@code Ingredient} by {@Integer}. The ingredient key of HashMap {@code recipe}
      * must exist in the restaurant book.
      */
-    public void consumeIngredients(HashMap<Ingredient, Integer> recipe) {
+    public void consumeIngredients(HashMap<IngredientName, Integer> recipe) {
         requireNonNull(recipe);
 
         ingredients.consume(recipe);
