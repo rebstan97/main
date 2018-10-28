@@ -778,7 +778,7 @@ contains the data of your previous *MeNUS* folder.
 |*Delete account* |`deregister id/USERNAME` |`deregister id/azhikai`
 |*Add ingredient* |`add-ingredient n/INGREDIENT_NAME t/UNIT_TYPE p/PRICE_PER_UNIT m/MINIMUM` |`add-ingredient n/cod fish t/kilogram p/20 m/1`
 |*List ingredient* |`list-ingredients` |`list-ingredients`
-|*List ingredient with low stock count* |`list-ingredients-low` |`list-ingredients-low`
+|*List ingredient with low stock count* |`low-stock` |`low-stock`
 |*Edit ingredient* |`edit-ingredient INDEX [n/INGREDIENT_NAME] [t/UNIT_TYPE] [p/PRICE_PER_UNIT] [m/MINIMUM]` or `edit-ingredient NAME [n/INGREDIENT_NAME] [t/UNIT_TYPE] [p/PRICE_PER_UNIT] [m/MINIMUM]` |`edit-ingredient 3 n/thin fries` or `edit-ingredient ketchup n/tomato ketchup`
 |*Delete ingredient* |`delete-ingredient INDEX` or `delete-ingredient NAME` |`delete-ingredient 1` or `delete-ingredient cod fish`
 |*Stock up* |`stockup n/INGREDIENT_NAME... u/NUMBER_OF_UNITS...` |`stockup n/cod fish u/5`
