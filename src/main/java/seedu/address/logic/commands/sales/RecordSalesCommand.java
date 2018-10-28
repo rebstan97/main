@@ -14,6 +14,9 @@ import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.ingredient.Ingredient;
+import seedu.address.model.ingredient.IngredientName;
+import seedu.address.model.menu.Item;
+import seedu.address.model.menu.Name;
 import seedu.address.model.salesrecord.SalesRecord;
 
 /**
@@ -40,6 +43,19 @@ public class RecordSalesCommand extends Command {
     public static final String MESSAGE_RECORD_SALES_SUCCESS = "Sales volume recorded.\n%1$s";
     public static final String MESSAGE_DUPLICATE_SALES_RECORD = "Sales record of \"%1$s\" already exists on the same "
             + "date.";
+    public static final String MESSAGE_ITEM_NOT_FOUND = "However, the item does not exist in the menu section. "
+            + "Please add the item via the [INSERT_COMMAND] and specify the ingredients required via the "
+            + "[INSERT_COMMAND] to enable auto-ingredient update.";
+    public static final String MESSAGE_REQUIRED_INGREDIENTS_NOT_FOUND = "However, you have not yet specified the "
+            + "ingredients required to make this item. Please do so via the [INSERT_COMMAND] to enable auto-ingredient "
+            + "update.";
+    public static final String MESSAGE_INGREDIENT_NOT_FOUND = "However, some ingredient(s) required to make this item"
+            + " were not found in the ingredient section. Please add the ingredient(s) via the [INSERT_COMMAND] to "
+            + "enable auto-ingredient update.";
+    public static final String MESSAGE_INGREDIENT_NOT_ENOUGH = "However, some ingredient(s) in the ingredient section"
+            + " fall short of that required to make the amount of item specified in the quantity sold field. Please "
+            + "stockup your ingredients via the [INSERT_COMMAND] to enable the auto-ingredient update.";
+    public static final String MESSAGE_INGREDIENT_UPDATE_SUCCESS = "Ingredient list has been updated.";
 
     private SalesRecord toAdd;
 
@@ -59,21 +75,50 @@ public class RecordSalesCommand extends Command {
             throw new CommandException(String.format(MESSAGE_DUPLICATE_SALES_RECORD, toAdd.getName()));
         }
 
-        String item = toAdd.getName().toString();
+        String ingredientsUpdateStatus = MESSAGE_INGREDIENT_UPDATE_SUCCESS;
+
+        try {
+            updateIngredientList(model);
+//        } catch (ItemNotFoundException e) {
+//            ingredientsUpdateStatus = MESSAGE_ITEM_NOT_FOUND;
+        } catch (RequiredIngredientsNotFoundException e) {
+            ingredientsUpdateStatus = MESSAGE_REQUIRED_INGREDIENTS_NOT_FOUND;
+//        } catch (IngredientNotFoundException e) {
+//            ingredientsUpdateStatus = MESSAGE_INGREDIENT_NOT_FOUND;
+//        } catch (IngredientNotEnoughException e) {
+//            ingredientsUpdateStatus = MESSAGE_INGREDIENT_NOT_ENOUGH;
+        }
+
+        model.addRecord(toAdd); // record will be added even if one of the four exceptions above was caught
+        model.commitAddressBook();
+        return new CommandResult(String.format(MESSAGE_RECORD_SALES_SUCCESS, toAdd) + "\n"
+                + ingredientsUpdateStatus);
+    }
+
+    private void updateIngredientList(Model model)  throws /*ItemNotFoundException, */
+    RequiredIngredientsNotFoundException
+        /*, IngredientNotFoundException, IngredientNotEnoughException */{
+        Name itemName = new Name(toAdd.getName().toString());
         int quantitySold = toAdd.getQuantitySold().getValue();
 
-        // retrieve the ingredients and their corresponding quantity used to make one unit of "item"
-        HashMap<Ingredient, Integer> ingredientsUsed = model.getRequiredIngredients(item);
+        // finds the item in menu section
+        Item item = model.findItem(itemName);
+
+        // retrieve the name of ingredients and their corresponding quantity used to make one unit of "item"
+        HashMap<IngredientName, Integer> ingredientsUsed = model.getRequiredIngredients(item);
+
+        if (ingredientsUsed.isEmpty()) {
+            throw new RequiredIngredientsNotFoundException();
+        }
+
         // compute the total ingredients used after factoring quantity sold
         ingredientsUsed.replaceAll((ingredient, quantityUsed) -> quantityUsed * quantitySold);
+
         // update ingredient list
         model.consumeIngredients(ingredientsUsed);
+
         // saves the ingredientsUsed in the SalesRecord
         toAdd = toAdd.setIngredientsUsed(ingredientsUsed);
-
-        model.addRecord(toAdd);
-        model.commitAddressBook();
-        return new CommandResult(String.format(MESSAGE_RECORD_SALES_SUCCESS, toAdd));
     }
 
     @Override
@@ -82,6 +127,11 @@ public class RecordSalesCommand extends Command {
                 || (other instanceof RecordSalesCommand // instanceof handles nulls
                     && toAdd.equals(((RecordSalesCommand) other).toAdd));
     }
+
+    /**
+     * Signal that the ingredients required to make the item has not been specified in menu section.
+     */
+    public static class RequiredIngredientsNotFoundException extends Exception {}
 }
 
 
