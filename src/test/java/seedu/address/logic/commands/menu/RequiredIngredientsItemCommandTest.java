@@ -2,7 +2,6 @@ package seedu.address.logic.commands.menu;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_ITEM_RECIPE_FRIES;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.menu.MenuCommandTestUtil.showItemAtIndex;
@@ -26,7 +25,6 @@ import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.ingredient.IngredientName;
 import seedu.address.model.menu.Item;
-import seedu.address.model.menu.Recipe;
 import seedu.address.testutil.menu.ItemBuilder;
 
 /**
