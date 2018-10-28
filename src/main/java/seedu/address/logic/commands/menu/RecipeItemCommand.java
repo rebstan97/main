@@ -58,7 +58,8 @@ public class RecipeItemCommand extends Command {
         }
 
         Item itemToEdit = lastShownList.get(index.getZeroBased());
-        Item editedItem = new Item(itemToEdit.getName(), itemToEdit.getPrice(), recipe, itemToEdit.getTags());
+        Item editedItem = new Item(itemToEdit.getName(), itemToEdit.getPrice(), recipe, itemToEdit.getTags(),
+                itemToEdit.getRequiredIngredients());
 
         model.updateItem(itemToEdit, editedItem);
         model.updateFilteredItemList(PREDICATE_SHOW_ALL_ITEMS);

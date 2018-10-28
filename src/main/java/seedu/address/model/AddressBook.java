@@ -16,7 +16,9 @@ import seedu.address.model.ingredient.IngredientName;
 import seedu.address.model.ingredient.UniqueIngredientList;
 import seedu.address.model.ingredient.exceptions.IngredientNotFoundException;
 import seedu.address.model.menu.Item;
+import seedu.address.model.menu.Name;
 import seedu.address.model.menu.UniqueItemList;
+import seedu.address.model.menu.exceptions.ItemNotFoundException;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.UniquePersonList;
 import seedu.address.model.reservation.Reservation;
@@ -428,7 +430,8 @@ public class AddressBook implements ReadOnlyAddressBook {
             return;
         }
 
-        Item newItem = new Item(item.getName(), item.getPrice(), item.getRecipe(), tags);
+        Item newItem = new Item(item.getName(), item.getPrice(), item.getRecipe(), tags,
+                item.getRequiredIngredients());
         updateItem(item, newItem);
     }
 
@@ -463,6 +466,14 @@ public class AddressBook implements ReadOnlyAddressBook {
         default:
             return;
         }
+    }
+
+    /**
+     * Finds an item in the menu with the name {@code Name}. The item must already exist
+     * in the menu.
+     */
+    public Item findItem(Name name) throws ItemNotFoundException {
+        return items.find(name);
     }
 
     @Override
