@@ -247,7 +247,7 @@ public class ParserUtil {
         requireNonNull(indexOrName);
         String trimmedIndexOrName = indexOrName.trim();
 
-        if (StringUtil.isUnsignedIntegerIncludingZero(trimmedIndexOrName)) {
+        if (StringUtil.isNonZeroUnsignedInteger(trimmedIndexOrName)) {
             return Index.fromOneBased(parseInt(trimmedIndexOrName));
         }
 
@@ -309,7 +309,7 @@ public class ParserUtil {
     public static NumUnits parseNumUnits(String numUnits) throws ParseException {
         requireNonNull(numUnits);
         String trimmedNumUnits = numUnits.trim();
-        if (!StringUtil.isUnsignedIntegerIncludingZero(trimmedNumUnits)) {
+        if (!StringUtil.isUnsignedInteger(trimmedNumUnits)) {
             throw new ParseException(NumUnits.MESSAGE_NUMUNITS_CONSTRAINTS);
         }
         return new NumUnits(parseInt(trimmedNumUnits));
