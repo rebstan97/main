@@ -147,4 +147,3 @@ public class RecordSalesCommand extends Command {
 
 // update UGDG -> remove delete/edit by name and date
 
-// merge and update using search "to be updated once merged"
