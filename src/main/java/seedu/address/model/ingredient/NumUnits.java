@@ -19,7 +19,7 @@ public class NumUnits {
      */
     public static final String NUMUNITS_VALIDATION_REGEX = "^\\d+$";
 
-    private Integer numberOfUnits;
+    private int numberOfUnits;
 
     /**
      * Constructs a {@code NumUnits}.
@@ -42,13 +42,13 @@ public class NumUnits {
     /**
      * Returns the value of {@code numberOfUnits}.
      */
-    public Integer getNumberOfUnits() {
+    public int getNumberOfUnits() {
         return numberOfUnits;
     }
 
     @Override
     public String toString() {
-        return numberOfUnits.toString();
+        return String.valueOf(numberOfUnits);
     }
 
     /**
@@ -68,19 +68,19 @@ public class NumUnits {
     public NumUnits decrease(Integer toDecrease) {
         requireNonNull(toDecrease);
         assert(toDecrease <= numberOfUnits);
-        Integer updatedNum = numberOfUnits - toDecrease;
-        return new NumUnits(updatedNum.toString());
+        int updatedNum = numberOfUnits - toDecrease;
+        return new NumUnits(String.valueOf(updatedNum));
     }
 
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof NumUnits // instanceof handles nulls
-                && numberOfUnits.equals(((NumUnits) other).numberOfUnits)); // state check
+                && numberOfUnits == ((NumUnits) other).getNumberOfUnits()); // state check
     }
 
     @Override
     public int hashCode() {
-        return numberOfUnits.hashCode();
+        return Integer.valueOf(numberOfUnits).hashCode();
     }
 }
