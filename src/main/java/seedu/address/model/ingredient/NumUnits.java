@@ -5,7 +5,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 
 /**
  * Represents the number of available units of an Ingredient.
- * Guarantees: immutable; is valid as declared in {@link #isValidNumUnits(String)}
+ * Guarantees: immutable; is valid as declared in {@link #isValidNumUnits(String) and  {@link #isValidNumUnits(int)}}
  */
 public class NumUnits {
 
@@ -18,7 +18,7 @@ public class NumUnits {
      */
     public static final String NUMUNITS_VALIDATION_REGEX = "^\\d+$";
 
-    private int numberOfUnits;
+    private final int numberOfUnits;
 
     /**
      * Constructs a {@code NumUnits}.
@@ -62,7 +62,6 @@ public class NumUnits {
      * @return A new {@code NumUnits} object with the updated value.
      */
     public NumUnits increase(int toIncrease) {
-        requireNonNull(toIncrease);
         int updatedNum = numberOfUnits + toIncrease;
         return new NumUnits(updatedNum);
     }
@@ -72,7 +71,6 @@ public class NumUnits {
      * @return A new {@code NumUnits} object with the updated value.
      */
     public NumUnits decrease(int toDecrease) {
-        requireNonNull(toDecrease);
         assert(toDecrease <= numberOfUnits);
         int updatedNum = numberOfUnits - toDecrease;
         return new NumUnits(updatedNum);

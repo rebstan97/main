@@ -17,26 +17,14 @@ public class NumUnitsTest {
     }
 
     @Test
-    public void increase_null_throwsNullPointerException() {
-        NumUnits numUnits = new NumUnits(1);
-        Assert.assertThrows(NullPointerException.class, () -> numUnits.increase(null));
-    }
-
-    @Test
-    public void increase_validInteger_returnsTrue() {
+    public void increase_validNumUnits_assertEquals() {
         NumUnits currentNumUnits = new NumUnits(10);
         NumUnits expectedNumUnits = new NumUnits(22);
         assertEquals(expectedNumUnits, currentNumUnits.increase(12));
     }
 
     @Test
-    public void decrease_null_throwsNullPointerException() {
-        NumUnits numUnits = new NumUnits(1);
-        Assert.assertThrows(NullPointerException.class, () -> numUnits.decrease(null));
-    }
-
-    @Test
-    public void decrease_validInteger_returnsTrue() {
+    public void decrease_validNumUnits_assertEquals() {
         NumUnits currentNumUnits = new NumUnits(22);
         NumUnits expectedNumUnits = new NumUnits(10);
         assertEquals(expectedNumUnits, currentNumUnits.decrease(12));
@@ -53,9 +41,13 @@ public class NumUnitsTest {
         assertFalse(NumUnits.isValidNumUnits("abcde^")); // only non-numeric characters
         assertFalse(NumUnits.isValidNumUnits("12ab*")); // contains non-numeric characters
         assertFalse(NumUnits.isValidNumUnits("200.2")); // numeric value with decimal separator
+        assertFalse(NumUnits.isValidNumUnits(-1)); // negative integer
 
         // valid number of units
         assertTrue(NumUnits.isValidNumUnits("800")); // numeric value
         assertTrue(NumUnits.isValidNumUnits("28902375639")); // numeric value with many digits
+        assertTrue(NumUnits.isValidNumUnits(1)); // small positive integer
+        assertTrue(NumUnits.isValidNumUnits(10000)); // large positive integer
+        assertTrue(NumUnits.isValidNumUnits(0)); // zero
     }
 }
