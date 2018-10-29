@@ -299,9 +299,9 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Replaces the given person {@code target} in the list with {@code editedAccount}. {@code target} must exist in the
-     * restaurant book. The account identity of {@code editedAccount} must not be the same as another existing account
-     * in the restaurant book.
+     * Replaces the given person {@code target} in the list with {@code editedAccount}. {@code target} must exist
+     * in the restaurant book. The account identity of {@code editedAccount} must not be the same as another existing
+     * account in the restaurant book.
      */
     public void updateAccount(Account target, Account editedAccount) {
         accounts.update(target, editedAccount);
@@ -363,8 +363,8 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Increases the number of units of {@code Ingredient} by {@Integer}. The ingredient key of HashMap {@code requiredIngredients}
-     * must exist in the restaurant book.
+     * Increases the number of units of {@code Ingredient} by {@Integer}. The ingredient key of
+     * HashMap {@code requiredIngredients} must exist in the restaurant book.
      */
     public void stockUpIngredients(HashMap<IngredientName, Integer> requiredIngredients) {
         requireNonNull(requiredIngredients);
@@ -373,8 +373,8 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Reduces the number of units of {@code Ingredient} by {@Integer}. The ingredient key of HashMap {@code requiredIngredients}
-     * must exist in the restaurant book.
+     * Reduces the number of units of {@code Ingredient} by {@Integer}. The ingredient key of
+     * HashMap {@code requiredIngredients} must exist in the restaurant book.
      */
     public void consumeIngredients(HashMap<IngredientName, Integer> requiredIngredients) {
         requireNonNull(requiredIngredients);
