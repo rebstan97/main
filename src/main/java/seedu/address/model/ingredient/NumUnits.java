@@ -1,6 +1,5 @@
 package seedu.address.model.ingredient;
 
-import static java.lang.Integer.parseInt;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
@@ -62,7 +61,7 @@ public class NumUnits {
      * Increases the number of units by {@code toIncrease}.
      * @return A new {@code NumUnits} object with the updated value.
      */
-    public NumUnits increase(Integer toIncrease) {
+    public NumUnits increase(int toIncrease) {
         requireNonNull(toIncrease);
         int updatedNum = numberOfUnits + toIncrease;
         return new NumUnits(updatedNum);
@@ -72,7 +71,7 @@ public class NumUnits {
      * Decreases the number of units by {@code toDecrease}.
      * @return A new {@code NumUnits} object with the updated value.
      */
-    public NumUnits decrease(Integer toDecrease) {
+    public NumUnits decrease(int toDecrease) {
         requireNonNull(toDecrease);
         assert(toDecrease <= numberOfUnits);
         int updatedNum = numberOfUnits - toDecrease;
