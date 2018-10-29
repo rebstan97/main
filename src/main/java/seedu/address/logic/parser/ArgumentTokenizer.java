@@ -240,12 +240,14 @@ public class ArgumentTokenizer {
             // Extract and store prefixes and their arguments
             Prefix firstPrefix = prefixPositions.get(i).getPrefix();
             String firstArgValue = extractArgumentValue(argsString, prefixPositions.get(i), prefixPositions.get(i + 1));
+            argMultimap.put(index, firstPrefix, firstArgValue);
 
+            if (i + 2 >= prefixPositions.size()) {
+                break;
+            }
             Prefix secondPrefix = prefixPositions.get(i + 1).getPrefix();
             String secondArgValue = extractArgumentValue(argsString, prefixPositions.get(i + 1),
                     prefixPositions.get(i + 2));
-
-            argMultimap.put(index, firstPrefix, firstArgValue);
             argMultimap.put(index, secondPrefix, secondArgValue);
 
             index++;
