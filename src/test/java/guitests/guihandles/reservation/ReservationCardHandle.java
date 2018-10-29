@@ -18,14 +18,16 @@ public class ReservationCardHandle extends NodeHandle<Node> {
     private static final String ID_FIELD_ID = "#id";
     private static final String NAME_FIELD_ID = "#name";
     private static final String PAX_FIELD_ID = "#pax";
-    private static final String DATETIME_FIELD_ID = "#dateTime";
+    private static final String DATE_FIELD_ID = "#date";
+    private static final String TIME_FIELD_ID = "#time";
     private static final String REMARK_FIELD_ID = "#remark";
     private static final String TAGS_FIELD_ID = "#tags";
 
     private final Label idLabel;
     private final Label nameLabel;
     private final Label paxLabel;
-    private final Label dateTimeLabel;
+    private final Label dateLabel;
+    private final Label timeLabel;
     private final Label remarkLabel;
     private final List<Label> tagLabels;
 
@@ -35,7 +37,8 @@ public class ReservationCardHandle extends NodeHandle<Node> {
         idLabel = getChildNode(ID_FIELD_ID);
         nameLabel = getChildNode(NAME_FIELD_ID);
         paxLabel = getChildNode(PAX_FIELD_ID);
-        dateTimeLabel = getChildNode(DATETIME_FIELD_ID);
+        dateLabel = getChildNode(DATE_FIELD_ID);
+        timeLabel = getChildNode(TIME_FIELD_ID);
         remarkLabel = getChildNode(REMARK_FIELD_ID);
 
         Region tagsContainer = getChildNode(TAGS_FIELD_ID);
@@ -58,8 +61,12 @@ public class ReservationCardHandle extends NodeHandle<Node> {
         return paxLabel.getText();
     }
 
-    public String getDateTime() {
-        return dateTimeLabel.getText();
+    public String getDate() {
+        return dateLabel.getText();
+    }
+
+    public String getTime() {
+        return timeLabel.getText();
     }
 
     public String getRemark() {
@@ -88,7 +95,8 @@ public class ReservationCardHandle extends NodeHandle<Node> {
     public boolean equals(Reservation reservation) {
         return getName().equals(reservation.getName().toString())
                 && getPax().equals(reservation.getPax().value)
-                && getDateTime().equals(reservation.getDateTime().toString())
+                && getDate().equals(reservation.getDateTime().toLocalDate().toString())
+                && getTime().equals(reservation.getDateTime().toLocalTime().toString())
                 && ImmutableMultiset.copyOf(getTags()).equals(ImmutableMultiset.copyOf(reservation.getTags().stream()
                         .map(tag -> tag.tagName)
                         .collect(Collectors.toList())));
