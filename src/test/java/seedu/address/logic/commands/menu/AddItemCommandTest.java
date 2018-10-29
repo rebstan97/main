@@ -8,6 +8,7 @@ import static org.junit.Assert.assertTrue;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.function.Predicate;
 
 import org.junit.Rule;
@@ -284,6 +285,16 @@ public class AddItemCommandTest {
         }
 
         @Override
+        public Item findItem(Name name) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public Map<IngredientName, Integer> getRequiredIngredients(Item item) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void updateFilteredItemList(Predicate<Item> predicate) {
             throw new AssertionError("This method should not be called.");
         }
@@ -359,6 +370,16 @@ public class AddItemCommandTest {
             throw new AssertionError("This method should not be called.");
         }
 
+        @Override
+        public void stockUpIngredients(HashMap<IngredientName, Integer> requiredIngredients) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void consumeIngredients(HashMap<IngredientName, Integer> requiredIngredients) {
+            throw new AssertionError("This method should not be called.");
+        }
+
         public ObservableList<Ingredient> getFilteredIngredientList() {
             throw new AssertionError("This method should not be called.");
         }
@@ -366,21 +387,6 @@ public class AddItemCommandTest {
         @Override
         public void updateFilteredIngredientList(Predicate<Ingredient> predicate) {
             throw new AssertionError("This method should not be called.");
-        }
-
-
-        // to be updated once merged
-        @Override
-        public Item findItem(Name name){return null;}
-
-        @Override
-        public HashMap<IngredientName, Integer> getRequiredIngredients(Item item) {
-            return null;
-        }
-
-        @Override
-        public void consumeIngredients(HashMap<IngredientName, Integer> a) {
-
         }
     }
 

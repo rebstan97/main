@@ -1,6 +1,7 @@
 package seedu.address.model;
 
 import java.util.HashMap;
+import java.util.Map;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
@@ -255,6 +256,18 @@ public interface Model {
     void updateIngredient(Ingredient target, Ingredient editedIngredient);
 
     /**
+     * Stocks up a list of ingredients. For each ingredient, the number of units of {@code Ingredient} is increased by
+     * {@Integer}. The ingredient key of HashMap {@code requiredIngredients} must exist in the restaurant book.
+     */
+    void stockUpIngredients(HashMap<IngredientName, Integer> requiredIngredients);
+
+    /**
+     * Consumes a list of ingredients. For each ingredient, the number of units of {@code Ingredient} is decreased by
+     * {@Integer}. The ingredient key of HashMap {@code requiredIngredients} must exist in the restaurant book.
+     */
+    void consumeIngredients(HashMap<IngredientName, Integer> requiredIngredients);
+
+    /**
      * Returns an unmodifiable view of the filtered ingredient list
      */
     ObservableList<Ingredient> getFilteredIngredientList();
@@ -307,6 +320,17 @@ public interface Model {
     void sortMenu(SortMethod sortMethod);
 
     /**
+     * Finds the item with the given name. The item with {@code Name} must already
+     * exist in the menu.
+     */
+    Item findItem(Name name);
+
+    /**
+     * Returns an unmodifiable map of requiredIngredients of an {@code Item}
+     */
+    Map<IngredientName, Integer> getRequiredIngredients(Item item);
+
+    /**
      * Returns an unmodifiable view of the filtered item list
      */
     ObservableList<Item> getFilteredItemList();
@@ -344,14 +368,4 @@ public interface Model {
      * Saves the current address book state for undo/redo.
      */
     void commitAddressBook();
-
-
-
-    // to be updated once merged
-    Item findItem(Name name);
-
-    HashMap<IngredientName, Integer> getRequiredIngredients(Item item);
-
-    void consumeIngredients(HashMap<IngredientName, Integer> a);
-
 }

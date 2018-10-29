@@ -2,6 +2,7 @@ package seedu.address.model;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
@@ -16,7 +17,9 @@ import seedu.address.model.ingredient.IngredientName;
 import seedu.address.model.ingredient.UniqueIngredientList;
 import seedu.address.model.ingredient.exceptions.IngredientNotFoundException;
 import seedu.address.model.menu.Item;
+import seedu.address.model.menu.Name;
 import seedu.address.model.menu.UniqueItemList;
+import seedu.address.model.menu.exceptions.ItemNotFoundException;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.UniquePersonList;
 import seedu.address.model.reservation.Reservation;
@@ -303,9 +306,9 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Replaces the given person {@code target} in the list with {@code editedAccount}. {@code target} must exist in the
-     * restaurant book. The account identity of {@code editedAccount} must not be the same as another existing account
-     * in the restaurant book.
+     * Replaces the given person {@code target} in the list with {@code editedAccount}. {@code target} must exist
+     * in the restaurant book. The account identity of {@code editedAccount} must not be the same as another existing
+     * account in the restaurant book.
      */
     public void updateAccount(Account target, Account editedAccount) {
         accounts.update(target, editedAccount);
@@ -364,6 +367,26 @@ public class AddressBook implements ReadOnlyAddressBook {
         requireNonNull(editedIngredient);
 
         ingredients.setIngredient(target, editedIngredient);
+    }
+
+    /**
+     * Increases the number of units of {@code Ingredient} by {@Integer}. The ingredient key of
+     * HashMap {@code requiredIngredients} must exist in the restaurant book.
+     */
+    public void stockUpIngredients(HashMap<IngredientName, Integer> requiredIngredients) {
+        requireNonNull(requiredIngredients);
+
+        ingredients.stockUp(requiredIngredients);
+    }
+
+    /**
+     * Reduces the number of units of {@code Ingredient} by {@Integer}. The ingredient key of
+     * HashMap {@code requiredIngredients} must exist in the restaurant book.
+     */
+    public void consumeIngredients(HashMap<IngredientName, Integer> requiredIngredients) {
+        requireNonNull(requiredIngredients);
+
+        ingredients.consume(requiredIngredients);
     }
 
     /**
@@ -433,7 +456,8 @@ public class AddressBook implements ReadOnlyAddressBook {
             return;
         }
 
-        Item newItem = new Item(item.getName(), item.getPrice(), item.getRecipe(), tags);
+        Item newItem = new Item(item.getName(), item.getPrice(), item.getRecipe(), tags,
+                item.getRequiredIngredients());
         updateItem(item, newItem);
     }
 
@@ -468,6 +492,14 @@ public class AddressBook implements ReadOnlyAddressBook {
         default:
             return;
         }
+    }
+
+    /**
+     * Finds an item in the menu with the name {@code Name}. The item must already exist
+     * in the menu.
+     */
+    public Item findItem(Name name) throws ItemNotFoundException {
+        return items.find(name);
     }
 
     @Override

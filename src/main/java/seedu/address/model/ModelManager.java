@@ -5,6 +5,7 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
@@ -21,8 +22,7 @@ import seedu.address.model.ingredient.IngredientName;
 import seedu.address.model.ingredient.exceptions.IngredientNotFoundException;
 import seedu.address.model.menu.Item;
 import seedu.address.model.menu.Name;
-import seedu.address.model.menu.Price;
-import seedu.address.model.menu.Recipe;
+import seedu.address.model.menu.exceptions.ItemNotFoundException;
 import seedu.address.model.person.Person;
 import seedu.address.model.reservation.Reservation;
 import seedu.address.model.salesrecord.Date;
@@ -270,6 +270,22 @@ public class ModelManager extends ComponentManager implements Model {
         indicateAddressBookChanged();
     }
 
+    @Override
+    public void stockUpIngredients(HashMap<IngredientName, Integer> requiredIngredients) {
+        requireAllNonNull(requiredIngredients);
+
+        versionedAddressBook.stockUpIngredients(requiredIngredients);
+        indicateAddressBookChanged();
+    }
+
+    @Override
+    public void consumeIngredients(HashMap<IngredientName, Integer> requiredIngredients) {
+        requireAllNonNull(requiredIngredients);
+
+        versionedAddressBook.consumeIngredients(requiredIngredients);
+        indicateAddressBookChanged();
+    }
+
     //=========== Filtered Ingredient List Accessors =============================================================
 
     @Override
@@ -327,6 +343,16 @@ public class ModelManager extends ComponentManager implements Model {
     public void sortMenu(SortMethod sortMethod) {
         versionedAddressBook.sortMenu(sortMethod);
         indicateAddressBookChanged();
+    }
+
+    @Override
+    public Item findItem(Name name) throws ItemNotFoundException {
+        return versionedAddressBook.findItem(name);
+    }
+
+    @Override
+    public Map<IngredientName, Integer> getRequiredIngredients(Item item) {
+        return item.getRequiredIngredients();
     }
 
     //=========== Filtered Item List Accessors ==============================================================
@@ -449,26 +475,4 @@ public class ModelManager extends ComponentManager implements Model {
         requireNonNull(predicate);
         filteredReservations.setPredicate(predicate);
     }
-
-
-
-
-
-    // to be updated once merged
-    @Override
-    public Item findItem(Name name) {
-        return new Item(name, new Price("2"), new Recipe("Pour water"), new HashSet<>());
-    }
-
-    @Override
-    public HashMap<IngredientName, Integer> getRequiredIngredients(Item item) {
-        HashMap<IngredientName, Integer> h = new HashMap<>();
-        h.put(new IngredientName("Carrot"), 1);
-        h.put(new IngredientName("Onion"), 2);
-        h.put(new IngredientName("Apple"), 3);
-        h.put(new IngredientName("Garlicloging"), 4);
-        return h;
-    }
-    @Override
-    public void consumeIngredients(HashMap<IngredientName, Integer> a) {}
 }

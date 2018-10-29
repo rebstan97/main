@@ -3,30 +3,18 @@ package seedu.address.logic.commands.sales;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DATE_RECORD_TWO;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.logic.commands.sales.RecordSalesCommand.MESSAGE_INGREDIENT_NOT_ENOUGH;
-import static seedu.address.logic.commands.sales.RecordSalesCommand.MESSAGE_INGREDIENT_NOT_FOUND;
-import static seedu.address.logic.commands.sales.RecordSalesCommand.MESSAGE_INGREDIENT_UPDATE_SUCCESS;
-import static seedu.address.logic.commands.sales.RecordSalesCommand.MESSAGE_ITEM_NOT_FOUND;
-import static seedu.address.logic.commands.sales.RecordSalesCommand.MESSAGE_REQUIRED_INGREDIENTS_NOT_FOUND;
 import static seedu.address.testutil.TypicalAddressBook.getTypicalAddressBook;
 import static seedu.address.testutil.salesrecords.TypicalRecords.RECORD_ONE;
-
-import java.util.HashMap;
 
 import org.junit.Before;
 import org.junit.Test;
 
 import seedu.address.logic.CommandHistory;
-import seedu.address.logic.commands.sales.RecordSalesCommand.RequiredIngredientsNotFoundException;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.ingredient.IngredientName;
-import seedu.address.model.menu.Item;
-import seedu.address.model.menu.Name;
 import seedu.address.model.salesrecord.SalesRecord;
 import seedu.address.testutil.salesrecords.RecordBuilder;
-import seedu.address.testutil.salesrecords.RecordSalesCommandUtil;
 
 /**
  * Contains integration tests (interaction with the Model) for {@code RecordSalesCommand}.

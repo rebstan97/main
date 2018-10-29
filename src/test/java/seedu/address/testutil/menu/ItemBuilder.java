@@ -1,8 +1,11 @@
 package seedu.address.testutil.menu;
 
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
 
+import seedu.address.model.ingredient.IngredientName;
 import seedu.address.model.menu.Item;
 import seedu.address.model.menu.Name;
 import seedu.address.model.menu.Price;
@@ -23,12 +26,14 @@ public class ItemBuilder {
     private Price price;
     private Recipe recipe;
     private Set<Tag> tags;
+    private Map<IngredientName, Integer> requiredIngredients;
 
     public ItemBuilder() {
         name = new Name(DEFAULT_NAME);
         price = new Price(DEFAULT_PRICE);
         recipe = new Recipe(DEFAULT_RECIPE);
         tags = new HashSet<>();
+        requiredIngredients = new HashMap<>();
     }
 
     /**
@@ -39,6 +44,7 @@ public class ItemBuilder {
         price = itemToCopy.getPrice();
         recipe = itemToCopy.getRecipe();
         tags = new HashSet<>(itemToCopy.getTags());
+        requiredIngredients = new HashMap<>(itemToCopy.getRequiredIngredients());
     }
 
     /**
@@ -50,7 +56,7 @@ public class ItemBuilder {
     }
 
     /**
-     * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code Person} that we are building.
+     * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code Item} that we are building.
      */
     public ItemBuilder withTags(String ... tags) {
         this.tags = SampleDataUtil.getTagSet(tags);
@@ -73,8 +79,20 @@ public class ItemBuilder {
         return this;
     }
 
+    /**
+     * Sets the requiredIngredients of the {@code Item} that we are building..
+     */
+    public ItemBuilder withRequiredIngredients(Map<String, String> requiredIngredients) {
+        this.requiredIngredients = new HashMap<>();
+        for (Map.Entry<String, String> entry : requiredIngredients.entrySet()) {
+            this.requiredIngredients.put(new IngredientName(entry.getKey()),
+                    Integer.parseInt(entry.getValue()));
+        }
+        return this;
+    }
+
     public Item build() {
-        return new Item(name, price, recipe, tags);
+        return new Item(name, price, recipe, tags, requiredIngredients);
     }
 
 }
