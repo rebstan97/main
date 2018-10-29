@@ -3,11 +3,13 @@ package seedu.address.model.salesrecord;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import seedu.address.model.ingredient.IngredientName;
 import seedu.address.model.salesrecord.exceptions.DuplicateRecordException;
 import seedu.address.model.salesrecord.exceptions.SalesRecordNotFoundException;
 
@@ -117,6 +119,22 @@ public class UniqueRecordList implements Iterable<SalesRecord> {
             }
         }
         return new SalesReport(date, FXCollections.unmodifiableObservableList(observableRecordList));
+    }
+
+    /**
+     * Update {@code target} IngredientName to {@code editedName} IngredientName in
+     * ingredientUsed attribute of every SalesRecord, if {@code target} exists
+     */
+    public void updateIngredientName(IngredientName target, IngredientName editedName) {
+        requireAllNonNull(target, editedName);
+
+        for (SalesRecord salesRecord: internalList) {
+            HashMap<IngredientName, Integer> ingredientUsed = salesRecord.getIngredientsUsed();
+            if (ingredientUsed.containsKey(target)) {
+                Integer quantityUsed = ingredientUsed.remove(target);
+                ingredientUsed.put(editedName, quantityUsed);
+            }
+        }
     }
 
     @Override

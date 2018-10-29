@@ -117,6 +117,12 @@ public interface Model {
     SalesReport getSalesReport(Date date);
 
     /**
+     * Replaces the given ingredient name {@code target} with {@code editedName}. {@code target} need not exist in the
+     * sales book.
+     */
+    void updateIngredientNameInRecordList(IngredientName target, IngredientName editedName);
+
+    /**
      * Returns an unmodifiable view of the filtered record list
      */
     ObservableList<SalesRecord> getFilteredRecordList();

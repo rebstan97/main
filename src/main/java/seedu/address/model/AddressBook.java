@@ -265,6 +265,11 @@ public class AddressBook implements ReadOnlyAddressBook {
         return records.generateSalesReport(date);
     }
 
+    public void updateIngredientNameInRecordList(IngredientName target, IngredientName editedName) {
+        requireNonNull(editedName);
+        records.updateIngredientName(target, editedName);
+    }
+
     //// account-level operations
 
     /**
