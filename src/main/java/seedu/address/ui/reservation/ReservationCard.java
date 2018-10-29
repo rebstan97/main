@@ -47,7 +47,9 @@ public class ReservationCard extends UiPart<Region> {
     @FXML
     private Label pax;
     @FXML
-    private Label dateTime;
+    private Label date;
+    @FXML
+    private Label time;
     @FXML
     private Label remark;
     @FXML
@@ -59,7 +61,8 @@ public class ReservationCard extends UiPart<Region> {
         id.setText(displayedIndex + ". ");
         name.setText(reservation.getName().toString());
         pax.setText("Pax: " + reservation.getPax().value);
-        dateTime.setText("Date and Time: " + reservation.getDateTime().toString());
+        date.setText("Date: " + reservation.getDateTime().toLocalDate().toString());
+        time.setText("Time: " + reservation.getDateTime().toLocalTime().toString());
         remark.setText(reservation.getRemark().value);
         initTags(reservation);
     }
