@@ -1,7 +1,7 @@
 package seedu.address.logic.commands.menu;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ENDINGINDEX;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ENDING_INDEX;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PERCENT;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_ITEMS;
 
@@ -32,7 +32,7 @@ public class DiscountItemCommand extends Command {
             + "by the index number used in the displayed item list a discount based on the percent. "
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: INDEX (must be a positive integer, starting index) "
-            + "[" + PREFIX_ENDINGINDEX + "INDEX](must be larger than the starting index) "
+            + "[" + PREFIX_ENDING_INDEX + "INDEX](must be larger than the starting index) "
             + PREFIX_PERCENT + "PERCENT "
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_PERCENT + "20";
@@ -114,7 +114,8 @@ public class DiscountItemCommand extends Command {
         Price updatedPrice = new Price(String.format("%.2f", originalValue));
         updatedPrice.setValue(percent);
 
-        return new Item(itemToDiscount.getName(), updatedPrice, itemToDiscount.getRecipe(), itemToDiscount.getTags());
+        return new Item(itemToDiscount.getName(), updatedPrice, itemToDiscount.getRecipe(), itemToDiscount.getTags(),
+                itemToDiscount.getRequiredIngredients());
     }
 
     @Override

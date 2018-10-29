@@ -4,6 +4,7 @@ import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -49,6 +50,23 @@ public class ArgumentTokenizer {
             String argsString, Prefix firstPrefix, Prefix secondPrefix) throws ParseException {
         List<PrefixPosition> positions = findAllPrefixPositions(argsString, firstPrefix, secondPrefix);
         return extractArgumentsToPair(argsString, positions, firstPrefix, secondPrefix);
+    }
+
+    /**
+     * Tokenizes an arguments string and returns an {@code ArgumentPairMultimap} object that maps integer indices to
+     * their respective argument pair values. The indices are one-based and argument pairs are formed by pairing
+     * the argument value of the {@code firstPrefix} with the following argument of {@code secondPrefix},
+     * and so on repetitively.
+     *
+     * @param argsString    Arguments string of the form: {@code <prefix>firstValue <prefix>secondValue}
+     * @param firstPrefix   One prefix to tokenize the arguments string with
+     * @param secondPrefix  Another prefix to tokenize the arguments string with
+     * @return              ArgumentPairMultimap object that maps integer indices to their argument pairs
+     */
+    public static ArgumentIndexAndPairMultimap tokenizeToIndexAndPair(
+            String argsString, Prefix firstPrefix, Prefix secondPrefix) {
+        List<PrefixPosition> positions = findAllPrefixPositions(argsString, firstPrefix, secondPrefix);
+        return extractArgumentsToIndexAndPair(argsString, positions);
     }
 
     /**
@@ -177,6 +195,60 @@ public class ArgumentTokenizer {
                     prefixPositions.get(i + 2));
             argsPair = new StringPair(firstArgValue, secondArgValue);
             argMultimap.put(index, argsPair);
+            index++;
+        }
+
+        return argMultimap;
+    }
+
+    /**
+     * Extracts prefixes and their respective arguments, forms argument pairs and returns an {@code
+     * ArgumentPairMultimap} object that maps integer indices to argument pairs. Prefixes are
+     * extracted based on their zero-based positions in {@code argsString}.
+     *
+     * @param argsString      Arguments string of the form: {@code <prefix>value <prefix>value ...}
+     * @param prefixPositions Zero-based positions of all prefixes in {@code argsString}
+     * @return                ArgumentPairMultimap object that maps indices to argument pairs
+     * @throws ParseException If the prefixes are in the incorrect format
+     */
+    private static ArgumentIndexAndPairMultimap extractArgumentsToIndexAndPair(String argsString,
+            List<PrefixPosition> prefixPositions) {
+
+        // Sort by start position
+        prefixPositions.sort(Comparator.comparingInt(PrefixPosition::getStartPosition));
+
+        // Insert a PrefixPosition to represent the preamble
+        PrefixPosition preambleMarker = new PrefixPosition(new Prefix(""), 0);
+        prefixPositions.add(0, preambleMarker);
+
+        // Add a dummy PrefixPosition to represent the end of the string
+        PrefixPosition endPositionMarker = new PrefixPosition(new Prefix(""), argsString.length());
+        prefixPositions.add(endPositionMarker);
+
+        // Map indices to argument pairs
+        ArgumentIndexAndPairMultimap argMultimap = new ArgumentIndexAndPairMultimap();
+
+        // Extract out the Index
+        Prefix argPrefix = prefixPositions.get(0).getPrefix();
+        String argValue = extractArgumentValue(argsString, prefixPositions.get(0), prefixPositions.get(1));
+        argMultimap.put(0, argPrefix, argValue);
+
+
+        int index = 1;
+        for (int i = 1; i < prefixPositions.size() - 1; i = i + 2) {
+            // Extract and store prefixes and their arguments
+            Prefix firstPrefix = prefixPositions.get(i).getPrefix();
+            String firstArgValue = extractArgumentValue(argsString, prefixPositions.get(i), prefixPositions.get(i + 1));
+            argMultimap.put(index, firstPrefix, firstArgValue);
+
+            if (i + 2 >= prefixPositions.size()) {
+                break;
+            }
+            Prefix secondPrefix = prefixPositions.get(i + 1).getPrefix();
+            String secondArgValue = extractArgumentValue(argsString, prefixPositions.get(i + 1),
+                    prefixPositions.get(i + 2));
+            argMultimap.put(index, secondPrefix, secondArgValue);
+
             index++;
         }
 
