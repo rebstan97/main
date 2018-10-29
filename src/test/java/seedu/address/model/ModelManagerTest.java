@@ -318,19 +318,19 @@ public class ModelManagerTest {
 
     @Test
     public void stockUpIngredient_ingredientNotInIngredientList_throwsIngredientNotFoundException() {
-        HashMap<IngredientName, Integer> recipe = new HashMap<>();
-        recipe.put(BROCCOLI.getName(), 12);
+        HashMap<IngredientName, Integer> requiredIngredients = new HashMap<>();
+        requiredIngredients.put(BROCCOLI.getName(), 12);
         thrown.expect(IngredientNotFoundException.class);
-        modelManager.stockUpIngredients(recipe);
+        modelManager.stockUpIngredients(requiredIngredients);
     }
 
     @Test
     public void stockUpIngredient_ingredientInIngredientList_assertEquals() {
         Ingredient ingredient = new IngredientBuilder(BROCCOLI).withNumUnits(20).build();
         modelManager.addIngredient(ingredient);
-        HashMap<IngredientName, Integer> recipe = new HashMap<>();
-        recipe.put(BROCCOLI.getName(), 12);
-        modelManager.stockUpIngredients(recipe);
+        HashMap<IngredientName, Integer> requiredIngredients = new HashMap<>();
+        requiredIngredients.put(BROCCOLI.getName(), 12);
+        modelManager.stockUpIngredients(requiredIngredients);
         Ingredient stockedUpIngredient = modelManager.findIngredient(BROCCOLI.getName());
         NumUnits updatedNumUnits = stockedUpIngredient.getNumUnits();
         assertEquals(new NumUnits(32), updatedNumUnits);
@@ -338,29 +338,29 @@ public class ModelManagerTest {
 
     @Test
     public void consumeIngredient_ingredientNotInIngredientList_throwsIngredientNotFoundException() {
-        HashMap<IngredientName, Integer> recipe = new HashMap<>();
-        recipe.put(BROCCOLI.getName(), 12);
+        HashMap<IngredientName, Integer> requiredIngredients = new HashMap<>();
+        requiredIngredients.put(BROCCOLI.getName(), 12);
         thrown.expect(IngredientNotFoundException.class);
-        modelManager.consumeIngredients(recipe);
+        modelManager.consumeIngredients(requiredIngredients);
     }
 
     @Test
     public void consumeIngredient_ingredientNotEnough_throwsIngredientNotEnoughException() {
         Ingredient ingredient = new IngredientBuilder(BROCCOLI).withNumUnits(2).build();
         modelManager.addIngredient(ingredient);
-        HashMap<IngredientName, Integer> recipe = new HashMap<>();
-        recipe.put(BROCCOLI.getName(), 12);
+        HashMap<IngredientName, Integer> requiredIngredients = new HashMap<>();
+        requiredIngredients.put(BROCCOLI.getName(), 12);
         thrown.expect(IngredientNotEnoughException.class);
-        modelManager.consumeIngredients(recipe);
+        modelManager.consumeIngredients(requiredIngredients);
     }
 
     @Test
     public void consumeIngredient_ingredientInIngredientList_assertEquals() {
         Ingredient ingredient = new IngredientBuilder(BROCCOLI).withNumUnits(20).build();
         modelManager.addIngredient(ingredient);
-        HashMap<IngredientName, Integer> recipe = new HashMap<>();
-        recipe.put(BROCCOLI.getName(), 2);
-        modelManager.consumeIngredients(recipe);
+        HashMap<IngredientName, Integer> requiredIngredients = new HashMap<>();
+        requiredIngredients.put(BROCCOLI.getName(), 2);
+        modelManager.consumeIngredients(requiredIngredients);
         Ingredient consumedIngredient = modelManager.findIngredient(BROCCOLI.getName());
         NumUnits updatedNumUnits = consumedIngredient.getNumUnits();
         assertEquals(new NumUnits(18), updatedNumUnits);
