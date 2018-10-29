@@ -5,7 +5,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 
 /**
  * Represents the number of available units of an Ingredient.
- * Guarantees: immutable; is valid as declared in {@link #isValidNumUnits(String)}
+ * Guarantees: immutable; is valid as declared in {@link #isValidNumUnits(String) and  {@link #isValidNumUnits(int)}}
  */
 public class NumUnits {
 
@@ -18,17 +18,24 @@ public class NumUnits {
      */
     public static final String NUMUNITS_VALIDATION_REGEX = "^\\d+$";
 
-    private final String numberOfUnits;
+    private final int numberOfUnits;
 
     /**
      * Constructs a {@code NumUnits}.
      *
      * @param numUnits A valid number of available units.
      */
-    public NumUnits(String numUnits) {
+    public NumUnits(int numUnits) {
         requireNonNull(numUnits);
         checkArgument(isValidNumUnits(numUnits), MESSAGE_NUMUNITS_CONSTRAINTS);
         numberOfUnits = numUnits;
+    }
+
+    /**
+     * Returns true if a given int is a valid number of available units.
+     */
+    public static boolean isValidNumUnits(int test) {
+        return test >= 0;
     }
 
     /**
@@ -38,32 +45,46 @@ public class NumUnits {
         return test.matches(NUMUNITS_VALIDATION_REGEX);
     }
 
-    @Override
-    public String toString() {
+    /**
+     * Returns the value of {@code numberOfUnits}.
+     */
+    public int getNumberOfUnits() {
         return numberOfUnits;
     }
 
+    @Override
+    public String toString() {
+        return String.valueOf(numberOfUnits);
+    }
+
     /**
-     * Adds the values of two {@code NumUnits} objects and updates the value of the current object to be this sum.
-     * @return The updated {@NumUnits} object
+     * Increases the number of units by {@code toIncrease}.
+     * @return A new {@code NumUnits} object with the updated value.
      */
-    public NumUnits add(NumUnits toAdd) {
-        Integer currentNum = Integer.parseInt(numberOfUnits);
-        Integer numToAdd = Integer.parseInt(toAdd.toString());
-        Integer updatedNum = Integer.sum(currentNum, numToAdd);
-        NumUnits newNumUnits = new NumUnits(updatedNum.toString());
-        return newNumUnits;
+    public NumUnits increase(int toIncrease) {
+        int updatedNum = numberOfUnits + toIncrease;
+        return new NumUnits(updatedNum);
+    }
+
+    /**
+     * Decreases the number of units by {@code toDecrease}.
+     * @return A new {@code NumUnits} object with the updated value.
+     */
+    public NumUnits decrease(int toDecrease) {
+        assert(toDecrease <= numberOfUnits);
+        int updatedNum = numberOfUnits - toDecrease;
+        return new NumUnits(updatedNum);
     }
 
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof NumUnits // instanceof handles nulls
-                && numberOfUnits.equals(((NumUnits) other).numberOfUnits)); // state check
+                && numberOfUnits == ((NumUnits) other).getNumberOfUnits()); // state check
     }
 
     @Override
     public int hashCode() {
-        return numberOfUnits.hashCode();
+        return Integer.valueOf(numberOfUnits).hashCode();
     }
 }

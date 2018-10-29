@@ -61,8 +61,8 @@ public abstract class EditIngredientCommand extends Command {
         IngredientPrice updatedPrice = editIngredientDescriptor.getPrice().orElse(ingredientToEdit.getPrice());
         MinimumUnit updatedMinUnit = editIngredientDescriptor.getMinimum().orElse(ingredientToEdit.getMinimum());
 
-        NumUnits numToAdd = editIngredientDescriptor.getNumUnits().orElse(new NumUnits("0"));
-        NumUnits updatedNumUnits = ingredientToEdit.getNumUnits().add(numToAdd);
+        NumUnits numToAdd = editIngredientDescriptor.getNumUnits().orElse(new NumUnits(0));
+        NumUnits updatedNumUnits = ingredientToEdit.getNumUnits().increase(numToAdd.getNumberOfUnits());
 
         return new Ingredient(updatedName, updatedUnit, updatedPrice, updatedMinUnit, updatedNumUnits);
     }

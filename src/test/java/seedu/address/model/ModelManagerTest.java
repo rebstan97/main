@@ -19,6 +19,8 @@ import static seedu.address.testutil.TypicalPersons.DYLAN;
 import static seedu.address.testutil.accounts.TypicalAccounts.DEMO_ADMIN;
 import static seedu.address.testutil.accounts.TypicalAccounts.DEMO_ONE;
 import static seedu.address.testutil.accounts.TypicalAccounts.DEMO_TWO;
+import static seedu.address.testutil.ingredients.TypicalIngredients.AVOCADO;
+import static seedu.address.testutil.ingredients.TypicalIngredients.BROCCOLI;
 import static seedu.address.testutil.menu.TypicalItems.APPLE_JUICE;
 import static seedu.address.testutil.menu.TypicalItems.BURGER;
 import static seedu.address.testutil.menu.TypicalItems.CHEESE_BURGER;
@@ -30,6 +32,7 @@ import static seedu.address.testutil.salesrecords.TypicalRecords.RECORD_TWO;
 
 import java.nio.file.Paths;
 import java.util.Arrays;
+import java.util.HashMap;
 
 import org.junit.Rule;
 import org.junit.Test;
@@ -37,6 +40,11 @@ import org.junit.rules.ExpectedException;
 
 import seedu.address.model.accounts.Account;
 import seedu.address.model.accounts.exceptions.AccountNotFoundException;
+import seedu.address.model.ingredient.Ingredient;
+import seedu.address.model.ingredient.IngredientName;
+import seedu.address.model.ingredient.NumUnits;
+import seedu.address.model.ingredient.exceptions.IngredientNotEnoughException;
+import seedu.address.model.ingredient.exceptions.IngredientNotFoundException;
 import seedu.address.model.menu.Item;
 import seedu.address.model.menu.exceptions.ItemNotFoundException;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
@@ -47,6 +55,7 @@ import seedu.address.model.tag.Tag;
 import seedu.address.testutil.PersonBuilder;
 import seedu.address.testutil.RestaurantBookBuilder;
 import seedu.address.testutil.accounts.AccountBuilder;
+import seedu.address.testutil.ingredients.IngredientBuilder;
 import seedu.address.testutil.menu.ItemBuilder;
 import seedu.address.testutil.salesrecords.RecordBuilder;
 
@@ -249,6 +258,112 @@ public class ModelManagerTest {
         modelManager.updateAccount(DEMO_ADMIN, account);
         assertFalse(modelManager.hasAccount(DEMO_ADMIN));
         assertTrue(modelManager.hasAccount(account));
+    }
+
+    @Test
+    public void hasIngredient_nullIngredient_throwsNullPointerException() {
+        thrown.expect(NullPointerException.class);
+        modelManager.hasIngredient(null);
+    }
+
+    @Test
+    public void hasIngredient_ingredientNotIngredientList_returnsFalse() {
+        assertFalse(modelManager.hasIngredient(AVOCADO));
+    }
+
+    @Test
+    public void hasIngredient_ingredientInIngredientList_returnsTrue() {
+        modelManager.addIngredient(AVOCADO);
+        assertTrue(modelManager.hasIngredient(AVOCADO));
+    }
+
+    @Test
+    public void deleteIngredient_ingredientNotInIngredientList_throwsItemNotFoundException() {
+        thrown.expect(IngredientNotFoundException.class);
+        modelManager.deleteIngredient(BROCCOLI);
+    }
+    @Test
+    public void deleteIngredient_ingredientInIngredientList_returnTrue() {
+        modelManager.addIngredient(BROCCOLI);
+        assertTrue(modelManager.hasIngredient(BROCCOLI));
+        modelManager.deleteIngredient(BROCCOLI);
+        assertFalse(modelManager.hasIngredient(BROCCOLI));
+    }
+    @Test
+    public void updateIngredient_ingredientNotInIngredientList_throwsIngredientNotFoundException() {
+        thrown.expect(IngredientNotFoundException.class);
+        modelManager.updateIngredient(BROCCOLI, AVOCADO);
+    }
+    @Test
+    public void updateIngredient_ingredientInIngredientList_returnTrue() {
+        modelManager.addIngredient(BROCCOLI);
+        Ingredient ingredient = new IngredientBuilder(AVOCADO).build();
+        modelManager.updateIngredient(BROCCOLI, AVOCADO);
+        assertFalse(modelManager.hasIngredient(BROCCOLI));
+        assertTrue(modelManager.hasIngredient(ingredient));
+    }
+
+    @Test
+    public void findIngredient_ingredientNotInIngredientList_throwsIngredientNotFoundException() {
+        thrown.expect(IngredientNotFoundException.class);
+        modelManager.findIngredient(BROCCOLI.getName());
+    }
+
+    @Test
+    public void findIngredient_ingredientInIngredientList_assertEquals() {
+        modelManager.addIngredient(AVOCADO);
+        Ingredient ingredient = modelManager.findIngredient(AVOCADO.getName());
+        assertEquals(AVOCADO, ingredient);
+    }
+
+    @Test
+    public void stockUpIngredient_ingredientNotInIngredientList_throwsIngredientNotFoundException() {
+        HashMap<IngredientName, Integer> requiredIngredients = new HashMap<>();
+        requiredIngredients.put(BROCCOLI.getName(), 12);
+        thrown.expect(IngredientNotFoundException.class);
+        modelManager.stockUpIngredients(requiredIngredients);
+    }
+
+    @Test
+    public void stockUpIngredient_ingredientInIngredientList_assertEquals() {
+        Ingredient ingredient = new IngredientBuilder(BROCCOLI).withNumUnits(20).build();
+        modelManager.addIngredient(ingredient);
+        HashMap<IngredientName, Integer> requiredIngredients = new HashMap<>();
+        requiredIngredients.put(BROCCOLI.getName(), 12);
+        modelManager.stockUpIngredients(requiredIngredients);
+        Ingredient stockedUpIngredient = modelManager.findIngredient(BROCCOLI.getName());
+        NumUnits updatedNumUnits = stockedUpIngredient.getNumUnits();
+        assertEquals(new NumUnits(32), updatedNumUnits);
+    }
+
+    @Test
+    public void consumeIngredient_ingredientNotInIngredientList_throwsIngredientNotFoundException() {
+        HashMap<IngredientName, Integer> requiredIngredients = new HashMap<>();
+        requiredIngredients.put(BROCCOLI.getName(), 12);
+        thrown.expect(IngredientNotFoundException.class);
+        modelManager.consumeIngredients(requiredIngredients);
+    }
+
+    @Test
+    public void consumeIngredient_ingredientNotEnough_throwsIngredientNotEnoughException() {
+        Ingredient ingredient = new IngredientBuilder(BROCCOLI).withNumUnits(2).build();
+        modelManager.addIngredient(ingredient);
+        HashMap<IngredientName, Integer> requiredIngredients = new HashMap<>();
+        requiredIngredients.put(BROCCOLI.getName(), 12);
+        thrown.expect(IngredientNotEnoughException.class);
+        modelManager.consumeIngredients(requiredIngredients);
+    }
+
+    @Test
+    public void consumeIngredient_ingredientInIngredientList_assertEquals() {
+        Ingredient ingredient = new IngredientBuilder(BROCCOLI).withNumUnits(20).build();
+        modelManager.addIngredient(ingredient);
+        HashMap<IngredientName, Integer> requiredIngredients = new HashMap<>();
+        requiredIngredients.put(BROCCOLI.getName(), 2);
+        modelManager.consumeIngredients(requiredIngredients);
+        Ingredient consumedIngredient = modelManager.findIngredient(BROCCOLI.getName());
+        NumUnits updatedNumUnits = consumedIngredient.getNumUnits();
+        assertEquals(new NumUnits(18), updatedNumUnits);
     }
 
     // Menu Management

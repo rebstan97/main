@@ -2,6 +2,7 @@ package seedu.address.model;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
@@ -359,6 +360,27 @@ public class RestaurantBook implements ReadOnlyRestaurantBook {
         requireNonNull(editedIngredient);
 
         ingredients.setIngredient(target, editedIngredient);
+    }
+
+
+    /**
+     * Increases the number of units of {@code Ingredient} by {@code Integer}. The ingredient key of HashMap {@code
+     * requiredIngredients} must exist in the restaurant book.
+     */
+    public void stockUpIngredients(HashMap<IngredientName, Integer> requiredIngredients) {
+        requireNonNull(requiredIngredients);
+
+        ingredients.stockUp(requiredIngredients);
+    }
+
+    /**
+     * Reduces the number of units of {@code Ingredient} by {@code Integer}. The ingredient key of HashMap {@code
+     * requiredIngredients} must exist in the restaurant book.
+     */
+    public void consumeIngredients(HashMap<IngredientName, Integer> requiredIngredients) {
+        requireNonNull(requiredIngredients);
+
+        ingredients.consume(requiredIngredients);
     }
 
     /**
