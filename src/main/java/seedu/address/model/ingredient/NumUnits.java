@@ -26,10 +26,17 @@ public class NumUnits {
      *
      * @param numUnits A valid number of available units.
      */
-    public NumUnits(String numUnits) {
+    public NumUnits(int numUnits) {
         requireNonNull(numUnits);
         checkArgument(isValidNumUnits(numUnits), MESSAGE_NUMUNITS_CONSTRAINTS);
-        numberOfUnits = parseInt(numUnits);
+        numberOfUnits = numUnits;
+    }
+
+    /**
+     * Returns true if a given int is a valid number of available units.
+     */
+    public static boolean isValidNumUnits(int test) {
+        return test >= 0;
     }
 
     /**
@@ -57,8 +64,8 @@ public class NumUnits {
      */
     public NumUnits increase(Integer toIncrease) {
         requireNonNull(toIncrease);
-        Integer updatedNum = numberOfUnits + toIncrease;
-        return new NumUnits(updatedNum.toString());
+        int updatedNum = numberOfUnits + toIncrease;
+        return new NumUnits(updatedNum);
     }
 
     /**
@@ -69,7 +76,7 @@ public class NumUnits {
         requireNonNull(toDecrease);
         assert(toDecrease <= numberOfUnits);
         int updatedNum = numberOfUnits - toDecrease;
-        return new NumUnits(String.valueOf(updatedNum));
+        return new NumUnits(updatedNum);
     }
 
     @Override

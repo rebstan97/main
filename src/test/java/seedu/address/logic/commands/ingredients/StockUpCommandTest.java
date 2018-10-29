@@ -35,12 +35,12 @@ public class StockUpCommandTest {
     public void execute_validIngredient_success() {
         descriptorList = new ArrayList<>();
         ChangeStockDescriptor descriptor =
-                descriptorBuilder.buildChangeStockDescriptor("Mexican Avocado", "20");
+                descriptorBuilder.buildChangeStockDescriptor("Mexican Avocado", 20);
         descriptorList.add(descriptor);
 
         StockUpCommand stockUpCommand = new StockUpCommand(descriptorList);
 
-        Ingredient updatedIngredient = new IngredientBuilder(AVOCADO).withNumUnits("20").build();
+        Ingredient updatedIngredient = new IngredientBuilder(AVOCADO).withNumUnits(20).build();
         String expectedMessage = String.format(MESSAGE_STOCKUP_INGREDIENT_SUCCESS, "\n" + updatedIngredient);
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
@@ -54,13 +54,13 @@ public class StockUpCommandTest {
     public void execute_multipleValidIngredients_success() {
         descriptorList = new ArrayList<>();
         ChangeStockDescriptor descriptor =
-                descriptorBuilder.buildChangeStockDescriptor("Chinese Cabbage", "10");
+                descriptorBuilder.buildChangeStockDescriptor("Chinese Cabbage", 10);
         descriptorList.add(descriptor);
         descriptor =
-                descriptorBuilder.buildChangeStockDescriptor("Baked Beans", "87");
+                descriptorBuilder.buildChangeStockDescriptor("Baked Beans", 87);
         descriptorList.add(descriptor);
         descriptor =
-                descriptorBuilder.buildChangeStockDescriptor("Duck Drumstick", "59");
+                descriptorBuilder.buildChangeStockDescriptor("Duck Drumstick", 59);
         descriptorList.add(descriptor);
 
         StockUpCommand stockUpCommand = new StockUpCommand(descriptorList);
@@ -68,15 +68,15 @@ public class StockUpCommandTest {
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         StringBuilder updatedIngredients = new StringBuilder();
 
-        Ingredient updatedIngredient = new IngredientBuilder(CABBAGE).withNumUnits("10").build();
+        Ingredient updatedIngredient = new IngredientBuilder(CABBAGE).withNumUnits(10).build();
         updatedIngredients.append("\n" + updatedIngredient);
         expectedModel.updateIngredient(CABBAGE, updatedIngredient);
 
-        updatedIngredient = new IngredientBuilder(BEANS).withNumUnits("87").build();
+        updatedIngredient = new IngredientBuilder(BEANS).withNumUnits(87).build();
         updatedIngredients.append("\n" + updatedIngredient);
         expectedModel.updateIngredient(BEANS, updatedIngredient);
 
-        updatedIngredient = new IngredientBuilder(DUCK).withNumUnits("59").build();
+        updatedIngredient = new IngredientBuilder(DUCK).withNumUnits(59).build();
         updatedIngredients.append("\n" + updatedIngredient);
         expectedModel.updateIngredient(DUCK, updatedIngredient);
 
@@ -90,7 +90,7 @@ public class StockUpCommandTest {
     public void execute_invalidIngredient_failure() {
         descriptorList = new ArrayList<>();
         ChangeStockDescriptor descriptor =
-                descriptorBuilder.buildChangeStockDescriptor("Iceberg Lettuce", "35");
+                descriptorBuilder.buildChangeStockDescriptor("Iceberg Lettuce", 35);
         descriptorList.add(descriptor);
 
         StockUpCommand stockUpCommand = new StockUpCommand(descriptorList);

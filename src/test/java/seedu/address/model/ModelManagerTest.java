@@ -326,14 +326,14 @@ public class ModelManagerTest {
 
     @Test
     public void stockUpIngredient_ingredientInIngredientList_assertEquals() {
-        Ingredient ingredient = new IngredientBuilder(BROCCOLI).withNumUnits("20").build();
+        Ingredient ingredient = new IngredientBuilder(BROCCOLI).withNumUnits(20).build();
         modelManager.addIngredient(ingredient);
         HashMap<IngredientName, Integer> recipe = new HashMap<>();
         recipe.put(BROCCOLI.getName(), 12);
         modelManager.stockUpIngredients(recipe);
         Ingredient stockedUpIngredient = modelManager.findIngredient(BROCCOLI.getName());
         NumUnits updatedNumUnits = stockedUpIngredient.getNumUnits();
-        assertEquals(new NumUnits("32"), updatedNumUnits);
+        assertEquals(new NumUnits(32), updatedNumUnits);
     }
 
     @Test
@@ -346,7 +346,7 @@ public class ModelManagerTest {
 
     @Test
     public void consumeIngredient_ingredientNotEnough_throwsIngredientNotEnoughException() {
-        Ingredient ingredient = new IngredientBuilder(BROCCOLI).withNumUnits("2").build();
+        Ingredient ingredient = new IngredientBuilder(BROCCOLI).withNumUnits(2).build();
         modelManager.addIngredient(ingredient);
         HashMap<IngredientName, Integer> recipe = new HashMap<>();
         recipe.put(BROCCOLI.getName(), 12);
@@ -356,14 +356,14 @@ public class ModelManagerTest {
 
     @Test
     public void consumeIngredient_ingredientInIngredientList_assertEquals() {
-        Ingredient ingredient = new IngredientBuilder(BROCCOLI).withNumUnits("20").build();
+        Ingredient ingredient = new IngredientBuilder(BROCCOLI).withNumUnits(20).build();
         modelManager.addIngredient(ingredient);
         HashMap<IngredientName, Integer> recipe = new HashMap<>();
         recipe.put(BROCCOLI.getName(), 2);
         modelManager.consumeIngredients(recipe);
         Ingredient consumedIngredient = modelManager.findIngredient(BROCCOLI.getName());
         NumUnits updatedNumUnits = consumedIngredient.getNumUnits();
-        assertEquals(new NumUnits("18"), updatedNumUnits);
+        assertEquals(new NumUnits(18), updatedNumUnits);
     }
 
     // Menu Management

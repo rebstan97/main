@@ -55,7 +55,7 @@ public class StockUpCommandParserTest {
                 expectedCommand);
 
         IngredientName ingredientName = new IngredientName("Fresh Eggs");
-        NumUnits numUnits = new NumUnits("1000");
+        NumUnits numUnits = new NumUnits(1000);
         descriptor = new ChangeStockDescriptor(ingredientName, numUnits);
         descriptorList.add(descriptor);
         assertParseSuccess(parser,

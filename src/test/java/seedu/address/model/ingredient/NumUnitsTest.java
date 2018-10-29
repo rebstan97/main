@@ -11,39 +11,34 @@ import seedu.address.testutil.Assert;
 public class NumUnitsTest {
 
     @Test
-    public void constructor_null_throwsNullPointerException() {
-        Assert.assertThrows(NullPointerException.class, () -> new NumUnits(null));
-    }
-
-    @Test
     public void constructor_invalidNumUnits_throwsIllegalArgumentException() {
-        String invalidNumUnits = "";
+        int invalidNumUnits = -1;
         Assert.assertThrows(IllegalArgumentException.class, () -> new NumUnits(invalidNumUnits));
     }
 
     @Test
     public void increase_null_throwsNullPointerException() {
-        NumUnits numUnits = new NumUnits("1");
+        NumUnits numUnits = new NumUnits(1);
         Assert.assertThrows(NullPointerException.class, () -> numUnits.increase(null));
     }
 
     @Test
     public void increase_validInteger_returnsTrue() {
-        NumUnits currentNumUnits = new NumUnits("10");
-        NumUnits expectedNumUnits = new NumUnits("22");
+        NumUnits currentNumUnits = new NumUnits(10);
+        NumUnits expectedNumUnits = new NumUnits(22);
         assertEquals(expectedNumUnits, currentNumUnits.increase(12));
     }
 
     @Test
     public void decrease_null_throwsNullPointerException() {
-        NumUnits numUnits = new NumUnits("1");
+        NumUnits numUnits = new NumUnits(1);
         Assert.assertThrows(NullPointerException.class, () -> numUnits.decrease(null));
     }
 
     @Test
     public void decrease_validInteger_returnsTrue() {
-        NumUnits currentNumUnits = new NumUnits("22");
-        NumUnits expectedNumUnits = new NumUnits("10");
+        NumUnits currentNumUnits = new NumUnits(22);
+        NumUnits expectedNumUnits = new NumUnits(10);
         assertEquals(expectedNumUnits, currentNumUnits.decrease(12));
     }
 
