@@ -81,6 +81,14 @@ public class RequiredIngredientsItemCommandParserTest {
         // negative number of ingredients
         assertParseFailure(parser, targetIndex.getOneBased() + INGREDIENT_NAME_DESC_APPLE + " "
                 + PREFIX_INGREDIENT_NUM + "-3", MESSAGE_INTEGER_CONSTRAINTS);
+
+        // missing ingredient name
+        assertParseFailure(parser, targetIndex.getOneBased() + " " + PREFIX_INGREDIENT_NUM +
+                        VALID_NUMBER_OF_INGREDIENTS, MESSAGE_INVALID_FORMAT);
+
+        // missing number of ingredient
+        assertParseFailure(parser, targetIndex.getOneBased() + " " + INGREDIENT_NAME_DESC_APPLE,
+                MESSAGE_INVALID_FORMAT);
     }
 
     @Test
