@@ -19,6 +19,8 @@ import seedu.address.model.salesrecord.SalesRecord;
  */
 public class XmlAdaptedRecord {
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Record's %s field is missing!";
+    public static final String INGREDIENT_USED = "ingredientsUsed";
+    public static final String MESSAGE_QUANTITY_USED_CONSTRAINTS = "Quantity used should be a positive integer!";
 
     @XmlElement(required = true)
     private String date;
@@ -150,6 +152,10 @@ public class XmlAdaptedRecord {
      * @throws IllegalValueException if there were any data constraints violated in the Ingredient
      */
     private HashMap<IngredientName, Integer> ingredientUsedToModelType() throws IllegalValueException {
+        if (ingredientsUsed == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, INGREDIENT_USED));
+        }
+
         HashMap<IngredientName, Integer> modelIngredientUsed = new HashMap<>();
 
         for (Map.Entry<String, String> entry : ingredientsUsed.entrySet()) {
@@ -158,8 +164,10 @@ public class XmlAdaptedRecord {
 
             validateName(ingredientName);
             IngredientName modelName = new IngredientName(ingredientName);
+            validateQuantityUsed(quantityUsed);
+            Integer modelQuantity = Integer.parseInt(quantityUsed);
 
-            modelIngredientUsed.put(modelName, Integer.parseInt(quantityUsed));
+            modelIngredientUsed.put(modelName, modelQuantity);
         }
         return modelIngredientUsed;
     }
@@ -176,6 +184,21 @@ public class XmlAdaptedRecord {
         }
         if (!IngredientName.isValidName(ingredientName)) {
             throw new IllegalValueException(IngredientName.MESSAGE_NAME_CONSTRAINTS);
+        }
+    }
+
+    /**
+     * Checks if quantity used is valid.
+     *
+     * @throws IllegalValueException if {@code quantityUsed} is null or invalid
+     */
+    private void validateQuantityUsed(String quantityUsed) throws IllegalValueException {
+        if (quantityUsed == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    Integer.class.getSimpleName()));
+        }
+        if (Integer.parseInt(quantityUsed) <= 0) {
+            throw new IllegalValueException(MESSAGE_QUANTITY_USED_CONSTRAINTS);
         }
     }
 

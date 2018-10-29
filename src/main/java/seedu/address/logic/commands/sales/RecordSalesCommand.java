@@ -13,7 +13,6 @@ import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.ingredient.Ingredient;
 import seedu.address.model.ingredient.IngredientName;
 import seedu.address.model.menu.Item;
 import seedu.address.model.menu.Name;
@@ -46,8 +45,8 @@ public class RecordSalesCommand extends Command {
     public static final String MESSAGE_ITEM_NOT_FOUND = "However, the item does not exist in the menu section. "
             + "Please add the item via the [INSERT_COMMAND] and specify the ingredients required via the "
             + "[INSERT_COMMAND] to enable auto-ingredient update.";
-    public static final String MESSAGE_REQUIRED_INGREDIENTS_NOT_FOUND = "However, you have not yet specified the "
-            + "ingredients required to make this item. Please do so via the [INSERT_COMMAND] to enable auto-ingredient "
+    public static final String MESSAGE_REQUIRED_INGREDIENTS_NOT_FOUND = "However, the ingredients required to make "
+            + "this item have not been specified. Please do so via the [INSERT_COMMAND] to enable auto-ingredient."
             + "update.";
     public static final String MESSAGE_INGREDIENT_NOT_FOUND = "However, some ingredient(s) required to make this item"
             + " were not found in the ingredient section. Please add the ingredient(s) via the [INSERT_COMMAND] to "
@@ -140,11 +139,11 @@ public class RecordSalesCommand extends Command {
 
 // save ingredientsUsed into storage
 
-// show ingredientsUsed in UI browser panel
-
-// edit-sales update ingredientsUsed
-
 // API for edit ingredientUsed if ingredient name changes
+
+
+
+// show ingredientsUsed in UI browser panel
 
 // update UGDG -> remove delete/edit by name and date
 
