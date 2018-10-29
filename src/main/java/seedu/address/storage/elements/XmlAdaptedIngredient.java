@@ -80,7 +80,7 @@ public class XmlAdaptedIngredient {
         final MinimumUnit modelMinimum = new MinimumUnit(minimum);
 
         validateNumUnits();
-        final NumUnits modelNumUnits = new NumUnits(numUnits);
+        final NumUnits modelNumUnits = new NumUnits(Integer.parseInt(numUnits));
 
         return new Ingredient(modelName, modelUnit, modelPrice, modelMinimum, modelNumUnits);
     }
