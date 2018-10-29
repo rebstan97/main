@@ -48,7 +48,7 @@ public class AddIngredientCommandParser implements Parser<AddIngredientCommand> 
         IngredientPrice price = ParserUtil.parseIngredientPrice(argMultimap.getValue(PREFIX_INGREDIENT_PRICE).get());
         MinimumUnit minimum = ParserUtil.parseMinimumUnit(argMultimap.getValue(PREFIX_INGREDIENT_MINIMUM).get());
 
-        Ingredient ingredient = new Ingredient(name, unit, price, minimum, new NumUnits("0"));
+        Ingredient ingredient = new Ingredient(name, unit, price, minimum, new NumUnits(0));
 
         return new AddIngredientCommand(ingredient);
     }
