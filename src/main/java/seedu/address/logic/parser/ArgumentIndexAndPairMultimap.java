@@ -3,8 +3,6 @@ package seedu.address.logic.parser;
 import java.util.HashMap;
 import java.util.Map;
 
-import seedu.address.commons.core.pair.StringPair;
-
 /**
  * Stores mapping of indices to their respective argument pairs.
  * Each key must be associated with exactly two arguments forming a pair.
