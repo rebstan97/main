@@ -16,7 +16,7 @@ public class IngredientBuilder {
     public static final String DEFAULT_UNIT = "packet of 5";
     public static final String DEFAULT_PRICE = "1.90";
     public static final String DEFAULT_MINIMUM = "3";
-    public static final String DEFAULT_NUMUNITS = "0";
+    public static final int DEFAULT_NUMUNITS = 0;
 
     private IngredientName name;
     private IngredientUnit unit;
@@ -78,7 +78,7 @@ public class IngredientBuilder {
     /**
      * Sets the {@code NumUnits} of the {@code Ingredient} that we are building.
      */
-    public IngredientBuilder withNumUnits(String numUnits) {
+    public IngredientBuilder withNumUnits(int numUnits) {
         this.numUnits = new NumUnits(numUnits);
         return this;
     }

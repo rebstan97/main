@@ -3,6 +3,7 @@ package seedu.address.model;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.HashMap;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
@@ -255,6 +256,22 @@ public class ModelManager extends ComponentManager implements Model {
         requireAllNonNull(target, editedIngredient);
 
         versionedAddressBook.updateIngredient(target, editedIngredient);
+        indicateAddressBookChanged();
+    }
+
+    @Override
+    public void stockUpIngredients(HashMap<IngredientName, Integer> requiredIngredients) {
+        requireAllNonNull(requiredIngredients);
+
+        versionedAddressBook.stockUpIngredients(requiredIngredients);
+        indicateAddressBookChanged();
+    }
+
+    @Override
+    public void consumeIngredients(HashMap<IngredientName, Integer> requiredIngredients) {
+        requireAllNonNull(requiredIngredients);
+
+        versionedAddressBook.consumeIngredients(requiredIngredients);
         indicateAddressBookChanged();
     }
 
