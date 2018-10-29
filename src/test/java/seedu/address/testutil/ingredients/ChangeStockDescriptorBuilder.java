@@ -22,7 +22,7 @@ public class ChangeStockDescriptorBuilder {
     /**
      * Returns an {@code ChangeStockDescriptor} with fields containing {@code ingredientName} and {@code numUnits}.
      */
-    public ChangeStockDescriptor buildChangeStockDescriptor(String ingredientName, String numUnits) {
+    public ChangeStockDescriptor buildChangeStockDescriptor(String ingredientName, int numUnits) {
         descriptor = new ChangeStockDescriptor();
         descriptor.setName(new IngredientName(ingredientName));
         descriptor.setNumUnits(new NumUnits(numUnits));
@@ -40,7 +40,7 @@ public class ChangeStockDescriptorBuilder {
     /**
      * Sets the {@code NumUnits} of the {@code EditIngredientDescriptor} that we are building.
      */
-    public ChangeStockDescriptorBuilder withNumUnits(String numUnits) {
+    public ChangeStockDescriptorBuilder withNumUnits(int numUnits) {
         descriptor.setNumUnits(new NumUnits(numUnits));
         return this;
     }
