@@ -23,7 +23,7 @@ public class XmlAdaptedItemTest {
     private static final String INVALID_NAME = "F@ies";
     private static final String INVALID_PRICE = "+2";
     private static final String INVALID_TAG = "#fries";
-    private static final String INVALID_INGREDIENTNAME = "@ppl3";
+    private static final String INVALID_INGREDIENT_NAME = "@ppl3";
     private static final String INVALID_INTEGER = "0";
 
     private static final String VALID_NAME = APPLE_JUICE.getName().toString();
@@ -33,9 +33,13 @@ public class XmlAdaptedItemTest {
             .map(XmlAdaptedTag::new)
             .collect(Collectors.toList());
 
-    private static final Map<String, String> VALID_REQUIRED_INGREDIENTS = new HashMap<>();
-    private static final String VALID_INGREDIENTNAME = "Apple";
+    private static final String VALID_INGREDIENT_NAME = "Apple";
     private static final String VALID_INTEGER = "3";
+    private static final Map<String, String> VALID_REQUIRED_INGREDIENTS = new HashMap<>();
+    static {
+        VALID_REQUIRED_INGREDIENTS.put(VALID_INGREDIENT_NAME, VALID_INTEGER);
+    }
+
 
     @Test
     public void toModelType_validItemDetails_returnsItem() throws Exception {
@@ -88,21 +92,21 @@ public class XmlAdaptedItemTest {
     public void toModelType_invalidRequiredIngredients_throwsIllegalValueException() {
         Map<String, String> invalidRequiredIngredients = new HashMap<>();
         // Invalid IngredientName
-        invalidRequiredIngredients.put(INVALID_INGREDIENTNAME, VALID_INTEGER);
+        invalidRequiredIngredients.put(INVALID_INGREDIENT_NAME, VALID_INTEGER);
         XmlAdaptedItem item = new XmlAdaptedItem(VALID_NAME, VALID_PRICE, VALID_REMARK, VALID_TAGS,
                 invalidRequiredIngredients);
         Assert.assertThrows(IllegalValueException.class, item::toModelType);
 
         // Invalid Integer
         invalidRequiredIngredients.clear();
-        invalidRequiredIngredients.put(VALID_INGREDIENTNAME, INVALID_INTEGER);
+        invalidRequiredIngredients.put(VALID_INGREDIENT_NAME, INVALID_INTEGER);
         item = new XmlAdaptedItem(VALID_NAME, VALID_PRICE, VALID_REMARK, VALID_TAGS,
                 invalidRequiredIngredients);
         Assert.assertThrows(IllegalValueException.class, item::toModelType);
 
         // Invalid IngredientName and Integer
         invalidRequiredIngredients.clear();
-        invalidRequiredIngredients.put(INVALID_INGREDIENTNAME, INVALID_INTEGER);
+        invalidRequiredIngredients.put(INVALID_INGREDIENT_NAME, INVALID_INTEGER);
         item = new XmlAdaptedItem(VALID_NAME, VALID_PRICE, VALID_REMARK, VALID_TAGS,
                 invalidRequiredIngredients);
         Assert.assertThrows(IllegalValueException.class, item::toModelType);

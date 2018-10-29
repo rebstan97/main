@@ -6,7 +6,12 @@
         <price>2.00</price>
         <originalPrice>2.00</originalPrice>
         <recipe>Add apple to juicer</recipe>
-        <requiredIngredients/>
+        <requiredIngredients>
+            <entry>
+                <key>Apple</key>
+                <value>3</value>
+            </entry>
+        </requiredIngredients>
         <tagged>drink</tagged>
         <tagged>monday</tagged>
     </items>
