@@ -3,9 +3,9 @@ package seedu.address.model.salesrecord;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
-import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -129,7 +129,7 @@ public class UniqueRecordList implements Iterable<SalesRecord> {
         requireAllNonNull(target, editedName);
 
         for (SalesRecord salesRecord: internalList) {
-            HashMap<IngredientName, Integer> ingredientUsed = salesRecord.getIngredientsUsed();
+            Map<IngredientName, Integer> ingredientUsed = salesRecord.getIngredientsUsed();
             if (ingredientUsed.containsKey(target)) {
                 Integer quantityUsed = ingredientUsed.remove(target);
                 ingredientUsed.put(editedName, quantityUsed);

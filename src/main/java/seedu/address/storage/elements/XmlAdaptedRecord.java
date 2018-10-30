@@ -31,7 +31,7 @@ public class XmlAdaptedRecord {
     @XmlElement(required = true)
     private String price;
     @XmlElement(required = true)
-    private HashMap<String, String> ingredientsUsed;
+    private Map<String, String> ingredientsUsed;
 
     /**
      * Constructs an XmlAdaptedRecord.
@@ -79,7 +79,7 @@ public class XmlAdaptedRecord {
         final ItemName modelName = nameToModelType();
         final QuantitySold modelQuantitySold = quantitySoldToModelType();
         final Price modelPrice = priceToModelType();
-        final HashMap<IngredientName, Integer> modelIngredientUsed = ingredientUsedToModelType();
+        final Map<IngredientName, Integer> modelIngredientUsed = ingredientUsedToModelType();
         return new SalesRecord(modelDate, modelName, modelQuantitySold, modelPrice)
                 .setIngredientsUsed(modelIngredientUsed);
     }
@@ -147,16 +147,16 @@ public class XmlAdaptedRecord {
     }
 
     /**
-     * Converts this HashMap<String, String> into the model's HashMap<IngredientName, Integer>.
+     * Converts this Map<String, String> into the model's Map<IngredientName, Integer>.
      *
      * @throws IllegalValueException if there were any data constraints violated in the Ingredient
      */
-    private HashMap<IngredientName, Integer> ingredientUsedToModelType() throws IllegalValueException {
+    private Map<IngredientName, Integer> ingredientUsedToModelType() throws IllegalValueException {
         if (ingredientsUsed == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, INGREDIENT_USED));
         }
 
-        HashMap<IngredientName, Integer> modelIngredientUsed = new HashMap<>();
+        Map<IngredientName, Integer> modelIngredientUsed = new HashMap<>();
 
         for (Map.Entry<String, String> entry : ingredientsUsed.entrySet()) {
             String ingredientName = entry.getKey();

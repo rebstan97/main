@@ -1,11 +1,9 @@
 package seedu.address.model.salesrecord;
 
-import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
-
 import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
 
-import seedu.address.model.ingredient.Ingredient;
 import seedu.address.model.ingredient.IngredientName;
 
 /**
@@ -22,7 +20,7 @@ public class SalesRecord {
     private final QuantitySold quantitySold;
     private final Price price;
     private final double revenue;
-    private final HashMap<IngredientName, Integer> ingredientsUsed;
+    private final Map<IngredientName, Integer> ingredientsUsed;
 
     /**
      * Every field must be present and not null.
@@ -32,7 +30,7 @@ public class SalesRecord {
     }
 
     private SalesRecord(Date date, ItemName name, QuantitySold quantitySold, Price price, double revenue,
-            HashMap<IngredientName, Integer> ingredientsUsed) {
+            Map<IngredientName, Integer> ingredientsUsed) {
         this.date = date;
         this.name = name;
         this.quantitySold = quantitySold;
@@ -61,7 +59,7 @@ public class SalesRecord {
         return revenue;
     }
 
-    public HashMap<IngredientName, Integer> getIngredientsUsed() {
+    public Map<IngredientName, Integer> getIngredientsUsed() {
         return ingredientsUsed;
     }
 
@@ -70,7 +68,7 @@ public class SalesRecord {
      * This is to ensure immutability.
      * @param ingredientsUsed The ingredients and their corresponding quantity used.
      */
-    public SalesRecord setIngredientsUsed(HashMap<IngredientName, Integer> ingredientsUsed) {
+    public SalesRecord setIngredientsUsed(Map<IngredientName, Integer> ingredientsUsed) {
         return new SalesRecord(this.date, this.name, this.quantitySold, this.price, this.revenue, ingredientsUsed);
     }
 

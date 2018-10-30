@@ -115,7 +115,7 @@ public class RecordSalesCommand extends Command {
             throw new RequiredIngredientsNotFoundException();
         }
 
-        HashMap<IngredientName, Integer> ingredientsUsed = new HashMap<>(requiredIngredients);
+        Map<IngredientName, Integer> ingredientsUsed = new HashMap<>(requiredIngredients);
 
         // compute the total ingredients used after factoring quantity sold
         ingredientsUsed.replaceAll((ingredient, quantityUsed) -> quantityUsed * quantitySold);

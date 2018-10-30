@@ -7,6 +7,7 @@ import static org.junit.Assert.assertTrue;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Predicate;
 
@@ -588,8 +589,8 @@ public class RecordSalesCommandTest {
             return item.getRequiredIngredients();
         }
 
-        private void stockUp(HashMap<IngredientName, Integer> consumedIngredients) {
-            for (HashMap.Entry<IngredientName, Integer> entry : consumedIngredients.entrySet()) {
+        private void stockUp(Map<IngredientName, Integer> consumedIngredients) {
+            for (Map.Entry<IngredientName, Integer> entry : consumedIngredients.entrySet()) {
                 IngredientName name = entry.getKey();
                 Integer unitsConsumed = entry.getValue();
                 Ingredient ingredient = findIngredient(name);
@@ -602,11 +603,11 @@ public class RecordSalesCommandTest {
         }
 
         @Override
-        public void consumeIngredients(HashMap<IngredientName, Integer> requiredIngredients) throws
+        public void consumeIngredients(Map<IngredientName, Integer> requiredIngredients) throws
                 IngredientNotFoundException, IngredientNotEnoughException {
             requireNonNull(requiredIngredients);
-            HashMap<IngredientName, Integer> consumedIngredients = new HashMap<>();
-            for (HashMap.Entry<IngredientName, Integer> ingredientPair : requiredIngredients.entrySet()) {
+            Map<IngredientName, Integer> consumedIngredients = new HashMap<>();
+            for (Map.Entry<IngredientName, Integer> ingredientPair : requiredIngredients.entrySet()) {
                 IngredientName name = ingredientPair.getKey();
                 Integer unitsToConsume = ingredientPair.getValue();
                 Ingredient ingredient;
