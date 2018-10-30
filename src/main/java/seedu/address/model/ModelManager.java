@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.HashMap;
+import java.util.Map;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
@@ -19,6 +20,8 @@ import seedu.address.model.ingredient.Ingredient;
 import seedu.address.model.ingredient.IngredientName;
 import seedu.address.model.ingredient.exceptions.IngredientNotFoundException;
 import seedu.address.model.menu.Item;
+import seedu.address.model.menu.Name;
+import seedu.address.model.menu.exceptions.ItemNotFoundException;
 import seedu.address.model.person.Person;
 import seedu.address.model.reservation.Reservation;
 import seedu.address.model.salesrecord.Date;
@@ -333,6 +336,16 @@ public class ModelManager extends ComponentManager implements Model {
     public void sortMenu(SortMethod sortMethod) {
         versionedRestaurantBook.sortMenu(sortMethod);
         indicateRestaurantBookChanged();
+    }
+
+    @Override
+    public Item findItem(Name name) throws ItemNotFoundException {
+        return versionedRestaurantBook.findItem(name);
+    }
+
+    @Override
+    public Map<IngredientName, Integer> getRequiredIngredients(Item item) {
+        return item.getRequiredIngredients();
     }
 
     //=========== Filtered Item List Accessors ==============================================================

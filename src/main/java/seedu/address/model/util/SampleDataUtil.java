@@ -16,7 +16,7 @@ import seedu.address.model.tag.Tag;
  */
 public class SampleDataUtil {
 
-    public static Account getRootAccount() {
+    private static Account getRootAccount() {
         return new Account(new Username("root"), new Password("1122qq"));
     }
 

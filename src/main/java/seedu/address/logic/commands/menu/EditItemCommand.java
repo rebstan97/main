@@ -9,6 +9,7 @@ import static seedu.address.model.Model.PREDICATE_SHOW_ALL_ITEMS;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
 
@@ -22,6 +23,7 @@ import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.ingredient.IngredientName;
 import seedu.address.model.menu.Item;
 import seedu.address.model.menu.Name;
 import seedu.address.model.menu.Price;
@@ -98,10 +100,11 @@ public class EditItemCommand extends Command {
 
         Name updatedName = editItemDescriptor.getName().orElse(itemToEdit.getName());
         Price updatedPrice = editItemDescriptor.getPrice().orElse(itemToEdit.getPrice());
-        Recipe updatedRecipe = itemToEdit.getRecipe(); // edit command does not allow editing remarks
         Set<Tag> updatedTags = editItemDescriptor.getTags().orElse(itemToEdit.getTags());
+        Recipe recipe = itemToEdit.getRecipe(); // edit command does not allow editing remarks and requiredIngredients
+        Map<IngredientName, Integer> requiredIngredients = itemToEdit.getRequiredIngredients();
 
-        return new Item(updatedName, updatedPrice, updatedRecipe, updatedTags);
+        return new Item(updatedName, updatedPrice, recipe, updatedTags, requiredIngredients);
     }
 
     @Override

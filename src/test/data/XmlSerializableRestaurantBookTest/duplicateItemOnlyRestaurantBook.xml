@@ -5,6 +5,7 @@
         <price>3</price>
         <originalPrice>3</originalPrice>
         <recipe></recipe>
+        <requiredIngredients/>
     </items>
 
     <!-- Item with same identity as Cheese Burger -->
@@ -13,5 +14,6 @@
         <price>3</price>
         <originalPrice>3</originalPrice>
         <recipe></recipe>
+        <requiredIngredients/>
     </items>
 </restaurantbook>

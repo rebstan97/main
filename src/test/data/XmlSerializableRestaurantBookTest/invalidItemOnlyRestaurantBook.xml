@@ -5,5 +5,6 @@
         <name>Some Name</name>
         <price isPrivate="false">5.0000</price>
         <recipe isPrivate="false">Some recipe</recipe>
+        <requiredIngredients/>
     </items>
 </restaurantbook>

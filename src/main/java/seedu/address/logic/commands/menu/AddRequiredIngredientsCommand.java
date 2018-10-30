@@ -1,10 +1,12 @@
 package seedu.address.logic.commands.menu;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_RECIPE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_INGREDIENT_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_INGREDIENT_NUM;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_ITEMS;
 
 import java.util.List;
+import java.util.Map;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
@@ -13,40 +15,42 @@ import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.ingredient.IngredientName;
 import seedu.address.model.menu.Item;
-import seedu.address.model.menu.Recipe;
 
 /**
- * Adds a recipe to a item in the menu.
+ * Adds required ingredients to an item in the menu.
  */
-public class RecipeItemCommand extends Command {
-    public static final String COMMAND_WORD = "recipe-item";
-    public static final String COMMAND_ALIAS = "ri";
+public class AddRequiredIngredientsCommand extends Command {
+    public static final String COMMAND_WORD = "add-required-ingredients";
+    public static final String COMMAND_ALIAS = "ari";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the recipe for a item identified "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the required ingredients for a item identified "
             + "by the index number used in the displayed item list. "
             + "Existing values will be overwritten by the input values.\n"
             + "Parameters: INDEX (must be a positive integer) "
-            + PREFIX_RECIPE + "RECIPE\n"
+            + PREFIX_INGREDIENT_NAME + "INGREDIENT_NAME... "
+            + PREFIX_INGREDIENT_NUM + "NUMBER_OF_INGREDIENTS...\n"
             + "Example: " + COMMAND_WORD + " 1 "
-            + PREFIX_RECIPE + "Boil water over high heat and reduce the heat to medium-low, "
-            + "pour in the vinegar and 2 teaspoons of salt and egg.";
+            + PREFIX_INGREDIENT_NAME + "Apple "
+            + PREFIX_INGREDIENT_NUM + "3";
 
-    public static final String MESSAGE_ADD_RECIPE_SUCCESS = "Added recipe to Item: %1$s";
-    public static final String MESSAGE_DELETE_RECIPE_SUCCESS = "Removed recipe from Item: %1$s";
+    public static final String MESSAGE_ADD_REQUIRED_INGREDIENT_SUCCESS = "Added required ingredient(s) to Item: %1$s";
+    public static final String MESSAGE_DELETE_REQUIRED_INGREDIENT_SUCCESS = "Removed required ingredient(s) from "
+            + "Item: %1$s";
 
     private final Index index;
-    private final Recipe recipe;
+    private final Map<IngredientName, Integer> requiredIngredients;
 
     /**
      * @param index of the item in the filtered item list to edit
-     * @param recipe the recipe of the item
+     * @param requiredIngredients the requiredIngredients of the item
      */
-    public RecipeItemCommand(Index index, Recipe recipe) {
-        requireAllNonNull(index, recipe);
+    public AddRequiredIngredientsCommand(Index index, Map<IngredientName, Integer> requiredIngredients) {
+        requireAllNonNull(index, requiredIngredients);
 
         this.index = index;
-        this.recipe = recipe;
+        this.requiredIngredients = requiredIngredients;
     }
 
     @Override
@@ -58,8 +62,8 @@ public class RecipeItemCommand extends Command {
         }
 
         Item itemToEdit = lastShownList.get(index.getZeroBased());
-        Item editedItem = new Item(itemToEdit.getName(), itemToEdit.getPrice(), recipe, itemToEdit.getTags(),
-                itemToEdit.getRequiredIngredients());
+        Item editedItem = new Item(itemToEdit.getName(), itemToEdit.getPrice(), itemToEdit.getRecipe(),
+                itemToEdit.getTags(), requiredIngredients);
 
         model.updateItem(itemToEdit, editedItem);
         model.updateFilteredItemList(PREDICATE_SHOW_ALL_ITEMS);
@@ -67,13 +71,15 @@ public class RecipeItemCommand extends Command {
 
         return new CommandResult(generateSuccessMessage(editedItem));
     }
+
     /**
      * Generates a command execution success message based on whether the recipe is added to or removed from
      * {@code itemToEdit}.
      */
-    private String generateSuccessMessage(Item editedItem) {
-        String message = !recipe.toString().isEmpty() ? MESSAGE_ADD_RECIPE_SUCCESS : MESSAGE_DELETE_RECIPE_SUCCESS;
-        return String.format(message, editedItem);
+    private String generateSuccessMessage(Item itemToEdit) {
+        String message = !requiredIngredients.isEmpty() ? MESSAGE_ADD_REQUIRED_INGREDIENT_SUCCESS
+                : MESSAGE_DELETE_REQUIRED_INGREDIENT_SUCCESS;
+        return String.format(message, itemToEdit);
     }
 
     @Override
@@ -83,12 +89,12 @@ public class RecipeItemCommand extends Command {
             return true;
         }
         // instanceof handles nulls
-        if (!(other instanceof RecipeItemCommand)) {
+        if (!(other instanceof AddRequiredIngredientsCommand)) {
             return false;
         }
         // state check
-        RecipeItemCommand e = (RecipeItemCommand) other;
+        AddRequiredIngredientsCommand e = (AddRequiredIngredientsCommand) other;
         return index.equals(e.index)
-                && recipe.equals(e.recipe);
+                && requiredIngredients.equals(e.requiredIngredients);
     }
 }
