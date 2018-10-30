@@ -37,15 +37,15 @@ public class LowStockCommandTest {
     @Test
     public void execute_listIsNotFiltered_showsUpdatedFilteredList() {
         model.updateFilteredIngredientList(predicate);
-        assertCommandSuccess(new ListIngredientsCommand(), model, commandHistory,
-                ListIngredientsCommand.MESSAGE_SUCCESS, expectedModel);
+        assertCommandSuccess(new LowStockCommand(), model, commandHistory,
+                LowStockCommand.MESSAGE_SUCCESS, expectedModel);
     }
 
     @Test
     public void execute_listIsFiltered_showsUpdatedFilteredList() {
         showIngredientAtIndex(model, INDEX_FIRST);
         model.updateFilteredIngredientList(predicate);
-        assertCommandSuccess(new ListIngredientsCommand(), model, commandHistory,
-                ListIngredientsCommand.MESSAGE_SUCCESS, expectedModel);
+        assertCommandSuccess(new LowStockCommand(), model, commandHistory,
+                LowStockCommand.MESSAGE_SUCCESS, expectedModel);
     }
 }
