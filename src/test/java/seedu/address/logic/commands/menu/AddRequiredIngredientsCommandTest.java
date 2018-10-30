@@ -2,13 +2,15 @@ package seedu.address.logic.commands.menu;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_ITEM_RECIPE_FRIES;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.menu.MenuCommandTestUtil.showItemAtIndex;
 import static seedu.address.testutil.TypicalAddressBook.getTypicalAddressBook;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND;
+
+import java.util.HashMap;
+import java.util.Map;
 
 import org.junit.Test;
 
@@ -21,35 +23,38 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.ingredient.IngredientName;
 import seedu.address.model.menu.Item;
-import seedu.address.model.menu.Recipe;
 import seedu.address.testutil.menu.ItemBuilder;
 
 /**
- * Contains integration tests (interaction with the Model) and unit tests for RecipeItemCommand.
+ * Contains integration tests (interaction with the Model) and unit tests for AddRequiredIngredientsCommand.
  */
-public class RecipeItemCommandTest {
-
-    private static final String RECIPE_STUB = "Some recipe";
+public class AddRequiredIngredientsCommandTest {
+    private static final Map<IngredientName, Integer> REQUIRED_INGREDIENTS_STUB = new HashMap<>();
+    static {
+        REQUIRED_INGREDIENTS_STUB.put(new IngredientName("Apple"), 3);
+    }
 
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
     private CommandHistory commandHistory = new CommandHistory();
 
     @Test
-    public void execute_deleteRecipeUnfilteredList_success() {
+    public void execute_deleteRequiredIngredientsUnfilteredList_success() {
         Item firstItem = model.getFilteredItemList().get(INDEX_FIRST.getZeroBased());
-        Item editedItem = new ItemBuilder(firstItem).withRecipe("").build();
+        Item editedItem = new ItemBuilder(firstItem).withRequiredIngredients(new HashMap<>()).build();
 
-        RecipeItemCommand recipeItemCommand = new RecipeItemCommand(INDEX_FIRST,
-                new Recipe(editedItem.getRecipe().toString()));
+        AddRequiredIngredientsCommand addRequiredIngredientsCommand =
+                new AddRequiredIngredientsCommand(INDEX_FIRST, editedItem.getRequiredIngredients());
 
-        String expectedMessage = String.format(RecipeItemCommand.MESSAGE_DELETE_RECIPE_SUCCESS, editedItem);
+        String expectedMessage =
+                String.format(AddRequiredIngredientsCommand.MESSAGE_DELETE_REQUIRED_INGREDIENT_SUCCESS, editedItem);
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.updateItem(firstItem, editedItem);
         expectedModel.commitAddressBook();
 
-        assertCommandSuccess(recipeItemCommand, model, commandHistory, expectedMessage, expectedModel);
+        assertCommandSuccess(addRequiredIngredientsCommand, model, commandHistory, expectedMessage, expectedModel);
     }
 
     @Test
@@ -58,27 +63,29 @@ public class RecipeItemCommandTest {
 
         Item firstItem = model.getFilteredItemList().get(INDEX_FIRST.getZeroBased());
         Item editedItem = new ItemBuilder(model.getFilteredItemList().get(INDEX_FIRST.getZeroBased()))
-                .withRecipe(RECIPE_STUB).build();
+                .withRequiredIngredients(Map.of("Apple", "3")).build();
 
-        RecipeItemCommand recipeItemCommand = new RecipeItemCommand(INDEX_FIRST,
-                new Recipe(editedItem.getRecipe().toString()));
+        AddRequiredIngredientsCommand addRequiredIngredientsCommand = new AddRequiredIngredientsCommand(INDEX_FIRST,
+                editedItem.getRequiredIngredients());
 
-        String expectedMessage = String.format(RecipeItemCommand.MESSAGE_ADD_RECIPE_SUCCESS, editedItem);
+        String expectedMessage = String.format(AddRequiredIngredientsCommand.MESSAGE_ADD_REQUIRED_INGREDIENT_SUCCESS,
+                editedItem);
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.updateItem(firstItem, editedItem);
         expectedModel.commitAddressBook();
 
-        assertCommandSuccess(recipeItemCommand, model, commandHistory, expectedMessage, expectedModel);
+        assertCommandSuccess(addRequiredIngredientsCommand, model, commandHistory, expectedMessage, expectedModel);
     }
 
     @Test
     public void execute_invalidItemIndexUnfilteredList_failure() {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredItemList().size() + 1);
-        RecipeItemCommand recipeItemCommand = new RecipeItemCommand(outOfBoundIndex,
-                new Recipe(VALID_ITEM_RECIPE_FRIES));
+        AddRequiredIngredientsCommand addRequiredIngredientsCommand =
+                new AddRequiredIngredientsCommand(outOfBoundIndex, REQUIRED_INGREDIENTS_STUB);
 
-        assertCommandFailure(recipeItemCommand, model, commandHistory, Messages.MESSAGE_INVALID_ITEM_DISPLAYED_INDEX);
+        assertCommandFailure(addRequiredIngredientsCommand, model, commandHistory,
+                Messages.MESSAGE_INVALID_ITEM_DISPLAYED_INDEX);
     }
 
     /**
@@ -92,24 +99,27 @@ public class RecipeItemCommandTest {
         // ensures that outOfBoundIndex is still in bounds of address book list
         assertTrue(outOfBoundIndex.getZeroBased() < model.getAddressBook().getItemList().size());
 
-        RecipeItemCommand recipeItemCommand = new RecipeItemCommand(outOfBoundIndex,
-                new Recipe(VALID_ITEM_RECIPE_FRIES));
-        assertCommandFailure(recipeItemCommand, model, commandHistory, Messages.MESSAGE_INVALID_ITEM_DISPLAYED_INDEX);
+        AddRequiredIngredientsCommand addRequiredIngredientsCommand =
+                new AddRequiredIngredientsCommand(outOfBoundIndex, REQUIRED_INGREDIENTS_STUB);
+        assertCommandFailure(addRequiredIngredientsCommand, model, commandHistory,
+                Messages.MESSAGE_INVALID_ITEM_DISPLAYED_INDEX);
     }
 
     @Test
     public void executeUndoRedo_validIndexUnfilteredList_success() throws Exception {
         Item itemToModify = model.getFilteredItemList().get(INDEX_FIRST.getZeroBased());
-        Item modifiedItem = new ItemBuilder(itemToModify).withRecipe(RECIPE_STUB).build();
+        Item modifiedItem = new ItemBuilder(itemToModify)
+                .withRequiredIngredients(Map.of("Apple", "3")).build();
 
-        RecipeItemCommand recipeItemCommand = new RecipeItemCommand(INDEX_FIRST, new Recipe(RECIPE_STUB));
+        AddRequiredIngredientsCommand addRequiredIngredientsCommand =
+                new AddRequiredIngredientsCommand(INDEX_FIRST, REQUIRED_INGREDIENTS_STUB);
 
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         expectedModel.updateItem(itemToModify, modifiedItem);
         expectedModel.commitAddressBook();
 
-        // recipe -> first item recipe changed
-        recipeItemCommand.execute(model, commandHistory);
+        // required ingredients -> first item required ingredients changed
+        addRequiredIngredientsCommand.execute(model, commandHistory);
 
         // undo -> reverts restaurant book back to previous state and filtered item list to show all items
         expectedModel.undoAddressBook();
@@ -124,10 +134,12 @@ public class RecipeItemCommandTest {
     public void executeUndoRedo_invalidIndexUnfilteredList_failure() {
         Index outOfBoundIndex = Index.fromOneBased(model.getFilteredItemList().size() + 1);
 
-        RecipeItemCommand recipeItemCommand = new RecipeItemCommand(outOfBoundIndex, new Recipe(""));
+        AddRequiredIngredientsCommand addRequiredIngredientsCommand =
+                new AddRequiredIngredientsCommand(outOfBoundIndex, new HashMap<>());
 
         // execution failed -> restaurant book state not added into model
-        assertCommandFailure(recipeItemCommand, model, commandHistory, Messages.MESSAGE_INVALID_ITEM_DISPLAYED_INDEX);
+        assertCommandFailure(addRequiredIngredientsCommand, model, commandHistory,
+                Messages.MESSAGE_INVALID_ITEM_DISPLAYED_INDEX);
 
         // single restaurant book state in model -> undoCommand and redoCommand fail
         assertCommandFailure(new UndoCommand(), model, commandHistory, UndoCommand.MESSAGE_FAILURE);
@@ -137,12 +149,12 @@ public class RecipeItemCommandTest {
 
     @Test
     public void equals() {
-        final RecipeItemCommand standardCommand = new RecipeItemCommand(INDEX_FIRST,
-                new Recipe(VALID_ITEM_RECIPE_FRIES));
+        final AddRequiredIngredientsCommand standardCommand = new AddRequiredIngredientsCommand(INDEX_FIRST,
+                REQUIRED_INGREDIENTS_STUB);
 
         // same values -> returns true
-        RecipeItemCommand commandWithSameValues = new RecipeItemCommand(INDEX_FIRST,
-                new Recipe(VALID_ITEM_RECIPE_FRIES));
+        AddRequiredIngredientsCommand commandWithSameValues = new AddRequiredIngredientsCommand(INDEX_FIRST,
+                REQUIRED_INGREDIENTS_STUB);
         assertTrue(standardCommand.equals(commandWithSameValues));
 
         // same object -> returns true
@@ -155,9 +167,10 @@ public class RecipeItemCommandTest {
         assertFalse(standardCommand.equals(new ClearMenuCommand()));
 
         // different index -> returns false
-        assertFalse(standardCommand.equals(new RecipeItemCommand(INDEX_SECOND, new Recipe(VALID_ITEM_RECIPE_FRIES))));
+        assertFalse(standardCommand.equals(new AddRequiredIngredientsCommand(INDEX_SECOND,
+                REQUIRED_INGREDIENTS_STUB)));
 
         // different recipe -> returns false
-        assertFalse(standardCommand.equals(new RecipeItemCommand(INDEX_FIRST, new Recipe("Other recipe"))));
+        assertFalse(standardCommand.equals(new AddRequiredIngredientsCommand(INDEX_FIRST, new HashMap<>())));
     }
 }

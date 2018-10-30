@@ -6,6 +6,7 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
+import java.util.function.Predicate;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -109,6 +110,19 @@ public class UniqueItemList implements Iterable<Item> {
      */
     public void sortItemsByPrice() {
         FXCollections.sort(internalList, Comparator.comparingDouble(item -> item.getPrice().getValue()));
+    }
+
+    /**
+     * Finds the item with the equivalent name from the list.
+     * The item must exist in the list and be the only one with this name.
+     */
+    public Item find(Name name) throws ItemNotFoundException {
+        requireNonNull(name);
+        Predicate<Item> predicate = item -> item.getName().toString().equalsIgnoreCase(name.toString());
+        if (!internalList.stream().anyMatch(predicate)) {
+            throw new ItemNotFoundException();
+        }
+        return internalList.stream().filter(predicate).findFirst().get();
     }
 
     /**
