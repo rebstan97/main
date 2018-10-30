@@ -11,11 +11,15 @@ public class Price {
 
     public static final String MESSAGE_PRICE_CONSTRAINTS =
             "Price should only contain numbers, and it should be at most 2 decimal place";
+    public static final String MESSAGE_PERCENT_CONSTRAINTS =
+            "Percent should only contain numbers, and it should be at most 2 digits";
     private static final String DECIMAL_PLACE_REGEX = "\\d{0,2}";
     public static final String PRICE_VALIDATION_REGEX = "\\d+" + ".?" + DECIMAL_PLACE_REGEX;
+    public static final String PERCENT_VALIDATION_REGEX = "\\d{0,2}";
     private static final double MAX_PERCENT = 100.0;
-    private double value;
     private final double originalValue;
+    private double value;
+    private double percent;
 
     /**
      * Constructs a {@code Price}.
@@ -27,6 +31,7 @@ public class Price {
         checkArgument(isValidPrice(price), MESSAGE_PRICE_CONSTRAINTS);
         originalValue = Double.parseDouble(price);
         value = Double.parseDouble(price);
+        percent = 0;
     }
 
     /**
@@ -34,11 +39,12 @@ public class Price {
      *
      * @param price A valid price.
      */
-    public Price(String price, String originalPrice) {
+    public Price(String price, String originalPrice, String percent) {
         requireNonNull(price);
         checkArgument(isValidPrice(price), MESSAGE_PRICE_CONSTRAINTS);
         originalValue = Double.parseDouble(originalPrice);
         value = Double.parseDouble(price);
+        this.percent = Double.parseDouble(percent);
     }
 
     /**
@@ -46,6 +52,13 @@ public class Price {
      */
     public static boolean isValidPrice(String test) {
         return test.matches(PRICE_VALIDATION_REGEX);
+    }
+
+    /**
+     * Returns true if a given string is a valid percent.
+     */
+    public static boolean isValidPercent(String test) {
+        return test.matches(PERCENT_VALIDATION_REGEX);
     }
 
     public double getValue() {
@@ -56,7 +69,12 @@ public class Price {
         return originalValue;
     }
 
+    public double getPercent() {
+        return percent;
+    }
+
     public void setValue(double percent) {
+        this.percent = percent;
         value = originalValue * ((MAX_PERCENT - percent) / MAX_PERCENT);
     }
 
