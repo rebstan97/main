@@ -2,15 +2,13 @@ package seedu.address.logic.parser.accounts;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ID;
-
-import java.util.stream.Stream;
+import static seedu.address.logic.parser.ParserUtil.arePrefixesPresent;
 
 import seedu.address.logic.commands.accounts.DeregisterCommand;
 import seedu.address.logic.parser.ArgumentMultimap;
 import seedu.address.logic.parser.ArgumentTokenizer;
 import seedu.address.logic.parser.Parser;
 import seedu.address.logic.parser.ParserUtil;
-import seedu.address.logic.parser.Prefix;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.accounts.Account;
 import seedu.address.model.accounts.Username;
@@ -37,13 +35,5 @@ public class DeregisterCommandParser implements Parser<DeregisterCommand> {
 
         // Password not required since it does not involve a password to deregister the account
         return new DeregisterCommand(new Account(username));
-    }
-
-    /**
-     * Returns true if none of the prefixes contains empty {@code Optional} values in the given {@code
-     * ArgumentMultimap}.
-     */
-    private static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
-        return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
     }
 }
