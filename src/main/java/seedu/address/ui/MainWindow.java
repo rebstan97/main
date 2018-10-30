@@ -56,7 +56,6 @@ public class MainWindow extends UiPart<Stage> {
     private IngredientListPanel ingredientListPanel;
     private ItemListPanel itemListPanel;
     private ReservationListPanel reservationListPanel;
-    private ItemStackPanel itemStackPanel;
 
     private Config config;
     private UserPrefs prefs;
@@ -331,7 +330,7 @@ public class MainWindow extends UiPart<Stage> {
     private void handleItemPanelSelectionChangedEvent(ItemPanelSelectionChangedEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
         browserPlaceholder.getChildren().clear();
-        itemStackPanel = new ItemStackPanel(event.getNewSelection());
+        ItemStackPanel itemStackPanel = new ItemStackPanel(event.getNewSelection());
         browserPlaceholder.getChildren().add(itemStackPanel.getRoot());
     }
 
