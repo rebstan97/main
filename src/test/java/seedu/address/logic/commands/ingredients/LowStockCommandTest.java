@@ -24,7 +24,7 @@ public class LowStockCommandTest {
     private Model model;
     private Model expectedModel;
     private CommandHistory commandHistory = new CommandHistory();
-    Predicate<Ingredient> predicate;
+    private Predicate<Ingredient> predicate;
 
     @Before
     public void setUp() {
