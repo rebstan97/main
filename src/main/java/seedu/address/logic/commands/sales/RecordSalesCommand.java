@@ -140,6 +140,3 @@ public class RecordSalesCommand extends Command {
      */
     public static class RequiredIngredientsNotFoundException extends Exception {}
 }
-
-// update UGDG -> remove delete/edit by name and date, specify how record sales command works
-
