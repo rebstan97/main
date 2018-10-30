@@ -210,8 +210,7 @@ public class AddressBookParser {
             return new EditIngredientCommandParser().parse(arguments);
 
         case StockUpCommand.COMMAND_WORD:
-            return new StockUpCommandParser().
-                    parse(arguments);
+            return new StockUpCommandParser().parse(arguments);
 
         case AddItemCommand.COMMAND_WORD:
         case AddItemCommand.COMMAND_ALIAS:
