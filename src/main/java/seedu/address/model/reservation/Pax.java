@@ -13,7 +13,7 @@ public class Pax {
     public static final String MESSAGE_PAX_CONSTRAINTS =
             "Pax value should only contain numbers, and it should be at least 1 digit long";
     public static final String PAX_VALIDATION_REGEX = "\\d{1,}";
-    private final String value;
+    public final String value;
 
     /**
      * Constructs a {@code Pax}.
@@ -35,22 +35,19 @@ public class Pax {
 
     @Override
     public String toString() {
-        return getValue();
+        return value;
     }
 
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof Pax // instanceof handles nulls
-                    && getValue().equals(((Pax) other).getValue())); // state check
+                    && value.equals(((Pax) other).value)); // state check
     }
 
     @Override
     public int hashCode() {
-        return getValue().hashCode();
+        return value.hashCode();
     }
 
-    public String getValue() {
-        return value;
-    }
 }

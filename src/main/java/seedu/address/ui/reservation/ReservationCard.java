@@ -60,7 +60,7 @@ public class ReservationCard extends UiPart<Region> {
         this.reservation = reservation;
         id.setText(displayedIndex + ". ");
         name.setText(reservation.getName().toString());
-        pax.setText("Pax: " + reservation.getPax().getValue());
+        pax.setText("Pax: " + reservation.getPax().value);
         date.setText("Date: " + reservation.getDate().toString());
         time.setText("Time: " + reservation.getTime().toString());
         remark.setText(reservation.getRemark().value);

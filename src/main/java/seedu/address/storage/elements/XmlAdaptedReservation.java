@@ -56,7 +56,7 @@ public class XmlAdaptedReservation {
      */
     public XmlAdaptedReservation(Reservation source) {
         name = source.getName().toString();
-        pax = source.getPax().getValue();
+        pax = source.getPax().value;
         dateTime = source.getDateTime().toString();
         remark = source.getRemark().value;
         tagged = source.getTags().stream()
