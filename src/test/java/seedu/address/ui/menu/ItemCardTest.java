@@ -67,7 +67,7 @@ public class ItemCardTest extends GuiUnitTest {
         // verify id is displayed correctly
         assertEquals(Integer.toString(expectedId) + ". ", itemCardHandle.getId());
 
-        // verify person details are displayed correctly
+        // verify item details are displayed correctly
         assertCardDisplaysItem(expectedItem, itemCardHandle);
     }
 }
