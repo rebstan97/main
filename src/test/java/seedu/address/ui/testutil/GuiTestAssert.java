@@ -212,7 +212,7 @@ public class GuiTestAssert {
     public static void assertCardDisplaysReservation(Reservation expectedReservation,
             ReservationCardHandle actualCard) {
         assertEquals(expectedReservation.getName().toString(), actualCard.getName());
-        assertEquals("Pax: " + expectedReservation.getPax().value, actualCard.getPax());
+        assertEquals("Pax: " + expectedReservation.getPax().getValue(), actualCard.getPax());
         assertEquals("Date: " + expectedReservation.getDate().toString(), actualCard.getDate());
         assertEquals("Time: " + expectedReservation.getTime().toString(), actualCard.getTime());
         assertTagsEqualForReservation(expectedReservation, actualCard);
