@@ -19,7 +19,7 @@
       <padding>
         <Insets bottom="5" left="15" right="5" top="5" />
       </padding>
-      <Label fx:id="name" text="\$name"/>
+      <Label fx:id="name" styleClass="label-panel" text="\$name"/>
       <FlowPane fx:id="tags" />
       <Label fx:id="price" styleClass="label-panel" text="\$price" />
       <Label fx:id="percent" styleClass="label-panel" text="\$percent" />
