@@ -95,8 +95,8 @@ public class ReservationCardHandle extends NodeHandle<Node> {
     public boolean equals(Reservation reservation) {
         return getName().equals(reservation.getName().toString())
                 && getPax().equals(reservation.getPax().value)
-                && getDate().equals(reservation.getDateTime().toLocalDate().toString())
-                && getTime().equals(reservation.getDateTime().toLocalTime().toString())
+                && getDate().equals(reservation.getDate().toString())
+                && getTime().equals(reservation.getTime().toString())
                 && ImmutableMultiset.copyOf(getTags()).equals(ImmutableMultiset.copyOf(reservation.getTags().stream()
                         .map(tag -> tag.tagName)
                         .collect(Collectors.toList())));
