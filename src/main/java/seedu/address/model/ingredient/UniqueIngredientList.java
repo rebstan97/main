@@ -96,14 +96,14 @@ public class UniqueIngredientList implements Iterable<Ingredient> {
     }
 
     /**
-     * Stocks up the ingredients which are keys in HashMap {@code recipe} by increasing the number of units of each
-     * ingredient.
+     * Stocks up the ingredients which are keys in HashMap {@code requiredIngredients} by increasing the number
+     * of units of each ingredient.
      * @throws  IngredientNotFoundException if the ingredient does not exist in the list.
      */
-    public void stockUp(HashMap<IngredientName, Integer> recipe) throws IngredientNotFoundException {
-        requireNonNull(recipe);
+    public void stockUp(HashMap<IngredientName, Integer> requiredIngredients) throws IngredientNotFoundException {
+        requireNonNull(requiredIngredients);
         HashMap<IngredientName, Integer> stockedUpIngredients = new HashMap<>();
-        for (HashMap.Entry<IngredientName, Integer> ingredientPair : recipe.entrySet()) {
+        for (HashMap.Entry<IngredientName, Integer> ingredientPair : requiredIngredients.entrySet()) {
             IngredientName name = ingredientPair.getKey();
             Integer unitsToAdd = ingredientPair.getValue();
 
@@ -119,20 +119,21 @@ public class UniqueIngredientList implements Iterable<Ingredient> {
             Ingredient stockedUpIngredient = new Ingredient(ingredient.getName(), ingredient.getUnit(),
                     ingredient.getPrice(), ingredient.getMinimum(), updatedNumUnits);
             setIngredient(ingredient, stockedUpIngredient);
+            stockedUpIngredients.put(name, unitsToAdd);
         }
     }
 
     /**
-     * Consumes the ingredients which are keys in HashMap {@code recipe} by decreasing the number of units of each
-     * ingredient.
+     * Consumes the ingredients which are keys in HashMap {@code requiredIngredients} by decreasing the number
+     * of units of each ingredient.
      * @throws  IngredientNotFoundException if the ingredient does not exist in the list.
      * @throws  IngredientNotEnoughException if the ingredient does not have sufficient units.
      */
-    public void consume(HashMap<IngredientName, Integer> recipe) throws IngredientNotFoundException,
+    public void consume(HashMap<IngredientName, Integer> requiredIngredients) throws IngredientNotFoundException,
             IngredientNotEnoughException {
-        requireNonNull(recipe);
+        requireNonNull(requiredIngredients);
         HashMap<IngredientName, Integer> consumedIngredients = new HashMap<>();
-        for (HashMap.Entry<IngredientName, Integer> ingredientPair : recipe.entrySet()) {
+        for (HashMap.Entry<IngredientName, Integer> ingredientPair : requiredIngredients.entrySet()) {
             IngredientName name = ingredientPair.getKey();
             Integer unitsToConsume = ingredientPair.getValue();
 
@@ -149,11 +150,11 @@ public class UniqueIngredientList implements Iterable<Ingredient> {
                 throw new IngredientNotEnoughException();
             }
 
-            consumedIngredients.put(name, unitsToConsume);
             NumUnits updatedNumUnits = ingredient.getNumUnits().decrease(unitsToConsume);
             Ingredient consumedIngredient = new Ingredient(ingredient.getName(), ingredient.getUnit(),
                     ingredient.getPrice(), ingredient.getMinimum(), updatedNumUnits);
             setIngredient(ingredient, consumedIngredient);
+            consumedIngredients.put(name, unitsToConsume);
         }
     }
 
