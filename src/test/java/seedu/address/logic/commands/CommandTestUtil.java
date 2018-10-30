@@ -146,8 +146,8 @@ public class CommandTestUtil {
     public static final String VALID_UNIT_BROCCOLI = "kilograms";
     public static final String VALID_PRICE_APPLE = "1.90";
     public static final String VALID_PRICE_BROCCOLI = "6.50";
-    public static final String VALID_MINIMUM_APPLE = "3";
-    public static final String VALID_MINIMUM_BROCCOLI = "5";
+    public static final int VALID_MINIMUM_APPLE = 3;
+    public static final int VALID_MINIMUM_BROCCOLI = 5;
     public static final int VALID_NUMUNITS_APPLE = 10;
     public static final int VALID_NUMUNITS_BROCCOLI = 28;
 

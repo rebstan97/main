@@ -54,7 +54,8 @@ public class ParserUtilTest {
     private static final String VALID_INGREDIENT_NAME = "Chicken Drumstick";
     private static final String VALID_INGREDIENT_UNIT = "5-kilogram bag";
     private static final String VALID_INGREDIENT_PRICE = "9.90";
-    private static final String VALID_INGREDIENT_MINIMUM = "10";
+    private static final String VALID_INGREDIENT_MINIMUM_STRING = "10";
+    private static final int VALID_INGREDIENT_MINIMUM = 10;
 
     private static final String VALID_USERNAME = "azhikai";
     private static final String VALID_PASSWORD = "1122qq";
@@ -312,7 +313,7 @@ public class ParserUtilTest {
     @Test
     public void parseMinimumUnit_validValueWithoutWhitespace_returnsMin() throws Exception {
         MinimumUnit expectedMin = new MinimumUnit(VALID_INGREDIENT_MINIMUM);
-        assertEquals(expectedMin, ParserUtil.parseMinimumUnit(VALID_INGREDIENT_MINIMUM));
+        assertEquals(expectedMin, ParserUtil.parseMinimumUnit(VALID_INGREDIENT_MINIMUM_STRING));
     }
 
     @Test

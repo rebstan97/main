@@ -295,10 +295,10 @@ public class ParserUtil {
     public static MinimumUnit parseMinimumUnit(String minimum) throws ParseException {
         requireNonNull(minimum);
         String trimmedMinimum = minimum.trim();
-        if (!MinimumUnit.isValidMinimum(trimmedMinimum)) {
+        if (!StringUtil.isUnsignedInteger(trimmedMinimum)) {
             throw new ParseException(MinimumUnit.MESSAGE_MINIMUM_CONSTRAINTS);
         }
-        return new MinimumUnit(trimmedMinimum);
+        return new MinimumUnit(parseInt(minimum));
     }
 
     /**
