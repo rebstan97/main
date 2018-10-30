@@ -6,6 +6,7 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import java.util.function.Predicate;
 
 import javafx.collections.FXCollections;
@@ -96,11 +97,11 @@ public class UniqueIngredientList implements Iterable<Ingredient> {
     }
 
     /**
-     * Stocks up the ingredients which are keys in HashMap {@code requiredIngredients} by increasing the number
+     * Stocks up the ingredients which are keys in Map {@code requiredIngredients} by increasing the number
      * of units of each ingredient.
      * @throws  IngredientNotFoundException if the ingredient does not exist in the list.
      */
-    public void stockUp(HashMap<IngredientName, Integer> requiredIngredients) throws IngredientNotFoundException {
+    public void stockUp(Map<IngredientName, Integer> requiredIngredients) throws IngredientNotFoundException {
         requireNonNull(requiredIngredients);
         HashMap<IngredientName, Integer> stockedUpIngredients = new HashMap<>();
         for (HashMap.Entry<IngredientName, Integer> ingredientPair : requiredIngredients.entrySet()) {
@@ -124,12 +125,12 @@ public class UniqueIngredientList implements Iterable<Ingredient> {
     }
 
     /**
-     * Consumes the ingredients which are keys in HashMap {@code requiredIngredients} by decreasing the number
+     * Consumes the ingredients which are keys in Map {@code requiredIngredients} by decreasing the number
      * of units of each ingredient.
      * @throws  IngredientNotFoundException if the ingredient does not exist in the list.
      * @throws  IngredientNotEnoughException if the ingredient does not have sufficient units.
      */
-    public void consume(HashMap<IngredientName, Integer> requiredIngredients) throws IngredientNotFoundException,
+    public void consume(Map<IngredientName, Integer> requiredIngredients) throws IngredientNotFoundException,
             IngredientNotEnoughException {
         requireNonNull(requiredIngredients);
         HashMap<IngredientName, Integer> consumedIngredients = new HashMap<>();

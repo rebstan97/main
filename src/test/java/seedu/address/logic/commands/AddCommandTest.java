@@ -330,12 +330,12 @@ public class AddCommandTest {
         }
 
         @Override
-        public void stockUpIngredients(HashMap<IngredientName, Integer> requiredIngredients) {
+        public void stockUpIngredients(Map<IngredientName, Integer> requiredIngredients) {
             throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void consumeIngredients(HashMap<IngredientName, Integer> requiredIngredients) {
+        public void consumeIngredients(Map<IngredientName, Integer> requiredIngredients) {
             throw new AssertionError("This method should not be called.");
         }
 

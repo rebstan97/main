@@ -5,6 +5,7 @@ import static java.util.Objects.requireNonNull;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
 
@@ -366,9 +367,9 @@ public class AddressBook implements ReadOnlyAddressBook {
 
     /**
      * Increases the number of units of {@code Ingredient} by {@Integer}. The ingredient key of
-     * HashMap {@code requiredIngredients} must exist in the restaurant book.
+     * Map {@code requiredIngredients} must exist in the restaurant book.
      */
-    public void stockUpIngredients(HashMap<IngredientName, Integer> requiredIngredients) {
+    public void stockUpIngredients(Map<IngredientName, Integer> requiredIngredients) {
         requireNonNull(requiredIngredients);
 
         ingredients.stockUp(requiredIngredients);
@@ -376,9 +377,9 @@ public class AddressBook implements ReadOnlyAddressBook {
 
     /**
      * Reduces the number of units of {@code Ingredient} by {@Integer}. The ingredient key of
-     * HashMap {@code requiredIngredients} must exist in the restaurant book.
+     * Map {@code requiredIngredients} must exist in the restaurant book.
      */
-    public void consumeIngredients(HashMap<IngredientName, Integer> requiredIngredients) {
+    public void consumeIngredients(Map<IngredientName, Integer> requiredIngredients) {
         requireNonNull(requiredIngredients);
 
         ingredients.consume(requiredIngredients);

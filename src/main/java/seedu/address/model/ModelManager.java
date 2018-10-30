@@ -263,7 +263,7 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
-    public void stockUpIngredients(HashMap<IngredientName, Integer> requiredIngredients) {
+    public void stockUpIngredients(Map<IngredientName, Integer> requiredIngredients) {
         requireAllNonNull(requiredIngredients);
 
         versionedAddressBook.stockUpIngredients(requiredIngredients);
@@ -271,7 +271,7 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
-    public void consumeIngredients(HashMap<IngredientName, Integer> requiredIngredients) {
+    public void consumeIngredients(Map<IngredientName, Integer> requiredIngredients) {
         requireAllNonNull(requiredIngredients);
 
         versionedAddressBook.consumeIngredients(requiredIngredients);
