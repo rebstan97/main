@@ -22,6 +22,7 @@ import seedu.address.commons.events.ui.DisplayIngredientListRequestEvent;
 import seedu.address.commons.events.ui.DisplayItemListRequestEvent;
 import seedu.address.commons.events.ui.DisplaySalesReportEvent;
 import seedu.address.commons.events.ui.ExitAppRequestEvent;
+import seedu.address.commons.events.ui.ItemPanelSelectionChangedEvent;
 import seedu.address.commons.events.ui.LoginEvent;
 import seedu.address.commons.events.ui.LogoutEvent;
 import seedu.address.commons.events.ui.ShowHelpRequestEvent;
@@ -30,6 +31,7 @@ import seedu.address.logic.Logic;
 import seedu.address.model.UserPrefs;
 import seedu.address.ui.accounts.UsernameDisplay;
 import seedu.address.ui.menu.ItemListPanel;
+import seedu.address.ui.menu.ItemStackPanel;
 import seedu.address.ui.reservation.ReservationListPanel;
 import seedu.address.ui.sales.RecordListPanel;
 import seedu.address.ui.sales.SalesReportWindow;
@@ -54,6 +56,7 @@ public class MainWindow extends UiPart<Stage> {
     private IngredientListPanel ingredientListPanel;
     private ItemListPanel itemListPanel;
     private ReservationListPanel reservationListPanel;
+    private ItemStackPanel itemStackPanel;
 
     private Config config;
     private UserPrefs prefs;
@@ -322,6 +325,14 @@ public class MainWindow extends UiPart<Stage> {
     private void handleShowHelpEvent(ShowHelpRequestEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
         handleHelp();
+    }
+
+    @Subscribe
+    private void handleItemPanelSelectionChangedEvent(ItemPanelSelectionChangedEvent event) {
+        logger.info(LogsCenter.getEventHandlingLogMessage(event));
+        browserPlaceholder.getChildren().clear();
+        itemStackPanel = new ItemStackPanel(event.getNewSelection());
+        browserPlaceholder.getChildren().add(itemStackPanel.getRoot());
     }
 
     @Subscribe

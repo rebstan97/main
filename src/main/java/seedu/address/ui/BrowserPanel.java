@@ -88,11 +88,12 @@ public class BrowserPanel extends UiPart<Region> {
         loadPersonPage(event.getNewSelection());
     }
 
+    /*
     @Subscribe
     private void handleItemPanelSelectionChangedEvent(ItemPanelSelectionChangedEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
         loadItemPage(event.getNewSelection());
-    }
+    }*/
 
     @Subscribe
     private void handleSalesRecordPanelSelectionChangedEvent(RecordPanelSelectionChangedEvent event) {
