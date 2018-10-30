@@ -741,7 +741,7 @@ Examples:
 ==== Removing out-of-stock dishes from daily menu `[coming in v2.0]`
 
 Removes out-of-stock dishes that require ingredients with low stock count from the daily menu. +
-Format: `remove-oos-dish`
+Format: `remove-oos-dish` or `rod`
 
 ==== Show history of stockup `[coming in v2.0]`
 
