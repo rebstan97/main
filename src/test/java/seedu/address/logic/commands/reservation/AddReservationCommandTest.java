@@ -7,6 +7,8 @@ import static org.junit.Assert.assertTrue;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.function.Predicate;
 
 import org.junit.Rule;
@@ -25,6 +27,7 @@ import seedu.address.model.accounts.Account;
 import seedu.address.model.ingredient.Ingredient;
 import seedu.address.model.ingredient.IngredientName;
 import seedu.address.model.menu.Item;
+import seedu.address.model.menu.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.reservation.Reservation;
 import seedu.address.model.salesrecord.Date;
@@ -234,6 +237,16 @@ public class AddReservationCommandTest {
         }
 
         @Override
+        public Item findItem(Name name) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public Map<IngredientName, Integer> getRequiredIngredients(Item item) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void removeTagForMenu(Tag tag) {
             throw new AssertionError("This method should not be called.");
         }
@@ -276,6 +289,16 @@ public class AddReservationCommandTest {
 
         @Override
         public void updateIngredient(Ingredient target, Ingredient editedIngredient) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void stockUpIngredients(HashMap<IngredientName, Integer> recipe) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void consumeIngredients(HashMap<IngredientName, Integer> recipe) {
             throw new AssertionError("This method should not be called.");
         }
 

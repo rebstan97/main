@@ -2,7 +2,7 @@ package seedu.address.logic.parser.menu;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ENDINGINDEX;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ENDING_INDEX;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PERCENT;
 
 import seedu.address.commons.core.index.Index;
@@ -32,7 +32,7 @@ public class DiscountItemCommandParser implements Parser<DiscountItemCommand> {
      */
     public DiscountItemCommand parse(String args) throws ParseException {
         requireNonNull(args);
-        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_ENDINGINDEX, PREFIX_PERCENT);
+        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_ENDING_INDEX, PREFIX_PERCENT);
 
         Index index = Index.fromZeroBased(0); //Dummy value
         if (StringUtil.isNonZeroUnsignedInteger(argMultimap.getPreamble())) {
@@ -53,9 +53,9 @@ public class DiscountItemCommandParser implements Parser<DiscountItemCommand> {
         double percent = Double.parseDouble(trimmedPercent);
 
         Index endingIndex = index;
-        if (argMultimap.getValue(PREFIX_ENDINGINDEX).isPresent()) {
+        if (argMultimap.getValue(PREFIX_ENDING_INDEX).isPresent()) {
             try {
-                endingIndex = ParserUtil.parseIndex(argMultimap.getValue(PREFIX_ENDINGINDEX).get());
+                endingIndex = ParserUtil.parseIndex(argMultimap.getValue(PREFIX_ENDING_INDEX).get());
             } catch (ParseException pe) {
                 throw new ParseException(
                         String.format(MESSAGE_INVALID_COMMAND_FORMAT, DiscountItemCommand.MESSAGE_USAGE), pe);

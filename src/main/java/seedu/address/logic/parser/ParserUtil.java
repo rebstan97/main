@@ -1,5 +1,6 @@
 package seedu.address.logic.parser;
 
+import static java.lang.Integer.parseInt;
 import static java.util.Objects.requireNonNull;
 
 import java.util.Collection;
@@ -46,7 +47,7 @@ public class ParserUtil {
         if (!StringUtil.isNonZeroUnsignedInteger(trimmedIndex)) {
             throw new ParseException(MESSAGE_INVALID_INDEX);
         }
-        return Index.fromOneBased(Integer.parseInt(trimmedIndex));
+        return Index.fromOneBased(parseInt(trimmedIndex));
     }
 
     /**
@@ -247,7 +248,7 @@ public class ParserUtil {
         String trimmedIndexOrName = indexOrName.trim();
 
         if (StringUtil.isNonZeroUnsignedInteger(trimmedIndexOrName)) {
-            return Index.fromOneBased(Integer.parseInt(trimmedIndexOrName));
+            return Index.fromOneBased(parseInt(trimmedIndexOrName));
         }
 
         if (IngredientName.isValidName(trimmedIndexOrName)) {
@@ -308,10 +309,10 @@ public class ParserUtil {
     public static NumUnits parseNumUnits(String numUnits) throws ParseException {
         requireNonNull(numUnits);
         String trimmedNumUnits = numUnits.trim();
-        if (!NumUnits.isValidNumUnits(trimmedNumUnits)) {
+        if (!StringUtil.isUnsignedInteger(trimmedNumUnits)) {
             throw new ParseException(NumUnits.MESSAGE_NUMUNITS_CONSTRAINTS);
         }
-        return new NumUnits(trimmedNumUnits);
+        return new NumUnits(parseInt(trimmedNumUnits));
     }
 
     /**
