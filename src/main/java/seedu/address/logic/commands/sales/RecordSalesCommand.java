@@ -23,6 +23,7 @@ import seedu.address.model.menu.Item;
 import seedu.address.model.menu.Name;
 import seedu.address.model.menu.exceptions.ItemNotFoundException;
 import seedu.address.model.salesrecord.SalesRecord;
+import seedu.address.model.salesrecord.exceptions.RequiredIngredientsNotFoundException;
 
 /**
  * Record the sales volume of a menu item
@@ -134,9 +135,4 @@ public class RecordSalesCommand extends Command {
                 || (other instanceof RecordSalesCommand // instanceof handles nulls
                     && toAdd.equals(((RecordSalesCommand) other).toAdd));
     }
-
-    /**
-     * Signal that the ingredients required to make the item has not been specified in menu section.
-     */
-    public static class RequiredIngredientsNotFoundException extends Exception {}
 }
