@@ -124,16 +124,25 @@ public class UniqueIngredientList implements Iterable<Ingredient> {
     public void consume(HashMap<IngredientName, Integer> recipe) throws IngredientNotFoundException,
             IngredientNotEnoughException {
         requireNonNull(recipe);
+        HashMap<IngredientName, Integer> consumedIngredients = new HashMap<>();
         for (HashMap.Entry<IngredientName, Integer> ingredientPair : recipe.entrySet()) {
             IngredientName name = ingredientPair.getKey();
             Integer unitsToConsume = ingredientPair.getValue();
 
-            Ingredient ingredient = find(name);
+            Ingredient ingredient;
+            try {
+                ingredient = find(name);
+            } catch (IngredientNotFoundException e) {
+                stockUp(consumedIngredients);
+                throw new IngredientNotFoundException();
+            }
 
             if (ingredient.getNumUnits().getNumberOfUnits() < unitsToConsume) {
+                stockUp(consumedIngredients);
                 throw new IngredientNotEnoughException();
             }
 
+            consumedIngredients.put(name, unitsToConsume);
             NumUnits updatedNumUnits = ingredient.getNumUnits().decrease(unitsToConsume);
             Ingredient consumedIngredient = new Ingredient(ingredient.getName(), ingredient.getUnit(),
                     ingredient.getPrice(), ingredient.getMinimum(), updatedNumUnits);
