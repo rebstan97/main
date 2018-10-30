@@ -14,7 +14,6 @@ import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.ingredient.Ingredient;
 import seedu.address.model.ingredient.IngredientName;
 import seedu.address.model.ingredient.exceptions.IngredientNotEnoughException;
 import seedu.address.model.ingredient.exceptions.IngredientNotFoundException;
@@ -145,5 +144,5 @@ public class RecordSalesCommand extends Command {
 
 // show ingredientsUsed in UI browser panel
 
-// update UGDG -> remove delete/edit by name and date
+// update UGDG -> remove delete/edit by name and date, specify how record sales command works
 

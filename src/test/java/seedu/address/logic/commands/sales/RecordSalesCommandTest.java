@@ -109,8 +109,8 @@ public class RecordSalesCommandTest {
 
         // add enough onion into ingredient list but no carrot
         int onionNeeded = validRecord.getQuantitySold().getValue() * 2;
-        Ingredient onion = new IngredientBuilder().withName("Onion").withNumUnits(onionNeeded).build();
-        modelStub.addIngredient(onion);
+        Ingredient enoughOnion = new IngredientBuilder().withName("Onion").withNumUnits(onionNeeded).build();
+        modelStub.addIngredient(enoughOnion);
 
         // carrot not found in ingredient list -> ingredient list should not be updated -> quantity of onion remains
         // unchanged
@@ -136,10 +136,10 @@ public class RecordSalesCommandTest {
 
         // add enough onion into ingredient list but not enough carrot
         int onionNeeded = validRecord.getQuantitySold().getValue() * 2;
-        Ingredient onion = new IngredientBuilder().withName("Onion").withNumUnits(onionNeeded).build();
-        Ingredient carrot = new IngredientBuilder().withName("Carrot").withNumUnits(3).build();
-        modelStub.addIngredient(onion);
-        modelStub.addIngredient(carrot);
+        Ingredient enoughOnion = new IngredientBuilder().withName("Onion").withNumUnits(onionNeeded).build();
+        Ingredient notEnoughCarrot = new IngredientBuilder().withName("Carrot").withNumUnits(3).build();
+        modelStub.addIngredient(enoughOnion);
+        modelStub.addIngredient(notEnoughCarrot);
 
         // carrot not enough -> ingredient list should not be updated -> quantity of onion and carrots remains unchanged
         CommandResult commandResult = new RecordSalesCommand(validRecord).execute(modelStub, commandHistory);
@@ -164,11 +164,11 @@ public class RecordSalesCommandTest {
 
         // add enough onion and carrot into ingredient list
         int onionNeeded = validRecord.getQuantitySold().getValue() * 2;
-        Ingredient onion = new IngredientBuilder().withName("Onion").withNumUnits(onionNeeded + 10).build();
+        Ingredient enoughOnion = new IngredientBuilder().withName("Onion").withNumUnits(onionNeeded + 10).build();
         int carrotNeeded = validRecord.getQuantitySold().getValue() * 3;
-        Ingredient carrot = new IngredientBuilder().withName("Carrot").withNumUnits(carrotNeeded + 5).build();
-        modelStub.addIngredient(onion);
-        modelStub.addIngredient(carrot);
+        Ingredient enoughCarrot = new IngredientBuilder().withName("Carrot").withNumUnits(carrotNeeded + 5).build();
+        modelStub.addIngredient(enoughOnion);
+        modelStub.addIngredient(enoughCarrot);
 
         // item exists in menu with required ingredients specified. Required ingredients all sufficient in ingredient
         // list -> ingredient list updated -> quantity of onion and carrot decreased
@@ -565,21 +565,23 @@ public class RecordSalesCommandTest {
         @Override
         public Item findItem(Name name) throws ItemNotFoundException {
             requireNonNull(name);
-            Predicate<Item> predicate = item -> item.getName().toString().equalsIgnoreCase(name.toString());
-            if (!itemsAdded.stream().anyMatch(predicate)) {
-                throw new ItemNotFoundException();
+            for (Item item : itemsAdded) {
+                if (item.getName().toString().equalsIgnoreCase(name.toString())) {
+                    return item;
+                }
             }
-            return itemsAdded.stream().filter(predicate).findFirst().get();
+                throw new ItemNotFoundException();
         }
 
         @Override
         public Ingredient findIngredient(IngredientName name) throws IngredientNotFoundException {
             requireNonNull(name);
-            Predicate<Ingredient> predicate = ingredient -> ingredient.getName().equalsIgnoreCase(name);
-            if (!ingredientsAdded.stream().anyMatch(predicate)) {
-                throw new IngredientNotFoundException();
+            for (Ingredient ingredient : ingredientsAdded) {
+                if (ingredient.getName().toString().equalsIgnoreCase(name.toString())) {
+                    return ingredient;
+                }
             }
-            return ingredientsAdded.stream().filter(predicate).findFirst().get();
+            throw new IngredientNotFoundException();
         }
 
         @Override
