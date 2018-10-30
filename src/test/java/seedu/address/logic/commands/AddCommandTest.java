@@ -374,11 +374,6 @@ public class AddCommandTest {
         }
 
         @Override
-        public void updateIngredientNameInRecordList(IngredientName target, IngredientName editedName) {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
         public ObservableList<SalesRecord> getFilteredRecordList() {
             throw new AssertionError("This method should not be called.");
         }

@@ -141,12 +141,5 @@ public class RecordSalesCommand extends Command {
     public static class RequiredIngredientsNotFoundException extends Exception {}
 }
 
-
-// API for edit ingredientUsed if ingredient name changes
-
-
-
-// show ingredientsUsed in UI browser panel
-
 // update UGDG -> remove delete/edit by name and date, specify how record sales command works
 

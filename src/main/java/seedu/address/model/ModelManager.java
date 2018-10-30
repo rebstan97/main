@@ -167,13 +167,6 @@ public class ModelManager extends ComponentManager implements Model {
         return versionedAddressBook.getSalesReport(date);
     }
 
-    @Override
-    public void updateIngredientNameInRecordList(IngredientName target, IngredientName editedName) {
-        requireAllNonNull(target, editedName);
-        versionedAddressBook.updateIngredientNameInRecordList(target, editedName);
-        indicateAddressBookChanged();
-    }
-
     //=========== Filtered Sales Record List Accessors =============================================================
 
 

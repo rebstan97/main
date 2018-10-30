@@ -121,22 +121,6 @@ public class UniqueRecordList implements Iterable<SalesRecord> {
         return new SalesReport(date, FXCollections.unmodifiableObservableList(observableRecordList));
     }
 
-    /**
-     * Update {@code target} IngredientName to {@code editedName} IngredientName in
-     * ingredientUsed attribute of every SalesRecord, if {@code target} exists
-     */
-    public void updateIngredientName(IngredientName target, IngredientName editedName) {
-        requireAllNonNull(target, editedName);
-
-        for (SalesRecord salesRecord: internalList) {
-            Map<IngredientName, Integer> ingredientUsed = salesRecord.getIngredientsUsed();
-            if (ingredientUsed.containsKey(target)) {
-                Integer quantityUsed = ingredientUsed.remove(target);
-                ingredientUsed.put(editedName, quantityUsed);
-            }
-        }
-    }
-
     @Override
     public Iterator<SalesRecord> iterator() {
         return internalList.iterator();
