@@ -25,6 +25,7 @@ import seedu.address.commons.events.ui.DisplaySalesReportEvent;
 import seedu.address.commons.events.ui.ExitAppRequestEvent;
 import seedu.address.commons.events.ui.LoginEvent;
 import seedu.address.commons.events.ui.LogoutEvent;
+import seedu.address.commons.events.ui.RecordPanelSelectionChangedEvent;
 import seedu.address.commons.events.ui.ShowHelpRequestEvent;
 import seedu.address.commons.events.ui.reservation.DisplayReservationListRequestEvent;
 import seedu.address.logic.Logic;
@@ -33,6 +34,7 @@ import seedu.address.ui.accounts.UsernameDisplay;
 import seedu.address.ui.menu.ItemListPanel;
 import seedu.address.ui.reservation.ReservationListPanel;
 import seedu.address.ui.sales.RecordListPanel;
+import seedu.address.ui.sales.RecordStackPanel;
 import seedu.address.ui.sales.SalesReportWindow;
 
 /**
@@ -346,15 +348,23 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     @Subscribe
-    private void handleDisplayReservationEvent(DisplayReservationListRequestEvent event) {
-        logger.info(LogsCenter.getEventHandlingLogMessage(event));
-        handleSwitchToReservation();
-    }
-
-    @Subscribe
     private void handleDisplayRecordListEvent(DisplayRecordListRequestEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
         handleSwitchToSales();
+    }
+
+    @Subscribe
+    private void handleRecordPanelSelectionChangedEvent(RecordPanelSelectionChangedEvent event) {
+        logger.info(LogsCenter.getEventHandlingLogMessage(event));
+        browserPlaceholder.getChildren().clear();
+        RecordStackPanel recordStackPanel = new RecordStackPanel(event.getNewSelection());
+        browserPlaceholder.getChildren().add(recordStackPanel.getRoot());
+    }
+
+    @Subscribe
+    private void handleDisplayReservationEvent(DisplayReservationListRequestEvent event) {
+        logger.info(LogsCenter.getEventHandlingLogMessage(event));
+        handleSwitchToReservation();
     }
 
     @Subscribe

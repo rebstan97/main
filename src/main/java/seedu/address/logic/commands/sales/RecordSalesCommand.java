@@ -120,11 +120,12 @@ public class RecordSalesCommand extends Command {
         // compute the total ingredients used after factoring quantity sold
         ingredientsUsed.replaceAll((ingredient, quantityUsed) -> quantityUsed * quantitySold);
 
+        // saves the ingredientsUsed in the SalesRecord
+        toAdd = toAdd.setIngredientsUsed(ingredientsUsed);
+
         // update ingredient list
         model.consumeIngredients(ingredientsUsed);
 
-        // saves the ingredientsUsed in the SalesRecord
-        toAdd = toAdd.setIngredientsUsed(ingredientsUsed);
     }
 
     @Override

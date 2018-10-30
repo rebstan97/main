@@ -1,5 +1,7 @@
 package seedu.address.ui.sales;
 
+import java.text.NumberFormat;
+import java.util.Locale;
 import java.util.Map;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -14,6 +16,9 @@ import seedu.address.ui.UiPart;
  */
 public class RecordStackPanel extends UiPart<Region> {
     private static final String FXML = "RecordStackPanel.fxml";
+    public static final String MESSAGE_REQUIRED_INGREDIENTS_NOT_FOUND = "Data unavailable due to one of the "
+            + "following reasons - \n\n1) The ingredients required to make this item were not specified at the time of "
+            + "recording.\n\n2) This record was edited some time in the past.";
 
     public final SalesRecord salesRecord;
 
@@ -35,11 +40,13 @@ public class RecordStackPanel extends UiPart<Region> {
     public RecordStackPanel(SalesRecord salesRecord) {
         super(FXML);
         this.salesRecord = salesRecord;
-        date.setText(salesRecord.getDate().toString());
+        date.setText(salesRecord.getDate().toString() + " (" + salesRecord.getDate().getDayOfWeek() + ")");
         itemName.setText(salesRecord.getName().toString());
         quantitySold.setText(salesRecord.getQuantitySold().toString());
-        price.setText(salesRecord.getPrice().toString());
-        totalRevenue.setText(String.valueOf(salesRecord.getRevenue()));
+
+        NumberFormat currencyFormatter = NumberFormat.getCurrencyInstance(Locale.US);
+        price.setText(currencyFormatter.format(salesRecord.getPrice().getValue()));
+        totalRevenue.setText(currencyFormatter.format(salesRecord.getRevenue()));
         ingredientUsed.setText(ingredientUsedToString(salesRecord.getIngredientsUsed()));
     }
 
@@ -47,11 +54,14 @@ public class RecordStackPanel extends UiPart<Region> {
      * Returns the string representation of the given {@code ingredientUsed}
      */
     private String ingredientUsedToString(Map<IngredientName, Integer> ingredientUsed) {
+        if (ingredientUsed.isEmpty()) {
+            return MESSAGE_REQUIRED_INGREDIENTS_NOT_FOUND;
+        }
         StringBuilder stringBuilder = new StringBuilder();
         int index = 1;
         for (Map.Entry<IngredientName, Integer> entry : ingredientUsed.entrySet()) {
-            stringBuilder.append(index).append(". ").append(entry.getKey().toString())
-                    .append("\t\t\t").append(entry.getValue().toString());
+            stringBuilder.append(index).append(") ").append(entry.getKey().toString())
+                    .append(" - ").append(entry.getValue().toString()).append(" units").append("\n");
             index ++;
         }
         return stringBuilder.toString();
