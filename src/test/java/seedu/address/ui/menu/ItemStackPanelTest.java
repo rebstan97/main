@@ -4,6 +4,8 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static seedu.address.ui.testutil.GuiTestAssert.assertStackPanelDisplaysItem;
 
+import java.util.Map;
+
 import org.junit.Test;
 
 import guitests.guihandles.menu.ItemStackPanelHandle;
@@ -15,17 +17,38 @@ public class ItemStackPanelTest extends GuiUnitTest {
 
     @Test
     public void display() {
-        // no tags
-        Item itemWithNoTags = new ItemBuilder().withTags(new String[0]).build();
+        // no tags, recipe & required ingredients
+        Item itemWithNoTags = new ItemBuilder().build();
         ItemStackPanel itemStackPanel = new ItemStackPanel(itemWithNoTags);
         uiPartRule.setUiPart(itemStackPanel);
         assertStackPanelDisplay(itemStackPanel, itemWithNoTags);
 
         // with tags
-        Item itemWithTags = new ItemBuilder().build();
+        Item itemWithTags = new ItemBuilder().withTags("husband", "friends").build();
         itemStackPanel = new ItemStackPanel(itemWithTags);
         uiPartRule.setUiPart(itemStackPanel);
         assertStackPanelDisplay(itemStackPanel, itemWithTags);
+
+        // with recipe
+        Item itemWithRecipe = new ItemBuilder().withRecipe("Some recipe").build();
+        itemStackPanel = new ItemStackPanel(itemWithRecipe);
+        uiPartRule.setUiPart(itemStackPanel);
+        assertStackPanelDisplay(itemStackPanel, itemWithRecipe);
+
+        // with required ingredients
+        Item itemWithRequiredIngredients = new ItemBuilder()
+                .withRequiredIngredients(Map.of("Apple", "3")).build();
+        itemStackPanel = new ItemStackPanel(itemWithRequiredIngredients);
+        uiPartRule.setUiPart(itemStackPanel);
+        assertStackPanelDisplay(itemStackPanel, itemWithRequiredIngredients);
+
+        // with tags, recipe & required ingredients
+        Item item = new ItemBuilder().withRecipe("Other recipe")
+                .withRequiredIngredients(Map.of("Apple", "3"))
+                .withTags("friends").build();
+        itemStackPanel = new ItemStackPanel(item);
+        uiPartRule.setUiPart(itemStackPanel);
+        assertStackPanelDisplay(itemStackPanel, item);
     }
 
     @Test
@@ -47,7 +70,16 @@ public class ItemStackPanelTest extends GuiUnitTest {
         assertFalse(itemStackPanel.equals(0));
 
         // different item, same index -> returns false
+        // different name
         Item differentItem = new ItemBuilder().withName("differentName").build();
+        assertFalse(itemStackPanel.equals(new ItemStackPanel(differentItem)));
+
+        // different price
+        differentItem = new ItemBuilder().withPrice("999").build();
+        assertFalse(itemStackPanel.equals(new ItemStackPanel(differentItem)));
+
+        // different tags
+        differentItem = new ItemBuilder().withTags("different").build();
         assertFalse(itemStackPanel.equals(new ItemStackPanel(differentItem)));
     }
 
