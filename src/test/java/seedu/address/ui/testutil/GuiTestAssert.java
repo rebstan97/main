@@ -5,14 +5,17 @@ import static org.junit.Assert.assertEquals;
 import java.text.NumberFormat;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 import guitests.guihandles.PersonCardHandle;
 import guitests.guihandles.PersonListPanelHandle;
 import guitests.guihandles.ResultDisplayHandle;
 import guitests.guihandles.menu.ItemCardHandle;
+import guitests.guihandles.menu.ItemStackPanelHandle;
 import guitests.guihandles.reservation.ReservationCardHandle;
 import guitests.guihandles.sales.RecordCardHandle;
+import seedu.address.model.ingredient.IngredientName;
 import seedu.address.model.menu.Item;
 import seedu.address.model.person.Person;
 import seedu.address.model.reservation.Reservation;
@@ -190,6 +193,40 @@ public class GuiTestAssert {
         expectedTags.forEach(tag ->
                 assertEquals(Arrays.asList(LABEL_DEFAULT_STYLE, getTagColorStyleFor(tag)),
                         actualCard.getTagStyleClasses(tag)));
+    }
+
+    /**
+     * Asserts that {@code actualStackPanel} displays the details of {@code expectedItem}.
+     */
+    public static void assertStackPanelDisplaysItem(Item expectedItem, ItemStackPanelHandle actualStackPanel) {
+        assertEquals(expectedItem.getName().toString(), actualStackPanel.getName());
+        assertEquals("$" + expectedItem.getPrice().toString(), actualStackPanel.getPrice());
+        assertEquals("Price displayed with " + String.format("%.0f", expectedItem.getPrice().getPercent())
+                + "% discount", actualStackPanel.getPercent());
+        assertEquals("Recipe: " + expectedItem.getRecipe(), actualStackPanel.getRecipe());
+        Map<IngredientName, Integer> map = expectedItem.getRequiredIngredients();
+        StringBuilder str = new StringBuilder("Required ingredients:\n");
+        for (Map.Entry<IngredientName, Integer> entry : map.entrySet()) {
+            str.append("\u2022 " + entry.getValue().toString() + " unit of ");
+            str.append(entry.getKey().toString() + "\n");
+        }
+        assertEquals(str.toString(), actualStackPanel.getRequiredIngredients());
+        assertTagsEqualForItem(expectedItem, actualStackPanel);
+        assertEquals(expectedItem.getTags().stream().map(tag -> tag.tagName).collect(Collectors.toList()),
+                actualStackPanel.getTags());
+    }
+
+    /**
+     * Asserts that the tags in {@code actualStackPanel} matches all the tags in {@code expectedItem}
+     * with the correct color.
+     */
+    private static void assertTagsEqualForItem(Item expectedItem, ItemStackPanelHandle actualStackPanelHandle) {
+        List<String> expectedTags = expectedItem.getTags().stream()
+                .map(tag -> tag.tagName).collect(Collectors.toList());
+        assertEquals(expectedTags, actualStackPanelHandle.getTags());
+        expectedTags.forEach(tag ->
+                assertEquals(Arrays.asList(LABEL_DEFAULT_STYLE, getTagColorStyleFor(tag)),
+                        actualStackPanelHandle.getTagStyleClasses(tag)));
     }
 
     // Reservation Management
