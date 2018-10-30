@@ -172,8 +172,9 @@ public class GuiTestAssert {
     public static void assertCardDisplaysItem(Item expectedItem, ItemCardHandle actualCard) {
         assertEquals(expectedItem.getName().toString(), actualCard.getName());
         assertEquals("$" + expectedItem.getPrice().toString(), actualCard.getPrice());
+        assertEquals("Price displayed with " + String.format("%.0f", expectedItem.getPrice().getPercent())
+                + "% discount", actualCard.getPercent());
         assertTagsEqualForItem(expectedItem, actualCard);
-        assertEquals(expectedItem.getRecipe().toString(), actualCard.getRecipe());
         assertEquals(expectedItem.getTags().stream().map(tag -> tag.tagName).collect(Collectors.toList()),
                 actualCard.getTags());
     }
