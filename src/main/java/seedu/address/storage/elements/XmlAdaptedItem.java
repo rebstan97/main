@@ -77,7 +77,7 @@ public class XmlAdaptedItem {
         name = source.getName().toString();
         price = source.getPrice().toString();
         originalPrice = String.format("%.2f", source.getPrice().getOriginalValue());
-        percent = String.format("%.0f", source.getPrice().getPercent());
+        percent = String.format("%.0f", source.getPercent());
         recipe = source.getRecipe().toString();
         tagged = source.getTags().stream()
                 .map(XmlAdaptedTag::new)

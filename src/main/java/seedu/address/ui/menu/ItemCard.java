@@ -57,7 +57,7 @@ public class ItemCard extends UiPart<Region> {
         id.setText(displayedIndex + ". ");
         name.setText(item.getName().toString());
         price.setText("$" + item.getPrice().toString());
-        percent.setText("Price displayed with " + String.format("%.0f", item.getPrice().getPercent()) + "% discount");
+        percent.setText("Price displayed with " + String.format("%.0f", item.getPercent()) + "% discount");
         initTags(item);
     }
 

@@ -53,7 +53,7 @@ public class ItemStackPanel extends UiPart<Region> {
         this.item = item;
         name.setText(item.getName().toString());
         price.setText("$" + item.getPrice().toString());
-        percent.setText("Price displayed with " + String.format("%.0f", item.getPrice().getPercent()) + "% discount");
+        percent.setText("Price displayed with " + String.format("%.0f", item.getPercent()) + "% discount");
         recipe.setText("Recipe: " + item.getRecipe().toString());
         requiredIngredients.setText(getRequiredIngredientsFor(item));
         initTags(item);

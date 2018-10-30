@@ -175,7 +175,7 @@ public class GuiTestAssert {
     public static void assertCardDisplaysItem(Item expectedItem, ItemCardHandle actualCard) {
         assertEquals(expectedItem.getName().toString(), actualCard.getName());
         assertEquals("$" + expectedItem.getPrice().toString(), actualCard.getPrice());
-        assertEquals("Price displayed with " + String.format("%.0f", expectedItem.getPrice().getPercent())
+        assertEquals("Price displayed with " + String.format("%.0f", expectedItem.getPercent())
                 + "% discount", actualCard.getPercent());
         assertTagsEqualForItem(expectedItem, actualCard);
         assertEquals(expectedItem.getTags().stream().map(tag -> tag.tagName).collect(Collectors.toList()),
@@ -214,7 +214,7 @@ public class GuiTestAssert {
     public static void assertStackPanelDisplaysItem(Item expectedItem, ItemStackPanelHandle actualStackPanel) {
         assertEquals(expectedItem.getName().toString(), actualStackPanel.getName());
         assertEquals("$" + expectedItem.getPrice().toString(), actualStackPanel.getPrice());
-        assertEquals("Price displayed with " + String.format("%.0f", expectedItem.getPrice().getPercent())
+        assertEquals("Price displayed with " + String.format("%.0f", expectedItem.getPercent())
                 + "% discount", actualStackPanel.getPercent());
         assertEquals("Recipe: " + expectedItem.getRecipe(), actualStackPanel.getRecipe());
         Map<IngredientName, Integer> map = expectedItem.getRequiredIngredients();
