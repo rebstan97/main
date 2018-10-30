@@ -6,6 +6,7 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import java.util.function.Predicate;
 
 import javafx.collections.FXCollections;
@@ -96,35 +97,66 @@ public class UniqueIngredientList implements Iterable<Ingredient> {
     }
 
     /**
-     * Stocks up the ingredients which are keys in HashMap {@code recipe} by increasing the number of units of each
-     * ingredient.
+     * Stocks up the ingredients which are keys in Map {@code requiredIngredients} by increasing the number
+     * of units of each ingredient.
      * @throws  IngredientNotFoundException if the ingredient does not exist in the list.
      */
-    public void stockUp(HashMap<IngredientName, Integer> recipe) throws IngredientNotFoundException {
-        requireNonNull(recipe);
-        for (HashMap.Entry<IngredientName, Integer> ingredientPair : recipe.entrySet()) {
+    public void stockUp(Map<IngredientName, Integer> requiredIngredients) throws IngredientNotFoundException {
+        requireNonNull(requiredIngredients);
+        HashMap<IngredientName, Integer> stockedUpIngredients = new HashMap<>();
+        for (HashMap.Entry<IngredientName, Integer> ingredientPair : requiredIngredients.entrySet()) {
             IngredientName name = ingredientPair.getKey();
             Integer unitsToAdd = ingredientPair.getValue();
 
-            Ingredient ingredient = find(name);
+            Ingredient ingredient;
+            try {
+                ingredient = find(name);
+            } catch (IngredientNotFoundException e) {
+                consume(stockedUpIngredients);
+                throw new IngredientNotFoundException();
+            }
 
             NumUnits updatedNumUnits = ingredient.getNumUnits().increase(unitsToAdd);
             Ingredient stockedUpIngredient = new Ingredient(ingredient.getName(), ingredient.getUnit(),
                     ingredient.getPrice(), ingredient.getMinimum(), updatedNumUnits);
             setIngredient(ingredient, stockedUpIngredient);
+            stockedUpIngredients.put(name, unitsToAdd);
         }
     }
 
     /**
-     * Consumes the ingredients which are keys in HashMap {@code recipe} by decreasing the number of units of each
-     * ingredient.
+     * Consumes the ingredients which are keys in Map {@code requiredIngredients} by decreasing the number
+     * of units of each ingredient.
      * @throws  IngredientNotFoundException if the ingredient does not exist in the list.
      * @throws  IngredientNotEnoughException if the ingredient does not have sufficient units.
      */
-    public void consume(HashMap<IngredientName, Integer> recipe) throws IngredientNotFoundException,
+    public void consume(Map<IngredientName, Integer> requiredIngredients) throws IngredientNotFoundException,
             IngredientNotEnoughException {
-        requireNonNull(recipe);
+        requireNonNull(requiredIngredients);
+        HashMap<IngredientName, Integer> consumedIngredients = new HashMap<>();
+        for (HashMap.Entry<IngredientName, Integer> ingredientPair : requiredIngredients.entrySet()) {
+            IngredientName name = ingredientPair.getKey();
+            Integer unitsToConsume = ingredientPair.getValue();
 
+            Ingredient ingredient;
+            try {
+                ingredient = find(name);
+            } catch (IngredientNotFoundException e) {
+                stockUp(consumedIngredients);
+                throw new IngredientNotFoundException();
+            }
+
+            if (ingredient.getNumUnits().getNumberOfUnits() < unitsToConsume) {
+                stockUp(consumedIngredients);
+                throw new IngredientNotEnoughException();
+            }
+
+            NumUnits updatedNumUnits = ingredient.getNumUnits().decrease(unitsToConsume);
+            Ingredient consumedIngredient = new Ingredient(ingredient.getName(), ingredient.getUnit(),
+                    ingredient.getPrice(), ingredient.getMinimum(), updatedNumUnits);
+            setIngredient(ingredient, consumedIngredient);
+            consumedIngredients.put(name, unitsToConsume);
+        }
     }
 
     public void setIngredients(UniqueIngredientList replacement) {
