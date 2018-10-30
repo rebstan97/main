@@ -196,6 +196,19 @@ public class GuiTestAssert {
     }
 
     /**
+     * Asserts that the tags in {@code actualStackPanel} matches all the tags in {@code expectedItem}
+     * with the correct color.
+     */
+    private static void assertTagsEqualForItem(Item expectedItem, ItemStackPanelHandle actualStackPanelHandle) {
+        List<String> expectedTags = expectedItem.getTags().stream()
+                .map(tag -> tag.tagName).collect(Collectors.toList());
+        assertEquals(expectedTags, actualStackPanelHandle.getTags());
+        expectedTags.forEach(tag ->
+                assertEquals(Arrays.asList(LABEL_DEFAULT_STYLE, getTagColorStyleFor(tag)),
+                        actualStackPanelHandle.getTagStyleClasses(tag)));
+    }
+
+    /**
      * Asserts that {@code actualStackPanel} displays the details of {@code expectedItem}.
      */
     public static void assertStackPanelDisplaysItem(Item expectedItem, ItemStackPanelHandle actualStackPanel) {
@@ -214,19 +227,6 @@ public class GuiTestAssert {
         assertTagsEqualForItem(expectedItem, actualStackPanel);
         assertEquals(expectedItem.getTags().stream().map(tag -> tag.tagName).collect(Collectors.toList()),
                 actualStackPanel.getTags());
-    }
-
-    /**
-     * Asserts that the tags in {@code actualStackPanel} matches all the tags in {@code expectedItem}
-     * with the correct color.
-     */
-    private static void assertTagsEqualForItem(Item expectedItem, ItemStackPanelHandle actualStackPanelHandle) {
-        List<String> expectedTags = expectedItem.getTags().stream()
-                .map(tag -> tag.tagName).collect(Collectors.toList());
-        assertEquals(expectedTags, actualStackPanelHandle.getTags());
-        expectedTags.forEach(tag ->
-                assertEquals(Arrays.asList(LABEL_DEFAULT_STYLE, getTagColorStyleFor(tag)),
-                        actualStackPanelHandle.getTagStyleClasses(tag)));
     }
 
     // Reservation Management
