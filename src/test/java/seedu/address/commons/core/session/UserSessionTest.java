@@ -17,13 +17,13 @@ public class UserSessionTest {
 
     @Before
     public void setUp() {
-        UserSession.login(new AccountBuilder().build());
+        UserSession.create(new AccountBuilder().build());
     }
 
     @AfterClass
     public static void tearDown() {
         // Make sure to unset the session, in case the last test case does not logs out
-        UserSession.logout();
+        UserSession.destroy();
     }
 
     @Test
@@ -43,7 +43,7 @@ public class UserSessionTest {
 
     @Test
     public void session_isNotAuthenticated() {
-        UserSession.logout();
+        UserSession.destroy();
         assertFalse(UserSession.isAuthenticated());
         assertNull(UserSession.getAccount());
     }

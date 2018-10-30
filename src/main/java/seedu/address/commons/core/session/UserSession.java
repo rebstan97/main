@@ -17,8 +17,7 @@ public class UserSession {
      *
      * @param acc logged in for this session.
      */
-    public static void login(Account acc) {
-        //TODO: Handle logging in when a session is already established.
+    public static void create(Account acc) {
         if (!isAuthenticated) {
             isAuthenticated = true;
             account = acc;
@@ -28,7 +27,7 @@ public class UserSession {
     /**
      * Logs out of this account which releases this session.
      */
-    public static void logout() {
+    public static void destroy() {
         isAuthenticated = false;
         account = null;
     }
@@ -50,7 +49,7 @@ public class UserSession {
      * @return true if this session exists. Otherwise, false.
      */
     public static boolean isAuthenticated() {
-        return isAuthenticated;
+        return isAuthenticated && account != null;
     }
 
     /**

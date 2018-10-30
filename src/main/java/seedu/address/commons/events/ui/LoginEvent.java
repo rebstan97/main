@@ -13,7 +13,7 @@ public class LoginEvent extends BaseEvent {
     public final Username username;
 
     public LoginEvent(Account account) {
-        UserSession.login(account);
+        UserSession.create(account);
         this.username = account.getUsername();
     }
 

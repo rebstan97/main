@@ -34,7 +34,7 @@ public class LoginCommandTest {
     @Before
     public void setUp() {
         // Logs out before every test case
-        UserSession.logout();
+        UserSession.destroy();
     }
 
     @Test

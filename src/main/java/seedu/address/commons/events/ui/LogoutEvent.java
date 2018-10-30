@@ -9,7 +9,7 @@ import seedu.address.commons.events.BaseEvent;
 public class LogoutEvent extends BaseEvent {
 
     public LogoutEvent() {
-        UserSession.logout();
+        UserSession.destroy();
     }
 
     @Override
