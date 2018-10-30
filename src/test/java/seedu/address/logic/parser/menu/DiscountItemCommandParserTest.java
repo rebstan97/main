@@ -14,6 +14,7 @@ import org.junit.Test;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.menu.DiscountItemCommand;
+import seedu.address.model.menu.Price;
 
 public class DiscountItemCommandParserTest {
     private static final String MESSAGE_INVALID_FORMAT =
@@ -55,7 +56,7 @@ public class DiscountItemCommandParserTest {
     public void parse_invalidPercent_failure() {
         // invalid percent
         assertParseFailure(parser, "1" + INVALID_ITEM_PERCENT_DESC,
-                DiscountItemCommandParser.MESSAGE_PERCENT_CONSTRAINTS);
+                Price.MESSAGE_PERCENT_CONSTRAINTS);
     }
 
     @Test
@@ -63,18 +64,18 @@ public class DiscountItemCommandParserTest {
         // only starting index specified
         Index targetIndex = INDEX_FIRST;
         String userInput = targetIndex.getOneBased() + INVALID_ITEM_PERCENT_DESC;
-        assertParseFailure(parser, userInput, DiscountItemCommandParser.MESSAGE_PERCENT_CONSTRAINTS);
+        assertParseFailure(parser, userInput, Price.MESSAGE_PERCENT_CONSTRAINTS);
 
         // both index specified
         Index endingIndex = INDEX_SECOND;
         userInput = targetIndex.getOneBased() + " ei/" + endingIndex.getOneBased() + INVALID_ITEM_PERCENT_DESC;
-        assertParseFailure(parser, userInput, DiscountItemCommandParser.MESSAGE_PERCENT_CONSTRAINTS);
+        assertParseFailure(parser, userInput, Price.MESSAGE_PERCENT_CONSTRAINTS);
     }
 
     @Test
     public void parse_validAllFollowedByInvalidPercent_failure() {
         String userInput = "ALL" + INVALID_ITEM_PERCENT_DESC;
-        assertParseFailure(parser, userInput, DiscountItemCommandParser.MESSAGE_PERCENT_CONSTRAINTS);
+        assertParseFailure(parser, userInput, Price.MESSAGE_PERCENT_CONSTRAINTS);
     }
 
     @Test
