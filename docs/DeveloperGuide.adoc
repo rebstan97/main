@@ -606,10 +606,6 @@ The menu management feature implements the following operations:
 * `today-special` command -- Finds items whose tags contain the `DAY_OF_THE_WEEK`.
 
 Each `Item` object consists of `Name` and `Price`.
-////
-[NOTE]
-`Name` is a separate class from the `Name` used by `Person`, but is functionally the same.
-////
 
 ==== `add-item` Command
 The `add-item` command is facilitated by `AddItemCommand` and `AddItemCommandParser`. The command takes in
@@ -674,11 +670,6 @@ The Reservations feature currently contains 3 commands to modify the `UniqueRese
 * `delete-reservation` command - Deletes existing reservations in the reservations list.
 
 Each `Reservation` object contains `Name`, `Pax`, and `LocalDateTime`.
-
-////
-[NOTE]
-`Name` is a separate class from the `Name` used by `Person`, but is functionally the same.
-////
 
 ==== `add-reservation` Command
 The `add-reservation` command follows similar implementation of the current `add` command.
