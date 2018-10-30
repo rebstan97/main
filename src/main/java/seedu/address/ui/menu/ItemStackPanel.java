@@ -90,12 +90,6 @@ public class ItemStackPanel extends UiPart<Region> {
         });
     }
 
-    /**
-     * Frees resources allocated to the browser.
-     */
-    public void freeResources() {
-    }
-
     @Override
     public boolean equals(Object other) {
         // short circuit if same object
