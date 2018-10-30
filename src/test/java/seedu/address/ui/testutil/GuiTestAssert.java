@@ -5,6 +5,7 @@ import static org.junit.Assert.assertEquals;
 import java.text.NumberFormat;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Locale;
 import java.util.stream.Collectors;
 
 import guitests.guihandles.PersonCardHandle;
@@ -70,7 +71,7 @@ public class GuiTestAssert {
         assertEquals(expectedRecord.getDate().toString(), actualCard.getDate());
         assertEquals(expectedRecord.getName().toString(), actualCard.getItemName());
         assertEquals("Quantity Sold: " + expectedRecord.getQuantitySold().toString(), actualCard.getQuantitySold());
-        NumberFormat currencyFormatter = NumberFormat.getCurrencyInstance();
+        NumberFormat currencyFormatter = NumberFormat.getCurrencyInstance(Locale.US);
         assertEquals("Item Price: "
                 + currencyFormatter.format(expectedRecord.getPrice().getValue()), actualCard.getPrice());
     }
