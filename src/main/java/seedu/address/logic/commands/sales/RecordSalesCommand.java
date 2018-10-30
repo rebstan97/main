@@ -9,6 +9,8 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_QUANTITY_SOLD;
 import java.util.HashMap;
 import java.util.Map;
 
+import seedu.address.commons.core.EventsCenter;
+import seedu.address.commons.events.ui.DisplayRecordListRequestEvent;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
@@ -93,6 +95,7 @@ public class RecordSalesCommand extends Command {
 
         model.addRecord(toAdd); // record will be added even if one of the four exceptions above was caught
         model.commitAddressBook();
+        EventsCenter.getInstance().post(new DisplayRecordListRequestEvent());
         return new CommandResult(String.format(MESSAGE_RECORD_SALES_SUCCESS, toAdd) + "\n"
                 + ingredientsUpdateStatus);
     }

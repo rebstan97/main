@@ -20,6 +20,7 @@ import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.events.ui.DisplayIngredientListRequestEvent;
 import seedu.address.commons.events.ui.DisplayItemListRequestEvent;
+import seedu.address.commons.events.ui.DisplayRecordListRequestEvent;
 import seedu.address.commons.events.ui.DisplaySalesReportEvent;
 import seedu.address.commons.events.ui.ExitAppRequestEvent;
 import seedu.address.commons.events.ui.LoginEvent;
@@ -348,6 +349,12 @@ public class MainWindow extends UiPart<Stage> {
     private void handleDisplayReservationEvent(DisplayReservationListRequestEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
         handleSwitchToReservation();
+    }
+
+    @Subscribe
+    private void handleDisplayRecordListEvent(DisplayRecordListRequestEvent event) {
+        logger.info(LogsCenter.getEventHandlingLogMessage(event));
+        handleSwitchToSales();
     }
 
     @Subscribe
