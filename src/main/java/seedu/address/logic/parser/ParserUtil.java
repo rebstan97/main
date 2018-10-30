@@ -288,7 +288,7 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String minimum} into an {@code MinimumUnit}. Leading and trailing whitespaces will be trimmed.
+     * Parses a {@code String minimum} into a {@code MinimumUnit}. Leading and trailing whitespaces will be trimmed.
      *
      * @throws ParseException if the given {@code MinimumUnit} is invalid.
      */
@@ -298,7 +298,7 @@ public class ParserUtil {
         if (!StringUtil.isUnsignedInteger(trimmedMinimum)) {
             throw new ParseException(MinimumUnit.MESSAGE_MINIMUM_CONSTRAINTS);
         }
-        return new MinimumUnit(parseInt(minimum));
+        return new MinimumUnit(parseInt(trimmedMinimum));
     }
 
     /**

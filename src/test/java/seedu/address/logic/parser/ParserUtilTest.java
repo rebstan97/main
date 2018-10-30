@@ -317,8 +317,8 @@ public class ParserUtilTest {
     }
 
     @Test
-    public void parseMinimumUnit_validValueWithWhitespace_returnsTrimmedMin() throws Exception {
-        String minWithWhitespace = WHITESPACE + VALID_INGREDIENT_MINIMUM + WHITESPACE;
+    public void parseMinimumUnit_validValueWithWhitespace_returnsMin() throws Exception {
+        String minWithWhitespace = WHITESPACE + VALID_INGREDIENT_MINIMUM_STRING + WHITESPACE;
         MinimumUnit expectedMin = new MinimumUnit(VALID_INGREDIENT_MINIMUM);
         assertEquals(expectedMin, ParserUtil.parseMinimumUnit(minWithWhitespace));
     }
