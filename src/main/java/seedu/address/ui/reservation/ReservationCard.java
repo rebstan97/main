@@ -61,8 +61,8 @@ public class ReservationCard extends UiPart<Region> {
         id.setText(displayedIndex + ". ");
         name.setText(reservation.getName().toString());
         pax.setText("Pax: " + reservation.getPax().value);
-        date.setText("Date: " + reservation.getDateTime().toLocalDate().toString());
-        time.setText("Time: " + reservation.getDateTime().toLocalTime().toString());
+        date.setText("Date: " + reservation.getDate().toString());
+        time.setText("Time: " + reservation.getTime().toString());
         remark.setText(reservation.getRemark().value);
         initTags(reservation);
     }
