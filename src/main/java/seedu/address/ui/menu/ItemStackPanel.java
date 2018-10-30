@@ -1,14 +1,12 @@
 package seedu.address.ui.menu;
 
 import java.util.Map;
-import java.util.logging.Logger;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
-import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.ingredient.IngredientName;
 import seedu.address.model.menu.Item;
 import seedu.address.ui.UiPart;
@@ -32,8 +30,6 @@ public class ItemStackPanel extends UiPart<Region> {
     }
 
     private static final ItemStackPanel.TagColourStyle[] TAG_COLOR_STYLES = ItemStackPanel.TagColourStyle.values();
-
-    private final Logger logger = LogsCenter.getLogger(getClass());
 
     public final Item item;
 
