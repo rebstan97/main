@@ -1,6 +1,5 @@
 package seedu.address.model;
 
-import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Predicate;
 
@@ -251,15 +250,15 @@ public interface Model {
 
     /**
      * Stocks up a list of ingredients. For each ingredient, the number of units of {@code Ingredient} is increased by
-     * {@Integer}. The ingredient key of HashMap {@code requiredIngredients} must exist in the restaurant book.
+     * {@Integer}. The ingredient key of Map {@code requiredIngredients} must exist in the restaurant book.
      */
-    void stockUpIngredients(HashMap<IngredientName, Integer> requiredIngredients);
+    void stockUpIngredients(Map<IngredientName, Integer> requiredIngredients);
 
     /**
      * Consumes a list of ingredients. For each ingredient, the number of units of {@code Ingredient} is decreased by
-     * {@Integer}. The ingredient key of HashMap {@code requiredIngredients} must exist in the restaurant book.
+     * {@Integer}. The ingredient key of Map {@code requiredIngredients} must exist in the restaurant book.
      */
-    void consumeIngredients(HashMap<IngredientName, Integer> requiredIngredients);
+    void consumeIngredients(Map<IngredientName, Integer> requiredIngredients);
 
     /**
      * Returns an unmodifiable view of the filtered ingredient list
