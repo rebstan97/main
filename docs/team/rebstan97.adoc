@@ -33,11 +33,14 @@ architecture components and integration with other features such as sales and me
 * *Other contributions*:
 
 ** Project management:
-*** To be updated.
+*** Maintained issue tracker
 ** Enhancements to existing features:
 *** To be updated.
 ** Documentation:
-*** Did cosmetic tweaks to existing contents of the User Guide: https://github.com[#14]
+*** Updated user stories and use cases in the Developer Guide (Pull request https://github.com/CS2103-AY1819S1-F10-4/main/pull/27[#27], https://github.com/CS2103-AY1819S1-F10-4/main/pull/118/files[#118])
+*** Added implementation of the command `delete-ingredient` (Pull request https://github.com/CS2103-AY1819S1-F10-4/main/pull/116[#116])
+*** Added description of feature commands to the User Guide(Pull request https://github.com/CS2103-AY1819S1-F10-4/main/pull/27[#27], https://github.com/CS2103-AY1819S1-F10-4/main/pull/116[#116])
+*** Made general enhancements to the User Guide (Pull request https://github.com/CS2103-AY1819S1-F10-4/main/pull/120[#120])
 ** Community:
 *** PRs reviewed (with non-trivial review comments): https://github.com[#12], https://github.com[#32], https://github.com[#19], https://github.com[#42]
 *** Contributed to forum discussions (examples:  https://github.com[1], https://github.com[2], https://github.com[3], https://github.com[4])
