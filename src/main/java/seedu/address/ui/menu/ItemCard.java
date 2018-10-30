@@ -47,7 +47,7 @@ public class ItemCard extends UiPart<Region> {
     @FXML
     private Label price;
     @FXML
-    private Label recipe;
+    private Label percent;
     @FXML
     private FlowPane tags;
 
@@ -57,7 +57,7 @@ public class ItemCard extends UiPart<Region> {
         id.setText(displayedIndex + ". ");
         name.setText(item.getName().toString());
         price.setText("$" + item.getPrice().toString());
-        recipe.setText(item.getRecipe().toString());
+        percent.setText("Price displayed with " + String.format("%.0f", item.getPrice().getPercent()) + "% discount");
         initTags(item);
     }
 
