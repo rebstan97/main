@@ -89,8 +89,8 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 * You can keep track of the ingredient availability in your restaurant.
 
 === Sales
-* You can record sales volume of an item and edit/delete past sales records. You can also generate and display the
-sales report for a specific day.
+* You can keep track of daily sales volume. You can also generate the sales report for a specific day, and rank dates
+ and dishes based on revenue.
 
 === Reservations
 * You can keep track of customer reservations on the system.
@@ -267,6 +267,7 @@ Password is masked by default and should never be shown
 ====
 // end::accountmanagement[]
 
+[[Add-ingredient]]
 === Adding an ingredient: `add-ingredient` or `add-ing`
 
 Adds a new ingredient to the ingredient list. +
@@ -336,6 +337,7 @@ Edits the unit type and price per unit of the 4th ingredient to be `1.5ml bottle
 * `edit-ingredient ketchup n/tomato ketchup`  +
 Edits the name of `ketchup` to be `tomato ketchup`.
 
+[[Stockup]]
 === Stocking up an ingredient: `stockup`
 
 Increase the number of units of an ingredient or multiple ingredients. +
@@ -378,6 +380,7 @@ Format: `history [stockup] [consumption]`
 * At least one of the optional fields must be provided.
 ****
 
+[[Add-item]]
 === Adding an item to the menu: `add-item` or `ai`
 
 Adds an item to the menu +
@@ -647,14 +650,33 @@ Deletes the 2nd reservation in the reservations list.
 
 === Recording sales volume of an item: `record-sales` or `rs`
 
-Records the quantity of an item sold within a specific day into the sales list. +
-Format: `record-sales d/DATE n/ITEM_NAME q/QUANTITY SOLD p/ITEM_PRICE`
+Records the sales volume of an item within a specific day into the sales list. +
+Format: `record-sales d/DATE n/ITEM_NAME q/QUANTITY_SOLD p/ITEM_PRICE` +
 
 ****
 * DATE must be written in the DD-MM-YYYY format.
 * DATE must exist in the calendar.
 * Both DATE and ITEM_NAME cannot be same as another record in the sales list.
 ****
+
+[WARNING]
+====
+Auto-ingredient update mechanism: +
+`record-sales` also determines all the ingredients you have used and automatically deducts them from the ingredient
+list, subjected to the following conditions: +
+1) The item exists in the menu. Refer to <<Add-item>> for more information. +
+2) The required ingredients to make one unit of `ITEM_NAME` is specified. Refer to <<To-Be-Updated>> for more
+information. +
+3) All required ingredients exist in the ingredient list. Refer to <<Add-ingredient>> for more information. +
+4) There are sufficient ingredients to make `QUANTITY_SOLD` units of `ITEM_NAME`. Refer to <<Stockup>> for more
+information. +
+====
+
+[NOTE]
+====
+Sales volume will still be recorded if not all the above conditions are satisfied. However, ingredient list would not
+ be updated.
+====
 
 Examples:
 
@@ -678,8 +700,8 @@ Displays the sales report dated 25-09-2018.
 
 === Deleting a sales record: `delete-sales` or `des`
 
-Deletes the sales record identified by the index, or by the date and item name. +
-Format: `delete-sales ITEM_INDEX` / `delete-sales DATE ITEM_NAME`
+Deletes the sales record identified by the index. +
+Format: `delete-sales ITEM_INDEX`
 
 ****
 * Deletes the record at the specified `ITEM_INDEX`.
