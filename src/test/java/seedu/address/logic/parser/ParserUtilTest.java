@@ -3,7 +3,6 @@ package seedu.address.logic.parser;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
-
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ID;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PASSWORD;
 import static seedu.address.logic.parser.ParserUtil.MESSAGE_INVALID_INDEX;
@@ -54,7 +53,8 @@ public class ParserUtilTest {
     private static final String VALID_INGREDIENT_NAME = "Chicken Drumstick";
     private static final String VALID_INGREDIENT_UNIT = "5-kilogram bag";
     private static final String VALID_INGREDIENT_PRICE = "9.90";
-    private static final String VALID_INGREDIENT_MINIMUM = "10";
+    private static final String VALID_INGREDIENT_MINIMUM_STRING = "10";
+    private static final int VALID_INGREDIENT_MINIMUM = 10;
 
     private static final String VALID_USERNAME = "azhikai";
     private static final String VALID_PASSWORD = "1122qq";
@@ -312,12 +312,12 @@ public class ParserUtilTest {
     @Test
     public void parseMinimumUnit_validValueWithoutWhitespace_returnsMin() throws Exception {
         MinimumUnit expectedMin = new MinimumUnit(VALID_INGREDIENT_MINIMUM);
-        assertEquals(expectedMin, ParserUtil.parseMinimumUnit(VALID_INGREDIENT_MINIMUM));
+        assertEquals(expectedMin, ParserUtil.parseMinimumUnit(VALID_INGREDIENT_MINIMUM_STRING));
     }
 
     @Test
-    public void parseMinimumUnit_validValueWithWhitespace_returnsTrimmedMin() throws Exception {
-        String minWithWhitespace = WHITESPACE + VALID_INGREDIENT_MINIMUM + WHITESPACE;
+    public void parseMinimumUnit_validValueWithWhitespace_returnsMin() throws Exception {
+        String minWithWhitespace = WHITESPACE + VALID_INGREDIENT_MINIMUM_STRING + WHITESPACE;
         MinimumUnit expectedMin = new MinimumUnit(VALID_INGREDIENT_MINIMUM);
         assertEquals(expectedMin, ParserUtil.parseMinimumUnit(minWithWhitespace));
     }
