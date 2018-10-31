@@ -3,6 +3,8 @@ package seedu.address.model.ingredient;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
+import java.util.Objects;
+
 /**
  * Represents the minimum threshold in terms of number of available units for an Ingredient in the restaurant
  * management app to be considered "low in stock count".
@@ -63,11 +65,11 @@ public class MinimumUnit {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof MinimumUnit // instanceof handles nulls
-                && minimumUnit == (((MinimumUnit) other).minimumUnit)); // state check
+                    && minimumUnit == (((MinimumUnit) other).minimumUnit)); // state check
     }
 
     @Override
     public int hashCode() {
-        return Integer.valueOf(minimumUnit).hashCode();
+        return Objects.hash(minimumUnit);
     }
 }
