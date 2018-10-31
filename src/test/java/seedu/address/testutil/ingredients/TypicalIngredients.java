@@ -24,37 +24,37 @@ public class TypicalIngredients {
     public static final Ingredient AVOCADO = new IngredientBuilder().withName("Mexican Avocado")
             .withUnit("kilogram")
             .withPrice("6.00")
-            .withMinimum("1").build();
+            .withMinimum(1).build();
     public static final Ingredient BEANS = new IngredientBuilder().withName("Baked Beans")
             .withUnit("200-gram can")
             .withPrice("0.80")
-            .withMinimum("10").build();
+            .withMinimum(10).build();
     public static final Ingredient CABBAGE = new IngredientBuilder().withName("Chinese Cabbage")
             .withUnit("500 grams")
             .withPrice("5.50")
-            .withMinimum("10").build();
+            .withMinimum(10).build();
     public static final Ingredient DUCK = new IngredientBuilder().withName("Duck Drumstick")
             .withUnit("50 grams")
             .withPrice("3.20")
-            .withMinimum("20").build();
+            .withMinimum(20).build();
     public static final Ingredient EGG = new IngredientBuilder().withName("Chicken Egg")
             .withUnit("carton of 30")
             .withPrice("3.80")
-            .withMinimum("5").build();
+            .withMinimum(5).build();
     public static final Ingredient FISH = new IngredientBuilder().withName("White Promfret")
             .withUnit("kilogram")
             .withPrice("14.00")
-            .withMinimum("8").build();
+            .withMinimum(8).build();
     public static final Ingredient GARLIC = new IngredientBuilder().withName("Garlic Cloves")
             .withUnit("500 gram bag")
             .withPrice("2.40")
-            .withMinimum("3").build();
+            .withMinimum(3).build();
 
     // Manually added
     public static final Ingredient HAM = new IngredientBuilder().withName("Bacon Ham").withUnit("kilogram")
-            .withPrice("13.00").withMinimum("6").build();
+            .withPrice("13.00").withMinimum(6).build();
     public static final Ingredient ICECREAM = new IngredientBuilder().withName("Chocolate Ice Cream").withUnit("tub")
-            .withPrice("5.80").withMinimum("10").build();
+            .withPrice("5.80").withMinimum(10).build();
 
     // Manually added - Ingredient's details found in {@code CommandTestUtil}
     public static final Ingredient APPLE = new IngredientBuilder().withName(VALID_NAME_APPLE)
