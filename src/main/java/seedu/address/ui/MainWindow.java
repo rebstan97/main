@@ -58,7 +58,7 @@ public class MainWindow extends UiPart<Stage> {
     private BrowserPanel browserPanel;
     private PersonListPanel personListPanel;
     private AccountListPanel accountListPanel;
-    private RecordListPanel recordListPanel; // Panels stack on top of each other, only one visible at a time
+    private RecordListPanel recordListPanel;
     private IngredientListPanel ingredientListPanel;
     private ItemListPanel itemListPanel;
     private ReservationListPanel reservationListPanel;
@@ -229,7 +229,7 @@ public class MainWindow extends UiPart<Stage> {
      * Switch to the account view.
      */
     @FXML
-    public void handleSwitchToAccount() {
+    private void handleSwitchToAccount() {
         browserPlaceholder.getChildren().clear();
         personListPanelPlaceholder.getChildren().clear();
         personListPanelPlaceholder.getChildren().add(accountListPanel.getRoot());
@@ -239,7 +239,7 @@ public class MainWindow extends UiPart<Stage> {
      * Switch to the menu view.
      */
     @FXML
-    public void handleSwitchToMenu() {
+    private void handleSwitchToMenu() {
         personListPanelPlaceholder.getChildren().clear();
         itemListPanel = new ItemListPanel(logic.getFilteredItemList());
         personListPanelPlaceholder.getChildren().add(itemListPanel.getRoot());
@@ -249,7 +249,7 @@ public class MainWindow extends UiPart<Stage> {
      * Switch to the sales view.
      */
     @FXML
-    public void handleSwitchToSales() {
+    private void handleSwitchToSales() {
         personListPanelPlaceholder.getChildren().clear();
         recordListPanel = new RecordListPanel(logic.getFilteredRecordList());
         personListPanelPlaceholder.getChildren().add(recordListPanel.getRoot());
@@ -259,7 +259,7 @@ public class MainWindow extends UiPart<Stage> {
      * Switch to the ingredient view.
      */
     @FXML
-    public void handleSwitchToIngredient() {
+    private void handleSwitchToIngredient() {
         personListPanelPlaceholder.getChildren().clear();
         ingredientListPanel = new IngredientListPanel(logic.getFilteredIngredientList());
         personListPanelPlaceholder.getChildren().add(ingredientListPanel.getRoot());
@@ -269,7 +269,7 @@ public class MainWindow extends UiPart<Stage> {
      * Switch to the reservation view.
      */
     @FXML
-    public void handleSwitchToReservation() {
+    private void handleSwitchToReservation() {
         personListPanelPlaceholder.getChildren().clear();
         reservationListPanel = new ReservationListPanel(logic.getFilteredReservationList());
         personListPanelPlaceholder.getChildren().add(reservationListPanel.getRoot());
@@ -279,7 +279,7 @@ public class MainWindow extends UiPart<Stage> {
      * Opens the help window or focuses on it if it's already opened.
      */
     @FXML
-    public void handleHelp() {
+    private void handleHelp() {
         if (!helpWindow.isShowing()) {
             helpWindow.show();
         } else {
