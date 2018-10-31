@@ -13,11 +13,13 @@ import java.util.stream.Collectors;
 import guitests.guihandles.PersonCardHandle;
 import guitests.guihandles.PersonListPanelHandle;
 import guitests.guihandles.ResultDisplayHandle;
+import guitests.guihandles.accounts.AccountCardHandle;
 import guitests.guihandles.menu.ItemCardHandle;
 import guitests.guihandles.menu.ItemStackPanelHandle;
 import guitests.guihandles.reservation.ReservationCardHandle;
 import guitests.guihandles.sales.RecordCardHandle;
 import guitests.guihandles.sales.RecordStackPanelHandle;
+import seedu.address.model.accounts.Account;
 import seedu.address.model.ingredient.IngredientName;
 import seedu.address.model.menu.Item;
 import seedu.address.model.person.Person;
@@ -307,4 +309,10 @@ public class GuiTestAssert {
                         actualCard.getTagStyleClasses(tag)));
     }
 
+    /**
+     * Asserts that {@code actualCard} displays the details of {@code expectedAccount}.
+     */
+    public static void assertCardDisplaysAccount(Account expectedAccount, AccountCardHandle actualCard) {
+        assertEquals(expectedAccount.getUsername().toString(), actualCard.getUsername());
+    }
 }
