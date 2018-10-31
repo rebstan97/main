@@ -13,10 +13,8 @@ import javafx.scene.web.WebView;
 import seedu.address.MainApp;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.events.ui.PersonPanelSelectionChangedEvent;
-import seedu.address.commons.events.ui.RecordPanelSelectionChangedEvent;
 import seedu.address.model.person.Person;
 import seedu.address.model.reservation.Reservation;
-import seedu.address.model.salesrecord.SalesRecord;
 
 /**
  * The Browser Panel of the App.
@@ -48,10 +46,6 @@ public class BrowserPanel extends UiPart<Region> {
         loadPage(SEARCH_PAGE_URL + person.getName().toString());
     }
 
-    private void loadSalesRecordPage(SalesRecord salesRecord) {
-        loadPage(SEARCH_PAGE_URL + salesRecord.getName().toString());
-    }
-
     private void loadReservationPage(Reservation reservation) {
         loadPage(SEARCH_PAGE_URL + reservation.getName().toString());
     }
@@ -79,11 +73,5 @@ public class BrowserPanel extends UiPart<Region> {
     private void handlePersonPanelSelectionChangedEvent(PersonPanelSelectionChangedEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
         loadPersonPage(event.getNewSelection());
-    }
-
-    @Subscribe
-    private void handleSalesRecordPanelSelectionChangedEvent(RecordPanelSelectionChangedEvent event) {
-        logger.info(LogsCenter.getEventHandlingLogMessage(event));
-        loadSalesRecordPage(event.getNewSelection());
     }
 }

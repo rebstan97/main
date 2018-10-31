@@ -7,6 +7,7 @@ import static org.junit.Assert.assertTrue;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Predicate;
 
@@ -25,14 +26,20 @@ import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.accounts.Account;
 import seedu.address.model.ingredient.Ingredient;
 import seedu.address.model.ingredient.IngredientName;
+import seedu.address.model.ingredient.NumUnits;
+import seedu.address.model.ingredient.exceptions.IngredientNotEnoughException;
+import seedu.address.model.ingredient.exceptions.IngredientNotFoundException;
 import seedu.address.model.menu.Item;
 import seedu.address.model.menu.Name;
+import seedu.address.model.menu.exceptions.ItemNotFoundException;
 import seedu.address.model.person.Person;
 import seedu.address.model.reservation.Reservation;
 import seedu.address.model.salesrecord.Date;
 import seedu.address.model.salesrecord.SalesRecord;
 import seedu.address.model.salesrecord.SalesReport;
 import seedu.address.model.tag.Tag;
+import seedu.address.testutil.ingredients.IngredientBuilder;
+import seedu.address.testutil.menu.ItemBuilder;
 import seedu.address.testutil.salesrecords.RecordBuilder;
 
 public class RecordSalesCommandTest {
@@ -42,25 +49,15 @@ public class RecordSalesCommandTest {
     @Rule
     public ExpectedException thrown = ExpectedException.none();
 
+    private final ModelStubAcceptingRecordAdded modelStub = new ModelStubAcceptingRecordAdded();
+    private final SalesRecord validRecord = new RecordBuilder().build();
+
     private CommandHistory commandHistory = new CommandHistory();
 
     @Test
     public void constructor_nullRecord_throwsNullPointerException() {
         thrown.expect(NullPointerException.class);
         new RecordSalesCommand(null);
-    }
-
-    @Test
-    public void execute_recordAcceptedByModel_addSuccessful() throws Exception {
-        ModelStubAcceptingRecordAdded modelStub = new ModelStubAcceptingRecordAdded();
-        SalesRecord validRecord = new RecordBuilder().build();
-
-        CommandResult commandResult = new RecordSalesCommand(validRecord).execute(modelStub, commandHistory);
-
-        assertEquals(String.format(RecordSalesCommand.MESSAGE_RECORD_SALES_SUCCESS, validRecord),
-                commandResult.feedbackToUser);
-        assertEquals(Arrays.asList(validRecord), modelStub.recordsAdded);
-        assertEquals(EMPTY_COMMAND_HISTORY, commandHistory);
     }
 
     @Test
@@ -72,6 +69,117 @@ public class RecordSalesCommandTest {
         thrown.expect(CommandException.class);
         thrown.expectMessage(String.format(RecordSalesCommand.MESSAGE_DUPLICATE_SALES_RECORD, validRecord.getName()));
         recordSalesCommand.execute(modelStub, commandHistory);
+    }
+
+    @Test
+    public void execute_recordAcceptedButItemNotFoundInMenu_addSuccessfulIngredientListNotUpdated() throws Exception {
+        CommandResult commandResult = new RecordSalesCommand(validRecord).execute(modelStub, commandHistory);
+        // empty menu -> item not found
+        assertEquals(String.format(RecordSalesCommand.MESSAGE_RECORD_SALES_SUCCESS, validRecord) + "\n"
+                + RecordSalesCommand.MESSAGE_ITEM_NOT_FOUND, commandResult.feedbackToUser);
+        assertEquals(Arrays.asList(validRecord), modelStub.recordsAdded);
+        assertEquals(EMPTY_COMMAND_HISTORY, commandHistory);
+    }
+
+    @Test
+    public void execute_recordAcceptedButRequiredIngredientsNotSpecifiedInMenu_addSuccessfulIngredientListNotUpdated()
+            throws Exception {
+        // add item into menu but did not specify required ingredients
+        Item itemWithoutRequiredIngredients = new ItemBuilder().withName(validRecord.getName().toString()).build();
+        modelStub.addItem(itemWithoutRequiredIngredients);
+
+        // required ingredients of items not found
+        CommandResult commandResult = new RecordSalesCommand(validRecord).execute(modelStub, commandHistory);
+        assertEquals(String.format(RecordSalesCommand.MESSAGE_RECORD_SALES_SUCCESS, validRecord) + "\n"
+                + RecordSalesCommand.MESSAGE_REQUIRED_INGREDIENTS_NOT_FOUND, commandResult.feedbackToUser);
+        assertEquals(Arrays.asList(validRecord), modelStub.recordsAdded);
+        assertEquals(EMPTY_COMMAND_HISTORY, commandHistory);
+    }
+
+    @Test
+    public void execute_recordAcceptedButSomeIngredientsNotFoundInIngredientList_addSuccessfulIngredientListNotUpdated()
+            throws Exception {
+        Map<String, String> requiredIngredients = new HashMap<>();
+        requiredIngredients.put("Carrot", "1");
+        requiredIngredients.put("Onion", "2");
+
+        // add item into menu and specify required ingredients
+        Item itemWithRequiredIngredients = new ItemBuilder().withName(validRecord.getName().toString())
+                .withRequiredIngredients(requiredIngredients).build();
+        modelStub.addItem(itemWithRequiredIngredients);
+
+        // add enough onion into ingredient list but no carrot
+        int onionNeeded = validRecord.getQuantitySold().getValue() * 2;
+        Ingredient enoughOnion = new IngredientBuilder().withName("Onion").withNumUnits(onionNeeded).build();
+        modelStub.addIngredient(enoughOnion);
+
+        // carrot not found in ingredient list -> ingredient list should not be updated -> quantity of onion remains
+        // unchanged
+        CommandResult commandResult = new RecordSalesCommand(validRecord).execute(modelStub, commandHistory);
+        assertEquals(String.format(RecordSalesCommand.MESSAGE_RECORD_SALES_SUCCESS, validRecord) + "\n"
+                + RecordSalesCommand.MESSAGE_INGREDIENT_NOT_FOUND, commandResult.feedbackToUser);
+        assertEquals(Arrays.asList(validRecord), modelStub.recordsAdded);
+        assertEquals(EMPTY_COMMAND_HISTORY, commandHistory);
+        assertEquals(onionNeeded, modelStub.ingredientsAdded.get(0).getNumUnits().getNumberOfUnits());
+    }
+
+    @Test
+    public void execute_recordAcceptedButSomeIngredientNotEnoughInIngredientList_addSuccessfulIngredientListNotUpdated()
+            throws Exception {
+        Map<String, String> requiredIngredients = new HashMap<>();
+        requiredIngredients.put("Carrot", "1");
+        requiredIngredients.put("Onion", "2");
+
+        // add item into menu and specify required ingredients
+        Item itemWithRequiredIngredients = new ItemBuilder().withName(validRecord.getName().toString())
+                .withRequiredIngredients(requiredIngredients).build();
+        modelStub.addItem(itemWithRequiredIngredients);
+
+        // add enough onion into ingredient list but not enough carrot
+        int onionNeeded = validRecord.getQuantitySold().getValue() * 2;
+        Ingredient enoughOnion = new IngredientBuilder().withName("Onion").withNumUnits(onionNeeded).build();
+        Ingredient notEnoughCarrot = new IngredientBuilder().withName("Carrot").withNumUnits(3).build();
+        modelStub.addIngredient(enoughOnion);
+        modelStub.addIngredient(notEnoughCarrot);
+
+        // carrot not enough -> ingredient list should not be updated -> quantity of onion and carrots remains unchanged
+        CommandResult commandResult = new RecordSalesCommand(validRecord).execute(modelStub, commandHistory);
+        assertEquals(String.format(RecordSalesCommand.MESSAGE_RECORD_SALES_SUCCESS, validRecord) + "\n"
+                + RecordSalesCommand.MESSAGE_INGREDIENT_NOT_ENOUGH, commandResult.feedbackToUser);
+        assertEquals(Arrays.asList(validRecord), modelStub.recordsAdded);
+        assertEquals(EMPTY_COMMAND_HISTORY, commandHistory);
+        assertEquals(onionNeeded, modelStub.ingredientsAdded.get(0).getNumUnits().getNumberOfUnits());
+        assertEquals(3, modelStub.ingredientsAdded.get(1).getNumUnits().getNumberOfUnits());
+    }
+
+    @Test
+    public void execute_recordAccepted_addSuccessfulIngredientListUpdated() throws Exception {
+        Map<String, String> requiredIngredients = new HashMap<>();
+        requiredIngredients.put("Carrot", "3");
+        requiredIngredients.put("Onion", "2");
+
+        // add item into menu and specify required ingredients
+        Item itemWithRequiredIngredients = new ItemBuilder().withName(validRecord.getName().toString())
+                .withRequiredIngredients(requiredIngredients).build();
+        modelStub.addItem(itemWithRequiredIngredients);
+
+        // add enough onion and carrot into ingredient list
+        int onionNeeded = validRecord.getQuantitySold().getValue() * 2;
+        Ingredient enoughOnion = new IngredientBuilder().withName("Onion").withNumUnits(onionNeeded + 10).build();
+        int carrotNeeded = validRecord.getQuantitySold().getValue() * 3;
+        Ingredient enoughCarrot = new IngredientBuilder().withName("Carrot").withNumUnits(carrotNeeded + 5).build();
+        modelStub.addIngredient(enoughOnion);
+        modelStub.addIngredient(enoughCarrot);
+
+        // item exists in menu with required ingredients specified. Required ingredients all sufficient in ingredient
+        // list -> ingredient list updated -> quantity of onion and carrot decreased
+        CommandResult commandResult = new RecordSalesCommand(validRecord).execute(modelStub, commandHistory);
+        assertEquals(String.format(RecordSalesCommand.MESSAGE_RECORD_SALES_SUCCESS, validRecord) + "\n"
+                + RecordSalesCommand.MESSAGE_INGREDIENT_UPDATE_SUCCESS, commandResult.feedbackToUser);
+        assertEquals(Arrays.asList(validRecord), modelStub.recordsAdded);
+        assertEquals(EMPTY_COMMAND_HISTORY, commandHistory);
+        assertEquals(10, modelStub.ingredientsAdded.get(0).getNumUnits().getNumberOfUnits());
+        assertEquals(5, modelStub.ingredientsAdded.get(1).getNumUnits().getNumberOfUnits());
     }
 
     @Test
@@ -408,11 +516,13 @@ public class RecordSalesCommandTest {
     }
 
     /**
-     * A Model stub that always accept the person being added.
+     * A Model stub that always accept the record being added.
      */
     private class ModelStubAcceptingRecordAdded extends ModelStub {
 
         private final ArrayList<SalesRecord> recordsAdded = new ArrayList<>();
+        private final ArrayList<Item> itemsAdded = new ArrayList<>();
+        private final ArrayList<Ingredient> ingredientsAdded = new ArrayList<>();
 
         @Override
         public boolean hasRecord(SalesRecord record) {
@@ -434,6 +544,90 @@ public class RecordSalesCommandTest {
         @Override
         public ReadOnlyAddressBook getAddressBook() {
             return new AddressBook();
+        }
+
+        @Override
+        public void addItem(Item item) {
+            requireNonNull(item);
+            itemsAdded.add(item);
+        }
+
+        @Override
+        public void addIngredient(Ingredient ingredient) {
+            requireNonNull(ingredient);
+            ingredientsAdded.add(ingredient);
+        }
+
+        @Override
+        public Item findItem(Name name) throws ItemNotFoundException {
+            requireNonNull(name);
+            for (Item item : itemsAdded) {
+                if (item.getName().toString().equalsIgnoreCase(name.toString())) {
+                    return item;
+                }
+            }
+            throw new ItemNotFoundException();
+        }
+
+        @Override
+        public Ingredient findIngredient(IngredientName name) throws IngredientNotFoundException {
+            requireNonNull(name);
+            for (Ingredient ingredient : ingredientsAdded) {
+                if (ingredient.getName().toString().equalsIgnoreCase(name.toString())) {
+                    return ingredient;
+                }
+            }
+            throw new IngredientNotFoundException();
+        }
+
+        @Override
+        public Map<IngredientName, Integer> getRequiredIngredients(Item item) {
+            return item.getRequiredIngredients();
+        }
+
+        /**
+         * Stocks up the ingredients in this model stub according to the Map given
+         * @param consumedIngredients
+         */
+        private void stockUp(Map<IngredientName, Integer> consumedIngredients) {
+            for (Map.Entry<IngredientName, Integer> entry : consumedIngredients.entrySet()) {
+                IngredientName name = entry.getKey();
+                Integer unitsConsumed = entry.getValue();
+                Ingredient ingredient = findIngredient(name);
+                int index = ingredientsAdded.indexOf(ingredient);
+                NumUnits updatedNumUnits = ingredient.getNumUnits().increase(unitsConsumed);
+                Ingredient stockedIngredient = new Ingredient(ingredient.getName(), ingredient.getUnit(),
+                        ingredient.getPrice(), ingredient.getMinimum(), updatedNumUnits);
+                ingredientsAdded.set(index, stockedIngredient);
+            }
+        }
+
+        @Override
+        public void consumeIngredients(Map<IngredientName, Integer> requiredIngredients) throws
+                IngredientNotFoundException, IngredientNotEnoughException {
+            requireNonNull(requiredIngredients);
+            Map<IngredientName, Integer> consumedIngredients = new HashMap<>();
+            for (Map.Entry<IngredientName, Integer> ingredientPair : requiredIngredients.entrySet()) {
+                IngredientName name = ingredientPair.getKey();
+                Integer unitsToConsume = ingredientPair.getValue();
+                Ingredient ingredient;
+                try {
+                    ingredient = findIngredient(name);
+                } catch (IngredientNotFoundException e) {
+                    stockUp(consumedIngredients);
+                    throw new IngredientNotFoundException();
+                }
+                if (ingredient.getNumUnits().getNumberOfUnits() < unitsToConsume) {
+                    stockUp(consumedIngredients);
+                    throw new IngredientNotEnoughException();
+                }
+                consumedIngredients.put(name, unitsToConsume);
+                int index = ingredientsAdded.indexOf(ingredient);
+                NumUnits updatedNumUnits = ingredient.getNumUnits().decrease(unitsToConsume);
+                Ingredient consumedIngredient = new Ingredient(ingredient.getName(), ingredient.getUnit(),
+                        ingredient.getPrice(), ingredient.getMinimum(), updatedNumUnits);
+                ingredientsAdded.set(index, consumedIngredient);
+            }
         }
     }
 }
