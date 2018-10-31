@@ -303,30 +303,6 @@ public class MainWindow extends UiPart<Stage> {
         raise(new ExitAppRequestEvent());
     }
 
-    public PersonListPanel getPersonListPanel() {
-        return personListPanel;
-    }
-
-    public AccountListPanel getAccountListPanel() {
-        return accountListPanel;
-    }
-
-    public ItemListPanel getItemListPanel() {
-        return itemListPanel;
-    }
-
-    public RecordListPanel getRecordListPanel() {
-        return recordListPanel;
-    }
-
-    public IngredientListPanel getIngredientListPanel() {
-        return ingredientListPanel;
-    }
-
-    public ReservationListPanel getReservationListPanel() {
-        return reservationListPanel;
-    }
-
     void releaseResources() {
         browserPanel.freeResources();
     }
