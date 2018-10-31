@@ -15,6 +15,7 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.events.ui.ItemPanelSelectionChangedEvent;
 import seedu.address.commons.events.ui.PersonPanelSelectionChangedEvent;
 import seedu.address.model.menu.Item;
+import seedu.address.commons.events.ui.RecordPanelSelectionChangedEvent;
 import seedu.address.model.person.Person;
 import seedu.address.model.reservation.Reservation;
 
