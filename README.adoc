@@ -21,7 +21,7 @@ endif::[]
 * This is a desktop menu application. It has a GUI but most of the user interactions happen using a CLI (Command Line
 Interface) which is oriented for typist user.
 * The target user group is F&B owners who operate one or more restaurants in NUS. This application aims to improve
-the effectiveness and efficiency of managing their restaurants.
+the effectiveness and efficiency of managing their restaurants. Essentially, *MeNUS* is the one and only restaurant management system they will ever needed.
 
 == Site Map
 
