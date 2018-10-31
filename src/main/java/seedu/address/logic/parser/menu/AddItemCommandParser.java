@@ -5,6 +5,8 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PRICE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Set;
 import java.util.stream.Stream;
 
@@ -15,6 +17,7 @@ import seedu.address.logic.parser.Parser;
 import seedu.address.logic.parser.ParserUtil;
 import seedu.address.logic.parser.Prefix;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.ingredient.IngredientName;
 import seedu.address.model.menu.Item;
 import seedu.address.model.menu.Name;
 import seedu.address.model.menu.Price;
@@ -44,8 +47,9 @@ public class AddItemCommandParser implements Parser<AddItemCommand> {
         Price price = ItemParserUtil.parsePrice(argMultimap.getValue(PREFIX_PRICE).get());
         Recipe recipe = new Recipe("");
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
+        Map<IngredientName, Integer> requiredIngredients = new HashMap<>();
 
-        Item item = new Item(name, price, recipe, tagList);
+        Item item = new Item(name, price, recipe, tagList, requiredIngredients);
 
         return new AddItemCommand(item);
     }

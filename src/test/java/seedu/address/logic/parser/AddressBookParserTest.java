@@ -5,17 +5,22 @@ import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertTrue;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
+import static seedu.address.logic.commands.CommandTestUtil.INGREDIENT_NAME_DESC_APPLE;
 import static seedu.address.logic.commands.CommandTestUtil.ITEM_PERCENT_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DATE_RECORD_ONE;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ITEM_PERCENT;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_APPLE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ID;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_INGREDIENT_NUM;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PASSWORD;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_REMARK;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST;
 import static seedu.address.testutil.accounts.TypicalAccounts.DEMO_ONE;
 
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 import org.junit.Rule;
@@ -51,7 +56,9 @@ import seedu.address.logic.commands.ingredients.EditIngredientByNameCommand;
 import seedu.address.logic.commands.ingredients.EditIngredientCommand;
 import seedu.address.logic.commands.ingredients.EditIngredientCommand.EditIngredientDescriptor;
 import seedu.address.logic.commands.ingredients.ListIngredientsCommand;
+import seedu.address.logic.commands.ingredients.LowStockCommand;
 import seedu.address.logic.commands.menu.AddItemCommand;
+import seedu.address.logic.commands.menu.AddRequiredIngredientsCommand;
 import seedu.address.logic.commands.menu.ClearMenuCommand;
 import seedu.address.logic.commands.menu.DeleteItemCommand;
 import seedu.address.logic.commands.menu.DiscountItemCommand;
@@ -394,6 +401,16 @@ public class AddressBookParserTest {
     }
 
     @Test
+    public void parseCommand_lowStock() throws Exception {
+        assertTrue(parser.parseCommand(LowStockCommand.COMMAND_WORD) instanceof LowStockCommand);
+        assertTrue(parser
+                .parseCommand(LowStockCommand.COMMAND_WORD + " 3") instanceof LowStockCommand);
+        assertTrue(parser.parseCommand(LowStockCommand.COMMAND_ALIAS) instanceof LowStockCommand);
+        assertTrue(parser
+                .parseCommand(LowStockCommand.COMMAND_ALIAS + " 3") instanceof LowStockCommand);
+    }
+
+    @Test
     public void parseCommand_deleteIngredient() throws Exception {
         DeleteIngredientCommand command = (DeleteIngredientCommand) parser.parseCommand(
                 DeleteIngredientCommand.COMMAND_WORD + " " + INDEX_FIRST.getOneBased());
@@ -541,6 +558,20 @@ public class AddressBookParserTest {
                 + " " + INDEX_FIRST.getOneBased() + ITEM_PERCENT_DESC);
         assertEquals(new DiscountItemCommand(INDEX_FIRST, INDEX_FIRST,
                 Double.parseDouble(VALID_ITEM_PERCENT), false), command);
+    }
+
+    @Test
+    public void parseCommand_requiredIngredientsItem() throws Exception {
+        Map<IngredientName, Integer> requiredIngredients = new HashMap<>();
+        requiredIngredients.put(new IngredientName(VALID_NAME_APPLE), 3);
+        String userInput = INDEX_FIRST.getOneBased() + " " + INGREDIENT_NAME_DESC_APPLE + " "
+                + PREFIX_INGREDIENT_NUM + "3";
+        AddRequiredIngredientsCommand command = (AddRequiredIngredientsCommand) parser.parseCommand(
+                AddRequiredIngredientsCommand.COMMAND_WORD + " " + userInput);
+        assertEquals(new AddRequiredIngredientsCommand(INDEX_FIRST, requiredIngredients), command);
+        command = (AddRequiredIngredientsCommand) parser.parseCommand(
+                AddRequiredIngredientsCommand.COMMAND_ALIAS + " " + userInput);
+        assertEquals(new AddRequiredIngredientsCommand(INDEX_FIRST, requiredIngredients), command);
     }
 
     @Test

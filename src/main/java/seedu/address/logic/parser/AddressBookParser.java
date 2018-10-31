@@ -29,8 +29,10 @@ import seedu.address.logic.commands.ingredients.AddIngredientCommand;
 import seedu.address.logic.commands.ingredients.DeleteIngredientCommand;
 import seedu.address.logic.commands.ingredients.EditIngredientCommand;
 import seedu.address.logic.commands.ingredients.ListIngredientsCommand;
+import seedu.address.logic.commands.ingredients.LowStockCommand;
 import seedu.address.logic.commands.ingredients.StockUpCommand;
 import seedu.address.logic.commands.menu.AddItemCommand;
+import seedu.address.logic.commands.menu.AddRequiredIngredientsCommand;
 import seedu.address.logic.commands.menu.ClearMenuCommand;
 import seedu.address.logic.commands.menu.DeleteItemCommand;
 import seedu.address.logic.commands.menu.DiscountItemCommand;
@@ -62,6 +64,7 @@ import seedu.address.logic.parser.ingredients.DeleteIngredientCommandParser;
 import seedu.address.logic.parser.ingredients.EditIngredientCommandParser;
 import seedu.address.logic.parser.ingredients.StockUpCommandParser;
 import seedu.address.logic.parser.menu.AddItemCommandParser;
+import seedu.address.logic.parser.menu.AddRequiredIngredientsCommandParser;
 import seedu.address.logic.parser.menu.DeleteItemCommandParser;
 import seedu.address.logic.parser.menu.DiscountItemCommandParser;
 import seedu.address.logic.parser.menu.EditItemCommandParser;
@@ -199,6 +202,10 @@ public class AddressBookParser {
         case ListIngredientsCommand.COMMAND_ALIAS:
             return new ListIngredientsCommand();
 
+        case LowStockCommand.COMMAND_WORD:
+        case LowStockCommand.COMMAND_ALIAS:
+            return new LowStockCommand();
+
         case DeleteIngredientCommand.COMMAND_WORD:
         case DeleteIngredientCommand.COMMAND_ALIAS:
             return new DeleteIngredientCommandParser().parse(arguments);
@@ -253,6 +260,10 @@ public class AddressBookParser {
         case DiscountItemCommand.COMMAND_WORD:
         case DiscountItemCommand.COMMAND_ALIAS:
             return new DiscountItemCommandParser().parse(arguments);
+
+        case AddRequiredIngredientsCommand.COMMAND_WORD:
+        case AddRequiredIngredientsCommand.COMMAND_ALIAS:
+            return new AddRequiredIngredientsCommandParser().parse(arguments);
 
         case ClearMenuCommand.COMMAND_WORD:
         case ClearMenuCommand.COMMAND_ALIAS:

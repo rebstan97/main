@@ -43,7 +43,7 @@ public class RecipeItemCommandTest {
         RecipeItemCommand recipeItemCommand = new RecipeItemCommand(INDEX_FIRST,
                 new Recipe(editedItem.getRecipe().toString()));
 
-        String expectedMessage = String.format(RecipeItemCommand.MESSAGE_DELETE_REMARK_SUCCESS, editedItem);
+        String expectedMessage = String.format(RecipeItemCommand.MESSAGE_DELETE_RECIPE_SUCCESS, editedItem);
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.updateItem(firstItem, editedItem);
@@ -63,7 +63,7 @@ public class RecipeItemCommandTest {
         RecipeItemCommand recipeItemCommand = new RecipeItemCommand(INDEX_FIRST,
                 new Recipe(editedItem.getRecipe().toString()));
 
-        String expectedMessage = String.format(RecipeItemCommand.MESSAGE_ADD_REMARK_SUCCESS, editedItem);
+        String expectedMessage = String.format(RecipeItemCommand.MESSAGE_ADD_RECIPE_SUCCESS, editedItem);
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.updateItem(firstItem, editedItem);
@@ -74,10 +74,11 @@ public class RecipeItemCommandTest {
 
     @Test
     public void execute_invalidItemIndexUnfilteredList_failure() {
-        Index outOfBoundIndex = Index.fromOneBased(model.getFilteredPersonList().size() + 1);
-        RecipeItemCommand remarkCommand = new RecipeItemCommand(outOfBoundIndex, new Recipe(VALID_ITEM_RECIPE_FRIES));
+        Index outOfBoundIndex = Index.fromOneBased(model.getFilteredItemList().size() + 1);
+        RecipeItemCommand recipeItemCommand = new RecipeItemCommand(outOfBoundIndex,
+                new Recipe(VALID_ITEM_RECIPE_FRIES));
 
-        assertCommandFailure(remarkCommand, model, commandHistory, Messages.MESSAGE_INVALID_ITEM_DISPLAYED_INDEX);
+        assertCommandFailure(recipeItemCommand, model, commandHistory, Messages.MESSAGE_INVALID_ITEM_DISPLAYED_INDEX);
     }
 
     /**
@@ -89,7 +90,7 @@ public class RecipeItemCommandTest {
         Index outOfBoundIndex = INDEX_SECOND;
 
         // ensures that outOfBoundIndex is still in bounds of address book list
-        assertTrue(outOfBoundIndex.getZeroBased() < model.getAddressBook().getPersonList().size());
+        assertTrue(outOfBoundIndex.getZeroBased() < model.getAddressBook().getItemList().size());
 
         RecipeItemCommand recipeItemCommand = new RecipeItemCommand(outOfBoundIndex,
                 new Recipe(VALID_ITEM_RECIPE_FRIES));
@@ -121,7 +122,7 @@ public class RecipeItemCommandTest {
 
     @Test
     public void executeUndoRedo_invalidIndexUnfilteredList_failure() {
-        Index outOfBoundIndex = Index.fromOneBased(model.getFilteredPersonList().size() + 1);
+        Index outOfBoundIndex = Index.fromOneBased(model.getFilteredItemList().size() + 1);
 
         RecipeItemCommand recipeItemCommand = new RecipeItemCommand(outOfBoundIndex, new Recipe(""));
 

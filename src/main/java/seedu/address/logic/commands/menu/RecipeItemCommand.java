@@ -32,8 +32,8 @@ public class RecipeItemCommand extends Command {
             + PREFIX_RECIPE + "Boil water over high heat and reduce the heat to medium-low, "
             + "pour in the vinegar and 2 teaspoons of salt and egg.";
 
-    public static final String MESSAGE_ADD_REMARK_SUCCESS = "Added recipe to Item: %1$s";
-    public static final String MESSAGE_DELETE_REMARK_SUCCESS = "Removed recipe from Item: %1$s";
+    public static final String MESSAGE_ADD_RECIPE_SUCCESS = "Added recipe to Item: %1$s";
+    public static final String MESSAGE_DELETE_RECIPE_SUCCESS = "Removed recipe from Item: %1$s";
 
     private final Index index;
     private final Recipe recipe;
@@ -58,7 +58,8 @@ public class RecipeItemCommand extends Command {
         }
 
         Item itemToEdit = lastShownList.get(index.getZeroBased());
-        Item editedItem = new Item(itemToEdit.getName(), itemToEdit.getPrice(), recipe, itemToEdit.getTags());
+        Item editedItem = new Item(itemToEdit.getName(), itemToEdit.getPrice(), recipe, itemToEdit.getTags(),
+                itemToEdit.getRequiredIngredients());
 
         model.updateItem(itemToEdit, editedItem);
         model.updateFilteredItemList(PREDICATE_SHOW_ALL_ITEMS);
@@ -70,9 +71,9 @@ public class RecipeItemCommand extends Command {
      * Generates a command execution success message based on whether the recipe is added to or removed from
      * {@code itemToEdit}.
      */
-    private String generateSuccessMessage(Item itemToEdit) {
-        String message = !recipe.toString().isEmpty() ? MESSAGE_ADD_REMARK_SUCCESS : MESSAGE_DELETE_REMARK_SUCCESS;
-        return String.format(message, itemToEdit);
+    private String generateSuccessMessage(Item editedItem) {
+        String message = !recipe.toString().isEmpty() ? MESSAGE_ADD_RECIPE_SUCCESS : MESSAGE_DELETE_RECIPE_SUCCESS;
+        return String.format(message, editedItem);
     }
 
     @Override
