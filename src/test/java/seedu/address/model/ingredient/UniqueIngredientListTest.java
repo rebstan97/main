@@ -307,5 +307,4 @@ public class UniqueIngredientListTest {
         updatedIngredient = uniqueIngredientList.find(broccoli.getName());
         assertEquals(new NumUnits(20), updatedIngredient.getNumUnits());
     }
-
 }
