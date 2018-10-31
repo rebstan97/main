@@ -104,9 +104,7 @@ public class Item {
         Item otherItem = (Item) other;
         return otherItem.getName().equals(getName())
                 && otherItem.getPrice().equals(getPrice())
-                && otherItem.getTags().equals(getTags())
-                && otherItem.getRecipe().equals(getRecipe())
-                && otherItem.getRequiredIngredients().equals(getRequiredIngredients());
+                && otherItem.getTags().equals(getTags());
     }
 
     @Override
