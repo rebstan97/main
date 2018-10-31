@@ -1,5 +1,7 @@
 package seedu.address.model.salesrecord;
 
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
@@ -31,6 +33,7 @@ public class SalesRecord {
 
     private SalesRecord(Date date, ItemName name, QuantitySold quantitySold, Price price, double revenue,
             Map<IngredientName, Integer> ingredientsUsed) {
+        requireAllNonNull(date, name, quantitySold, price, revenue, ingredientsUsed);
         this.date = date;
         this.name = name;
         this.quantitySold = quantitySold;
