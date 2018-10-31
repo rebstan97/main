@@ -32,7 +32,7 @@ public class AccountListPanel extends UiPart<Region> {
     /**
      * Custom {@code ListCell} that displays the graphics of a {@code Account} using a {@code AccountCard}.
      */
-    class AccountListViewCell extends ListCell<Account> {
+    private class AccountListViewCell extends ListCell<Account> {
 
         @Override
         protected void updateItem(Account account, boolean empty) {
