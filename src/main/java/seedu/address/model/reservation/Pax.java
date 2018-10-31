@@ -13,7 +13,7 @@ public class Pax {
     public static final String MESSAGE_PAX_CONSTRAINTS =
             "Pax value should only contain numbers, and it should be at least 1 digit long";
     public static final String PAX_VALIDATION_REGEX = "\\d{1,}";
-    public final String value;
+    private final String value;
 
     /**
      * Constructs a {@code Pax}.

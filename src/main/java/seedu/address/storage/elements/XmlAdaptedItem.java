@@ -35,6 +35,8 @@ public class XmlAdaptedItem {
     @XmlElement(required = true)
     private String originalPrice;
     @XmlElement(required = true)
+    private String percent;
+    @XmlElement(required = true)
     private String recipe;
     @XmlElement(required = true)
     private Map<String, String> requiredIngredients = new HashMap<>();
@@ -51,11 +53,12 @@ public class XmlAdaptedItem {
     /**
      * Constructs an {@code XmlAdaptedItem} with the given item details.
      */
-    public XmlAdaptedItem(String name, String price, String recipe, List<XmlAdaptedTag> tagged,
+    public XmlAdaptedItem(String name, String price, String percent, String recipe, List<XmlAdaptedTag> tagged,
             Map<String, String> requiredIngredients) {
         this.name = name;
         this.price = price;
         this.originalPrice = price;
+        this.percent = percent;
         this.recipe = recipe;
         if (tagged != null) {
             this.tagged = new ArrayList<>(tagged);
@@ -74,6 +77,7 @@ public class XmlAdaptedItem {
         name = source.getName().toString();
         price = source.getPrice().toString();
         originalPrice = String.format("%.2f", source.getPrice().getOriginalValue());
+        percent = String.format("%.0f", source.getPercent());
         recipe = source.getRecipe().toString();
         tagged = source.getTags().stream()
                 .map(XmlAdaptedTag::new)
@@ -116,7 +120,13 @@ public class XmlAdaptedItem {
         if (!Price.isValidPrice(originalPrice)) {
             throw new IllegalValueException(Price.MESSAGE_PRICE_CONSTRAINTS);
         }
-        final Price modelPrice = new Price(price, originalPrice);
+        if (percent == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Price.class.getSimpleName()));
+        }
+        if (!Price.isValidPercent(percent)) {
+            throw new IllegalValueException(Price.MESSAGE_PERCENT_CONSTRAINTS);
+        }
+        final Price modelPrice = new Price(price, originalPrice, percent);
 
         if (recipe == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Recipe.class.getSimpleName()));

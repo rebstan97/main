@@ -5,6 +5,7 @@
         <name>Apple Juice</name>
         <price>2.00</price>
         <originalPrice>2.00</originalPrice>
+        <percent>0</percent>
         <recipe>Add apple to juicer</recipe>
         <requiredIngredients>
             <entry>
@@ -19,6 +20,7 @@
         <name>Beef Burger</name>
         <price>3.00</price>
         <originalPrice>3.00</originalPrice>
+        <percent>0</percent>
         <recipe></recipe>
         <requiredIngredients/>
         <tagged>tuesday</tagged>
@@ -29,6 +31,7 @@
         <name>Chocolate Cake</name>
         <price>2.00</price>
         <originalPrice>2.00</originalPrice>
+        <percent>0</percent>
         <recipe></recipe>
         <requiredIngredients/>
         <tagged>wednesday</tagged>
@@ -37,6 +40,7 @@
         <name>Duck Rice</name>
         <price>3.00</price>
         <originalPrice>3.00</originalPrice>
+        <percent>0</percent>
         <recipe></recipe>
         <requiredIngredients/>
         <tagged>thursday</tagged>
@@ -45,6 +49,7 @@
         <name>Egg</name>
         <price>0.50</price>
         <originalPrice>0.50</originalPrice>
+        <percent>0</percent>
         <recipe></recipe>
         <requiredIngredients/>
         <tagged>friday</tagged>
@@ -53,6 +58,7 @@
         <name>Fruit Cake</name>
         <price>2.00</price>
         <originalPrice>2.00</originalPrice>
+        <percent>0</percent>
         <recipe></recipe>
         <requiredIngredients/>
         <tagged>saturday</tagged>
@@ -61,6 +67,7 @@
         <name>Garlic Bread</name>
         <price>1.00</price>
         <originalPrice>1.00</originalPrice>
+        <percent>0</percent>
         <recipe></recipe>
         <requiredIngredients/>
         <tagged>sunday</tagged>
