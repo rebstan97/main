@@ -224,6 +224,7 @@ public class MainWindow extends UiPart<Stage> {
      */
     @FXML
     public void handleSwitchToAccount() {
+        browserPlaceholder.getChildren().clear();
         personListPanelPlaceholder.getChildren().clear();
         accountListPanel = new AccountListPanel(logic.getFilteredAccountList());
         personListPanelPlaceholder.getChildren().add(accountListPanel.getRoot());

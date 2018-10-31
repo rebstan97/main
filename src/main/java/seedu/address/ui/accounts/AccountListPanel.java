@@ -82,5 +82,4 @@ public class AccountListPanel extends UiPart<Region> {
             }
         }
     }
-
 }
