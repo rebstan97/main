@@ -22,9 +22,8 @@ public class RecordStackPanel extends UiPart<Region> {
             + "recording.\n\n2) This record was edited some time in the past.";
 
     private static final String FXML = "RecordStackPanel.fxml";
-    
-    public final SalesRecord salesRecord;
 
+    public final SalesRecord salesRecord;
 
     @FXML
     private StackPane stackPane;
