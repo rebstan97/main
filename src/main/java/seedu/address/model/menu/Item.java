@@ -53,6 +53,10 @@ public class Item {
         return recipe;
     }
 
+    public double getPercent() {
+        return price.getPercent();
+    }
+
     /**
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
      * if modification is attempted.

@@ -17,13 +17,13 @@ public class ItemCardTest extends GuiUnitTest {
     @Test
     public void display() {
         // no tags
-        Item itemWithNoTags = new ItemBuilder().withTags(new String[0]).build();
+        Item itemWithNoTags = new ItemBuilder().build();
         ItemCard itemCard = new ItemCard(itemWithNoTags, 1);
         uiPartRule.setUiPart(itemCard);
         assertCardDisplay(itemCard, itemWithNoTags, 1);
 
         // with tags
-        Item itemWithTags = new ItemBuilder().build();
+        Item itemWithTags = new ItemBuilder().withTags("husband", "friends").build();
         itemCard = new ItemCard(itemWithTags, 2);
         uiPartRule.setUiPart(itemCard);
         assertCardDisplay(itemCard, itemWithTags, 2);
@@ -67,7 +67,7 @@ public class ItemCardTest extends GuiUnitTest {
         // verify id is displayed correctly
         assertEquals(Integer.toString(expectedId) + ". ", itemCardHandle.getId());
 
-        // verify person details are displayed correctly
+        // verify item details are displayed correctly
         assertCardDisplaysItem(expectedItem, itemCardHandle);
     }
 }

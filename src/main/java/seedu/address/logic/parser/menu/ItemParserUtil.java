@@ -38,4 +38,18 @@ public class ItemParserUtil {
         }
         return new Price(trimmedPrice);
     }
+
+    /**
+     * Parses a {@code String percent} into a {@code double}. Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code percent} is invalid.
+     */
+    public static double parsePercent(String percent) throws ParseException {
+        requireNonNull(percent);
+        String trimmedPercent = percent.trim();
+        if (!Price.isValidPercent(trimmedPercent)) {
+            throw new ParseException(Price.MESSAGE_PERCENT_CONSTRAINTS);
+        }
+        return Double.parseDouble(trimmedPercent);
+    }
 }
