@@ -662,18 +662,16 @@ p/ITEM_PRICE` +
 * Both DATE and ITEM_NAME cannot be same as another record in the sales list.
 ****
 
-[WARNING]
-====
-[[auto-ingredient-update]]Auto-ingredient update mechanism: +
+[[auto-ingredient-update]]
+===== Auto-ingredient update mechanism:
 `record-sales` also determines all the ingredients you used and automatically deducts them from the ingredient
 list, subjected to the following conditions: +
 1) The item exists in the menu. Refer to <<Add-item>> for more information. +
-2) The required ingredients to make one unit of `ITEM_NAME` is specified. Refer to <<To-Be-Updated>> for more
+2) The required ingredients to make one unit of `ITEM_NAME` is specified. Refer to <<add-required-ingredient>> for more
 information. +
 3) All required ingredients exist in the ingredient list. Refer to <<Add-ingredient>> for more information. +
 4) There are sufficient ingredients to make `QUANTITY_SOLD` units of `ITEM_NAME`. Refer to <<Stockup>> for more
 information.
-====
 
 [NOTE]
 ====
@@ -808,6 +806,25 @@ Examples:
 
 * `delete-role r/999`
 * `dr id/999`
+
+==== Check item sales history `[coming in v2.0]`
+Generates the item sales report that consists of all records associated with that item. +
+Format: `check-history n/ITEM_NAME` or `ch n/ITEM_NAME`
+
+Examples:
+
+* `check-history n/Fried Rice`
+* `ch n/Fried Rice`
+
+==== Display sales graph `[coming in v2.0]`
+Generates and displays the sales graph with the vertical axis representing the total revenue and horizontal axis
+representing the dates. +
+Format: `display-sales-graph` or `dsg`
+
+==== Export sales report`[coming in v2.0]`
+Exports the sales report of a specific date into a pdf file. The generated .pdf sales report will be much more
+detailed than that displayed in app.
+Format: `export-sales DATE` or `es DATE`
 
 == Frequently Asked Questions (FAQ)
 
