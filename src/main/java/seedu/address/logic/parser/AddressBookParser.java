@@ -203,6 +203,7 @@ public class AddressBookParser {
             return new ListIngredientsCommand();
 
         case LowStockCommand.COMMAND_WORD:
+        case LowStockCommand.COMMAND_ALIAS:
             return new LowStockCommand();
 
         case DeleteIngredientCommand.COMMAND_WORD:

@@ -19,6 +19,8 @@ public class LowStockCommand extends Command {
 
     public static final String COMMAND_WORD = "low-stock";
 
+    public static final String COMMAND_ALIAS = "ls";
+
     public static final String MESSAGE_SUCCESS = "Listed all ingredients that are low in stock count";
 
 
