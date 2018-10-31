@@ -118,6 +118,11 @@ public class AddItemCommandTest {
         }
 
         @Override
+        public void resetRestaurantBookVersion() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public boolean hasPerson(Person person) {
             throw new AssertionError("This method should not be called.");
         }
