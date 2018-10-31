@@ -76,6 +76,11 @@ public class ModelManager extends ComponentManager implements Model {
         return versionedRestaurantBook;
     }
 
+    @Override
+    public void resetRestaurantBookVersion() {
+        versionedRestaurantBook.reset();
+    }
+
     /**
      * Raises an event to indicate the model has changed
      */

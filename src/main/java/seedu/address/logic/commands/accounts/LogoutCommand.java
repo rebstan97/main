@@ -32,6 +32,7 @@ public class LogoutCommand extends Command {
             throw new CommandException(MESSAGE_NOT_AUTHENTICATED);
         }
 
+        model.resetRestaurantBookVersion();
         EventsCenter.getInstance().post(new LogoutEvent());
         return new CommandResult(MESSAGE_SUCCESS);
     }

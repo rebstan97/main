@@ -20,8 +20,18 @@ public class VersionedRestaurantBook extends RestaurantBook {
     }
 
     /**
-     * Saves a copy of the current {@code RestaurantBook} state at the end of the state list.
-     * Undone states are removed from the state list.
+     * Resets the pointer of the versioned restaurant book after saving the latest state.
+     */
+    public void reset() {
+        ReadOnlyRestaurantBook finalState = restaurantBookStateList.get(currentStatePointer);
+        restaurantBookStateList.clear();
+        restaurantBookStateList.add(finalState);
+        currentStatePointer = 0;
+    }
+
+    /**
+     * Saves a copy of the current {@code RestaurantBook} state at the end of the state list. Undone states are removed
+     * from the state list.
      */
     public void commit() {
         removeStatesAfterCurrentPointer();
@@ -93,6 +103,7 @@ public class VersionedRestaurantBook extends RestaurantBook {
      * Thrown when trying to {@code undo()} but can't.
      */
     public static class NoUndoableStateException extends RuntimeException {
+
         private NoUndoableStateException() {
             super("Current state pointer at start of restaurantBookState list, unable to undo.");
         }
@@ -102,6 +113,7 @@ public class VersionedRestaurantBook extends RestaurantBook {
      * Thrown when trying to {@code redo()} but can't.
      */
     public static class NoRedoableStateException extends RuntimeException {
+
         private NoRedoableStateException() {
             super("Current state pointer at end of restaurantBookState list, unable to redo.");
         }

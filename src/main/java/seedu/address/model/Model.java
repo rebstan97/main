@@ -42,6 +42,11 @@ public interface Model {
      */
     ReadOnlyRestaurantBook getRestaurantBook();
 
+    /**
+     * Resets the version of the RestaurantBook
+     */
+    void resetRestaurantBookVersion();
+
     //=========== API for Persons =============================================================
 
     /**
@@ -314,8 +319,7 @@ public interface Model {
     void sortMenu(SortMethod sortMethod);
 
     /**
-     * Finds the item with the given name. The item with {@code Name} must already
-     * exist in the menu.
+     * Finds the item with the given name. The item with {@code Name} must already exist in the menu.
      */
     Item findItem(Name name);
 
