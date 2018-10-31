@@ -34,6 +34,11 @@ public class ParserUtil {
     public static final String MESSAGE_INVALID_INDEX = "Index is not a non-zero unsigned integer.";
     public static final String MESSAGE_NOT_INDEX_OR_NAME = "A valid index or ingredient name must be entered.";
 
+    // This class should not be instantiated.
+    private ParserUtil() {
+        throw new AssertionError("ParserUtil should not be instantiated.");
+    }
+
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
      * trimmed.

@@ -11,6 +11,11 @@ import seedu.address.model.accounts.Username;
  */
 public class AccountParserUtil {
 
+    // This class should not be instantiated.
+    private AccountParserUtil() {
+        throw new AssertionError("AccountParserUtil should not be instantiated.");
+    }
+
     /**
      * Parses a {@code username} into a {@code Username}. Leading and trailing whitespaces will be trimmed.
      *
