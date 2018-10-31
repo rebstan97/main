@@ -44,14 +44,15 @@ import seedu.address.testutil.salesrecords.RecordBuilder;
 
 public class RecordSalesCommandTest {
 
+    @Rule
+    public ExpectedException thrown = ExpectedException.none();
+    
     private static final CommandHistory EMPTY_COMMAND_HISTORY = new CommandHistory();
     private final ModelStubAcceptingRecordAdded modelStub = new ModelStubAcceptingRecordAdded();
     private final SalesRecord validRecord = new RecordBuilder().build();
 
     private CommandHistory commandHistory = new CommandHistory();
 
-    @Rule
-    public ExpectedException thrown = ExpectedException.none();
 
     @Test
     public void constructor_nullRecord_throwsNullPointerException() {
