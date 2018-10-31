@@ -19,7 +19,6 @@ import seedu.address.model.salesrecord.SalesRecord;
  */
 public class XmlAdaptedRecord {
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Record's %s field is missing!";
-    public static final String INGREDIENT_USED = "ingredientsUsed";
     public static final String MESSAGE_QUANTITY_USED_CONSTRAINTS = "Quantity used should be a positive integer!";
 
     @XmlElement(required = true)
