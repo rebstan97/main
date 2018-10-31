@@ -26,6 +26,7 @@ import seedu.address.commons.events.ui.ItemPanelSelectionChangedEvent;
 import seedu.address.commons.events.ui.LoginEvent;
 import seedu.address.commons.events.ui.LogoutEvent;
 import seedu.address.commons.events.ui.ShowHelpRequestEvent;
+import seedu.address.commons.events.ui.accounts.DisplayAccountListRequestEvent;
 import seedu.address.commons.events.ui.reservation.DisplayReservationListRequestEvent;
 import seedu.address.logic.Logic;
 import seedu.address.model.UserPrefs;
@@ -187,6 +188,8 @@ public class MainWindow extends UiPart<Stage> {
         CommandBox commandBox = new CommandBox(logic);
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
 
+        accountListPanel = new AccountListPanel(logic.getFilteredAccountList());
+
         personListPanel = new PersonListPanel(logic.getFilteredPersonList());
         personListPanelPlaceholder.getChildren().add(personListPanel.getRoot()); // Show address book
     }
@@ -226,7 +229,6 @@ public class MainWindow extends UiPart<Stage> {
     public void handleSwitchToAccount() {
         browserPlaceholder.getChildren().clear();
         personListPanelPlaceholder.getChildren().clear();
-        accountListPanel = new AccountListPanel(logic.getFilteredAccountList());
         personListPanelPlaceholder.getChildren().add(accountListPanel.getRoot());
     }
 
@@ -334,6 +336,12 @@ public class MainWindow extends UiPart<Stage> {
         browserPlaceholder.getChildren().clear();
         ItemStackPanel itemStackPanel = new ItemStackPanel(event.getNewSelection());
         browserPlaceholder.getChildren().add(itemStackPanel.getRoot());
+    }
+
+    @Subscribe
+    private void handleDisplayAccountListEvent(DisplayAccountListRequestEvent event) {
+        logger.info(LogsCenter.getEventHandlingLogMessage(event));
+        handleSwitchToAccount();
     }
 
     @Subscribe
