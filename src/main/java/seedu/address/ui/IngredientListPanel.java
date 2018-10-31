@@ -19,6 +19,7 @@ import seedu.address.model.ingredient.Ingredient;
  * Panel containing the list of ingredients.
  */
 public class IngredientListPanel extends UiPart<Region> {
+
     private static final String FXML = "IngredientListPanel.fxml";
     private final Logger logger = LogsCenter.getLogger(IngredientListPanel.class);
 
@@ -66,7 +67,8 @@ public class IngredientListPanel extends UiPart<Region> {
     /**
      * Custom {@code ListCell} that displays the graphics of an {@code Ingredient} using an {@code IngredientCard}.
      */
-    class IngredientListViewCell extends ListCell<Ingredient> {
+    private class IngredientListViewCell extends ListCell<Ingredient> {
+
         @Override
         protected void updateItem(Ingredient ingredient, boolean isEmpty) {
             super.updateItem(ingredient, isEmpty);
@@ -79,5 +81,4 @@ public class IngredientListPanel extends UiPart<Region> {
             }
         }
     }
-
 }
