@@ -17,7 +17,6 @@ import static seedu.address.testutil.salesrecords.RecordBuilder.DEFAULT_DATE;
 import static seedu.address.testutil.salesrecords.RecordBuilder.DEFAULT_ITEM_NAME;
 import static seedu.address.testutil.salesrecords.RecordBuilder.DEFAULT_PRICE;
 import static seedu.address.testutil.salesrecords.RecordBuilder.DEFAULT_QUANTITY_SOLD;
-
 import static seedu.address.testutil.salesrecords.TypicalRecords.RECORD_ONE;
 
 import org.junit.Test;
