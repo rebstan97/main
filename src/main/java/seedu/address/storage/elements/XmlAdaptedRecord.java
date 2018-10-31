@@ -192,7 +192,12 @@ public class XmlAdaptedRecord {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
                     Integer.class.getSimpleName()));
         }
-        if (Integer.parseInt(quantityUsed) <= 0) {
+        try {
+            int quantity = Integer.parseInt(quantityUsed);
+            if (quantity <= 0) {
+                throw new IllegalValueException(MESSAGE_QUANTITY_USED_CONSTRAINTS);
+            }
+        } catch (NumberFormatException e) {
             throw new IllegalValueException(MESSAGE_QUANTITY_USED_CONSTRAINTS);
         }
     }

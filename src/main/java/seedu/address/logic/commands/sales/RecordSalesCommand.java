@@ -119,7 +119,7 @@ public class RecordSalesCommand extends Command {
     }
 
     /**
-     * Retrieve the name of ingredients and their corresponding quantity required to make one unit of "item"
+     * Retrieves the name of ingredients and their corresponding quantity required to make one unit of "item"
      * @return A Map representation of the required ingredients per unit of "item"
      */
     private Map<IngredientName, Integer> getRequiredIngredients(Model model) throws ItemNotFoundException {
