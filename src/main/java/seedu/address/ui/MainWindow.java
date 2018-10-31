@@ -29,6 +29,7 @@ import seedu.address.commons.events.ui.ShowHelpRequestEvent;
 import seedu.address.commons.events.ui.reservation.DisplayReservationListRequestEvent;
 import seedu.address.logic.Logic;
 import seedu.address.model.UserPrefs;
+import seedu.address.ui.accounts.AccountListPanel;
 import seedu.address.ui.accounts.UsernameDisplay;
 import seedu.address.ui.menu.ItemListPanel;
 import seedu.address.ui.menu.ItemStackPanel;
@@ -52,6 +53,7 @@ public class MainWindow extends UiPart<Stage> {
     // Independent Ui parts residing in this Ui container
     private BrowserPanel browserPanel;
     private PersonListPanel personListPanel;
+    private AccountListPanel accountListPanel;
     private RecordListPanel recordListPanel; // Panels stack on top of each other, only one visible at a time
     private IngredientListPanel ingredientListPanel;
     private ItemListPanel itemListPanel;
@@ -222,14 +224,9 @@ public class MainWindow extends UiPart<Stage> {
      */
     @FXML
     public void handleSwitchToAccount() {
-        //ingredientListPanel = new IngredientListPanel(logic.getFilteredIngredientList());
-        //ingredientListPanelPlaceholder.getChildren().add(ingredientListPanel.getRoot());
-
-        // Proposed changes: e.g.
-        // userListPanel = new UserListPanel(logic.getFilteredAccountList());
-        // dataListPanelPlaceholder.getChildren().add(userListPanel.getRoot());
-        // Then when you want it cleared when switch to another option, do
-        // dataListPanelPlaceholder.getChildren().clear(); follow by repeating the top.
+        personListPanelPlaceholder.getChildren().clear();
+        accountListPanel = new AccountListPanel(logic.getFilteredAccountList());
+        personListPanelPlaceholder.getChildren().add(accountListPanel.getRoot());
     }
 
     /**
@@ -298,6 +295,10 @@ public class MainWindow extends UiPart<Stage> {
 
     public PersonListPanel getPersonListPanel() {
         return personListPanel;
+    }
+
+    public AccountListPanel getAccountListPanel() {
+        return accountListPanel;
     }
 
     public ItemListPanel getItemListPanel() {
