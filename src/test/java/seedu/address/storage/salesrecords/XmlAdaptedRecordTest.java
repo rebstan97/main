@@ -19,6 +19,7 @@ import seedu.address.model.salesrecord.Date;
 import seedu.address.model.salesrecord.ItemName;
 import seedu.address.model.salesrecord.Price;
 import seedu.address.model.salesrecord.QuantitySold;
+import seedu.address.model.salesrecord.SalesRecord;
 import seedu.address.storage.elements.XmlAdaptedRecord;
 import seedu.address.testutil.Assert;
 import seedu.address.testutil.salesrecords.RecordBuilder;
@@ -44,8 +45,9 @@ public class XmlAdaptedRecordTest {
         Map<IngredientName, Integer> ingredientUsed = new HashMap<>();
         ingredientUsed.put(new IngredientName("Egg"), 3);
         ingredientUsed.put(new IngredientName("Garlic"), 2);
-        record = new XmlAdaptedRecord(RECORD_DEFAULT.setIngredientsUsed(ingredientUsed));
-        assertEquals(RECORD_DEFAULT, record.toModelType());
+        SalesRecord recordWithIngredientsUsed = RECORD_DEFAULT.setIngredientsUsed(ingredientUsed);
+        record = new XmlAdaptedRecord(recordWithIngredientsUsed);
+        assertEquals(recordWithIngredientsUsed, record.toModelType());
     }
     @Test
     public void toModelType_nullDate_throwsIllegalValueException() {
