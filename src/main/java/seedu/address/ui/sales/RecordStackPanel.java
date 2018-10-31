@@ -21,9 +21,10 @@ public class RecordStackPanel extends UiPart<Region> {
             + "following reasons - \n\n1) The ingredients required to make this item were not specified at the time of "
             + "recording.\n\n2) This record was edited some time in the past.";
 
+    private static final String FXML = "RecordStackPanel.fxml";
+    
     public final SalesRecord salesRecord;
 
-    private static final String FXML = "RecordStackPanel.fxml";
 
     @FXML
     private StackPane stackPane;
