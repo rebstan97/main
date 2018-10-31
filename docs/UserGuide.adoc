@@ -659,10 +659,12 @@ Format: `record-sales d/DATE n/ITEM_NAME q/QUANTITY_SOLD p/ITEM_PRICE` +
 * Both DATE and ITEM_NAME cannot be same as another record in the sales list.
 ****
 
+
 [WARNING]
 ====
+[[Auto-ingredient update]]
 Auto-ingredient update mechanism: +
-`record-sales` also determines all the ingredients you have used and automatically deducts them from the ingredient
+`record-sales` also determines all the ingredients you used and automatically deducts them from the ingredient
 list, subjected to the following conditions: +
 1) The item exists in the menu. Refer to <<Add-item>> for more information. +
 2) The required ingredients to make one unit of `ITEM_NAME` is specified. Refer to <<To-Be-Updated>> for more
@@ -674,8 +676,8 @@ information. +
 
 [NOTE]
 ====
-Sales volume will still be recorded if not all the above conditions are satisfied. However, ingredient list would not
- be updated.
+Sales volume will still be recorded even if not all the above conditions are satisfied. However, ingredient list would
+ not be updated.
 ====
 
 Examples:
@@ -707,7 +709,6 @@ Format: `delete-sales ITEM_INDEX`
 * Deletes the record at the specified `ITEM_INDEX`.
 * The item index refers to the index number shown in the sales list.
 * The index *must be a positive integer* 1, 2, 3, ...
-* Alternatively, deletes the sales record with the specified `DATE` and `ITEM_NAME`.
 ****
 
 Examples:
@@ -715,22 +716,21 @@ Examples:
 * `delete-sales 2` +
 Deletes the 2nd record from the sales list.
 
-* `delete-sales 10-02-2018 Fried Rice` +
-Deletes the sales record for `Fried Rice` dated 10-02-2018 from the sales list.
-
+[NOTE]
+====
+Deleting a sales record will not undo the effect of <<Auto-ingredient update>> when recording.
+====
 
 === Editing a sales record: `edit-sales` or `es`
 
-Edits the sales record identified by the index, or by the date and item name. +
-Format: `edit-sales ITEM_INDEX [d/DATE] [n/ITEM_NAME] [q/QUANTITY SOLD] [p/ITEM_PRICE]`/ `edit-sales DATE
-ITEM_NAME [d/DATE] [n/ITEM_NAME] [q/QUANTITY SOLD] [p/ITEM_PRICE]`
+Edits the sales record identified by the index. +
+Format: `edit-sales ITEM_INDEX [d/DATE] [n/ITEM_NAME] [q/QUANTITY SOLD] [p/ITEM_PRICE]`
 
 ****
 * Edits the record at the specified `INDEX`. The index refers to the index number shown in the sales list.
 * The index *must be a positive integer* 1, 2, 3, ...
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
-* Alternatively, edits the record with the specified `DATE` and `ITEM_NAME`.
 ****
 
 Examples:
@@ -738,12 +738,13 @@ Examples:
 * `edit-sales 3 n/Fried Omelet`  +
 Edits the item name of the 3rd record to be "Fried Omelet".
 
-* `edit-sales 23-06-2018 Fried Rice n/Fried Rice with Shrimps` +
-Edits the item name of the record "23-06-2018, Fried Rice" to be "Fried Rice with Shrimps".
+* `edit-sales 7 q/37 p/6.50`  +
+Edits the quantity sold and price of the 7th record to be 37 and 6.50 respectively.
 
-* `edit-sales 12-02-2018 Pasta q/37 p/6.50`  +
-Edits the quantity sold and price of the record "12-02-2018, Pasta" to be 37 and 6.50 respectively.
-
+[NOTE]
+====
+Editing a sales record will not undo the effect of auto-ingredient update when recording.
+====
 
 === Ranking items according to total revenue: `rank-item` or `ri`
 
