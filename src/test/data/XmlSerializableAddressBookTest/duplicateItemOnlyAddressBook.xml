@@ -5,6 +5,7 @@
         <name>Cheese Burger</name>
         <price>3</price>
         <originalPrice>3</originalPrice>
+        <percent>0</percent>
         <recipe></recipe>
         <requiredIngredients/>
     </items>
@@ -14,6 +15,7 @@
         <name>Cheese Burger</name>
         <price>3</price>
         <originalPrice>3</originalPrice>
+        <percent>0</percent>
         <recipe></recipe>
         <requiredIngredients/>
     </items>

@@ -14,26 +14,29 @@ import seedu.address.model.menu.Item;
 /**
  * Provides a handle to an item card in the item list panel.
  */
-public class ItemCardHandle extends NodeHandle<Node> {
-    private static final String ID_FIELD_ID = "#id";
+public class ItemStackPanelHandle extends NodeHandle<Node> {
     private static final String NAME_FIELD_ID = "#name";
     private static final String PRICE_FIELD_ID = "#price";
     private static final String PERCENT_FIELD_ID = "#percent";
+    private static final String RECIPE_FIELD_ID = "#recipe";
+    private static final String REQUIRED_INGREDIENTS_FIELD_ID = "#requiredIngredients";
     private static final String TAGS_FIELD_ID = "#tags";
 
-    private final Label idLabel;
     private final Label nameLabel;
     private final Label priceLabel;
     private final Label percentLabel;
+    private final Label recipeLabel;
+    private final Label requiredIngredientsLabel;
     private final List<Label> tagLabels;
 
-    public ItemCardHandle(Node cardNode) {
+    public ItemStackPanelHandle(Node cardNode) {
         super(cardNode);
 
-        idLabel = getChildNode(ID_FIELD_ID);
         nameLabel = getChildNode(NAME_FIELD_ID);
         priceLabel = getChildNode(PRICE_FIELD_ID);
         percentLabel = getChildNode(PERCENT_FIELD_ID);
+        recipeLabel = getChildNode(RECIPE_FIELD_ID);
+        requiredIngredientsLabel = getChildNode(REQUIRED_INGREDIENTS_FIELD_ID);
 
         Region tagsContainer = getChildNode(TAGS_FIELD_ID);
         tagLabels = tagsContainer
@@ -41,10 +44,6 @@ public class ItemCardHandle extends NodeHandle<Node> {
                 .stream()
                 .map(Label.class::cast)
                 .collect(Collectors.toList());
-    }
-
-    public String getId() {
-        return idLabel.getText();
     }
 
     public String getName() {
@@ -57,6 +56,14 @@ public class ItemCardHandle extends NodeHandle<Node> {
 
     public String getPercent() {
         return percentLabel.getText();
+    }
+
+    public String getRecipe() {
+        return recipeLabel.getText();
+    }
+
+    public String getRequiredIngredients() {
+        return requiredIngredientsLabel.getText();
     }
 
     public List<String> getTags() {
