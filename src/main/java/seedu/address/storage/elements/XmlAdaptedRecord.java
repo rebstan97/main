@@ -152,10 +152,6 @@ public class XmlAdaptedRecord {
      * @throws IllegalValueException if there were any data constraints violated in the Ingredient
      */
     private Map<IngredientName, Integer> ingredientUsedToModelType() throws IllegalValueException {
-        if (ingredientsUsed == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, INGREDIENT_USED));
-        }
-
         Map<IngredientName, Integer> modelIngredientUsed = new HashMap<>();
 
         for (Map.Entry<String, String> entry : ingredientsUsed.entrySet()) {

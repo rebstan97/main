@@ -8,9 +8,13 @@ import static seedu.address.testutil.salesrecords.TypicalRecords.RECORD_DEFAULT;
 import static seedu.address.testutil.salesrecords.TypicalRecords.RECORD_ONE;
 import static seedu.address.testutil.salesrecords.TypicalRecords.RECORD_TWO;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.junit.Test;
 
 import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.model.ingredient.IngredientName;
 import seedu.address.model.salesrecord.Date;
 import seedu.address.model.salesrecord.ItemName;
 import seedu.address.model.salesrecord.Price;
@@ -31,8 +35,16 @@ public class XmlAdaptedRecordTest {
 
     private XmlAdaptedRecord record = null;
     @Test
-    public void toModelType_validRecordDetails_returnsRecord() throws Exception {
+    public void toModelType_validRecordDetailsWithoutIngredientUsed_returnsRecord() throws Exception {
         record = new XmlAdaptedRecord(RECORD_DEFAULT);
+        assertEquals(RECORD_DEFAULT, record.toModelType());
+    }
+    @Test
+    public void toModelType_validRecordDetailsWithIngredientUsed_returnsRecord() throws Exception {
+        Map<IngredientName, Integer> ingredientUsed = new HashMap<>();
+        ingredientUsed.put(new IngredientName("Egg"), 3);
+        ingredientUsed.put(new IngredientName("Garlic"), 2);
+        record = new XmlAdaptedRecord(RECORD_DEFAULT.setIngredientsUsed(ingredientUsed));
         assertEquals(RECORD_DEFAULT, record.toModelType());
     }
     @Test
