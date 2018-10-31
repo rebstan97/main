@@ -237,7 +237,7 @@ image::RegisterAccountSdForLogic.png[width="800"]
 === Model component
 
 .Structure of the Model Component
-image::ModelClassDiagramNew.png[width="800"]
+image::ModelClassBetterOopDiagram.png[width="800"]
 
 *API* : link:{repoURL}/src/main/java/seedu/address/model/Model.java[`Model.java`]
 
@@ -245,7 +245,8 @@ The `Model`,
 
 * stores a `UserPref` object that represents the user's preferences.
 * stores the Restaurant Book data.
-* exposes an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
+* exposes data via an unmodifiable `ObservableList` that can be 'observed' e.g. the UI can be bound to this
+list so that the UI automatically updates when the data in the list change.
 * does not depend on any of the other three components.
 
 [[Design-Storage]]
@@ -605,8 +606,6 @@ The menu management feature implements the following operations:
 * `today-special` command -- Finds items whose tags contain the `DAY_OF_THE_WEEK`.
 
 Each `Item` object consists of `Name` and `Price`.
-[NOTE]
-`Name` is a separate class from the `Name` used by `Person`, but is functionally the same.
 
 ==== `add-item` Command
 The `add-item` command is facilitated by `AddItemCommand` and `AddItemCommandParser`. The command takes in
@@ -680,15 +679,12 @@ The Reservations feature currently contains 3 commands to modify the `UniqueRese
 
 Each `Reservation` object contains `Name`, `Pax`, and `LocalDateTime`.
 
-[NOTE]
-`Name` is a separate class from the `Name` used by `Person`, but is functionally the same.
-
 ==== `add-reservation` Command
 The `add-reservation` command follows similar implementation of the current `add` command.
 
 The command takes in 3 parameters, `Name`, `Pax`, and `DateTime` to create a `Reservation` object.
 
-After the `Reservation` Object is created, AddressBook#addReservation(Reservation reservation) is called to add the
+After the `Reservation` Object is created, RestaurantBook#addReservation(Reservation reservation) is called to add the
 `Reservation` Object to the `UniqueReservationsList`.
 
 ==== `edit-reservation` Command

@@ -3,10 +3,13 @@ package seedu.address.model.menu;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
 
+import seedu.address.model.ingredient.IngredientName;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -22,16 +25,20 @@ public class Item {
 
     // Data fields
     private final Set<Tag> tags = new HashSet<>();
+    private final Map<IngredientName, Integer> requiredIngredients = new HashMap<>();
+
 
     /**
      * Every field must be present and not null.
      */
-    public Item(Name name, Price price, Recipe recipe, Set<Tag> tags) {
+    public Item(Name name, Price price, Recipe recipe, Set<Tag> tags,
+            Map<IngredientName, Integer> requiredIngredients) {
         requireAllNonNull(name, price, tags);
         this.name = name;
         this.price = price;
         this.recipe = recipe;
         this.tags.addAll(tags);
+        this.requiredIngredients.putAll(requiredIngredients);
     }
 
     public Name getName() {
@@ -46,12 +53,24 @@ public class Item {
         return recipe;
     }
 
+    public double getPercent() {
+        return price.getPercent();
+    }
+
     /**
      * Returns an immutable tag set, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
      */
     public Set<Tag> getTags() {
         return Collections.unmodifiableSet(tags);
+    }
+
+    /**
+     * Returns an immutable required ingredients map, which throws {@code UnsupportedOperationException}
+     * if modification is attempted.
+     */
+    public Map<IngredientName, Integer> getRequiredIngredients() {
+        return Collections.unmodifiableMap(requiredIngredients);
     }
 
     /**
@@ -96,7 +115,7 @@ public class Item {
 
     @Override
     public String toString() {
-        final StringBuilder builder = new StringBuilder();
+        final StringBuilder builder = new StringBuilder("Name ");
         builder.append(getName())
                 .append(" Price: ")
                 .append(getPrice())

@@ -1,6 +1,6 @@
 package seedu.address.model;
 
-import java.util.HashMap;
+import java.util.Map;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
@@ -10,6 +10,7 @@ import seedu.address.model.accounts.Account;
 import seedu.address.model.ingredient.Ingredient;
 import seedu.address.model.ingredient.IngredientName;
 import seedu.address.model.menu.Item;
+import seedu.address.model.menu.Name;
 import seedu.address.model.person.Person;
 import seedu.address.model.reservation.Reservation;
 import seedu.address.model.salesrecord.Date;
@@ -249,15 +250,15 @@ public interface Model {
 
     /**
      * Stocks up a list of ingredients. For each ingredient, the number of units of {@code Ingredient} is increased by
-     * {@Integer}. The ingredient key of HashMap {@code requiredIngredients} must exist in the restaurant book.
+     * {@Integer}. The ingredient key of Map {@code requiredIngredients} must exist in the restaurant book.
      */
-    void stockUpIngredients(HashMap<IngredientName, Integer> requiredIngredients);
+    void stockUpIngredients(Map<IngredientName, Integer> requiredIngredients);
 
     /**
      * Consumes a list of ingredients. For each ingredient, the number of units of {@code Ingredient} is decreased by
-     * {@Integer}. The ingredient key of HashMap {@code requiredIngredients} must exist in the restaurant book.
+     * {@Integer}. The ingredient key of Map {@code requiredIngredients} must exist in the restaurant book.
      */
-    void consumeIngredients(HashMap<IngredientName, Integer> requiredIngredients);
+    void consumeIngredients(Map<IngredientName, Integer> requiredIngredients);
 
     /**
      * Returns an unmodifiable view of the filtered ingredient list
@@ -310,6 +311,17 @@ public interface Model {
      * Sort the item list by given sorting method.
      */
     void sortMenu(SortMethod sortMethod);
+
+    /**
+     * Finds the item with the given name. The item with {@code Name} must already
+     * exist in the menu.
+     */
+    Item findItem(Name name);
+
+    /**
+     * Returns an unmodifiable map of requiredIngredients of an {@code Item}
+     */
+    Map<IngredientName, Integer> getRequiredIngredients(Item item);
 
     /**
      * Returns an unmodifiable view of the filtered item list

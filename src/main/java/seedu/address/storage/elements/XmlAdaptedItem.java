@@ -1,8 +1,10 @@
 package seedu.address.storage.elements;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -10,6 +12,7 @@ import java.util.stream.Collectors;
 import javax.xml.bind.annotation.XmlElement;
 
 import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.model.ingredient.IngredientName;
 import seedu.address.model.menu.Item;
 import seedu.address.model.menu.Name;
 import seedu.address.model.menu.Price;
@@ -23,6 +26,7 @@ import seedu.address.storage.XmlAdaptedTag;
 public class XmlAdaptedItem {
 
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Item's %s field is missing!";
+    public static final String REQUIRED_INGREDIENT = "requiredIngredients";
 
     @XmlElement(required = true)
     private String name;
@@ -31,7 +35,11 @@ public class XmlAdaptedItem {
     @XmlElement(required = true)
     private String originalPrice;
     @XmlElement(required = true)
+    private String percent;
+    @XmlElement(required = true)
     private String recipe;
+    @XmlElement(required = true)
+    private Map<String, String> requiredIngredients = new HashMap<>();
 
     @XmlElement
     private List<XmlAdaptedTag> tagged = new ArrayList<>();
@@ -45,13 +53,18 @@ public class XmlAdaptedItem {
     /**
      * Constructs an {@code XmlAdaptedItem} with the given item details.
      */
-    public XmlAdaptedItem(String name, String price, String recipe, List<XmlAdaptedTag> tagged) {
+    public XmlAdaptedItem(String name, String price, String percent, String recipe, List<XmlAdaptedTag> tagged,
+            Map<String, String> requiredIngredients) {
         this.name = name;
         this.price = price;
         this.originalPrice = price;
+        this.percent = percent;
         this.recipe = recipe;
         if (tagged != null) {
             this.tagged = new ArrayList<>(tagged);
+        }
+        if (requiredIngredients != null) {
+            this.requiredIngredients = new HashMap<>(requiredIngredients);
         }
     }
 
@@ -64,10 +77,16 @@ public class XmlAdaptedItem {
         name = source.getName().toString();
         price = source.getPrice().toString();
         originalPrice = String.format("%.2f", source.getPrice().getOriginalValue());
+        percent = String.format("%.0f", source.getPercent());
         recipe = source.getRecipe().toString();
         tagged = source.getTags().stream()
                 .map(XmlAdaptedTag::new)
                 .collect(Collectors.toList());
+        for (Map.Entry<IngredientName, Integer> entry : source.getRequiredIngredients().entrySet()) {
+            String ingredientName = entry.getKey().toString();
+            String num = entry.getValue().toString();
+            requiredIngredients.put(ingredientName, num);
+        }
     }
 
     /**
@@ -101,15 +120,37 @@ public class XmlAdaptedItem {
         if (!Price.isValidPrice(originalPrice)) {
             throw new IllegalValueException(Price.MESSAGE_PRICE_CONSTRAINTS);
         }
-        final Price modelPrice = new Price(price, originalPrice);
+        if (percent == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Price.class.getSimpleName()));
+        }
+        if (!Price.isValidPercent(percent)) {
+            throw new IllegalValueException(Price.MESSAGE_PERCENT_CONSTRAINTS);
+        }
+        final Price modelPrice = new Price(price, originalPrice, percent);
 
         if (recipe == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Recipe.class.getSimpleName()));
         }
         final Recipe modelRecipe = new Recipe(recipe);
 
+        if (requiredIngredients == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, REQUIRED_INGREDIENT));
+        }
+        Map<IngredientName, Integer> modelRequiredIngredients = new HashMap<>();
+        for (Map.Entry<String, String> entry : requiredIngredients.entrySet()) {
+            if (!IngredientName.isValidName(entry.getKey())) {
+                throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, REQUIRED_INGREDIENT));
+            }
+            IngredientName ingredientName = new IngredientName(entry.getKey());
+            Integer num = Integer.parseInt(entry.getValue());
+            if (num <= 0) {
+                throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, REQUIRED_INGREDIENT));
+            }
+            modelRequiredIngredients.put(ingredientName, num);
+        }
+
         final Set<Tag> modelTags = new HashSet<>(itemTags);
-        return new Item(modelName, modelPrice, modelRecipe, modelTags);
+        return new Item(modelName, modelPrice, modelRecipe, modelTags, modelRequiredIngredients);
     }
 
     @Override
