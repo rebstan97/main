@@ -101,32 +101,42 @@ public class RecordSalesCommand extends Command {
                 + ingredientsUpdateStatus);
     }
 
-    private void updateIngredientList(Model model)  throws ItemNotFoundException, RequiredIngredientsNotFoundException,
+    /**
+     * Updates the ingredient list based on info specified in the sales record
+     */
+    private void updateIngredientList(Model model) throws ItemNotFoundException, RequiredIngredientsNotFoundException,
             IngredientNotFoundException, IngredientNotEnoughException {
-        Name itemName = new Name(toAdd.getName().toString());
-        int quantitySold = toAdd.getQuantitySold().getValue();
 
-        // finds the item in menu section
-        Item item = model.findItem(itemName);
-
-        // retrieve the name of ingredients and their corresponding quantity used to make one unit of "item"
-        Map<IngredientName, Integer> requiredIngredients = model.getRequiredIngredients(item);
+        Map<IngredientName, Integer> requiredIngredients = getRequiredIngredients(model);
 
         if (requiredIngredients.isEmpty()) {
             throw new RequiredIngredientsNotFoundException();
         }
 
+        Map<IngredientName, Integer> ingredientsUsed = computeIngredientsUsed(requiredIngredients);
+        toAdd = toAdd.setIngredientsUsed(ingredientsUsed); // saves the ingredientsUsed in the SalesRecord
+        model.consumeIngredients(ingredientsUsed); // update ingredient list
+    }
+
+    /**
+     * Retrieve the name of ingredients and their corresponding quantity required to make one unit of "item"
+     * @return A Map representation of the required ingredients per unit of "item"
+     */
+    private Map<IngredientName, Integer> getRequiredIngredients(Model model) throws ItemNotFoundException {
+        Name itemName = new Name(toAdd.getName().toString());
+        Item item = model.findItem(itemName);
+        return model.getRequiredIngredients(item);
+    }
+
+    /**
+     * Computes the total quantity of each ingredient used based on the quantity sold specified in the record
+     * @return A Map representation of all ingredients used
+     */
+    private Map<IngredientName, Integer> computeIngredientsUsed(Map<IngredientName, Integer> requiredIngredients) {
         Map<IngredientName, Integer> ingredientsUsed = new HashMap<>(requiredIngredients);
-
-        // compute the total ingredients used after factoring quantity sold
+        int quantitySold = toAdd.getQuantitySold().getValue();
         ingredientsUsed.replaceAll((ingredient, quantityUsed) -> quantityUsed * quantitySold);
-
-        // saves the ingredientsUsed in the SalesRecord
-        toAdd = toAdd.setIngredientsUsed(ingredientsUsed);
-
-        // update ingredient list
-        model.consumeIngredients(ingredientsUsed);
-
+        return ingredientsUsed;
     }
 
     @Override

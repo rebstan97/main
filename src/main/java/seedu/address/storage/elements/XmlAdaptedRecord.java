@@ -147,7 +147,7 @@ public class XmlAdaptedRecord {
     }
 
     /**
-     * Converts this Map<String, String> into the model's Map<IngredientName, Integer>.
+     * Converts this Xml {@code ingredientsUsed} into the model's ingredientUsed.
      *
      * @throws IllegalValueException if there were any data constraints violated in the Ingredient
      */

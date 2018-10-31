@@ -1,8 +1,5 @@
 package seedu.address.logic.commands.sales;
 
-import static org.junit.Assert.assertEquals;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_DATE_RECORD_TWO;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_ITEM_NAME_RECORD_ONE;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ITEM_NAME_RECORD_TWO;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;

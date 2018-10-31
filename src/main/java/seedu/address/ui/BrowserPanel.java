@@ -17,7 +17,6 @@ import seedu.address.commons.events.ui.PersonPanelSelectionChangedEvent;
 import seedu.address.model.menu.Item;
 import seedu.address.model.person.Person;
 import seedu.address.model.reservation.Reservation;
-import seedu.address.model.salesrecord.SalesRecord;
 
 /**
  * The Browser Panel of the App.

@@ -3,6 +3,7 @@ package seedu.address.ui.sales;
 import java.text.NumberFormat;
 import java.util.Locale;
 import java.util.Map;
+
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Region;
@@ -15,12 +16,14 @@ import seedu.address.ui.UiPart;
  * Stack panel to display each sales record's details
  */
 public class RecordStackPanel extends UiPart<Region> {
-    private static final String FXML = "RecordStackPanel.fxml";
+
     public static final String MESSAGE_REQUIRED_INGREDIENTS_NOT_FOUND = "Data unavailable due to one of the "
             + "following reasons - \n\n1) The ingredients required to make this item were not specified at the time of "
             + "recording.\n\n2) This record was edited some time in the past.";
 
     public final SalesRecord salesRecord;
+
+    private static final String FXML = "RecordStackPanel.fxml";
 
     @FXML
     private StackPane stackPane;
@@ -62,7 +65,7 @@ public class RecordStackPanel extends UiPart<Region> {
         for (Map.Entry<IngredientName, Integer> entry : ingredientUsed.entrySet()) {
             stringBuilder.append(index).append(") ").append(entry.getKey().toString())
                     .append(" - ").append(entry.getValue().toString()).append(" units").append("\n");
-            index ++;
+            index++;
         }
         return stringBuilder.toString();
     }

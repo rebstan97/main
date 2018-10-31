@@ -173,7 +173,6 @@ public class AddReservationCommandTest {
             throw new AssertionError("This method should not be called.");
         }
 
-
         @Override
         public void addAccount(Account account) {
             throw new AssertionError("This method should not be called.");
