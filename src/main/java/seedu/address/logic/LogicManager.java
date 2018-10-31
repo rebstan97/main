@@ -1,6 +1,6 @@
 package seedu.address.logic;
 
-import static seedu.address.logic.parser.CliSyntax.PREFIX_PASSWORD;
+import static seedu.address.logic.parser.util.CliSyntax.PREFIX_PASSWORD;
 
 import java.util.logging.Logger;
 

@@ -2,7 +2,7 @@ package seedu.address.model.accounts;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_PASSWORD;
+import static seedu.address.logic.parser.util.CliSyntax.PREFIX_PASSWORD;
 
 import java.nio.charset.StandardCharsets;
 import java.util.Arrays;

@@ -3,10 +3,10 @@ package seedu.address.logic.parser;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ID;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_PASSWORD;
-import static seedu.address.logic.parser.ParserUtil.MESSAGE_INVALID_INDEX;
-import static seedu.address.logic.parser.ParserUtil.arePrefixesPresent;
+import static seedu.address.logic.parser.util.CliSyntax.PREFIX_ID;
+import static seedu.address.logic.parser.util.CliSyntax.PREFIX_PASSWORD;
+import static seedu.address.logic.parser.util.ParserUtil.MESSAGE_INVALID_INDEX;
+import static seedu.address.logic.parser.util.ParserUtil.arePrefixesPresent;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST;
 
 import java.util.Arrays;
@@ -19,6 +19,9 @@ import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.logic.parser.util.ArgumentMultimap;
+import seedu.address.logic.parser.util.ArgumentTokenizer;
+import seedu.address.logic.parser.util.ParserUtil;
 import seedu.address.model.ingredient.IngredientName;
 import seedu.address.model.ingredient.IngredientPrice;
 import seedu.address.model.ingredient.IngredientUnit;

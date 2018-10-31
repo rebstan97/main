@@ -1,4 +1,4 @@
-package seedu.address.logic.parser;
+package seedu.address.logic.parser.util;
 
 import static java.lang.Integer.parseInt;
 import static java.util.Objects.requireNonNull;

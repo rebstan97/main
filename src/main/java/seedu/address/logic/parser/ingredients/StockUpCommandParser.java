@@ -1,18 +1,18 @@
 package seedu.address.logic.parser.ingredients;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_INGREDIENT_NAME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_INGREDIENT_NUM;
+import static seedu.address.logic.parser.util.CliSyntax.PREFIX_INGREDIENT_NAME;
+import static seedu.address.logic.parser.util.CliSyntax.PREFIX_INGREDIENT_NUM;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import seedu.address.logic.commands.ingredients.StockUpCommand;
 import seedu.address.logic.commands.ingredients.StockUpCommand.ChangeStockDescriptor;
-import seedu.address.logic.parser.ArgumentPairMultimap;
-import seedu.address.logic.parser.ArgumentTokenizer;
+import seedu.address.logic.parser.util.ArgumentPairMultimap;
+import seedu.address.logic.parser.util.ArgumentTokenizer;
 import seedu.address.logic.parser.Parser;
-import seedu.address.logic.parser.ParserUtil;
+import seedu.address.logic.parser.util.ParserUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.ingredient.IngredientName;
 import seedu.address.model.ingredient.NumUnits;

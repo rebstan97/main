@@ -1,9 +1,9 @@
 package seedu.address.logic.commands.ingredients;
 
-import static seedu.address.logic.parser.CliSyntax.PREFIX_INGREDIENT_MINIMUM;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_INGREDIENT_NAME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_INGREDIENT_PRICE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_INGREDIENT_UNIT;
+import static seedu.address.logic.parser.util.CliSyntax.PREFIX_INGREDIENT_MINIMUM;
+import static seedu.address.logic.parser.util.CliSyntax.PREFIX_INGREDIENT_NAME;
+import static seedu.address.logic.parser.util.CliSyntax.PREFIX_INGREDIENT_PRICE;
+import static seedu.address.logic.parser.util.CliSyntax.PREFIX_INGREDIENT_UNIT;
 
 import java.util.Optional;
 

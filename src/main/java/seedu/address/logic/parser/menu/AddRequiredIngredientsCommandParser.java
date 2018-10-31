@@ -2,19 +2,19 @@ package seedu.address.logic.parser.menu;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_INGREDIENT_NAME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_INGREDIENT_NUM;
+import static seedu.address.logic.parser.util.CliSyntax.PREFIX_INGREDIENT_NAME;
+import static seedu.address.logic.parser.util.CliSyntax.PREFIX_INGREDIENT_NUM;
 
 import java.util.HashMap;
 import java.util.Map;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.menu.AddRequiredIngredientsCommand;
-import seedu.address.logic.parser.ArgumentIndexAndPairMultimap;
-import seedu.address.logic.parser.ArgumentTokenizer;
+import seedu.address.logic.parser.util.ArgumentIndexAndPairMultimap;
+import seedu.address.logic.parser.util.ArgumentTokenizer;
 import seedu.address.logic.parser.Parser;
-import seedu.address.logic.parser.ParserUtil;
-import seedu.address.logic.parser.Prefix;
+import seedu.address.logic.parser.util.ParserUtil;
+import seedu.address.logic.parser.util.Prefix;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.ingredient.IngredientName;
 

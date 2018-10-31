@@ -1,9 +1,9 @@
 package seedu.address.logic.commands.menu;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_PRICE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.logic.parser.util.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.util.CliSyntax.PREFIX_PRICE;
+import static seedu.address.logic.parser.util.CliSyntax.PREFIX_TAG;
 
 import seedu.address.commons.core.EventsCenter;
 import seedu.address.commons.events.ui.DisplayItemListRequestEvent;

@@ -10,10 +10,10 @@ import static seedu.address.logic.commands.CommandTestUtil.ITEM_PERCENT_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_DATE_RECORD_ONE;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ITEM_PERCENT;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_APPLE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ID;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_INGREDIENT_NUM;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_PASSWORD;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_REMARK;
+import static seedu.address.logic.parser.util.CliSyntax.PREFIX_ID;
+import static seedu.address.logic.parser.util.CliSyntax.PREFIX_INGREDIENT_NUM;
+import static seedu.address.logic.parser.util.CliSyntax.PREFIX_PASSWORD;
+import static seedu.address.logic.parser.util.CliSyntax.PREFIX_REMARK;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST;
 import static seedu.address.testutil.accounts.TypicalAccounts.DEMO_ONE;
 

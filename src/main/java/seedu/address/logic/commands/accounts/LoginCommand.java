@@ -1,8 +1,8 @@
 package seedu.address.logic.commands.accounts;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ID;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_PASSWORD;
+import static seedu.address.logic.parser.util.CliSyntax.PREFIX_ID;
+import static seedu.address.logic.parser.util.CliSyntax.PREFIX_PASSWORD;
 
 import seedu.address.commons.core.EventsCenter;
 import seedu.address.commons.core.session.UserSession;

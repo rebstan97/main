@@ -1,22 +1,20 @@
 package seedu.address.logic.parser.reservation;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_DATETIME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_PAX;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
-import static seedu.address.logic.parser.ParserUtil.arePrefixesPresent;
+import static seedu.address.logic.parser.util.CliSyntax.PREFIX_DATETIME;
+import static seedu.address.logic.parser.util.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.util.CliSyntax.PREFIX_PAX;
+import static seedu.address.logic.parser.util.CliSyntax.PREFIX_TAG;
+import static seedu.address.logic.parser.util.ParserUtil.arePrefixesPresent;
 
 import java.time.LocalDateTime;
 import java.util.Set;
-import java.util.stream.Stream;
 
 import seedu.address.logic.commands.reservation.AddReservationCommand;
-import seedu.address.logic.parser.ArgumentMultimap;
-import seedu.address.logic.parser.ArgumentTokenizer;
+import seedu.address.logic.parser.util.ArgumentMultimap;
+import seedu.address.logic.parser.util.ArgumentTokenizer;
 import seedu.address.logic.parser.Parser;
-import seedu.address.logic.parser.ParserUtil;
-import seedu.address.logic.parser.Prefix;
+import seedu.address.logic.parser.util.ParserUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.reservation.Name;
 import seedu.address.model.reservation.Pax;

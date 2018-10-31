@@ -1,20 +1,17 @@
 package seedu.address.logic.parser.ingredients;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_INGREDIENT_MINIMUM;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_INGREDIENT_NAME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_INGREDIENT_PRICE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_INGREDIENT_UNIT;
-import static seedu.address.logic.parser.ParserUtil.arePrefixesPresent;
-
-import java.util.stream.Stream;
+import static seedu.address.logic.parser.util.CliSyntax.PREFIX_INGREDIENT_MINIMUM;
+import static seedu.address.logic.parser.util.CliSyntax.PREFIX_INGREDIENT_NAME;
+import static seedu.address.logic.parser.util.CliSyntax.PREFIX_INGREDIENT_PRICE;
+import static seedu.address.logic.parser.util.CliSyntax.PREFIX_INGREDIENT_UNIT;
+import static seedu.address.logic.parser.util.ParserUtil.arePrefixesPresent;
 
 import seedu.address.logic.commands.ingredients.AddIngredientCommand;
-import seedu.address.logic.parser.ArgumentMultimap;
-import seedu.address.logic.parser.ArgumentTokenizer;
+import seedu.address.logic.parser.util.ArgumentMultimap;
+import seedu.address.logic.parser.util.ArgumentTokenizer;
 import seedu.address.logic.parser.Parser;
-import seedu.address.logic.parser.ParserUtil;
-import seedu.address.logic.parser.Prefix;
+import seedu.address.logic.parser.util.ParserUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.ingredient.Ingredient;
 import seedu.address.model.ingredient.IngredientName;

@@ -2,8 +2,8 @@ package seedu.address.logic.commands.ingredients;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.commands.ingredients.EditIngredientCommand.createEditedIngredient;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_INGREDIENT_NAME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_INGREDIENT_NUM;
+import static seedu.address.logic.parser.util.CliSyntax.PREFIX_INGREDIENT_NAME;
+import static seedu.address.logic.parser.util.CliSyntax.PREFIX_INGREDIENT_NUM;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_INGREDIENTS;
 
 import java.util.List;

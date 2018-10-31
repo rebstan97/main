@@ -1,6 +1,6 @@
 package seedu.address.testutil.accounts;
 
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NEW_PASSWORD;
+import static seedu.address.logic.parser.util.CliSyntax.PREFIX_NEW_PASSWORD;
 
 import seedu.address.logic.commands.accounts.ChangePasswordCommand.EditAccountDescriptor;
 

@@ -3,8 +3,8 @@ package seedu.address.logic;
 import static org.junit.Assert.assertEquals;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
 import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ID;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_PASSWORD;
+import static seedu.address.logic.parser.util.CliSyntax.PREFIX_ID;
+import static seedu.address.logic.parser.util.CliSyntax.PREFIX_PASSWORD;
 
 import org.junit.Before;
 import org.junit.Rule;

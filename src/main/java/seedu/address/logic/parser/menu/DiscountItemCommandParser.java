@@ -2,16 +2,16 @@ package seedu.address.logic.parser.menu;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ENDING_INDEX;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_PERCENT;
+import static seedu.address.logic.parser.util.CliSyntax.PREFIX_ENDING_INDEX;
+import static seedu.address.logic.parser.util.CliSyntax.PREFIX_PERCENT;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.commands.menu.DiscountItemCommand;
-import seedu.address.logic.parser.ArgumentMultimap;
-import seedu.address.logic.parser.ArgumentTokenizer;
+import seedu.address.logic.parser.util.ArgumentMultimap;
+import seedu.address.logic.parser.util.ArgumentTokenizer;
 import seedu.address.logic.parser.Parser;
-import seedu.address.logic.parser.ParserUtil;
+import seedu.address.logic.parser.util.ParserUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**

@@ -1,10 +1,10 @@
 package seedu.address.logic.commands.sales;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ITEM_NAME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ITEM_PRICE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_QUANTITY_SOLD;
+import static seedu.address.logic.parser.util.CliSyntax.PREFIX_DATE;
+import static seedu.address.logic.parser.util.CliSyntax.PREFIX_ITEM_NAME;
+import static seedu.address.logic.parser.util.CliSyntax.PREFIX_ITEM_PRICE;
+import static seedu.address.logic.parser.util.CliSyntax.PREFIX_QUANTITY_SOLD;
 
 import java.util.HashMap;
 import java.util.Map;

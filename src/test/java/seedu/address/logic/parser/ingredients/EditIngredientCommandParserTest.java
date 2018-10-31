@@ -23,7 +23,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_UNIT_APPLE;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_UNIT_BROCCOLI;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
-import static seedu.address.logic.parser.ParserUtil.MESSAGE_NOT_INDEX_OR_NAME;
+import static seedu.address.logic.parser.util.ParserUtil.MESSAGE_NOT_INDEX_OR_NAME;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND;
 import static seedu.address.testutil.TypicalIndexes.INDEX_THIRD;

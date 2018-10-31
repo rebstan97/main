@@ -2,13 +2,13 @@ package seedu.address.logic.parser.accounts;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NEW_PASSWORD;
-import static seedu.address.logic.parser.ParserUtil.arePrefixesPresent;
+import static seedu.address.logic.parser.util.CliSyntax.PREFIX_NEW_PASSWORD;
+import static seedu.address.logic.parser.util.ParserUtil.arePrefixesPresent;
 
 import seedu.address.logic.commands.accounts.ChangePasswordCommand;
 import seedu.address.logic.commands.accounts.ChangePasswordCommand.EditAccountDescriptor;
-import seedu.address.logic.parser.ArgumentMultimap;
-import seedu.address.logic.parser.ArgumentTokenizer;
+import seedu.address.logic.parser.util.ArgumentMultimap;
+import seedu.address.logic.parser.util.ArgumentTokenizer;
 import seedu.address.logic.parser.Parser;
 import seedu.address.logic.parser.exceptions.ParseException;
 

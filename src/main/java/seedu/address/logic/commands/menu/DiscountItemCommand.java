@@ -1,8 +1,8 @@
 package seedu.address.logic.commands.menu;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ENDING_INDEX;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_PERCENT;
+import static seedu.address.logic.parser.util.CliSyntax.PREFIX_ENDING_INDEX;
+import static seedu.address.logic.parser.util.CliSyntax.PREFIX_PERCENT;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_ITEMS;
 
 import java.util.List;

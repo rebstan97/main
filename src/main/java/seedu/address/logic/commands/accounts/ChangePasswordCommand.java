@@ -1,7 +1,7 @@
 package seedu.address.logic.commands.accounts;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NEW_PASSWORD;
+import static seedu.address.logic.parser.util.CliSyntax.PREFIX_NEW_PASSWORD;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_ACCOUNTS;
 
 import java.util.Optional;

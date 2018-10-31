@@ -5,13 +5,17 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertTrue;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.ArgumentTokenizer.tokenizeToPair;
+import static seedu.address.logic.parser.util.ArgumentTokenizer.tokenizeToPair;
 
 import org.junit.Test;
 
 import seedu.address.commons.core.pair.StringPair;
 import seedu.address.logic.commands.ingredients.StockUpCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.logic.parser.util.ArgumentMultimap;
+import seedu.address.logic.parser.util.ArgumentPairMultimap;
+import seedu.address.logic.parser.util.ArgumentTokenizer;
+import seedu.address.logic.parser.util.Prefix;
 
 public class ArgumentTokenizerTest {
 

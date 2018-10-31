@@ -1,20 +1,17 @@
 package seedu.address.logic.parser.sales;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ITEM_NAME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ITEM_PRICE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_QUANTITY_SOLD;
-import static seedu.address.logic.parser.ParserUtil.arePrefixesPresent;
-
-import java.util.stream.Stream;
+import static seedu.address.logic.parser.util.CliSyntax.PREFIX_DATE;
+import static seedu.address.logic.parser.util.CliSyntax.PREFIX_ITEM_NAME;
+import static seedu.address.logic.parser.util.CliSyntax.PREFIX_ITEM_PRICE;
+import static seedu.address.logic.parser.util.CliSyntax.PREFIX_QUANTITY_SOLD;
+import static seedu.address.logic.parser.util.ParserUtil.arePrefixesPresent;
 
 import seedu.address.logic.commands.sales.RecordSalesCommand;
-import seedu.address.logic.parser.ArgumentMultimap;
-import seedu.address.logic.parser.ArgumentTokenizer;
+import seedu.address.logic.parser.util.ArgumentMultimap;
+import seedu.address.logic.parser.util.ArgumentTokenizer;
 import seedu.address.logic.parser.Parser;
-import seedu.address.logic.parser.ParserUtil;
-import seedu.address.logic.parser.Prefix;
+import seedu.address.logic.parser.util.ParserUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.salesrecord.Date;
 import seedu.address.model.salesrecord.ItemName;

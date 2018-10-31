@@ -1,7 +1,7 @@
 package seedu.address.logic.commands.accounts;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ID;
+import static seedu.address.logic.parser.util.CliSyntax.PREFIX_ID;
 
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.Command;

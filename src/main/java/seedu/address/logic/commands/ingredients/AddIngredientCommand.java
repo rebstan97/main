@@ -1,10 +1,10 @@
 package seedu.address.logic.commands.ingredients;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_INGREDIENT_MINIMUM;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_INGREDIENT_NAME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_INGREDIENT_PRICE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_INGREDIENT_UNIT;
+import static seedu.address.logic.parser.util.CliSyntax.PREFIX_INGREDIENT_MINIMUM;
+import static seedu.address.logic.parser.util.CliSyntax.PREFIX_INGREDIENT_NAME;
+import static seedu.address.logic.parser.util.CliSyntax.PREFIX_INGREDIENT_PRICE;
+import static seedu.address.logic.parser.util.CliSyntax.PREFIX_INGREDIENT_UNIT;
 
 import seedu.address.commons.core.EventsCenter;
 import seedu.address.commons.events.ui.DisplayIngredientListRequestEvent;

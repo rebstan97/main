@@ -4,7 +4,7 @@ import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT
 import static seedu.address.logic.commands.CommandTestUtil.PREFIX_WITH_INVALID_NEW_PASSWORD;
 import static seedu.address.logic.commands.CommandTestUtil.PREFIX_WITH_VALID_NEW_PASSWORD;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PASSWORD_DEMO_ONE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NEW_PASSWORD;
+import static seedu.address.logic.parser.util.CliSyntax.PREFIX_NEW_PASSWORD;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 
