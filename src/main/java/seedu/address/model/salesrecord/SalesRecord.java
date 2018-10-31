@@ -2,7 +2,11 @@ package seedu.address.model.salesrecord;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
+
+import seedu.address.model.ingredient.IngredientName;
 
 /**
  * Represents a sales record in the sales book.
@@ -18,17 +22,24 @@ public class SalesRecord {
     private final QuantitySold quantitySold;
     private final Price price;
     private final double revenue;
+    private final Map<IngredientName, Integer> ingredientsUsed;
 
     /**
      * Every field must be present and not null.
      */
     public SalesRecord(Date date, ItemName name, QuantitySold quantitySold, Price price) {
-        requireAllNonNull(date, name, quantitySold, price);
+        this(date, name, quantitySold, price, quantitySold.getValue() * price.getValue(), new HashMap<>());
+    }
+
+    private SalesRecord(Date date, ItemName name, QuantitySold quantitySold, Price price, double revenue,
+            Map<IngredientName, Integer> ingredientsUsed) {
+        requireAllNonNull(date, name, quantitySold, price, revenue, ingredientsUsed);
         this.date = date;
         this.name = name;
         this.quantitySold = quantitySold;
         this.price = price;
-        this.revenue = quantitySold.getValue() * price.getValue();
+        this.revenue = revenue;
+        this.ingredientsUsed = ingredientsUsed;
     }
 
     public Date getDate() {
@@ -49,6 +60,19 @@ public class SalesRecord {
 
     public double getRevenue() {
         return revenue;
+    }
+
+    public Map<IngredientName, Integer> getIngredientsUsed() {
+        return ingredientsUsed;
+    }
+
+    /**
+     * Returns a new SalesRecord object with specified {@code ingredientsUsed} and all other attributes unchanged.
+     * This is to ensure immutability.
+     * @param ingredientsUsed The ingredients and their corresponding quantity used.
+     */
+    public SalesRecord setIngredientsUsed(Map<IngredientName, Integer> ingredientsUsed) {
+        return new SalesRecord(this.date, this.name, this.quantitySold, this.price, this.revenue, ingredientsUsed);
     }
 
     /**

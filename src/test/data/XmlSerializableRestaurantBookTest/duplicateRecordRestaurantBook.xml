@@ -5,6 +5,7 @@
         <itemName>Mushroom Pie</itemName>
         <quantitySold>12</quantitySold>
         <price>5.5</price>
+        <ingredientsUsed></ingredientsUsed>
     </records>
 
     <!-- Record with same identity -->
@@ -13,5 +14,6 @@
         <itemName>Mushroom Pie</itemName>
         <quantitySold>84</quantitySold>
         <price>7.99</price>
+        <ingredientsUsed></ingredientsUsed>
     </records>
 </restaurantbook>

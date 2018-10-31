@@ -8,7 +8,6 @@ import seedu.address.logic.commands.accounts.DeregisterCommand;
 import seedu.address.logic.parser.ArgumentMultimap;
 import seedu.address.logic.parser.ArgumentTokenizer;
 import seedu.address.logic.parser.Parser;
-import seedu.address.logic.parser.ParserUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.accounts.Account;
 import seedu.address.model.accounts.Username;
@@ -31,7 +30,7 @@ public class DeregisterCommandParser implements Parser<DeregisterCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeregisterCommand.MESSAGE_USAGE));
         }
 
-        Username username = ParserUtil.parseUsername(argMultimap.getValue(PREFIX_ID).get());
+        Username username = AccountParserUtil.parseUsername(argMultimap.getValue(PREFIX_ID).get());
 
         // Password not required since it does not involve a password to deregister the account
         return new DeregisterCommand(new Account(username));

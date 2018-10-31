@@ -56,6 +56,7 @@ import seedu.address.logic.commands.ingredients.EditIngredientByNameCommand;
 import seedu.address.logic.commands.ingredients.EditIngredientCommand;
 import seedu.address.logic.commands.ingredients.EditIngredientCommand.EditIngredientDescriptor;
 import seedu.address.logic.commands.ingredients.ListIngredientsCommand;
+import seedu.address.logic.commands.ingredients.LowStockCommand;
 import seedu.address.logic.commands.menu.AddItemCommand;
 import seedu.address.logic.commands.menu.AddRequiredIngredientsCommand;
 import seedu.address.logic.commands.menu.ClearMenuCommand;
@@ -397,6 +398,16 @@ public class RestaurantBookParserTest {
         assertTrue(parser.parseCommand(ListIngredientsCommand.COMMAND_ALIAS) instanceof ListIngredientsCommand);
         assertTrue(parser
                 .parseCommand(ListIngredientsCommand.COMMAND_ALIAS + " 3") instanceof ListIngredientsCommand);
+    }
+
+    @Test
+    public void parseCommand_lowStock() throws Exception {
+        assertTrue(parser.parseCommand(LowStockCommand.COMMAND_WORD) instanceof LowStockCommand);
+        assertTrue(parser
+                .parseCommand(LowStockCommand.COMMAND_WORD + " 3") instanceof LowStockCommand);
+        assertTrue(parser.parseCommand(LowStockCommand.COMMAND_ALIAS) instanceof LowStockCommand);
+        assertTrue(parser
+                .parseCommand(LowStockCommand.COMMAND_ALIAS + " 3") instanceof LowStockCommand);
     }
 
     @Test

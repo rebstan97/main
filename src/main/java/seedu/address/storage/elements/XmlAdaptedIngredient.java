@@ -77,7 +77,7 @@ public class XmlAdaptedIngredient {
         final IngredientPrice modelPrice = new IngredientPrice(price);
 
         validateMinimum();
-        final MinimumUnit modelMinimum = new MinimumUnit(minimum);
+        final MinimumUnit modelMinimum = new MinimumUnit(Integer.parseInt(minimum));
 
         validateNumUnits();
         final NumUnits modelNumUnits = new NumUnits(Integer.parseInt(numUnits));

@@ -389,7 +389,6 @@ public class AddIngredientCommandTest {
         public void sortMenu(SortMethod sortMethod) {
             throw new AssertionError("This method should not be called.");
         }
-
     }
 
     /**

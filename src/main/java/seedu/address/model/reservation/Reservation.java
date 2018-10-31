@@ -51,9 +51,13 @@ public class Reservation {
         return dateTime;
     }
 
-    public LocalDate getDate() { return dateTime.toLocalDate(); }
+    public LocalDate getDate() {
+        return dateTime.toLocalDate();
+    }
 
-    public LocalTime getTime() { return dateTime.toLocalTime(); }
+    public LocalTime getTime() {
+        return dateTime.toLocalTime();
+    }
 
     public Remark getRemark() {
         return remark;

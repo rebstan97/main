@@ -15,7 +15,7 @@ public class IngredientBuilder {
     public static final String DEFAULT_NAME = "Granny Smith Apple";
     public static final String DEFAULT_UNIT = "packet of 5";
     public static final String DEFAULT_PRICE = "1.90";
-    public static final String DEFAULT_MINIMUM = "3";
+    public static final int DEFAULT_MINIMUM = 3;
     public static final int DEFAULT_NUMUNITS = 0;
 
     private IngredientName name;
@@ -70,7 +70,7 @@ public class IngredientBuilder {
     /**
      * Sets the {@code Minimum} of the {@code Minimum} that we are building.
      */
-    public IngredientBuilder withMinimum(String minimum) {
+    public IngredientBuilder withMinimum(int minimum) {
         this.minimum = new MinimumUnit(minimum);
         return this;
     }
