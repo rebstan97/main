@@ -60,7 +60,7 @@ public class EditIngredientDescriptorBuilder {
     /**
      * Sets the {@code MinimumUnit} of the {@code EditIngredientDescriptor} that we are building.
      */
-    public EditIngredientDescriptorBuilder withMinimum(String minimum) {
+    public EditIngredientDescriptorBuilder withMinimum(int minimum) {
         descriptor.setMinimum(new MinimumUnit(minimum));
         return this;
     }
