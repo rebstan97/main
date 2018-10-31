@@ -1,5 +1,6 @@
 package seedu.address.model.salesrecord;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
@@ -18,6 +19,11 @@ class DateTest {
     public void constructor_invalidDate_throwsIllegalArgumentException() {
         String invalidDate = "31-02-2018";
         Assert.assertThrows(IllegalArgumentException.class, () -> new Date(invalidDate));
+    }
+
+    @Test
+    public void getDayOfWeek() {
+        assertEquals(new Date("31-10-2018").getDayOfWeek(), "Wednesday");
     }
 
     @Test

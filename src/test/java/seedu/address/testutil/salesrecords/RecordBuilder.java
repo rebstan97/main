@@ -1,5 +1,9 @@
 package seedu.address.testutil.salesrecords;
 
+import java.util.HashMap;
+import java.util.Map;
+
+import seedu.address.model.ingredient.IngredientName;
 import seedu.address.model.salesrecord.Date;
 import seedu.address.model.salesrecord.ItemName;
 import seedu.address.model.salesrecord.Price;
@@ -18,12 +22,16 @@ public class RecordBuilder {
     private ItemName itemName;
     private QuantitySold quantitySold;
     private Price price;
+    private double revenue;
+    private Map<IngredientName, Integer> ingredientsUsed;
 
     public RecordBuilder() {
         date = new Date(DEFAULT_DATE);
         itemName = new ItemName(DEFAULT_ITEM_NAME);
         quantitySold = new QuantitySold(DEFAULT_QUANTITY_SOLD);
         price = new Price(DEFAULT_PRICE);
+        revenue = quantitySold.getValue() * price.getValue();
+        ingredientsUsed = new HashMap<>();
     }
 
     /**
@@ -34,6 +42,8 @@ public class RecordBuilder {
         itemName = recordToCopy.getName();
         quantitySold = recordToCopy.getQuantitySold();
         price = recordToCopy.getPrice();
+        revenue = recordToCopy.getRevenue();
+        ingredientsUsed = recordToCopy.getIngredientsUsed();
     }
 
     /**
@@ -68,7 +78,15 @@ public class RecordBuilder {
         return this;
     }
 
+    /**
+     * Sets the {@code ingredientUsed} of the {@code Record} that we are building.
+     */
+    public RecordBuilder withIngredientUsed(Map<IngredientName, Integer> ingredientsUsed) {
+        this.ingredientsUsed = ingredientsUsed;
+        return this;
+    }
+
     public SalesRecord build() {
-        return new SalesRecord(date, itemName, quantitySold, price);
+        return new SalesRecord(date, itemName, quantitySold, price).setIngredientsUsed(ingredientsUsed);
     }
 }

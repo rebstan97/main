@@ -1,6 +1,7 @@
 package seedu.address.ui.sales;
 
 import java.text.NumberFormat;
+import java.util.Locale;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -47,7 +48,7 @@ public class RecordCard extends UiPart<Region> {
         itemName.setText(record.getName().toString());
         quantitySold.setText("Quantity Sold: " + String.valueOf(record.getQuantitySold().toString()));
 
-        NumberFormat currencyFormatter = NumberFormat.getCurrencyInstance();
+        NumberFormat currencyFormatter = NumberFormat.getCurrencyInstance(Locale.US);
         price.setText("Item Price: " + currencyFormatter.format(record.getPrice().getValue()));
     }
 
