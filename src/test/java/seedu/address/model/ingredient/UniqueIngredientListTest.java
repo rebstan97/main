@@ -174,38 +174,52 @@ public class UniqueIngredientListTest {
     }
 
     @Test
-    public void stockUp_nullIngredientName_throwsNullPointerException() {
+    public void stockUp_null_throwsNullPointerException() {
         thrown.expect(NullPointerException.class);
         uniqueIngredientList.stockUp(null);
     }
 
     @Test
     public void stockUp_ingredientNotInList_throwsIngredientNotFoundException() {
-        HashMap<IngredientName, Integer> recipe = new HashMap<>();
-        recipe.put(AVOCADO.getName(), 2);
+        HashMap<IngredientName, Integer> requiredIngredients = new HashMap<>();
+        requiredIngredients.put(AVOCADO.getName(), 2);
         thrown.expect(IngredientNotFoundException.class);
-        uniqueIngredientList.stockUp(recipe);
+        uniqueIngredientList.stockUp(requiredIngredients);
+    }
+
+    @Test
+    public void stockUp_secondIngredientNotInList_throwsIngredientNotEnoughException() {
+        HashMap<IngredientName, Integer> requiredIngredients = new HashMap<>();
+        Ingredient avocado = new IngredientBuilder(AVOCADO).withNumUnits(15).build();
+        Ingredient broccoli = new IngredientBuilder(BROCCOLI).withNumUnits(1).build();
+        requiredIngredients.put(avocado.getName(), 10);
+        requiredIngredients.put(broccoli.getName(), 2);
+        uniqueIngredientList.add(avocado);
+        thrown.expect(IngredientNotFoundException.class);
+        uniqueIngredientList.stockUp(requiredIngredients);
+        Ingredient updatedIngredient = uniqueIngredientList.find(avocado.getName());
+        assertEquals(new NumUnits(15), updatedIngredient.getNumUnits());
     }
 
     @Test
     public void stockUp_ingredientInListWithOneIngredient_assertEquals() {
-        HashMap<IngredientName, Integer> recipe = new HashMap<>();
+        HashMap<IngredientName, Integer> requiredIngredients = new HashMap<>();
         Ingredient ingredient = new IngredientBuilder(AVOCADO).withNumUnits(10).build();
-        recipe.put(ingredient.getName(), 2);
+        requiredIngredients.put(ingredient.getName(), 2);
         uniqueIngredientList.add(ingredient);
-        uniqueIngredientList.stockUp(recipe);
+        uniqueIngredientList.stockUp(requiredIngredients);
         Ingredient updatedIngredient = uniqueIngredientList.find(ingredient.getName());
         assertEquals(new NumUnits(12), updatedIngredient.getNumUnits());
     }
 
     @Test
     public void stockUp_ingredientInListWithMultipleIngredients_assertEquals() {
-        HashMap<IngredientName, Integer> recipe = new HashMap<>();
-        recipe.put(AVOCADO.getName(), 2);
-        recipe.put(BROCCOLI.getName(), 10);
+        HashMap<IngredientName, Integer> requiredIngredients = new HashMap<>();
+        requiredIngredients.put(AVOCADO.getName(), 2);
+        requiredIngredients.put(BROCCOLI.getName(), 10);
         uniqueIngredientList.add(AVOCADO);
         uniqueIngredientList.add(BROCCOLI);
-        uniqueIngredientList.stockUp(recipe);
+        uniqueIngredientList.stockUp(requiredIngredients);
         Ingredient updatedIngredient = uniqueIngredientList.find(AVOCADO.getName());
         assertEquals(new NumUnits(2), updatedIngredient.getNumUnits());
         updatedIngredient = uniqueIngredientList.find(BROCCOLI.getName());
@@ -220,46 +234,77 @@ public class UniqueIngredientListTest {
 
     @Test
     public void consume_ingredientNotInList_throwsIngredientNotFoundException() {
-        HashMap<IngredientName, Integer> recipe = new HashMap<>();
-        recipe.put(AVOCADO.getName(), 2);
+        HashMap<IngredientName, Integer> requiredIngredients = new HashMap<>();
+        requiredIngredients.put(AVOCADO.getName(), 2);
         thrown.expect(IngredientNotFoundException.class);
-        uniqueIngredientList.consume(recipe);
+        uniqueIngredientList.consume(requiredIngredients);
+    }
+
+    @Test
+    public void consume_secondIngredientNotInList_throwsIngredientNotEnoughException() {
+        HashMap<IngredientName, Integer> requiredIngredients = new HashMap<>();
+        Ingredient avocado = new IngredientBuilder(AVOCADO).withNumUnits(15).build();
+        Ingredient broccoli = new IngredientBuilder(BROCCOLI).withNumUnits(1).build();
+        requiredIngredients.put(avocado.getName(), 10);
+        requiredIngredients.put(broccoli.getName(), 2);
+        uniqueIngredientList.add(avocado);
+        thrown.expect(IngredientNotFoundException.class);
+        uniqueIngredientList.consume(requiredIngredients);
+        Ingredient updatedIngredient = uniqueIngredientList.find(avocado.getName());
+        assertEquals(new NumUnits(15), updatedIngredient.getNumUnits());
     }
 
     @Test
     public void consume_ingredientNotEnough_throwsIngredientNotEnoughException() {
-        HashMap<IngredientName, Integer> recipe = new HashMap<>();
+        HashMap<IngredientName, Integer> requiredIngredients = new HashMap<>();
         Ingredient ingredient = new IngredientBuilder(AVOCADO).withNumUnits(1).build();
-        recipe.put(AVOCADO.getName(), 10);
+        requiredIngredients.put(ingredient.getName(), 10);
         uniqueIngredientList.add(ingredient);
         thrown.expect(IngredientNotEnoughException.class);
-        uniqueIngredientList.consume(recipe);
+        uniqueIngredientList.consume(requiredIngredients);
+    }
+
+    @Test
+    public void consume_secondIngredientNotEnough_throwsIngredientNotEnoughException() {
+        HashMap<IngredientName, Integer> requiredIngredients = new HashMap<>();
+        Ingredient avocado = new IngredientBuilder(AVOCADO).withNumUnits(15).build();
+        Ingredient broccoli = new IngredientBuilder(BROCCOLI).withNumUnits(1).build();
+        requiredIngredients.put(avocado.getName(), 10);
+        requiredIngredients.put(broccoli.getName(), 2);
+        uniqueIngredientList.add(avocado);
+        uniqueIngredientList.add(broccoli);
+        thrown.expect(IngredientNotEnoughException.class);
+        uniqueIngredientList.consume(requiredIngredients);
+        Ingredient updatedIngredient = uniqueIngredientList.find(AVOCADO.getName());
+        assertEquals(new NumUnits(15), updatedIngredient.getNumUnits());
+        updatedIngredient = uniqueIngredientList.find(AVOCADO.getName());
+        assertEquals(new NumUnits(1), updatedIngredient.getNumUnits());
     }
 
     @Test
     public void consume_ingredientInListWithOneIngredient_assertEquals() {
-        HashMap<IngredientName, Integer> recipe = new HashMap<>();
+        HashMap<IngredientName, Integer> requiredIngredients = new HashMap<>();
         Ingredient ingredient = new IngredientBuilder(AVOCADO).withNumUnits(12).build();
-        recipe.put(ingredient.getName(), 2);
+        requiredIngredients.put(ingredient.getName(), 2);
         uniqueIngredientList.add(ingredient);
-        uniqueIngredientList.consume(recipe);
+        uniqueIngredientList.consume(requiredIngredients);
         Ingredient updatedIngredient = uniqueIngredientList.find(ingredient.getName());
         assertEquals(new NumUnits(10), updatedIngredient.getNumUnits());
     }
 
     @Test
     public void consume_ingredientInListWithMultipleIngredients_assertEquals() {
-        HashMap<IngredientName, Integer> recipe = new HashMap<>();
+        HashMap<IngredientName, Integer> requiredIngredients = new HashMap<>();
         Ingredient avocado = new IngredientBuilder(AVOCADO).withNumUnits(15).build();
         Ingredient broccoli = new IngredientBuilder(BROCCOLI).withNumUnits(22).build();
-        recipe.put(AVOCADO.getName(), 10);
-        recipe.put(BROCCOLI.getName(), 2);
+        requiredIngredients.put(avocado.getName(), 10);
+        requiredIngredients.put(broccoli.getName(), 2);
         uniqueIngredientList.add(avocado);
         uniqueIngredientList.add(broccoli);
-        uniqueIngredientList.consume(recipe);
-        Ingredient updatedIngredient = uniqueIngredientList.find(AVOCADO.getName());
+        uniqueIngredientList.consume(requiredIngredients);
+        Ingredient updatedIngredient = uniqueIngredientList.find(avocado.getName());
         assertEquals(new NumUnits(5), updatedIngredient.getNumUnits());
-        updatedIngredient = uniqueIngredientList.find(BROCCOLI.getName());
+        updatedIngredient = uniqueIngredientList.find(broccoli.getName());
         assertEquals(new NumUnits(20), updatedIngredient.getNumUnits());
     }
 
