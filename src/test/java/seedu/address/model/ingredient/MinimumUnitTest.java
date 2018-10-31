@@ -10,18 +10,13 @@ import seedu.address.testutil.Assert;
 public class MinimumUnitTest {
 
     @Test
-    public void constructor_null_throwsNullPointerException() {
-        Assert.assertThrows(NullPointerException.class, () -> new MinimumUnit(null));
-    }
-
-    @Test
     public void constructor_invalidMinimum_throwsIllegalArgumentException() {
-        String invalidMinimum = "";
+        int invalidMinimum = -1;
         Assert.assertThrows(IllegalArgumentException.class, () -> new MinimumUnit(invalidMinimum));
     }
 
     @Test
-    public void isValidMinimum() {
+    public void isValidMinimum_string() {
         // null minimum
         Assert.assertThrows(NullPointerException.class, () -> MinimumUnit.isValidMinimum(null));
 
@@ -35,5 +30,17 @@ public class MinimumUnitTest {
         // valid minimum
         assertTrue(MinimumUnit.isValidMinimum("800")); // numeric value
         assertTrue(MinimumUnit.isValidMinimum("28902375639")); // numeric value with many digits
+    }
+
+    @Test
+    public void isValidMinimum_int() {
+        // invalid minimum
+        assertFalse(MinimumUnit.isValidMinimum(-1)); // small negative integer
+        assertFalse(MinimumUnit.isValidMinimum(-1000)); // large negative integer
+
+        // valid minimum
+        assertTrue(MinimumUnit.isValidMinimum(1)); // small positive integer
+        assertTrue(MinimumUnit.isValidMinimum(289023)); // large positive integer
+        assertTrue(MinimumUnit.isValidMinimum(0)); // zero
     }
 }
