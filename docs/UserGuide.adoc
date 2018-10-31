@@ -627,10 +627,6 @@ Examples:
 
 * `import-menu f/test/ n/menu.txt` +
 Import the menu.txt from test folder to replace current menu.
-
-==== Support for multiple menus `[coming in v2.0]`
-User will be able to manage multiple menus without the need of exporting and importing for different version of the
-current menu.
 // end::menu[]
 
 === Adding a reservation: `add-reservation` or `ar`
@@ -812,6 +808,12 @@ Examples:
 
 * `delete-role r/999`
 * `dr id/999`
+
+// tag::menuv2[]
+==== Support for multiple menus `[coming in v2.0]`
+User will be able to manage multiple menus without the need of exporting and importing for different version of the
+current menu.
+// end::menuv2[]
 
 == Frequently Asked Questions (FAQ)
 
