@@ -46,8 +46,8 @@ public class RecordSalesCommandIntegrationTest {
 
         // item with name "VALID_ITEM_NAME_RECORD_TWO" not found in menu. Ingredient list should not be updated.
         assertCommandSuccess(new RecordSalesCommand(validRecord), model, commandHistory,
-                String.format(RecordSalesCommand.MESSAGE_RECORD_SALES_SUCCESS, validRecord) +
-                        "\n" + RecordSalesCommand.MESSAGE_ITEM_NOT_FOUND, expectedModel);
+                String.format(RecordSalesCommand.MESSAGE_RECORD_SALES_SUCCESS, validRecord)
+                        + "\n" + RecordSalesCommand.MESSAGE_ITEM_NOT_FOUND, expectedModel);
     }
 
     @Test
@@ -65,8 +65,8 @@ public class RecordSalesCommandIntegrationTest {
         // item with name "VALID_ITEM_NAME_RECORD_TWO" found in menu. However, required ingredients not
         // specified. Ingredient list should not be updated.
         assertCommandSuccess(new RecordSalesCommand(validRecord), model, commandHistory,
-                String.format(RecordSalesCommand.MESSAGE_RECORD_SALES_SUCCESS, validRecord) +
-                        "\n" + RecordSalesCommand.MESSAGE_REQUIRED_INGREDIENTS_NOT_FOUND, expectedModel);
+                String.format(RecordSalesCommand.MESSAGE_RECORD_SALES_SUCCESS, validRecord)
+                        + "\n" + RecordSalesCommand.MESSAGE_REQUIRED_INGREDIENTS_NOT_FOUND, expectedModel);
     }
 
     @Test
@@ -98,8 +98,8 @@ public class RecordSalesCommandIntegrationTest {
         // item with name "VALID_ITEM_NAME_RECORD_TWO" found in menu with required ingredients specified.
         // however, some ingredient was not found in ingredient list. Ingredient list should not be updated.
         assertCommandSuccess(new RecordSalesCommand(validRecord), model, commandHistory,
-                String.format(RecordSalesCommand.MESSAGE_RECORD_SALES_SUCCESS, validRecord) +
-                        "\n" + RecordSalesCommand.MESSAGE_INGREDIENT_NOT_FOUND, expectedModel);
+                String.format(RecordSalesCommand.MESSAGE_RECORD_SALES_SUCCESS, validRecord)
+                        + "\n" + RecordSalesCommand.MESSAGE_INGREDIENT_NOT_FOUND, expectedModel);
     }
 
     @Test
@@ -135,8 +135,8 @@ public class RecordSalesCommandIntegrationTest {
         // item with name "VALID_ITEM_NAME_RECORD_TWO" found in menu with required ingredients specified.
         // however, some ingredient was insufficient. Ingredient list should not be updated.
         assertCommandSuccess(new RecordSalesCommand(validRecord), model, commandHistory,
-                String.format(RecordSalesCommand.MESSAGE_RECORD_SALES_SUCCESS, validRecord) +
-                        "\n" + RecordSalesCommand.MESSAGE_INGREDIENT_NOT_ENOUGH, expectedModel);
+                String.format(RecordSalesCommand.MESSAGE_RECORD_SALES_SUCCESS, validRecord)
+                        + "\n" + RecordSalesCommand.MESSAGE_INGREDIENT_NOT_ENOUGH, expectedModel);
     }
 
     @Test
@@ -174,8 +174,8 @@ public class RecordSalesCommandIntegrationTest {
         // item with name "VALID_ITEM_NAME_RECORD_TWO" found in menu with required ingredients specified.
         // All ingredients are present and sufficient in ingredient list. Ingredient list updated.
         assertCommandSuccess(new RecordSalesCommand(validRecord), model, commandHistory,
-                String.format(RecordSalesCommand.MESSAGE_RECORD_SALES_SUCCESS, validRecord) +
-                        "\n" + RecordSalesCommand.MESSAGE_INGREDIENT_UPDATE_SUCCESS, expectedModel);
+                String.format(RecordSalesCommand.MESSAGE_RECORD_SALES_SUCCESS, validRecord)
+                        + "\n" + RecordSalesCommand.MESSAGE_INGREDIENT_UPDATE_SUCCESS, expectedModel);
     }
 
     @Test
