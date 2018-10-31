@@ -340,6 +340,7 @@ public class MainWindow extends UiPart<Stage> {
     @Subscribe
     private void handleItemPanelSelectionChangedEvent(ItemPanelSelectionChangedEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
+        browserPlaceholder.getChildren().clear();
         ItemStackPanel itemStackPanel = new ItemStackPanel(event.getNewSelection());
         browserPlaceholder.getChildren().add(itemStackPanel.getRoot());
     }
@@ -379,6 +380,7 @@ public class MainWindow extends UiPart<Stage> {
     @Subscribe
     private void handleRecordPanelSelectionChangedEvent(RecordPanelSelectionChangedEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
+        browserPlaceholder.getChildren().clear();
         RecordStackPanel recordStackPanel = new RecordStackPanel(event.getNewSelection());
         browserPlaceholder.getChildren().add(recordStackPanel.getRoot());
     }
