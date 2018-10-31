@@ -192,6 +192,10 @@ public class MainWindow extends UiPart<Stage> {
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
 
         accountListPanel = new AccountListPanel(logic.getFilteredAccountList());
+        itemListPanel = new ItemListPanel(logic.getFilteredItemList());
+        ingredientListPanel = new IngredientListPanel(logic.getFilteredIngredientList());
+        reservationListPanel = new ReservationListPanel(logic.getFilteredReservationList());
+        recordListPanel = new RecordListPanel(logic.getFilteredRecordList());
 
         personListPanel = new PersonListPanel(logic.getFilteredPersonList());
         personListPanelPlaceholder.getChildren().add(personListPanel.getRoot()); // Show address book
@@ -240,8 +244,8 @@ public class MainWindow extends UiPart<Stage> {
      */
     @FXML
     private void handleSwitchToMenu() {
+        browserPlaceholder.getChildren().clear();
         personListPanelPlaceholder.getChildren().clear();
-        itemListPanel = new ItemListPanel(logic.getFilteredItemList());
         personListPanelPlaceholder.getChildren().add(itemListPanel.getRoot());
     }
 
@@ -250,8 +254,8 @@ public class MainWindow extends UiPart<Stage> {
      */
     @FXML
     private void handleSwitchToSales() {
+        browserPlaceholder.getChildren().clear();
         personListPanelPlaceholder.getChildren().clear();
-        recordListPanel = new RecordListPanel(logic.getFilteredRecordList());
         personListPanelPlaceholder.getChildren().add(recordListPanel.getRoot());
     }
 
@@ -260,8 +264,8 @@ public class MainWindow extends UiPart<Stage> {
      */
     @FXML
     private void handleSwitchToIngredient() {
+        browserPlaceholder.getChildren().clear();
         personListPanelPlaceholder.getChildren().clear();
-        ingredientListPanel = new IngredientListPanel(logic.getFilteredIngredientList());
         personListPanelPlaceholder.getChildren().add(ingredientListPanel.getRoot());
     }
 
@@ -270,8 +274,8 @@ public class MainWindow extends UiPart<Stage> {
      */
     @FXML
     private void handleSwitchToReservation() {
+        browserPlaceholder.getChildren().clear();
         personListPanelPlaceholder.getChildren().clear();
-        reservationListPanel = new ReservationListPanel(logic.getFilteredReservationList());
         personListPanelPlaceholder.getChildren().add(reservationListPanel.getRoot());
     }
 
@@ -336,7 +340,6 @@ public class MainWindow extends UiPart<Stage> {
     @Subscribe
     private void handleItemPanelSelectionChangedEvent(ItemPanelSelectionChangedEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
-        browserPlaceholder.getChildren().clear();
         ItemStackPanel itemStackPanel = new ItemStackPanel(event.getNewSelection());
         browserPlaceholder.getChildren().add(itemStackPanel.getRoot());
     }
@@ -376,7 +379,6 @@ public class MainWindow extends UiPart<Stage> {
     @Subscribe
     private void handleRecordPanelSelectionChangedEvent(RecordPanelSelectionChangedEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
-        browserPlaceholder.getChildren().clear();
         RecordStackPanel recordStackPanel = new RecordStackPanel(event.getNewSelection());
         browserPlaceholder.getChildren().add(recordStackPanel.getRoot());
     }
