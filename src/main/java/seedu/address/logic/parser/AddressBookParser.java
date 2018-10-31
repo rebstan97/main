@@ -30,6 +30,7 @@ import seedu.address.logic.commands.ingredients.AddIngredientCommand;
 import seedu.address.logic.commands.ingredients.DeleteIngredientCommand;
 import seedu.address.logic.commands.ingredients.EditIngredientCommand;
 import seedu.address.logic.commands.ingredients.ListIngredientsCommand;
+import seedu.address.logic.commands.ingredients.LowStockCommand;
 import seedu.address.logic.commands.ingredients.StockUpCommand;
 import seedu.address.logic.commands.menu.AddItemCommand;
 import seedu.address.logic.commands.menu.AddRequiredIngredientsCommand;
@@ -205,6 +206,10 @@ public class AddressBookParser {
         case ListIngredientsCommand.COMMAND_WORD:
         case ListIngredientsCommand.COMMAND_ALIAS:
             return new ListIngredientsCommand();
+
+        case LowStockCommand.COMMAND_WORD:
+        case LowStockCommand.COMMAND_ALIAS:
+            return new LowStockCommand();
 
         case DeleteIngredientCommand.COMMAND_WORD:
         case DeleteIngredientCommand.COMMAND_ALIAS:

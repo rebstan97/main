@@ -81,6 +81,14 @@ public class ItemStackPanelTest extends GuiUnitTest {
         // different tags
         differentItem = new ItemBuilder().withTags("different").build();
         assertFalse(itemStackPanel.equals(new ItemStackPanel(differentItem)));
+
+        // different recipe
+        differentItem = new ItemBuilder().withRecipe("some recipe").build();
+        assertFalse(itemStackPanel.equals(new ItemStackPanel(differentItem)));
+
+        // different required ingredients
+        differentItem = new ItemBuilder().withRequiredIngredients(Map.of("name", "9")).build();
+        assertFalse(itemStackPanel.equals(new ItemStackPanel(differentItem)));
     }
 
     /**
