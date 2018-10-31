@@ -1,6 +1,7 @@
 package seedu.address.ui.testutil;
 
 import static org.junit.Assert.assertEquals;
+import static seedu.address.ui.sales.RecordStackPanel.MESSAGE_REQUIRED_INGREDIENTS_NOT_FOUND;
 
 import java.text.NumberFormat;
 import java.util.Arrays;
@@ -16,6 +17,7 @@ import guitests.guihandles.menu.ItemCardHandle;
 import guitests.guihandles.menu.ItemStackPanelHandle;
 import guitests.guihandles.reservation.ReservationCardHandle;
 import guitests.guihandles.sales.RecordCardHandle;
+import guitests.guihandles.sales.RecordStackPanelHandle;
 import seedu.address.model.ingredient.IngredientName;
 import seedu.address.model.menu.Item;
 import seedu.address.model.person.Person;
@@ -77,6 +79,38 @@ public class GuiTestAssert {
         NumberFormat currencyFormatter = NumberFormat.getCurrencyInstance(Locale.US);
         assertEquals("Item Price: "
                 + currencyFormatter.format(expectedRecord.getPrice().getValue()), actualCard.getPrice());
+    }
+
+    /**
+     * Asserts that {@code actualStackPanel} displays the details of {@code expectedRecord}.
+     */
+    public static void assertStackPanelDisplaysRecord(SalesRecord expectedRecord,
+            RecordStackPanelHandle actualStackPanel) {
+        assertEquals(expectedRecord.getDate().toString() + " (" + expectedRecord.getDate().getDayOfWeek() + ")",
+                actualStackPanel.getDate());
+        assertEquals(expectedRecord.getName().toString(), actualStackPanel.getItemName());
+        assertEquals(expectedRecord.getQuantitySold().toString(), actualStackPanel.getQuantitySold());
+
+        NumberFormat currencyFormatter = NumberFormat.getCurrencyInstance(Locale.US);
+        assertEquals(currencyFormatter.format(expectedRecord.getPrice().getValue()), actualStackPanel.getPrice());
+        assertEquals(currencyFormatter.format(expectedRecord.getRevenue()), actualStackPanel.getTotalRevenue());
+        String expectedIngredientUsed = (expectedRecord.getIngredientsUsed().isEmpty())
+                ? MESSAGE_REQUIRED_INGREDIENTS_NOT_FOUND : ingredientUsedToString(expectedRecord.getIngredientsUsed());
+        assertEquals(expectedIngredientUsed, actualStackPanel.getIngredientUsed());
+    }
+
+    /**
+     * Returns the string representation of the given {@code ingredientUsed}
+     */
+    private static String ingredientUsedToString(Map<IngredientName, Integer> ingredientUsed) {
+        StringBuilder stringBuilder = new StringBuilder();
+        int index = 1;
+        for (Map.Entry<IngredientName, Integer> entry : ingredientUsed.entrySet()) {
+            stringBuilder.append(index).append(") ").append(entry.getKey().toString())
+                    .append(" - ").append(entry.getValue().toString()).append(" units").append("\n");
+            index++;
+        }
+        return stringBuilder.toString();
     }
 
     /**
