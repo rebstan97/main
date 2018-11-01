@@ -864,7 +864,7 @@ Examples:
 * `check-history n/Fried Rice`
 * `ch n/Fried Rice`
 
-==== Exporting sales report`[coming in v2.0]`
+==== Exporting sales report `[coming in v2.0]`
 Exports the sales report of a specific date into a pdf file. The generated .pdf sales report will be much more
 detailed than that displayed in app.
 Format: `export-sales DATE` or `es DATE`
