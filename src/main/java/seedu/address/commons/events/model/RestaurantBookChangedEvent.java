@@ -16,9 +16,10 @@ public class RestaurantBookChangedEvent extends BaseEvent {
 
     @Override
     public String toString() {
-        //TODO: Display number of reservations, sales and ingredients as well?
-        return "number of persons " + data.getPersonList().size()
-                + ", number of accounts " + data.getAccountList().size()
-                + ", number of items " + data.getItemList().size();
+        return "number of accounts " + data.getAccountList().size()
+                + ", number of items " + data.getItemList().size()
+                + ", number of reservations " + data.getReservationList().size()
+                + ", number of sales record " + data.getRecordList().size()
+                + ", number of ingredients " + data.getIngredientList().size();
     }
 }

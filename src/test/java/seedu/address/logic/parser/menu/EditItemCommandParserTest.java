@@ -16,9 +16,9 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_ITEM_PRICE_BURG
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ITEM_PRICE_FRIES;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ITEM_TAG_BURGER;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ITEM_TAG_CHEESE;
-import static seedu.address.logic.parser.util.CliSyntax.PREFIX_TAG;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
+import static seedu.address.logic.parser.util.CliSyntax.PREFIX_TAG;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND;
 import static seedu.address.testutil.TypicalIndexes.INDEX_THIRD;

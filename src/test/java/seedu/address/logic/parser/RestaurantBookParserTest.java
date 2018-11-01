@@ -44,6 +44,7 @@ import seedu.address.logic.commands.UndoCommand;
 import seedu.address.logic.commands.accounts.ChangePasswordCommand;
 import seedu.address.logic.commands.accounts.ChangePasswordCommand.EditAccountDescriptor;
 import seedu.address.logic.commands.accounts.DeregisterCommand;
+import seedu.address.logic.commands.accounts.ListAccountsCommand;
 import seedu.address.logic.commands.accounts.LoginCommand;
 import seedu.address.logic.commands.accounts.LogoutCommand;
 import seedu.address.logic.commands.accounts.RegisterCommand;
@@ -342,6 +343,16 @@ public class RestaurantBookParserTest {
     @Test
     public void parseCommand_logout() throws ParseException {
         assertTrue(parser.parseCommand(LogoutCommand.COMMAND_WORD) instanceof LogoutCommand);
+    }
+
+    @Test
+    public void parseCommand_listAccounts() throws Exception {
+        assertTrue(parser.parseCommand(ListAccountsCommand.COMMAND_WORD) instanceof ListAccountsCommand);
+        assertTrue(parser.parseCommand(ListAccountsCommand.COMMAND_ALIAS) instanceof ListAccountsCommand);
+        assertTrue(parser.parseCommand(ListAccountsCommand.COMMAND_WORD + " 3")
+                instanceof ListAccountsCommand);
+        assertTrue(parser.parseCommand(ListAccountsCommand.COMMAND_ALIAS + " 3")
+                instanceof ListAccountsCommand);
     }
 
     @Test

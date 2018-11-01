@@ -12,11 +12,11 @@ import seedu.address.logic.commands.ingredients.EditIngredientByIndexCommand;
 import seedu.address.logic.commands.ingredients.EditIngredientByNameCommand;
 import seedu.address.logic.commands.ingredients.EditIngredientCommand;
 import seedu.address.logic.commands.ingredients.EditIngredientCommand.EditIngredientDescriptor;
+import seedu.address.logic.parser.Parser;
+import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.logic.parser.util.ArgumentMultimap;
 import seedu.address.logic.parser.util.ArgumentTokenizer;
-import seedu.address.logic.parser.Parser;
 import seedu.address.logic.parser.util.ParserUtil;
-import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.ingredient.IngredientName;
 
 /**

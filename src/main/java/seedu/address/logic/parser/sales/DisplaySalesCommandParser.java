@@ -4,8 +4,8 @@ import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT
 
 import seedu.address.logic.commands.sales.DisplaySalesCommand;
 import seedu.address.logic.parser.Parser;
-import seedu.address.logic.parser.util.ParserUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.logic.parser.util.ParserUtil;
 import seedu.address.model.salesrecord.Date;
 
 /**

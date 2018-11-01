@@ -6,11 +6,11 @@ import static seedu.address.logic.commands.CommandTestUtil.INGREDIENT_NAME_DESC_
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_INGREDIENT_NAME_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_APPLE;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BROCCOLI;
-import static seedu.address.logic.parser.util.CliSyntax.PREFIX_INGREDIENT_NUM;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.address.logic.parser.menu.AddRequiredIngredientsCommandParser.MESSAGE_DUPLICATE_INGREDIENT_NAME;
 import static seedu.address.logic.parser.menu.AddRequiredIngredientsCommandParser.MESSAGE_INTEGER_CONSTRAINTS;
+import static seedu.address.logic.parser.util.CliSyntax.PREFIX_INGREDIENT_NUM;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST;
 
 import java.util.HashMap;

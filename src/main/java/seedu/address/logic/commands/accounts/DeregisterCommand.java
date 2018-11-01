@@ -3,6 +3,8 @@ package seedu.address.logic.commands.accounts;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.util.CliSyntax.PREFIX_ID;
 
+import seedu.address.commons.core.EventsCenter;
+import seedu.address.commons.events.ui.accounts.DisplayAccountListRequestEvent;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
@@ -46,6 +48,7 @@ public class DeregisterCommand extends Command {
 
         model.removeAccount(retrievedAccount);
         model.commitRestaurantBook();
+        EventsCenter.getInstance().post(new DisplayAccountListRequestEvent());
         return new CommandResult(String.format(MESSAGE_SUCCESS, account));
     }
 

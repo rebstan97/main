@@ -7,8 +7,8 @@ import seedu.address.logic.commands.ingredients.DeleteIngredientByIndexCommand;
 import seedu.address.logic.commands.ingredients.DeleteIngredientByNameCommand;
 import seedu.address.logic.commands.ingredients.DeleteIngredientCommand;
 import seedu.address.logic.parser.Parser;
-import seedu.address.logic.parser.util.ParserUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.logic.parser.util.ParserUtil;
 import seedu.address.model.ingredient.IngredientName;
 
 /**

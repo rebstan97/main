@@ -8,11 +8,11 @@ import static seedu.address.logic.parser.util.CliSyntax.PREFIX_QUANTITY_SOLD;
 import static seedu.address.logic.parser.util.ParserUtil.arePrefixesPresent;
 
 import seedu.address.logic.commands.sales.RecordSalesCommand;
+import seedu.address.logic.parser.Parser;
+import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.logic.parser.util.ArgumentMultimap;
 import seedu.address.logic.parser.util.ArgumentTokenizer;
-import seedu.address.logic.parser.Parser;
 import seedu.address.logic.parser.util.ParserUtil;
-import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.salesrecord.Date;
 import seedu.address.model.salesrecord.ItemName;
 import seedu.address.model.salesrecord.Price;

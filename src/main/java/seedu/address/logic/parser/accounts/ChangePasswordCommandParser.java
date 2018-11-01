@@ -7,10 +7,10 @@ import static seedu.address.logic.parser.util.ParserUtil.arePrefixesPresent;
 
 import seedu.address.logic.commands.accounts.ChangePasswordCommand;
 import seedu.address.logic.commands.accounts.ChangePasswordCommand.EditAccountDescriptor;
-import seedu.address.logic.parser.util.ArgumentMultimap;
-import seedu.address.logic.parser.util.ArgumentTokenizer;
 import seedu.address.logic.parser.Parser;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.logic.parser.util.ArgumentMultimap;
+import seedu.address.logic.parser.util.ArgumentTokenizer;
 
 /**
  * Parses input arguments and creates a new ChangePasswordCommand object
