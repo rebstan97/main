@@ -60,7 +60,7 @@ public class AddIngredientCommandParserTest {
                 + INGREDIENT_PRICE_DESC_APPLE + INGREDIENT_PRICE_DESC_BROCCOLI
                 + INGREDIENT_MINIMUM_DESC_BROCCOLI, new AddIngredientCommand(expectedIngredient));
 
-        // multiple minimums - last address accepted
+        // multiple minimums - last minimum accepted
         assertParseSuccess(parser, INGREDIENT_NAME_DESC_BROCCOLI + INGREDIENT_UNIT_DESC_BROCCOLI
                 + INGREDIENT_PRICE_DESC_BROCCOLI + INGREDIENT_MINIMUM_DESC_APPLE
                 + INGREDIENT_MINIMUM_DESC_BROCCOLI, new AddIngredientCommand(expectedIngredient));
