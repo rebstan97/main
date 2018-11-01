@@ -12,6 +12,11 @@ public class UserSession {
     private static boolean isAuthenticated = false;
     private static Account account;
 
+    // This class should not be instantiated.
+    private UserSession() {
+        throw new AssertionError("UserSession should not be instantiated.");
+    }
+
     /**
      * Stores this {@code Account} info as part of this session.
      *
