@@ -20,20 +20,25 @@ import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.events.ui.DisplayIngredientListRequestEvent;
 import seedu.address.commons.events.ui.DisplayItemListRequestEvent;
+import seedu.address.commons.events.ui.DisplayRecordListRequestEvent;
 import seedu.address.commons.events.ui.DisplaySalesReportEvent;
 import seedu.address.commons.events.ui.ExitAppRequestEvent;
 import seedu.address.commons.events.ui.ItemPanelSelectionChangedEvent;
 import seedu.address.commons.events.ui.LoginEvent;
 import seedu.address.commons.events.ui.LogoutEvent;
+import seedu.address.commons.events.ui.RecordPanelSelectionChangedEvent;
 import seedu.address.commons.events.ui.ShowHelpRequestEvent;
+import seedu.address.commons.events.ui.accounts.DisplayAccountListRequestEvent;
 import seedu.address.commons.events.ui.reservation.DisplayReservationListRequestEvent;
 import seedu.address.logic.Logic;
 import seedu.address.model.UserPrefs;
+import seedu.address.ui.accounts.AccountListPanel;
 import seedu.address.ui.accounts.UsernameDisplay;
 import seedu.address.ui.menu.ItemListPanel;
 import seedu.address.ui.menu.ItemStackPanel;
 import seedu.address.ui.reservation.ReservationListPanel;
 import seedu.address.ui.sales.RecordListPanel;
+import seedu.address.ui.sales.RecordStackPanel;
 import seedu.address.ui.sales.SalesReportWindow;
 
 /**
@@ -52,7 +57,8 @@ public class MainWindow extends UiPart<Stage> {
     // Independent Ui parts residing in this Ui container
     private BrowserPanel browserPanel;
     private PersonListPanel personListPanel;
-    private RecordListPanel recordListPanel; // Panels stack on top of each other, only one visible at a time
+    private AccountListPanel accountListPanel;
+    private RecordListPanel recordListPanel;
     private IngredientListPanel ingredientListPanel;
     private ItemListPanel itemListPanel;
     private ReservationListPanel reservationListPanel;
@@ -185,6 +191,12 @@ public class MainWindow extends UiPart<Stage> {
         CommandBox commandBox = new CommandBox(logic);
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
 
+        accountListPanel = new AccountListPanel(logic.getFilteredAccountList());
+        itemListPanel = new ItemListPanel(logic.getFilteredItemList());
+        ingredientListPanel = new IngredientListPanel(logic.getFilteredIngredientList());
+        reservationListPanel = new ReservationListPanel(logic.getFilteredReservationList());
+        recordListPanel = new RecordListPanel(logic.getFilteredRecordList());
+
         personListPanel = new PersonListPanel(logic.getFilteredPersonList());
         personListPanelPlaceholder.getChildren().add(personListPanel.getRoot()); // Show address book
     }
@@ -221,24 +233,19 @@ public class MainWindow extends UiPart<Stage> {
      * Switch to the account view.
      */
     @FXML
-    public void handleSwitchToAccount() {
-        //ingredientListPanel = new IngredientListPanel(logic.getFilteredIngredientList());
-        //ingredientListPanelPlaceholder.getChildren().add(ingredientListPanel.getRoot());
-
-        // Proposed changes: e.g.
-        // userListPanel = new UserListPanel(logic.getFilteredAccountList());
-        // dataListPanelPlaceholder.getChildren().add(userListPanel.getRoot());
-        // Then when you want it cleared when switch to another option, do
-        // dataListPanelPlaceholder.getChildren().clear(); follow by repeating the top.
+    private void handleSwitchToAccount() {
+        browserPlaceholder.getChildren().clear();
+        personListPanelPlaceholder.getChildren().clear();
+        personListPanelPlaceholder.getChildren().add(accountListPanel.getRoot());
     }
 
     /**
      * Switch to the menu view.
      */
     @FXML
-    public void handleSwitchToMenu() {
+    private void handleSwitchToMenu() {
+        browserPlaceholder.getChildren().clear();
         personListPanelPlaceholder.getChildren().clear();
-        itemListPanel = new ItemListPanel(logic.getFilteredItemList());
         personListPanelPlaceholder.getChildren().add(itemListPanel.getRoot());
     }
 
@@ -246,9 +253,9 @@ public class MainWindow extends UiPart<Stage> {
      * Switch to the sales view.
      */
     @FXML
-    public void handleSwitchToSales() {
+    private void handleSwitchToSales() {
+        browserPlaceholder.getChildren().clear();
         personListPanelPlaceholder.getChildren().clear();
-        recordListPanel = new RecordListPanel(logic.getFilteredRecordList());
         personListPanelPlaceholder.getChildren().add(recordListPanel.getRoot());
     }
 
@@ -256,9 +263,9 @@ public class MainWindow extends UiPart<Stage> {
      * Switch to the ingredient view.
      */
     @FXML
-    public void handleSwitchToIngredient() {
+    private void handleSwitchToIngredient() {
+        browserPlaceholder.getChildren().clear();
         personListPanelPlaceholder.getChildren().clear();
-        ingredientListPanel = new IngredientListPanel(logic.getFilteredIngredientList());
         personListPanelPlaceholder.getChildren().add(ingredientListPanel.getRoot());
     }
 
@@ -266,9 +273,9 @@ public class MainWindow extends UiPart<Stage> {
      * Switch to the reservation view.
      */
     @FXML
-    public void handleSwitchToReservation() {
+    private void handleSwitchToReservation() {
+        browserPlaceholder.getChildren().clear();
         personListPanelPlaceholder.getChildren().clear();
-        reservationListPanel = new ReservationListPanel(logic.getFilteredReservationList());
         personListPanelPlaceholder.getChildren().add(reservationListPanel.getRoot());
     }
 
@@ -276,7 +283,7 @@ public class MainWindow extends UiPart<Stage> {
      * Opens the help window or focuses on it if it's already opened.
      */
     @FXML
-    public void handleHelp() {
+    private void handleHelp() {
         if (!helpWindow.isShowing()) {
             helpWindow.show();
         } else {
@@ -294,26 +301,6 @@ public class MainWindow extends UiPart<Stage> {
     @FXML
     private void handleExit() {
         raise(new ExitAppRequestEvent());
-    }
-
-    public PersonListPanel getPersonListPanel() {
-        return personListPanel;
-    }
-
-    public ItemListPanel getItemListPanel() {
-        return itemListPanel;
-    }
-
-    public RecordListPanel getRecordListPanel() {
-        return recordListPanel;
-    }
-
-    public IngredientListPanel getIngredientListPanel() {
-        return ingredientListPanel;
-    }
-
-    public ReservationListPanel getReservationListPanel() {
-        return reservationListPanel;
     }
 
     void releaseResources() {
@@ -335,6 +322,12 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     @Subscribe
+    private void handleDisplayAccountListEvent(DisplayAccountListRequestEvent event) {
+        logger.info(LogsCenter.getEventHandlingLogMessage(event));
+        handleSwitchToAccount();
+    }
+
+    @Subscribe
     private void handleDisplayItemListEvent(DisplayItemListRequestEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
         handleSwitchToMenu();
@@ -352,6 +345,20 @@ public class MainWindow extends UiPart<Stage> {
         handleSwitchToSales();
         SalesReportWindow salesReportWindow = new SalesReportWindow(event.getSalesReportToDisplay());
         salesReportWindow.show();
+    }
+
+    @Subscribe
+    private void handleDisplayRecordListEvent(DisplayRecordListRequestEvent event) {
+        logger.info(LogsCenter.getEventHandlingLogMessage(event));
+        handleSwitchToSales();
+    }
+
+    @Subscribe
+    private void handleRecordPanelSelectionChangedEvent(RecordPanelSelectionChangedEvent event) {
+        logger.info(LogsCenter.getEventHandlingLogMessage(event));
+        browserPlaceholder.getChildren().clear();
+        RecordStackPanel recordStackPanel = new RecordStackPanel(event.getNewSelection());
+        browserPlaceholder.getChildren().add(recordStackPanel.getRoot());
     }
 
     @Subscribe

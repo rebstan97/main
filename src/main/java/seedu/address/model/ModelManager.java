@@ -466,5 +466,4 @@ public class ModelManager extends ComponentManager implements Model {
         requireNonNull(predicate);
         filteredReservations.setPredicate(predicate);
     }
-
 }

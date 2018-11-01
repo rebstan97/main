@@ -17,6 +17,7 @@ import seedu.address.ui.UiPart;
  * Panel containing the list of sales records.
  */
 public class RecordListPanel extends UiPart<Region> {
+
     private static final String FXML = "RecordListPanel.fxml";
     private final Logger logger = LogsCenter.getLogger(RecordListPanel.class);
 
@@ -58,7 +59,8 @@ public class RecordListPanel extends UiPart<Region> {
     /**
      * Custom {@code ListCell} that displays the graphics of a {@code SalesRecord} using a {@code RecordCard}.
      */
-    class RecordListViewCell extends ListCell<SalesRecord> {
+    private class RecordListViewCell extends ListCell<SalesRecord> {
+
         @Override
         protected void updateItem(SalesRecord salesRecord, boolean empty) {
             super.updateItem(salesRecord, empty);
@@ -71,5 +73,4 @@ public class RecordListPanel extends UiPart<Region> {
             }
         }
     }
-
 }

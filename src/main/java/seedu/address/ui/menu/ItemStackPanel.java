@@ -104,6 +104,8 @@ public class ItemStackPanel extends UiPart<Region> {
 
         // state check
         ItemStackPanel itemStackPanel = (ItemStackPanel) other;
-        return item.equals(itemStackPanel.item);
+        return item.equals(itemStackPanel.item)
+                && recipe.getText().equals(itemStackPanel.recipe.getText())
+                && requiredIngredients.getText().equals(itemStackPanel.requiredIngredients.getText());
     }
 }
