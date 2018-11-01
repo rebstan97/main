@@ -9,7 +9,7 @@ import guitests.guihandles.NodeHandle;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Region;
-import seedu.address.model.menu.Item;
+import seedu.restaurant.model.menu.Item;
 
 /**
  * Provides a handle to an item card in the item list panel.

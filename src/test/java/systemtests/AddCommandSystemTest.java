@@ -1,60 +1,60 @@
 package systemtests;
 
-import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.commands.CommandTestUtil.ADDRESS_DESC_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.ADDRESS_DESC_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.INVALID_ADDRESS_DESC;
-import static seedu.address.logic.commands.CommandTestUtil.INVALID_EMAIL_DESC;
-import static seedu.address.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
-import static seedu.address.logic.commands.CommandTestUtil.INVALID_PHONE_DESC;
-import static seedu.address.logic.commands.CommandTestUtil.INVALID_TAG_DESC;
-import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_FRIEND;
-import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_HUSBAND;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
-import static seedu.address.testutil.EventsUtil.postNow;
-import static seedu.address.testutil.TypicalPersons.ALICE;
-import static seedu.address.testutil.TypicalPersons.AMY;
-import static seedu.address.testutil.TypicalPersons.BOB;
-import static seedu.address.testutil.TypicalPersons.CARL;
-import static seedu.address.testutil.TypicalPersons.HOON;
-import static seedu.address.testutil.TypicalPersons.IDA;
-import static seedu.address.testutil.TypicalPersons.KEYWORD_MATCHING_MEIER;
+import static seedu.restaurant.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.restaurant.logic.commands.CommandTestUtil.ADDRESS_DESC_AMY;
+import static seedu.restaurant.logic.commands.CommandTestUtil.ADDRESS_DESC_BOB;
+import static seedu.restaurant.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
+import static seedu.restaurant.logic.commands.CommandTestUtil.EMAIL_DESC_BOB;
+import static seedu.restaurant.logic.commands.CommandTestUtil.INVALID_ADDRESS_DESC;
+import static seedu.restaurant.logic.commands.CommandTestUtil.INVALID_EMAIL_DESC;
+import static seedu.restaurant.logic.commands.CommandTestUtil.INVALID_NAME_DESC;
+import static seedu.restaurant.logic.commands.CommandTestUtil.INVALID_PHONE_DESC;
+import static seedu.restaurant.logic.commands.CommandTestUtil.INVALID_TAG_DESC;
+import static seedu.restaurant.logic.commands.CommandTestUtil.NAME_DESC_AMY;
+import static seedu.restaurant.logic.commands.CommandTestUtil.NAME_DESC_BOB;
+import static seedu.restaurant.logic.commands.CommandTestUtil.PHONE_DESC_AMY;
+import static seedu.restaurant.logic.commands.CommandTestUtil.PHONE_DESC_BOB;
+import static seedu.restaurant.logic.commands.CommandTestUtil.TAG_DESC_FRIEND;
+import static seedu.restaurant.logic.commands.CommandTestUtil.TAG_DESC_HUSBAND;
+import static seedu.restaurant.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
+import static seedu.restaurant.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
+import static seedu.restaurant.logic.commands.CommandTestUtil.VALID_NAME_BOB;
+import static seedu.restaurant.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
+import static seedu.restaurant.logic.parser.util.CliSyntax.PREFIX_TAG;
+import static seedu.restaurant.testutil.EventsUtil.postNow;
+import static seedu.restaurant.testutil.TypicalPersons.ALICE;
+import static seedu.restaurant.testutil.TypicalPersons.AMY;
+import static seedu.restaurant.testutil.TypicalPersons.BOB;
+import static seedu.restaurant.testutil.TypicalPersons.CARL;
+import static seedu.restaurant.testutil.TypicalPersons.HOON;
+import static seedu.restaurant.testutil.TypicalPersons.IDA;
+import static seedu.restaurant.testutil.TypicalPersons.KEYWORD_MATCHING_MEIER;
 
 import org.junit.Before;
 import org.junit.Test;
 
-import seedu.address.commons.core.Messages;
-import seedu.address.commons.core.index.Index;
-import seedu.address.commons.events.ui.LoginEvent;
-import seedu.address.logic.commands.AddCommand;
-import seedu.address.logic.commands.RedoCommand;
-import seedu.address.logic.commands.UndoCommand;
-import seedu.address.model.Model;
-import seedu.address.model.person.Address;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.Name;
-import seedu.address.model.person.Person;
-import seedu.address.model.person.Phone;
-import seedu.address.model.tag.Tag;
-import seedu.address.testutil.PersonBuilder;
-import seedu.address.testutil.PersonUtil;
-import seedu.address.testutil.accounts.AccountBuilder;
+import seedu.restaurant.commons.core.Messages;
+import seedu.restaurant.commons.core.index.Index;
+import seedu.restaurant.commons.events.ui.LoginEvent;
+import seedu.restaurant.logic.commands.AddCommand;
+import seedu.restaurant.logic.commands.RedoCommand;
+import seedu.restaurant.logic.commands.UndoCommand;
+import seedu.restaurant.model.Model;
+import seedu.restaurant.model.person.Address;
+import seedu.restaurant.model.person.Email;
+import seedu.restaurant.model.person.Name;
+import seedu.restaurant.model.person.Person;
+import seedu.restaurant.model.person.Phone;
+import seedu.restaurant.model.tag.Tag;
+import seedu.restaurant.testutil.PersonBuilder;
+import seedu.restaurant.testutil.PersonUtil;
+import seedu.restaurant.testutil.account.AccountBuilder;
 
-public class AddCommandSystemTest extends AddressBookSystemTest {
+public class AddCommandSystemTest extends RestaurantBookSystemTest {
 
     private Model model;
 
-    // Don't name it setUp() which overrides the one in AddressBookSystemTest, causing the tests to fail
+    // Don't name it setUp() which overrides the one in RestaurantBookSystemTest, causing the tests to fail
     @Before
     public void prepare() {
         model = getModel();
@@ -65,8 +65,8 @@ public class AddCommandSystemTest extends AddressBookSystemTest {
     public void add() {
         /* ------------------------ Perform add operations on the shown unfiltered list ----------------------------- */
 
-        /* Case: add a person without tags to a non-empty address book, command with leading spaces and trailing spaces
-         * -> added
+        /* Case: add a person without tags to a non-empty restaurant book, command with leading spaces and
+         * trailing spaces -> added
          */
         Person toAdd = AMY;
         String command = "   " + AddCommand.COMMAND_WORD + "  " + NAME_DESC_AMY + "  " + PHONE_DESC_AMY + " "
@@ -84,20 +84,20 @@ public class AddCommandSystemTest extends AddressBookSystemTest {
         expectedResultMessage = RedoCommand.MESSAGE_SUCCESS;
         assertCommandSuccess(command, model, expectedResultMessage);
 
-        /* Case: add a person with all fields same as another person in the address book except name -> added */
+        /* Case: add a person with all fields same as another person in the restaurant book except name -> added */
         toAdd = new PersonBuilder(AMY).withName(VALID_NAME_BOB).build();
         command = AddCommand.COMMAND_WORD + NAME_DESC_BOB + PHONE_DESC_AMY + EMAIL_DESC_AMY + ADDRESS_DESC_AMY
                 + TAG_DESC_FRIEND;
         assertCommandSuccess(command, toAdd);
 
-        /* Case: add a person with all fields same as another person in the address book except phone and email
+        /* Case: add a person with all fields same as another person in the restaurant book except phone and email
          * -> added
          */
         toAdd = new PersonBuilder(AMY).withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB).build();
         command = PersonUtil.getAddCommand(toAdd);
         assertCommandSuccess(command, toAdd);
 
-        /* Case: add to empty address book -> added */
+        /* Case: add to empty restaurant book -> added */
         deleteAllPersons();
         assertCommandSuccess(ALICE);
 
@@ -200,8 +200,8 @@ public class AddCommandSystemTest extends AddressBookSystemTest {
      * 5. Browser url and selected card remain unchanged.<br>
      * 6. Status bar's sync status changes.<br>
      * Verifications 1, 3 and 4 are performed by
-     * {@code AddressBookSystemTest#assertApplicationDisplaysExpected(String, String, Model)}.<br>
-     * @see AddressBookSystemTest#assertApplicationDisplaysExpected(String, String, Model)
+     * {@code RestaurantBookSystemTest#assertApplicationDisplaysExpected(String, String, Model)}.<br>
+     * @see RestaurantBookSystemTest#assertApplicationDisplaysExpected(String, String, Model)
      */
     private void assertCommandSuccess(Person toAdd) {
         assertCommandSuccess(PersonUtil.getAddCommand(toAdd), toAdd);
@@ -244,8 +244,8 @@ public class AddCommandSystemTest extends AddressBookSystemTest {
      * 4. {@code Storage} and {@code PersonListPanel} remain unchanged.<br>
      * 5. Browser url, selected card and status bar remain unchanged.<br>
      * Verifications 1, 3 and 4 are performed by
-     * {@code AddressBookSystemTest#assertApplicationDisplaysExpected(String, String, Model)}.<br>
-     * @see AddressBookSystemTest#assertApplicationDisplaysExpected(String, String, Model)
+     * {@code RestaurantBookSystemTest#assertApplicationDisplaysExpected(String, String, Model)}.<br>
+     * @see RestaurantBookSystemTest#assertApplicationDisplaysExpected(String, String, Model)
      */
     private void assertCommandFailure(String command, String expectedResultMessage) {
         Model expectedModel = getModel();
