@@ -27,11 +27,11 @@ in-depth analysis of the underlying *MeNUS* architecture.
 ** Project management:
 *** TBU
 ** Enhancements to existing features:
-*** TBU
+*** Added the method of creating command aliases: https://github.com/CS2103-AY1819S1-F10-4/main/pull/41[#41]
 ** Documentation:
 *** Helped teammates with proper language and phrasing in User Guide and Developer Guide
 ** Community:
-*** PRs reviewed (with non-trivial review comments): https://github.com/CS2103-AY1819S1-F10-4/main/pull/114
+*** PRs reviewed (with non-trivial review comments): https://github.com/CS2103-AY1819S1-F10-4/main/pull/114[#114]
 ** Tools:
 *** TBU
 
