@@ -56,7 +56,6 @@ public class MainWindow extends UiPart<Stage> {
 
     // Independent Ui parts residing in this Ui container
     private BrowserPanel browserPanel;
-    private PersonListPanel personListPanel;
     private AccountListPanel accountListPanel;
     private RecordListPanel recordListPanel;
     private IngredientListPanel ingredientListPanel;
@@ -197,7 +196,7 @@ public class MainWindow extends UiPart<Stage> {
         reservationListPanel = new ReservationListPanel(logic.getFilteredReservationList());
         recordListPanel = new RecordListPanel(logic.getFilteredRecordList());
 
-        personListPanel = new PersonListPanel(logic.getFilteredPersonList());
+        PersonListPanel personListPanel = new PersonListPanel(logic.getFilteredPersonList());
         personListPanelPlaceholder.getChildren().add(personListPanel.getRoot()); // Show restaurant book
     }
 
