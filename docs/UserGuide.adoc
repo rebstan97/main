@@ -743,15 +743,25 @@ Examples:
 Removes out-of-stock dishes that require ingredients with low stock count from the daily menu. +
 Format: `remove-oos-dish` or `rod`
 
-==== Show history of stockup `[coming in v2.0]`
+Examples:
 
-Shows the history of past ingredient stockups or past ingredient consumption. +
-Format: `view-stockup`
+* `remove-oos-dish`
+* `rod`
 
-==== Show history of consumption `[coming in v2.0]`
+==== Show history of past stock ups and consumption `[coming in v2.0]`
 
-Shows the history of past ingredient stockups or past ingredient consumption. +
-Format: `view-stockup`
+Shows the history of past ingredient stock ups or consumption. +
+Format: `view-history [STOCKUP] [CONSUMPTION]`  or `vh [STOCKUP] [CONSUMPTION]`
+
+****
+* At least one of the optional fields must be provided.
+****
+
+Examples:
+
+* `view-history stockup`
+* `view-history consumption`
+* `vh stockup consumption`
 
 == Frequently Asked Questions (FAQ)
 
