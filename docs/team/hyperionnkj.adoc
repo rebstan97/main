@@ -1,53 +1,61 @@
-= John Doe - Project Portfolio
+= Neo Kai Jun - Project Portfolio
 :site-section: AboutUs
 :imagesDir: ../images
 :stylesDir: ../stylesheets
 
-== PROJECT: AddressBook - Level 4
+== PROJECT: MeNUS
 
 ---
 
 == Overview
 
-AddressBook - Level 4 is a desktop address book application used for teaching Software Engineering principles. The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java, and has about 10 kLoC.
+*MeNUS* is an integrated restaurant management desktop application designed for restaurant managers. It incorporates
+the menus, ingredients, sales and reservations management system so restaurant managers can efficiently and
+effectively keep track of their menu, ingredient inventory, financial records and bookings all in one place. It
+ provides a Command Line Interface (CLI) for restaurant managers to interact with, and is complemented with a
+ Graphical User Interface (GUI) created with JavaFX. MeNUS is written with approximately 30 kLOC.
+
 
 == Summary of contributions
 
-* *Major enhancement*: added *the ability to undo/redo previous commands*
-** What it does: allows the user to undo all previous commands one at a time. Preceding undo commands can be reversed by using the redo command.
-** Justification: This feature improves the product significantly because a user can make mistakes in commands and the app should provide a convenient way to rectify them.
-** Highlights: This enhancement affects existing commands and commands to be added in future. It required an in-depth analysis of design alternatives. The implementation too was challenging as it required changes to existing commands.
-** Credits: _{mention here if you reused any code/ideas from elsewhere or if a third-party library is heavily used in the feature so that a reader can make a more accurate judgement of how much effort went into the feature}_
-
-* *Minor enhancement*: added a history command that allows the user to navigate to previous commands using up/down keys.
+* *Major enhancement*: added Sales Management features to help restaurant owners keep track of financial records.
+** What it does: allows the user to record, edit and delete financial records. Besides, they can view the sales
+report of a specified date, and even the revenue ranking of the items and dates. An auto-ingredient update mechanism
+was also incorporated in command to record sales, so restaurant managers would no longer have to manually update them
+ every day.
+** Justification: These features help ease the difficulty in keeping track of financial records every day. It also
+helps restaurant managers make strategic financial and marketing decisions to expand their business in the long run.
+** Highlights: This enhancement adds on to the limited number of commands available in MeNUS. It requires an in-depth
+analysis of design alternatives as well as understanding how the entire code base interacts with one another. The
+implementation too was challenging as the auto-ingredient update mechanism requires knowledge of how menus and
+ingredients management works.
 
 * *Other contributions*:
 
-** Project management:
-*** Managed releases `v1.3` - `v1.5rc` (3 releases) on GitHub
-** Enhancements to existing features:
-*** Updated the GUI color scheme (Pull requests https://github.com[#33], https://github.com[#34])
-*** Wrote additional tests for existing features to increase coverage from 88% to 92% (Pull requests https://github.com[#36], https://github.com[#38])
-** Documentation:
-*** Did cosmetic tweaks to existing contents of the User Guide: https://github.com[#14]
-** Community:
-*** PRs reviewed (with non-trivial review comments): https://github.com[#12], https://github.com[#32], https://github.com[#19], https://github.com[#42]
-*** Contributed to forum discussions (examples:  https://github.com[1], https://github.com[2], https://github.com[3], https://github.com[4])
-*** Reported bugs and suggestions for other teams in the class (examples:  https://github.com[1], https://github.com[2], https://github.com[3])
-*** Some parts of the history feature I added was adopted by several other class mates (https://github.com[1], https://github.com[2])
-** Tools:
-*** Integrated a third party library (Natty) to the project (https://github.com[#42])
-*** Integrated a new Github plugin (CircleCI) to the team repo
+** Project Management:
+*** Manage the integration aspect of the MeNUS. Ensure interaction between various components of the app goes smoothly
+as intended.
 
-_{you can add/remove categories in the list above}_
+** Community:
+*** PRs reviewed (with non-trivial review comments)
+*** Reported bugs and suggestions for other teams in the class
+
+** Quality Assurance:
+*** Written all the test cases related to Sales management which include unit testing, system testing and integration
+ testing. This helps improve the overall coverage of the app beyond 90%.
+
+** Documentation:
+*** Written the Sales command descriptions in User guide
+*** Written and updated use cases, user stories in Developer guide.
+*** Written the implementation details of display-sales and auto-ingredient update features.
+*** Drawn UML model to ease understanding and complement written explanation
+*** Made general enhancements to the User Guide and Developer Guide
 
 == Contributions to the User Guide
 
 |===
 |_Given below are sections I contributed to the User Guide. They showcase my ability to write documentation targeting end-users._
 |===
-
-//include::../UserGuide.adoc[tag=undoredo]
 
 == Contributions to the Developer Guide
 
