@@ -16,7 +16,6 @@ import seedu.address.logic.parser.Parser;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.logic.parser.util.ArgumentMultimap;
 import seedu.address.logic.parser.util.ArgumentTokenizer;
-import seedu.address.logic.parser.util.ParserUtil;
 import seedu.address.model.ingredient.IngredientName;
 
 /**
@@ -25,8 +24,9 @@ import seedu.address.model.ingredient.IngredientName;
 public class EditIngredientCommandParser implements Parser<EditIngredientCommand> {
 
     /**
-     * Parses the given {@code String} of arguments in the context of the EditIngredientCommand
-     * and returns an EditIngredientCommand object for execution.
+     * Parses the given {@code String} of arguments in the context of the EditIngredientCommand and returns an
+     * EditIngredientCommand object for execution.
+     *
      * @throws ParseException if the user input does not conform the expected format
      */
     public EditIngredientCommand parse(String args) throws ParseException {
@@ -42,7 +42,7 @@ public class EditIngredientCommandParser implements Parser<EditIngredientCommand
                     EditIngredientCommand.MESSAGE_USAGE));
         }
 
-        Object indexOrName = ParserUtil.parseIndexOrIngredientName(indexOrNameArg);
+        Object indexOrName = IngredientParserUtil.parseIndexOrIngredientName(indexOrNameArg);
 
         EditIngredientDescriptor editIngredientDescriptor = new EditIngredientDescriptor();
         setNameDescriptor(argMultimap, editIngredientDescriptor);
@@ -74,7 +74,7 @@ public class EditIngredientCommandParser implements Parser<EditIngredientCommand
             throws ParseException {
         if (argMultimap.getValue(PREFIX_INGREDIENT_MINIMUM).isPresent()) {
             editIngredientDescriptor.setMinimum(
-                    ParserUtil.parseMinimumUnit(argMultimap.getValue(PREFIX_INGREDIENT_MINIMUM).get()));
+                    IngredientParserUtil.parseMinimumUnit(argMultimap.getValue(PREFIX_INGREDIENT_MINIMUM).get()));
         }
     }
 
@@ -83,7 +83,7 @@ public class EditIngredientCommandParser implements Parser<EditIngredientCommand
         setUnitDescriptor(argMultimap, editIngredientDescriptor);
         if (argMultimap.getValue(PREFIX_INGREDIENT_PRICE).isPresent()) {
             editIngredientDescriptor.setPrice(
-                    ParserUtil.parseIngredientPrice(argMultimap.getValue(PREFIX_INGREDIENT_PRICE).get()));
+                    IngredientParserUtil.parseIngredientPrice(argMultimap.getValue(PREFIX_INGREDIENT_PRICE).get()));
         }
     }
 
@@ -92,7 +92,7 @@ public class EditIngredientCommandParser implements Parser<EditIngredientCommand
         setNameDescriptor(argMultimap, editIngredientDescriptor);
         if (argMultimap.getValue(PREFIX_INGREDIENT_UNIT).isPresent()) {
             editIngredientDescriptor.setUnit(
-                    ParserUtil.parseIngredientUnit(argMultimap.getValue(PREFIX_INGREDIENT_UNIT).get()));
+                    IngredientParserUtil.parseIngredientUnit(argMultimap.getValue(PREFIX_INGREDIENT_UNIT).get()));
         }
     }
 
@@ -100,8 +100,7 @@ public class EditIngredientCommandParser implements Parser<EditIngredientCommand
             throws ParseException {
         if (argMultimap.getValue(PREFIX_INGREDIENT_NAME).isPresent()) {
             editIngredientDescriptor.setName(
-                    ParserUtil.parseIngredientName(argMultimap.getValue(PREFIX_INGREDIENT_NAME).get()));
+                    IngredientParserUtil.parseIngredientName(argMultimap.getValue(PREFIX_INGREDIENT_NAME).get()));
         }
     }
-
 }

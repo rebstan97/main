@@ -13,7 +13,6 @@ import seedu.address.logic.parser.Parser;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.logic.parser.util.ArgumentPairMultimap;
 import seedu.address.logic.parser.util.ArgumentTokenizer;
-import seedu.address.logic.parser.util.ParserUtil;
 import seedu.address.model.ingredient.IngredientName;
 import seedu.address.model.ingredient.NumUnits;
 
@@ -23,8 +22,9 @@ import seedu.address.model.ingredient.NumUnits;
 public class StockUpCommandParser implements Parser<StockUpCommand> {
 
     /**
-     * Parses the given {@code String} of arguments in the context of the StockupCommand
-     * and returns a StockUpCommand object for execution.
+     * Parses the given {@code String} of arguments in the context of the StockupCommand and returns a StockUpCommand
+     * object for execution.
+     *
      * @throws ParseException if the user input does not conform the expected format
      */
     public StockUpCommand parse(String args) throws ParseException {
@@ -39,8 +39,9 @@ public class StockUpCommandParser implements Parser<StockUpCommand> {
         int index = 1;
         List<ChangeStockDescriptor> stockDescriptorList = new ArrayList<>();
         while (argMultimap.contains(index)) {
-            IngredientName name = ParserUtil.parseIngredientName(argMultimap.getValue(index).getFirstString());
-            NumUnits numUnits = ParserUtil.parseNumUnits(argMultimap.getValue(index).getSecondString());
+            IngredientName name = IngredientParserUtil
+                    .parseIngredientName(argMultimap.getValue(index).getFirstString());
+            NumUnits numUnits = IngredientParserUtil.parseNumUnits(argMultimap.getValue(index).getSecondString());
             ChangeStockDescriptor descriptor = new ChangeStockDescriptor(name, numUnits);
             stockDescriptorList.add(descriptor);
             index++;

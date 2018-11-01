@@ -8,7 +8,6 @@ import seedu.address.logic.commands.ingredients.DeleteIngredientByNameCommand;
 import seedu.address.logic.commands.ingredients.DeleteIngredientCommand;
 import seedu.address.logic.parser.Parser;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.logic.parser.util.ParserUtil;
 import seedu.address.model.ingredient.IngredientName;
 
 /**
@@ -28,7 +27,7 @@ public class DeleteIngredientCommandParser implements Parser<DeleteIngredientCom
                     DeleteIngredientCommand.MESSAGE_USAGE));
         }
 
-        Object indexOrName = ParserUtil.parseIndexOrIngredientName(args);
+        Object indexOrName = IngredientParserUtil.parseIndexOrIngredientName(args);
         DeleteIngredientCommand deleteCommand = null;
         if (indexOrName instanceof Index) {
             deleteCommand = new DeleteIngredientByIndexCommand((Index) indexOrName);

@@ -12,6 +12,7 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.menu.AddRequiredIngredientsCommand;
 import seedu.address.logic.parser.Parser;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.logic.parser.ingredients.IngredientParserUtil;
 import seedu.address.logic.parser.util.ArgumentIndexAndPairMultimap;
 import seedu.address.logic.parser.util.ArgumentTokenizer;
 import seedu.address.logic.parser.util.ParserUtil;
@@ -56,7 +57,7 @@ public class AddRequiredIngredientsCommandParser implements Parser<AddRequiredIn
                 throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                         AddRequiredIngredientsCommand.MESSAGE_USAGE));
             }
-            IngredientName name = ParserUtil.parseIngredientName(map.get(PREFIX_INGREDIENT_NAME));
+            IngredientName name = IngredientParserUtil.parseIngredientName(map.get(PREFIX_INGREDIENT_NAME));
             if (requiredIngredients.containsKey(name)) {
                 throw new ParseException(MESSAGE_DUPLICATE_INGREDIENT_NAME);
             }
@@ -81,11 +82,10 @@ public class AddRequiredIngredientsCommandParser implements Parser<AddRequiredIn
     /**
      * Returns true if a given string is a valid number of ingredient.
      */
-    public static boolean isValidNumberOfIngredients(String test) {
-        if (!test.matches(INTEGER_VALIDATION_REGEX)) {
+    private static boolean isValidNumberOfIngredients(String test) {
+        if (!test.matches(INTEGER_VALIDATION_REGEX)) { // TODO: This should be in ingredient class
             return false;
         }
         return Integer.parseInt(test) > 0;
     }
-
 }

@@ -22,10 +22,6 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.logic.parser.util.ArgumentMultimap;
 import seedu.address.logic.parser.util.ArgumentTokenizer;
 import seedu.address.logic.parser.util.ParserUtil;
-import seedu.address.model.ingredient.IngredientName;
-import seedu.address.model.ingredient.IngredientPrice;
-import seedu.address.model.ingredient.IngredientUnit;
-import seedu.address.model.ingredient.MinimumUnit;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
@@ -47,17 +43,6 @@ public class ParserUtilTest {
     private static final String VALID_EMAIL = "rachel@example.com";
     private static final String VALID_TAG_1 = "friend";
     private static final String VALID_TAG_2 = "neighbour";
-
-    private static final String INVALID_INGREDIENT_NAME = "Chicken Drums+ick";
-    private static final String INVALID_INGREDIENT_UNIT = "+kilograms";
-    private static final String INVALID_INGREDIENT_PRICE = "9.9099";
-    private static final String INVALID_INGREDIENT_MINIMUM = "10.0";
-
-    private static final String VALID_INGREDIENT_NAME = "Chicken Drumstick";
-    private static final String VALID_INGREDIENT_UNIT = "5-kilogram bag";
-    private static final String VALID_INGREDIENT_PRICE = "9.90";
-    private static final String VALID_INGREDIENT_MINIMUM_STRING = "10";
-    private static final int VALID_INGREDIENT_MINIMUM = 10;
 
     private static final String VALID_USERNAME = "azhikai";
     private static final String VALID_PASSWORD = "1122qq";
@@ -91,7 +76,7 @@ public class ParserUtilTest {
 
     @Test
     public void parseName_null_throwsNullPointerException() {
-        Assert.assertThrows(NullPointerException.class, () -> ParserUtil.parseName((String) null));
+        Assert.assertThrows(NullPointerException.class, () -> ParserUtil.parseName(null));
     }
 
     @Test
@@ -114,7 +99,7 @@ public class ParserUtilTest {
 
     @Test
     public void parsePhone_null_throwsNullPointerException() {
-        Assert.assertThrows(NullPointerException.class, () -> ParserUtil.parsePhone((String) null));
+        Assert.assertThrows(NullPointerException.class, () -> ParserUtil.parsePhone(null));
     }
 
     @Test
@@ -229,133 +214,6 @@ public class ParserUtilTest {
         Set<Tag> expectedTagSet = new HashSet<Tag>(Arrays.asList(new Tag(VALID_TAG_1), new Tag(VALID_TAG_2)));
 
         assertEquals(expectedTagSet, actualTagSet);
-    }
-
-    //============ Ingredients Parser Util Tests =============================================================
-
-    @Test
-    public void parseIngredientName_null_throwsNullPointerException() {
-        Assert.assertThrows(NullPointerException.class, () -> ParserUtil.parseIngredientName((String) null));
-    }
-
-    @Test
-    public void parseIngredientName_invalidValue_throwsParseException() {
-        Assert.assertThrows(ParseException.class, () -> ParserUtil.parseIngredientName(INVALID_INGREDIENT_NAME));
-    }
-
-    @Test
-    public void parseIngredientName_validValueWithoutWhitespace_returnsName() throws Exception {
-        IngredientName expectedName = new IngredientName(VALID_INGREDIENT_NAME);
-        assertEquals(expectedName, ParserUtil.parseIngredientName(VALID_INGREDIENT_NAME));
-    }
-
-    @Test
-    public void parseIngredientName_validValueWithWhitespace_returnsTrimmedName() throws Exception {
-        String nameWithWhitespace = WHITESPACE + VALID_INGREDIENT_NAME + WHITESPACE;
-        IngredientName expectedName = new IngredientName(VALID_INGREDIENT_NAME);
-        assertEquals(expectedName, ParserUtil.parseIngredientName(nameWithWhitespace));
-    }
-
-    @Test
-    public void parseIngredientUnit_null_throwsNullPointerException() {
-        Assert.assertThrows(NullPointerException.class, () -> ParserUtil.parseIngredientName((String) null));
-    }
-
-    @Test
-    public void parseIngredientUnit_invalidValue_throwsParseException() {
-        Assert.assertThrows(ParseException.class, () -> ParserUtil.parseIngredientUnit(INVALID_INGREDIENT_UNIT));
-    }
-
-    @Test
-    public void parseIngredientUnit_validValueWithoutWhitespace_returnsName() throws Exception {
-        IngredientUnit expectedUnit = new IngredientUnit(VALID_INGREDIENT_UNIT);
-        assertEquals(expectedUnit, ParserUtil.parseIngredientUnit(VALID_INGREDIENT_UNIT));
-    }
-
-    @Test
-    public void parseIngredientUnit_validValueWithWhitespace_returnsTrimmedUnit() throws Exception {
-        String unitWithWhitespace = WHITESPACE + VALID_INGREDIENT_UNIT + WHITESPACE;
-        IngredientUnit expectedUnit = new IngredientUnit(VALID_INGREDIENT_UNIT);
-        assertEquals(expectedUnit, ParserUtil.parseIngredientUnit(unitWithWhitespace));
-    }
-
-    @Test
-    public void parseIngredientPrice_null_throwsNullPointerException() {
-        Assert.assertThrows(NullPointerException.class, () -> ParserUtil.parseIngredientPrice((String) null));
-    }
-
-    @Test
-    public void parseIngredientPrice_invalidValue_throwsParseException() {
-        Assert.assertThrows(ParseException.class, () -> ParserUtil.parseIngredientPrice(INVALID_INGREDIENT_PRICE));
-    }
-
-    @Test
-    public void parseIngredientPrice_validValueWithoutWhitespace_returnsPrice() throws Exception {
-        IngredientPrice expectedPrice = new IngredientPrice(VALID_INGREDIENT_PRICE);
-        assertEquals(expectedPrice, ParserUtil.parseIngredientPrice(VALID_INGREDIENT_PRICE));
-    }
-
-    @Test
-    public void parseIngredientPrice_validValueWithWhitespace_returnsTrimmedPrice() throws Exception {
-        String priceWithWhitespace = WHITESPACE + VALID_INGREDIENT_PRICE + WHITESPACE;
-        IngredientPrice expectedPrice = new IngredientPrice(VALID_INGREDIENT_PRICE);
-        assertEquals(expectedPrice, ParserUtil.parseIngredientPrice(priceWithWhitespace));
-    }
-
-    @Test
-    public void parseMinimumUnit_null_throwsNullPointerException() {
-        Assert.assertThrows(NullPointerException.class, () -> ParserUtil.parseMinimumUnit((String) null));
-    }
-
-    @Test
-    public void parseMinimumUnit_invalidValue_throwsParseException() {
-        Assert.assertThrows(ParseException.class, () -> ParserUtil.parseMinimumUnit(INVALID_INGREDIENT_MINIMUM));
-    }
-
-    @Test
-    public void parseMinimumUnit_validValueWithoutWhitespace_returnsMin() throws Exception {
-        MinimumUnit expectedMin = new MinimumUnit(VALID_INGREDIENT_MINIMUM);
-        assertEquals(expectedMin, ParserUtil.parseMinimumUnit(VALID_INGREDIENT_MINIMUM_STRING));
-    }
-
-    @Test
-    public void parseMinimumUnit_validValueWithWhitespace_returnsMin() throws Exception {
-        String minWithWhitespace = WHITESPACE + VALID_INGREDIENT_MINIMUM_STRING + WHITESPACE;
-        MinimumUnit expectedMin = new MinimumUnit(VALID_INGREDIENT_MINIMUM);
-        assertEquals(expectedMin, ParserUtil.parseMinimumUnit(minWithWhitespace));
-    }
-
-    @Test
-    public void parseIndexOrName_null_throwsNullPointerException() {
-        Assert.assertThrows(NullPointerException.class, () -> ParserUtil.parseIndexOrIngredientName(null));
-    }
-
-    @Test
-    public void parseIndexOrName_invalidIndexValue_throwsParseException() {
-        Assert.assertThrows(ParseException.class, () -> ParserUtil.parseIndexOrIngredientName(
-                Long.toString(Integer.MAX_VALUE + 1)));
-    }
-
-    @Test
-    public void parseIndexOrName_invalidNameValue_throwsParseException() {
-        Assert.assertThrows(ParseException.class, () -> ParserUtil.parseIndexOrIngredientName("Chicken "
-                + "Thigh+"));
-    }
-
-    @Test
-    public void parseIndexOrName_validIndexValue_returnsIndex() throws Exception {
-        assertEquals(INDEX_FIRST, ParserUtil.parseIndexOrIngredientName("1"));
-        assertEquals(INDEX_FIRST, ParserUtil.parseIndexOrIngredientName("    1    "));
-    }
-
-    @Test
-    public void parseIndexOrName_validValue_returnsTrimmedMin() throws Exception {
-        String validName = VALID_INGREDIENT_NAME;
-        IngredientName expectedName = new IngredientName(VALID_INGREDIENT_NAME);
-        assertEquals(expectedName, ParserUtil.parseIndexOrIngredientName(validName));
-        String nameWithWhitespace = WHITESPACE + VALID_INGREDIENT_NAME + WHITESPACE;
-        expectedName = new IngredientName(VALID_INGREDIENT_NAME);
-        assertEquals(expectedName, ParserUtil.parseIndexOrIngredientName(nameWithWhitespace));
     }
 
     @Test
