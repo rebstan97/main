@@ -20,6 +20,7 @@ import seedu.address.ui.UiPart;
  * Panel containing the list of reservations.
  */
 public class ReservationListPanel extends UiPart<Region> {
+
     private static final String FXML = "ReservationListPanel.fxml";
     private final Logger logger = LogsCenter.getLogger(ReservationListPanel.class);
 
@@ -67,7 +68,8 @@ public class ReservationListPanel extends UiPart<Region> {
     /**
      * Custom {@code ListCell} that displays the graphics of a {@code Reservation} using a {@code ReservationCard}.
      */
-    class ReservationListViewCell extends ListCell<Reservation> {
+    private class ReservationListViewCell extends ListCell<Reservation> {
+
         @Override
         protected void updateItem(Reservation reservation, boolean empty) {
             super.updateItem(reservation, empty);
@@ -80,5 +82,4 @@ public class ReservationListPanel extends UiPart<Region> {
             }
         }
     }
-
 }
