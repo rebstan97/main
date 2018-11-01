@@ -1,9 +1,9 @@
-= John Doe - Project Portfolio
+= Ong Ming Xian - Project Portfolio
 :site-section: AboutUs
 :imagesDir: ../images
 :stylesDir: ../stylesheets
 
-== PROJECT: AddressBook - Level 4
+== PROJECT: MeNUS
 
 ---
 
