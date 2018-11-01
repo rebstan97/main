@@ -378,7 +378,9 @@ Format: `history [stockup] [consumption]`
 * At least one of the optional fields must be provided.
 ****
 
-=== Adding an item to the menu: `add-item` or `ai`
+// tag::menu[]
+=== Menu Management
+==== Adding an item to the menu: `add-item` or `ai`
 
 Adds an item to the menu +
 Format: `add-item n/ITEM_NAME p/ITEM_PRICE [t/TAG]...`
@@ -391,14 +393,14 @@ Format: `add-item n/ITEM_NAME p/ITEM_PRICE [t/TAG]...`
 Examples:
 
 * `add-item n/Burger p/2`
-* `add-item n/Burger Set p/4.5 t/Set`
+* `ai n/Burger Set p/4.5 t/Set`
 
-=== Listing all items in the menu : `list-items` or 'li'
+==== Listing all items in the menu : `list-items` or 'li'
 
 Shows a list of all items in the menu. +
 Format: `list-items`
 
-=== Editing an item in the menu : `edit-item` or `ei`
+==== Editing an item in the menu : `edit-item` or `ei`
 
 Edits an existing item in the menu. +
 Format: `edit-item INDEX [n/ITEM_NAME] [p/ITEM_PRICE] [t/TAG]...` or `edit-item NAME [n/ITEM_NAME] [p/ITEM_PRICE]
@@ -418,10 +420,10 @@ Examples:
 
 * `edit-item 1 n/burger p/3` +
 Edits the name and price of the 1st item to be `burger` and `3` respectively.
-* `edit-item 2 p/4 t/` +
+* `ei 2 p/4 t/` +
 Edits the price of the 2nd item to be `4` and clears all existing tags.
 
-=== Deleting an item : `delete-item` or `di`
+==== Deleting an item : `delete-item` or `di`
 
 Deletes the specified item from the menu. +
 Format: `delete-item INDEX` or `delete-item NAME`
@@ -438,11 +440,11 @@ Examples:
 * `list-items` +
 `delete-item 2` +
 Deletes the 2nd item in the menu.
-* `find-item Cheese` +
-`delete-item 1` +
+* `fi Cheese` +
+`di 1` +
 Deletes the 1st item in the results of the `find` command.
 
-=== Selecting an item : `select-item` or `si`
+==== Selecting an item : `select-item` or `si`
 
 Selects the item identified by the index number used in the menu. +
 Format: `select-item INDEX`
@@ -458,11 +460,11 @@ Examples:
 * `list-items` +
 `select-item 2` +
 Selects the 2nd item in the menu.
-* `find Burger` +
-`select-item 1` +
+* `fi Burger` +
+`si 1` +
 Selects the 1st item in the results of the `find` command.
 
-=== Locating items by name: `find-item` or `fi`
+==== Locating items by name: `find-item` or `fi`
 
 Finds items whose names contain any of the given keywords. +
 Format: `find-item KEYWORD [MORE_KEYWORDS]`
@@ -480,10 +482,10 @@ Examples:
 
 * `find-item Burger` +
 Returns `burger` and `Cheese Burger`
-* `find-item Cheese Chocolate Fruit` +
+* `fi Cheese Chocolate Fruit` +
 Returns any item having names `Cheese`, `Chocolate`, or `Fruit`
 
-=== Filter menu by tag: `filter-menu` or `fm`
+==== Filter menu by tag: `filter-menu` or `fm`
 
 Finds items that contain the given tag in the menu. +
 Format: `filter-menu t/TAG`
@@ -500,10 +502,10 @@ Examples:
 
 * `filter-menu t/monday` +
 Returns any item that contains tag `monday`
-* `filter-menu t/set` +
+* `fm t/set` +
 Returns any item that contains tag `set`
 
-=== Sort menu : `sort-menu` or `sm`
+==== Sort menu : `sort-menu` or `sm`
 
 Sort the menu by name or price. +
 Format: `sort-menu [NAME] [PRICE]`
@@ -518,38 +520,42 @@ Examples:
 
 * `sort-menu NAME` +
 Sorts the menu by item name in alphabetical order.
-* `sort-menu PRICE` +
+* `sm PRICE` +
 Sorts the menu by item price in ascending order(lowest to highest).
 
-=== Clearing all entries : `clear-menu` or `cm`
+==== Clearing all entries : `clear-menu` or `cm`
 
 Clears all entries from the menu. +
 Format: `clear-menu`
 
-=== Giving a discount to an item : `discount-item` or `di`
+==== Giving a discount to an item : `discount-item` or `dci`
 
 Gives the item identified by the index number used in the displayed item list a discount. +
-Format: `discount-item INDEX|ALL d/PERCENTAGE`
+Format: `discount-item INDEX|ALL [ei/INDEX] dp/PERCENTAGE`
 
 ****
 * Gives the item at the specified `INDEX` a discount based on the percentage.
 * If the item is already on discount, it will update the new discounted price.
-* The index refers to the index number shown in the displayed person list.
+* The index refers to the index number shown in the displayed item list.
 * The index *must be a positive integer* `1, 2, 3, ...`
 * You can remove discount by typing `0` for the percentage.
 * You can give a discount to the whole menu by typing `ALL` instead of a specified `INDEX`.
+* You can give a discount to a range of items by adding the ending index `ei\INDEX`.
 ****
 
 Examples:
 
 * `list-items` +
-`discount-item 2` +
-Discount the 2nd item in the menu.
-* `find-item Cheese` +
-`discount-item 1` +
-Discounts the 1st item in the results of the `find` command.
+`discount-item 2 dp/20` +
+Give the 2nd item in the menu a 20% discount.
+* `fi Cheese` +
+`dci 1 dp/0` +
+Revert the 1st item in the results of the `find` command to original price.
+* `li` +
+`dci 1 ei/3 dp/50` +
+Give the 1st item to the 3rd item in the menu a 50% discount.
 
-=== Today's specials : `today-special` or `ts`
+==== Today's specials : `today-special` or `ts`
 
 Lists the items that have been tagged with `DAY_OF_THE_WEEK` in the menu. +
 Format: `today-special`
@@ -560,7 +566,50 @@ Examples:
 If today is Monday +
 List the items that have been tagged with `Monday` in the menu.
 
-=== Export menu : `export-menu` or `em`
+==== Add recipe to item : `recipe-item` or `ri`
+
+Adds recipe to the item identified by the index number used in the menu. +
+Format: `recipe-item INDEX r/RECIPE`
+
+****
+* Adds a recipe to the item at the specified `INDEX`.
+* If the item has a recipe already, it will update the recipe.
+* The index refers to the index number shown in the displayed item list.
+* The index *must be a positive integer* `1, 2, 3, ...`
+* You can remove recipe by typing `r/` without specifying any recipe after it..
+****
+
+Examples:
+
+* `recipe-item 1 r/Some Recipe` +
+Add/Update the recipe of the 1st item to be `Some Recipe`.
+* `fi Cheese` +
+`ri 1 r/Other Recipe` +
+Add/Update the recipe of the 1st item in the results of the `find` command to be `Other Recipe`.
+
+[[add-required-ingredient]]
+=== Add required ingredients: `add-required-ingredients` or `ari`
+
+Adds required ingredients to the item identified by the index number used in the menu. +
+Format: `add-required-ingredients INDEX n/INGREDIENT_NAME... nu/NUMBER_OF_INGREDIENTS...`
+
+****
+* Adds required ingredients to the item at the specified `INDEX`.
+* If the item has required ingredients already, it will update the required ingredients.
+* The index refers to the index number shown in the displayed item list.
+* The index *must be a positive integer* `1, 2, 3, ...`
+* NUMBER_OF_INGREDIENTSS for an ingredient must follow the INGREDIENT_NAME for that particular ingredient.
+****
+
+Examples:
+
+* `add-required-ingredients 1 n/Apple nu/3`
+Add/Update the required ingredients of the 1st item.
+* `fi Cheese` +
+`ari 1 n/chicken thigh u/10 n/potato u/20` +
+Add/Update the recipe of the 1st item in the results of the `find` command.
+
+==== Export menu : `export-menu` or `em`
 
 Exports the menu to a particular file path. +
 Format: `export-menu fp/FILEPATH fn/FILENAME`
@@ -570,7 +619,7 @@ Examples:
 * `export-menu f/test/ n/menu.txt` +
 Export the menu to test folder with the file name `menu.txt`
 
-=== Import menu : `import-menu` or `im`
+==== Import menu : `import-menu` or `im`
 
 Imports an existing menu from specified file path to replace current menu. +
 Format: `import-menu fp/FILEPATH fn/FILENAME`
@@ -579,10 +628,7 @@ Examples:
 
 * `import-menu f/test/ n/menu.txt` +
 Import the menu.txt from test folder to replace current menu.
-
-=== Support for multiple menus `[coming in v2.0]`
-User will be able to manage multiple menus without the need of exporting and importing for different version of the
-current menu.
+// end::menu[]
 
 //tag::reservations[]
 === Reservations
@@ -793,6 +839,12 @@ Examples:
 
 * `delete-role r/999`
 * `dr id/999`
+
+// tag::menuv2[]
+==== Support for multiple menus `[coming in v2.0]`
+User will be able to manage multiple menus without the need of exporting and importing for different version of the
+current menu.
+// end::menuv2[]
 
 == Frequently Asked Questions (FAQ)
 
