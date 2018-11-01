@@ -584,6 +584,7 @@ Import the menu.txt from test folder to replace current menu.
 User will be able to manage multiple menus without the need of exporting and importing for different version of the
 current menu.
 
+//tag::reservations[]
 === Reservations
 ==== Adding a reservation: `add-reservation` or `ar`
 
@@ -672,6 +673,7 @@ Selects the 2nd reservation in the reservations list.
 * `list-reservations` +
 `select-reservation 7` +
 Selects the 7th reservation in the reservations list.
+//end::reservations[]
 
 === Recording sales volume of an item: `record-sales` or `rs`
 
