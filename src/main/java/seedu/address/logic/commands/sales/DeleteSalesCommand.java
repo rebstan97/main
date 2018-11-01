@@ -4,8 +4,10 @@ import static java.util.Objects.requireNonNull;
 
 import java.util.List;
 
+import seedu.address.commons.core.EventsCenter;
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
+import seedu.address.commons.events.ui.DisplayRecordListRequestEvent;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
@@ -47,6 +49,7 @@ public class DeleteSalesCommand extends Command {
         SalesRecord recordToDelete = lastShownList.get(targetIndex.getZeroBased());
         model.deleteRecord(recordToDelete);
         model.commitAddressBook();
+        EventsCenter.getInstance().post(new DisplayRecordListRequestEvent());
         return new CommandResult(String.format(MESSAGE_DELETE_SALES_SUCCESS, recordToDelete));
     }
     @Override

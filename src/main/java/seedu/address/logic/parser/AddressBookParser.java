@@ -22,6 +22,7 @@ import seedu.address.logic.commands.SelectCommand;
 import seedu.address.logic.commands.UndoCommand;
 import seedu.address.logic.commands.accounts.ChangePasswordCommand;
 import seedu.address.logic.commands.accounts.DeregisterCommand;
+import seedu.address.logic.commands.accounts.ListAccountsCommand;
 import seedu.address.logic.commands.accounts.LoginCommand;
 import seedu.address.logic.commands.accounts.LogoutCommand;
 import seedu.address.logic.commands.accounts.RegisterCommand;
@@ -29,6 +30,7 @@ import seedu.address.logic.commands.ingredients.AddIngredientCommand;
 import seedu.address.logic.commands.ingredients.DeleteIngredientCommand;
 import seedu.address.logic.commands.ingredients.EditIngredientCommand;
 import seedu.address.logic.commands.ingredients.ListIngredientsCommand;
+import seedu.address.logic.commands.ingredients.LowStockCommand;
 import seedu.address.logic.commands.ingredients.StockUpCommand;
 import seedu.address.logic.commands.menu.AddItemCommand;
 import seedu.address.logic.commands.menu.AddRequiredIngredientsCommand;
@@ -193,6 +195,10 @@ public class AddressBookParser {
         case LogoutCommand.COMMAND_WORD:
             return new LogoutCommand();
 
+        case ListAccountsCommand.COMMAND_WORD:
+        case ListAccountsCommand.COMMAND_ALIAS:
+            return new ListAccountsCommand();
+
         case AddIngredientCommand.COMMAND_WORD:
         case AddIngredientCommand.COMMAND_ALIAS:
             return new AddIngredientCommandParser().parse(arguments);
@@ -200,6 +206,10 @@ public class AddressBookParser {
         case ListIngredientsCommand.COMMAND_WORD:
         case ListIngredientsCommand.COMMAND_ALIAS:
             return new ListIngredientsCommand();
+
+        case LowStockCommand.COMMAND_WORD:
+        case LowStockCommand.COMMAND_ALIAS:
+            return new LowStockCommand();
 
         case DeleteIngredientCommand.COMMAND_WORD:
         case DeleteIngredientCommand.COMMAND_ALIAS:
