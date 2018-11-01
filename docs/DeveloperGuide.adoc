@@ -730,6 +730,14 @@ The `SortMenuCommand` will indirectly call the `UniqueItemList#sortItemsByName()
 `UniqueItemList#sortItemsByPrice()` and the sorts the menu.
 After sorting the menu, it will save the current state for undo/redo.
 
+The following activity diagram summarizes what happens when a user executes `sort-menu` command:
+
+image::SortMenuActivityDiagram.png[width="650"]
+
+The following sequence diagram shows how the `sort-menu` command works:
+
+image::SortMenuSequenceDiagram.png[width="1000"]
+
 ==== `filter-menu` Command
 The `filter-menu` command is facilitated by `FilterMenuCommand` and `FilterMenuCommandParser`. The command takes in
 user input for the keywords.
@@ -1423,6 +1431,7 @@ Steps 1b1-1b2 are repeated until the number of units entered is less than the nu
 +
 Use case resumes at step 2.
 
+// tag::ucmenu[]
 [discrete]
 === Use case: UC301 -  Add item to menu
 
@@ -1590,6 +1599,7 @@ Use case ends.
 Steps 1a1-1a2 are repeated until invalid file path is entered.
 +
 Use case resumes at step 2.
+// end::ucmenu[]
 
 [discrete]
 === Use case: UC401 - Add reservation
