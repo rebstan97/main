@@ -274,7 +274,7 @@ Password is masked by default and should never be shown
 
 // tag::ingredientmanagement[]
 === Ingredients Management
-[[Add-ingredient]]
+[[add-ingredient]]
 ==== Adding an ingredient: `add-ingredient` or `add-ing`
 
 Adds a new ingredient to the ingredient list. +
@@ -351,7 +351,7 @@ Edits the unit type and price per unit of the 4th ingredient to be `1.5ml bottle
 * `edit-ingredient ketchup n/tomato ketchup`  +
 Edits the name of `ketchup` to be `tomato ketchup`.
 
-[[Stockup]]
+[[stockup]]
 ==== Stocking up an ingredient: `stockup`
 
 Increases the number of units of an ingredient or multiple ingredients. +
@@ -382,7 +382,7 @@ Examples:
 
 // tag::menu[]
 === Menu Management
-[[Add-item]]
+[[add-item]]
 ==== Adding an item to the menu: `add-item` or `ai`
 
 Adds an item to the menu +
@@ -743,12 +743,14 @@ p/ITEM_PRICE` +
 ===== Auto-ingredient update mechanism:
 `record-sales` also determines all the ingredients you used and automatically deducts them from the ingredient
 list, subjected to the following conditions: +
-1) The item exists in the menu. Refer to <<Add-item>> for more information. +
-2) The required ingredients to make one unit of `ITEM_NAME` is specified. Refer to <<add-required-ingredient>> for more
-information. +
-3) All required ingredients exist in the ingredient list. Refer to <<Add-ingredient>> for more information. +
-4) There are sufficient ingredients to make `QUANTITY_SOLD` units of `ITEM_NAME`. Refer to <<Stockup>> for more
-information.
+1) The item exists in the menu. +
+Refer to <<add-item>> for more information. +
+2) The required ingredients to make one unit of `ITEM_NAME` is specified. +
+Refer to <<add-required-ingredient>> for more information. +
+3) All required ingredients exist in the ingredient list. +
+Refer to <<add-ingredient>> for more information. +
+4) There are sufficient ingredients to make `QUANTITY_SOLD` units of `ITEM_NAME`. +
+Refer to <<stockup>> for more information.
 
 [NOTE]
 ====
