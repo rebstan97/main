@@ -10,7 +10,6 @@ import seedu.address.logic.commands.accounts.ChangePasswordCommand.EditAccountDe
 import seedu.address.logic.parser.ArgumentMultimap;
 import seedu.address.logic.parser.ArgumentTokenizer;
 import seedu.address.logic.parser.Parser;
-import seedu.address.logic.parser.ParserUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
@@ -36,7 +35,7 @@ public class ChangePasswordCommandParser implements Parser<ChangePasswordCommand
 
         EditAccountDescriptor editAccountDescriptor = new EditAccountDescriptor();
         if (argMultimap.getValue(PREFIX_NEW_PASSWORD).isPresent()) {
-            editAccountDescriptor.setPassword(ParserUtil.parsePassword(argMultimap.getValue(PREFIX_NEW_PASSWORD)
+            editAccountDescriptor.setPassword(AccountParserUtil.parsePassword(argMultimap.getValue(PREFIX_NEW_PASSWORD)
                     .get()));
         }
 

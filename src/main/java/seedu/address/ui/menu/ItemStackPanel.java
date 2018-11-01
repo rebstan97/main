@@ -1,19 +1,22 @@
 package seedu.address.ui.menu;
 
+import java.util.Map;
+
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.FlowPane;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
+import javafx.scene.layout.StackPane;
+import seedu.address.model.ingredient.IngredientName;
 import seedu.address.model.menu.Item;
 import seedu.address.ui.UiPart;
 
 /**
- * An UI component that displays information of a {@code Item}.
+ * The Item Stack Panel of the App.
  */
-public class ItemCard extends UiPart<Region> {
+public class ItemStackPanel extends UiPart<Region> {
 
-    private static final String FXML = "ItemListCard.fxml";
+    private static final String FXML = "ItemStackPanel.fxml";
 
     /**
      * The colours of the tags take on Enum values
@@ -26,39 +29,47 @@ public class ItemCard extends UiPart<Region> {
         }
     }
 
-    private static final TagColourStyle[] TAG_COLOR_STYLES = TagColourStyle.values();
-
-    /**
-     * Note: Certain keywords such as "location" and "resources" are reserved keywords in JavaFX.
-     * As a consequence, UI elements' variable names cannot be set to such keywords
-     * or an exception will be thrown by JavaFX during runtime.
-     *
-     * @see <a href="https://github.com/se-edu/addressbook-level4/issues/336">The issue on AddressBook level 4</a>
-     */
+    private static final ItemStackPanel.TagColourStyle[] TAG_COLOR_STYLES = ItemStackPanel.TagColourStyle.values();
 
     public final Item item;
 
     @FXML
-    private HBox cardPane;
+    private StackPane stackPane;
     @FXML
     private Label name;
-    @FXML
-    private Label id;
     @FXML
     private Label price;
     @FXML
     private Label percent;
     @FXML
+    private Label recipe;
+    @FXML
+    private Label requiredIngredients;
+    @FXML
     private FlowPane tags;
 
-    public ItemCard(Item item, int displayedIndex) {
+    public ItemStackPanel(Item item) {
         super(FXML);
         this.item = item;
-        id.setText(displayedIndex + ". ");
         name.setText(item.getName().toString());
         price.setText("$" + item.getPrice().toString());
         percent.setText("Price displayed with " + String.format("%.0f", item.getPercent()) + "% discount");
+        recipe.setText("Recipe: " + item.getRecipe().toString());
+        requiredIngredients.setText(getRequiredIngredientsFor(item));
         initTags(item);
+    }
+
+    /**
+     * Returns the required ingredients for {@code item}
+     */
+    private String getRequiredIngredientsFor(Item item) {
+        Map<IngredientName, Integer> map = item.getRequiredIngredients();
+        StringBuilder str = new StringBuilder("Required ingredients:\n");
+        for (Map.Entry<IngredientName, Integer> entry : map.entrySet()) {
+            str.append("\u2022 " + entry.getValue().toString() + " unit of ");
+            str.append(entry.getKey().toString() + "\n");
+        }
+        return str.toString();
     }
 
     /**
@@ -79,7 +90,6 @@ public class ItemCard extends UiPart<Region> {
         });
     }
 
-
     @Override
     public boolean equals(Object other) {
         // short circuit if same object
@@ -88,13 +98,12 @@ public class ItemCard extends UiPart<Region> {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof ItemCard)) {
+        if (!(other instanceof ItemStackPanel)) {
             return false;
         }
 
         // state check
-        ItemCard card = (ItemCard) other;
-        return id.getText().equals(card.id.getText())
-                && item.equals(card.item);
+        ItemStackPanel itemStackPanel = (ItemStackPanel) other;
+        return item.equals(itemStackPanel.item);
     }
 }
