@@ -9,7 +9,7 @@ import org.junit.Test;
 
 import guitests.guihandles.accounts.AccountCardHandle;
 import seedu.address.model.account.Account;
-import seedu.address.testutil.accounts.AccountBuilder;
+import seedu.address.testutil.account.AccountBuilder;
 import seedu.address.ui.GuiUnitTest;
 
 public class AccountCardTest extends GuiUnitTest {

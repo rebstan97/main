@@ -17,8 +17,8 @@ import seedu.address.model.ModelManager;
 import seedu.address.model.RestaurantBook;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.account.Account;
-import seedu.address.testutil.accounts.AccountBuilder;
-import seedu.address.testutil.accounts.EditAccountDescriptorBuilder;
+import seedu.address.testutil.account.AccountBuilder;
+import seedu.address.testutil.account.EditAccountDescriptorBuilder;
 
 /**
  * Contains integration tests (interaction with the Model, UndoCommand and RedoCommand) and unit tests for EditCommand.

@@ -16,7 +16,7 @@ import seedu.address.logic.LogicManager;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
-import seedu.address.testutil.accounts.AccountBuilder;
+import seedu.address.testutil.account.AccountBuilder;
 
 public class CommandBoxTest extends GuiUnitTest {
 

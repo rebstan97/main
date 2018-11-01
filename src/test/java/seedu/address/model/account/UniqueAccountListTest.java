@@ -4,9 +4,9 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
-import static seedu.address.testutil.accounts.TypicalAccounts.DEMO_ADMIN;
-import static seedu.address.testutil.accounts.TypicalAccounts.DEMO_ONE;
-import static seedu.address.testutil.accounts.TypicalAccounts.DEMO_THREE;
+import static seedu.address.testutil.account.TypicalAccounts.DEMO_ADMIN;
+import static seedu.address.testutil.account.TypicalAccounts.DEMO_ONE;
+import static seedu.address.testutil.account.TypicalAccounts.DEMO_THREE;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -18,7 +18,7 @@ import org.junit.rules.ExpectedException;
 
 import seedu.address.model.account.exceptions.AccountNotFoundException;
 import seedu.address.model.account.exceptions.DuplicateAccountException;
-import seedu.address.testutil.accounts.AccountBuilder;
+import seedu.address.testutil.account.AccountBuilder;
 
 public class UniqueAccountListTest {
 

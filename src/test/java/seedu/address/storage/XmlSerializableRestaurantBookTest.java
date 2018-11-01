@@ -16,7 +16,7 @@ import org.junit.rules.ExpectedException;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.commons.util.XmlUtil;
 import seedu.address.model.RestaurantBook;
-import seedu.address.testutil.ingredients.TypicalIngredients;
+import seedu.address.testutil.ingredient.TypicalIngredients;
 
 
 public class XmlSerializableRestaurantBookTest {

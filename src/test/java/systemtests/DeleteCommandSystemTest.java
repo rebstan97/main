@@ -22,7 +22,7 @@ import seedu.address.logic.commands.RedoCommand;
 import seedu.address.logic.commands.UndoCommand;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
-import seedu.address.testutil.accounts.AccountBuilder;
+import seedu.address.testutil.account.AccountBuilder;
 
 public class DeleteCommandSystemTest extends RestaurantBookSystemTest {
 

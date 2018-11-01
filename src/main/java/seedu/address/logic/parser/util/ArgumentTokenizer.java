@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import seedu.address.commons.core.pair.StringPair;
-import seedu.address.logic.commands.ingredients.StockUpCommand;
+import seedu.address.logic.commands.ingredient.StockUpCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**

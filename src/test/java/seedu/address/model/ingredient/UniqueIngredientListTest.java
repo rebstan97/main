@@ -3,8 +3,8 @@ package seedu.address.model.ingredient;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
-import static seedu.address.testutil.ingredients.TypicalIngredients.AVOCADO;
-import static seedu.address.testutil.ingredients.TypicalIngredients.BROCCOLI;
+import static seedu.address.testutil.ingredient.TypicalIngredients.AVOCADO;
+import static seedu.address.testutil.ingredient.TypicalIngredients.BROCCOLI;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -18,7 +18,7 @@ import org.junit.rules.ExpectedException;
 import seedu.address.model.ingredient.exceptions.DuplicateIngredientException;
 import seedu.address.model.ingredient.exceptions.IngredientNotEnoughException;
 import seedu.address.model.ingredient.exceptions.IngredientNotFoundException;
-import seedu.address.testutil.ingredients.IngredientBuilder;
+import seedu.address.testutil.ingredient.IngredientBuilder;
 
 public class UniqueIngredientListTest {
     @Rule

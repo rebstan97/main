@@ -19,7 +19,7 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.account.Account;
-import seedu.address.testutil.accounts.AccountBuilder;
+import seedu.address.testutil.account.AccountBuilder;
 
 public class LoginCommandTest {
 

@@ -19,7 +19,7 @@ import seedu.address.model.UserPrefs;
 import seedu.address.model.ingredient.Ingredient;
 import seedu.address.model.menu.Item;
 import seedu.address.model.salesrecord.SalesRecord;
-import seedu.address.testutil.ingredients.IngredientBuilder;
+import seedu.address.testutil.ingredient.IngredientBuilder;
 import seedu.address.testutil.menu.ItemBuilder;
 import seedu.address.testutil.salesrecords.RecordBuilder;
 

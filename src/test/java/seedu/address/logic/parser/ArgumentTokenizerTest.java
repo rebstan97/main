@@ -10,7 +10,7 @@ import static seedu.address.logic.parser.util.ArgumentTokenizer.tokenizeToPair;
 import org.junit.Test;
 
 import seedu.address.commons.core.pair.StringPair;
-import seedu.address.logic.commands.ingredients.StockUpCommand;
+import seedu.address.logic.commands.ingredient.StockUpCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.logic.parser.util.ArgumentMultimap;
 import seedu.address.logic.parser.util.ArgumentPairMultimap;

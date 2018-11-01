@@ -3,15 +3,15 @@ package seedu.address.model.account;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_USERNAME_DEMO_ONE;
-import static seedu.address.testutil.accounts.TypicalAccounts.DEMO_ADMIN;
-import static seedu.address.testutil.accounts.TypicalAccounts.DEMO_ONE;
-import static seedu.address.testutil.accounts.TypicalAccounts.DEMO_TWO;
+import static seedu.address.testutil.account.TypicalAccounts.DEMO_ADMIN;
+import static seedu.address.testutil.account.TypicalAccounts.DEMO_ONE;
+import static seedu.address.testutil.account.TypicalAccounts.DEMO_TWO;
 
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
-import seedu.address.testutil.accounts.AccountBuilder;
+import seedu.address.testutil.account.AccountBuilder;
 
 public class AccountTest {
 

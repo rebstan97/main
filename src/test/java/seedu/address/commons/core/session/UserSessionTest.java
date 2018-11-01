@@ -11,7 +11,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import seedu.address.model.account.Account;
-import seedu.address.testutil.accounts.AccountBuilder;
+import seedu.address.testutil.account.AccountBuilder;
 
 public class UserSessionTest {
 

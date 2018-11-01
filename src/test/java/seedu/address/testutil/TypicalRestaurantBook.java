@@ -1,8 +1,8 @@
 package seedu.address.testutil;
 
 import static seedu.address.testutil.TypicalPersons.getTypicalPersons;
-import static seedu.address.testutil.accounts.TypicalAccounts.getTypicalAccounts;
-import static seedu.address.testutil.ingredients.TypicalIngredients.getTypicalIngredients;
+import static seedu.address.testutil.account.TypicalAccounts.getTypicalAccounts;
+import static seedu.address.testutil.ingredient.TypicalIngredients.getTypicalIngredients;
 import static seedu.address.testutil.menu.TypicalItems.getTypicalItems;
 import static seedu.address.testutil.reservation.TypicalReservations.getTypicalReservations;
 import static seedu.address.testutil.salesrecords.TypicalRecords.getTypicalRecords;

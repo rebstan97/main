@@ -1,7 +1,7 @@
 package seedu.address.ui.account;
 
 import static org.junit.Assert.assertEquals;
-import static seedu.address.testutil.accounts.TypicalAccounts.getTypicalAccounts;
+import static seedu.address.testutil.account.TypicalAccounts.getTypicalAccounts;
 import static seedu.address.ui.testutil.GuiTestAssert.assertCardDisplaysAccount;
 
 import org.junit.Before;

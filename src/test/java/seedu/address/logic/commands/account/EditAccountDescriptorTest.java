@@ -11,7 +11,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_PASSWORD_DEMO_T
 import org.junit.Test;
 
 import seedu.address.logic.commands.account.ChangePasswordCommand.EditAccountDescriptor;
-import seedu.address.testutil.accounts.EditAccountDescriptorBuilder;
+import seedu.address.testutil.account.EditAccountDescriptorBuilder;
 
 public class EditAccountDescriptorTest {
 

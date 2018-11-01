@@ -9,7 +9,7 @@ import org.junit.Test;
 import guitests.guihandles.accounts.UsernameDisplayHandle;
 import seedu.address.commons.events.ui.LoginEvent;
 import seedu.address.commons.events.ui.LogoutEvent;
-import seedu.address.testutil.accounts.AccountBuilder;
+import seedu.address.testutil.account.AccountBuilder;
 import seedu.address.ui.GuiUnitTest;
 
 public class UsernameDisplayTest extends GuiUnitTest {

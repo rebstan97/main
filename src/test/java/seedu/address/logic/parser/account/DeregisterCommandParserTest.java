@@ -8,7 +8,7 @@ import static seedu.address.logic.commands.CommandTestUtil.PREFIX_WITH_VALID_USE
 import static seedu.address.logic.commands.CommandTestUtil.VALID_USERNAME_DEMO_ONE;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
-import static seedu.address.testutil.accounts.AccountBuilder.DEFAULT_USERNAME;
+import static seedu.address.testutil.account.AccountBuilder.DEFAULT_USERNAME;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -16,7 +16,7 @@ import org.junit.Test;
 import seedu.address.logic.commands.account.DeregisterCommand;
 import seedu.address.model.account.Account;
 import seedu.address.model.account.Username;
-import seedu.address.testutil.accounts.AccountBuilder;
+import seedu.address.testutil.account.AccountBuilder;
 
 public class DeregisterCommandParserTest {
 

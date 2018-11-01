@@ -1,7 +1,7 @@
 package seedu.address.logic.commands.account;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static seedu.address.testutil.accounts.TypicalAccounts.DEMO_ADMIN;
+import static seedu.address.testutil.account.TypicalAccounts.DEMO_ADMIN;
 
 import org.junit.Assert;
 import org.junit.Rule;
@@ -14,7 +14,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.account.Account;
-import seedu.address.testutil.accounts.AccountBuilder;
+import seedu.address.testutil.account.AccountBuilder;
 
 public class RegisterCommandTest {
 

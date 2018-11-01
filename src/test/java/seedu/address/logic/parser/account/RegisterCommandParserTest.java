@@ -11,8 +11,8 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_PASSWORD_DEMO_O
 import static seedu.address.logic.commands.CommandTestUtil.VALID_USERNAME_DEMO_ONE;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
-import static seedu.address.testutil.accounts.AccountBuilder.DEFAULT_PASSWORD;
-import static seedu.address.testutil.accounts.AccountBuilder.DEFAULT_USERNAME;
+import static seedu.address.testutil.account.AccountBuilder.DEFAULT_PASSWORD;
+import static seedu.address.testutil.account.AccountBuilder.DEFAULT_USERNAME;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -21,7 +21,7 @@ import seedu.address.logic.commands.account.RegisterCommand;
 import seedu.address.model.account.Account;
 import seedu.address.model.account.Password;
 import seedu.address.model.account.Username;
-import seedu.address.testutil.accounts.AccountBuilder;
+import seedu.address.testutil.account.AccountBuilder;
 
 public class RegisterCommandParserTest {
 
