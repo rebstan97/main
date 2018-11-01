@@ -38,7 +38,7 @@ public class LoginCommandTest {
     }
 
     @Test
-    public void session_notAuthenticated() {
+    public void session_notAuthenticated_returnFalse() {
         assertFalse(UserSession.isAuthenticated());
     }
 
@@ -56,7 +56,7 @@ public class LoginCommandTest {
     }
 
     @Test
-    public void execute_loginIfAlreadyLoggedIn() throws CommandException {
+    public void execute_loginIfAlreadyLoggedIn_throwsCommandException() throws CommandException {
         thrown.expect(CommandException.class);
         thrown.expectMessage(LoginCommand.MESSAGE_ALREADY_AUTHENTICATED);
 
@@ -66,7 +66,7 @@ public class LoginCommandTest {
     }
 
     @Test
-    public void execute_invalidPassword() throws CommandException {
+    public void execute_invalidPassword_throwsCommandException() throws CommandException {
         thrown.expect(CommandException.class);
         thrown.expectMessage(LoginCommand.MESSAGE_WRONG_PASSWORD);
 
@@ -75,7 +75,7 @@ public class LoginCommandTest {
     }
 
     @Test
-    public void execute_invalidAccount() throws CommandException {
+    public void execute_invalidAccount_throwsCommandException() throws CommandException {
         thrown.expect(CommandException.class);
         thrown.expectMessage(LoginCommand.MESSAGE_ACCOUNT_NOT_FOUND);
 

@@ -27,13 +27,13 @@ public class UserSessionTest {
     }
 
     @Test
-    public void session_isAuthenticated() {
+    public void session_isAuthenticated_returnTrue() {
         assertTrue(UserSession.isAuthenticated());
         assertNotNull(UserSession.getAccount());
     }
 
     @Test
-    public void session_update() {
+    public void session_update_returnTrue() {
         Account accountWithNewPassword = new AccountBuilder().withUsername("hellothere").build();
         UserSession.update(accountWithNewPassword);
         assertEquals(UserSession.getAccount().getUsername().toString(), "hellothere");
@@ -42,7 +42,7 @@ public class UserSessionTest {
     }
 
     @Test
-    public void session_isNotAuthenticated() {
+    public void session_isNotAuthenticated_returnTrue() {
         UserSession.destroy();
         assertFalse(UserSession.isAuthenticated());
         assertNull(UserSession.getAccount());

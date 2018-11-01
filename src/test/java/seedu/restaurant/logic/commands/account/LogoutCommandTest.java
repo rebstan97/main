@@ -42,7 +42,7 @@ public class LogoutCommandTest {
     }
 
     @Test
-    public void session_isAuthenticated() {
+    public void session_isAuthenticated_returnTrue() {
         assertTrue(UserSession.isAuthenticated());
     }
 
@@ -57,7 +57,7 @@ public class LogoutCommandTest {
     }
 
     @Test
-    public void execute_logout_logoutAgain() throws CommandException {
+    public void execute_logoutTwice_throwsCommandException() throws CommandException {
         thrown.expect(CommandException.class);
         thrown.expectMessage(LogoutCommand.MESSAGE_NOT_AUTHENTICATED);
 
