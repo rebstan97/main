@@ -587,6 +587,7 @@ Add/Update the recipe of the 1st item to be `Some Recipe`.
 `ri 1 r/Other Recipe` +
 Add/Update the recipe of the 1st item in the results of the `find` command to be `Other Recipe`.
 
+[[add-required-ingredient]]
 === Add required ingredients: `add-required-ingredients` or `ari`
 
 Adds required ingredients to the item identified by the index number used in the menu. +
