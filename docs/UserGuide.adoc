@@ -221,6 +221,11 @@ Examples:
 * `login id/azhikai pw/p@55w0rd`
 * `li id/azhikai pw/p@55w0rd`
 
+[INFO]
+====
+To testers: You may access the application using the default `root` account: `login id/root pw/1122qq`
+====
+
 ==== Logging out: `logout`
 
 Logs out of the account. +
