@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.TypicalRestaurantBook.getTypicalRestaurantBook;
 
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -30,13 +31,13 @@ public class LogoutCommandTest {
 
     private CommandHistory commandHistory = new CommandHistory();
     private Model model = new ModelManager(getTypicalRestaurantBook(), new UserPrefs());
+    private Account account = new AccountBuilder().build();
 
     @Before
     public void setUp() throws CommandException {
         // Logs in before every test case, if not logged in yet
         if (!UserSession.isAuthenticated()) {
-            Account validAccount = new AccountBuilder().build();
-            new LoginCommand(validAccount).execute(model, commandHistory);
+            new LoginCommand(account).execute(model, commandHistory);
         }
     }
 
@@ -62,5 +63,23 @@ public class LogoutCommandTest {
 
         new LogoutCommand().execute(model, commandHistory);
         new LogoutCommand().execute(model, commandHistory);
+    }
+
+    @Test
+    public void logout_clearVersionedRestaurantBook_loginStateReset() throws CommandException {
+        model.commitRestaurantBook(); // Shift the pointer by 1
+
+        Assert.assertTrue(model.canUndoRestaurantBook());
+        model.undoRestaurantBook();
+        Assert.assertFalse(model.canUndoRestaurantBook());
+
+        Assert.assertTrue(model.canRedoRestaurantBook());
+        model.redoRestaurantBook();
+        Assert.assertFalse(model.canRedoRestaurantBook());
+
+        new LogoutCommand().execute(model, commandHistory); // this triggers version pointer to reset to 0
+        new LoginCommand(account).execute(model, commandHistory);
+        assertFalse(model.canUndoRestaurantBook());
+        assertFalse(model.canRedoRestaurantBook());
     }
 }
