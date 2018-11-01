@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import seedu.address.model.accounts.Account;
+import seedu.address.model.account.Account;
 
 /**
  * A utility class containing a list of {@code Account} objects to be used in tests.

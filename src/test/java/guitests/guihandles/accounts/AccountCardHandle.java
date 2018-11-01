@@ -3,7 +3,7 @@ package guitests.guihandles.accounts;
 import guitests.guihandles.NodeHandle;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
-import seedu.address.model.accounts.Account;
+import seedu.address.model.account.Account;
 
 /**
  * Provides a handle to an item card in the item list panel.

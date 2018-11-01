@@ -19,7 +19,7 @@ import guitests.guihandles.menu.ItemStackPanelHandle;
 import guitests.guihandles.reservation.ReservationCardHandle;
 import guitests.guihandles.sales.RecordCardHandle;
 import guitests.guihandles.sales.RecordStackPanelHandle;
-import seedu.address.model.accounts.Account;
+import seedu.address.model.account.Account;
 import seedu.address.model.ingredient.IngredientName;
 import seedu.address.model.menu.Item;
 import seedu.address.model.person.Person;

@@ -10,8 +10,8 @@ import java.util.Set;
 
 import javafx.collections.ObservableList;
 import seedu.address.logic.commands.menu.SortMenuCommand.SortMethod;
-import seedu.address.model.accounts.Account;
-import seedu.address.model.accounts.UniqueAccountList;
+import seedu.address.model.account.Account;
+import seedu.address.model.account.UniqueAccountList;
 import seedu.address.model.ingredient.Ingredient;
 import seedu.address.model.ingredient.IngredientName;
 import seedu.address.model.ingredient.UniqueIngredientList;

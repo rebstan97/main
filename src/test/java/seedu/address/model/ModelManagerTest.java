@@ -38,8 +38,8 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
-import seedu.address.model.accounts.Account;
-import seedu.address.model.accounts.exceptions.AccountNotFoundException;
+import seedu.address.model.account.Account;
+import seedu.address.model.account.exceptions.AccountNotFoundException;
 import seedu.address.model.ingredient.Ingredient;
 import seedu.address.model.ingredient.IngredientName;
 import seedu.address.model.ingredient.NumUnits;

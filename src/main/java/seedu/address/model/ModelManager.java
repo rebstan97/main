@@ -14,7 +14,7 @@ import seedu.address.commons.core.ComponentManager;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.events.model.RestaurantBookChangedEvent;
 import seedu.address.logic.commands.menu.SortMenuCommand.SortMethod;
-import seedu.address.model.accounts.Account;
+import seedu.address.model.account.Account;
 import seedu.address.model.ingredient.Ingredient;
 import seedu.address.model.ingredient.IngredientName;
 import seedu.address.model.ingredient.exceptions.IngredientNotFoundException;

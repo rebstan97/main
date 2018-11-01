@@ -29,7 +29,7 @@ import java.util.List;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.CommandHistory;
-import seedu.address.logic.commands.accounts.ChangePasswordCommand;
+import seedu.address.logic.commands.account.ChangePasswordCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.commands.ingredients.EditIngredientCommand;
 import seedu.address.logic.commands.menu.EditItemCommand;

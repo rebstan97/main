@@ -2,8 +2,8 @@ package seedu.address.commons.events.ui;
 
 import seedu.address.commons.core.session.UserSession;
 import seedu.address.commons.events.BaseEvent;
-import seedu.address.model.accounts.Account;
-import seedu.address.model.accounts.Username;
+import seedu.address.model.account.Account;
+import seedu.address.model.account.Username;
 
 /**
  * Indicates a user has just logged into the system.

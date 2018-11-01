@@ -21,7 +21,7 @@ import seedu.address.logic.commands.menu.SortMenuCommand.SortMethod;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyRestaurantBook;
 import seedu.address.model.RestaurantBook;
-import seedu.address.model.accounts.Account;
+import seedu.address.model.account.Account;
 import seedu.address.model.ingredient.Ingredient;
 import seedu.address.model.ingredient.IngredientName;
 import seedu.address.model.menu.Item;

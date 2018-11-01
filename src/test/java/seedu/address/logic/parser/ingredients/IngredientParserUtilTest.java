@@ -32,8 +32,6 @@ public class IngredientParserUtilTest {
     @Rule
     public final ExpectedException thrown = ExpectedException.none();
 
-    //============ Ingredients Parser Util Tests =============================================================
-
     @Test
     public void parseIngredientName_null_throwsNullPointerException() {
         Assert.assertThrows(NullPointerException.class, () -> IngredientParserUtil.parseIngredientName(null));

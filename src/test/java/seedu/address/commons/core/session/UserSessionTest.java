@@ -10,7 +10,7 @@ import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.Test;
 
-import seedu.address.model.accounts.Account;
+import seedu.address.model.account.Account;
 import seedu.address.testutil.accounts.AccountBuilder;
 
 public class UserSessionTest {

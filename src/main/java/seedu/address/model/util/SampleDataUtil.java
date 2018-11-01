@@ -6,9 +6,9 @@ import java.util.stream.Collectors;
 
 import seedu.address.model.ReadOnlyRestaurantBook;
 import seedu.address.model.RestaurantBook;
-import seedu.address.model.accounts.Account;
-import seedu.address.model.accounts.Password;
-import seedu.address.model.accounts.Username;
+import seedu.address.model.account.Account;
+import seedu.address.model.account.Password;
+import seedu.address.model.account.Username;
 import seedu.address.model.tag.Tag;
 
 /**

@@ -1,8 +1,8 @@
 package seedu.address.testutil.accounts;
 
-import seedu.address.model.accounts.Account;
-import seedu.address.model.accounts.Password;
-import seedu.address.model.accounts.Username;
+import seedu.address.model.account.Account;
+import seedu.address.model.account.Password;
+import seedu.address.model.account.Username;
 
 /**
  * A utility class to help with building Account objects.

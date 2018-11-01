@@ -8,7 +8,7 @@ import static seedu.address.testutil.reservation.TypicalReservations.getTypicalR
 import static seedu.address.testutil.salesrecords.TypicalRecords.getTypicalRecords;
 
 import seedu.address.model.RestaurantBook;
-import seedu.address.model.accounts.Account;
+import seedu.address.model.account.Account;
 import seedu.address.model.ingredient.Ingredient;
 import seedu.address.model.menu.Item;
 import seedu.address.model.person.Person;

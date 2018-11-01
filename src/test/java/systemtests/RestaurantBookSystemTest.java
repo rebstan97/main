@@ -44,7 +44,7 @@ import seedu.address.model.Model;
 import seedu.address.model.RestaurantBook;
 import seedu.address.ui.BrowserPanel;
 import seedu.address.ui.CommandBox;
-import seedu.address.ui.accounts.UsernameDisplay;
+import seedu.address.ui.account.UsernameDisplay;
 
 /**
  * A system test class for RestaurantBook, which provides access to handles of GUI components and helper methods

@@ -1,6 +1,6 @@
 package seedu.address.commons.core.session;
 
-import seedu.address.model.accounts.Account;
+import seedu.address.model.account.Account;
 
 /**
  * Since this is a local desktop application which may or may not work with internet connection, we assume the

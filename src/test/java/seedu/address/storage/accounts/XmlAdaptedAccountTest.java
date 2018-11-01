@@ -11,8 +11,8 @@ import static seedu.address.testutil.accounts.TypicalAccounts.DEMO_TWO;
 import org.junit.Test;
 
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.accounts.Password;
-import seedu.address.model.accounts.Username;
+import seedu.address.model.account.Password;
+import seedu.address.model.account.Username;
 import seedu.address.storage.elements.XmlAdaptedAccount;
 import seedu.address.testutil.Assert;
 import seedu.address.testutil.accounts.AccountBuilder;

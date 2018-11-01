@@ -5,9 +5,9 @@ import java.util.Objects;
 import javax.xml.bind.annotation.XmlElement;
 
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.accounts.Account;
-import seedu.address.model.accounts.Password;
-import seedu.address.model.accounts.Username;
+import seedu.address.model.account.Account;
+import seedu.address.model.account.Password;
+import seedu.address.model.account.Username;
 
 /**
  * JAXB-friendly version of the Account.

@@ -1,8 +1,8 @@
 package seedu.address.testutil.accounts;
 
-import seedu.address.logic.commands.accounts.ChangePasswordCommand.EditAccountDescriptor;
-import seedu.address.model.accounts.Account;
-import seedu.address.model.accounts.Password;
+import seedu.address.logic.commands.account.ChangePasswordCommand.EditAccountDescriptor;
+import seedu.address.model.account.Account;
+import seedu.address.model.account.Password;
 
 /**
  * A utility class to help with building EditAccountDescriptor objects.

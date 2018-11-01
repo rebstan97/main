@@ -10,7 +10,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.ReadOnlyRestaurantBook;
 import seedu.address.model.RestaurantBook;
-import seedu.address.model.accounts.Account;
+import seedu.address.model.account.Account;
 import seedu.address.model.ingredient.Ingredient;
 import seedu.address.model.menu.Item;
 import seedu.address.model.person.Person;

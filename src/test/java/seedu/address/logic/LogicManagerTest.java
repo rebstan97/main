@@ -18,13 +18,13 @@ import seedu.address.commons.events.ui.LogoutEvent;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.HistoryCommand;
 import seedu.address.logic.commands.ListCommand;
-import seedu.address.logic.commands.accounts.RegisterCommand;
+import seedu.address.logic.commands.account.RegisterCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.accounts.Account;
+import seedu.address.model.account.Account;
 import seedu.address.testutil.accounts.AccountBuilder;
 
 public class LogicManagerTest {
