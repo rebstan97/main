@@ -503,6 +503,34 @@ public static void logout() {
 ** Cons: More memory usage to track each user session.
 // end::useraccount[]
 
+// tag::auto-ingredient-update[]
+=== Auto-ingredient update feature
+
+The auto-ingredient update mechanism is facilitated by `RecordSalesCommand` and triggers whenever the "record-sales"
+command is invoked. The command instantiates a `SalesRecord` based on the information given and attempts to compute
+the ingredients used before deducting them from the ingredient list automatically.
+
+==== Current Implementation
+
+A `SalesRecord` is associated with 6 attributes - `Date`, `ItemName`, `QuantitySold`, `Price`, `Revenue` and
+`IngredientUsed`. The success of the auto-ingredient update mechanism is subjected to the following conditions: +
+
+1) `ItemName` exists in the `Menu`.  +
+2) The required ingredients to make one unit of `ItemName` is specified in the `Menu`. +
+3) The required ingredients exist in the `Ingredient` list. +
+4) There are sufficient ingredients to make `QuantitySold` units of `ItemName` in the `Ingredient` list.
+
+[NOTE]
+If any of the above conditions is not satisfied, the sales will be recorded without updating the ingredient
+list.
+
+[NOTE]
+If conditions 1 and 2 are satisfied, `RecordSalesCommand` will compute all the ingredients used and store the data in
+ `IngredientUsed` attribute of `SalesRecord`.
+
+This mechanism is aided by methods from the `Menu` and `Ingredient` components, all of which are exposed in the
+`Model` interface.
+
 // tag::displaySales[]
 === Display sales report feature
 ==== Current Implementation
