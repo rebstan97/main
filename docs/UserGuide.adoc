@@ -584,10 +584,12 @@ Import the menu.txt from test folder to replace current menu.
 User will be able to manage multiple menus without the need of exporting and importing for different version of the
 current menu.
 
-=== Adding a reservation: `add-reservation` or `ar`
+//tag::reservations[]
+=== Reservations
+==== Adding a reservation: `add-reservation` or `ar`
 
 Adds a new reservation to the reservations list. +
-Format: `add-reservation n/NAME px/PAX dt/DATETIME`
+Format: `add-reservation n/NAME px/PAX dt/DATETIME` or `ar n/NAME px/PAX dt/DATETIME`
 
 ****
 * DateTime is entered in yyyy-mm-dd**T**hh:mm:ss format.
@@ -596,16 +598,17 @@ Format: `add-reservation n/NAME px/PAX dt/DATETIME`
 Examples:
 
 * `add-reservation n/TAN px/4 dt/2018-07-21T10:00:00`
+* `ar n/ONG px/2 dt/2018-08-30T12:00:00`
 
-=== Listing all reservations : `list-reservations` or `lr`
+==== Listing all reservations : `list-reservations` or `lr`
 
 Shows a list of all reservations in the reservations list. +
-Format: `list-reservations`
+Format: `list-reservations` or `lr`
 
-=== Editing a reservation: `edit-reservation` or `er`
+==== Editing a reservation: `edit-reservation` or `er`
 
 Edits an reservation in the reservation list. +
-Format: `edit-reservation INDEX [n/NAME] [px/PAX] [dt/DATETIME]`
+Format: `edit-reservation INDEX [n/NAME] [px/PAX] [dt/DATETIME]` or `er INDEX [n/NAME] [px/PAX] [dt/DATETIME]`
 
 ****
 * Edits the reservation at the specified `INDEX`. The index refers to the index number shown in the
@@ -619,18 +622,18 @@ Examples:
 * `edit-reservation 2 dt/2018-12-31T18:00:00` +
 Edits the time of the 2nd reservation in the list to `31st Dec 2018, 1800` hrs.
 
-* `edit-reservation 6 n/ONG px/4`  +
+* `er 6 n/ONG px/4`  +
 Edits the name and pax of the 6th reservation to `ONG` and `4` respectively.
 
-=== Sorting reservations list: `sort-reservations` or `sr`
+==== Sorting reservations list: `sort-reservations` or `sortr`
 
 Sorts the reservations list by Date/Time. +
-Format: `sort-reservations`
+Format: `sort-reservations` or `sortr`
 
-=== Deleting a reservation: `delete-reservation` or `dr`
+==== Deleting a reservation: `delete-reservation` or `dr`
 
 Deletes the specified reservation from the reservations list. +
-Format: `delete-reservation INDEX`
+Format: `delete-reservation INDEX` or `dr INDEX`
 
 ****
 * Deletes the reservation at the specified `INDEX`.
@@ -642,8 +645,35 @@ Examples:
 
 * `list-reservations` +
 `delete-reservations 2` +
-`list-ingredients` +
+`list-reservations` +
 Deletes the 2nd reservation in the reservations list.
+
+* `list-reservations` +
+`dr 5` +
+`list-reservations` +
+Deletes the 5th reservation in the reservations list.
+
+==== Selecting a reservation : `select-reservation` or `sr`
+
+Selects the reservation identified by the index number used in the displayed reservations list. +
+Format: `select-reservation INDEX` or `sr INDEX`
+
+****
+* Selects the reservation at the specified `INDEX`.
+* The index refers to the index number shown in the displayed reservation list.
+* The index *must be a positive integer* `1, 2, 3, ...`
+****
+
+Examples:
+
+* `list-reservations` +
+`select-reservation 2` +
+Selects the 2nd reservation in the reservations list.
+
+* `list-reservations` +
+`select-reservation 7` +
+Selects the 7th reservation in the reservations list.
+//end::reservations[]
 
 === Recording sales volume of an item: `record-sales` or `rs`
 
@@ -810,7 +840,8 @@ contains the data of your previous *MeNUS* folder.
 |*Import menu* |`import-menu fp/FILE_PATH fn/FILE_NAME` |`import-menu fp/backup/ fn/menu.txt`
 |*Add reservation* |`add-reservation n/NAME px/PAX dt/DATETIME` |`add-reservation n/TAN px/4 dt/2018-07-21:10:00:00`
 |*Edit reservation* |`edit-reservation INDEX [n/NAME] [px/PAX] [dt/DATETIME]` |`edit-reservation 2 px/2`
-|*Delete reservation* |`delete-reservation INDEX` |`delete-reservations 2`
+|*Delete reservation* |`delete-reservation INDEX` |`delete-reservation 2`
+|*Select reservation* |`select-reservations` |`select-reservation 1`
 |*List reservation* |`list-reservations` |`list-reservations`
 |*Sort reservation* |`sort-reservations` |`sort-reservations`
 |*Record sales volume* |`record-sales d/DATE n/ITEM_NAME q/QUANTITY SOLD p/ITEM_PRICE` |`record-sales d/25-09-2018 n/Fried Rice q/35 p/5.50`
