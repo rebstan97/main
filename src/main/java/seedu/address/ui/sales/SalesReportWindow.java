@@ -1,6 +1,7 @@
 package seedu.address.ui.sales;
 
 import java.text.NumberFormat;
+import java.util.Locale;
 import java.util.logging.Logger;
 
 import javafx.fxml.FXML;
@@ -26,7 +27,7 @@ public class SalesReportWindow extends UiPart<Stage> {
     private static final Logger logger = LogsCenter.getLogger(SalesReportWindow.class);
     private static final String FXML = "SalesReportWindow.fxml";
     private static final String totalRevenueMessage = "Total revenue: %s";
-    private static final NumberFormat currencyFormatter = NumberFormat.getCurrencyInstance();
+    private static final NumberFormat currencyFormatter = NumberFormat.getCurrencyInstance(Locale.US);
 
     private SalesReport salesReport;
 

@@ -6,8 +6,11 @@ import static seedu.address.model.Model.PREDICATE_SHOW_ALL_ITEMS;
 
 import java.util.List;
 
+import seedu.address.commons.core.EventsCenter;
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
+import seedu.address.commons.events.ui.DisplayItemListRequestEvent;
+import seedu.address.commons.events.ui.JumpToListRequestEvent;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
@@ -65,6 +68,8 @@ public class RecipeItemCommand extends Command {
         model.updateFilteredItemList(PREDICATE_SHOW_ALL_ITEMS);
         model.commitAddressBook();
 
+        EventsCenter.getInstance().post(new DisplayItemListRequestEvent());
+        EventsCenter.getInstance().post(new JumpToListRequestEvent(index));
         return new CommandResult(generateSuccessMessage(editedItem));
     }
     /**

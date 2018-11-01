@@ -4,7 +4,6 @@ import java.util.Map;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
-
 import seedu.address.logic.commands.menu.SortMenuCommand.SortMethod;
 import seedu.address.model.accounts.Account;
 import seedu.address.model.ingredient.Ingredient;
@@ -361,5 +360,4 @@ public interface Model {
      * Saves the current address book state for undo/redo.
      */
     void commitAddressBook();
-
 }
