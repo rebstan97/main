@@ -20,6 +20,7 @@ import seedu.address.ui.UiPart;
  * Panel containing the list of items.
  */
 public class ItemListPanel extends UiPart<Region> {
+
     private static final String FXML = "ItemListPanel.fxml";
     private final Logger logger = LogsCenter.getLogger(ItemListPanel.class);
 
@@ -67,7 +68,8 @@ public class ItemListPanel extends UiPart<Region> {
     /**
      * Custom {@code ListCell} that displays the graphics of a {@code Item} using a {@code ItemCard}.
      */
-    class ItemListViewCell extends ListCell<Item> {
+    private class ItemListViewCell extends ListCell<Item> {
+
         @Override
         protected void updateItem(Item item, boolean empty) {
             super.updateItem(item, empty);
@@ -80,5 +82,4 @@ public class ItemListPanel extends UiPart<Region> {
             }
         }
     }
-
 }
