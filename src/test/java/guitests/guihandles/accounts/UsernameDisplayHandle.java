@@ -2,7 +2,7 @@ package guitests.guihandles.accounts;
 
 import guitests.guihandles.NodeHandle;
 import javafx.scene.control.Label;
-import seedu.address.ui.account.UsernameDisplay;
+import seedu.restaurant.ui.account.UsernameDisplay;
 
 /**
  * A handler for the {@link UsernameDisplay} of the UI

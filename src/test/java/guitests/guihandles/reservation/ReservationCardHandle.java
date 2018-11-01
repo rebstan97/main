@@ -9,7 +9,7 @@ import guitests.guihandles.NodeHandle;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Region;
-import seedu.address.model.reservation.Reservation;
+import seedu.restaurant.model.reservation.Reservation;
 
 /**
  * Provides a handle to a person card in the reservation list panel.

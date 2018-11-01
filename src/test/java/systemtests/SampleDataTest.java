@@ -8,10 +8,10 @@ import java.nio.file.Path;
 
 import org.junit.Test;
 
-import seedu.address.model.ReadOnlyRestaurantBook;
-import seedu.address.model.RestaurantBook;
-import seedu.address.model.util.SampleDataUtil;
-import seedu.address.testutil.TestUtil;
+import seedu.restaurant.model.ReadOnlyRestaurantBook;
+import seedu.restaurant.model.RestaurantBook;
+import seedu.restaurant.model.util.SampleDataUtil;
+import seedu.restaurant.testutil.TestUtil;
 
 public class SampleDataTest extends RestaurantBookSystemTest {
 

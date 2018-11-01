@@ -7,7 +7,7 @@ import java.util.Set;
 import guitests.guihandles.NodeHandle;
 import javafx.scene.Node;
 import javafx.scene.control.ListView;
-import seedu.address.model.account.Account;
+import seedu.restaurant.model.account.Account;
 
 /**
  * Provides a handle for {@code AccountListPanel} containing the list of {@code AccountCard}.

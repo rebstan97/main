@@ -1,22 +1,22 @@
 package systemtests;
 
-import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
-import static seedu.address.testutil.EventsUtil.postNow;
-import static seedu.address.testutil.TypicalPersons.KEYWORD_MATCHING_MEIER;
+import static seedu.restaurant.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
+import static seedu.restaurant.testutil.EventsUtil.postNow;
+import static seedu.restaurant.testutil.TypicalPersons.KEYWORD_MATCHING_MEIER;
 
 import org.junit.Before;
 import org.junit.Test;
 
-import seedu.address.commons.core.index.Index;
-import seedu.address.commons.events.ui.LoginEvent;
-import seedu.address.logic.commands.ClearCommand;
-import seedu.address.logic.commands.RedoCommand;
-import seedu.address.logic.commands.UndoCommand;
-import seedu.address.model.Model;
-import seedu.address.model.ModelManager;
-import seedu.address.model.UserPrefs;
-import seedu.address.model.util.SampleDataUtil;
-import seedu.address.testutil.account.AccountBuilder;
+import seedu.restaurant.commons.core.index.Index;
+import seedu.restaurant.commons.events.ui.LoginEvent;
+import seedu.restaurant.logic.commands.ClearCommand;
+import seedu.restaurant.logic.commands.RedoCommand;
+import seedu.restaurant.logic.commands.UndoCommand;
+import seedu.restaurant.model.Model;
+import seedu.restaurant.model.ModelManager;
+import seedu.restaurant.model.UserPrefs;
+import seedu.restaurant.model.util.SampleDataUtil;
+import seedu.restaurant.testutil.account.AccountBuilder;
 
 public class ClearCommandSystemTest extends RestaurantBookSystemTest {
 
