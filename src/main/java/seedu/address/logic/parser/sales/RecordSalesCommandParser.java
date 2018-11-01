@@ -12,7 +12,6 @@ import seedu.address.logic.parser.Parser;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.logic.parser.util.ArgumentMultimap;
 import seedu.address.logic.parser.util.ArgumentTokenizer;
-import seedu.address.logic.parser.util.ParserUtil;
 import seedu.address.model.salesrecord.Date;
 import seedu.address.model.salesrecord.ItemName;
 import seedu.address.model.salesrecord.Price;
@@ -25,24 +24,24 @@ import seedu.address.model.salesrecord.SalesRecord;
 public class RecordSalesCommandParser implements Parser<RecordSalesCommand> {
 
     /**
-     * Parses the given {@code String} of arguments in the context of the RecordSalesCommand
-     * and returns a RecordSalesCommand object for execution.
+     * Parses the given {@code String} of arguments in the context of the RecordSalesCommand and returns a
+     * RecordSalesCommand object for execution.
+     *
      * @throws ParseException if the user input does not conform the expected format
      */
     public RecordSalesCommand parse(String args) throws ParseException {
-        ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_DATE, PREFIX_ITEM_NAME, PREFIX_QUANTITY_SOLD,
-                        PREFIX_ITEM_PRICE);
+        ArgumentMultimap argMultimap = ArgumentTokenizer
+                .tokenize(args, PREFIX_DATE, PREFIX_ITEM_NAME, PREFIX_QUANTITY_SOLD, PREFIX_ITEM_PRICE);
 
         if (!arePrefixesPresent(argMultimap, PREFIX_DATE, PREFIX_ITEM_NAME, PREFIX_QUANTITY_SOLD, PREFIX_ITEM_PRICE)
                 || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, RecordSalesCommand.MESSAGE_USAGE));
         }
 
-        Date date = ParserUtil.parseDate(argMultimap.getValue(PREFIX_DATE).get());
-        ItemName name = ParserUtil.parseItemName(argMultimap.getValue(PREFIX_ITEM_NAME).get());
-        QuantitySold quantitySold = ParserUtil.parseQuantitySold(argMultimap.getValue(PREFIX_QUANTITY_SOLD).get());
-        Price price = ParserUtil.parsePrice(argMultimap.getValue(PREFIX_ITEM_PRICE).get());
+        Date date = SalesParserUtil.parseDate(argMultimap.getValue(PREFIX_DATE).get());
+        ItemName name = SalesParserUtil.parseItemName(argMultimap.getValue(PREFIX_ITEM_NAME).get());
+        QuantitySold quantitySold = SalesParserUtil.parseQuantitySold(argMultimap.getValue(PREFIX_QUANTITY_SOLD).get());
+        Price price = SalesParserUtil.parsePrice(argMultimap.getValue(PREFIX_ITEM_PRICE).get());
 
         SalesRecord record = new SalesRecord(date, name, quantitySold, price);
 

@@ -22,15 +22,15 @@ import seedu.address.logic.parser.util.ParserUtil;
 public class EditSalesCommandParser implements Parser<EditSalesCommand> {
 
     /**
-     * Parses the given {@code String} of arguments in the context of the EditSalesCommand
-     * and returns an EditSalesCommand object for execution.
+     * Parses the given {@code String} of arguments in the context of the EditSalesCommand and returns an
+     * EditSalesCommand object for execution.
+     *
      * @throws ParseException if the user input does not conform the expected format
      */
     public EditSalesCommand parse(String args) throws ParseException {
         requireNonNull(args);
-        ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_DATE, PREFIX_ITEM_NAME, PREFIX_QUANTITY_SOLD,
-                        PREFIX_ITEM_PRICE);
+        ArgumentMultimap argMultimap = ArgumentTokenizer
+                .tokenize(args, PREFIX_DATE, PREFIX_ITEM_NAME, PREFIX_QUANTITY_SOLD, PREFIX_ITEM_PRICE);
 
         Index index;
 
@@ -42,17 +42,18 @@ public class EditSalesCommandParser implements Parser<EditSalesCommand> {
 
         EditRecordDescriptor editRecordDescriptor = new EditRecordDescriptor();
         if (argMultimap.getValue(PREFIX_DATE).isPresent()) {
-            editRecordDescriptor.setDate(ParserUtil.parseDate(argMultimap.getValue(PREFIX_DATE).get()));
+            editRecordDescriptor.setDate(SalesParserUtil.parseDate(argMultimap.getValue(PREFIX_DATE).get()));
         }
         if (argMultimap.getValue(PREFIX_ITEM_NAME).isPresent()) {
-            editRecordDescriptor.setName(ParserUtil.parseItemName(argMultimap.getValue(PREFIX_ITEM_NAME).get()));
+            editRecordDescriptor.setName(SalesParserUtil.parseItemName(argMultimap.getValue(PREFIX_ITEM_NAME).get()));
         }
         if (argMultimap.getValue(PREFIX_QUANTITY_SOLD).isPresent()) {
-            editRecordDescriptor.setQuantitySold(ParserUtil.parseQuantitySold(argMultimap.getValue(PREFIX_QUANTITY_SOLD)
-                    .get()));
+            editRecordDescriptor
+                    .setQuantitySold(SalesParserUtil.parseQuantitySold(argMultimap.getValue(PREFIX_QUANTITY_SOLD)
+                            .get()));
         }
         if (argMultimap.getValue(PREFIX_ITEM_PRICE).isPresent()) {
-            editRecordDescriptor.setPrice(ParserUtil.parsePrice(argMultimap.getValue(PREFIX_ITEM_PRICE).get()));
+            editRecordDescriptor.setPrice(SalesParserUtil.parsePrice(argMultimap.getValue(PREFIX_ITEM_PRICE).get()));
         }
 
         if (!editRecordDescriptor.isAnyFieldEdited()) {

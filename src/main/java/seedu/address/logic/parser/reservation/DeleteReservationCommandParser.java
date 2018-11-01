@@ -14,8 +14,9 @@ import seedu.address.logic.parser.util.ParserUtil;
 public class DeleteReservationCommandParser implements Parser<DeleteReservationCommand> {
 
     /**
-     * Parses the given {@code String} of arguments in the context of the DeleteReservationCommand
-     * and returns an DeleteReservationCommand object for execution.
+     * Parses the given {@code String} of arguments in the context of the DeleteReservationCommand and returns an
+     * DeleteReservationCommand object for execution.
+     *
      * @throws ParseException if the user input does not conform the expected format
      */
     public DeleteReservationCommand parse(String args) throws ParseException {
@@ -27,5 +28,4 @@ public class DeleteReservationCommandParser implements Parser<DeleteReservationC
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteReservationCommand.MESSAGE_USAGE), pe);
         }
     }
-
 }
