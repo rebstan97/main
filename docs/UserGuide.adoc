@@ -274,9 +274,10 @@ Password is masked by default and should never be shown
 Adds a new ingredient to the ingredient list. +
 Format: `add-ingredient n/INGREDIENT_NAME t/UNIT_TYPE p/PRICE_PER_UNIT m/MINIMUM`
 
-****
+[NOTE]
+====
 * MINIMUM refers to the minimum number of units below which an ingredient will be considered low in stock count
-****
+====
 
 Examples:
 
@@ -297,12 +298,13 @@ Format: `low-stock`
 Deletes the specified ingredient from the ingredient list. +
 Format: `delete-ingredient INDEX` or `delete-ingredient NAME`
 
-****
+[NOTE]
+====
 * Deletes the ingredient at the specified `INDEX`.
-* The index refers to the index number shown in the displayed ingredient list.
-* The index *must be a positive integer* 1, 2, 3, ...
+* `INDEX` refers to the index number shown in the displayed ingredient list.
+* `INDEX` *must be a positive integer* 1, 2, 3, ...
 * Alternatively, deletes the ingredient with the specified `NAME`.
-****
+====
 
 Examples:
 
@@ -320,12 +322,17 @@ Deletes the ingredient `cod fish` from the ingredient list.
 Edits an ingredient in the ingredient list. +
 Format: `edit-ingredient INDEX [n/INGREDIENT_NAME] [t/UNIT_TYPE] [p/PRICE_PER_UNIT] [m/MINIMUM]` or `edit-ingredient NAME [n/INGREDIENT_NAME] [t/UNIT_TYPE] [p/PRICE_PER_UNIT] [m/MINIMUM]`
 
-****
+[NOTE]
+====
 * Edits the ingredient at the specified `INDEX`. The index refers to the index number shown in the displayed ingredient list. The index *must be a positive integer* 1, 2, 3, ...
-* At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
 * Alternatively, edits the ingredient with the specified `NAME`.
-****
+====
+
+[WARNING]
+====
+* At least one of the optional fields must be provided.
+====
 
 Examples:
 
@@ -753,9 +760,10 @@ Examples:
 Shows the history of past ingredient stock ups or consumption. +
 Format: `view-history [STOCKUP] [CONSUMPTION]`  or `vh [STOCKUP] [CONSUMPTION]`
 
-****
+[WARNING]
+====
 * At least one of the optional fields must be provided.
-****
+====
 
 Examples:
 
