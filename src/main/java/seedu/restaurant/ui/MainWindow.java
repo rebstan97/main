@@ -30,6 +30,7 @@ import seedu.restaurant.commons.events.ui.RecordPanelSelectionChangedEvent;
 import seedu.restaurant.commons.events.ui.ShowHelpRequestEvent;
 import seedu.restaurant.commons.events.ui.accounts.DisplayAccountListRequestEvent;
 import seedu.restaurant.commons.events.ui.reservation.DisplayReservationListRequestEvent;
+import seedu.restaurant.commons.events.ui.reservation.ReservationPanelSelectionChangedEvent;
 import seedu.restaurant.logic.Logic;
 import seedu.restaurant.model.UserPrefs;
 import seedu.restaurant.ui.account.AccountListPanel;
@@ -233,7 +234,7 @@ public class MainWindow extends UiPart<Stage> {
      */
     @FXML
     private void handleSwitchToAccount() {
-        browserPlaceholder.getChildren().clear();
+        //browserPlaceholder.getChildren().clear();
         personListPanelPlaceholder.getChildren().clear();
         personListPanelPlaceholder.getChildren().add(accountListPanel.getRoot());
     }
@@ -243,7 +244,7 @@ public class MainWindow extends UiPart<Stage> {
      */
     @FXML
     private void handleSwitchToMenu() {
-        browserPlaceholder.getChildren().clear();
+        //browserPlaceholder.getChildren().clear();
         personListPanelPlaceholder.getChildren().clear();
         personListPanelPlaceholder.getChildren().add(itemListPanel.getRoot());
     }
@@ -253,7 +254,7 @@ public class MainWindow extends UiPart<Stage> {
      */
     @FXML
     private void handleSwitchToSales() {
-        browserPlaceholder.getChildren().clear();
+        //browserPlaceholder.getChildren().clear();
         personListPanelPlaceholder.getChildren().clear();
         personListPanelPlaceholder.getChildren().add(recordListPanel.getRoot());
     }
@@ -263,7 +264,7 @@ public class MainWindow extends UiPart<Stage> {
      */
     @FXML
     private void handleSwitchToIngredient() {
-        browserPlaceholder.getChildren().clear();
+        //browserPlaceholder.getChildren().clear();
         personListPanelPlaceholder.getChildren().clear();
         personListPanelPlaceholder.getChildren().add(ingredientListPanel.getRoot());
     }
@@ -273,7 +274,7 @@ public class MainWindow extends UiPart<Stage> {
      */
     @FXML
     private void handleSwitchToReservation() {
-        browserPlaceholder.getChildren().clear();
+        //browserPlaceholder.getChildren().clear();
         personListPanelPlaceholder.getChildren().clear();
         personListPanelPlaceholder.getChildren().add(reservationListPanel.getRoot());
     }
@@ -318,6 +319,13 @@ public class MainWindow extends UiPart<Stage> {
         browserPlaceholder.getChildren().clear();
         ItemStackPanel itemStackPanel = new ItemStackPanel(event.getNewSelection());
         browserPlaceholder.getChildren().add(itemStackPanel.getRoot());
+    }
+
+    @Subscribe
+    private void handleReservationPanelSelectionChangedEvent(ReservationPanelSelectionChangedEvent event) {
+        logger.info(LogsCenter.getEventHandlingLogMessage(event));
+        browserPlaceholder.getChildren().clear();
+        browserPlaceholder.getChildren().add(browserPanel.getRoot());
     }
 
     @Subscribe
