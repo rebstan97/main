@@ -16,7 +16,6 @@ import org.junit.Test;
 
 import seedu.restaurant.commons.core.Messages;
 import seedu.restaurant.commons.core.index.Index;
-import seedu.restaurant.commons.events.ui.JumpToListRequestEvent;
 import seedu.restaurant.commons.events.ui.reservation.JumpToReservationListRequestEvent;
 import seedu.restaurant.logic.CommandHistory;
 import seedu.restaurant.model.Model;
@@ -104,7 +103,8 @@ public class SelectReservationCommandTest {
 
         assertCommandSuccess(selectCommand, model, commandHistory, expectedMessage, expectedModel);
 
-        JumpToReservationListRequestEvent lastEvent = (JumpToReservationListRequestEvent) eventsCollectorRule.eventsCollector.getMostRecent();
+        JumpToReservationListRequestEvent lastEvent =
+                (JumpToReservationListRequestEvent) eventsCollectorRule.eventsCollector.getMostRecent();
         assertEquals(index, Index.fromZeroBased(lastEvent.targetIndex));
     }
 
