@@ -11,7 +11,7 @@ import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.Region;
 import seedu.restaurant.commons.core.LogsCenter;
-import seedu.restaurant.commons.events.ui.JumpToListRequestEvent;
+import seedu.restaurant.commons.events.ui.reservation.JumpToReservationListRequestEvent;
 import seedu.restaurant.commons.events.ui.reservation.ReservationPanelSelectionChangedEvent;
 import seedu.restaurant.model.reservation.Reservation;
 import seedu.restaurant.ui.UiPart;
@@ -60,7 +60,7 @@ public class ReservationListPanel extends UiPart<Region> {
     }
 
     @Subscribe
-    private void handleJumpToListRequestEvent(JumpToListRequestEvent event) {
+    private void handleJumpToListRequestEvent(JumpToReservationListRequestEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
         scrollTo(event.targetIndex);
     }
