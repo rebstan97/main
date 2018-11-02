@@ -234,7 +234,7 @@ public class MainWindow extends UiPart<Stage> {
      */
     @FXML
     private void handleSwitchToAccount() {
-//        browserPlaceholder.getChildren().clear();
+        //browserPlaceholder.getChildren().clear();
         personListPanelPlaceholder.getChildren().clear();
         personListPanelPlaceholder.getChildren().add(accountListPanel.getRoot());
     }
@@ -244,7 +244,7 @@ public class MainWindow extends UiPart<Stage> {
      */
     @FXML
     private void handleSwitchToMenu() {
-//        browserPlaceholder.getChildren().clear();
+        //browserPlaceholder.getChildren().clear();
         personListPanelPlaceholder.getChildren().clear();
         personListPanelPlaceholder.getChildren().add(itemListPanel.getRoot());
     }
@@ -254,7 +254,7 @@ public class MainWindow extends UiPart<Stage> {
      */
     @FXML
     private void handleSwitchToSales() {
-//        browserPlaceholder.getChildren().clear();
+        //browserPlaceholder.getChildren().clear();
         personListPanelPlaceholder.getChildren().clear();
         personListPanelPlaceholder.getChildren().add(recordListPanel.getRoot());
     }
@@ -264,7 +264,7 @@ public class MainWindow extends UiPart<Stage> {
      */
     @FXML
     private void handleSwitchToIngredient() {
-//        browserPlaceholder.getChildren().clear();
+        //browserPlaceholder.getChildren().clear();
         personListPanelPlaceholder.getChildren().clear();
         personListPanelPlaceholder.getChildren().add(ingredientListPanel.getRoot());
     }
@@ -274,7 +274,7 @@ public class MainWindow extends UiPart<Stage> {
      */
     @FXML
     private void handleSwitchToReservation() {
-//        browserPlaceholder.getChildren().clear();
+        //browserPlaceholder.getChildren().clear();
         personListPanelPlaceholder.getChildren().clear();
         personListPanelPlaceholder.getChildren().add(reservationListPanel.getRoot());
     }
